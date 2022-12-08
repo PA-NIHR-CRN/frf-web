@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  column-gap: 1em;
+}
+
+.results {
+}
+
+.form {
+  min-width: 250px;
+
+  label {
+    display: block;
+  }
+
+  fieldset {
+    border: 1px solid gray;
+    margin-bottom: 1em;
+  }
+}
+
+.resultItem {
+  border: 1px solid gray;
+  padding: 1em;
+  margin-bottom: 1em;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+}
