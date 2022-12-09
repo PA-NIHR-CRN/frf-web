@@ -5,38 +5,24 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { Fragment, useRef, useEffect, useState } from 'react';
 
 import styles from './providers.module.scss';
-import { setRevalidateHeaders } from 'next/dist/server/send-payload';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
 
-  const page = parseInt(context.query.page) || 1;
-
   const filters = {
-    serviceType: context.query.serviceType || null,
-    dataType: context.query.dataType || null,
-    population: context.query.population || null,
-    geography: context.query.geography || null,
-    providerOrganisation: context.query.providerOrganisation || null,
+    page: parseInt(context.query.page) || 1,
+    serviceType: [].concat(context.query.serviceType || null).filter(Boolean),
+    dataType: [].concat(context.query.dataType || null).filter(Boolean),
+    population: [].concat(context.query.population || null).filter(Boolean),
+    geography: [].concat(context.query.geography || null).filter(Boolean),
+    providerOrganisation: []
+      .concat(context.query.providerOrganisation || null)
+      .filter(Boolean),
     q: context.query.q || null,
   };
 
-  if (filters.serviceType && !Array.isArray(filters.serviceType))
-    filters.serviceType = [filters.serviceType];
-
-  if (filters.dataType && !Array.isArray(filters.dataType))
-    filters.dataType = [filters.dataType];
-
-  if (filters.geography && !Array.isArray(filters.geography))
-    filters.geography = [filters.geography];
-
-  if (
-    filters.providerOrganisation &&
-    !Array.isArray(filters.providerOrganisation)
-  )
-    filters.providerOrganisation = [filters.providerOrganisation];
-
-  const results = await content.getProvidersByFilter(filters, page);
+  /* TODO: how should we handle errors here? */
+  const results = await content.getProvidersByFilter(filters);
   const providerOrganisations = await content.getAllProviderOrganisations();
 
   return {

@@ -5,6 +5,7 @@ import styles from './providers.module.scss';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
+  /* TODO: how should we handle errors here? */
   const provider = await content.getProviderBySlug(context.query.slug);
   return {
     props: { provider },

@@ -5,6 +5,7 @@ import styles from '../providers.module.scss';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
+  /* TODO: how should we handle errors here? */
   const provider = await content.getProviderBySlug(context.query.slug);
   return {
     props: { provider },
@@ -14,6 +15,7 @@ export async function getServerSideProps(context) {
 export default function ProviderDetail({ provider }) {
   if (!provider) {
     return (
+      /* TODO: make this better */
       <main>
         <h1>404 not found</h1>
       </main>
