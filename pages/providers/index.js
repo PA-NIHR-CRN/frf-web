@@ -1,10 +1,11 @@
 import Head from 'next/head';
 import ContentfulService from '../../lib/contentful';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { Fragment, useRef } from 'react';
+import { Fragment, useRef, useEffect, useState } from 'react';
 
 import styles from './providers.module.scss';
+import { setRevalidateHeaders } from 'next/dist/server/send-payload';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -49,6 +50,17 @@ export default function SearchProviders({
   providerOrganisations,
 }) {
   const searchForm = useRef();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      setIsLoading(true);
+    });
+    router.events.on('routeChangeComplete', () => {
+      setIsLoading(false);
+    });
+  }, []);
 
   const handleFiltersSubmit = async (event) => {
     event.preventDefault();
@@ -74,7 +86,7 @@ export default function SearchProviders({
 
     console.log(formDataAsObject);
 
-    Router.push({
+    router.push({
       pathname: '/providers',
       query: formDataAsObject,
     });
@@ -117,9 +129,13 @@ export default function SearchProviders({
       </Head>
 
       <main>
-        <div className={styles.container}>
+        <div
+          className={`${styles.container} ${
+            isLoading ? styles.loading : styles.loaded
+          }`}
+        >
           <div className={styles.results}>
-            <h1>{results.pagination.total} service providers found</h1>
+            <h1>{results.pagination.total} service providers found,</h1>
 
             {results.items.map((item) => (
               <div key={item.fields.slug} className={styles.resultItem}>
