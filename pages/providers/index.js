@@ -22,18 +22,17 @@ export async function getServerSideProps(context) {
 
   /* TODO: how should we handle errors here? */
   const results = await content.getProvidersByFilter(filters);
-  const providerOrganisations = await content.getAllProviderOrganisations();
+  // const providerOrganisations = await content.getAllProviderOrganisations();
+  // const providerOrganisations = { items: [] };
+
+  const filterOptions = await content.getProviderFilterOptionValues();
 
   return {
-    props: { filters, results, providerOrganisations },
+    props: { filters, results, filterOptions },
   };
 }
 
-export default function SearchProviders({
-  filters,
-  results,
-  providerOrganisations,
-}) {
+export default function SearchProviders({ filters, results, filterOptions }) {
   const searchForm = useRef();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -69,7 +68,7 @@ export default function SearchProviders({
       ])
     );
 
-    console.log(formDataAsObject);
+    // console.log(formDataAsObject);
 
     router.push({
       pathname: '/providers',
@@ -152,82 +151,46 @@ export default function SearchProviders({
               </fieldset>
               <fieldset>
                 <legend>Service Type</legend>
-                {filterCheckbox(
-                  'serviceType',
-                  'Find',
-                  'Find',
-                  filters.serviceType?.includes('Find')
-                )}
-                {filterCheckbox(
-                  'serviceType',
-                  'Recruit',
-                  'Recruit',
-                  filters.serviceType?.includes('Recruit')
-                )}
-                {filterCheckbox(
-                  'serviceType',
-                  'Follow-up',
-                  'Follow-up',
-                  filters.serviceType?.includes('Follow-up')
-                )}
+                {filterOptions.serviceTypes.map((item, i) => (
+                  <Fragment key={i}>
+                    {filterCheckbox(
+                      'serviceType',
+                      item,
+                      item,
+                      filters.serviceType?.includes(item)
+                    )}
+                  </Fragment>
+                ))}
               </fieldset>
               <fieldset>
                 <legend>Type of data available</legend>
-                {filterCheckbox(
-                  'dataType',
-                  'Primary care',
-                  'Primary care',
-                  filters.dataType?.includes('Primary care')
-                )}
-                {filterCheckbox(
-                  'dataType',
-                  'Secondary care',
-                  'Secondary care',
-                  filters.dataType?.includes('Secondary care')
-                )}
-                {filterCheckbox(
-                  'dataType',
-                  'Participant reported',
-                  'Participant reported',
-                  filters.dataType?.includes('Participant reported')
-                )}
+                {filterOptions.dataTypes.map((item, i) => (
+                  <Fragment key={i}>
+                    {filterCheckbox(
+                      'dataType',
+                      item,
+                      item,
+                      filters.dataType?.includes(item)
+                    )}
+                  </Fragment>
+                ))}
               </fieldset>
               <fieldset>
                 <legend>Geographical coverage</legend>
-                {filterCheckbox(
-                  'geography',
-                  'UK wide',
-                  'UK wide',
-                  filters.geography?.includes('UK wide')
-                )}
-                {filterCheckbox(
-                  'geography',
-                  'England',
-                  'England',
-                  filters.geography?.includes('England')
-                )}
-                {filterCheckbox(
-                  'geography',
-                  'Northern Ireland',
-                  'Northern Ireland',
-                  filters.geography?.includes('Northern Ireland')
-                )}
-                {filterCheckbox(
-                  'geography',
-                  'Scotland',
-                  'Scotland',
-                  filters.geography?.includes('Scotland')
-                )}
-                {filterCheckbox(
-                  'geography',
-                  'Wales',
-                  'Wales',
-                  filters.geography?.includes('Wales')
-                )}
+                {filterOptions.geographies.map((item, i) => (
+                  <Fragment key={i}>
+                    {filterCheckbox(
+                      'geography',
+                      item,
+                      item,
+                      filters.providerOrganisation?.includes(item)
+                    )}
+                  </Fragment>
+                ))}
               </fieldset>
               <fieldset>
                 <legend>Organisations</legend>
-                {providerOrganisations.items.map((item, i) => (
+                {filterOptions.providerOrganisations.map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
                       'providerOrganisation',
