@@ -92,21 +92,6 @@ export default function SearchProviders({
     );
   };
 
-  const filterRadio = (name, value, label, checked) => {
-    return (
-      <label>
-        <input
-          type="radio"
-          name={name}
-          value={value}
-          defaultChecked={checked}
-          onChange={handleFilterChange}
-        />
-        {label}
-      </label>
-    );
-  };
-
   return (
     <>
       <Head>
@@ -120,7 +105,7 @@ export default function SearchProviders({
           }`}
         >
           <div className={styles.results}>
-            <h1>{results.pagination.total} service providers found,</h1>
+            <h1>{results.pagination.total} service providers found</h1>
 
             {results.items.map((item) => (
               <div key={item.fields.slug} className={styles.resultItem}>
@@ -190,30 +175,30 @@ export default function SearchProviders({
                 <legend>Type of data available</legend>
                 {filterCheckbox(
                   'dataType',
-                  'Primary care data',
-                  'Primary care data',
-                  filters.dataType?.includes('Primary care data')
+                  'Primary care',
+                  'Primary care',
+                  filters.dataType?.includes('Primary care')
                 )}
                 {filterCheckbox(
                   'dataType',
-                  'Secondary care data',
-                  'Secondary care data',
-                  filters.dataType?.includes('Secondary care data')
+                  'Secondary care',
+                  'Secondary care',
+                  filters.dataType?.includes('Secondary care')
                 )}
                 {filterCheckbox(
                   'dataType',
-                  'Participant reported data',
-                  'Participant reported data',
-                  filters.dataType?.includes('Participant reported data')
+                  'Participant reported',
+                  'Participant reported',
+                  filters.dataType?.includes('Participant reported')
                 )}
               </fieldset>
               <fieldset>
                 <legend>Geographical coverage</legend>
                 {filterCheckbox(
                   'geography',
-                  'All',
-                  'All',
-                  filters.geography?.includes('All')
+                  'UK wide',
+                  'UK wide',
+                  filters.geography?.includes('UK wide')
                 )}
                 {filterCheckbox(
                   'geography',
