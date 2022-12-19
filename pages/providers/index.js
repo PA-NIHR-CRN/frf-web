@@ -9,6 +9,8 @@ import styles from './providers.module.scss';
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
 
+  const filterOptions = await content.getProviderFilterOptionValues();
+
   const filters = {
     page: parseInt(context.query.page) || 1,
     serviceType: [].concat(context.query.serviceType || null).filter(Boolean),
@@ -24,8 +26,6 @@ export async function getServerSideProps(context) {
   const results = await content.getProvidersByFilter(filters);
   // const providerOrganisations = await content.getAllProviderOrganisations();
   // const providerOrganisations = { items: [] };
-
-  const filterOptions = await content.getProviderFilterOptionValues();
 
   return {
     props: { filters, results, filterOptions },
@@ -151,7 +151,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
               </fieldset>
               <fieldset>
                 <legend>Service Type</legend>
-                {filterOptions.serviceTypes.map((item, i) => (
+                {filterOptions.serviceType.map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
                       'serviceType',
@@ -164,7 +164,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
               </fieldset>
               <fieldset>
                 <legend>Type of data available</legend>
-                {filterOptions.dataTypes.map((item, i) => (
+                {filterOptions.dataType.map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
                       'dataType',
@@ -177,7 +177,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
               </fieldset>
               <fieldset>
                 <legend>Geographical coverage</legend>
-                {filterOptions.geographies.map((item, i) => (
+                {filterOptions.geography.map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
                       'geography',
@@ -190,7 +190,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
               </fieldset>
               <fieldset>
                 <legend>Organisations</legend>
-                {filterOptions.providerOrganisations.map((item, i) => (
+                {filterOptions.providerOrganisation.map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
                       'providerOrganisation',
