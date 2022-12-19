@@ -13,7 +13,6 @@ export async function getServerSideProps(context) {
     page: parseInt(context.query.page) || 1,
     serviceType: [].concat(context.query.serviceType || null).filter(Boolean),
     dataType: [].concat(context.query.dataType || null).filter(Boolean),
-    population: [].concat(context.query.population || null).filter(Boolean),
     geography: [].concat(context.query.geography || null).filter(Boolean),
     providerOrganisation: []
       .concat(context.query.providerOrganisation || null)
@@ -239,44 +238,6 @@ export default function SearchProviders({
                   'Wales',
                   'Wales',
                   filters.geography?.includes('Wales')
-                )}
-              </fieldset>
-              <fieldset>
-                <legend>Population coverage</legend>
-                {filterRadio(
-                  'population',
-                  '0-10000',
-                  'Less than 10,000',
-                  filters.population?.includes('0-10000'),
-                  'radio'
-                )}
-                {filterRadio(
-                  'population',
-                  '10000-49999',
-                  '10,000 to 49,999',
-                  filters.population?.includes('10000-49999'),
-                  'radio'
-                )}
-                {filterRadio(
-                  'population',
-                  '50000-199999',
-                  '50,000 to 199,999',
-                  filters.population?.includes('50000-199999'),
-                  'radio'
-                )}
-                {filterRadio(
-                  'population',
-                  '200000-999999',
-                  '200,000 to 999,999',
-                  filters.population?.includes('200000-999999'),
-                  'radio'
-                )}
-                {filterRadio(
-                  'population',
-                  '1000000-999999999',
-                  '1,000,000 and more',
-                  filters.population?.includes('1000000+'),
-                  'radio'
                 )}
               </fieldset>
               <fieldset>
