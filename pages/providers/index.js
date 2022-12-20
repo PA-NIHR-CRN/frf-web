@@ -159,55 +159,8 @@ export default function SearchProviders({ filters, results, filterOptions }) {
             isLoading ? styles.loading : styles.loaded
           }`}
         >
-          <div className={styles.results}>
-            <h1>{results.pagination.total} service providers found</h1>
-
-            {anyFiltersActive(filters) &&
-              Object.keys(filters)
-                .filter((filterName) =>
-                  [
-                    'q',
-                    'serviceType',
-                    'dataType',
-                    'geography',
-                    'organisation',
-                    'providerOrganisation',
-                  ].includes(filterName)
-                )
-                .map((filterName, i) =>
-                  renderFilterClearButton(filterName, filters[filterName], i)
-                )}
-
-            {results.items.map((item) => (
-              <div key={item.fields.slug} className={styles.resultItem}>
-                <h2>
-                  <a href={`/providers/${item.fields.slug}`}>
-                    {item.fields.name}
-                  </a>
-                </h2>
-                <p>Org name: {item.fields.providerOrganisation.fields.name}</p>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: documentToHtmlString(item.fields.shortDescription),
-                  }}
-                ></div>
-                <h3>Coverage</h3>
-                <dl>
-                  <dt>Geographical: </dt>
-                  <dd>{item.fields.geography.join(', ')}</dd>
-                  <dt>Population:</dt>
-                  <dd>{item.fields.population}</dd>
-                </dl>
-                <h3>Suited to:</h3>
-                <ul>
-                  {item.fields.suitedTo.map((item, i) => (
-                    <li key={i}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
           <div className={styles.form}>
+            <h3>Filter providers by</h3>
             <form
               method="get"
               action="/search"
@@ -274,6 +227,74 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                 ))}
               </fieldset>
             </form>
+          </div>
+          <div className={styles.results}>
+            <h3>{results.pagination.total} service providers found</h3>
+
+            {anyFiltersActive(filters) &&
+                Object.keys(filters)
+                    .filter((filterName) =>
+                        [
+                          'q',
+                          'serviceType',
+                          'dataType',
+                          'geography',
+                          'organisation',
+                          'providerOrganisation',
+                        ].includes(filterName)
+                    )
+                    .map((filterName, i) =>
+                        renderFilterClearButton(filterName, filters[filterName], i)
+                    )}
+
+            {results.items.map((item) => (
+                <div key={item.fields.slug} className={styles.resultItem}>
+                  <h2>
+                    <a href={`/providers/${item.fields.slug}`}>
+                      {item.fields.name}
+                    </a>
+                  </h2>
+                  <p>Org name: {item.fields.providerOrganisation.fields.name}</p>
+                  <hr />
+                  <div className={styles.providerDetails}>
+                    <div>
+                      <div
+                          dangerouslySetInnerHTML={{
+                            __html: documentToHtmlString(item.fields.shortDescription),
+                          }}
+                      ></div>
+                      <h3>Coverage</h3>
+                      <dl>
+                        <dt>Geographical: </dt>
+                        <dd>{item.fields.geography.join(', ')}</dd>
+                        <dt>Population:</dt>
+                        <dd>{item.fields.population}</dd>
+                      </dl>
+                      <h3>Suited to:</h3>
+                      <ul>
+                        {item.fields.suitedTo.map((item, i) => (
+                            <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className={styles.providerDataTypes}>
+
+                      <p><b>Types of data available</b></p>
+                      <ul>
+                        {item.fields.dataType?.map((item, i) => (
+                            <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className={styles.providerFooter}>
+                    <div><b>First Published:</b> {new Date(item.sys.createdAt).toLocaleDateString('en-GB')}</div>
+                    <div><b>Last Updated:</b> {new Date(item.sys.updatedAt).toLocaleDateString('en-GB')}</div>
+                    <div className={styles.providerViewBtn}><a href={`/providers/${item.fields.slug}`}>View more details</a></div>
+                  </div>
+                </div>
+            ))}
           </div>
         </div>
       </main>
