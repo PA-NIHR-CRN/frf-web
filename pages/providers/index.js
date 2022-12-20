@@ -54,8 +54,18 @@ export default function SearchProviders({ filters, results, filterOptions }) {
   };
 
   const handleFilterClear = async (event) => {
+    const filterName = event.target.name;
+    const filterValue = event.target.value;
+
     const params = Object.assign({}, router.query);
-    delete params[event.target.name];
+
+    // if we're removing a specific value then remove from the array
+    // otherwise remove the filter entirely
+    if (filterValue && Array.isArray(params[filterName])) {
+      params[filterName] = params[filterName].filter((v) => v !== filterValue);
+    } else {
+      delete params[filterName];
+    }
 
     router.push({
       pathname: '/providers',
@@ -111,10 +121,30 @@ export default function SearchProviders({ filters, results, filterOptions }) {
 
     // all others are arrays
     return value.map((v, j) => (
-      <button key={`${name}-${j}`} onClick={handleFilterClear} name={name}>
+      <button
+        key={`${name}-${j}`}
+        onClick={handleFilterClear}
+        name={name}
+        value={v}
+      >
         {v} &times;
       </button>
     ));
+  };
+
+  const anyFiltersActive = (filters) => {
+    const activeFilters = [
+      filters.q,
+      filters.serviceType,
+      filters.dataType,
+      filters.geography,
+      filters.organisation,
+      filters.providerOrganisation,
+    ]
+      .flat()
+      .filter(Boolean);
+
+    if (activeFilters.length) return true;
   };
 
   return (
@@ -132,20 +162,21 @@ export default function SearchProviders({ filters, results, filterOptions }) {
           <div className={styles.results}>
             <h1>{results.pagination.total} service providers found</h1>
 
-            {Object.keys(filters)
-              .filter((filterName) =>
-                [
-                  'q',
-                  'serviceType',
-                  'dataType',
-                  'geography',
-                  'organisation',
-                  'providerOrganisation',
-                ].includes(filterName)
-              )
-              .map((filterName, i) =>
-                renderFilterClearButton(filterName, filters[filterName], i)
-              )}
+            {anyFiltersActive(filters) &&
+              Object.keys(filters)
+                .filter((filterName) =>
+                  [
+                    'q',
+                    'serviceType',
+                    'dataType',
+                    'geography',
+                    'organisation',
+                    'providerOrganisation',
+                  ].includes(filterName)
+                )
+                .map((filterName, i) =>
+                  renderFilterClearButton(filterName, filters[filterName], i)
+                )}
 
             {results.items.map((item) => (
               <div key={item.fields.slug} className={styles.resultItem}>
