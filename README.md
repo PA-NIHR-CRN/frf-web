@@ -12,3 +12,4 @@
 - CONTENTFUL_ACCESS_TOKEN from Settings -> API keys
 - CONTENTFUL_PREVIEW_MODE set to `1` to allow the app to fetch preview/draft content
 - CONTENTFUL_PREVIEW_ACCESS_TOKEN from Settings -> API keys
+- CONTENTFUL_MANAGEMENT_ACCESS_TOKEN from Settings -> API keys (content management tab)
