@@ -24,8 +24,6 @@ export async function getServerSideProps(context) {
 
   /* TODO: how should we handle errors here? */
   const results = await content.getProvidersByFilter(filters);
-  // const providerOrganisations = await content.getAllProviderOrganisations();
-  // const providerOrganisations = { items: [] };
 
   return {
     props: { filters, results, filterOptions },
@@ -55,6 +53,16 @@ export default function SearchProviders({ filters, results, filterOptions }) {
     search();
   };
 
+  const handleFilterClear = async (event) => {
+    const params = Object.assign({}, router.query);
+    delete params[event.target.name];
+
+    router.push({
+      pathname: '/providers',
+      query: params,
+    });
+  };
+
   const search = () => {
     const formData = new FormData(searchForm.current);
 
@@ -67,8 +75,6 @@ export default function SearchProviders({ filters, results, filterOptions }) {
           : formData.get(key),
       ])
     );
-
-    // console.log(formDataAsObject);
 
     router.push({
       pathname: '/providers',
@@ -83,12 +89,32 @@ export default function SearchProviders({ filters, results, filterOptions }) {
           type="checkbox"
           name={name}
           value={value}
-          defaultChecked={checked}
+          checked={checked}
           onChange={handleFilterChange}
         />
         {label}
       </label>
     );
+  };
+
+  const renderFilterClearButton = (name, value, i) => {
+    if (!value || !value.length) return;
+
+    // "keywords" is a string
+    if (name === 'q') {
+      return (
+        <button key={`${name}-${i}`} onClick={handleFilterClear} name={name}>
+          {value} &times;
+        </button>
+      );
+    }
+
+    // all others are arrays
+    return value.map((v, j) => (
+      <button key={`${name}-${j}`} onClick={handleFilterClear} name={name}>
+        {v} &times;
+      </button>
+    ));
   };
 
   return (
@@ -105,6 +131,21 @@ export default function SearchProviders({ filters, results, filterOptions }) {
         >
           <div className={styles.results}>
             <h1>{results.pagination.total} service providers found</h1>
+
+            {Object.keys(filters)
+              .filter((filterName) =>
+                [
+                  'q',
+                  'serviceType',
+                  'dataType',
+                  'geography',
+                  'organisation',
+                  'providerOrganisation',
+                ].includes(filterName)
+              )
+              .map((filterName, i) =>
+                renderFilterClearButton(filterName, filters[filterName], i)
+              )}
 
             {results.items.map((item) => (
               <div key={item.fields.slug} className={styles.resultItem}>
@@ -183,7 +224,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                       'geography',
                       item,
                       item,
-                      filters.providerOrganisation?.includes(item)
+                      filters.geography?.includes(item)
                     )}
                   </Fragment>
                 ))}
@@ -194,9 +235,9 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                   <Fragment key={i}>
                     {filterCheckbox(
                       'providerOrganisation',
-                      item.fields.slug,
                       item.fields.name,
-                      filters.providerOrganisation?.includes(item.fields.slug)
+                      item.fields.name,
+                      filters.providerOrganisation?.includes(item.fields.name)
                     )}
                   </Fragment>
                 ))}
