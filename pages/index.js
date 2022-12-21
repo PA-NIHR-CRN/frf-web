@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
           of appropriate placement of studies in the UK.
         </p>
         <p>
-          <a href="/providers?serviceType=Find">View all Find services</a>
+          <Link href="/providers?serviceType=Find">View all Find services</Link>
         </p>
 
         <h2>Recruit</h2>
@@ -28,7 +29,9 @@ export default function Home() {
           about taking part in research.
         </p>
         <p>
-          <a href="/providers?serviceType=Recruit">View all Recruit services</a>
+          <Link href="/providers?serviceType=Recruit">
+            View all Recruit services
+          </Link>
         </p>
 
         <h2>Follow-up</h2>
@@ -37,9 +40,9 @@ export default function Home() {
           existing data sets.
         </p>
         <p>
-          <a href="/providers?serviceType=Follow-up">
+          <Link href="/providers?serviceType=Follow-up">
             View all Follow-up services
-          </a>
+          </Link>
         </p>
       </main>
     </div>
