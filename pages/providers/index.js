@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import ContentfulService from '../../lib/contentful';
 import { useRouter } from 'next/router';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
@@ -286,21 +287,25 @@ export default function SearchProviders({ filters, results, filterOptions }) {
               </form>
             </div>
 
-            {anyFiltersActive(filters) &&
-              Object.keys(filters)
-                .filter((filterName) =>
-                  [
-                    'q',
-                    'serviceType',
-                    'dataType',
-                    'geography',
-                    'organisation',
-                    'providerOrganisation',
-                  ].includes(filterName)
-                )
-                .map((filterName, i) =>
-                  renderFilterClearButton(filterName, filters[filterName], i)
-                )}
+            {anyFiltersActive(filters) && (
+              <div>
+                {Object.keys(filters)
+                  .filter((filterName) =>
+                    [
+                      'q',
+                      'serviceType',
+                      'dataType',
+                      'geography',
+                      'organisation',
+                      'providerOrganisation',
+                    ].includes(filterName)
+                  )
+                  .map((filterName, i) =>
+                    renderFilterClearButton(filterName, filters[filterName], i)
+                  )}
+                <Link href="/providers">Clear all</Link>
+              </div>
+            )}
 
             {results.items.map((item) => (
               <div key={item.fields.slug} className={styles.resultItem}>
