@@ -22,8 +22,8 @@ export async function getServerSideProps(context) {
     q: context.query.q || null,
     order: context.query.order || null,
     findCost: [].concat(context.query.findCost || null).filter(Boolean),
-    // recruitCost: context.query.findCost || null,
-    // followupCost: context.query.findCost || null,
+    recruitCost: [].concat(context.query.recruitCost || null).filter(Boolean),
+    followUpCost: [].concat(context.query.followUpCost || null).filter(Boolean),
   };
 
   /* TODO: how should we handle errors here? */
@@ -55,6 +55,16 @@ export default function SearchProviders({ filters, results, filterOptions }) {
   };
 
   const handleFilterChange = async (event) => {
+    search();
+  };
+
+  const handleCostsFilterChange = async (event) => {
+    const checkedState = event.target.checked;
+    const checkboxes = document.getElementsByName(event.target.name);
+    checkboxes.forEach((item) => {
+      item.checked = false;
+    });
+    event.target.checked = checkedState;
     search();
   };
 
@@ -106,7 +116,13 @@ export default function SearchProviders({ filters, results, filterOptions }) {
     });
   };
 
-  const filterCheckbox = (name, value, label, checked) => {
+  const filterCheckbox = (
+    name,
+    value,
+    label,
+    checked,
+    onChangeFn = handleFilterChange
+  ) => {
     return (
       <label>
         <input
@@ -114,7 +130,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
           name={name}
           value={value}
           checked={checked}
-          onChange={handleFilterChange}
+          onChange={onChangeFn}
         />
         {label}
       </label>
@@ -228,6 +244,48 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                 ))}
               </fieldset>
               <fieldset>
+                <legend>Costs (Find)</legend>
+                {filterOptions.findCost.map((item, i) => (
+                  <Fragment key={i}>
+                    {filterCheckbox(
+                      'findCost',
+                      item,
+                      item,
+                      filters.findCost?.includes(item),
+                      handleCostsFilterChange
+                    )}
+                  </Fragment>
+                ))}
+              </fieldset>
+              <fieldset>
+                <legend>Costs (Recruit)</legend>
+                {filterOptions.recruitCost.map((item, i) => (
+                  <Fragment key={i}>
+                    {filterCheckbox(
+                      'recruitCost',
+                      item,
+                      item,
+                      filters.recruitCost?.includes(item),
+                      handleCostsFilterChange
+                    )}
+                  </Fragment>
+                ))}
+              </fieldset>
+              <fieldset>
+                <legend>Costs (Follow-Up)</legend>
+                {filterOptions.followUpCost.map((item, i) => (
+                  <Fragment key={i}>
+                    {filterCheckbox(
+                      'followUpCost',
+                      item,
+                      item,
+                      filters.followUpCost?.includes(item),
+                      handleCostsFilterChange
+                    )}
+                  </Fragment>
+                ))}
+              </fieldset>
+              <fieldset>
                 <legend>Organisations</legend>
                 {filterOptions.providerOrganisation.map((item, i) => (
                   <Fragment key={i}>
@@ -236,19 +294,6 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                       item.fields.name,
                       item.fields.name,
                       filters.providerOrganisation?.includes(item.fields.name)
-                    )}
-                  </Fragment>
-                ))}
-              </fieldset>
-              <fieldset>
-                <legend>Costs (Find)</legend>
-                {filterOptions.findCost.map((item, i) => (
-                  <Fragment key={i}>
-                    {filterCheckbox(
-                      'findCost',
-                      item,
-                      item,
-                      filters.findCost?.includes(item)
                     )}
                   </Fragment>
                 ))}
