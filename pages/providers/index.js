@@ -22,9 +22,7 @@ export async function getServerSideProps(context) {
       .filter(Boolean),
     q: context.query.q || null,
     order: context.query.order || null,
-    findCost: [].concat(context.query.findCost || null).filter(Boolean),
-    recruitCost: [].concat(context.query.recruitCost || null).filter(Boolean),
-    followUpCost: [].concat(context.query.followUpCost || null).filter(Boolean),
+    costs: [].concat(context.query.costs || null).filter(Boolean),
   };
 
   /* TODO: how should we handle errors here? */
@@ -171,6 +169,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
       filters.geography,
       filters.organisation,
       filters.providerOrganisation,
+      filters.costs,
     ]
       .flat()
       .filter(Boolean);
@@ -246,45 +245,48 @@ export default function SearchProviders({ filters, results, filterOptions }) {
               </fieldset>
               <fieldset>
                 <legend>Costs (Find)</legend>
-                {filterOptions.findCost.map((item, i) => (
-                  <Fragment key={i}>
-                    {filterCheckbox(
-                      'findCost',
-                      item,
-                      item,
-                      filters.findCost?.includes(item),
-                      handleCostsFilterChange
-                    )}
-                  </Fragment>
-                ))}
+                {filterOptions.costs
+                  .filter((item) => item.includes('Find:'))
+                  .map((item, i) => (
+                    <Fragment key={i}>
+                      {filterCheckbox(
+                        'costs',
+                        item,
+                        item.substring(item.indexOf(':') + 1),
+                        filters.costs?.includes(item)
+                      )}
+                    </Fragment>
+                  ))}
               </fieldset>
               <fieldset>
                 <legend>Costs (Recruit)</legend>
-                {filterOptions.recruitCost.map((item, i) => (
-                  <Fragment key={i}>
-                    {filterCheckbox(
-                      'recruitCost',
-                      item,
-                      item,
-                      filters.recruitCost?.includes(item),
-                      handleCostsFilterChange
-                    )}
-                  </Fragment>
-                ))}
+                {filterOptions.costs
+                  .filter((item) => item.includes('Recruit:'))
+                  .map((item, i) => (
+                    <Fragment key={i}>
+                      {filterCheckbox(
+                        'costs',
+                        item,
+                        item.substring(item.indexOf(':') + 1),
+                        filters.costs?.includes(item)
+                      )}
+                    </Fragment>
+                  ))}
               </fieldset>
               <fieldset>
                 <legend>Costs (Follow-Up)</legend>
-                {filterOptions.followUpCost.map((item, i) => (
-                  <Fragment key={i}>
-                    {filterCheckbox(
-                      'followUpCost',
-                      item,
-                      item,
-                      filters.followUpCost?.includes(item),
-                      handleCostsFilterChange
-                    )}
-                  </Fragment>
-                ))}
+                {filterOptions.costs
+                  .filter((item) => item.includes('Follow-Up:'))
+                  .map((item, i) => (
+                    <Fragment key={i}>
+                      {filterCheckbox(
+                        'costs',
+                        item,
+                        item.substring(item.indexOf(':') + 1),
+                        filters.costs?.includes(item)
+                      )}
+                    </Fragment>
+                  ))}
               </fieldset>
               <fieldset>
                 <legend>Organisations</legend>
@@ -343,6 +345,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                       'geography',
                       'organisation',
                       'providerOrganisation',
+                      'costs',
                     ].includes(filterName)
                   )
                   .map((filterName, i) =>
