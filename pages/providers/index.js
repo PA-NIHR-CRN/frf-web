@@ -20,6 +20,7 @@ export async function getServerSideProps(context) {
       .concat(context.query.providerOrganisation || null)
       .filter(Boolean),
     q: context.query.q || null,
+    order: context.query.order || null,
     findCost: [].concat(context.query.findCost || null).filter(Boolean),
     // recruitCost: context.query.findCost || null,
     // followupCost: context.query.findCost || null,
@@ -35,6 +36,7 @@ export async function getServerSideProps(context) {
 
 export default function SearchProviders({ filters, results, filterOptions }) {
   const searchForm = useRef();
+  const resultOrderingForm = useRef();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -89,9 +91,18 @@ export default function SearchProviders({ filters, results, filterOptions }) {
       ])
     );
 
+    const resultOrderingData = new FormData(resultOrderingForm.current);
+
+    const resultOrderingDataAsObject = Object.fromEntries(
+      Array.from(resultOrderingData.keys()).map((key) => [
+        key,
+        resultOrderingData.get(key),
+      ])
+    );
+
     router.push({
       pathname: '/providers',
-      query: formDataAsObject,
+      query: { ...formDataAsObject, ...resultOrderingDataAsObject },
     });
   };
 
@@ -245,7 +256,35 @@ export default function SearchProviders({ filters, results, filterOptions }) {
             </form>
           </div>
           <div className={styles.results}>
-            <h3>{results.pagination.total} service providers found</h3>
+            <div className={styles.resultHeader}>
+              <h3>{results.pagination.total} service providers found</h3>
+              <form
+                method="get"
+                action="/search"
+                onSubmit={handleFiltersSubmit}
+                ref={resultOrderingForm}
+              >
+                <label>Sort by</label>
+                <select
+                  key="order"
+                  name="order"
+                  className={styles.resultSorting}
+                  onChange={handleFilterChange}
+                  defaultValue={filters.order || 'published'}
+                >
+                  <option value={'a-z'}>Alphabetical (ascending)</option>
+                  <option value={'z-a'}>Alphabetical (descending)</option>
+                  <option value={'updated'}>Recently updated</option>
+                  <option value={'published'}>Recently published</option>
+                  <option value={'highest-population'}>
+                    Population coverage (highest)
+                  </option>
+                  <option value={'lowest-population'}>
+                    Population coverage (lowest)
+                  </option>
+                </select>
+              </form>
+            </div>
 
             {anyFiltersActive(filters) &&
               Object.keys(filters)
@@ -283,7 +322,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                     ></div>
                     <h3>Coverage</h3>
                     <dl>
-                      <dt>Geographical: </dt>
+                      <dt>Geographical:</dt>
                       <dd>{item.fields.geography.join(', ')}</dd>
                       <dt>Population:</dt>
                       <dd>{item.fields.population}</dd>

@@ -51,8 +51,7 @@
 }
 
 .resultSorting {
-  top: 30px;
-  height: 39px;
+  margin: 20px 0 0 10px
 }
 
 .resultItem {
@@ -87,15 +86,12 @@
 .providerViewBtn {
   margin-top: -5px;
 
-  background: #00703c;
-  box-shadow: inset 0px -2px 0px #002d18;
+  background: #00703C;
+  box-shadow: inset 0px -2px 0px #002D18;
   padding: 5px 10px;
 
-  a,
-  a:visited,
-  a:hover,
-  a:active {
-    color: #ffffff;
+  a, a:visited, a:hover, a:active {
+    color: #FFFFFF;
     text-decoration: none;
   }
 }
