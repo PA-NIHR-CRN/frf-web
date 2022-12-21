@@ -270,7 +270,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                     {item.fields.name}
                   </a>
                 </h2>
-                <p>Org name: {item.fields.providerOrganisation.fields.name}</p>
+                <p>{item.fields.providerOrganisation.fields.name}</p>
                 <hr />
                 <div className={styles.providerDetails}>
                   <div>
@@ -288,23 +288,29 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                       <dt>Population:</dt>
                       <dd>{item.fields.population}</dd>
                     </dl>
-                    <h3>Suited to:</h3>
-                    <ul>
-                      {item.fields.suitedTo.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
+                    {item.fields.suitedTo && (
+                      <>
+                        <h3>Suited to:</h3>
+                        <ul>
+                          {item.fields.suitedTo.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
                   </div>
-                  <div className={styles.providerDataTypes}>
-                    <p>
-                      <b>Types of data available</b>
-                    </p>
-                    <ul>
-                      {item.fields.dataType?.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  {item.fields.dataType && (
+                    <div className={styles.providerDataTypes}>
+                      <p>
+                        <b>Types of data available</b>
+                      </p>
+                      <ul>
+                        {item.fields.dataType?.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
                 <hr />
                 <div className={styles.providerFooter}>
