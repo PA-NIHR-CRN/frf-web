@@ -8,6 +8,7 @@ export default function Home() {
       </Head>
       <main>
         <h1>Homepage</h1>
+        TODO: Add links to filtered search
       </main>
     </div>
   );
