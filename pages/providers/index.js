@@ -18,6 +18,7 @@ export async function getServerSideProps(context) {
     serviceType: [].concat(context.query.serviceType || null).filter(Boolean),
     dataType: [].concat(context.query.dataType || null).filter(Boolean),
     geography: [].concat(context.query.geography || null).filter(Boolean),
+    excludeRegional: context.query.excludeRegional || null,
     providerOrganisation: []
       .concat(context.query.providerOrganisation || null)
       .filter(Boolean),
@@ -55,16 +56,6 @@ export default function SearchProviders({ filters, results, filterOptions }) {
   };
 
   const handleFilterChange = async (event) => {
-    search();
-  };
-
-  const handleCostsFilterChange = async (event) => {
-    const checkedState = event.target.checked;
-    const checkboxes = document.getElementsByName(event.target.name);
-    checkboxes.forEach((item) => {
-      item.checked = false;
-    });
-    event.target.checked = checkedState;
     search();
   };
 
@@ -149,6 +140,15 @@ export default function SearchProviders({ filters, results, filterOptions }) {
       );
     }
 
+    // exclude regional
+    if (name === 'excludeRegional') {
+      return (
+        <button key={`${name}-${i}`} onClick={handleFilterClear} name={name}>
+          Exclude Regional &times;
+        </button>
+      );
+    }
+
     // all others are arrays
     return value.map((v, j) => (
       <button
@@ -168,6 +168,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
       filters.serviceType,
       filters.dataType,
       filters.geography,
+      filters.excludeRegional,
       filters.organisation,
       filters.providerOrganisation,
       filters.costs,
@@ -243,6 +244,19 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                     )}
                   </Fragment>
                 ))}
+                {
+                  <>
+                    <hr />
+                    <Fragment key="excludeRegional">
+                      {filterCheckbox(
+                        'excludeRegional',
+                        true,
+                        'Exclude regional only services',
+                        !!filters.excludeRegional
+                      )}
+                    </Fragment>
+                  </>
+                }
               </fieldset>
               <fieldset>
                 <legend>Costs (Find)</legend>
@@ -347,12 +361,13 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                       'organisation',
                       'providerOrganisation',
                       'costs',
+                      'excludeRegional',
                     ].includes(filterName)
                   )
                   .map((filterName, i) =>
                     renderFilterClearButton(filterName, filters[filterName], i)
                   )}
-                <Link href="/providers">Clear all</Link>
+                <Link href="/providers">Clear filters</Link>
               </div>
             )}
 
@@ -390,7 +405,10 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                     <h3>Coverage</h3>
                     <dl>
                       <dt>Geographical:</dt>
-                      <dd>{item.fields.geography.join(', ')}</dd>
+                      <dd>
+                        {item.fields?.regionalCoverage ||
+                          item.fields.geography.join(', ')}
+                      </dd>
                       <dt>Population:</dt>
                       <dd>{item.fields.population}</dd>
                     </dl>
