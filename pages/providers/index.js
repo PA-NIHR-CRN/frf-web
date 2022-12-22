@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import ContentfulService from '../../lib/contentful';
+import { formatCostsTable } from '../../utils/costs.utils';
 import { useRouter } from 'next/router';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { Fragment, useRef, useEffect, useState } from 'react';
@@ -373,6 +374,19 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                         ),
                       }}
                     ></div>
+
+                    {item.fields.costs && (
+                      <>
+                        <h3>Services available and costs:</h3>
+                        {formatCostsTable(
+                          item.fields.costs,
+                          item.fields?.findCostChargeableDescription,
+                          item.fields?.recruitCostChargeableDescription,
+                          item.fields?.followUpCostChargeableDescription
+                        )}
+                      </>
+                    )}
+
                     <h3>Coverage</h3>
                     <dl>
                       <dt>Geographical:</dt>

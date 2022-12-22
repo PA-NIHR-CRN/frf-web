@@ -77,6 +77,13 @@
   min-width: 165px;
 }
 
+.providerCostTableTypeColumn {
+  min-width: 136px;
+  text-align: center;
+  text-transform: uppercase !important;
+
+}
+
 .providerFooter {
   display: flex;
   column-gap: 2em;
