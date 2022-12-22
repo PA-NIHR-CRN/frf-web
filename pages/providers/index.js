@@ -7,6 +7,8 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { Fragment, useRef, useEffect, useState } from 'react';
 
 import styles from './providers.module.scss';
+import { formatTypesOfDataList } from '../../utils/typesOfData.utils';
+import { formatSuitedToList } from '../../utils/suitedTo.utils';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -380,8 +382,8 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                 </h2>
                 <p>{item.fields.providerOrganisation.fields.name}</p>
                 <hr />
-                <div className={styles.providerDetails}>
-                  <div>
+                <div className={styles.providerDetailsContainer}>
+                  <div className={styles.providerDetailsPrimary}>
                     <div
                       dangerouslySetInnerHTML={{
                         __html: documentToHtmlString(
@@ -415,24 +417,16 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                     {item.fields.suitedTo && (
                       <>
                         <h3>Suited to:</h3>
-                        <ul>
-                          {item.fields.suitedTo.map((item, i) => (
-                            <li key={i}>{item}</li>
-                          ))}
-                        </ul>
+                        {formatSuitedToList(item.fields.suitedTo)}
                       </>
                     )}
                   </div>
                   {item.fields.dataType && (
-                    <div className={styles.providerDataTypes}>
+                    <div className={styles.providerDetailsSecondary}>
                       <p>
                         <b>Types of data available</b>
                       </p>
-                      <ul>
-                        {item.fields.dataType?.map((item, i) => (
-                          <li key={i}>{item}</li>
-                        ))}
-                      </ul>
+                      {formatTypesOfDataList(item.fields.dataType)}
                     </div>
                   )}
                 </div>
