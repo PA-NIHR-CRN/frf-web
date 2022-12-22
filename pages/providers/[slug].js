@@ -1,13 +1,18 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ContentfulService from '../../lib/contentful';
 
 import styles from './providers.module.scss';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { formatCostsTable } from '../../utils/costs.utils';
-import { useEffect, useState } from 'react';
 import { formatTypesOfDataList } from '../../utils/typesOfData.utils';
 import { formatSuitedToList } from '../../utils/suitedTo.utils';
+import YouTubeVideoIframe from '../../utils/video.utils';
+import {
+  formatCollapsibleBox,
+  formatGoBackLink,
+} from '../../utils/generic.utils';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -21,18 +26,10 @@ export async function getServerSideProps(context) {
 export default function ProviderDetail({ provider }) {
   const router = useRouter();
 
-  const goBackLink = () => {
-    return (
-      <div className={styles.goBackLink}>
-        <a onClick={router.back}>Back to provider list</a>
-      </div>
-    );
-  };
-
   if (!provider) {
     return (
       <main>
-        {goBackLink()}
+        {formatGoBackLink(router.back, 'Back to provider list')}
         <h1>404 not found</h1>
       </main>
     );
@@ -47,7 +44,7 @@ export default function ProviderDetail({ provider }) {
       <main>
         <div>
           <div className={styles.detailHeading}>
-            {goBackLink()}
+            {formatGoBackLink(router.back, 'Back to provider list')}
             <h1>{provider.fields.name}</h1>
             <h3>{provider.fields.providerOrganisation.fields.name}</h3>
           </div>
@@ -96,6 +93,63 @@ export default function ProviderDetail({ provider }) {
                   )}
                 </>
               )}
+
+              {/*YouTube Video*/}
+              {/*TODO: Update to use new field videoURL and parse the ID */}
+              {provider.fields.videoEmbed && YouTubeVideoIframe('OtmV3TPTbRs')}
+
+              {provider.fields?.website && (
+                <p>
+                  <Link href={provider.fields?.website}>
+                    For more information visit
+                    {provider.fields?.websiteName
+                      ? ' ' + provider.fields?.websiteName
+                      : ' ' + provider.fields?.website}
+                  </Link>
+                </p>
+              )}
+
+              {provider.fields.dataSpecificsAndCoding && (
+                <>
+                  <h2>Data specifics and coding</h2>
+                  {provider.fields.dataSpecificsAndCoding.map(
+                    (item, i) =>
+                      item.fields.heading &&
+                      item.fields.text &&
+                      formatCollapsibleBox(
+                        item.fields.heading,
+                        item.fields.text,
+                        i
+                      )
+                  )}
+                </>
+              )}
+
+              {provider.fields.geographicAndPopulationCoverage && (
+                <>
+                  <h2>Geographical and population coverage</h2>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: documentToHtmlString(
+                        provider.fields.geographicAndPopulationCoverage
+                      ),
+                    }}
+                  ></div>
+                </>
+              )}
+
+              <h2>Information governance</h2>
+              <p>
+                {
+                  "Full details of this service provider's Information Governance process."
+                }
+              </p>
+
+              <a
+                href={`/providers/${provider.fields.slug}/information-governance`}
+              >
+                Details of Information Governance
+              </a>
             </div>
             <div className={styles.detailSecondary}>
               {provider.fields.dataType && (

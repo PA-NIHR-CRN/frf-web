@@ -6,7 +6,7 @@ export const formatSuitedToList = (positiveList, negativeList) => {
       {positiveList && (
         <ul
           className={styles.yesNoListPositive}
-          style={{ marginBottom: negativeList ? '0' : 'auto' }}
+          style={{ marginBottom: negativeList ? '0' : '12px' }}
         >
           {positiveList.map((item, i) => (
             <li key={i}>{item}</li>

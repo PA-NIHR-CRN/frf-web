@@ -1,12 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import ContentfulService from '../../lib/contentful';
-import { formatCostsTable } from '../../utils/costs.utils';
 import { useRouter } from 'next/router';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { Fragment, useRef, useEffect, useState } from 'react';
-
 import styles from './providers.module.scss';
+import { formatCostsTable } from '../../utils/costs.utils';
 import { formatTypesOfDataList } from '../../utils/typesOfData.utils';
 import { formatSuitedToList } from '../../utils/suitedTo.utils';
 

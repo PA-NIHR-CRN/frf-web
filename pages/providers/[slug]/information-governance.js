@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import ContentfulService from '../../../lib/contentful';
-
+import { useRouter } from 'next/router';
 import styles from '../providers.module.scss';
+import { formatGoBackLink } from '../../../utils/generic.utils';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -13,10 +14,13 @@ export async function getServerSideProps(context) {
 }
 
 export default function ProviderDetail({ provider }) {
+  const router = useRouter();
+
   if (!provider) {
     return (
       /* TODO: make this better */
       <main>
+        {formatGoBackLink(router.back, 'Back to provider details')}
         <h1>404 not found</h1>
       </main>
     );
@@ -31,9 +35,7 @@ export default function ProviderDetail({ provider }) {
       <main>
         <div className={styles.container}>
           <div className={styles.detail}>
-            <a href={`/providers/${provider.fields.slug}`}>
-              Back to {provider.fields.name}
-            </a>
+            {formatGoBackLink(router.back, 'Back to provider details')}
             <h1>Information Governance for {provider.fields.name}</h1>
           </div>
         </div>
