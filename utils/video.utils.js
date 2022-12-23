@@ -2,12 +2,17 @@ import { useRef } from 'react';
 import styles from '../pages/providers/providers.module.scss';
 
 export default function YouTubeVideoIframe(
-  video,
+  videoUrl,
   width = '560px',
   height = '315px',
   thumbnailQuality = 'maxresdefault' // 'hqdefault'
 ) {
   const divRef = useRef();
+
+  const getVideoID = (videoURL) => {
+    const url = videoURL.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : url[0];
+  };
 
   const onClick = () => {
     const iframe = document.createElement('iframe');
@@ -21,7 +26,9 @@ export default function YouTubeVideoIframe(
     iframe.style.height = height;
     iframe.setAttribute(
       'src',
-      `https://www.youtube.com/embed/${video}?rel=0&showinfo=1&autoplay=1`
+      `https://www.youtube.com/embed/${getVideoID(
+        videoUrl
+      )}?rel=0&showinfo=1&autoplay=1`
     );
     if (divRef.current) {
       divRef.current.innerHTML = '';
@@ -35,7 +42,9 @@ export default function YouTubeVideoIframe(
       <img
         onClick={onClick}
         loading="lazy"
-        src={`https://img.youtube.com/vi/${video}/${thumbnailQuality}.jpg`}
+        src={`https://img.youtube.com/vi/${getVideoID(
+          videoUrl
+        )}/${thumbnailQuality}.jpg`}
         alt="YouTube Video Thumbnail"
         width={width}
         height={height}

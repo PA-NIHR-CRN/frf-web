@@ -96,7 +96,8 @@ export default function ProviderDetail({ provider }) {
 
               {/*YouTube Video*/}
               {/*TODO: Update to use new field videoURL and parse the ID */}
-              {provider.fields.videoEmbed && YouTubeVideoIframe('OtmV3TPTbRs')}
+              {provider.fields.videoUrl &&
+                YouTubeVideoIframe(provider.fields.videoUrl)}
 
               {provider.fields?.website && (
                 <p>
