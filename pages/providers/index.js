@@ -5,9 +5,10 @@ import { useRouter } from 'next/router';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { Fragment, useRef, useEffect, useState } from 'react';
 import styles from './providers.module.scss';
-import { formatCostsTable } from '../../utils/costs.utils';
+import { formatServiceTypesCostsTable } from '../../utils/serviceTypes.utils';
 import { formatTypesOfDataList } from '../../utils/typesOfData.utils';
 import { formatSuitedToList } from '../../utils/suitedTo.utils';
+import { formatDate } from '../../utils/generic.utils';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -208,7 +209,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                 <input type="submit" value="Search" />
               </fieldset>
               <fieldset>
-                <legend>Service Type</legend>
+                <legend>Type of service</legend>
                 {filterOptions.serviceType.map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
@@ -305,7 +306,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                   ))}
               </fieldset>
               <fieldset>
-                <legend>Organisations</legend>
+                <legend>Organisation</legend>
                 {filterOptions.providerOrganisation.map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
@@ -394,7 +395,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                     {item.fields.costs && (
                       <>
                         <h3>Services available and costs:</h3>
-                        {formatCostsTable(
+                        {formatServiceTypesCostsTable(
                           item.fields.costs,
                           item.fields?.findCostChargeableDescription,
                           item.fields?.recruitCostChargeableDescription,
@@ -432,12 +433,10 @@ export default function SearchProviders({ filters, results, filterOptions }) {
                 <hr />
                 <div className={styles.providerFooter}>
                   <div>
-                    <b>First Published:</b>{' '}
-                    {new Date(item.sys.createdAt).toLocaleDateString('en-GB')}
+                    <b>First Published:</b> {formatDate(item.sys.createdAt)}
                   </div>
                   <div>
-                    <b>Last Updated:</b>{' '}
-                    {new Date(item.sys.updatedAt).toLocaleDateString('en-GB')}
+                    <b>Last Updated:</b> {formatDate(item.sys.updatedAt)}
                   </div>
                   <div className={styles.providerViewBtn}>
                     <a href={`/providers/${item.fields.slug}`}>

@@ -3,16 +3,14 @@ import styles from '../pages/providers/providers.module.scss';
 
 export const formatCollapsibleBox = (heading, text, key) => {
   return (
-    <>
-      <details key={key}>
-        <summary>{heading}</summary>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: documentToHtmlString(text),
-          }}
-        ></div>
-      </details>
-    </>
+    <details key={key}>
+      <summary>{heading}</summary>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: documentToHtmlString(text),
+        }}
+      ></div>
+    </details>
   );
 };
 
@@ -22,4 +20,8 @@ export const formatGoBackLink = (routerBackFn, label) => {
       <a onClick={routerBackFn}>{label}</a>
     </div>
   );
+};
+
+export const formatDate = (date) => {
+  return new Date(date).toLocaleDateString('en-GB');
 };

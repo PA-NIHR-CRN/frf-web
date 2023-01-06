@@ -2,15 +2,18 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ContentfulService from '../../lib/contentful';
-
 import styles from './providers.module.scss';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import { formatCostsTable } from '../../utils/costs.utils';
+import {
+  formatServiceTypesCostsTable,
+  formatServiceTypeBlock,
+} from '../../utils/serviceTypes.utils';
 import { formatTypesOfDataList } from '../../utils/typesOfData.utils';
 import { formatSuitedToList } from '../../utils/suitedTo.utils';
 import YouTubeVideoIframe from '../../utils/video.utils';
 import {
   formatCollapsibleBox,
+  formatDate,
   formatGoBackLink,
 } from '../../utils/generic.utils';
 
@@ -42,7 +45,7 @@ export default function ProviderDetail({ provider }) {
       </Head>
 
       <main>
-        <div>
+        <div className={styles.providerWrapper}>
           <div className={styles.detailHeading}>
             {formatGoBackLink(router.back, 'Back to provider list')}
             <h1>{provider.fields.name}</h1>
@@ -64,7 +67,7 @@ export default function ProviderDetail({ provider }) {
               {provider.fields.costs && (
                 <>
                   <h3>Services available and costs:</h3>
-                  {formatCostsTable(
+                  {formatServiceTypesCostsTable(
                     provider.fields.costs,
                     provider.fields?.findCostChargeableDescription,
                     provider.fields?.recruitCostChargeableDescription,
@@ -112,7 +115,9 @@ export default function ProviderDetail({ provider }) {
 
               {provider.fields.dataSpecificsAndCoding && (
                 <>
-                  <h2>Data specifics and coding</h2>
+                  <h2 className={styles.providerPageSubTitle}>
+                    Data specifics and coding
+                  </h2>
                   {provider.fields.dataSpecificsAndCoding.map(
                     (item, i) =>
                       item.fields.heading &&
@@ -128,7 +133,9 @@ export default function ProviderDetail({ provider }) {
 
               {provider.fields.geographicAndPopulationCoverage && (
                 <>
-                  <h2>Geographical and population coverage</h2>
+                  <h2 className={styles.providerPageSubTitle}>
+                    Geographical and population coverage
+                  </h2>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: documentToHtmlString(
@@ -139,7 +146,9 @@ export default function ProviderDetail({ provider }) {
                 </>
               )}
 
-              <h2>Information governance</h2>
+              <h2 className={styles.providerPageSubTitle}>
+                Information governance
+              </h2>
               <p>
                 {
                   "Full details of this service provider's Information Governance process."
@@ -151,6 +160,56 @@ export default function ProviderDetail({ provider }) {
               >
                 Details of Information Governance
               </a>
+
+              {provider.fields.serviceTypes && (
+                <>
+                  {provider.fields.serviceTypes
+                    .filter((item) => item.fields?.serviceType.includes('Find'))
+                    .map((item, i) =>
+                      formatServiceTypeBlock(
+                        item,
+                        provider.fields.costs,
+                        provider.fields?.findCostChargeableDescription,
+                        i
+                      )
+                    )}
+
+                  {provider.fields.serviceTypes
+                    .filter((item) =>
+                      item.fields?.serviceType.includes('Recruit')
+                    )
+                    .map((item, i) =>
+                      formatServiceTypeBlock(
+                        item,
+                        provider.fields.costs,
+                        provider.fields?.recruitCostChargeableDescription,
+                        i
+                      )
+                    )}
+
+                  {provider.fields.serviceTypes
+                    .filter((item) =>
+                      item.fields?.serviceType.includes('Follow-Up')
+                    )
+                    .map((item, i) =>
+                      formatServiceTypeBlock(
+                        item,
+                        provider.fields.costs,
+                        provider.fields?.followUpCostChargeableDescription,
+                        i
+                      )
+                    )}
+                </>
+              )}
+              <div>
+                <hr />
+                <p>
+                  <b>First Published:</b> {formatDate(provider.sys.createdAt)}
+                </p>
+                <p>
+                  <b>Last Updated:</b> {formatDate(provider.sys.updatedAt)}
+                </p>
+              </div>
             </div>
             <div className={styles.detailSecondary}>
               {provider.fields.dataType && (
