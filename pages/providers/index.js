@@ -373,79 +373,94 @@ export default function SearchProviders({ filters, results, filterOptions }) {
               </div>
             )}
 
-            {results.items.map((item) => (
-              <div key={item.fields.slug} className={styles.resultItem}>
-                <h2>
-                  <a href={`/providers/${item.fields.slug}`}>
-                    {item.fields.name}
-                  </a>
-                </h2>
-                <p>{item.fields.providerOrganisation.fields.name}</p>
-                <hr />
-                <div className={styles.providerDetailsContainer}>
-                  <div className={styles.providerDetailsPrimary}>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: documentToHtmlString(
-                          item.fields.shortDescription
-                        ),
-                      }}
-                    ></div>
-
-                    {item.fields.costs && (
-                      <>
-                        <h3>Services available and costs:</h3>
-                        {formatServiceTypesCostsTable(
-                          item.fields.costs,
-                          item.fields?.findCostChargeableDescription,
-                          item.fields?.recruitCostChargeableDescription,
-                          item.fields?.followUpCostChargeableDescription
-                        )}
-                      </>
-                    )}
-
-                    <h3>Coverage</h3>
-                    <dl>
-                      <dt>Geographical:</dt>
-                      <dd>
-                        {item.fields?.regionalCoverage ||
-                          item.fields.geography.join(', ')}
-                      </dd>
-                      <dt>Population:</dt>
-                      <dd>{item.fields.population}</dd>
-                    </dl>
-                    {item.fields.suitedTo && (
-                      <>
-                        <h3>Suited to:</h3>
-                        {formatSuitedToList(item.fields.suitedTo)}
-                      </>
-                    )}
-                  </div>
-                  {item.fields.dataType && (
-                    <div className={styles.providerDetailsSecondary}>
-                      <p>
-                        <b>Types of data available</b>
-                      </p>
-                      {formatTypesOfDataList(item.fields.dataType)}
-                    </div>
-                  )}
-                </div>
-                <hr />
-                <div className={styles.providerFooter}>
-                  <div>
-                    <b>First Published:</b> {formatDate(item.sys.createdAt)}
-                  </div>
-                  <div>
-                    <b>Last Updated:</b> {formatDate(item.sys.updatedAt)}
-                  </div>
-                  <div className={styles.providerViewBtn}>
+            {results.items &&
+              results.items.map((item) => (
+                <div key={item.fields.slug} className={styles.resultItem}>
+                  <h2>
                     <a href={`/providers/${item.fields.slug}`}>
-                      View more details
+                      {item.fields.name}
                     </a>
+                  </h2>
+                  <p>{item.fields.providerOrganisation.fields.name}</p>
+                  <hr />
+                  <div className={styles.providerDetailsContainer}>
+                    <div className={styles.providerDetailsPrimary}>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: documentToHtmlString(
+                            item.fields.shortDescription
+                          ),
+                        }}
+                      ></div>
+
+                      {item.fields.costs && (
+                        <>
+                          <h3>Services available and costs:</h3>
+                          {formatServiceTypesCostsTable(
+                            item.fields.costs,
+                            item.fields?.findCostChargeableDescription,
+                            item.fields?.recruitCostChargeableDescription,
+                            item.fields?.followUpCostChargeableDescription
+                          )}
+                        </>
+                      )}
+
+                      <h3>Coverage</h3>
+                      <dl>
+                        <dt>Geographical:</dt>
+                        <dd>
+                          {item.fields?.regionalCoverage ||
+                            item.fields.geography.join(', ')}
+                        </dd>
+                        <dt>Population:</dt>
+                        <dd>{item.fields.population}</dd>
+                      </dl>
+                      {item.fields.suitedTo && (
+                        <>
+                          <h3>Suited to:</h3>
+                          {formatSuitedToList(item.fields.suitedTo)}
+                        </>
+                      )}
+                    </div>
+                    {item.fields.dataType && (
+                      <div className={styles.providerDetailsSecondary}>
+                        <p>
+                          <b>Types of data available</b>
+                        </p>
+                        {formatTypesOfDataList(item.fields.dataType)}
+                      </div>
+                    )}
+                  </div>
+                  <hr />
+                  <div className={styles.providerFooter}>
+                    <div>
+                      <b>First Published:</b> {formatDate(item.sys.createdAt)}
+                    </div>
+                    <div>
+                      <b>Last Updated:</b> {formatDate(item.sys.updatedAt)}
+                    </div>
+                    <div className={styles.providerViewBtn}>
+                      <a href={`/providers/${item.fields.slug}`}>
+                        View more details
+                      </a>
+                    </div>
                   </div>
                 </div>
+              ))}
+
+            {!results.items.length && (
+              <div>
+                <h2>There are no matching results</h2>
+                <p>Improve your search results by:</p>
+                <ul>
+                  <li> Removing filters</li>
+                  <li>Double-checking your spelling</li>
+                  <li>Using fewer key words Searching</li>
+                  <li>Double-checking your spelling Using fewer key words</li>
+                  <li>Searching for something less specific</li>
+                </ul>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </main>
