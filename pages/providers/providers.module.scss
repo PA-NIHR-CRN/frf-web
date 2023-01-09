@@ -217,3 +217,31 @@ $color--follow-up: #E0DFF1;
   @extend .providerPageSubTitle;
   background: $color--follow-up;
 }
+
+.informationGovernancePageDetail {
+  text-align: center;
+}
+
+.informationGovernanceTable {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.informationGovernanceTable tbody tr {
+  border-bottom: 1px solid #B1B4B6;
+}
+
+.informationGovernanceTable tbody tr td {
+  padding: 5px 8px 4px;
+}
+
+.informationGovernanceTableRequiredTrue::before {
+  content: '✓';
+  color: green;
+}
+
+.informationGovernanceTableRequiredFalse::before {
+  content: 'x';
+  color: red;
+}
