@@ -2,7 +2,7 @@ import Head from 'next/head';
 import ContentfulService from '../../../lib/contentful';
 import { useRouter } from 'next/router';
 import styles from '../providers.module.scss';
-import { formatGoBackLink } from '../../../utils/generic.utils';
+import { formatGoBackLink, previewBanner } from '../../../utils/generic.utils';
 import {
   formatDataSourceTable,
   formatDataTransferTable,
@@ -14,11 +14,11 @@ export async function getServerSideProps(context) {
   /* TODO: how should we handle errors here? */
   const provider = await content.getProviderBySlug(context.query.slug);
   return {
-    props: { provider },
+    props: { isPreviewMode: process.env.CONTENTFUL_PREVIEW_MODE, provider },
   };
 }
 
-export default function ProviderDetail({ provider }) {
+export default function ProviderDetail({ isPreviewMode, provider }) {
   const router = useRouter();
 
   if (!provider) {
@@ -36,6 +36,8 @@ export default function ProviderDetail({ provider }) {
       <Head>
         <title>Information Governance</title>
       </Head>
+
+      {previewBanner(isPreviewMode)}
 
       <main>
         <div className={styles.providerWrapper}>

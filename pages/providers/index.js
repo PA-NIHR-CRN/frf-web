@@ -8,7 +8,7 @@ import styles from './providers.module.scss';
 import { formatServiceTypesCostsTable } from '../../utils/serviceTypes.utils';
 import { formatTypesOfDataList } from '../../utils/typesOfData.utils';
 import { formatSuitedToList } from '../../utils/suitedTo.utils';
-import { formatDate } from '../../utils/generic.utils';
+import { formatDate, previewBanner } from '../../utils/generic.utils';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -33,11 +33,21 @@ export async function getServerSideProps(context) {
   const results = await content.getProvidersByFilter(filters);
 
   return {
-    props: { filters, results, filterOptions },
+    props: {
+      isPreviewMode: process.env.CONTENTFUL_PREVIEW_MODE,
+      filters,
+      results,
+      filterOptions,
+    },
   };
 }
 
-export default function SearchProviders({ filters, results, filterOptions }) {
+export default function SearchProviders({
+  isPreviewMode,
+  filters,
+  results,
+  filterOptions,
+}) {
   const searchForm = useRef();
   const resultOrderingForm = useRef();
   const router = useRouter();
@@ -186,6 +196,8 @@ export default function SearchProviders({ filters, results, filterOptions }) {
       <Head>
         <title>Search results</title>
       </Head>
+
+      {previewBanner(isPreviewMode)}
 
       <main>
         <div

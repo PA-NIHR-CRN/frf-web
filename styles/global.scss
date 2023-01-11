@@ -4,7 +4,22 @@ html {
   line-height: 1.4;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+}
+
 main {
   max-width: 1000px;
   margin: 0 auto;
+}
+
+.preview-mode {
+  display: block;
+  padding: 10px;
+  margin-bottom: 2rem;
+  background: orange;
+  color: white;
+  text-align: center;
+  opacity: 0.75;
 }

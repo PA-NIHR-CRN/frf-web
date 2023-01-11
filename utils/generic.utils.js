@@ -22,6 +22,17 @@ export const formatGoBackLink = (routerBackFn, label) => {
   );
 };
 
+export const previewBanner = (isPreviewMode) => {
+  if (isPreviewMode) {
+    return (
+      <div className="preview-mode">
+        You are viewing the preview site, which shows draft content from
+        Contentful.
+      </div>
+    );
+  }
+};
+
 export const formatDate = (date) => {
   return new Date(date).toLocaleDateString('en-GB');
 };
