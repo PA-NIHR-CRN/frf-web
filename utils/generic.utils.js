@@ -23,7 +23,7 @@ export const formatGoBackLink = (routerBackFn, label) => {
 };
 
 export const previewBanner = (isPreviewMode) => {
-  if (isPreviewMode) {
+  if (isPreviewMode && parseInt(isPreviewMode) === 1) {
     return (
       <div className="preview-mode">
         You are viewing the preview site, which shows draft content from
