@@ -197,7 +197,7 @@ export default function SearchProviders({ filters, results, filterOptions }) {
             <h3>Filter providers by</h3>
             <form
               method="get"
-              action="/search"
+              action="/providers"
               onSubmit={handleFiltersSubmit}
               ref={searchForm}
             >
