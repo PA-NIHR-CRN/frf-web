@@ -1,12 +1,21 @@
 import Head from 'next/head';
 import Link from 'next/link';
 
-export default function Home() {
+import { previewBanner } from '../utils/generic.utils';
+
+export async function getServerSideProps() {
+  return {
+    props: { isPreviewMode: process.env.CONTENTFUL_PREVIEW_MODE },
+  };
+}
+
+export default function Home({ isPreviewMode }) {
   return (
     <div>
       <Head>
         <title>Homepage</title>
       </Head>
+      {previewBanner(isPreviewMode)}
       <main>
         <h1>Find, Recruit & Follow-up </h1>
         <p>
