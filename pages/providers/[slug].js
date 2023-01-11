@@ -155,11 +155,13 @@ export default function ProviderDetail({ provider }) {
                 }
               </p>
 
-              <a
-                href={`/providers/${provider.fields.slug}/information-governance`}
-              >
-                Details of Information Governance
-              </a>
+              <div className={styles.informationGovernanceViewBtn}>
+                <a
+                  href={`/providers/${provider.fields.slug}/information-governance`}
+                >
+                  Details of Information Governance
+                </a>
+              </div>
 
               {provider.fields.serviceTypes && (
                 <>

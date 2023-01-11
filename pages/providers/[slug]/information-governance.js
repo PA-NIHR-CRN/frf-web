@@ -7,6 +7,7 @@ import {
   formatDataSourceTable,
   formatDataTransferTable,
 } from '../../../utils/informationGov.utils';
+import { Fragment } from 'react';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -37,7 +38,7 @@ export default function ProviderDetail({ provider }) {
       </Head>
 
       <main>
-        <div>
+        <div className={styles.providerWrapper}>
           <div>
             {formatGoBackLink(router.back, 'Back to provider details')}
             <h1>Information Governance for {provider.fields.name}</h1>
@@ -50,22 +51,97 @@ export default function ProviderDetail({ provider }) {
             </p>
           </div>
 
-          {provider.fields.informationGovernance && (
-            <div className={styles.informationGovernancePageDetail}>
-              <h2 className={styles.providerPageSubTitle}>Data source</h2>
-              {formatDataSourceTable(provider.fields.informationGovernance)}
+          <div className={styles.informationGovernancePageDetail}>
+            {provider.fields.informationGovernance && (
+              <>
+                <h2 className={styles.providerPageSubTitle}>Data source</h2>
+                {formatDataSourceTable(provider.fields.informationGovernance)}
 
-              <h2 className={styles.providerPageSubTitle}>
-                Data processing activities
-              </h2>
-              <h4 className={styles.providerPageSubTitle}>
-                Transfer of personal data to a third party data controller
-              </h4>
-              {formatDataTransferTable(
-                provider.fields.informationGovernance.fields.dataTransfer
-              )}
-            </div>
-          )}
+                <h2 className={styles.providerPageSubTitle}>
+                  Data processing activities
+                </h2>
+                <h4 className={styles.providerPageSubTitle}>
+                  Transfer of personal data to a third party data controller
+                </h4>
+                {formatDataTransferTable(
+                  provider.fields.informationGovernance.fields.dataTransfer
+                )}
+              </>
+            )}
+
+            {provider.fields.serviceTypes && (
+              <>
+                {provider.fields.serviceTypes
+                  .filter((item) => item.fields?.serviceType.includes('Find'))
+                  .map((item, i) => (
+                    <Fragment key={i}>
+                      <div
+                        className={
+                          styles.informationGovernanceServiceTypeTitleFind
+                        }
+                      >
+                        <h2>Find</h2>
+                        <p>
+                          Determining numbers of potentially eligible research
+                          participants
+                        </p>
+                      </div>
+                      {item.fields.informationGovernance &&
+                        formatDataTransferTable(
+                          item.fields.informationGovernance
+                        )}
+                    </Fragment>
+                  ))}
+
+                {provider.fields.serviceTypes
+                  .filter((item) =>
+                    item.fields?.serviceType.includes('Recruit')
+                  )
+                  .map((item, i) => (
+                    <Fragment key={i}>
+                      <div
+                        className={
+                          styles.informationGovernanceServiceTypeTitleRecruit
+                        }
+                      >
+                        <h2>Recruit</h2>
+                        <p>
+                          Approaching potentially eligible research participants
+                        </p>
+                      </div>
+                      {item.fields.informationGovernance &&
+                        formatDataTransferTable(
+                          item.fields.informationGovernance
+                        )}
+                    </Fragment>
+                  ))}
+
+                {provider.fields.serviceTypes
+                  .filter((item) =>
+                    item.fields?.serviceType.includes('Follow-Up')
+                  )
+                  .map((item, i) => (
+                    <Fragment key={i}>
+                      <div
+                        className={
+                          styles.informationGovernanceServiceTypeTitleFollowUp
+                        }
+                      >
+                        <h2>Follow-Up</h2>
+                        <p>
+                          Using data sources to link to patient records for
+                          follow-up information
+                        </p>
+                      </div>
+                      {item.fields.informationGovernance &&
+                        formatDataTransferTable(
+                          item.fields.informationGovernance
+                        )}
+                    </Fragment>
+                  ))}
+              </>
+            )}
+          </div>
         </div>
       </main>
     </>
