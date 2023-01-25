@@ -17,6 +17,7 @@ import {
   formatGoBackLink,
   previewBanner,
 } from '../../utils/generic.utils';
+import { ServiceType } from '../../consts/serviceType.const';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -52,7 +53,7 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
           <div className={styles.detailHeading}>
             {formatGoBackLink(router.back, 'Back to provider list')}
             <h1>{provider.fields.name}</h1>
-            <h3>{provider.fields.providerOrganisation.fields.name}</h3>
+            <h3>{provider.fields.providerOrganisation}</h3>
           </div>
 
           <div
@@ -101,7 +102,6 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
               )}
 
               {/*YouTube Video*/}
-              {/*TODO: Update to use new field videoURL and parse the ID */}
               {provider.fields.videoUrl &&
                 YouTubeVideoIframe(provider.fields.videoUrl)}
 
@@ -123,8 +123,8 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
                   </h2>
                   {provider.fields.dataSpecificsAndCoding.map(
                     (item, i) =>
-                      item.fields.heading &&
-                      item.fields.text &&
+                      item.fields?.heading &&
+                      item.fields?.text &&
                       formatCollapsibleBox(
                         item.fields.heading,
                         item.fields.text,
@@ -169,7 +169,9 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
               {provider.fields.serviceTypes && (
                 <>
                   {provider.fields.serviceTypes
-                    .filter((item) => item.fields?.serviceType.includes('Find'))
+                    .filter((item) =>
+                      item.fields?.serviceType.includes(ServiceType.FIND)
+                    )
                     .map((item, i) =>
                       formatServiceTypeBlock(
                         item,
@@ -181,7 +183,7 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
 
                   {provider.fields.serviceTypes
                     .filter((item) =>
-                      item.fields?.serviceType.includes('Recruit')
+                      item.fields?.serviceType.includes(ServiceType.RECRUIT)
                     )
                     .map((item, i) =>
                       formatServiceTypeBlock(
@@ -194,7 +196,7 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
 
                   {provider.fields.serviceTypes
                     .filter((item) =>
-                      item.fields?.serviceType.includes('Follow-Up')
+                      item.fields?.serviceType.includes(ServiceType.FOLLOW_UP)
                     )
                     .map((item, i) =>
                       formatServiceTypeBlock(
@@ -217,12 +219,12 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
               </div>
             </div>
             <div className={styles.detailSecondary}>
-              {provider.fields.dataType && (
+              {provider.metadata.tags && (
                 <>
                   <p>
                     <b>Types of data available</b>
                   </p>
-                  {formatTypesOfDataList(provider.fields.dataType)}
+                  {formatTypesOfDataList(provider.metadata.tags)}
                 </>
               )}
             </div>
