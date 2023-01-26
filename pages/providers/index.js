@@ -9,6 +9,7 @@ import { formatServiceTypesCostsTable } from '../../utils/serviceTypes.utils';
 import { formatTypesOfDataList } from '../../utils/typesOfData.utils';
 import { formatSuitedToList } from '../../utils/suitedTo.utils';
 import { formatDate, previewBanner } from '../../utils/generic.utils';
+import { ServiceType } from '../../consts/serviceType.const';
 
 export async function getServerSideProps(context) {
   const content = new ContentfulService();
@@ -21,9 +22,6 @@ export async function getServerSideProps(context) {
     dataType: [].concat(context.query.dataType || null).filter(Boolean),
     geography: [].concat(context.query.geography || null).filter(Boolean),
     excludeRegional: context.query.excludeRegional || null,
-    providerOrganisation: []
-      .concat(context.query.providerOrganisation || null)
-      .filter(Boolean),
     q: context.query.q || null,
     order: context.query.order || null,
     costs: [].concat(context.query.costs || null).filter(Boolean),
@@ -181,8 +179,6 @@ export default function SearchProviders({
       filters.dataType,
       filters.geography,
       filters.excludeRegional,
-      filters.organisation,
-      filters.providerOrganisation,
       filters.costs,
     ]
       .flat()
@@ -222,13 +218,13 @@ export default function SearchProviders({
               </fieldset>
               <fieldset>
                 <legend>Type of service</legend>
-                {filterOptions.serviceType.map((item, i) => (
+                {Object.keys(ServiceType).map((item, i) => (
                   <Fragment key={i}>
                     {filterCheckbox(
                       'serviceType',
-                      item,
-                      item,
-                      filters.serviceType?.includes(item)
+                      ServiceType[item],
+                      ServiceType[item],
+                      filters.serviceType?.includes(ServiceType[item])
                     )}
                   </Fragment>
                 ))}
@@ -273,9 +269,9 @@ export default function SearchProviders({
                 }
               </fieldset>
               <fieldset>
-                <legend>Costs (Find)</legend>
+                <legend>Costs ({ServiceType.FIND})</legend>
                 {filterOptions.costs
-                  .filter((item) => item.includes('Find:'))
+                  .filter((item) => item.includes(ServiceType.FIND + ':'))
                   .map((item, i) => (
                     <Fragment key={i}>
                       {filterCheckbox(
@@ -288,9 +284,9 @@ export default function SearchProviders({
                   ))}
               </fieldset>
               <fieldset>
-                <legend>Costs (Recruit)</legend>
+                <legend>Costs ({ServiceType.RECRUIT})</legend>
                 {filterOptions.costs
-                  .filter((item) => item.includes('Recruit:'))
+                  .filter((item) => item.includes(ServiceType.RECRUIT + ':'))
                   .map((item, i) => (
                     <Fragment key={i}>
                       {filterCheckbox(
@@ -303,9 +299,9 @@ export default function SearchProviders({
                   ))}
               </fieldset>
               <fieldset>
-                <legend>Costs (Follow-Up)</legend>
+                <legend>Costs ({ServiceType.FOLLOW_UP})</legend>
                 {filterOptions.costs
-                  .filter((item) => item.includes('Follow-Up:'))
+                  .filter((item) => item.includes(ServiceType.FOLLOW_UP + ':'))
                   .map((item, i) => (
                     <Fragment key={i}>
                       {filterCheckbox(
@@ -316,19 +312,6 @@ export default function SearchProviders({
                       )}
                     </Fragment>
                   ))}
-              </fieldset>
-              <fieldset>
-                <legend>Organisation</legend>
-                {filterOptions.providerOrganisation.map((item, i) => (
-                  <Fragment key={i}>
-                    {filterCheckbox(
-                      'providerOrganisation',
-                      item.fields.name,
-                      item.fields.name,
-                      filters.providerOrganisation?.includes(item.fields.name)
-                    )}
-                  </Fragment>
-                ))}
               </fieldset>
             </form>
           </div>
@@ -372,8 +355,6 @@ export default function SearchProviders({
                       'serviceType',
                       'dataType',
                       'geography',
-                      'organisation',
-                      'providerOrganisation',
                       'costs',
                       'excludeRegional',
                     ].includes(filterName)
@@ -393,7 +374,7 @@ export default function SearchProviders({
                       {item.fields.name}
                     </a>
                   </h2>
-                  <p>{item.fields.providerOrganisation.fields.name}</p>
+                  <p>{item.fields.providerOrganisation}</p>
                   <hr />
                   <div className={styles.providerDetailsContainer}>
                     <div className={styles.providerDetailsPrimary}>
@@ -434,13 +415,15 @@ export default function SearchProviders({
                         </>
                       )}
                     </div>
-                    {item.fields.dataType && (
-                      <div className={styles.providerDetailsSecondary}>
-                        <p>
-                          <b>Types of data available</b>
-                        </p>
-                        {formatTypesOfDataList(item.fields.dataType)}
-                      </div>
+                    {item.metadata.tags.length && (
+                      <>
+                        <div className={styles.providerDetailsSecondary}>
+                          <p>
+                            <b>Types of data available</b>
+                          </p>
+                          {formatTypesOfDataList(item.metadata.tags)}
+                        </div>
+                      </>
                     )}
                   </div>
                   <hr />

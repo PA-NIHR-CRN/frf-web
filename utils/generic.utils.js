@@ -36,3 +36,26 @@ export const previewBanner = (isPreviewMode) => {
 export const formatDate = (date) => {
   return new Date(date).toLocaleDateString('en-GB');
 };
+
+export const formatTooltip = (description) => {
+  return (
+    <div className={styles.tooltip}>
+      (?)
+      <span className={styles.tooltiptext}>{description}</span>
+    </div>
+  );
+};
+
+export const formatTags = (tagList, tagGroup) => {
+  const tags = [];
+  tagList.forEach((tag) => {
+    if (tag.sys.id?.startsWith(tagGroup)) {
+      const tagName = tag.sys.id
+        .replace(tagGroup, '')
+        .replace(/([A-Z])/g, ' $1')
+        .trim();
+      tags.push(tagName);
+    }
+  });
+  return tags;
+};

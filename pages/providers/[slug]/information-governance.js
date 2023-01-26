@@ -7,6 +7,7 @@ import {
   formatDataSourceTable,
   formatDataTransferTable,
 } from '../../../utils/informationGov.utils';
+import { ServiceType } from '../../../consts/serviceType.const';
 import { Fragment } from 'react';
 
 export async function getServerSideProps(context) {
@@ -59,14 +60,20 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
                 <h2 className={styles.providerPageSubTitle}>Data source</h2>
                 {formatDataSourceTable(provider.fields.informationGovernance)}
 
-                <h2 className={styles.providerPageSubTitle}>
-                  Data processing activities
-                </h2>
-                <h4 className={styles.providerPageSubTitle}>
-                  Transfer of personal data to a third party data controller
-                </h4>
-                {formatDataTransferTable(
-                  provider.fields.informationGovernance.fields.dataTransfer
+                {provider.fields.informationGovernance.fields
+                  .dataProcessingActivities && (
+                  <>
+                    <h2 className={styles.providerPageSubTitle}>
+                      Data processing activities
+                    </h2>
+                    {provider.fields.informationGovernance.fields.dataProcessingActivities.map(
+                      (dataTransfer, i) => (
+                        <Fragment key={i}>
+                          {formatDataTransferTable(dataTransfer)}
+                        </Fragment>
+                      )
+                    )}
+                  </>
                 )}
               </>
             )}
@@ -74,73 +81,55 @@ export default function ProviderDetail({ isPreviewMode, provider }) {
             {provider.fields.serviceTypes && (
               <>
                 {provider.fields.serviceTypes
-                  .filter((item) => item.fields?.serviceType.includes('Find'))
-                  .map((item, i) => (
-                    <Fragment key={i}>
-                      <div
-                        className={
-                          styles.informationGovernanceServiceTypeTitleFind
-                        }
-                      >
-                        <h2>Find</h2>
-                        <p>
-                          Determining numbers of potentially eligible research
-                          participants
-                        </p>
-                      </div>
-                      {item.fields.informationGovernance &&
-                        formatDataTransferTable(
-                          item.fields.informationGovernance
-                        )}
-                    </Fragment>
-                  ))}
+                  .filter((item) =>
+                    item.fields?.serviceType.includes(ServiceType.FIND)
+                  )
+                  .map((item, i) =>
+                    item.fields.dataProcessingActivities?.map(
+                      (dataTransfer, i) => (
+                        <Fragment key={i}>
+                          {formatDataTransferTable(
+                            dataTransfer,
+                            ServiceType.FIND
+                          )}
+                        </Fragment>
+                      )
+                    )
+                  )}
 
                 {provider.fields.serviceTypes
                   .filter((item) =>
-                    item.fields?.serviceType.includes('Recruit')
+                    item.fields?.serviceType.includes(ServiceType.RECRUIT)
                   )
-                  .map((item, i) => (
-                    <Fragment key={i}>
-                      <div
-                        className={
-                          styles.informationGovernanceServiceTypeTitleRecruit
-                        }
-                      >
-                        <h2>Recruit</h2>
-                        <p>
-                          Approaching potentially eligible research participants
-                        </p>
-                      </div>
-                      {item.fields.informationGovernance &&
-                        formatDataTransferTable(
-                          item.fields.informationGovernance
-                        )}
-                    </Fragment>
-                  ))}
+                  .map((item, i) =>
+                    item.fields.dataProcessingActivities?.map(
+                      (dataTransfer, i) => (
+                        <Fragment key={i}>
+                          {formatDataTransferTable(
+                            dataTransfer,
+                            ServiceType.RECRUIT
+                          )}
+                        </Fragment>
+                      )
+                    )
+                  )}
 
                 {provider.fields.serviceTypes
                   .filter((item) =>
-                    item.fields?.serviceType.includes('Follow-Up')
+                    item.fields?.serviceType.includes(ServiceType.FOLLOW_UP)
                   )
-                  .map((item, i) => (
-                    <Fragment key={i}>
-                      <div
-                        className={
-                          styles.informationGovernanceServiceTypeTitleFollowUp
-                        }
-                      >
-                        <h2>Follow-Up</h2>
-                        <p>
-                          Using data sources to link to patient records for
-                          follow-up information
-                        </p>
-                      </div>
-                      {item.fields.informationGovernance &&
-                        formatDataTransferTable(
-                          item.fields.informationGovernance
-                        )}
-                    </Fragment>
-                  ))}
+                  .map((item, i) =>
+                    item.fields.dataProcessingActivities?.map(
+                      (dataTransfer, i) => (
+                        <Fragment key={i}>
+                          {formatDataTransferTable(
+                            dataTransfer,
+                            ServiceType.FOLLOW_UP
+                          )}
+                        </Fragment>
+                      )
+                    )
+                  )}
               </>
             )}
           </div>

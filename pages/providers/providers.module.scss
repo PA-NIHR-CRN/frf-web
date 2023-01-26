@@ -124,6 +124,7 @@ $color--follow-up: #E0DFF1;
 .yesNoList {
   list-style: none;
   margin-top: 0;
+  margin-left: -20px;
 
   li::before {
     display: inline-block;
@@ -292,4 +293,32 @@ $color--follow-up: #E0DFF1;
 .informationGovernanceServiceTypeTitleFollowUp {
   @extend .informationGovernanceServiceTypeTitle;
   @extend .serviceTypeTitleFollowUp;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  margin: auto 5px;
+}
+
+.tooltip .tooltiptext {
+  font-size: 0.8em;
+  line-height: 20px;
+  visibility: hidden;
+  width: 278px;
+  background-color: #F3F2F1;
+  color: #0B0C0C;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 140%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
