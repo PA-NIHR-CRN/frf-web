@@ -5,5 +5,5 @@ type ButtonProps = {
 }
 
 export function Button({ children }: ButtonProps) {
-  return <button>{children}</button>
+  return <button className="govuk-button">{children}</button>
 }

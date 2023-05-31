@@ -3,5 +3,6 @@ import { Button } from './Button'
 
 test('Button', () => {
   render(<Button>Welcome</Button>)
-  expect(screen.getByRole('button', { name: 'Welcome' })).toBeInTheDocument()
+  const button = screen.getByRole('button', { name: 'Welcome' })
+  expect(button).toHaveClass('govuk-button')
 })
