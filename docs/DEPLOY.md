@@ -1,6 +1,6 @@
 # Deployment of NIHR FRF
 
-![Pipeline](https://github.com/PA-NIHR-CRN/frf-web/actions/workflows/build-test-deploy.yml/badge.svg)
+![Pipeline](https://github.com/PA-NIHR-CRN/frf-web/actions/workflows/frf-fe-build.yml/badge.svg)
 
 This is a [Next.js](https://nextjs.org/) project that utilises Server Side Rendering (SSR) along with Static Site Generation (SSG) and Incremental Static Regeneration (ISR) for automatic cache revalidation.
 
