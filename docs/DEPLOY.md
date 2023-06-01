@@ -2,11 +2,11 @@
 
 ![Pipeline](https://github.com/PA-NIHR-CRN/frf-web/actions/workflows/build-test-deploy.yml/badge.svg)
 
-This is a [Next.js](https://nextjs.org/) project that utilises Server Side Rendering (SSR) along with Static Site Generation (SSG) and Incremental Static Regeneration (ISR) for automatic static cache revalidation.
+This is a [Next.js](https://nextjs.org/) project that utilises Server Side Rendering (SSR) along with Static Site Generation (SSG) and Incremental Static Regeneration (ISR) for automatic cache revalidation.
 
 ## GitHub Actions Workflow
 
-We have a GitHub Actions workflow located in `.github/workflows/build-test-deploy` that builds, tests, runs code quality checks, and deploys a built Docker image to AWS Elastic Container Service (ECS) running on port `3000`.
+We have a GitHub Actions workflow located in `.github/workflows/frf-fe-build.yml` that builds, tests, runs code quality checks
 
 ## Docker
 
@@ -14,7 +14,7 @@ Build
 `docker build . -t nihr-frf`
 
 Run
-`docker run . -t nihr-frf`
+`docker run -p 3000:3000 nihr-frf`
 
 ## Environments
 
