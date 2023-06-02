@@ -82,7 +82,7 @@ function setupContentfulService() {
   const mockContentClient = createMockContentClient()
   const mockManagementClient = createMockManagementClient()
   const contentfulService = new ContentfulService(
-    '',
+    { contentfulSpaceId: '', contentfulEnvironment: '' },
     Mock.of<ContentfulClientApi<undefined>>(mockContentClient),
     Mock.of<ManagementClientApi>(mockManagementClient)
   )
@@ -102,7 +102,7 @@ describe('ContentfulService', () => {
         costs: ['Find: Free of charge', 'Recruit: Free of charge'],
         geography: ['England', 'Scotland'],
         order: 'z-a',
-        excludeRegional: false,
+        excludeRegional: true,
       })
 
       expect(mockContentClient.getEntries).toHaveBeenCalledWith({
@@ -111,6 +111,7 @@ describe('ContentfulService', () => {
         content_type: 'serviceProvider',
         'fields.costs[in]': 'Find: Free of charge,Recruit: Free of charge',
         'fields.geography[in]': 'England,Scotland',
+        'fields.regionalCoverage[exists]': 'false',
         'metadata.tags.sys.id[in]': 'dataTypeAudit,dataTypeClinicallyReported',
         order: ['-fields.name'],
         query: 'test',
@@ -152,6 +153,17 @@ describe('ContentfulService', () => {
         geography: ['Test Geography'],
         costs: ['Test Cost'],
       })
+    })
+  })
+
+  describe('getOrderFilter', () => {
+    it('returns the correct order query', () => {
+      expect(ContentfulService.getOrderFilter()).toEqual('-sys.createdAt')
+      expect(ContentfulService.getOrderFilter('updated')).toEqual('-sys.updatedAt')
+      expect(ContentfulService.getOrderFilter('a-z')).toEqual('fields.name')
+      expect(ContentfulService.getOrderFilter('z-a')).toEqual('-fields.name')
+      expect(ContentfulService.getOrderFilter('highest-population')).toEqual('-fields.population')
+      expect(ContentfulService.getOrderFilter('lowest-population')).toEqual('fields.population')
     })
   })
 })

@@ -9,7 +9,10 @@ const PER_PAGE = 10
 
 export class ContentfulService {
   constructor(
-    private contentfulEnvironment: string,
+    private config: {
+      contentfulSpaceId: string
+      contentfulEnvironment: string
+    },
     private contentClient: ContentfulClientApi<undefined>,
     private managementClient: ManagementClientApi
   ) {}
@@ -50,8 +53,9 @@ export class ContentfulService {
   }
 
   async getProviderFilterOptionValues() {
-    const space = await this.managementClient.getSpace(process.env.CONTENTFUL_SPACE_ID ?? '')
-    const environment = await space.getEnvironment(this.contentfulEnvironment)
+    const { contentfulSpaceId, contentfulEnvironment } = this.config
+    const space = await this.managementClient.getSpace(contentfulSpaceId)
+    const environment = await space.getEnvironment(contentfulEnvironment)
     const { fields } = await environment.getContentType('serviceProvider')
     const tags = await environment.getTags({
       order: 'name',
@@ -62,8 +66,8 @@ export class ContentfulService {
 
     return {
       dataType: ContentfulService.filterTagsByName(tags.items, TagNames.DATA_TYPE),
-      geography: geographyField?.items?.validations?.[0].in ?? [],
-      costs: costsField?.items?.validations?.[0].in ?? [],
+      geography: geographyField?.items?.validations?.[0].in,
+      costs: costsField?.items?.validations?.[0].in,
     }
   }
 
@@ -77,7 +81,7 @@ export class ContentfulService {
     return entries.items.length ? entries.items[0] : null
   }
 
-  private static getOrderFilter(orderType?: OrderType) {
+  static getOrderFilter(orderType?: OrderType) {
     switch (orderType) {
       case 'updated':
         return '-sys.updatedAt'

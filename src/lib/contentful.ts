@@ -32,4 +32,8 @@ const managementClient = createManagementClient({
   accessToken: CONTENTFUL_MANAGEMENT_ACCESS_TOKEN ?? '',
 })
 
-export const contentfulService = new ContentfulService(contentfulEnvironment, contentClient, managementClient)
+export const contentfulService = new ContentfulService(
+  { contentfulSpaceId: CONTENTFUL_SPACE_ID, contentfulEnvironment: contentfulEnvironment },
+  contentClient,
+  managementClient
+)
