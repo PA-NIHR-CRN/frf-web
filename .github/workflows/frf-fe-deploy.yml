@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feat/FRF-69-Deploy-Workflow # whilst testing
   workflow_dispatch:
     inputs:
       environment:
@@ -40,6 +41,7 @@ jobs:
   #       run: dotnet build --configuration Release --no-restore ./src
   #     - name: Test
   #       run: dotnet test --no-restore --verbosity normal ./src
+
   # deploy:
   #   needs: build
   #   name: "FRF API Deploy - ${{ github.event.inputs.environment || 'dev' }}"
