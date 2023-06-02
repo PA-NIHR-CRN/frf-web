@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.0.5",
+    "@radix-ui/react-collapsible": "^1.0.3",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
@@ -25,6 +26,7 @@
     "next": "13.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-use": "^17.4.0",
     "typescript": "5.0.4"
   },
   "devDependencies": {
@@ -45,6 +47,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "jest-junit": "^16.0.0",
     "lint-staged": "^13.2.2",
+    "next-router-mock": "^0.9.3",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",

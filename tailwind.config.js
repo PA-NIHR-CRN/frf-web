@@ -3,6 +3,26 @@ module.exports = {
   important: true,
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    // https://design-system.service.gov.uk/styles/spacing/
+    spacing: {
+      0: '0',
+      1: '5px',
+      2: '10px',
+      3: '15px',
+      4: '20px',
+      5: '25px',
+      6: '30px',
+      7: '40px',
+      8: '50px',
+      9: '60px',
+    },
+    // https://design-system.service.gov.uk/styles/typography/
+    fontSize: {
+      xs: ['.875rem', '1.42'],
+      sm: ['1rem', '1.25'],
+      base: ['1.1875rem', '1.31'],
+      lg: ['1.5rem', '1.25'],
+    },
     colors: {
       black: '#000000',
       white: '#ffffff',

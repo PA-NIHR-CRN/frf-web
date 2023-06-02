@@ -2,6 +2,8 @@ import { render, screen } from '@/config/test-utils'
 import { assertRootLayout } from './RootLayout.test'
 import { ServiceProviderLayout } from './ServiceProviderLayout'
 
+jest.mock('next/router', () => require('next-router-mock'))
+
 test('Displays a back link & page content', () => {
   render(
     <ServiceProviderLayout>
