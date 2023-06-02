@@ -1,0 +1,122 @@
+name: RTS API Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'The environment you will run the jobs on. Accepted values: dev, test, uat, oat, prod'
+        options: ['dev', 'test', 'uat', 'oat', 'prod']
+        required: true
+        default: 'dev'
+
+env:
+  AWS_REGION: eu-west-2
+
+jobs:
+  deploy:
+    name: 'FRF Deploy'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Deploy test'
+
+  # build:
+  #   name: 'FRF API Build'
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       dotnet-version: ['6.0.x']
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+  #       uses: actions/setup-dotnet@v1.7.2
+  #       with:
+  #         dotnet-version: ${{ matrix.dotnet-version }}
+  #     - name: Install dependencies
+  #       run: dotnet restore ./src/
+  #     - name: Build
+  #       run: dotnet build --configuration Release --no-restore ./src
+  #     - name: Test
+  #       run: dotnet test --no-restore --verbosity normal ./src
+  # deploy:
+  #   needs: build
+  #   name: "FRF API Deploy - ${{ github.event.inputs.environment || 'dev' }}"
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     GITHUB_ACTIONS_ENVIRONMENT: ${{ github.event.inputs.environment || 'dev' }}
+  #   steps:
+  #     - name: Determine Account Prefix
+  #       id: determine-account-prefix
+  #       run: |
+  #         declare -A ENV_TO_PREFIX_MAP=(
+  #             ["dev"]="crnccd"
+  #             ["test"]="crnccd"
+  #             ["uat"]="crnccs"
+  #             ["oat"]="crnccp"
+  #             ["prod"]="crnccp"
+  #         )
+  #         echo "::set-output name=account-prefix::${ENV_TO_PREFIX_MAP[${GITHUB_ACTIONS_ENVIRONMENT}]}"
+  #     - uses: actions/checkout@v2.1.0
+  #     - name: Configure AWS credentials (dev/test)
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       if: env.GITHUB_ACTIONS_ENVIRONMENT == 'dev' || env.GITHUB_ACTIONS_ENVIRONMENT == 'test'
+  #       with:
+  #         aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
+  #         aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
+  #         aws-region: ${{ env.AWS_REGION }}
+  #     - name: Configure AWS credentials (uat)
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       if: env.GITHUB_ACTIONS_ENVIRONMENT == 'uat'
+  #       with:
+  #         aws-access-key-id: ${{ secrets.CRNCC_STAGING_IAM_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.CRNCC_STAGING_IAM_ACCESS_KEY_SECRET }}
+  #         aws-region: ${{ env.AWS_REGION }}
+  #     - name: Configure AWS credentials (oat/prod)
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       if: env.GITHUB_ACTIONS_ENVIRONMENT == 'oat' || env.GITHUB_ACTIONS_ENVIRONMENT == 'prod'
+  #       with:
+  #         aws-access-key-id: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_SECRET }}
+  #         aws-region: ${{ env.AWS_REGION }}
+  #     - name: Login to Amazon ECR
+  #       id: login-ecr
+  #       uses: aws-actions/amazon-ecr-login@v1
+  #     - name: Build, tag, and push image to Amazon ECR
+  #       id: build-image
+  #       env:
+  #         ECR_REPOSITORY: ${{ steps.determine-account-prefix.outputs.account-prefix }}-ecr-${{ env.GITHUB_ACTIONS_ENVIRONMENT }}-frf-repository
+  #         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+  #         IMAGE_NAME_TAG: frf-web
+  #         IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+  #       run: |
+  #         echo "Using registry ${{ env.ECR_REGISTRY }}"
+  #         echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+  #         dotnet publish src/NIHR.CRN.FRF.API/NIHR.CRN.FRF.API.csproj --configuration Release
+  #         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG ./src/NIHR.CRN.FRF.API/.
+  #         docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+  #         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+  #     - name: Generate task definition file from container
+  #       run: |
+  #         aws ecs describe-task-definition --task-definition ${{ steps.determine-account-prefix.outputs.account-prefix }}-ecs-${{ env.GITHUB_ACTIONS_ENVIRONMENT }}-frf-task-definition --query taskDefinition > ./task-definition.json
+  #     - name: Fill in the new image ID in the Amazon ECS task definition
+  #       id: task-def
+  #       env:
+  #         ECS_TASK_DEFINITION: ./task-definition.json
+  #         CONTAINER_NAME: ${{ steps.determine-account-prefix.outputs.account-prefix }}-ecs-${{ env.GITHUB_ACTIONS_ENVIRONMENT }}-frf-containeryeah
+  #       uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
+  #       with:
+  #         task-definition: ${{ env.ECS_TASK_DEFINITION }}
+  #         container-name: ${{ env.CONTAINER_NAME }}
+  #         image: ${{ steps.build-image.outputs.image }}
+  #     - name: Deploy Amazon ECS task definition
+  #       env:
+  #         ECS_SERVICE: ${{ steps.determine-account-prefix.outputs.account-prefix }}-ecs-${{ env.GITHUB_ACTIONS_ENVIRONMENT }}-frf-service
+  #         ECS_CLUSTER: ${{ steps.determine-account-prefix.outputs.account-prefix }}-ecs-${{ env.GITHUB_ACTIONS_ENVIRONMENT }}-frf-cluster
+  #       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+  #       with:
+  #         task-definition: ${{ steps.task-def.outputs.task-definition }}
+  #         service: ${{ env.ECS_SERVICE }}
+  #         cluster: ${{ env.ECS_CLUSTER }}
+  #         wait-for-service-stability: true
