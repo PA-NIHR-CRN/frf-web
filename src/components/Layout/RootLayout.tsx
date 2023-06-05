@@ -1,22 +1,36 @@
-import { useEffect } from 'react'
+import { useEffect, ReactNode } from 'react'
 import { Roboto } from 'next/font/google'
+import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
+import { Header } from '../Header/Header'
+import { Panel } from '../Panel/Panel'
+import Link from 'next/link'
+import { Footer } from '../Footer/Footer'
 
 const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-roboto' })
 
-export function RootLayout({ children }: { children: React.ReactNode }) {
+type RootLayoutProps = { children: ReactNode; backLink?: ReactNode }
+
+export function RootLayout({ children, backLink }: RootLayoutProps) {
   useEffect(() => {
     document.body.classList.add('js-enabled')
   }, [])
 
   return (
-    <>
-      {/* TODO: Header Component Here */}
-      <div className="govuk-width-container">
-        <main className={`govuk-main-wrapper ${roboto.variable}`} role="main">
-          {children}
-        </main>
-      </div>
-      {/* TODO: Footer Component Here */}
-    </>
+    <div className={roboto.variable}>
+      <Header />
+      <PhaseBanner phase="Beta">
+        This is a new service – your{' '}
+        <Link className="govuk-link" href="/feedback">
+          feedback
+        </Link>{' '}
+        will help us to improve it.
+      </PhaseBanner>
+      <Panel>Find, Recruit and Follow-up</Panel>
+      {backLink}
+      <main id="main-content" className="govuk-main-wrapper" role="main">
+        {children}
+      </main>
+      <Footer />
+    </div>
   )
 }

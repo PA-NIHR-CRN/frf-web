@@ -5,7 +5,7 @@ import Link from 'next/link'
 export function Footer() {
   return (
     <footer className={clsx('govuk-footer', 'py-0')} role="contentinfo">
-      <div className={clsx('bg-navy-100 text-white')}>
+      <div className={clsx('bg-navy-100 text-white')} data-testid="frf-footer-links">
         <div className="govuk-width-container">
           <div className={clsx('flex h-[var(--footer-links-panel-height)] items-center justify-end')}>
             <h2 className="govuk-visually-hidden">Support links</h2>
@@ -25,7 +25,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className={clsx('bg-white')}>
+      <div className={clsx('bg-white')} data-testid="frf-footer-logos">
         <div className="govuk-width-container">
           <div className="flex items-center justify-between gap-12 md:h-[var(--footer-logos-panel-height)]">
             <div className="flex items-center">
