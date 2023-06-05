@@ -38,6 +38,6 @@ A handful of GitHub Actions workflows are defined. These are described below:
 
 In the terminal run:
 
-`yarn cf-content-types-generator -X -d -s <CONTENTFUL_SPACE_ID> -t <CONTENTFUL_MANAGEMENT_ACCESS_TOKEN> -o src/@types/generated`
+`npm run cf-content-types-generator -X -d -s <CONTENTFUL_SPACE_ID> -t <CONTENTFUL_MANAGEMENT_ACCESS_TOKEN> -o src/@types/generated`
 
 Note: manually insert the actual `CONTENTFUL_SPACE_ID` and `CONTENTFUL_MANAGEMENT_ACCESS_TOKEN` since it doesn't support environment variables.

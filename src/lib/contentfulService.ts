@@ -1,11 +1,9 @@
 import { Filters, OrderType } from '@/@types/filters'
 import { TypeServiceProviderSkeleton } from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
-import { TagIds, TagNames } from '@/constants/tags'
+import { PER_PAGE, TagIds, TagNames } from '@/constants'
 import type { ContentfulClientApi } from 'contentful'
 import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
-
-const PER_PAGE = 10
 
 export class ContentfulService {
   constructor(
