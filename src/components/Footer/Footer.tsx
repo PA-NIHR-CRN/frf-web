@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function Footer() {
   return (
@@ -10,14 +11,14 @@ export function Footer() {
             <h2 className="govuk-visually-hidden">Support links</h2>
             <ul className="govuk-footer__inline-list mb-0">
               <li className="govuk-footer__inline-list-item">
-                <a className="govuk-footer__link link--inverse" href="#">
+                <Link className="govuk-footer__link link--inverse" href="/privacy">
                   Privacy policy
-                </a>
+                </Link>
               </li>
               <li className="govuk-footer__inline-list-item">
-                <a className="govuk-footer__link link--inverse" href="#">
+                <Link className="govuk-footer__link link--inverse" href="/accessibility">
                   Accessibility
-                </a>
+                </Link>
               </li>
               <li className="govuk-footer__inline-list-item">&copy; NIHR 2022</li>
             </ul>

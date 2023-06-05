@@ -4,8 +4,8 @@ import { Footer } from './Footer'
 test('Displays the links & copyright bar', () => {
   render(<Footer />)
 
-  expect(screen.getByText('Privacy policy')).toHaveAttribute('href', '#')
-  expect(screen.getByText('Accessibility')).toHaveAttribute('href', '#')
+  expect(screen.getByText('Privacy policy')).toHaveAttribute('href', '/privacy')
+  expect(screen.getByText('Accessibility')).toHaveAttribute('href', '/accessibility')
   expect(screen.getByText('© NIHR 2022'))
 })
 
