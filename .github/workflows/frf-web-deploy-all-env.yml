@@ -1,0 +1,316 @@
+name: FRF Web Deploy to all Envs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AWS_REGION: eu-west-2
+
+jobs:
+  build:
+    name: "Build - ${{ github.event.inputs.environment || 'dev' }}"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-node
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm run test:ci
+
+  deploy-dev:
+    needs: [build]
+    environment: DEV
+    name: "Deploy Dev"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+
+      - name: Configure AWS credentials (dev)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
+          aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccd-ecr-dev-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccd-ecs-dev-frf-task-definition --query taskDefinition > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccd-ecs-dev-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccd-ecs-dev-frf-service
+          ECS_CLUSTER: crnccd-ecs-dev-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+  deploy-test:
+    needs: deploy-dev
+    environment: TEST
+    name: "Deploy Test"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+
+      - name: Configure AWS credentials (test)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
+          aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccd-ecr-test-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccd-ecs-test-frf-task-definition --query taskDefinition > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccd-ecs-test-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccd-ecs-test-frf-service
+          ECS_CLUSTER: crnccd-ecs-test-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+
+  deploy-uat:
+    needs: deploy-test
+    environment: UAT
+    name: "Deploy Uat"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+
+      - name: Configure AWS credentials (uat)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.CRNCC_STAGING_IAM_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CRNCC_STAGING_IAM_ACCESS_KEY_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccs-ecr-uat-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccs-ecs-uat-frf-task-definition --query taskDefinition > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccs-ecs-uat-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccs-ecs-uat-frf-service
+          ECS_CLUSTER: crnccs-ecs-uat-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+
+  deploy-oat:
+    needs: deploy-uat
+    environment: OAT
+    name: "Deploy Oat"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+
+      - name: Configure AWS credentials (oat)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccp-ecr-oat-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccp-ecs-oat-frf-task-definition --query taskDefinition > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccp-ecs-oat-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccp-ecs-oat-frf-service
+          ECS_CLUSTER: crnccp-ecs-oat-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+  deploy-prod:
+    needs: deploy-oat
+    environment: PROD
+    name: "Deploy Prod"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.1.0
+
+      - name: Configure AWS credentials (prod)
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccp-ecr-prod-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccp-ecs-prod-frf-task-definition --query taskDefinition > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccp-ecs-prod-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@97587c9d45a4930bf0e3da8dd2feb2a463cf4a3a
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccp-ecs-prod-frf-service
+          ECS_CLUSTER: crnccp-ecs-prod-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
