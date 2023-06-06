@@ -2,10 +2,6 @@ import { render, screen } from '@/config/test-utils'
 import { GetServerSidePropsContext } from 'next'
 import ServiceProvider, { getServerSideProps, ServiceProviderProps } from '@/pages/providers/[...slug]'
 
-test('Uses a layout', () => {
-  expect(ServiceProvider.getLayout).toBeDefined()
-})
-
 test('Displays the Service Provider page', async () => {
   const context = {
     params: {},
@@ -15,7 +11,7 @@ test('Displays the Service Provider page', async () => {
     props: ServiceProviderProps
   }
 
-  render(<ServiceProvider {...props} />)
+  render(ServiceProvider.getLayout(<ServiceProvider {...props} />))
 
   expect(screen.getByRole('heading', { name: 'Detail page', level: 2 }))
 })
