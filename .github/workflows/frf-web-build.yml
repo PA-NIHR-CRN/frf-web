@@ -1,9 +1,6 @@
-name: Pipeline
+name: FRF Web Build
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - '*'

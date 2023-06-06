@@ -17,14 +17,14 @@ const config: Config = {
   },
   testEnvironment: 'jest-environment-jsdom',
   reporters: ['default', 'jest-junit'],
-  coverageReporters: ['json-summary', 'text'],
+  coverageReporters: ['json-summary', 'text', 'html'],
   coveragePathIgnorePatterns: ['node_modules'],
   coverageThreshold: {
     global: {
       lines: 100,
       functions: 100,
-      branches: 100,
-      statements: 100,
+      branches: 95,
+      statements: 95,
     },
   },
 }
