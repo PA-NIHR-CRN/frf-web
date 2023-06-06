@@ -1,4 +1,4 @@
-import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from 'contentful'
 
 /**
  * Fields type definition for content type 'TypeBlockLabel'
@@ -7,18 +7,18 @@ import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleC
  * @memberof TypeBlockLabel
  */
 export interface TypeBlockLabelFields {
-    /**
-     * Field type definition for field 'label' (Label)
-     * @name Label
-     * @localized false
-     */
-    label: EntryFieldTypes.Symbol;
-    /**
-     * Field type definition for field 'description' (Description)
-     * @name Description
-     * @localized false
-     */
-    description?: EntryFieldTypes.Text;
+  /**
+   * Field type definition for field 'label' (Label)
+   * @name Label
+   * @localized false
+   */
+  label: EntryFieldTypes.Symbol
+  /**
+   * Field type definition for field 'description' (Description)
+   * @name Description
+   * @localized false
+   */
+  description?: EntryFieldTypes.Text
 }
 
 /**
@@ -29,7 +29,7 @@ export interface TypeBlockLabelFields {
  * @since 2023-01-25T15:20:39.291Z
  * @version 3
  */
-export type TypeBlockLabelSkeleton = EntrySkeletonType<TypeBlockLabelFields, "blockLabel">;
+export type TypeBlockLabelSkeleton = EntrySkeletonType<TypeBlockLabelFields, 'blockLabel'>
 /**
  * Entry type definition for content type 'blockLabel' (Block: Label)
  * @name TypeBlockLabel
@@ -38,4 +38,8 @@ export type TypeBlockLabelSkeleton = EntrySkeletonType<TypeBlockLabelFields, "bl
  * @since 2023-01-25T15:20:39.291Z
  * @version 3
  */
-export type TypeBlockLabel<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeBlockLabelSkeleton, Modifiers, Locales>;
+export type TypeBlockLabel<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+  TypeBlockLabelSkeleton,
+  Modifiers,
+  Locales
+>

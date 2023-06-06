@@ -1,5 +1,5 @@
-import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
-import type { TypeInformationGovernanceBlockSkeleton } from "./TypeInformationGovernanceBlock";
+import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from 'contentful'
+import type { TypeInformationGovernanceBlockSkeleton } from './TypeInformationGovernanceBlock'
 
 /**
  * Fields type definition for content type 'TypeBlockDataTransfer'
@@ -8,18 +8,18 @@ import type { TypeInformationGovernanceBlockSkeleton } from "./TypeInformationGo
  * @memberof TypeBlockDataTransfer
  */
 export interface TypeBlockDataTransferFields {
-    /**
-     * Field type definition for field 'label' (Label)
-     * @name Label
-     * @localized false
-     */
-    label: EntryFieldTypes.Symbol;
-    /**
-     * Field type definition for field 'dataTransfer' (Rows)
-     * @name Rows
-     * @localized false
-     */
-    dataTransfer: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeInformationGovernanceBlockSkeleton>>;
+  /**
+   * Field type definition for field 'label' (Label)
+   * @name Label
+   * @localized false
+   */
+  label: EntryFieldTypes.Symbol
+  /**
+   * Field type definition for field 'dataTransfer' (Rows)
+   * @name Rows
+   * @localized false
+   */
+  dataTransfer: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeInformationGovernanceBlockSkeleton>>
 }
 
 /**
@@ -30,7 +30,7 @@ export interface TypeBlockDataTransferFields {
  * @since 2023-01-25T15:20:38.437Z
  * @version 7
  */
-export type TypeBlockDataTransferSkeleton = EntrySkeletonType<TypeBlockDataTransferFields, "blockDataTransfer">;
+export type TypeBlockDataTransferSkeleton = EntrySkeletonType<TypeBlockDataTransferFields, 'blockDataTransfer'>
 /**
  * Entry type definition for content type 'blockDataTransfer' (Block: Data Processing Activity)
  * @name TypeBlockDataTransfer
@@ -39,4 +39,8 @@ export type TypeBlockDataTransferSkeleton = EntrySkeletonType<TypeBlockDataTrans
  * @since 2023-01-25T15:20:38.437Z
  * @version 7
  */
-export type TypeBlockDataTransfer<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeBlockDataTransferSkeleton, Modifiers, Locales>;
+export type TypeBlockDataTransfer<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+  TypeBlockDataTransferSkeleton,
+  Modifiers,
+  Locales
+>

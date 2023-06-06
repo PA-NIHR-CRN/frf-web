@@ -1,13 +1,30 @@
-import { render, screen } from '@/config/test-utils'
+import { render, screen, within } from '@/config/test-utils'
 import { RootLayout } from './RootLayout'
 
-test('Displays page content within the layout', () => {
+export const assertRootLayout = () => {
+  // Header
+  const header = screen.getByRole('banner')
+  expect(within(header).getByAltText('National Institute for Health and Care Research logo')).toBeInTheDocument()
+
+  // Phase Banner
+  const banner = screen.getByTestId('frf-phase-banner')
+  expect(banner).toHaveTextContent('This is a new service – your feedback will help us to improve it.')
+
+  // Hero Panel
+  const panel = screen.getByTestId('frf-panel')
+  expect(within(panel).getByText('Find, Recruit and Follow-up')).toBeInTheDocument()
+}
+
+test('Displays NIHR layout & page content', () => {
   render(
     <RootLayout>
       <h1>Welcome</h1>
     </RootLayout>
   )
 
+  assertRootLayout()
+
+  // Page content
   expect(screen.getByRole('heading', { name: 'Welcome' }))
 })
 

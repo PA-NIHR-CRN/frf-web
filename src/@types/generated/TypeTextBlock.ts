@@ -1,4 +1,4 @@
-import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from 'contentful'
 
 /**
  * Fields type definition for content type 'TypeTextBlock'
@@ -7,18 +7,18 @@ import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleC
  * @memberof TypeTextBlock
  */
 export interface TypeTextBlockFields {
-    /**
-     * Field type definition for field 'heading' (Heading)
-     * @name Heading
-     * @localized false
-     */
-    heading?: EntryFieldTypes.Symbol;
-    /**
-     * Field type definition for field 'text' (Text)
-     * @name Text
-     * @localized false
-     */
-    text?: EntryFieldTypes.RichText;
+  /**
+   * Field type definition for field 'heading' (Heading)
+   * @name Heading
+   * @localized false
+   */
+  heading?: EntryFieldTypes.Symbol
+  /**
+   * Field type definition for field 'text' (Text)
+   * @name Text
+   * @localized false
+   */
+  text?: EntryFieldTypes.RichText
 }
 
 /**
@@ -29,7 +29,7 @@ export interface TypeTextBlockFields {
  * @since 2022-12-20T16:49:07.740Z
  * @version 5
  */
-export type TypeTextBlockSkeleton = EntrySkeletonType<TypeTextBlockFields, "textBlock">;
+export type TypeTextBlockSkeleton = EntrySkeletonType<TypeTextBlockFields, 'textBlock'>
 /**
  * Entry type definition for content type 'textBlock' (Block: Text)
  * @name TypeTextBlock
@@ -38,4 +38,8 @@ export type TypeTextBlockSkeleton = EntrySkeletonType<TypeTextBlockFields, "text
  * @since 2022-12-20T16:49:07.740Z
  * @version 5
  */
-export type TypeTextBlock<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeTextBlockSkeleton, Modifiers, Locales>;
+export type TypeTextBlock<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+  TypeTextBlockSkeleton,
+  Modifiers,
+  Locales
+>

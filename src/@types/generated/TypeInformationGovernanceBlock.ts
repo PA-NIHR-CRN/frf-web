@@ -1,5 +1,5 @@
-import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
-import type { TypeBlockLabelSkeleton } from "./TypeBlockLabel";
+import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from 'contentful'
+import type { TypeBlockLabelSkeleton } from './TypeBlockLabel'
 
 /**
  * Fields type definition for content type 'TypeInformationGovernanceBlock'
@@ -8,24 +8,24 @@ import type { TypeBlockLabelSkeleton } from "./TypeBlockLabel";
  * @memberof TypeInformationGovernanceBlock
  */
 export interface TypeInformationGovernanceBlockFields {
-    /**
-     * Field type definition for field 'label' (Label)
-     * @name Label
-     * @localized false
-     */
-    label: EntryFieldTypes.EntryLink<TypeBlockLabelSkeleton>;
-    /**
-     * Field type definition for field 'required' (Required)
-     * @name Required
-     * @localized false
-     */
-    required?: EntryFieldTypes.Boolean;
-    /**
-     * Field type definition for field 'notes' (Notes)
-     * @name Notes
-     * @localized false
-     */
-    notes?: EntryFieldTypes.Symbol;
+  /**
+   * Field type definition for field 'label' (Label)
+   * @name Label
+   * @localized false
+   */
+  label: EntryFieldTypes.EntryLink<TypeBlockLabelSkeleton>
+  /**
+   * Field type definition for field 'required' (Required)
+   * @name Required
+   * @localized false
+   */
+  required?: EntryFieldTypes.Boolean
+  /**
+   * Field type definition for field 'notes' (Notes)
+   * @name Notes
+   * @localized false
+   */
+  notes?: EntryFieldTypes.Symbol
 }
 
 /**
@@ -36,7 +36,10 @@ export interface TypeInformationGovernanceBlockFields {
  * @since 2022-12-21T16:16:48.886Z
  * @version 15
  */
-export type TypeInformationGovernanceBlockSkeleton = EntrySkeletonType<TypeInformationGovernanceBlockFields, "informationGovernanceBlock">;
+export type TypeInformationGovernanceBlockSkeleton = EntrySkeletonType<
+  TypeInformationGovernanceBlockFields,
+  'informationGovernanceBlock'
+>
 /**
  * Entry type definition for content type 'informationGovernanceBlock' (Block: Information Governance Row)
  * @name TypeInformationGovernanceBlock
@@ -45,4 +48,8 @@ export type TypeInformationGovernanceBlockSkeleton = EntrySkeletonType<TypeInfor
  * @since 2022-12-21T16:16:48.886Z
  * @version 15
  */
-export type TypeInformationGovernanceBlock<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeInformationGovernanceBlockSkeleton, Modifiers, Locales>;
+export type TypeInformationGovernanceBlock<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+  TypeInformationGovernanceBlockSkeleton,
+  Modifiers,
+  Locales
+>
