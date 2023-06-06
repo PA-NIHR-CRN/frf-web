@@ -1,18 +1,21 @@
 import { render, screen } from '@/config/test-utils'
-import { RootLayout } from './RootLayout'
 import { assertRootLayout } from './RootLayout.test'
+import { ServiceProviderLayout } from './ServiceProviderLayout'
 
 test('Displays a back link & page content', () => {
   render(
-    <RootLayout backLink={<a href="#">Back</a>}>
+    <ServiceProviderLayout>
       <h1>Service Provider Detail Page</h1>
-    </RootLayout>
+    </ServiceProviderLayout>
   )
 
   assertRootLayout()
 
   // Back
-  expect(screen.getByRole('link', { name: 'Back' })).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
+    'href',
+    '/providers'
+  )
 
   // Page content
   expect(screen.getByRole('heading', { name: 'Service Provider Detail Page' })).toBeInTheDocument()
