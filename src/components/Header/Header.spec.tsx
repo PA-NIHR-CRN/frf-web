@@ -1,5 +1,6 @@
-import { render, screen, within } from '@/config/test-utils'
+import { act, render, screen, within } from '@/config/test-utils'
 import userEvent from '@testing-library/user-event'
+import mockRouter from 'next-router-mock'
 import { Header } from './Header'
 
 jest.mock('next/router', () => require('next-router-mock'))
@@ -115,5 +116,24 @@ test('Hide the navigation menu when clicking away from the menu', async () => {
   expect(menu).toBeVisible()
 
   await user.click(screen.getByText('Outside'))
+  expect(menu).not.toBeVisible()
+})
+
+test('Hide the navigation menu when changing page', async () => {
+  const user = userEvent.setup()
+
+  render(<Header />)
+
+  await user.click(screen.getByRole('button', { name: 'Show navigation menu' }))
+
+  const menu = screen.getByRole('navigation', { name: 'Navigation menu' })
+
+  expect(menu).toBeVisible()
+
+  // Simulate route change
+  act(() => {
+    mockRouter.push('/feedback')
+  })
+
   expect(menu).not.toBeVisible()
 })
