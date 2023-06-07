@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family: var(--font-roboto), arial, sans-serif;
+  }
+}
+
+@layer utilities {
+  body:not(.js-enabled) {
+    .js-disabled-show {
+      display: block;
+    }
+    .js-disabled-hide {
+      display: none;
+    }
+  }
+}
+
 // GDS Front-end Overrides
 $govuk-global-styles: true;
 $govuk-font-family: var(--font-roboto), arial, sans-serif;
@@ -33,6 +50,10 @@ body {
   --panel-bg-color: var(--colour-navy-100);
   --panel-border-color: var(--colour-purple-100);
   --panel-height: 210px;
+
+  // Nav
+  --nav-bg: #2c3c4e;
+  --nav-height: 298px;
 
   // Brand Colours
   --colour-aqua-100: #2ea9b0;
@@ -89,4 +110,5 @@ body {
   --colour-white: #ffffff;
   --grey: #dfe4e7;
   --light-grey: #f0f1f5;
+  --focus: #ffdd00;
 }
