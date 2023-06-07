@@ -1,0 +1,39 @@
+import { Container } from '@/components/Container/Container'
+import { menu } from '@/constants/menu'
+import Link from 'next/link'
+import { Fragment } from 'react'
+
+export default function Browse() {
+  return (
+    <Container>
+      <div className="govuk-grid-row">
+        <div className="govuk-grid-column-two-thirds">
+          <ul>
+            {menu.map((column, key) => (
+              <Fragment key={key}>
+                {column.map((item, key) => {
+                  if (!item.link) {
+                    return (
+                      <li key={key}>
+                        <span className="govuk-heading-m">{item.text}</span>
+                      </li>
+                    )
+                  }
+
+                  return (
+                    <li key={key}>
+                      <Link className="text-base" href={item.link}>
+                        {item.text}
+                      </Link>
+                      <p className="text-sm">{item.description}</p>
+                    </li>
+                  )
+                })}
+              </Fragment>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </Container>
+  )
+}

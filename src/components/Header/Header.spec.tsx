@@ -23,8 +23,13 @@ test('Displays the header', () => {
   expect(logo).toHaveAttribute('height', '32')
   expect(logo).toHaveAttribute('width', '322')
 
-  // Menu
+  // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
+
+  // Menu fallback link
+  const link = screen.getByRole('link', { name: 'Menu' })
+  expect(link).toHaveAttribute('href', '/browse')
+  expect(link).toHaveClass('js-disabled-show')
 })
 
 test('Shows the navigation menu when clicking the menu icon', async () => {

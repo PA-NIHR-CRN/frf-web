@@ -31,6 +31,12 @@ function Logo() {
 function MenuButton({ navOpen }: { navOpen: boolean }) {
   return (
     <div>
+      <Link
+        href="/browse"
+        className="js-disabled-show govuk-button govuk-body mb-0 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
+      >
+        Menu
+      </Link>
       <Collapsible.Trigger asChild>
         <button
           aria-controls="navigation-menu"
@@ -54,17 +60,13 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
   )
 }
 
-function MenuPanel({ navOpen }: { navOpen: boolean }) {
+function MenuPanel() {
   return (
     <Collapsible.Content
       asChild
-      forceMount
       aria-labelledby="navigation-menu-heading"
       id="navigation-menu"
       className={clsx('js-disabled-show min-h-[var(--nav-height)] w-full bg-[var(--nav-bg)] text-white')}
-      style={{
-        display: navOpen ? 'block' : 'none',
-      }}
     >
       <nav>
         <h2 id="navigation-menu-heading" className="govuk-visually-hidden">
@@ -137,7 +139,7 @@ export function Header() {
               <MenuButton navOpen={navOpen} />
             </div>
           </div>
-          <MenuPanel navOpen={navOpen} />
+          <MenuPanel />
         </header>
       </Collapsible.Root>
     </>
