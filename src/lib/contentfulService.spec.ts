@@ -1,6 +1,6 @@
-import { TypeServiceProvider } from '@/@types/generated'
+import { TypeHomepage, TypeServiceProvider } from '@/@types/generated'
 import { ContentfulService } from '@/lib/contentfulService'
-import type { ContentfulClientApi } from 'contentful'
+import type { ContentfulClientApi, Entry } from 'contentful'
 import type { Environment, ClientAPI as ManagementClientApi, Space } from 'contentful-management'
 import { Mock } from 'ts-mockery'
 
@@ -10,6 +10,17 @@ const mockServiceProvider = Mock.of<TypeServiceProvider<undefined, ''>>({
     slug: 'nhs-digitrials-v3-2-proposed-wording',
   },
 })
+
+const mockHomepage = Mock.of<TypeHomepage<undefined, ''>>({
+  fields: {
+    title: 'Find, Recruit and Follow-up Support',
+  },
+})
+
+const contentTypeMocks: Record<string, Entry> = {
+  homepage: mockHomepage,
+  serviceProvider: mockServiceProvider,
+}
 
 const mockEnvironment = Mock.of<Environment>({
   getContentType: jest.fn().mockImplementation(() => ({
@@ -62,12 +73,12 @@ const mockSpace = Mock.of<Space>({
 
 function createMockContentClient() {
   return {
-    getEntries: jest.fn().mockImplementation(() => ({
+    getEntries: jest.fn().mockImplementation(({ content_type }) => ({
       sys: { type: 'Array' },
       total: 1,
       skip: 0,
       limit: 10,
-      items: [mockServiceProvider],
+      items: [contentTypeMocks[content_type]],
     })),
   }
 }
@@ -139,6 +150,22 @@ describe('ContentfulService', () => {
       expect(entry).toBeDefined()
       expect(entry?.fields.name).toEqual(mockServiceProvider.fields.name)
       expect(entry?.fields.slug).toEqual(mockServiceProvider.fields.slug)
+    })
+  })
+
+  describe('getHomepage', () => {
+    it('returns content for the homepage', async () => {
+      const [contentfulService, mockContentClient] = setupContentfulService()
+
+      const entry = await contentfulService.getHomePage()
+
+      expect(mockContentClient.getEntries).toHaveBeenCalledWith({
+        limit: 1,
+        content_type: 'homepage',
+      })
+
+      expect(entry).toBeDefined()
+      expect(entry?.fields.title).toEqual(mockHomepage.fields.title)
     })
   })
 

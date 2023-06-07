@@ -1,5 +1,5 @@
 import { Filters, OrderType } from '@/@types/filters'
-import { TypeServiceProviderSkeleton } from '@/@types/generated'
+import { TypeHomepageSkeleton, TypeServiceProviderSkeleton } from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds, TagNames } from '@/constants'
 import type { ContentfulClientApi } from 'contentful'
@@ -70,11 +70,19 @@ export class ContentfulService {
   }
 
   async getProviderBySlug(slug: string) {
-    const entries = await this.contentClient.getEntries({
+    const entries = await this.contentClient.getEntries<TypeServiceProviderSkeleton>({
       limit: 1,
       content_type: 'serviceProvider',
       'fields.slug': slug,
       include: 10, // How deep to include linked items
+    })
+    return entries.items.length ? entries.items[0] : null
+  }
+
+  async getHomePage() {
+    const entries = await this.contentClient.getEntries<TypeHomepageSkeleton>({
+      limit: 1,
+      content_type: 'homepage',
     })
     return entries.items.length ? entries.items[0] : null
   }
