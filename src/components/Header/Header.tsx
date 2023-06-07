@@ -54,13 +54,17 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
   )
 }
 
-function MenuPanel() {
+function MenuPanel({ navOpen }: { navOpen: boolean }) {
   return (
     <Collapsible.Content
       asChild
+      forceMount
       aria-labelledby="navigation-menu-heading"
       id="navigation-menu"
       className={clsx('js-disabled-show min-h-[var(--nav-height)] w-full bg-[var(--nav-bg)] text-white')}
+      style={{
+        display: navOpen ? 'block' : 'none',
+      }}
     >
       <nav>
         <h2 id="navigation-menu-heading" className="govuk-visually-hidden">
@@ -133,7 +137,7 @@ export function Header() {
               <MenuButton navOpen={navOpen} />
             </div>
           </div>
-          <MenuPanel />
+          <MenuPanel navOpen={navOpen} />
         </header>
       </Collapsible.Root>
     </>
