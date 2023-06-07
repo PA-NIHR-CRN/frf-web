@@ -82,7 +82,7 @@ function MenuPanel() {
                   return (
                     <div
                       key={key}
-                      className="[&:not(:last-child)]xl:min-h-[110px] mb-5 max-w-[300px] lg:mb-0 [&:not(:last-child)]:lg:min-h-[140px]"
+                      className="mb-5 max-w-[300px] lg:mb-0 [&:not(:last-child)]:lg:min-h-[140px] [&:not(:last-child)]:xl:min-h-[110px]"
                     >
                       <Link className="link--inverse mb-1 inline-block text-base" href={item.link}>
                         {item.text}
