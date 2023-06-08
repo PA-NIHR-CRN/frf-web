@@ -72,7 +72,7 @@ jobs:
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
-          ECR_REPOSITORY: ${{ steps.determine-account-prefix.outputs.account-prefix }}-ecr-${{ env.GITHUB_ACTIONS_ENVIRONMENT }}-repository-rts
+          ECR_REPOSITORY: ${{ steps.determine-account-prefix.outputs.account-prefix }}-ecr-${{ env.GITHUB_ACTIONS_ENVIRONMENT }}-frf-repository
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_NAME_TAG: frf-web
           IMAGE_SHA_TAG: frf-web-${{ github.sha }}
