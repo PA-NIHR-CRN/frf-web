@@ -38,3 +38,6 @@ next-env.d.ts
 # dev
 .vscode/*
 .history
+/playwright/.cache/
+qa/test-results/
+qa/test-report/
