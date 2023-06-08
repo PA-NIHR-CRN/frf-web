@@ -37,3 +37,6 @@ next-env.d.ts
 
 # dev
 .history
+/playwright/.cache/
+qa/test-results/
+qa/test-report/
