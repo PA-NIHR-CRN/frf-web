@@ -1,7 +1,7 @@
 import { PlaywrightTestConfig, LaunchOptions } from '@playwright/test'
 
 const config: PlaywrightTestConfig = {
-  testDir: './qa/tests',
+  testDir: './qa/tests/features',
   outputDir: './qa/test-results',
   reporter: [['html', { outputFolder: './qa/test-report' }]],
   // globalSetup: '.qa/hooks/GlobalSetup.ts',
