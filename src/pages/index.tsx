@@ -5,6 +5,7 @@ import FindIcon from '@/components/Icons/FindIcon'
 import FollowUpIcon from '@/components/Icons/FollowUpIcon'
 import RecruitIcon from '@/components/Icons/RecruitIcon'
 import { contentfulService } from '@/lib/contentful'
+import { getVideoID } from '@/utils'
 import { getStaticPropsRevalidateValue } from '@/utils/getStaticPropsRevalidateValue'
 import { InferGetStaticPropsType } from 'next'
 import Head from 'next/head'
@@ -16,6 +17,7 @@ export default function Home({
   title,
   description,
   videoUrl,
+  videoID,
   serviceDescriptionFind,
   serviceDescriptionRecruit,
   serviceDescriptionFollowUp,
@@ -48,7 +50,7 @@ export default function Home({
                 src={videoUrl}
                 title="Video: Find, Recruit and Follow-up Intro"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope;"
-                srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=${videoUrl}?autoplay=1><img src=https://img.youtube.com/vi/msizPweg3kE/hqdefault.jpg alt='Video: Find, Recruit and Follow-up Intro'><span>▶</span></a>`}
+                srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=${videoUrl}?autoplay=1><img src=https://img.youtube.com/vi/${videoID}/hqdefault.jpg alt='Video: Find, Recruit and Follow-up Intro'><span>▶</span></a>`}
                 allowFullScreen
               ></iframe>
             </div>
@@ -62,7 +64,7 @@ export default function Home({
           <p className="govuk-body-l">
             Each of the data service providers offers one, two or all of the following three services:
           </p>
-          <div className="my-6 grid gap-6 text-left md:grid-cols-3">
+          <div className="my-7 grid gap-6 text-left md:grid-cols-3">
             {/* Find */}
             <Card>
               <div className="flex items-center justify-between bg-[var(--colour-find-background)]">
@@ -159,8 +161,18 @@ export const getStaticProps = async () => {
   try {
     const entry = await contentfulService.getHomePage()
     if (!entry) throw new Error('Failed to fetch homepage content: null entry')
+    const {
+      fields: { videoUrl, ...fields },
+    } = entry
+    const videoID = videoUrl ? getVideoID(videoUrl) : ''
     return {
-      props: { ...entry.fields },
+      props: {
+        ...fields,
+        ...(videoID && {
+          videoID,
+          videoUrl: `https://www.youtube.com/embed/${videoID}`,
+        }),
+      },
       revalidate: getStaticPropsRevalidateValue(),
     }
   } catch (error) {

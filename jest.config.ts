@@ -17,6 +17,7 @@ const config: Config = {
   },
   testEnvironment: 'jest-environment-jsdom',
   reporters: ['default', 'jest-junit'],
+  testPathIgnorePatterns: ['.vscode'],
   coverageReporters: ['json-summary', 'text', 'html'],
   coveragePathIgnorePatterns: ['node_modules'],
   coverageThreshold: {
