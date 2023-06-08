@@ -1,6 +1,8 @@
 import { render, screen, within } from '@/config/test-utils'
 import { RootLayout } from './RootLayout'
 
+jest.mock('next/router', () => require('next-router-mock'))
+
 export const assertRootLayout = () => {
   // Header
   const header = screen.getByRole('banner')
