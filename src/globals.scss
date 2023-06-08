@@ -17,10 +17,19 @@
       display: none;
     }
   }
+
+  .heading-underscore {
+    @apply after:my-[0.5rem] after:block after:h-[0.375rem] after:w-[3rem] after:bg-coral-100 after:content-[""];
+  }
+
+  .shadow-card {
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.15);
+  }
 }
 
 // GDS Front-end Overrides
 $govuk-global-styles: true;
+$govuk-new-link-styles: true;
 $govuk-font-family: var(--font-roboto), arial, sans-serif;
 $govuk-page-width: 1062px;
 
@@ -32,16 +41,6 @@ body {
 
 .link--inverse {
   @include govuk-link-style-inverse;
-}
-
-@layer utilities {
-  .heading-underscore {
-    @apply after:my-[0.5rem] after:block after:h-[0.375rem] after:w-[3rem] after:bg-coral-100 after:content-[""];
-  }
-
-  .shadow-card {
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.15);
-  }
 }
 
 :root {
