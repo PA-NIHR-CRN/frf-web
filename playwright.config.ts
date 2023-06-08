@@ -3,6 +3,7 @@ import { PlaywrightTestConfig, LaunchOptions } from '@playwright/test'
 const config: PlaywrightTestConfig = {
   testDir: './qa/tests/features',
   outputDir: './qa/test-results',
+  testMatch: /features/,
   reporter: [['html', { outputFolder: './qa/test-report' }]],
   // globalSetup: '.qa/hooks/GlobalSetup.ts',
   timeout: 30000,
