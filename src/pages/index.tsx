@@ -71,7 +71,7 @@ export default function Home({
                   <FindIcon />
                 </div>
               </div>
-              <div className="flex flex-grow flex-col justify-between">
+              <div className="flex flex-grow flex-col justify-between p-5">
                 <p>{serviceDescriptionFind}</p>
                 <Link href="/providers?serviceType=Find" className="govuk-link">
                   View all Find services
@@ -86,7 +86,7 @@ export default function Home({
                   <RecruitIcon />
                 </div>
               </div>
-              <div className="flex flex-grow flex-col justify-between">
+              <div className="flex flex-grow flex-col justify-between p-5">
                 <p>{serviceDescriptionRecruit}</p>
                 <Link href="/providers?serviceType=Recruit" className="govuk-link">
                   View all Recruit services
@@ -101,7 +101,7 @@ export default function Home({
                   <FollowUpIcon />
                 </div>
               </div>
-              <div className="flex flex-grow flex-col justify-between">
+              <div className="flex flex-grow flex-col justify-between p-5">
                 <p>{serviceDescriptionFollowUp}</p>
                 <Link href="/providers?serviceType=Follow-up" className="govuk-link">
                   View all Follow-up services
