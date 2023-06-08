@@ -26,7 +26,7 @@ const config: PlaywrightTestConfig = {
 
 export const browserOptions: LaunchOptions = {
   args: ['--start-fullscreen'],
-  slowMo: 5000,
+  slowMo: 0,
 }
 
 export default config
