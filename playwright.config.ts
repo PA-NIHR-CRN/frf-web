@@ -4,6 +4,7 @@ const config: PlaywrightTestConfig = {
   testDir: './qa/tests/features',
   outputDir: './qa/test-results',
   testMatch: /features/,
+  testIgnore: '**/src/**',
   reporter: [['html', { outputFolder: './qa/test-report' }]],
   // globalSetup: '.qa/hooks/GlobalSetup.ts',
   timeout: 30000,
