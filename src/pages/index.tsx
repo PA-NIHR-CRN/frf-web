@@ -35,7 +35,7 @@ export default function Home({
       <Container>
         <section className="flex flex-wrap items-center lg:flex-nowrap lg:gap-4 lg:pt-4">
           <div>
-            <h2 className="govuk-heading-l">{title}</h2>
+            <h2 className="govuk-heading-l mt-2 lg:mt-0">{title}</h2>
             <p
               className="whitespace-pre-wrap lg:pr-6"
               dangerouslySetInnerHTML={{
@@ -44,7 +44,7 @@ export default function Home({
             />
           </div>
           {videoUrl && (
-            <div className="lg:mt-10 mt-5 flex w-full justify-center">
+            <div className="lg:mt-10 mt-4 flex w-full justify-center lg:mt-5">
               <iframe
                 className="aspect-video w-full max-w-[700px] lg:w-[450px]"
                 src={videoUrl}
@@ -59,12 +59,12 @@ export default function Home({
       </Container>
 
       {/* Service Info */}
-      <section className="mt-7 bg-grey-30 py-7 text-center lg:mt-6">
+      <section className="mt-7 bg-grey-30 py-6 text-center lg:mt-6 lg:py-7">
         <Container>
           <p className="govuk-body-l">
             Each of the data service providers offers one, two or all of the following three services:
           </p>
-          <div className="my-7 grid gap-6 text-left md:grid-cols-3">
+          <div className="my-6 grid gap-6 text-left md:grid-cols-3 lg:my-7">
             {/* Find */}
             <Card>
               <div className="flex items-center justify-between bg-[var(--colour-find-background)]">
