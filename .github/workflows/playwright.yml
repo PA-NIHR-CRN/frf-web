@@ -38,7 +38,7 @@ jobs:
         aws-region: eu-west-2
         role-session-name: GitHubActions
     
-    - name: Get github actions runner public IP
+    - name: Get Github Actions Runner Public IP
       id: ip
       uses: haythem/public-ip@v1.3
       
