@@ -42,10 +42,15 @@ jobs:
       id: ip
       uses: haythem/public-ip@v1.3
       
-    - name: Add Github Actions IP to LB security group
+    - name: Add Github Actions IP to LB security group (Dev)
       if: github.event.inputs.env-context == 'dev'
       run: |
           aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_DEV }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
+
+    - name: Add Github Actions IP to LB security group (Test)
+      if: github.event.inputs.env-context == 'test'
+      run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
 
     - name: Run FRF E2E Tests in DEV
       if: github.event.inputs.env-context == 'dev'
@@ -62,6 +67,11 @@ jobs:
       if: github.event.inputs.env-context == 'dev'
       run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_DEV }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
+
+    - name: Remove Github Actions IP from LB security group
+      if: github.event.inputs.env-context == 'test'
+      run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
 
     - name: Upload HTML Report as artifact
       uses: actions/upload-artifact@v3
