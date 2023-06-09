@@ -5,8 +5,11 @@ const config: PlaywrightTestConfig = {
   outputDir: './qa/test-results',
   testMatch: /features/,
   testIgnore: '**/src/**',
-  reporter: [['html', { outputFolder: './qa/test-report' }]],
-  // globalSetup: '.qa/hooks/GlobalSetup.ts',
+  reporter: [
+    ['list', { printSteps: true }],
+    ['html', { outputFolder: './qa/test-report' }],
+  ],
+  globalSetup: './qa/hooks/GlobalSetup.ts',
   timeout: 30000,
   // workers: 6, // to enforce parallel workers in Actions Workflow
   retries: 1,
@@ -15,7 +18,7 @@ const config: PlaywrightTestConfig = {
       name: 'FindRecruitFollow',
       use: {
         trace: 'on',
-        baseURL: 'https://dev.findrecruitandfollowup.nihr.ac.uk/',
+        baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
         launchOptions: {
@@ -24,11 +27,6 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-}
-
-export const browserOptions: LaunchOptions = {
-  args: ['--start-fullscreen'],
-  slowMo: 0,
 }
 
 export default config
