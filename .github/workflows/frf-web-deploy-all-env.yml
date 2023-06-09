@@ -37,16 +37,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check variables
-        run: |
-          echo "repository variable : $REPOSITORY_VAR"
-          echo "organization variable : $ORGANIZATION_VAR"
-          echo "overridden variable : $OVERRIDE_VAR"
-          echo "variable from shell environment : $env_var"
-          echo "App var : ${{ vars.CONTENTFUL_ENVIRONMENT }}"
-          echo "CONTENTFUL_SPACE_ID var : ${{ secrets.CONTENTFUL_SPACE_ID }}"
-          echo "CONTENTFUL_PREVIEW_MODE var : ${{ vars.CONTENTFUL_PREVIEW_MODE }}"
-
       - uses: actions/checkout@v2.1.0
 
       - name: Configure AWS credentials (dev)
