@@ -3,17 +3,6 @@ on:
   schedule:
   # Run at 08:00 (UTC) Mon-Fri (09:00 during BST)
   - cron: '0 08 * * 1-5'
-  # push:
-  #   branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
-  workflow_dispatch:
-    inputs:
-      env-context:
-        description: "Select which environment you want to run the tests in"
-        options: ["dev", "test"]
-        required: true
-        default: "test"
 
 jobs:
   test:
@@ -28,16 +17,8 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run FRF E2E Tests in DEV
-      if: github.event.inputs.env-context == 'dev'
+    - name: Run FRF E2E Tests
       run: npx playwright test
-      env:
-        ENV_CONTEXT: "DEV"
-    - name: Run FRF E2E Tests in TEST
-      if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
-      run: npx playwright test
-      env:
-        ENV_CONTEXT: "TEST"
     - name: Upload HTML Report as artifact
       uses: actions/upload-artifact@v3
       if: always()
