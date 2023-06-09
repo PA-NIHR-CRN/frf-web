@@ -6,9 +6,9 @@ This is a [Next.js](https://nextjs.org/) project that utilises Server Side Rende
 
 ## GitHub Actions Workflow
 
-We have a GitHub Actions workflow located in `.github/workflows/frf-fe-build.yml` that builds, tests, runs code quality checks for every Pull Request.
+We have a GitHub Actions workflow located in `.github/workflows/frf-web-build.yml` that builds, tests, runs code quality checks for every Pull Request.
 
-Merges to `main` branch will trigger a staged deployment workflow in `.github/workflows/frf-fe-deploy-all-env.yml`. Deployment to the dev environment is automatic and then subsequent environments (test, uat, oat, prod) require manual confirmation.
+Merges to `main` branch will trigger a staged deployment workflow in `.github/workflows/frf-web-deploy-all-env.yml`. Deployment to the dev environment is automatic and then subsequent environments (test, uat, oat, prod) require manual confirmation.
 
 ## Docker
 
