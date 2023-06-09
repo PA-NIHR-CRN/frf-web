@@ -25,17 +25,6 @@ COPY . .
 # Disable telemetry during build
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN npm run build
-
-# Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV production
-
-# Disable telemetry during runtime
-ENV NEXT_TELEMETRY_DISABLED 1
-
 # Custom environment variables for the project used at build time (required for SSG)
 ARG CONTENTFUL_SPACE_ID
 ARG CONTENTFUL_ACCESS_TOKEN
@@ -46,6 +35,17 @@ ENV CONTENTFUL_SPACE_ID $CONTENTFUL_SPACE_ID
 ENV CONTENTFUL_ACCESS_TOKEN $CONTENTFUL_ACCESS_TOKEN
 ENV CONTENTFUL_PREVIEW_ACCESS_TOKEN $CONTENTFUL_PREVIEW_ACCESS_TOKEN
 ENV CONTENTFUL_MANAGEMENT_ACCESS_TOKEN $CONTENTFUL_MANAGEMENT_ACCESS_TOKEN
+
+RUN npm run build
+
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+
+# Disable telemetry during runtime
+ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
