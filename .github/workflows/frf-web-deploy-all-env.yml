@@ -20,7 +20,13 @@ jobs:
       - name: Install
         run: npm ci --no-audit --no-fund
       - name: Build
-        run: npm run build
+        run: |
+          touch .env.local
+          echo CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} >> .env.local
+          echo CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} >> .env.local
+          echo CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} >> .env.local
+          echo CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} >> .env.local
+          npm run build
       - name: Test
         run: npm run test:ci
 
