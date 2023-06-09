@@ -1,8 +1,78 @@
 import { render, screen } from '@/config/test-utils'
-import Home from '@/pages'
+import homepage from '@/mocks/homepage.json'
+import Home, { getStaticProps } from '@/pages'
+import { setupMockServer } from '@/utils'
 
-test('Displays the Home page', () => {
-  render(<Home />)
+const [server, mockContentfulResponse] = setupMockServer()
 
-  expect(screen.getByRole('heading', { name: 'Find, Recruit and Follow-up Support', level: 1 }))
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+test('Displays the Home page', async () => {
+  mockContentfulResponse(homepage.success)
+
+  const { props } = await getStaticProps()
+
+  render(<Home {...props} />)
+
+  const mockData = homepage.success.items[0].fields
+
+  // Title + Description
+  expect(screen.getByRole('heading', { name: mockData.title, level: 2 }))
+  expect(screen.getByText(mockData.description))
+
+  // Video
+  const videoIframe = screen.getByTitle('Video: Find, Recruit and Follow-up Intro')
+  expect(videoIframe).toHaveAttribute('src', mockData.videoUrl)
+
+  // Service Info
+  expect(screen.getByRole('heading', { name: 'Find', level: 3 })).toBeInTheDocument()
+  expect(screen.getByText(mockData.serviceDescriptionFind)).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'View all Find services' })).toHaveAttribute(
+    'href',
+    '/providers?serviceType=Find'
+  )
+
+  expect(screen.getByRole('heading', { name: 'Recruit', level: 3 })).toBeInTheDocument()
+  expect(screen.getByText(mockData.serviceDescriptionRecruit)).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'View all Recruit services' })).toHaveAttribute(
+    'href',
+    '/providers?serviceType=Recruit'
+  )
+
+  expect(screen.getByRole('heading', { name: 'Follow-up', level: 3 })).toBeInTheDocument()
+  expect(screen.getByText(mockData.serviceDescriptionFollowUp)).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'View all Follow-up services' })).toHaveAttribute(
+    'href',
+    '/providers?serviceType=Follow-up'
+  )
+
+  // View all services
+  expect(screen.getByRole('link', { name: 'View all data service providers' })).toHaveAttribute('href', '/providers')
+
+  // Signposts
+  expect(screen.getByRole('heading', { name: 'Get support for your research', level: 3 })).toBeInTheDocument()
+  expect(screen.getByText(mockData.signPostDescription1)).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Contact research support' })).toHaveAttribute('href', '#')
+
+  expect(screen.getByRole('heading', { name: 'Become a data service provider', level: 3 })).toBeInTheDocument()
+  expect(screen.getByText(mockData.signPostDescription2)).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Becoming a data service provider' })).toHaveAttribute('href', '#')
+})
+
+test('Sets the static cache revalidation period', async () => {
+  mockContentfulResponse(homepage.success)
+  const { revalidate } = await getStaticProps()
+  expect(revalidate).toBe(60)
+})
+
+test('Handles no data returned', async () => {
+  mockContentfulResponse({})
+  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content')
+})
+
+test('Handles errors when fetching data', async () => {
+  mockContentfulResponse(homepage.error, 400)
+  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content')
 })

@@ -57,6 +57,7 @@ module.exports = {
         80: 'var(--colour-grey-80)',
         40: 'var(--colour-grey-40)',
         60: 'var(--colour-grey-60)',
+        30: 'var(--colour-grey-30)',
         20: 'var(--colour-grey-20)',
         10: 'var(--colour-grey-10)',
         5: 'var(--colour-grey-5)',

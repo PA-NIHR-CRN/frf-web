@@ -17,10 +17,19 @@
       display: none;
     }
   }
+
+  .heading-underscore {
+    @apply after:my-[0.5rem] after:block after:h-[0.375rem] after:w-[3rem] after:bg-coral-100 after:content-[""];
+  }
+
+  .shadow-card {
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.15);
+  }
 }
 
 // GDS Front-end Overrides
 $govuk-global-styles: true;
+$govuk-new-link-styles: true;
 $govuk-font-family: var(--font-roboto), arial, sans-serif;
 $govuk-page-width: 1062px;
 
@@ -63,6 +72,14 @@ body {
   --nav-bg: #2c3c4e;
   --nav-height: 298px;
 
+  // Find, Recruit & Follow-Up
+  --colour-find-background: var(--colour-yellow-20);
+  --colour-find-foreground: var(--colour-yellow-100);
+  --colour-recruit-background: var(--colour-aqua-20);
+  --colour-recruit-foreground: var(--colour-aqua-100);
+  --colour-follow-up-background: var(--colour-purple-20);
+  --colour-follow-up-foreground: var(--colour-purple-100);
+
   // Brand Colours
   --colour-aqua-100: #2ea9b0;
   --colour-aqua-80: #6fbac0;
@@ -87,6 +104,7 @@ body {
   --colour-grey-80: #bfcad0;
   --colour-grey-40: #dfe4e7;
   --colour-grey-60: #ced5db;
+  --colour-grey-30: #eff1f3;
   --colour-grey-20: #f0f1f5;
   --colour-grey-10: #f6f7f8;
   --colour-grey-5: #fcfcfd;

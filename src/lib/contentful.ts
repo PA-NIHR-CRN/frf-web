@@ -29,7 +29,7 @@ const contentClient = createContentClient({
 })
 
 const managementClient = createManagementClient({
-  accessToken: CONTENTFUL_MANAGEMENT_ACCESS_TOKEN ?? '',
+  accessToken: CONTENTFUL_MANAGEMENT_ACCESS_TOKEN,
 })
 
 export const contentfulService = new ContentfulService(
