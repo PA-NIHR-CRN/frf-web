@@ -7,9 +7,9 @@ export function Footer() {
     <footer className={clsx('govuk-footer', 'py-0')} role="contentinfo">
       <div className="bg-navy-100 text-white" data-testid="frf-footer-links">
         <div className="govuk-width-container">
-          <div className="flex h-[var(--footer-links-panel-height)] items-center justify-end">
+          <div className="flex h-[var(--footer-links-panel-height)] items-center">
             <h2 className="govuk-visually-hidden">Support links</h2>
-            <ul className="govuk-footer__inline-list mb-0">
+            <ul className="govuk-footer__inline-list mb-0 flex w-full md:justify-end">
               <li className="govuk-footer__inline-list-item">
                 <Link className="govuk-footer__link link--inverse" href="/privacy">
                   Privacy policy
@@ -20,7 +20,7 @@ export function Footer() {
                   Accessibility
                 </Link>
               </li>
-              <li className="govuk-footer__inline-list-item">&copy; NIHR 2022</li>
+              <li className="govuk-footer__inline-list-item ml-auto md:ml-0">&copy; NIHR 2022</li>
             </ul>
           </div>
         </div>
