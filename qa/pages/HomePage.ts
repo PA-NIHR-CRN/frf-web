@@ -12,7 +12,7 @@ export default class HomePage {
 
     //Locators
     this.btnProviders = page.locator('a', { hasText: 'Providers' })
-    this.headingPageTitle = page.locator('h1[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h2[class="govuk-heading-l mt-2 lg:mt-0"]')
   }
 
   //Page Methods
