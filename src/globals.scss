@@ -51,6 +51,14 @@ body {
   --panel-border-color: var(--colour-purple-100);
   --panel-height: 210px;
 
+  // Find, Recruit & Follow-Up
+  --colour-find-background: var(--colour-yellow-20);
+  --colour-find-foreground: var(--colour-yellow-100);
+  --colour-recruit-background: var(--colour-aqua-20);
+  --colour-recruit-foreground: var(--colour-aqua-100);
+  --colour-follow-up-background: var(--colour-purple-20);
+  --colour-follow-up-foreground: var(--colour-purple-100);
+
   // Nav
   --nav-bg: #2c3c4e;
   --nav-height: 298px;
@@ -110,5 +118,6 @@ body {
   --colour-white: #ffffff;
   --grey: #dfe4e7;
   --light-grey: #f0f1f5;
+  --dark-grey: #505a5f;
   --focus: #ffdd00;
 }

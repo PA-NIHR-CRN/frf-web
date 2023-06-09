@@ -26,6 +26,7 @@ module.exports = {
     colors: {
       black: '#000000',
       white: '#ffffff',
+      darkGrey: 'var(--dark-grey)',
       aqua: {
         100: 'var(--colour-aqua-100)',
         80: 'var(--colour-aqua-80)',
