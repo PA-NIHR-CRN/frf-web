@@ -1,4 +1,4 @@
-# Deployment of NIHR FRF
+# Deployment of NIHR FRF Web
 
 ![Pipeline](https://github.com/PA-NIHR-CRN/frf-web/actions/workflows/frf-fe-build.yml/badge.svg)
 
@@ -6,15 +6,17 @@ This is a [Next.js](https://nextjs.org/) project that utilises Server Side Rende
 
 ## GitHub Actions Workflow
 
-We have a GitHub Actions workflow located in `.github/workflows/frf-fe-build.yml` that builds, tests, runs code quality checks
+We have a GitHub Actions workflow located in `.github/workflows/frf-fe-build.yml` that builds, tests, runs code quality checks for every Pull Request.
+
+Merges to `main` branch will trigger a staged deployment workflow in `.github/workflows/frf-fe-deploy-all-env.yml`. Deployment to the dev environment is automatic and then subsequent environments (test, uat, oat, prod) require manual confirmation.
 
 ## Docker
 
 Build
-`docker build . -t nihr-frf`
+`docker build . -t frf-web`
 
 Run
-`docker run -p 3000:3000 nihr-frf`
+`docker run -e CONTENTFUL_SPACE_ID=XXX -e CONTENTFUL_ACCESS_TOKEN=XXX -e CONTENTFUL_PREVIEW_ACCESS_TOKEN=XXX -e CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=XXX -p 3000:3000 frf-web`
 
 ## Environments
 
@@ -22,7 +24,7 @@ Run
 
 The development environment is automatically deployed whenever feature branches are merged into `main` via a [Pull Request](https://github.com/PA-NIHR-CRN/frf-web/pulls).
 
-[Visit Dev →](http://tbc)
+[Visit Dev →](https://dev.findrecruitandfollowup.nihr.ac.uk/)
 
 ### User Acceptance Testing (UAT)
 

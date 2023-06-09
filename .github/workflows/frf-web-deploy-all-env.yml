@@ -74,6 +74,13 @@ jobs:
         env:
           ECS_SERVICE: crnccd-ecs-dev-frf-service
           ECS_CLUSTER: crnccd-ecs-dev-frf-cluster
+          CONTENTFUL_SPACE_ID: ${{ secrets.CONTENTFUL_SPACE_ID }}
+          CONTENTFUL_ENVIRONMENT: ${{ env.CONTENTFUL_ENVIRONMENT }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+          CONTENTFUL_PREVIEW_MODE: ${{ env.CONTENTFUL_PREVIEW_MODE }}
+          CONTENTFUL_PREVIEW_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }}
+          CONTENTFUL_MANAGEMENT_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }}
+          NEXT_REVALIDATE_TIME: ${{ env.NEXT_REVALIDATE_TIME }}
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
@@ -197,7 +204,7 @@ jobs:
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
-
+          env
 
   deploy-oat:
     needs: deploy-uat
