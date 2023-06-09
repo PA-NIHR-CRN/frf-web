@@ -10,7 +10,7 @@ const config: PlaywrightTestConfig = {
     ['html', { outputFolder: './qa/test-report' }],
   ],
   globalSetup: './qa/hooks/GlobalSetup.ts',
-  timeout: 5000,
+  timeout: 30000,
   // workers: 6, // to enforce parallel workers in Actions Workflow
   retries: 0,
   projects: [
