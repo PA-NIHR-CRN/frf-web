@@ -12,7 +12,7 @@ env:
 
 jobs:
   build:
-    name: "Build"
+    name: 'Build'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,7 +27,7 @@ jobs:
   deploy-dev:
     needs: [build]
     environment: DEV
-    name: "Deploy Dev"
+    name: 'Deploy Dev'
     runs-on: ubuntu-latest
 
     steps:
@@ -100,7 +100,7 @@ jobs:
   deploy-test:
     needs: deploy-dev
     environment: TEST
-    name: "Deploy Test"
+    name: 'Deploy Test'
     runs-on: ubuntu-latest
 
     steps:
@@ -155,11 +155,10 @@ jobs:
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
 
-
   deploy-uat:
     needs: deploy-test
     environment: UAT
-    name: "Deploy Uat"
+    name: 'Deploy Uat'
     runs-on: ubuntu-latest
 
     steps:
@@ -213,12 +212,11 @@ jobs:
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
-          env
 
   deploy-oat:
     needs: deploy-uat
     environment: OAT
-    name: "Deploy Oat"
+    name: 'Deploy Oat'
     runs-on: ubuntu-latest
 
     steps:
@@ -276,7 +274,7 @@ jobs:
   deploy-prod:
     needs: deploy-oat
     environment: PROD
-    name: "Deploy Prod"
+    name: 'Deploy Prod'
     runs-on: ubuntu-latest
 
     steps:
