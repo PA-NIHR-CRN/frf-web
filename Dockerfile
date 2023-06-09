@@ -36,6 +36,11 @@ ENV NODE_ENV production
 # Disable telemetry during runtime
 ENV NEXT_TELEMETRY_DISABLED 1
 
+ENV CONTENTFUL_SPACE_ID
+ENV CONTENTFUL_ACCESS_TOKEN
+ENV CONTENTFUL_PREVIEW_ACCESS_TOKEN
+ENV CONTENTFUL_MANAGEMENT_ACCESS_TOKEN
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
@@ -47,6 +52,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
+
+ENV CONTENTFUL_SPACE_ID
+ENV CONTENTFUL_ACCESS_TOKEN
+ENV CONTENTFUL_PREVIEW_ACCESS_TOKEN
+ENV CONTENTFUL_MANAGEMENT_ACCESS_TOKEN
 
 EXPOSE 3000
 
