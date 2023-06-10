@@ -16,7 +16,7 @@ export class ContentfulService {
   ) {}
 
   async getProvidersByFilter(filters: Filters) {
-    return await this.contentClient.getEntries<TypeServiceProviderSkeleton>({
+    return await this.contentClient.withoutUnresolvableLinks.getEntries<TypeServiceProviderSkeleton>({
       skip: (filters.page - 1) * PER_PAGE,
       limit: PER_PAGE,
       content_type: 'serviceProvider',

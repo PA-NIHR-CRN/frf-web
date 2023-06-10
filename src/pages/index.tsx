@@ -69,11 +69,11 @@ export default function Home({
             <Card>
               <div className="flex items-center justify-between bg-[var(--colour-find-background)]">
                 <h3 className="govuk-heading-m mb-0 pl-4 text-navy-100">Find</h3>
-                <div className="bg-[var(--colour-find-foreground)] p-3">
+                <div className="bg-[var(--colour-find-foreground)] p-3 text-[3rem] text-white">
                   <FindIcon />
                 </div>
               </div>
-              <div className="govuk-body mb-0 flex flex-grow flex-col justify-between p-4">
+              <div className="govuk-body mb-0 flex flex-grow flex-col items-start justify-between p-4">
                 <p>{serviceDescriptionFind}</p>
                 <Link href="/providers?serviceType=Find" className="govuk-link">
                   View all Find services
@@ -88,7 +88,7 @@ export default function Home({
                   <RecruitIcon />
                 </div>
               </div>
-              <div className="govuk-body mb-0 flex flex-grow flex-col justify-between p-4">
+              <div className="govuk-body mb-0 flex flex-grow flex-col items-start justify-between p-4">
                 <p>{serviceDescriptionRecruit}</p>
                 <Link href="/providers?serviceType=Recruit" className="govuk-link">
                   View all Recruit services
@@ -103,7 +103,7 @@ export default function Home({
                   <FollowUpIcon />
                 </div>
               </div>
-              <div className="govuk-body mb-0 flex flex-grow flex-col justify-between p-4">
+              <div className="govuk-body mb-0 flex flex-grow flex-col items-start justify-between p-4">
                 <p>{serviceDescriptionFollowUp}</p>
                 <Link href="/providers?serviceType=Follow-up" className="govuk-link">
                   View all Follow-up services
