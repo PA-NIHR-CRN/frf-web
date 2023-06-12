@@ -100,7 +100,7 @@ export class ContentfulService {
       case 'lowest-population':
         return 'fields.population'
       default:
-        return '-sys.createdAt'
+        return 'fields.name'
     }
   }
 

@@ -72,14 +72,19 @@ const mockSpace = Mock.of<Space>({
 })
 
 function createMockContentClient() {
+  const getEntries = jest.fn().mockImplementation(({ content_type }) => ({
+    sys: { type: 'Array' },
+    total: 1,
+    skip: 0,
+    limit: 10,
+    items: [contentTypeMocks[content_type]],
+  }))
+
   return {
-    getEntries: jest.fn().mockImplementation(({ content_type }) => ({
-      sys: { type: 'Array' },
-      total: 1,
-      skip: 0,
-      limit: 10,
-      items: [contentTypeMocks[content_type]],
-    })),
+    withoutUnresolvableLinks: {
+      getEntries,
+    },
+    getEntries,
   }
 }
 
@@ -118,7 +123,7 @@ describe('ContentfulService', () => {
 
       expect(mockContentClient.getEntries).toHaveBeenCalledWith({
         skip: 0,
-        limit: 10,
+        limit: 4,
         content_type: 'serviceProvider',
         'fields.costs[in]': 'Find: Free of charge,Recruit: Free of charge',
         'fields.geography[in]': 'England,Scotland',
@@ -185,7 +190,7 @@ describe('ContentfulService', () => {
 
   describe('getOrderFilter', () => {
     it('returns the correct order query', () => {
-      expect(ContentfulService.getOrderFilter()).toEqual('-sys.createdAt')
+      expect(ContentfulService.getOrderFilter()).toEqual('fields.name')
       expect(ContentfulService.getOrderFilter('updated')).toEqual('-sys.updatedAt')
       expect(ContentfulService.getOrderFilter('a-z')).toEqual('fields.name')
       expect(ContentfulService.getOrderFilter('z-a')).toEqual('-fields.name')

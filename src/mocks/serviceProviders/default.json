@@ -1,0 +1,565 @@
+{
+  "sys": { "type": "Array" },
+  "total": 5,
+  "skip": 0,
+  "limit": 100,
+  "items": [
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "5bqhUajiDehFgoK9zfHQx1",
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
+        "revision": 1,
+        "createdAt": "2023-06-11T15:16:49.137Z",
+        "updatedAt": "2023-06-11T15:17:11.589Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Recruit4you",
+        "slug": "recruit4you",
+        "providerOrganisation": "Recruit4you",
+        "shortDescription": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Feasibility Service: Supports planning of Clinical trials by enabling clinical trialists to assess the feasibility of a study. Using national data sets the user can determine the number and location of patients who meet key eligibility criteria.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "\nRecruitment service: Supports recruitment for clinical trials by identifying suitable patients and inviting them to participate on behalf of the research organisation.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "\nOutcomes service: Enables researchers to follow up with patients by linking patient cohorts to rich and detailed NHS data sets to assess clinical safety and effectiveness of treatments.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "geography": ["England"],
+        "population": 35000000,
+        "suitedTo": [
+          "Drug development trials",
+          "Certain rare disease, indications or cancers",
+          "Inherited diseases",
+          "Large patient cohorts"
+        ],
+        "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
+        "findCostChargeableDescription": "Free of charge (all studies)",
+        "recruitCostChargeableDescription": "Chargeable service - £XXX",
+        "dataSpecificsAndCoding": [
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
+        ]
+      }
+    },
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "6dogwvwBKn1mSBBR3igIUV",
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
+        "revision": 1,
+        "createdAt": "2023-06-11T15:15:29.103Z",
+        "updatedAt": "2023-06-11T15:16:23.206Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Join Dementia Research",
+        "slug": "join-dementia-research",
+        "providerOrganisation": "Department of Health and Social Care",
+        "shortDescription": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Join Dementia Research is an easy-to-use service that allows the UK public to register their interest in dementia research, so that they can be contacted about relevant research studies. The overall aim is to improve and speed up study recruitment, and improve volunteers’ access to research.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "\nJoin Dementia Research improves the timeliness of study recruitment providing researchers with access to thousands of potential volunteers who want to be involved in research.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "As a researcher you can:", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        { "data": {}, "marks": [], "value": "Identify potential participants", "nodeType": "text" }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        { "data": {}, "marks": [], "value": "Screen and contact volunteers", "nodeType": "text" }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Run feasibility tests for future studies",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                }
+              ],
+              "nodeType": "unordered-list"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "geography": ["England"],
+        "population": 35000000,
+        "suitedTo": [
+          "Drug development trials",
+          "Certain rare disease, indications or cancers",
+          "Inherited diseases",
+          "Large patient cohorts"
+        ],
+        "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
+        "findCostChargeableDescription": "Free of charge (all studies)",
+        "recruitCostChargeableDescription": "Chargeable service - £XXX",
+        "dataSpecificsAndCoding": [
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
+        ]
+      }
+    },
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "7GzqSW79wH8rR36i168d0P",
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
+        "revision": 1,
+        "createdAt": "2023-06-11T15:13:29.491Z",
+        "updatedAt": "2023-06-11T15:14:49.245Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "GP Visualise and DataView",
+        "slug": "gp-visualise-and-dataview",
+        "providerOrganisation": "Wessex Care Organisation",
+        "shortDescription": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "GP Visualise is a protocol design, feasibility and recruitment system currently deployed across the Wessex and South London regions.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Authorised researchers can search an anonymised primary care dataset using a simple natural language query tool for rapid protocol design. Once refined and with appropriate permissions in place the system can notify interested GPs and provide a reidentification service enabling the GP to see only their own patients that might meet the entry criteria for the proposed study and to invite them to participate if\nthey deem this appropriate. Patient confidentiality is preserved whilst increasing potential access to research in a community setting.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "DataView is a suite of applications which together form a fully validated clinical trials platform that integrates multiple electronic health data sources It can support clinical trials\nfrom phase 2b through to implementation and post marketing studies. It includes applications for data collection, safety monitoring, standards conversion and data quality.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "geography": ["England"],
+        "population": 35000000,
+        "suitedTo": [
+          "Drug development trials",
+          "Certain rare disease, indications or cancers",
+          "Inherited diseases",
+          "Large patient cohorts"
+        ],
+        "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
+        "findCostChargeableDescription": "Free of charge (all studies)",
+        "recruitCostChargeableDescription": "Chargeable service - £XXX",
+        "dataSpecificsAndCoding": [
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
+        ]
+      }
+    },
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "indqIR0VHkBNlCMFDIXJi",
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
+        "revision": 2,
+        "createdAt": "2023-06-08T14:07:17.404Z",
+        "updatedAt": "2023-06-08T14:16:59.382Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Genomic Profile Register",
+        "slug": "genomic-profile-register",
+        "providerOrganisation": "Genomic Profile Register",
+        "shortDescription": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [{ "type": "bold" }],
+                  "value": "Genomic Profile Register:",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": " secure, national database of genomic and health data. It provides whole genome sequencing diagnostics. Within Clinical care, individuals are asked by clinicians whether they would like to add their genome sequence and health data to the Genomic Register.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                { "data": {}, "marks": [], "value": "\n", "nodeType": "text" },
+                { "data": {}, "marks": [{ "type": "bold" }], "value": "Find:", "nodeType": "text" },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": " The sample is sequenced and genome data is stored and can be analysed within the Genome Profile library. The number of eligible participants can be viewed by carrying out specific study criteria searches via the database.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                { "data": {}, "marks": [], "value": "\n", "nodeType": "text" },
+                { "data": {}, "marks": [{ "type": "bold" }], "value": "Recruit:", "nodeType": "text" },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": " If individuals consent to further research, the de-identified sample and data in the National Genomic Register can be made identifiable and available ",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "geography": ["England"],
+        "population": 35000000,
+        "suitedTo": [
+          "Drug development trials",
+          "Certain rare disease, indications or cancers",
+          "Inherited diseases",
+          "Large patient cohorts"
+        ],
+        "findCostChargeableDescription": "Free of charge (all studies)",
+        "recruitCostChargeableDescription": "Chargeable service - £XXX",
+        "dataSpecificsAndCoding": [
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
+          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
+        ]
+      }
+    },
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "3qPHNtoeSCwST5fPiCF20a",
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
+        "revision": 1,
+        "createdAt": "2023-06-05T14:42:40.325Z",
+        "updatedAt": "2023-06-05T17:16:54.823Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Test",
+        "slug": "test",
+        "providerOrganisation": "Test",
+        "shortDescription": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "Test", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "geography": ["UK wide"]
+      }
+    }
+  ],
+  "includes": {
+    "Entry": [
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "type": "Entry",
+          "id": "1m4Cj1qRu8KllLoBuwUk8l",
+          "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "textBlock" } },
+          "revision": 1,
+          "createdAt": "2023-06-08T14:10:13.164Z",
+          "updatedAt": "2023-06-08T14:10:32.094Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Type of data available",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "unordered-list",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Hospital in-patient and out-patient episodes",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [{ "nodeType": "text", "value": "Primary care ", "marks": [], "data": {} }]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [{ "nodeType": "text", "value": "Other", "marks": [], "data": {} }]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "type": "Entry",
+          "id": "53TfkDdQAmdbaipUjO7k7P",
+          "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "textBlock" } },
+          "revision": 1,
+          "createdAt": "2023-06-08T14:09:38.960Z",
+          "updatedAt": "2023-06-08T14:10:08.912Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Source of data",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "unordered-list",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [{ "nodeType": "text", "value": "Primary care ", "marks": [], "data": {} }]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [{ "nodeType": "text", "value": "Secondary care ", "marks": [], "data": {} }]
+                      }
+                    ]
+                  },
+                  {
+                    "nodeType": "list-item",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "paragraph",
+                        "data": {},
+                        "content": [{ "nodeType": "text", "value": "Participant reported", "marks": [], "data": {} }]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
