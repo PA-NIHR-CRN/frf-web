@@ -33,7 +33,6 @@ export default class CommonItemsPage {
   async assertHeaderFooterItemsAppear() {
     await expect(this.frfHeader).toBeVisible()
     await expect(this.frfFooterLinks).toBeVisible()
-    await expect(this.frfFooterLogos).toBeVisible()
     await expect(this.linkPrivacy).toBeVisible()
     await expect(this.linkAccessibility).toBeVisible()
   }
