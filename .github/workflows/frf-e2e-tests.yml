@@ -87,7 +87,7 @@ jobs:
       if: github.event.inputs.publish-report != 'false' && always()
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        folder: ${{steps.download.outputs.download-path}}/playwright-report/
+        folder: ${{steps.download.outputs.download-path}}/qa/test-report/
         branch: gh-pages
 
   # send-slack-message-failure:
