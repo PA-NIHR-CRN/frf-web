@@ -13,7 +13,7 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-test('Displays results with default search criteria', async () => {
+test('Default search criteria (no search or filters set)', async () => {
   mockContentfulResponse(defaultMock)
 
   const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as {
@@ -28,6 +28,12 @@ test('Displays results with default search criteria', async () => {
   // Sort
   expect(screen.getByLabelText('Sort by')).toBeInTheDocument()
 
+  // Results
+  expect(screen.getByRole('link', { name: 'Genomic Profile Register – New' })).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'GP Visualise and DataView – New' })).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Join Dementia Research' })).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Recruit4you – New' })).toBeInTheDocument()
+
   // Pagination
   const pagination = screen.getByRole('navigation', { name: 'results' })
   expect(pagination).toBeInTheDocument()
@@ -37,7 +43,7 @@ test('Displays results with default search criteria', async () => {
   expect(within(pagination).getByRole('link', { name: 'Next' })).toHaveAttribute('href', '?page=2')
 })
 
-test('Displays results from page two', async () => {
+test('Page two results', async () => {
   mockContentfulResponse(pageTwoMock)
 
   const { props } = (await getServerSideProps({

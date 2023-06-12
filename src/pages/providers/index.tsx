@@ -12,6 +12,7 @@ import MapPin from '@/components/Icons/MapPin'
 import Tick from '@/components/Icons/Tick'
 import Users from '@/components/Icons/Users'
 import Pagination from '@/components/Pagination/Pagination'
+import { Tag } from '@/components/Tag/Tag'
 import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { numDaysBetween } from '@/utils/numDaysBetween'
@@ -64,8 +65,9 @@ export default function ServiceProviders({
                         <h3 className="govuk-heading-m mb-2">
                           <Link href={`/providers/${fields.slug}`} className="text-black">
                             {fields.name}
+                            {isNew && <span className="govuk-visually-hidden">&ndash; New</span>}
                           </Link>
-                          {isNew && <strong className="govuk-tag govuk-tag--red ml-3 border-0">NEW</strong>}
+                          {isNew && <Tag aria-hidden>New</Tag>}
                         </h3>
                         <p className="mb-0 text-darkGrey">{fields.providerOrganisation}</p>
                       </div>
