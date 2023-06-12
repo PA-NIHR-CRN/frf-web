@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+
 import { PhaseBanner } from './PhaseBanner'
 
 test('Displays phase of the project and a description', () => {

@@ -1,4 +1,5 @@
 import { render, screen } from '@/config/test-utils'
+
 import { Button } from './Button'
 
 test('Button', () => {

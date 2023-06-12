@@ -1,8 +1,9 @@
+import type { ContentfulClientApi, Entry } from 'contentful'
+import type { ClientAPI as ManagementClientApi, Environment, Space } from 'contentful-management'
+import { Mock } from 'ts-mockery'
+
 import { TypeHomepage, TypeServiceProvider } from '@/@types/generated'
 import { ContentfulService } from '@/lib/contentfulService'
-import type { ContentfulClientApi, Entry } from 'contentful'
-import type { Environment, ClientAPI as ManagementClientApi, Space } from 'contentful-management'
-import { Mock } from 'ts-mockery'
 
 const mockServiceProvider = Mock.of<TypeServiceProvider<undefined, ''>>({
   fields: {

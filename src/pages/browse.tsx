@@ -1,7 +1,8 @@
-import { Container } from '@/components/Container/Container'
-import { menu } from '@/constants/menu'
 import Link from 'next/link'
 import { Fragment } from 'react'
+
+import { Container } from '@/components/Container/Container'
+import { menu } from '@/constants/menu'
 
 export default function Browse() {
   return (

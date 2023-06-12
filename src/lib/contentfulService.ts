@@ -1,9 +1,10 @@
+import type { ContentfulClientApi } from 'contentful'
+import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
+
 import { Filters, OrderType } from '@/@types/filters'
 import { TypeHomepageSkeleton, TypeServiceProviderSkeleton } from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds, TagNames } from '@/constants'
-import type { ContentfulClientApi } from 'contentful'
-import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
 
 export class ContentfulService {
   constructor(

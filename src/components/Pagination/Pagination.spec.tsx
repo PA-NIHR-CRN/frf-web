@@ -1,4 +1,5 @@
 import { render, screen, within } from '@/config/test-utils'
+
 import Pagination from './Pagination'
 
 test('No results', () => {

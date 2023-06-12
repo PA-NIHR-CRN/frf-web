@@ -1,9 +1,10 @@
+import clsx from 'clsx'
+import { ReactNode, useState } from 'react'
+
 import { Button } from '@/components/Button/Button'
 import { Card } from '@/components/Card/Card'
 import CollapseIcon from '@/components/Icons/CollapseIcon'
 import FindIcon from '@/components/Icons/FindIcon'
-import clsx from 'clsx'
-import { ReactNode, useState } from 'react'
 
 const FilterCategory = ({ title, children }: { title: string; children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false)

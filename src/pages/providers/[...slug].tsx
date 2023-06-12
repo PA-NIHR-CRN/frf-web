@@ -1,7 +1,8 @@
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { ReactElement } from 'react'
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { ServiceProviderLayout } from '@/components/Layout/ServiceProviderLayout'
+
 import { Container } from '@/components/Container/Container'
+import { ServiceProviderLayout } from '@/components/Layout/ServiceProviderLayout'
 
 export type ServiceProviderProps = InferGetServerSidePropsType<typeof getServerSideProps>
 

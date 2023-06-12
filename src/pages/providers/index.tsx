@@ -1,3 +1,8 @@
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import Link from 'next/link'
+import { NextSeo } from 'next-seo'
+
 import { Filters as FiltersType } from '@/@types/filters'
 import { Card } from '@/components/Card/Card'
 import { Container } from '@/components/Container/Container'
@@ -9,10 +14,6 @@ import Users from '@/components/Icons/Users'
 import Pagination from '@/components/Pagination/Pagination'
 import { PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
-import Head from 'next/head'
-import Link from 'next/link'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -22,11 +23,7 @@ export default function ServiceProviders({
 }: ServiceProvidersProps) {
   return (
     <>
-      <Head>
-        <title>
-          Search results (page {initialPage + 1} of {Math.ceil(totalItems / initialPageSize)})
-        </title>
-      </Head>
+      <NextSeo title={`Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`} />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">

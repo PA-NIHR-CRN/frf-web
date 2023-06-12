@@ -1,8 +1,8 @@
 import { GetServerSidePropsContext } from 'next'
-import { render, screen, within } from '@/config/test-utils'
-import ServiceProviders, { ServiceProvidersProps, getServerSideProps } from '@/pages/providers'
-import { defaultMock, pageTwoMock } from '@/mocks/serviceProviders'
 
+import { render, screen, within } from '@/config/test-utils'
+import { defaultMock, pageTwoMock } from '@/mocks/serviceProviders'
+import ServiceProviders, { getServerSideProps, ServiceProvidersProps } from '@/pages/providers'
 import { setupMockServer } from '@/utils'
 
 jest.mock('next/router', () => require('next-router-mock'))
