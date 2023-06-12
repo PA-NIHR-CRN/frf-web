@@ -15,9 +15,8 @@ on:
         options: ["dev", "test"]
         required: true
         default: "test"
-
 jobs:
-  test:
+  e2e-test:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +28,6 @@ jobs:
       run: npm ci
     - name: Install Playwright
       run: npx playwright install --with-deps
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1-node16
       with:
@@ -37,21 +35,17 @@ jobs:
         aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
         aws-region: eu-west-2
         role-session-name: GitHubActions
-    
     - name: Get Github Actions Runner Public IP
       id: ip
       uses: haythem/public-ip@v1.3
-      
     - name: Add Github Actions IP to LB security group (Dev)
       if: github.event.inputs.env-context == 'dev'
       run: |
           aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_DEV }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
-
     - name: Add Github Actions IP to LB security group (Test)
       if: github.event.inputs.env-context == 'test'
       run: |
           aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
-
     - name: Run FRF E2E Tests in DEV
       if: github.event.inputs.env-context == 'dev'
       run: npx playwright test
@@ -62,17 +56,14 @@ jobs:
       run: npx playwright test
       env:
         ENV_CONTEXT: "TEST"
-
     - name: Remove Github Actions IP from LB security group (Dev)
       if: github.event.inputs.env-context == 'dev'
       run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_DEV }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
-
     - name: Remove Github Actions IP from LB security group (Test)
       if: github.event.inputs.env-context == 'test'
       run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
-
     - name: Upload HTML Report as artifact
       uses: actions/upload-artifact@v3
       if: always()
@@ -80,3 +71,37 @@ jobs:
         name: test-report
         path: qa/test-report/
         retention-days: 3
+
+  send-slack-message-failure:
+    name: Send slack message failure
+    needs: [e2e-test]
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v3
+      - name: Slack Notify
+        if: github.ref == 'refs/heads/main'
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_COLOR: "failure"
+          SLACK_MESSAGE: "UI automation test run failing in TEST environment! please fix failing tests ASAP!"
+          SLACK_TITLE: "CPMS End-to-End UI Tests - ENV:TEST : FAILURE!"
+
+  send-slack-message-success:
+    name: Send slack message success
+    needs: [e2e-test-chrome]
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v3
+      - name: Slack Notify
+        if: github.ref == 'refs/heads/main'
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_COLOR: "success"
+          SLACK_MESSAGE: "UI automation test run passed"
+          SLACK_TITLE: "CPMS End-to-End UI Tests - ENV:TEST : SUCCESS"
+
+          # Get webhook for slack from Joe Ellis & ask Yousef to set up GH Page

@@ -1,4 +1,4 @@
-import { PlaywrightTestConfig, LaunchOptions } from '@playwright/test'
+import { PlaywrightTestConfig } from '@playwright/test'
 
 const config: PlaywrightTestConfig = {
   testDir: './qa/tests/features',
@@ -26,6 +26,19 @@ const config: PlaywrightTestConfig = {
         },
       },
     },
+    // {
+    //   name: 'FindRecruitFollow Mobile',
+    //   use: {
+    //     ...devices['iPhone 13'],
+    //     trace: 'on',
+    //     baseURL: `https://test.findrecruitandfollowup.nihr.ac.uk/`,
+    //     headless: false,
+    //     screenshot: 'on',
+    //     launchOptions: {
+    //       slowMo: 0,
+    //     },
+    //   },
+    // },
   ],
 }
 
