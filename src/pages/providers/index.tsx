@@ -101,7 +101,7 @@ export default function ServiceProviders({
                                   >
                                     RECRUIT
                                   </th>
-                                  <td className="govuk-table__cell pl-4">Free of charge (all studies)</td>{' '}
+                                  <td className="govuk-table__cell pl-4">Free of charge (all studies)</td>
                                 </tr>
                                 <tr className="govuk-table__row">
                                   <th
@@ -110,7 +110,7 @@ export default function ServiceProviders({
                                   >
                                     FOLLOW-UP
                                   </th>
-                                  <td className="govuk-table__cell pl-4">Free of charge (all studies)</td>{' '}
+                                  <td className="govuk-table__cell pl-4">Free of charge (all studies)</td>
                                 </tr>
                               </tbody>
                             </table>
