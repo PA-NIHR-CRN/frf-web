@@ -12,8 +12,9 @@ import MapPin from '@/components/Icons/MapPin'
 import Tick from '@/components/Icons/Tick'
 import Users from '@/components/Icons/Users'
 import Pagination from '@/components/Pagination/Pagination'
-import { PER_PAGE } from '@/constants'
+import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
+import { numDaysBetween } from '@/utils/numDaysBetween'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -53,18 +54,20 @@ export default function ServiceProviders({
 
             {/* Cards */}
             <div className="mt-9">
-              {items.map((item) => {
+              {items.map(({ sys: { createdAt }, fields }) => {
+                const isNew = numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT
+
                 return (
-                  <Card key={item.slug} className="govuk-body mb-8">
+                  <Card key={fields.slug} className="govuk-body mb-8">
                     <div className="flex justify-between border-b border-grey-80 p-4">
                       <div>
                         <h3 className="govuk-heading-m mb-2">
-                          <Link href={`/providers/${item.slug}`} className="text-black">
-                            {item.name}
+                          <Link href={`/providers/${fields.slug}`} className="text-black">
+                            {fields.name}
                           </Link>
-                          <strong className="govuk-tag govuk-tag--red ml-3 border-0">NEW</strong>
+                          {isNew && <strong className="govuk-tag govuk-tag--red ml-3 border-0">NEW</strong>}
                         </h3>
-                        <p className="mb-0 text-darkGrey">{item.providerOrganisation}</p>
+                        <p className="mb-0 text-darkGrey">{fields.providerOrganisation}</p>
                       </div>
                       <div>
                         <button>
@@ -76,7 +79,7 @@ export default function ServiceProviders({
                     <div className="p-4">
                       <div className="govuk-grid-row">
                         <div className="govuk-grid-column-three-quarters pr-5">
-                          <div dangerouslySetInnerHTML={{ __html: documentToHtmlString(item.shortDescription) }} />
+                          <div dangerouslySetInnerHTML={{ __html: documentToHtmlString(fields.shortDescription) }} />
 
                           {/* Service costs */}
                           <div className="mb-5 mt-6">
@@ -182,7 +185,7 @@ export default function ServiceProviders({
                         <span>06/10/2021</span>
                       </div>
                       <div>
-                        <Link href={`/providers/${item.slug}`} className="govuk-button mb-0">
+                        <Link href={`/providers/${fields.slug}`} className="govuk-button mb-0">
                           View more details
                         </Link>
                       </div>
@@ -200,10 +203,8 @@ export default function ServiceProviders({
   )
 }
 
-type Entry = Awaited<ReturnType<typeof contentfulService.getProvidersByFilter>>['items'][number]
-
 export const getServerSideProps: GetServerSideProps<{
-  items: Array<Entry['fields']>
+  items: Awaited<ReturnType<typeof contentfulService.getProvidersByFilter>>['items']
   meta: {
     initialPage: number
     initialPageSize: number
@@ -231,9 +232,7 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      items: entry.items.map((item) => ({
-        ...item.fields,
-      })),
+      items: entry.items,
       meta: {
         initialPage: entry.skip / entry.limit,
         initialPageSize: PER_PAGE,
