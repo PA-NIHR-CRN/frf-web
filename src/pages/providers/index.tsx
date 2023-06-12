@@ -1,5 +1,5 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 
@@ -22,6 +22,7 @@ export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServer
 export default function ServiceProviders({
   items,
   meta: { totalItems, initialPage, initialPageSize },
+  filterOptions,
 }: ServiceProvidersProps) {
   return (
     <>
@@ -30,7 +31,7 @@ export default function ServiceProviders({
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">
             {/* Filter panel */}
-            <Filters />
+            <Filters options={filterOptions} />
           </div>
 
           <div className="govuk-grid-column-two-thirds">
@@ -205,14 +206,7 @@ export default function ServiceProviders({
   )
 }
 
-export const getServerSideProps: GetServerSideProps<{
-  items: Awaited<ReturnType<typeof contentfulService.getProvidersByFilter>>['items']
-  meta: {
-    initialPage: number
-    initialPageSize: number
-    totalItems: number
-  }
-}> = async (context) => {
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const filters: FiltersType = {
     page: Number(context.query.page) || 1,
   }
@@ -232,9 +226,12 @@ export const getServerSideProps: GetServerSideProps<{
   //   costs: [].concat(context.query.costs || null).filter(Boolean),
   // }
 
+  const filterOptions = await contentfulService.getProviderFilterOptionValues()
+
   return {
     props: {
       items: entry.items,
+      filterOptions,
       meta: {
         initialPage: entry.skip / entry.limit,
         initialPageSize: PER_PAGE,

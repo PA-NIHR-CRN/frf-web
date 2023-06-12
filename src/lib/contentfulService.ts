@@ -6,6 +6,8 @@ import { TypeHomepageSkeleton, TypeServiceProviderSkeleton } from '@/@types/gene
 import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds, TagNames } from '@/constants'
 
+export type FilterOptions = Awaited<ReturnType<ContentfulService['getProviderFilterOptionValues']>>
+
 export class ContentfulService {
   constructor(
     private config: {
@@ -65,8 +67,8 @@ export class ContentfulService {
 
     return {
       dataType: ContentfulService.filterTagsByName(tags.items, TagNames.DATA_TYPE),
-      geography: geographyField?.items?.validations?.[0].in,
-      costs: costsField?.items?.validations?.[0].in,
+      geography: (geographyField?.items?.validations?.[0].in ?? []) as string[],
+      costs: (costsField?.items?.validations?.[0].in ?? []) as string[],
     }
   }
 

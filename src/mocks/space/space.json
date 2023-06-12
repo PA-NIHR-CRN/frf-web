@@ -1,0 +1,31 @@
+{
+  "name": "FRF",
+  "sys": {
+    "type": "Space",
+    "id": "TEST_SPACE_ID",
+    "version": 5,
+    "createdBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "0xwhaRB7gAhqTBbfaPSgzW"
+      }
+    },
+    "createdAt": "2023-05-30T11:04:07Z",
+    "updatedBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "0xwhaRB7gAhqTBbfaPSgzW"
+      }
+    },
+    "updatedAt": "2023-06-08T07:55:08Z",
+    "organization": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Organization",
+        "id": "2rBBVb5mq7kuznjerEigNi"
+      }
+    }
+  }
+}

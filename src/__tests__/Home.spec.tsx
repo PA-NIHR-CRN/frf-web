@@ -1,5 +1,5 @@
 import { render, screen } from '@/config/test-utils'
-import homepage from '@/mocks/homepage.json'
+import { errorMock, successMock } from '@/mocks/homepage'
 import Home, { getStaticProps } from '@/pages'
 import { setupMockServer } from '@/utils'
 
@@ -10,13 +10,13 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('Displays the Home page', async () => {
-  mockContentfulResponse(homepage.success)
+  mockContentfulResponse(successMock)
 
   const { props } = await getStaticProps()
 
   render(<Home {...props} />)
 
-  const mockData = homepage.success.items[0].fields
+  const mockData = successMock.items[0].fields
 
   // Title + Description
   expect(screen.getByRole('heading', { name: mockData.title, level: 2 }))
@@ -62,7 +62,7 @@ test('Displays the Home page', async () => {
 })
 
 test('Sets the static cache revalidation period', async () => {
-  mockContentfulResponse(homepage.success)
+  mockContentfulResponse(successMock)
   const { revalidate } = await getStaticProps()
   expect(revalidate).toBe(60)
 })
@@ -73,6 +73,6 @@ test('Handles no data returned', async () => {
 })
 
 test('Handles errors when fetching data', async () => {
-  mockContentfulResponse(homepage.error, 400)
+  mockContentfulResponse(errorMock, 400)
   await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content')
 })

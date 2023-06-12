@@ -1,29 +1,45 @@
 import clsx from 'clsx'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useId } from 'react'
 
 import { Button } from '@/components/Button/Button'
 import { Card } from '@/components/Card/Card'
+import { Checkbox } from '@/components/Checkbox/Checkbox'
 import CollapseIcon from '@/components/Icons/CollapseIcon'
 import FindIcon from '@/components/Icons/FindIcon'
+import { ServiceType } from '@/constants'
+import { FilterOptions } from '@/lib/contentfulService'
 
 const FilterCategory = ({ title, children }: { title: string; children: ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const id = useId()
   return (
-    <fieldset className="govuk-fieldset pb-3 pt-0 first-of-type:mt-5">
-      <legend className="govuk-fieldset__legend mb-0 flex w-full justify-between border-t border-grey-120 pt-3">
-        <h1 className="govuk-fieldset__heading">{title}</h1>
-        <button className={clsx('text-lg', { 'rotate-180': isOpen })} onClick={() => setIsOpen(!isOpen)} type="button">
-          <CollapseIcon />
-        </button>
-      </legend>
-      <div className={clsx('overflow-hidden pt-3', { 'sr-only': !isOpen })}>{children}</div>
+    <fieldset
+      className="govuk-fieldset govuk-checkboxes--small pt-0 first-of-type:mt-5"
+      aria-labelledby={`${id}-title`}
+    >
+      <details open className="group/details border-t border-grey-120 open:pb-3">
+        <summary className="group/summary flex cursor-pointer py-2 outline-none">
+          <div className="group-focus/summary:focusable-text flex w-full items-start justify-between py-1">
+            <span className="govuk-body m-0" id={`${id}-title`}>
+              {title}
+            </span>
+            <span className={clsx('text-lg', 'group-open/details:rotate-180')}>
+              <CollapseIcon />
+            </span>
+          </div>
+        </summary>
+        {children}
+      </details>
     </fieldset>
   )
 }
 
-export function Filters() {
+export type FiltersProps = {
+  options: FilterOptions
+}
+
+export function Filters({ options }: FiltersProps) {
   return (
-    <Card className="h-screen">
+    <Card>
       <div className="flex items-center bg-[var(--panel-bg-color)] p-3 pl-4">
         <h2 className="govuk-heading-m m-0 font-normal text-white">Filter by</h2>
       </div>
@@ -35,13 +51,16 @@ export function Filters() {
           </label>
           <div className="relative">
             <input
-              className="govuk-input h-auto rounded-3xl border-2 border-navy-100 p-2 pl-4"
+              className="govuk-input h-auto rounded-3xl border-2 border-navy-100 p-2 pl-4 pr-9"
               id="event-name"
               name="event-name"
               type="text"
               aria-describedby="keyword-hint"
             />
-            <button className="absolute right-4 top-[12px] text-lg" aria-label="Search">
+            <button
+              className="focus:focusable absolute right-3 top-[8px] p-[4px] text-lg outline-0"
+              aria-label="Search"
+            >
               <FindIcon />
             </button>
           </div>
@@ -52,27 +71,84 @@ export function Filters() {
 
         {/* Type of service */}
         <FilterCategory title="Type of service">
-          <p className="mb-0 text-sm text-navy-100">Checkboxes</p>
+          {Object.keys(ServiceType).map((item, i) => (
+            <Checkbox key={i} name="serviceType" value={ServiceType[item]} small>
+              {ServiceType[item]}
+            </Checkbox>
+          ))}
         </FilterCategory>
 
         {/* Source of data */}
         <FilterCategory title="Source of data">
-          <p className="mb-0 text-sm text-navy-100">Checkboxes</p>
+          {options.dataType.map((item, i) => (
+            <Checkbox key={i} name="dataType" value={item} small>
+              {item}
+            </Checkbox>
+          ))}
         </FilterCategory>
 
         {/* Geographical coverage */}
         <FilterCategory title="Geographical coverage">
-          <p className="mb-0 text-sm text-navy-100">Checkboxes</p>
+          {options.geography.map((item, i) => (
+            <Checkbox key={i} name="geography" value={item} small>
+              {item}
+            </Checkbox>
+          ))}
+          {/* Exclude Regionl */}
+          <hr className="my-2 border-dotted border-grey-120" />
+          <Checkbox name="excludeRegional" value="true" small>
+            Exclude regional only services
+          </Checkbox>
         </FilterCategory>
 
         {/* Costs */}
         <FilterCategory title="Costs">
-          <p className="mb-0 text-sm text-navy-100">Checkboxes</p>
+          {/* Costs: Find */}
+          <fieldset>
+            <legend className="govuk-fieldset__legend bg-[var(--colour-find-background)] px-7 py-1 uppercase tracking-wide text-navy-100">
+              {ServiceType.FIND}
+            </legend>
+            {options.costs
+              .filter((item) => item.includes(ServiceType.FIND + ':'))
+              .map((item, i) => (
+                <Checkbox key={i} name="costs" value={item} small>
+                  {item.substring(item.indexOf(':') + 1)}
+                </Checkbox>
+              ))}
+          </fieldset>
+          {/* Costs: Recruit */}
+          <fieldset className="mt-2">
+            <legend className="govuk-fieldset__legend bg-[var(--colour-recruit-background)] px-7 py-1 uppercase tracking-wide text-navy-100">
+              {ServiceType.RECRUIT}
+            </legend>
+            {options.costs
+              .filter((item) => item.includes(ServiceType.RECRUIT + ':'))
+              .map((item, i) => (
+                <Checkbox key={i} name="costs" value={item} small>
+                  {item.substring(item.indexOf(':') + 1)}
+                </Checkbox>
+              ))}
+          </fieldset>
+          {/* Costs: Follow-up */}
+          <fieldset className="mt-2">
+            <legend className="govuk-fieldset__legend bg-[var(--colour-follow-up-background)] px-7 py-1 uppercase tracking-wide text-navy-100">
+              {ServiceType.FOLLOW_UP}
+            </legend>
+            {options.costs
+              .filter((item) => item.includes(ServiceType.FOLLOW_UP + ':'))
+              .map((item, i) => (
+                <Checkbox key={i} name="costs" value={item} small>
+                  {item.substring(item.indexOf(':') + 1)}
+                </Checkbox>
+              ))}
+          </fieldset>
         </FilterCategory>
 
         {/* Clear all */}
-        <div className="mt-5 text-center">
-          <Button secondary>Clear all filters</Button>
+        <div className="border-t border-grey-120 text-center">
+          <Button secondary className="w-full">
+            Clear all filters
+          </Button>
         </div>
       </form>
     </Card>

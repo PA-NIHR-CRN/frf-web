@@ -35,6 +35,17 @@ $govuk-page-width: 1062px;
 
 @import '~node_modules/govuk-frontend/govuk/all.scss';
 
+@layer utilities {
+  .focusable {
+    outline: $govuk-focus-width solid $govuk-focus-colour;
+    outline-offset: 0;
+    box-shadow: inset 0 0 0 2px;
+  }
+  .focusable-text {
+    @include govuk-focused-text;
+  }
+}
+
 body {
   margin: 0;
 }
