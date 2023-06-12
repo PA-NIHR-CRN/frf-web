@@ -121,5 +121,3 @@ jobs:
   #         SLACK_COLOR: "success"
   #         SLACK_MESSAGE: "UI automation test run passed"
   #         SLACK_TITLE: "CPMS End-to-End UI Tests - ENV:TEST : SUCCESS"
-
-          # Get webhook for slack from Joe Ellis & ask Yousef to set up GH Page
