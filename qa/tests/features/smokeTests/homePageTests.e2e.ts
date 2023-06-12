@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Home Page- As a Researcher I want to view introductory info About the FRF service, Services Available & Access to a DSP - @frf_4', () => {
+test.describe('Home Page Smoke Tests - @frf_4', () => {
   test('As a user I will see an Introduction Section with Video on the Homepage- @frf_4_ac1_0', async ({
     homePage,
   }) => {
@@ -28,7 +28,7 @@ test.describe('Home Page- As a Researcher I want to view introductory info About
     await test.step('Given I have navigated to the HomePage', async () => {
       await homePage.goto()
     })
-    await test.step('Then I will see Introductory DSP Text', async () => {
+    await test.step('When I will see Introductory DSP Text', async () => {
       await homePage.assertOnHomePage()
       await homePage.assertDspIntroTextDisplayed()
     })
@@ -77,9 +77,30 @@ test.describe('Home Page- As a Researcher I want to view introductory info About
       await homePage.assertBecomeDspButtonVisible()
     })
   })
-})
 
-// FRF-4 manually done all good, AC1 automated AC2 & 3 to follow
-// FRF-5 to be tested in morning, automated in afternoon
-// Move onto pipeline stuff noted in yml file
-// Axe extension for PW
+  test('As a user I will Always have a Link Available to Navigate back to the Home Page - @frf_4_ac3', async ({
+    homePage,
+    providersPage,
+    commonItemsPage,
+    privacyPage,
+  }) => {
+    await test.step('Given I have navigated to the Providers Page', async () => {
+      await providersPage.goto()
+    })
+    await test.step('When I click the NIHR logo', async () => {
+      await commonItemsPage.nihrLogo.click()
+    })
+    await test.step('Then I should see the Home Page', async () => {
+      await homePage.assertOnHomePage()
+    })
+    await test.step('Given I have navigated to the Privacy Page', async () => {
+      await privacyPage.goto()
+    })
+    await test.step('When I click the NIHR logo', async () => {
+      await commonItemsPage.nihrLogo.click()
+    })
+    await test.step('Then I should see the Home Page', async () => {
+      await homePage.assertOnHomePage()
+    })
+  })
+})

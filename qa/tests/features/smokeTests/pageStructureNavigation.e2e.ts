@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Initial Site Testing of Basic Contentful Page Structure and Navigation - @frf_1', () => {
+test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', () => {
   test('As a User I Can Navigate to the Home Page', async ({ homePage }) => {
     await test.step('Given I have navigated to the HomePage', async () => {
       await homePage.goto()

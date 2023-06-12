@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
   globalSetup: './qa/hooks/GlobalSetup.ts',
   timeout: 30000,
   // workers: 6, // to enforce parallel workers in Actions Workflow
-  retries: 0,
+  retries: 2,
   projects: [
     {
       name: 'FindRecruitFollow',
@@ -26,19 +26,6 @@ const config: PlaywrightTestConfig = {
         },
       },
     },
-    // {
-    //   name: 'FindRecruitFollow Mobile',
-    //   use: {
-    //     ...devices['iPhone 13'],
-    //     trace: 'on',
-    //     baseURL: `https://test.findrecruitandfollowup.nihr.ac.uk/`,
-    //     headless: false,
-    //     screenshot: 'on',
-    //     launchOptions: {
-    //       slowMo: 0,
-    //     },
-    //   },
-    // },
   ],
 }
 
