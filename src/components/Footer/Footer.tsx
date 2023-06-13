@@ -25,7 +25,9 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className={clsx('bg-white')} data-testid="frf-footer-logos">
+
+      {/* Footer logos temporarily commented out - these may return once we have confirmation from client */}
+      {/* <div className={clsx('bg-white')} data-testid="frf-footer-logos">
         <div className="govuk-width-container">
           <div className="m-auto flex max-w-[320px] flex-wrap items-center justify-center gap-8 py-7 sm:max-w-none md:flex-nowrap lg:justify-between">
             <a href="#" target="_blank" className="max-w-[240px] lg:w-auto">
@@ -66,7 +68,7 @@ export function Footer() {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
     </footer>
   )
 }

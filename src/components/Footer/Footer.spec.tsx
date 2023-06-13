@@ -10,7 +10,8 @@ test('Displays the links & copyright bar', () => {
   expect(screen.getByText('© NIHR 2022'))
 })
 
-test.each([
+// TODO Footer logos may return once confirmed from client
+test.skip.each([
   ['National Institute for Health and Care Research', '#', { w: 240, h: 24 }],
   ['HSC Public Health Agency', '#', { w: 253, h: 97 }],
   ['NHS Scotland', '#', { w: 153, h: 130 }],
