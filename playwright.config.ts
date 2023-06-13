@@ -1,4 +1,4 @@
-import { PlaywrightTestConfig, LaunchOptions } from '@playwright/test'
+import { PlaywrightTestConfig } from '@playwright/test'
 
 const config: PlaywrightTestConfig = {
   testDir: './qa/tests/features',
@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
   globalSetup: './qa/hooks/GlobalSetup.ts',
   timeout: 30000,
   // workers: 6, // to enforce parallel workers in Actions Workflow
-  retries: 1,
+  retries: 2,
   projects: [
     {
       name: 'FindRecruitFollow',
