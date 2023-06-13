@@ -1,4 +1,5 @@
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
@@ -14,8 +15,9 @@ import Tick from '@/components/Icons/Tick'
 import Users from '@/components/Icons/Users'
 import { List, ListItem } from '@/components/List/List'
 import Pagination from '@/components/Pagination/Pagination'
+import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
 import { Tag } from '@/components/Tag/Tag'
-import { NEW_LIMIT, PAGE_TITLE, PER_PAGE } from '@/constants'
+import { DATE_FORMAT, NEW_LIMIT, PAGE_TITLE, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { numDaysBetween } from '@/utils/numDaysBetween'
 
@@ -26,7 +28,6 @@ export default function ServiceProviders({
   meta: { totalItems, initialPage, initialPageSize },
   filterOptions,
 }: ServiceProvidersProps) {
-  console.log('fields', items)
   return (
     <>
       <NextSeo
@@ -61,7 +62,8 @@ export default function ServiceProviders({
 
             {/* Cards */}
             <div className="mt-9">
-              {items.map(({ sys: { createdAt }, fields }) => {
+              {items.map(({ sys: { createdAt, updatedAt }, fields }) => {
+                console.log('FIELDS', fields)
                 const isNew = numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT
 
                 return (
@@ -129,33 +131,53 @@ export default function ServiceProviders({
 
                           {/* Geography */}
                           <List heading="Coverage:" className="mb-6">
-                            <ListItem icon={<MapPin />}>Geographical: England</ListItem>
-                            <ListItem icon={<Users />}>Population: 35,000,000</ListItem>
+                            <ListItem icon={<MapPin />}>
+                              Geographical: {fields?.regionalCoverage || fields.geography.join(', ')}
+                            </ListItem>
+                            {fields.population && (
+                              <ListItem icon={<Users />}>
+                                Population: {fields.population.toLocaleString('en-GB')}
+                              </ListItem>
+                            )}
                           </List>
 
                           {/* Suited to */}
-                          <List heading="Suited to:">
-                            <ListItem icon={<Tick />}>Drug development trials</ListItem>
-                            <ListItem icon={<Tick />}>Certain rare disease, indications or cancers</ListItem>
-                            <ListItem icon={<Tick />}>Inherited diseases</ListItem>
-                            <ListItem icon={<Cross />}>Large patient cohorts</ListItem>
-                          </List>
+                          {fields.suitedTo && (
+                            <List heading="Suited to:" aria-label="Suited to">
+                              {fields.suitedTo.map((field) => (
+                                <ListItem key={field} icon={<Tick />}>
+                                  {field}
+                                </ListItem>
+                              ))}
+                            </List>
+                          )}
+                          {fields.notSuitedTo && (
+                            <List aria-label="Not suited to" className="mt-2">
+                              {fields.notSuitedTo.map((field) => (
+                                <ListItem key={field} icon={<Cross />}>
+                                  {field}
+                                </ListItem>
+                              ))}
+                            </List>
+                          )}
                         </div>
 
                         {/* Side info */}
                         <aside className="govuk-grid-column-one-quarter p-0">
-                          <List heading="Type of data available" className="mb-6 px-3">
-                            <ListItem className="text-sm">Hospital in-patient and out-patient episodes</ListItem>
-                            <ListItem className="text-sm">Certain rare disease, indications or cancers</ListItem>
-                            <ListItem className="text-sm">Primary care</ListItem>
-                            <ListItem className="text-sm">Other</ListItem>
-                          </List>
-
-                          <List heading="Source of data" className="px-3">
-                            <ListItem className="text-sm">Primary care</ListItem>
-                            <ListItem className="text-sm">Secondary care</ListItem>
-                            <ListItem className="text-sm">Participant reported</ListItem>
-                          </List>
+                          {fields.dataSpecificsAndCoding &&
+                            fields.dataSpecificsAndCoding.map((item) => {
+                              if (!item?.fields.heading || !item?.fields.text) return null
+                              const { heading, text } = item.fields
+                              return (
+                                <>
+                                  <h3 className="govuk-heading-s mb-3">{heading}</h3>
+                                  <RichTextRenderer
+                                    document={text}
+                                    className="[&>ul>li>p]:mb-0 [&>ul>li>p]:text-sm [&>ul]:px-3"
+                                  />
+                                </>
+                              )
+                            })}
                         </aside>
                       </div>
                     </div>
@@ -163,10 +185,10 @@ export default function ServiceProviders({
                     {/* Card footer */}
                     <div className="items-center justify-between border-t border-grey-80 p-4 md:flex">
                       <div className="govuk-body-s mb-0">
-                        <strong>First published: </strong>
-                        <span className="mr-2">06/10/2021</span>
-                        <strong>Last updated: </strong>
-                        <span>06/10/2021</span>
+                        <strong>First published:</strong>
+                        <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
+                        <strong>Last updated:</strong>
+                        <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
                       </div>
                       <div>
                         <Link href={`/providers/${fields.slug}`} className="govuk-button mb-0">

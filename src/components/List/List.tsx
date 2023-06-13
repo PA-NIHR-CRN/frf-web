@@ -23,7 +23,7 @@ export function List<Element extends ElementType = 'ul'>({
   return (
     <>
       {heading && <p className="mb-3 font-bold">{heading}</p>}
-      <Component aria-label={heading} className={clsx('list-disc', className)} {...props}>
+      <Component className={clsx('list-disc', className)} {...props}>
         {children}
       </Component>
     </>

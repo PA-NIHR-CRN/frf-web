@@ -4,7 +4,7 @@ import { List, ListItem } from './List'
 
 test('Unordered list', () => {
   render(
-    <List heading="mock-list" className="custom-class">
+    <List aria-label="mock-list" heading="mock-list" className="custom-class">
       <ListItem>Test item 1</ListItem>
       <ListItem>Test item 2</ListItem>
     </List>
@@ -22,7 +22,7 @@ test('Unordered list', () => {
 
 test('Ordered list', () => {
   render(
-    <List as="ol" heading="mock-list">
+    <List as="ol" aria-label="mock-list">
       <ListItem>Test item 1</ListItem>
       <ListItem>Test item 2</ListItem>
     </List>
