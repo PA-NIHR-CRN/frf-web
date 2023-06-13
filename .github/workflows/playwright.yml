@@ -112,10 +112,10 @@ jobs:
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
       - name: "Set Env Message to DEV"
-        if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
+        if: github.event.inputs.env-context == 'dev'
         run: echo ENV_MSG=DEV
       - name: Test
-        run: echo $ENV_MSG
+        run: echo "FRF E2E UI Tests - ENV:$ENV_MSG - SUCCESS"
       - name: Slack Notify
         if: github.ref == 'refs/heads/main'
         uses: rtCamp/action-slack-notify@v2.2.0
