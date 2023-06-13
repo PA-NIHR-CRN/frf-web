@@ -13,7 +13,7 @@ import Tick from '@/components/Icons/Tick'
 import Users from '@/components/Icons/Users'
 import Pagination from '@/components/Pagination/Pagination'
 import { Tag } from '@/components/Tag/Tag'
-import { NEW_LIMIT, PER_PAGE } from '@/constants'
+import { NEW_LIMIT, PAGE_TITLE, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { numDaysBetween } from '@/utils/numDaysBetween'
 
@@ -26,7 +26,9 @@ export default function ServiceProviders({
 }: ServiceProvidersProps) {
   return (
     <>
-      <NextSeo title={`Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`} />
+      <NextSeo
+        title={`${PAGE_TITLE} – Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`}
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">
