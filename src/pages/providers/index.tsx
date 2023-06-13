@@ -8,9 +8,11 @@ import { Card } from '@/components/Card/Card'
 import { Container } from '@/components/Container/Container'
 import { Filters } from '@/components/Filters/Filters'
 import Bookmark from '@/components/Icons/Bookmark'
+import Cross from '@/components/Icons/Cross'
 import MapPin from '@/components/Icons/MapPin'
 import Tick from '@/components/Icons/Tick'
 import Users from '@/components/Icons/Users'
+import { List, ListItem } from '@/components/List/List'
 import Pagination from '@/components/Pagination/Pagination'
 import { Tag } from '@/components/Tag/Tag'
 import { NEW_LIMIT, PAGE_TITLE, PER_PAGE } from '@/constants'
@@ -24,6 +26,7 @@ export default function ServiceProviders({
   meta: { totalItems, initialPage, initialPageSize },
   filterOptions,
 }: ServiceProvidersProps) {
+  console.log('fields', items)
   return (
     <>
       <NextSeo
@@ -125,58 +128,34 @@ export default function ServiceProviders({
                           </div>
 
                           {/* Geography */}
-                          <div className="mb-6">
-                            <p className="mb-2 font-bold">Coverage:</p>
-                            <ul>
-                              <li className="mb-2 flex gap-2">
-                                <MapPin />
-                                <span>Geographical: England</span>
-                              </li>
-                              <li className="mb-2 flex gap-2">
-                                <Users />
-                                <span>Population: 35,000,000</span>
-                              </li>
-                            </ul>
-                          </div>
+                          <List heading="Coverage:" className="mb-6">
+                            <ListItem icon={<MapPin />}>Geographical: England</ListItem>
+                            <ListItem icon={<Users />}>Population: 35,000,000</ListItem>
+                          </List>
 
                           {/* Suited to */}
-                          <div className="mb-3">
-                            <p className="mb-2 font-bold">Suited to:</p>
-                            <ul>
-                              <li className="mb-1 flex gap-2">
-                                <Tick />
-                                <span>Drug development trials</span>
-                              </li>
-                              <li className="mb-1 flex gap-2">
-                                <Tick />
-                                <span>Certain rare disease, indications or cancers</span>
-                              </li>
-                              <li className="mb-1 flex gap-2">
-                                <Tick />
-                                <span>Inherited diseases</span>
-                              </li>
-                              <li className="mb-1 flex gap-2">
-                                <Tick />
-                                <span>Large patient cohorts</span>
-                              </li>
-                            </ul>
-                          </div>
+                          <List heading="Suited to:">
+                            <ListItem icon={<Tick />}>Drug development trials</ListItem>
+                            <ListItem icon={<Tick />}>Certain rare disease, indications or cancers</ListItem>
+                            <ListItem icon={<Tick />}>Inherited diseases</ListItem>
+                            <ListItem icon={<Cross />}>Large patient cohorts</ListItem>
+                          </List>
                         </div>
 
                         {/* Side info */}
                         <aside className="govuk-grid-column-one-quarter p-0">
-                          <h3 className="font-bold">Type of data available</h3>
-                          <ul className="govuk-list govuk-list--bullet govuk-body-s mb-2 p-3">
-                            <li className="mb-3">Hospital in-patient and out-patient episodes</li>
-                            <li className="mb-3">Primary care</li>
-                            <li className="mb-3">Other</li>
-                          </ul>
-                          <h3 className="font-bold">Source of data</h3>
-                          <ul className="govuk-list govuk-list--bullet govuk-body-s p-3">
-                            <li className="mb-3">Primary care</li>
-                            <li className="mb-3">Secondary care</li>
-                            <li className="mb-3">Participant reported</li>
-                          </ul>
+                          <List heading="Type of data available" className="mb-6 px-3">
+                            <ListItem className="text-sm">Hospital in-patient and out-patient episodes</ListItem>
+                            <ListItem className="text-sm">Certain rare disease, indications or cancers</ListItem>
+                            <ListItem className="text-sm">Primary care</ListItem>
+                            <ListItem className="text-sm">Other</ListItem>
+                          </List>
+
+                          <List heading="Source of data" className="px-3">
+                            <ListItem className="text-sm">Primary care</ListItem>
+                            <ListItem className="text-sm">Secondary care</ListItem>
+                            <ListItem className="text-sm">Participant reported</ListItem>
+                          </List>
                         </aside>
                       </div>
                     </div>
