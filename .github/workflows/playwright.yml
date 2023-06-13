@@ -106,9 +106,16 @@ jobs:
     name: Send slack message success
     needs: [e2e-test]
     runs-on: ubuntu-latest
+    env:
+      ENV_MSG: TEST
     if: success()
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
+      - name: "Set Env Message to DEV"
+        if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
+        run: echo ENV_MSG=DEV
+      - name: Test
+        run: echo $ENV_MSG
       - name: Slack Notify
         if: github.ref == 'refs/heads/main'
         uses: rtCamp/action-slack-notify@v2.2.0
