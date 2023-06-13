@@ -108,7 +108,7 @@ jobs:
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_COLOR: "failure"
           SLACK_MESSAGE: "FRF E2E Regression Tests Failed in ${{ env.ENV_MSG }}! :face_with_thermometer:"
-          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : FAILURE!"
+          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : FAILURE :x:"
 
   send-slack-message-success:
     name: Send slack message success
@@ -132,4 +132,4 @@ jobs:
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_COLOR: "success"
           SLACK_MESSAGE: "FRF E2E Regression Tests Passed in ${{ env.ENV_MSG }}! :partying_face:"
-          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : SUCCESS"
+          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : SUCCESS :tick:"
