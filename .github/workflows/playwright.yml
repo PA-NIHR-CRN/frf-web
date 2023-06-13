@@ -93,14 +93,22 @@ jobs:
     if: failure()
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
+      - name: "Set Env Message to DEV"
+        if: github.event.inputs.env-context == 'dev'
+        run: |
+          echo "ENV_MSG=DEV" >> "$GITHUB_ENV"
+      - name: "Set Env Message to TEST"
+        if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
+        run: |
+          echo "ENV_MSG=TEST" >> "$GITHUB_ENV"
       - name: Slack Notify
         if: github.ref == 'refs/heads/main'
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_COLOR: "failure"
-          SLACK_MESSAGE: "UI automation test run failing in TEST environment! please fix failing tests ASAP!"
-          SLACK_TITLE: "FRF E2E UI Tests - ENV:TEST : FAILURE!"
+          SLACK_MESSAGE: "FRF E2E Regression Tests Failed in ${{ env.ENV_MSG }}!"
+          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : FAILURE!"
 
   send-slack-message-success:
     name: Send slack message success
@@ -117,13 +125,11 @@ jobs:
         if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
         run: |
           echo "ENV_MSG=TEST" >> "$GITHUB_ENV"
-      - name: Test
-        run: echo "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} - SUCCESS"
       - name: Slack Notify
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/tests/feature-frf-5-site-menu'
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
           SLACK_COLOR: "success"
-          SLACK_MESSAGE: "UI automation test run passed"
-          SLACK_TITLE: "FRF E2E UI Tests - ENV:TEST : SUCCESS"
+          SLACK_MESSAGE: "FRF E2E Regression Tests Passed in ${{ env.ENV_MSG }}"
+          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : SUCCESS"
