@@ -86,34 +86,34 @@ jobs:
         folder: ${{steps.download.outputs.download-path}}/qa/test-report/
         branch: gh-pages
 
-  # send-slack-message-failure:
-  #   name: Send slack message failure
-  #   needs: [e2e-test]
-  #   runs-on: ubuntu-latest
-  #   if: failure()
-  #   steps:
-  #     - uses: technote-space/workflow-conclusion-action@v3
-  #     - name: Slack Notify
-  #       if: github.ref == 'refs/heads/main'
-  #       uses: rtCamp/action-slack-notify@v2.2.0
-  #       env:
-  #         SLACK_WEBHOOK: https://hooks.slack.com/services/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
-  #         SLACK_COLOR: "failure"
-  #         SLACK_MESSAGE: "UI automation test run failing in TEST environment! please fix failing tests ASAP!"
-  #         SLACK_TITLE: "CPMS End-to-End UI Tests - ENV:TEST : FAILURE!"
+  send-slack-message-failure:
+    name: Send slack message failure
+    needs: [e2e-test]
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v3
+      - name: Slack Notify
+        if: github.ref == 'refs/heads/main'
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_COLOR: "failure"
+          SLACK_MESSAGE: "UI automation test run failing in TEST environment! please fix failing tests ASAP!"
+          SLACK_TITLE: "FRF E2E UI Tests - ENV:TEST : FAILURE!"
 
-  # send-slack-message-success:
-  #   name: Send slack message success
-  #   needs: [e2e-test-chrome]
-  #   runs-on: ubuntu-latest
-  #   if: success()
-  #   steps:
-  #     - uses: technote-space/workflow-conclusion-action@v3
-  #     - name: Slack Notify
-  #       if: github.ref == 'refs/heads/main'
-  #       uses: rtCamp/action-slack-notify@v2.2.0
-  #       env:
-  #         SLACK_WEBHOOK: https://hooks.slack.com/services/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
-  #         SLACK_COLOR: "success"
-  #         SLACK_MESSAGE: "UI automation test run passed"
-  #         SLACK_TITLE: "CPMS End-to-End UI Tests - ENV:TEST : SUCCESS"
+  send-slack-message-success:
+    name: Send slack message success
+    needs: [e2e-test]
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - uses: technote-space/workflow-conclusion-action@v3
+      - name: Slack Notify
+        if: github.ref == 'refs/heads/main'
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_COLOR: "success"
+          SLACK_MESSAGE: "UI automation test run passed"
+          SLACK_TITLE: "FRF E2E UI Tests - ENV:TEST : SUCCESS"
