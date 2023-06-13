@@ -113,7 +113,7 @@ jobs:
       - uses: technote-space/workflow-conclusion-action@v3
       - name: "Set Env Message to DEV"
         if: github.event.inputs.env-context == 'dev'
-        run: echo ENV_MSG=DEV
+        run: echo "::set-env name=ENV_MSG::DEV"
       - name: Test
         run: echo "FRF E2E UI Tests - ENV:$ENV_MSG - SUCCESS"
       - name: Slack Notify
