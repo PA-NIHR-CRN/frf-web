@@ -108,7 +108,6 @@ jobs:
           SLACK_COLOR: "failure"
           SLACK_MESSAGE: "FRF E2E Regression Tests Failed in ${{ env.ENV_MSG }}! :face_with_thermometer:"
           SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : FAILURE :x:"
-          SITE_URL: https://pa-nihr-crn.github.io/frf-web/
 
   send-slack-message-success:
     name: Send slack message success
@@ -133,4 +132,3 @@ jobs:
           SLACK_COLOR: "success"
           SLACK_MESSAGE: "FRF E2E Regression Tests Passed in ${{ env.ENV_MSG }}! :partying_face:"
           SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : SUCCESS :tick:"
-          SITE_URL: https://pa-nihr-crn.github.io/frf-web/
