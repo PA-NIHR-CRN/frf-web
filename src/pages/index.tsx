@@ -27,11 +27,6 @@ export default function Home({
 }: HomepageProps) {
   return (
     <>
-      <Head>
-        <title>Find, Recruit and Follow-up</title>
-        <meta name="description" content="Find, Recruit and Follow-up service." />
-      </Head>
-
       {/* Title, Description & Video */}
       <Container>
         <section className="flex flex-wrap items-center lg:flex-nowrap lg:gap-4 lg:pt-4">
