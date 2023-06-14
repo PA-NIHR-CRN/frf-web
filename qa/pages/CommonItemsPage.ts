@@ -112,6 +112,7 @@ export default class CommonItemsPage {
 
   async assertSiteMenuIntroTextPresent() {
     await expect(this.txtSiteMenuInto).toBeVisible()
-    await expect(this.txtSiteMenuInto).toContainText('Discover more with the New Find, Recruit and Follow-up website')
+    await expect(this.txtSiteMenuInto).toContainText('THIS SHOULD CAUSE ERROR')
+    // await expect(this.txtSiteMenuInto).toContainText('Discover more with the New Find, Recruit and Follow-up website')
   }
 }
