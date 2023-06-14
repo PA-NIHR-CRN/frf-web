@@ -8,7 +8,6 @@ import { contentfulService } from '@/lib/contentful'
 import { getVideoID } from '@/utils'
 import { getStaticPropsRevalidateValue } from '@/utils/getStaticPropsRevalidateValue'
 import { InferGetStaticPropsType } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
 
 export type HomepageProps = InferGetStaticPropsType<typeof getStaticProps>
@@ -26,11 +25,6 @@ export default function Home({
 }: HomepageProps) {
   return (
     <>
-      <Head>
-        <title>Find, Recruit and Follow-up</title>
-        <meta name="description" content="Find, Recruit and Follow-up service." />
-      </Head>
-
       {/* Title, Description & Video */}
       <Container>
         <section className="flex flex-wrap items-center lg:flex-nowrap lg:gap-4 lg:pt-4">

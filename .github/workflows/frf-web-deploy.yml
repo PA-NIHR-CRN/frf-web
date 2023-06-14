@@ -29,6 +29,7 @@ jobs:
           echo CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} >> .env.local
           echo CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} >> .env.local
           echo CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
+          echo NEXT_PUBLIC_APP_ENV=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
           npm run build
       - name: Test
         run: npm run test:ci
@@ -86,7 +87,7 @@ jobs:
         run: |
           echo "Using registry ${{ env.ECR_REGISTRY }}"
           echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
-          docker build --build-arg CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker build --build-arg CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg NEXT_PUBLIC_APP_ENV=${{ vars.CONTENTFUL_ENVIRONMENT }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
       - name: Generate task definition file from container
