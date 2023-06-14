@@ -37,7 +37,6 @@ jobs:
         aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
         aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
         aws-region: eu-west-2
-        role-session-name: GitHubActions
     - name: Get Github Actions Runner Public IP
       id: ip
       uses: haythem/public-ip@v1.3
@@ -86,50 +85,50 @@ jobs:
         folder: ${{steps.download.outputs.download-path}}/qa/test-report/
         branch: gh-pages
 
-  send-slack-message-failure:
-    name: Send slack message failure
-    needs: [e2e-test]
-    runs-on: ubuntu-latest
-    if: failure()
-    steps:
-      - uses: technote-space/workflow-conclusion-action@v3
-      - name: "Set Env Message to DEV"
-        if: github.event.inputs.env-context == 'dev'
-        run: |
-          echo "ENV_MSG=DEV" >> "$GITHUB_ENV"
-      - name: "Set Env Message to TEST"
-        if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
-        run: |
-          echo "ENV_MSG=TEST" >> "$GITHUB_ENV"
-      - name: Slack Notify
-        if: github.ref == 'refs/heads/main'
-        uses: rtCamp/action-slack-notify@v2.2.0
-        env:
-          SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
-          SLACK_COLOR: "failure"
-          SLACK_MESSAGE: "FRF E2E Regression Tests Failed in ${{ env.ENV_MSG }}! :face_with_thermometer:"
-          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : FAILURE :x:"
+  # send-slack-message-failure:
+  #   name: Send slack message failure
+  #   needs: [e2e-test]
+  #   runs-on: ubuntu-latest
+  #   if: failure()
+  #   steps:
+  #     - uses: technote-space/workflow-conclusion-action@v3
+  #     - name: "Set Env Message to DEV"
+  #       if: github.event.inputs.env-context == 'dev'
+  #       run: |
+  #         echo "ENV_MSG=DEV" >> "$GITHUB_ENV"
+  #     - name: "Set Env Message to TEST"
+  #       if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
+  #       run: |
+  #         echo "ENV_MSG=TEST" >> "$GITHUB_ENV"
+  #     - name: Slack Notify
+  #       if: github.ref == 'refs/heads/main'
+  #       uses: rtCamp/action-slack-notify@v2.2.0
+  #       env:
+  #         SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
+  #         SLACK_COLOR: "failure"
+  #         SLACK_MESSAGE: "FRF E2E Regression Tests Failed in ${{ env.ENV_MSG }}! :face_with_thermometer:"
+  #         SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : FAILURE :x:"
 
-  send-slack-message-success:
-    name: Send slack message success
-    needs: [e2e-test]
-    runs-on: ubuntu-latest
-    if: success()
-    steps:
-      - uses: technote-space/workflow-conclusion-action@v3
-      - name: "Set Env Message to DEV"
-        if: github.event.inputs.env-context == 'dev'
-        run: |
-          echo "ENV_MSG=DEV" >> "$GITHUB_ENV"
-      - name: "Set Env Message to TEST"
-        if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
-        run: |
-          echo "ENV_MSG=TEST" >> "$GITHUB_ENV"
-      - name: Slack Notify
-        if: github.ref == 'refs/heads/tests/feature-frf-5-site-menu'
-        uses: rtCamp/action-slack-notify@v2.2.0
-        env:
-          SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
-          SLACK_COLOR: "success"
-          SLACK_MESSAGE: "FRF E2E Regression Tests Passed in ${{ env.ENV_MSG }}! :partying_face:"
-          SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : SUCCESS :tick:"
+  # send-slack-message-success:
+  #   name: Send slack message success
+  #   needs: [e2e-test]
+  #   runs-on: ubuntu-latest
+  #   if: success()
+  #   steps:
+  #     - uses: technote-space/workflow-conclusion-action@v3
+  #     - name: "Set Env Message to DEV"
+  #       if: github.event.inputs.env-context == 'dev'
+  #       run: |
+  #         echo "ENV_MSG=DEV" >> "$GITHUB_ENV"
+  #     - name: "Set Env Message to TEST"
+  #       if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test'
+  #       run: |
+  #         echo "ENV_MSG=TEST" >> "$GITHUB_ENV"
+  #     - name: Slack Notify
+  #       if: github.ref == 'refs/heads/tests/feature-frf-5-site-menu'
+  #       uses: rtCamp/action-slack-notify@v2.2.0
+  #       env:
+  #         SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
+  #         SLACK_COLOR: "success"
+  #         SLACK_MESSAGE: "FRF E2E Regression Tests Passed in ${{ env.ENV_MSG }}! :partying_face:"
+  #         SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : SUCCESS :tick:"
