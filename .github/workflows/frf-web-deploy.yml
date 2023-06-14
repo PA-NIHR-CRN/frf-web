@@ -117,7 +117,7 @@ jobs:
   e2e-test:
     name: FRF E2E Tests
     needs: deploy
-    if: ${{ github.event.inputs.environment }} == 'test'
+    if: github.event.inputs.environment == 'test'
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
