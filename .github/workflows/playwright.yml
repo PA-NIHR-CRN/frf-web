@@ -105,7 +105,7 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
           SLACK_COLOR: "failure"
           SLACK_MESSAGE: "FRF E2E Regression Tests Failed in ${{ env.ENV_MSG }}! :face_with_thermometer:"
           SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : FAILURE :x:"
@@ -129,7 +129,7 @@ jobs:
         if: github.ref == 'refs/heads/tests/feature-frf-5-site-menu'
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
           SLACK_COLOR: "success"
           SLACK_MESSAGE: "FRF E2E Regression Tests Passed in ${{ env.ENV_MSG }}! :partying_face:"
           SLACK_TITLE: "FRF E2E UI Tests - ENV:${{ env.ENV_MSG }} : SUCCESS :tick:"
