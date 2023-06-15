@@ -1,3 +1,6 @@
+import { InferGetStaticPropsType } from 'next'
+import Link from 'next/link'
+
 import { Card } from '@/components/Card/Card'
 import { Container } from '@/components/Container/Container'
 import ChevronIcon from '@/components/Icons/ChevronIcon'
@@ -7,8 +10,6 @@ import RecruitIcon from '@/components/Icons/RecruitIcon'
 import { contentfulService } from '@/lib/contentful'
 import { getVideoID } from '@/utils'
 import { getStaticPropsRevalidateValue } from '@/utils/getStaticPropsRevalidateValue'
-import { InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
 
 export type HomepageProps = InferGetStaticPropsType<typeof getStaticProps>
 
