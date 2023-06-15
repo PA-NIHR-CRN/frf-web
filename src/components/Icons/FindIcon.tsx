@@ -1,12 +1,6 @@
 function FindIcon() {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 48 48"
-      className="h-[1em] w-[1em]"
-      fill="none"
-      aria-hidden="true"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="h-[1em] w-[1em]" fill="none" aria-hidden>
       <path
         fill="currentColor"
         fillRule="evenodd"

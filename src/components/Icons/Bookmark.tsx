@@ -2,7 +2,7 @@ import React from 'react'
 
 function Bookmark() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="30" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="30" fill="none" aria-hidden>
       <path
         stroke="#25282B"
         strokeLinecap="round"
