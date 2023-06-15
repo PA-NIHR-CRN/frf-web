@@ -9,6 +9,7 @@ test('Unordered list', () => {
       <ListItem>Test item 2</ListItem>
     </List>
   )
+  expect(screen.getByText('mock-list')).toHaveAttribute('aria-hidden')
   const list = screen.getByRole('list', { name: 'mock-list' })
   expect(list).toHaveClass('custom-class')
   expect(list.tagName).toBe('UL')
@@ -27,6 +28,7 @@ test('Ordered list', () => {
       <ListItem>Test item 2</ListItem>
     </List>
   )
+  expect(screen.queryByText('mock-list')).not.toBeInTheDocument()
   expect(screen.getByRole('list', { name: 'mock-list' }).tagName).toBe('OL')
 })
 

@@ -22,7 +22,11 @@ export function List<Element extends ElementType = 'ul'>({
   const Component = as ?? 'ul'
   return (
     <>
-      {heading && <p className="mb-3 font-bold">{heading}</p>}
+      {heading && (
+        <p className="mb-3 font-bold" aria-hidden>
+          {heading}
+        </p>
+      )}
       <Component className={clsx('list-disc', className)} {...props}>
         {children}
       </Component>
