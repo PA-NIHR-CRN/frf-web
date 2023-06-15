@@ -12,6 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@axe-core/playwright": "^4.7.3",
     "@contentful/rich-text-html-renderer": "^16.0.5",
     "@radix-ui/react-collapsible": "^1.0.3",
     "@types/node": "20.2.5",
