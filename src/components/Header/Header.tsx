@@ -10,8 +10,8 @@ import { menu } from '@/constants/menu'
 
 function Logo() {
   return (
-    <Link
-      href="/"
+    <a
+      href="https://www.nihr.ac.uk"
       className={clsx(
         'govuk-header__link govuk-header__link--homepage',
         'inline-block h-[var(--logo-height)] min-w-[199px] hover:m-0'
@@ -25,7 +25,7 @@ function Logo() {
           alt="National Institute for Health and Care Research logo"
         />
       </span>
-    </Link>
+    </a>
   )
 }
 
