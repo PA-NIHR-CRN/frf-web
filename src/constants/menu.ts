@@ -4,7 +4,7 @@ export const menu = [
     {
       link: '/',
       text: 'View data service providers',
-      description: 'Discover more about the different data services providers within Find Recruit and Follow-up',
+      description: 'Discover more about the different data service providers within Find, Recruit and Follow-up',
     },
     {
       link: '/',
