@@ -1,24 +1,24 @@
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
+import { Fragment } from 'react'
 
 import { Filters as FiltersType } from '@/@types/filters'
 import { Card } from '@/components/Card/Card'
 import { Container } from '@/components/Container/Container'
 import { Filters } from '@/components/Filters/Filters'
-import Bookmark from '@/components/Icons/Bookmark'
-import Cross from '@/components/Icons/Cross'
-import MapPin from '@/components/Icons/MapPin'
-import Tick from '@/components/Icons/Tick'
-import Users from '@/components/Icons/Users'
-import { List, ListItem } from '@/components/List/List'
 import Pagination from '@/components/Pagination/Pagination'
-import { ServiceTypesCostTable } from '@/components/Results/ServiceTypesCostTable/ServiceTypesCostTable'
+import {
+  GeographicalCoverage,
+  ProviderHeading,
+  ProviderOrganisation,
+  ServiceTypesCostTable,
+  ShortDescription,
+  SuitedList,
+} from '@/components/Provider'
 import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
-import { Tag } from '@/components/Tag/Tag'
-import { DATE_FORMAT, NEW_LIMIT, PAGE_TITLE, PER_PAGE } from '@/constants'
+import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { numDaysBetween } from '@/utils/numDaysBetween'
 
@@ -29,11 +29,11 @@ export default function ServiceProviders({
   meta: { totalItems, initialPage, initialPageSize },
   filterOptions,
 }: ServiceProvidersProps) {
+  const titleSuffix = `Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
+
   return (
     <>
-      <NextSeo
-        title={`${PAGE_TITLE} – Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`}
-      />
+      <NextSeo title={`Find, Recruit and Follow-up – ${titleSuffix}`} />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">
@@ -64,8 +64,6 @@ export default function ServiceProviders({
             {/* Cards */}
             <div className="mt-9">
               {items.map(({ sys: { createdAt, updatedAt }, fields }) => {
-                const isNew = numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT
-
                 return (
                   <Card
                     as="article"
@@ -73,36 +71,21 @@ export default function ServiceProviders({
                     className="govuk-body mb-8"
                     aria-labelledby={`article-${fields.slug}-title`}
                   >
-                    <div className="flex justify-between border-b border-grey-80 p-4">
-                      <div>
-                        <h3 className="govuk-heading-m mb-2" id={`article-${fields.slug}-title`}>
-                          <Link href={`/providers/${fields.slug}`} className="text-black">
-                            {fields.name}
-                            {isNew && <span className="govuk-visually-hidden">&ndash; New</span>}
-                          </Link>
-                          {isNew && <Tag aria-hidden>New</Tag>}
-                        </h3>
-                        <h4
-                          className="mb-0 text-darkGrey"
-                          aria-label={`Provider organisation: ${fields.providerOrganisation}`}
-                        >
-                          {fields.providerOrganisation}
-                        </h4>
-                      </div>
-                      <div>
-                        <button>
-                          <Bookmark />
-                        </button>
-                      </div>
+                    <div className="flex flex-col justify-between border-b border-grey-80 p-4">
+                      <ProviderHeading
+                        slug={fields.slug ?? '/'}
+                        isNew={numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT}
+                      >
+                        {fields.name}
+                      </ProviderHeading>
+                      <ProviderOrganisation>{fields.providerOrganisation}</ProviderOrganisation>
                     </div>
 
                     <div className="p-4">
                       <div className="govuk-grid-row">
                         <div className="govuk-grid-column-three-quarters pr-5">
-                          <div
-                            data-testid="frf-dsp-description"
-                            dangerouslySetInnerHTML={{ __html: documentToHtmlString(fields.shortDescription) }}
-                          />
+                          {/* Description */}
+                          <ShortDescription>{fields.shortDescription}</ShortDescription>
 
                           {/* Service costs */}
                           <ServiceTypesCostTable
@@ -114,38 +97,18 @@ export default function ServiceProviders({
                           />
 
                           {/* Geography */}
-                          <List heading="Coverage:" aria-label="Coverage" className="mb-6">
-                            <ListItem icon={<MapPin />}>
-                              Geographical: {fields?.regionalCoverage || fields.geography.join(', ')}
-                            </ListItem>
-                            {fields.population && (
-                              <ListItem icon={<Users />}>
-                                Population: {fields.population.toLocaleString('en-GB')}
-                              </ListItem>
-                            )}
-                          </List>
+                          <GeographicalCoverage
+                            geography={fields.geography}
+                            regionalCoverage={fields.regionalCoverage}
+                            population={fields.population}
+                            className="mb-6"
+                          />
 
                           {/* Suited to */}
-                          {fields.suitedTo && (
-                            <List heading="Suited to:" aria-label="Suited to">
-                              {fields.suitedTo.map((field) => (
-                                <ListItem key={field} icon={<Tick />}>
-                                  {field}
-                                </ListItem>
-                              ))}
-                            </List>
-                          )}
+                          <SuitedList showHeading type="positive" items={fields.suitedTo} />
 
                           {/* Not suited to */}
-                          {fields.notSuitedTo && (
-                            <List aria-label="Not suited to" className="mt-2">
-                              {fields.notSuitedTo.map((field) => (
-                                <ListItem key={field} icon={<Cross />}>
-                                  {field}
-                                </ListItem>
-                              ))}
-                            </List>
-                          )}
+                          <SuitedList showHeading={false} type="negative" items={fields.notSuitedTo} className="mt-2" />
                         </div>
 
                         {/* Side info */}
@@ -155,13 +118,13 @@ export default function ServiceProviders({
                               if (!item?.fields.heading || !item?.fields.text) return null
                               const { heading, text } = item.fields
                               return (
-                                <>
+                                <Fragment key={heading}>
                                   <h3 className="govuk-heading-s mb-3">{heading}</h3>
                                   <RichTextRenderer
                                     document={text}
                                     className="[&>ul>li>p]:mb-0 [&>ul>li>p]:text-sm [&>ul]:px-3"
                                   />
-                                </>
+                                </Fragment>
                               )
                             })}
                         </aside>
@@ -177,7 +140,11 @@ export default function ServiceProviders({
                         <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
                       </div>
                       <div>
-                        <Link href={`/providers/${fields.slug}`} className="govuk-button mb-0">
+                        <Link
+                          href={`/providers/${fields.slug}`}
+                          className="govuk-button mb-0"
+                          aria-label={`View more details for ${fields.name}`}
+                        >
                           View more details
                         </Link>
                       </div>

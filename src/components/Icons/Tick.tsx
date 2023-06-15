@@ -2,7 +2,7 @@ import React from 'react'
 
 function Tick() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none" aria-hidden data-testid="frf-icon-tick">
       <path
         stroke="#00703C"
         strokeLinecap="round"

@@ -2,7 +2,14 @@ import React from 'react'
 
 function MapPin() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" fill="none">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="25"
+      height="24"
+      fill="none"
+      data-testid="frf-icon-map-pin"
+      aria-hidden
+    >
       <path
         stroke="#25282B"
         strokeLinecap="round"

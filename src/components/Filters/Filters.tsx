@@ -105,7 +105,7 @@ export function Filters({ options }: FiltersProps) {
         <FilterCategory title="Costs">
           {/* Costs: Find */}
           <fieldset>
-            <legend className="govuk-fieldset__legend bg-[var(--colour-find-background)] px-7 py-1 uppercase tracking-wide text-navy-100">
+            <legend className="govuk-fieldset__legend bg-[var(--colour-find-background)] px-7 py-1 text-sm font-bold uppercase tracking-wide text-navy-100">
               {ServiceType.FIND}
             </legend>
             {options.costs
@@ -118,7 +118,7 @@ export function Filters({ options }: FiltersProps) {
           </fieldset>
           {/* Costs: Recruit */}
           <fieldset className="mt-2">
-            <legend className="govuk-fieldset__legend bg-[var(--colour-recruit-background)] px-7 py-1 uppercase tracking-wide text-navy-100">
+            <legend className="govuk-fieldset__legend bg-[var(--colour-recruit-background)] px-7 py-1 text-sm font-bold uppercase tracking-wide text-navy-100">
               {ServiceType.RECRUIT}
             </legend>
             {options.costs
@@ -131,7 +131,7 @@ export function Filters({ options }: FiltersProps) {
           </fieldset>
           {/* Costs: Follow-up */}
           <fieldset className="mt-2">
-            <legend className="govuk-fieldset__legend bg-[var(--colour-follow-up-background)] px-7 py-1 uppercase tracking-wide text-navy-100">
+            <legend className="govuk-fieldset__legend bg-[var(--colour-follow-up-background)] px-7 py-1 text-sm font-bold uppercase tracking-wide text-navy-100">
               {ServiceType.FOLLOW_UP}
             </legend>
             {options.costs

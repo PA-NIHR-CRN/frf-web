@@ -67,11 +67,11 @@ test('Data service provider details newly published', async () => {
   expect(within(result).getByRole('list', { name: 'Coverage' })).toBeInTheDocument()
 
   // Suited to
-  const suitedToList = within(result).getByRole('list', { name: 'Suited to' })
+  const suitedToList = within(result).getByRole('list', { name: 'Suited to:' })
   expect(within(suitedToList).getAllByRole('listitem')).toHaveLength(4)
 
   // Not suited to
-  const notSuitedToList = within(result).getByRole('list', { name: 'Not suited to' })
+  const notSuitedToList = within(result).getByRole('list', { name: 'Not suited to:' })
   expect(within(notSuitedToList).getAllByRole('listitem')).toHaveLength(1)
 
   // Type of data available
@@ -85,6 +85,9 @@ test('Data service provider details newly published', async () => {
   expect(within(result).getByText('8 June 2023')).toBeInTheDocument()
   expect(within(result).getByText('Last updated:')).toBeInTheDocument()
   expect(within(result).getByText('13 June 2023')).toBeInTheDocument()
+
+  // View more
+  expect(within(result).getByRole('link', { name: 'View more details for Genomic Profile Register' }))
 })
 
 test('Data service provider details older than 3 months', async () => {
@@ -117,11 +120,11 @@ test('Data service provider details older than 3 months', async () => {
   expect(within(result).getByRole('list', { name: 'Coverage' })).toBeInTheDocument()
 
   // Suited to
-  const suitedToList = within(result).getByRole('list', { name: 'Suited to' })
+  const suitedToList = within(result).getByRole('list', { name: 'Suited to:' })
   expect(within(suitedToList).getAllByRole('listitem')).toHaveLength(4)
 
   // Not suited to (not present for this result)
-  expect(within(result).queryByRole('list', { name: 'Not suited to' })).not.toBeInTheDocument()
+  expect(within(result).queryByRole('list', { name: 'Not suited to:' })).not.toBeInTheDocument()
 
   // Type of data available
   expect(within(result).getByRole('heading', { name: 'Type of data available', level: 3 }))
@@ -134,6 +137,9 @@ test('Data service provider details older than 3 months', async () => {
   expect(within(result).getByText('10 June 2020')).toBeInTheDocument()
   expect(within(result).getByText('Last updated:')).toBeInTheDocument()
   expect(within(result).getByText('11 June 2023')).toBeInTheDocument()
+
+  // View more
+  expect(within(result).getByRole('link', { name: 'View more details for Join Dementia Research' }))
 })
 
 test('Page two results', async () => {

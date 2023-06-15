@@ -2,7 +2,7 @@ import React from 'react'
 
 function Cross() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" aria-hidden data-testid="frf-icon-cross">
       <path
         stroke="#D4351C"
         strokeLinecap="round"
