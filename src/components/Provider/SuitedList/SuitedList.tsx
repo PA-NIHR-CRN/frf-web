@@ -11,7 +11,7 @@ type SuitedListProps = {
 
 export const SuitedList = ({ showHeading, items, type, className }: SuitedListProps) => {
   const heading = type === 'positive' ? 'Suited to:' : 'Not suited to:'
-  const icon = type === 'positive' ? <Tick /> : <Cross />
+  const icon = type === 'positive' ? <Tick /> : <Cross className="text-[24px] text-red" />
 
   if (!items || !items.length) return null
 

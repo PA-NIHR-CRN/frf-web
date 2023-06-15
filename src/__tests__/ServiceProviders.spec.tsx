@@ -1,3 +1,4 @@
+import userEvent from '@testing-library/user-event'
 import { GetServerSidePropsContext } from 'next'
 
 import { render, screen, within } from '@/config/test-utils'
@@ -162,4 +163,37 @@ test('Page two results', async () => {
   expect(within(pagination).getByRole('link', { name: 'Page 1' })).toHaveAttribute('href', '?page=1')
   expect(within(pagination).getByRole('link', { name: 'Page 2' })).toHaveAttribute('href', '?page=2')
   expect(within(pagination).queryByRole('link', { name: 'Next' })).not.toBeInTheDocument()
+})
+
+test('Toggling filters on mobile', async () => {
+  const scrollToSpy = jest.fn()
+  jest.spyOn(window, 'scrollTo').mockImplementation(scrollToSpy)
+
+  mockContentfulResponse(defaultMock)
+
+  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+
+  render(<ServiceProviders {...props} />)
+
+  const showFiltersButton = screen.getByRole('link', { name: 'Open filters' })
+  expect(showFiltersButton).toHaveAttribute('href', '#filters')
+
+  const filtersCard = screen.getByTestId('filters-card')
+  expect(filtersCard).toHaveClass('hidden')
+
+  // Show filters
+  await userEvent.click(showFiltersButton)
+  expect(filtersCard).not.toHaveClass('hidden')
+
+  // Close filters
+  const closeFiltersButton = screen.getByRole('link', { name: 'Return to search results' })
+  expect(closeFiltersButton).toHaveAttribute('href', '#show-filters')
+  expect(closeFiltersButton).toHaveFocus()
+
+  await userEvent.click(closeFiltersButton)
+  expect(filtersCard).toHaveClass('hidden')
+
+  // Focus is returned to show filters button
+  expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
+  expect(showFiltersButton).toHaveFocus()
 })

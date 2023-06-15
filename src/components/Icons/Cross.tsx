@@ -1,10 +1,22 @@
+import clsx from 'clsx'
 import React from 'react'
 
-function Cross() {
+type CrossProps = {
+  className?: string
+}
+
+function Cross({ className }: CrossProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" aria-hidden data-testid="frf-icon-cross">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      className={clsx(className, 'h-[1em] w-[1em]')}
+      fill="none"
+      aria-hidden
+      data-testid="frf-icon-cross"
+    >
       <path
-        stroke="#D4351C"
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"

@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { Fragment } from 'react'
+import { Fragment, useRef, useState } from 'react'
 
 import { Filters as FiltersType } from '@/@types/filters'
 import { Card } from '@/components/Card/Card'
@@ -29,6 +29,32 @@ export default function ServiceProviders({
   meta: { totalItems, initialPage, initialPageSize },
   filterOptions,
 }: ServiceProvidersProps) {
+  const showFiltersButtonRef = useRef<HTMLAnchorElement>(null)
+  const [showFiltersMobile, setShowFiltersMobile] = useState(false)
+
+  const showFiltersButton = () => (
+    <a
+      id="show-filters"
+      href="#filters"
+      className="govuk-button govuk-button--secondary my-0 mr-3 md:mr-0 md:hidden"
+      ref={showFiltersButtonRef}
+      onClick={(event) => {
+        setShowFiltersMobile(true)
+        event.preventDefault()
+      }}
+    >
+      Open filters
+    </a>
+  )
+
+  const handleCloseFilters = () => {
+    setShowFiltersMobile(false)
+    setTimeout(() => {
+      showFiltersButtonRef.current?.focus()
+      window.scrollTo(0, 0)
+    }, 0)
+  }
+
   const titleSuffix = `Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
 
   return (
@@ -38,31 +64,40 @@ export default function ServiceProviders({
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">
             {/* Filter panel */}
-            <Filters options={filterOptions} />
+            <Filters
+              options={filterOptions}
+              showFiltersMobile={showFiltersMobile}
+              onRequestClose={handleCloseFilters}
+            />
           </div>
 
           <div className="govuk-grid-column-two-thirds">
             {/* Sort bar */}
             <div className="govuk-grid-row">
-              <div className="flex items-center">
+              <div className="flex flex-wrap items-center">
                 <div className="govuk-grid-column-one-half">
                   <p className="govuk-heading-m mb-0">{totalItems} data service providers found</p>
                 </div>
                 <div className="govuk-grid-column-one-half">
-                  <div className="govuk-form-group mb-0 flex items-center justify-end">
-                    <label className="govuk-label mb-0 mr-2" htmlFor="sort">
-                      Sort by
-                    </label>
-                    <select id="sort" name="sort" className="govuk-select">
-                      <option>Recently published</option>
-                    </select>
+                  <div className="govuk-form-group mt-5 items-center justify-end md:my-0 md:flex">
+                    {/* Show filters */}
+                    <div>{showFiltersButton()}</div>
+                    {/* Sort by */}
+                    <div className="mt-4 items-center md:mt-0 md:flex">
+                      <label className="govuk-label mb-1 mr-2 md:mb-0" htmlFor="sort">
+                        Sort by
+                      </label>
+                      <select id="sort" name="sort" className="govuk-select w-full md:w-auto">
+                        <option>Recently published</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Cards */}
-            <div className="mt-9">
+            <div className="mt-5">
               {items.map(({ sys: { createdAt, updatedAt }, fields }) => {
                 return (
                   <Card
@@ -112,14 +147,14 @@ export default function ServiceProviders({
                         </div>
 
                         {/* Side info */}
-                        <aside className="govuk-grid-column-one-quarter p-0">
+                        <aside className="govuk-grid-column-one-quarter mt-6 md:mt-0 md:p-0">
                           {fields.dataSpecificsAndCoding &&
                             fields.dataSpecificsAndCoding.map((item) => {
                               if (!item?.fields.heading || !item?.fields.text) return null
                               const { heading, text } = item.fields
                               return (
                                 <Fragment key={heading}>
-                                  <h3 className="govuk-heading-s mb-3">{heading}</h3>
+                                  <h3 className="govuk-heading-s mb-3 mt-5 md:mt-0">{heading}</h3>
                                   <RichTextRenderer
                                     document={text}
                                     className="[&>ul>li>p]:mb-0 [&>ul>li>p]:text-sm [&>ul]:px-3"
@@ -133,11 +168,15 @@ export default function ServiceProviders({
 
                     {/* Card footer */}
                     <div className="items-center justify-between border-t border-grey-80 p-4 md:flex">
-                      <div className="govuk-body-s mb-0">
-                        <strong>First published:</strong>
-                        <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
-                        <strong>Last updated:</strong>
-                        <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
+                      <div className="govuk-body-s mb-3 flex flex-col gap-3 md:mb-0 md:flex-row">
+                        <div>
+                          <strong>First published: </strong>
+                          <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
+                        </div>
+                        <div>
+                          <strong>Last updated: </strong>
+                          <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
+                        </div>
                       </div>
                       <div>
                         <Link
