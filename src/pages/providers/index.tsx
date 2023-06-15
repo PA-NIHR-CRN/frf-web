@@ -15,6 +15,7 @@ import Tick from '@/components/Icons/Tick'
 import Users from '@/components/Icons/Users'
 import { List, ListItem } from '@/components/List/List'
 import Pagination from '@/components/Pagination/Pagination'
+import { ServiceTypesCostTable } from '@/components/Results/ServiceTypesCostTable/ServiceTypesCostTable'
 import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
 import { Tag } from '@/components/Tag/Tag'
 import { DATE_FORMAT, NEW_LIMIT, PAGE_TITLE, PER_PAGE } from '@/constants'
@@ -63,21 +64,30 @@ export default function ServiceProviders({
             {/* Cards */}
             <div className="mt-9">
               {items.map(({ sys: { createdAt, updatedAt }, fields }) => {
-                console.log('FIELDS', fields)
                 const isNew = numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT
 
                 return (
-                  <Card key={fields.slug} className="govuk-body mb-8">
+                  <Card
+                    as="article"
+                    key={fields.slug}
+                    className="govuk-body mb-8"
+                    aria-labelledby={`article-${fields.slug}-title`}
+                  >
                     <div className="flex justify-between border-b border-grey-80 p-4">
                       <div>
-                        <h3 className="govuk-heading-m mb-2">
+                        <h3 className="govuk-heading-m mb-2" id={`article-${fields.slug}-title`}>
                           <Link href={`/providers/${fields.slug}`} className="text-black">
                             {fields.name}
                             {isNew && <span className="govuk-visually-hidden">&ndash; New</span>}
                           </Link>
                           {isNew && <Tag aria-hidden>New</Tag>}
                         </h3>
-                        <p className="mb-0 text-darkGrey">{fields.providerOrganisation}</p>
+                        <h4
+                          className="mb-0 text-darkGrey"
+                          aria-label={`Provider organisation: ${fields.providerOrganisation}`}
+                        >
+                          {fields.providerOrganisation}
+                        </h4>
                       </div>
                       <div>
                         <button>
@@ -89,48 +99,22 @@ export default function ServiceProviders({
                     <div className="p-4">
                       <div className="govuk-grid-row">
                         <div className="govuk-grid-column-three-quarters pr-5">
-                          <div dangerouslySetInnerHTML={{ __html: documentToHtmlString(fields.shortDescription) }} />
+                          <div
+                            data-testid="frf-dsp-description"
+                            dangerouslySetInnerHTML={{ __html: documentToHtmlString(fields.shortDescription) }}
+                          />
 
                           {/* Service costs */}
-                          <div className="mb-5 mt-6">
-                            <table className="govuk-table govuk-!-font-size-16">
-                              <caption className="govuk-table__caption govuk-body-m mb-2">
-                                Services available and costs:
-                              </caption>
-                              <tbody>
-                                <tr className="govuk-table__row border-t border-grey-120">
-                                  <th
-                                    scope="row"
-                                    className="govuk-table__cell bg-[var(--colour-find-background)] p-2 text-center font-bold   tracking-wider text-navy-100"
-                                  >
-                                    FIND
-                                  </th>
-                                  <td className="govuk-table__cell pl-4">Free of charge (all studies)</td>
-                                </tr>
-                                <tr className="govuk-table__row">
-                                  <th
-                                    scope="row"
-                                    className="govuk-table__cell bg-[var(--colour-recruit-background)] p-2 text-center font-bold  tracking-wider text-navy-100"
-                                  >
-                                    RECRUIT
-                                  </th>
-                                  <td className="govuk-table__cell pl-4">Free of charge (all studies)</td>
-                                </tr>
-                                <tr className="govuk-table__row">
-                                  <th
-                                    scope="row"
-                                    className="govuk-table__cell bg-[var(--colour-follow-up-background)] p-2 text-center font-bold  tracking-wider text-navy-100"
-                                  >
-                                    FOLLOW-UP
-                                  </th>
-                                  <td className="govuk-table__cell pl-4">Free of charge (all studies)</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
+                          <ServiceTypesCostTable
+                            costs={fields.costs}
+                            findCostChargeableDescription={fields.findCostChargeableDescription}
+                            recruitCostChargeableDescription={fields.recruitCostChargeableDescription}
+                            followUpCostChargeableDescription={fields.followUpCostChargeableDescription}
+                            className="mb-5 mt-6"
+                          />
 
                           {/* Geography */}
-                          <List heading="Coverage:" className="mb-6">
+                          <List heading="Coverage:" aria-label="Coverage" className="mb-6">
                             <ListItem icon={<MapPin />}>
                               Geographical: {fields?.regionalCoverage || fields.geography.join(', ')}
                             </ListItem>
@@ -151,6 +135,8 @@ export default function ServiceProviders({
                               ))}
                             </List>
                           )}
+
+                          {/* Not suited to */}
                           {fields.notSuitedTo && (
                             <List aria-label="Not suited to" className="mt-2">
                               {fields.notSuitedTo.map((field) => (

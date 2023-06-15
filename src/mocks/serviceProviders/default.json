@@ -12,8 +12,8 @@
         "id": "5bqhUajiDehFgoK9zfHQx1",
         "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
         "revision": 1,
-        "createdAt": "2023-06-11T15:16:49.137Z",
-        "updatedAt": "2023-06-11T15:17:11.589Z",
+        "createdAt": "2023-01-11T15:16:49.137Z",
+        "updatedAt": "2023-03-11T15:17:11.589Z",
         "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
         "locale": "en-US"
       },
@@ -79,10 +79,7 @@
         "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
         "findCostChargeableDescription": "Free of charge (all studies)",
         "recruitCostChargeableDescription": "Chargeable service - £XXX",
-        "dataSpecificsAndCoding": [
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
-        ]
+        "dataSpecificsAndCoding": [{ "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }]
       }
     },
     {
@@ -93,7 +90,7 @@
         "id": "6dogwvwBKn1mSBBR3igIUV",
         "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
         "revision": 1,
-        "createdAt": "2020-06-11T15:15:29.103Z",
+        "createdAt": "2020-06-10T15:15:29.103Z",
         "updatedAt": "2023-06-11T15:16:23.206Z",
         "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
         "locale": "en-US"
@@ -208,10 +205,7 @@
         "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
         "findCostChargeableDescription": "Free of charge (all studies)",
         "recruitCostChargeableDescription": "Chargeable service - £XXX",
-        "dataSpecificsAndCoding": [
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
-        ]
+        "dataSpecificsAndCoding": [{ "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }]
       }
     },
     {
@@ -223,7 +217,7 @@
         "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
         "revision": 1,
         "createdAt": "2023-06-11T15:13:29.491Z",
-        "updatedAt": "2023-06-11T15:14:49.245Z",
+        "updatedAt": "2023-06-12T15:14:49.245Z",
         "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
         "locale": "en-US"
       },
@@ -294,10 +288,7 @@
         "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
         "findCostChargeableDescription": "Free of charge (all studies)",
         "recruitCostChargeableDescription": "Chargeable service - £XXX",
-        "dataSpecificsAndCoding": [
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
-        ]
+        "dataSpecificsAndCoding": [{ "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }]
       }
     },
     {
@@ -309,7 +300,7 @@
         "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
         "revision": 2,
         "createdAt": "2023-06-08T14:07:17.404Z",
-        "updatedAt": "2023-06-08T14:16:59.382Z",
+        "updatedAt": "2023-06-13T14:16:59.382Z",
         "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
         "locale": "en-US"
       },
@@ -377,43 +368,11 @@
           "Inherited diseases",
           "Large patient cohorts"
         ],
+        "notSuitedTo": ["Healthy volunteer phase 1"],
+        "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
         "findCostChargeableDescription": "Free of charge (all studies)",
         "recruitCostChargeableDescription": "Chargeable service - £XXX",
-        "dataSpecificsAndCoding": [
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "53TfkDdQAmdbaipUjO7k7P" } },
-          { "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }
-        ]
-      }
-    },
-    {
-      "metadata": { "tags": [] },
-      "sys": {
-        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
-        "type": "Entry",
-        "id": "3qPHNtoeSCwST5fPiCF20a",
-        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" } },
-        "revision": 1,
-        "createdAt": "2023-06-05T14:42:40.325Z",
-        "updatedAt": "2023-06-05T17:16:54.823Z",
-        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
-        "locale": "en-US"
-      },
-      "fields": {
-        "name": "Test",
-        "slug": "test",
-        "providerOrganisation": "Test",
-        "shortDescription": {
-          "data": {},
-          "content": [
-            {
-              "data": {},
-              "content": [{ "data": {}, "marks": [], "value": "Test", "nodeType": "text" }],
-              "nodeType": "paragraph"
-            }
-          ],
-          "nodeType": "document"
-        },
-        "geography": ["UK wide"]
+        "dataSpecificsAndCoding": [{ "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }]
       }
     }
   ],
@@ -467,7 +426,14 @@
                       {
                         "nodeType": "paragraph",
                         "data": {},
-                        "content": [{ "nodeType": "text", "value": "Primary care ", "marks": [], "data": {} }]
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Primary care ",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
                       }
                     ]
                   },
@@ -478,7 +444,14 @@
                       {
                         "nodeType": "paragraph",
                         "data": {},
-                        "content": [{ "nodeType": "text", "value": "Other", "marks": [], "data": {} }]
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "Other",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
                       }
                     ]
                   }
@@ -486,75 +459,15 @@
               },
               {
                 "nodeType": "paragraph",
-                "data": {},
-                "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
-              }
-            ]
-          }
-        }
-      },
-      {
-        "metadata": { "tags": [] },
-        "sys": {
-          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
-          "type": "Entry",
-          "id": "53TfkDdQAmdbaipUjO7k7P",
-          "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "textBlock" } },
-          "revision": 1,
-          "createdAt": "2023-06-08T14:09:38.960Z",
-          "updatedAt": "2023-06-08T14:10:08.912Z",
-          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
-          "locale": "en-US"
-        },
-        "fields": {
-          "heading": "Source of data",
-          "text": {
-            "nodeType": "document",
-            "data": {},
-            "content": [
-              {
-                "nodeType": "unordered-list",
                 "data": {},
                 "content": [
                   {
-                    "nodeType": "list-item",
-                    "data": {},
-                    "content": [
-                      {
-                        "nodeType": "paragraph",
-                        "data": {},
-                        "content": [{ "nodeType": "text", "value": "Primary care ", "marks": [], "data": {} }]
-                      }
-                    ]
-                  },
-                  {
-                    "nodeType": "list-item",
-                    "data": {},
-                    "content": [
-                      {
-                        "nodeType": "paragraph",
-                        "data": {},
-                        "content": [{ "nodeType": "text", "value": "Secondary care ", "marks": [], "data": {} }]
-                      }
-                    ]
-                  },
-                  {
-                    "nodeType": "list-item",
-                    "data": {},
-                    "content": [
-                      {
-                        "nodeType": "paragraph",
-                        "data": {},
-                        "content": [{ "nodeType": "text", "value": "Participant reported", "marks": [], "data": {} }]
-                      }
-                    ]
+                    "nodeType": "text",
+                    "value": "",
+                    "marks": [],
+                    "data": {}
                   }
                 ]
-              },
-              {
-                "nodeType": "paragraph",
-                "data": {},
-                "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
               }
             ]
           }
