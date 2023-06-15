@@ -4,7 +4,7 @@ import { List, ListItem } from '@/components/List/List'
 
 type GeographicalCoverageProps = {
   regionalCoverage: string | undefined
-  population: number | undefined
+  population: string | undefined
   geography: string[]
   className?: string
 }
@@ -18,7 +18,7 @@ export const GeographicalCoverage = ({
   return (
     <List heading="Coverage:" aria-label="Coverage" className={className}>
       <ListItem icon={<MapPin />}>Geographical: {regionalCoverage || geography.join(', ')}</ListItem>
-      {population && <ListItem icon={<Users />}>Population: {population.toLocaleString('en-GB')}</ListItem>}
+      {population && <ListItem icon={<Users />}>Population: {population}</ListItem>}
     </List>
   )
 }
