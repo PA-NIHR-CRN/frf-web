@@ -26,7 +26,11 @@ export function RootLayout({ children, backLink }: RootLayoutProps) {
         </Link>{' '}
         will help us to improve it.
       </PhaseBanner>
-      <Panel>Find, Recruit and Follow-up</Panel>
+      <Panel>
+        <Link href="/" className="text-white no-underline focus:text-black">
+          Find, Recruit and Follow-up
+        </Link>
+      </Panel>
       {backLink}
       <main id="main-content" className="govuk-main-wrapper" role="main">
         {children}
