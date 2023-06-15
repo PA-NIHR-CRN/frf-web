@@ -14,7 +14,7 @@ test('Displays the header', () => {
   // Logo link
   expect(screen.getByRole('link', { name: 'National Institute for Health and Care Research logo' })).toHaveAttribute(
     'href',
-    '/'
+    'https://www.nihr.ac.uk'
   )
 
   // Logo image
