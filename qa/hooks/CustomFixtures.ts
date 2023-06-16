@@ -1,7 +1,5 @@
 import { test as base, chromium } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
-import type { Browser } from '@playwright/test'
-// import getPort from 'get-port';
 
 import HomePage from '../pages/HomePage'
 import ProvidersPage from '../pages/ProvidersPage'
