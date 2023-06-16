@@ -29,7 +29,6 @@ test.describe('Home Page Accessibility Tests - @access_Home', () => {
 
 test.describe('Site Menu Accessibility Tests - @access_SiteMenu', () => {
   test('Scan Site Menu with AXE Tool', async ({ homePage, commonItemsPage, makeAxeBuilder }, testInfo) => {
-    //use testinfo to check all tests performed
     const axeScanner = makeAxeBuilder()
     let axeScanResults: any
     await test.step('Given I have navigated to the Home Page', async () => {
@@ -44,7 +43,6 @@ test.describe('Site Menu Accessibility Tests - @access_SiteMenu', () => {
     })
 
     await test.step('When I scan the Site Menu for Accessibility Errors', async () => {
-      // include with parent selector of site menu, include open button, maybe do include with closed button before I open it? check if button is part of parent
       axeScanResults = await axeScanner
         .options({ reporter: 'v2' })
         .include('button[data-state="open"]')
