@@ -48,7 +48,7 @@ export default class HomePage {
       hasText: 'Follow-up',
     })
     this.dspIntroServiceBoxesText = page.locator(
-      'div[class="govuk-body mb-0 flex flex-grow flex-col justify-between p-4"] p'
+      'div[class="govuk-body mb-0 flex flex-grow flex-col items-start justify-between p-4"] p'
     )
     this.linkDspIntroServiceBoxesFind = page.locator('a', { hasText: 'View all Find services' })
     this.linkDspIntroServiceBoxesRecruit = page.locator('a', { hasText: 'View all Recruit services' })

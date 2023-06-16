@@ -88,7 +88,7 @@ test.describe('Home Page Smoke Tests - @frf_4', () => {
       await providersPage.goto()
     })
     await test.step('When I click the FRF Banner Title', async () => {
-      await commonItemsPage.frfServiceTitle.click()
+      await commonItemsPage.frfServiceTitle.locator('a').click()
     })
     await test.step('Then I should see the Home Page', async () => {
       await homePage.assertOnHomePage()
@@ -97,7 +97,7 @@ test.describe('Home Page Smoke Tests - @frf_4', () => {
       await privacyPage.goto()
     })
     await test.step('When I click the FRF Banner Title', async () => {
-      await commonItemsPage.frfServiceTitle.click()
+      await commonItemsPage.frfServiceTitle.locator('a').click()
     })
     await test.step('Then I should see the Home Page', async () => {
       await homePage.assertOnHomePage()

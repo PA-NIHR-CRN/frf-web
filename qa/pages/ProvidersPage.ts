@@ -3,14 +3,14 @@ import { expect, Locator, Page } from '@playwright/test'
 //Declare Page Objects
 export default class ProvidersPage {
   readonly page: Page
-  readonly btnDetail: Locator
+  readonly btnViewMoreDetails: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page
 
     //Locators
-    this.btnDetail = page.locator('a', { hasText: 'Detail' })
+    this.btnViewMoreDetails = page.locator('a[class="govuk-button mb-0"]')
   }
 
   //Page Methods
@@ -20,7 +20,7 @@ export default class ProvidersPage {
 
   async assertOnProvidersPage() {
     await expect(this.page).toHaveURL('/providers')
-    await expect(this.btnDetail).toBeVisible()
-    await expect(this.btnDetail).toHaveText('Detail')
+    await expect(this.btnViewMoreDetails.nth(0)).toBeVisible()
+    await expect(this.btnViewMoreDetails).toHaveCount(4)
   }
 }

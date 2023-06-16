@@ -21,6 +21,7 @@ export default class CommonItemsPage {
   readonly linkSiteMenuFeedback: Locator
   readonly txtLinkDescriptions: Locator
   readonly txtSiteMenuInto: Locator
+  readonly siteSeoMetaTag: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -55,6 +56,7 @@ export default class CommonItemsPage {
     })
     this.txtLinkDescriptions = page.locator('p[class="text-sm text-white"]')
     this.txtSiteMenuInto = page.locator('p[class="max-w-[300px] text-base text-white"]')
+    this.siteSeoMetaTag = page.locator('meta[name="robots"]')
   }
 
   //Page Methods
@@ -119,5 +121,9 @@ export default class CommonItemsPage {
   async assertSiteMenuIntroTextPresent() {
     await expect(this.txtSiteMenuInto).toBeVisible()
     await expect(this.txtSiteMenuInto).toContainText('Discover more with the Find, Recruit and Follow-up website')
+  }
+
+  async assertSeoIsDisabled() {
+    await expect(this.siteSeoMetaTag).toHaveAttribute('content', 'noindex,nofollow')
   }
 }

@@ -29,8 +29,8 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     await test.step('Given I have navigated to the Providers Page', async () => {
       await providersPage.goto()
     })
-    await test.step('When I click the Detail button', async () => {
-      await providersPage.btnDetail.click()
+    await test.step('When I click the first View More Details button', async () => {
+      await providersPage.btnViewMoreDetails.nth(0).click()
     })
     await test.step('Then I should see the Provider Details Page', async () => {
       await providerDetailsPage.assertOnProviderDetailsPage()
@@ -171,7 +171,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     })
   })
 
-  test('As a User I Can Navigate to the Feecback Form via GDS Beta Banner Link, Across Multiple Pages - @frf-_1_5', async ({
+  test('As a User I Can Navigate to the Feecback Form via GDS Beta Banner Link, Across Multiple Pages - @frf_1_5', async ({
     homePage,
     providersPage,
     providerDetailsPage,
@@ -204,6 +204,16 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     })
     await test.step('Then I should see the Accessibility Page', async () => {
       await feedbackFormPage.assertOnPrivacyPage()
+    })
+  })
+
+  test('The Site has SEO Disabled in Lower Environments - @frf_1_6', async ({ homePage, commonItemsPage }) => {
+    await test.step('Given I have navigated to the HomePage', async () => {
+      await homePage.goto()
+      await homePage.assertOnHomePage()
+    })
+    await test.step('Then I should see that SEO has been disabled', async () => {
+      await commonItemsPage.assertSeoIsDisabled()
     })
   })
 })
