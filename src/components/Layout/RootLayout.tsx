@@ -1,10 +1,11 @@
-import { useEffect, ReactNode } from 'react'
 import { Roboto } from 'next/font/google'
-import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
+import Link from 'next/link'
+import { ReactNode, useEffect } from 'react'
+
+import { Footer } from '../Footer/Footer'
 import { Header } from '../Header/Header'
 import { Panel } from '../Panel/Panel'
-import Link from 'next/link'
-import { Footer } from '../Footer/Footer'
+import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
 
 const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-roboto' })
 
@@ -25,7 +26,11 @@ export function RootLayout({ children, backLink }: RootLayoutProps) {
         </Link>{' '}
         will help us to improve it.
       </PhaseBanner>
-      <Panel>Find, Recruit and Follow-up</Panel>
+      <Panel>
+        <Link href="/" className="text-white no-underline focus:text-black">
+          Find, Recruit and Follow-up
+        </Link>
+      </Panel>
       {backLink}
       <main id="main-content" className="govuk-main-wrapper" role="main">
         {children}

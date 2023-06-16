@@ -1,0 +1,218 @@
+{
+  "sys": { "type": "Array" },
+  "total": 14,
+  "skip": 0,
+  "limit": 100,
+  "items": [
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeToast",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:59.637Z",
+        "updatedAt": "2023-06-05T14:41:59.637Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "private"
+      },
+      "name": "Data type: toast"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeRegistryData",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:59.596Z",
+        "updatedAt": "2023-06-05T14:41:59.596Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data Type: Registry data"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeClinicallyReported",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:59.544Z",
+        "updatedAt": "2023-06-05T14:41:59.544Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Clinically reported"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeAudit",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:58.771Z",
+        "updatedAt": "2023-06-05T14:41:58.771Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Audit"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeElectronicHealthcareRecord",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.802Z",
+        "updatedAt": "2023-06-05T14:41:57.802Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Electronic Healthcare Record"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "clinicallyReported",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.789Z",
+        "updatedAt": "2023-06-05T14:41:57.789Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Clinically reported"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeOther",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.789Z",
+        "updatedAt": "2023-06-05T14:41:57.789Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Other"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeBiologicalSamples",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.787Z",
+        "updatedAt": "2023-06-05T14:41:57.787Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Biological samples"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "serviceTypeRecruit",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.144Z",
+        "updatedAt": "2023-06-05T14:41:57.144Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Service type: Recruit"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "serviceTypeFind",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.141Z",
+        "updatedAt": "2023-06-05T14:41:57.141Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Service type: Find"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypePrimaryCare",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.140Z",
+        "updatedAt": "2023-06-05T14:41:57.140Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Primary care"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeParticipantReported",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.138Z",
+        "updatedAt": "2023-06-05T14:41:57.138Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Participant reported"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "dataTypeSecondaryCare",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.134Z",
+        "updatedAt": "2023-06-05T14:41:57.134Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Data type: Secondary care"
+    },
+    {
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "serviceTypeFollowUp",
+        "type": "Tag",
+        "createdAt": "2023-06-05T14:41:57.129Z",
+        "updatedAt": "2023-06-05T14:41:57.129Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+        "version": 1,
+        "visibility": "public"
+      },
+      "name": "Service type: Follow-Up"
+    }
+  ]
+}

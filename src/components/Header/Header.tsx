@@ -1,16 +1,17 @@
+import * as Collapsible from '@radix-ui/react-collapsible'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import * as Collapsible from '@radix-ui/react-collapsible'
-import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
 import { useClickAway } from 'react-use'
+
 import { menu } from '@/constants/menu'
 
 function Logo() {
   return (
-    <Link
-      href="/"
+    <a
+      href="https://www.nihr.ac.uk"
       className={clsx(
         'govuk-header__link govuk-header__link--homepage',
         'inline-block h-[var(--logo-height)] min-w-[199px] hover:m-0'
@@ -24,7 +25,7 @@ function Logo() {
           alt="National Institute for Health and Care Research logo"
         />
       </span>
-    </Link>
+    </a>
   )
 }
 
@@ -33,7 +34,7 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
     <div>
       <Link
         href="/browse"
-        className="js-disabled-show govuk-button govuk-body mb-0 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
+        className="js-disabled-show govuk-button govuk-body mb-0 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 underline shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
       >
         Menu
       </Link>
@@ -88,7 +89,7 @@ function MenuPanel() {
                   return (
                     <div
                       key={key}
-                      className="mb-5 max-w-[300px] lg:mb-0 [&:not(:last-child)]:lg:min-h-[140px] [&:not(:last-child)]:xl:min-h-[110px]"
+                      className="mb-5 max-w-[400px] lg:mb-0 [&:not(:last-child)]:lg:min-h-[150px] [&:not(:last-child)]:xl:min-h-[145px]"
                     >
                       <Link className="link--inverse mb-1 inline-block text-base" href={item.link}>
                         {item.text}

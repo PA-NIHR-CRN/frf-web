@@ -63,7 +63,7 @@ export interface TypeHomepageFields {
  * @type {TypeHomepageSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 1
+ * @version 5
  */
 export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepage">;
 /**
@@ -72,6 +72,6 @@ export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepa
  * @type {TypeHomepage}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 1
+ * @version 5
  */
 export type TypeHomepage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeHomepageSkeleton, Modifiers, Locales>;

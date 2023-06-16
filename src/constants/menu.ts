@@ -1,28 +1,29 @@
 export const menu = [
-  [{ link: null, text: 'Discover more with the New Find, Recruit and Follow-up website', description: null }],
+  [{ link: null, text: 'Discover more with the Find, Recruit and Follow-up website', description: null }],
   [
     {
       link: '/',
-      text: 'Find data service providers',
-      description: 'Discover a number of data service providers through FRF',
+      text: 'View data service providers',
+      description: 'Discover more about the different data service providers within Find, Recruit and Follow-up',
     },
     {
       link: '/',
-      text: 'Get support for your research',
-      description: 'Access support for your research study',
+      text: 'Contact research support',
+      description:
+        'Get in touch with research support professionals who can help you understand which services might be suitable for your study',
     },
   ],
   [
     {
       link: '/',
-      text: 'Data Service Providers',
+      text: 'Data service providers',
       description:
-        'All the information you need to know how to register your organisation as a DSP or update existing DSP information',
+        'Information for organisations offering Find, Recruit and Follow-up data services to researchers and life sciences companies',
     },
     {
       link: '/',
-      text: 'Research Support Staff',
-      description: 'Support for CRNCC and DA staff',
+      text: 'Research support colleagues',
+      description: 'Information for colleagues within the various research support organisations across the UK',
     },
   ],
   [

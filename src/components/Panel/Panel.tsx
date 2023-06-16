@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+
 import { Container } from '../Container/Container'
 
 type PanelProps = {

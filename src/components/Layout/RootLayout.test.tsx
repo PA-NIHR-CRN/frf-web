@@ -1,4 +1,5 @@
 import { render, screen, within } from '@/config/test-utils'
+
 import { RootLayout } from './RootLayout'
 
 jest.mock('next/router', () => require('next-router-mock'))
@@ -14,7 +15,7 @@ export const assertRootLayout = () => {
 
   // Hero Panel
   const panel = screen.getByTestId('frf-panel')
-  expect(within(panel).getByText('Find, Recruit and Follow-up')).toBeInTheDocument()
+  expect(within(panel).getByText('Find, Recruit and Follow-up')).toHaveAttribute('href', '/')
 }
 
 test('Displays NIHR layout & page content', () => {

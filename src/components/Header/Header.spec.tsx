@@ -1,6 +1,8 @@
-import { act, render, screen, within } from '@/config/test-utils'
 import userEvent from '@testing-library/user-event'
 import mockRouter from 'next-router-mock'
+
+import { act, render, screen, within } from '@/config/test-utils'
+
 import { Header } from './Header'
 
 jest.mock('next/router', () => require('next-router-mock'))
@@ -14,7 +16,7 @@ test('Displays the header', () => {
   // Logo link
   expect(screen.getByRole('link', { name: 'National Institute for Health and Care Research logo' })).toHaveAttribute(
     'href',
-    '/'
+    'https://www.nihr.ac.uk'
   )
 
   // Logo image
@@ -51,27 +53,37 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   expect(openMenu).toBeVisible()
 
   // 1st column
-  expect(
-    within(openMenu).getByText('Discover more with the New Find, Recruit and Follow-up website')
-  ).toBeInTheDocument()
+  expect(within(openMenu).getByText('Discover more with the Find, Recruit and Follow-up website')).toBeInTheDocument()
 
   // 2nd column
-  expect(within(openMenu).getByRole('link', { name: 'Find data service providers' })).toHaveAttribute('href', '/')
-  expect(within(openMenu).getByText('Discover a number of data service providers through FRF')).toBeInTheDocument()
-
-  expect(within(openMenu).getByRole('link', { name: 'Get support for your research' })).toHaveAttribute('href', '/')
-  expect(within(openMenu).getByText('Access support for your research study')).toBeInTheDocument()
-
-  // 3rd column
-  expect(within(openMenu).getByRole('link', { name: 'Data Service Providers' })).toHaveAttribute('href', '/')
+  expect(within(openMenu).getByRole('link', { name: 'View data service providers' })).toHaveAttribute('href', '/')
   expect(
     within(openMenu).getByText(
-      'All the information you need to know how to register your organisation as a DSP or update existing DSP information'
+      'Discover more about the different data service providers within Find, Recruit and Follow-up'
     )
   ).toBeInTheDocument()
 
-  expect(within(openMenu).getByRole('link', { name: 'Research Support Staff' })).toHaveAttribute('href', '/')
-  expect(within(openMenu).getByText('Support for CRNCC and DA staff')).toBeInTheDocument()
+  expect(within(openMenu).getByRole('link', { name: 'Contact research support' })).toHaveAttribute('href', '/')
+  expect(
+    within(openMenu).getByText(
+      'Get in touch with research support professionals who can help you understand which services might be suitable for your study'
+    )
+  ).toBeInTheDocument()
+
+  // 3rd column
+  expect(within(openMenu).getByRole('link', { name: 'Data service providers' })).toHaveAttribute('href', '/')
+  expect(
+    within(openMenu).getByText(
+      'Information for organisations offering Find, Recruit and Follow-up data services to researchers and life sciences companies'
+    )
+  ).toBeInTheDocument()
+
+  expect(within(openMenu).getByRole('link', { name: 'Research support colleagues' })).toHaveAttribute('href', '/')
+  expect(
+    within(openMenu).getByText(
+      'Information for colleagues within the various research support organisations across the UK'
+    )
+  ).toBeInTheDocument()
 
   // 4th column
   expect(within(openMenu).getByRole('link', { name: 'Provide feedback' })).toHaveAttribute('href', '/feedback')

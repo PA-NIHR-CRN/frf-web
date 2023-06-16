@@ -1,13 +1,13 @@
-import { test as base, chromium } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+import { chromium, test as base } from '@playwright/test'
 
-import HomePage from '../pages/HomePage'
-import ProvidersPage from '../pages/ProvidersPage'
-import ProviderDetailsPage from '../pages/ProviderDetailsPage'
-import CommonItemsPage from '../pages/CommonItemsPage'
-import PrivacyPage from '../pages/PrivacyPage'
 import AccessibilityPage from '../pages/AccessibilityPage'
+import CommonItemsPage from '../pages/CommonItemsPage'
 import FeedbackFormPage from '../pages/FeedbackFormPage'
+import HomePage from '../pages/HomePage'
+import PrivacyPage from '../pages/PrivacyPage'
+import ProviderDetailsPage from '../pages/ProviderDetailsPage'
+import ProvidersPage from '../pages/ProvidersPage'
 
 type CustomFixtures = {
   homePage: HomePage
