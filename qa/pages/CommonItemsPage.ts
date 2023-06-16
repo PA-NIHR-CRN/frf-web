@@ -21,6 +21,7 @@ export default class CommonItemsPage {
   readonly linkSiteMenuFeedback: Locator
   readonly txtLinkDescriptions: Locator
   readonly txtSiteMenuInto: Locator
+  readonly siteSeoMetaTag: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -39,22 +40,23 @@ export default class CommonItemsPage {
     this.btnClosedSiteMenu = page.locator('button[aria-label="Show navigation menu"]')
     this.btnOpenedSiteMenu = page.locator('button[aria-label="Hide navigation menu"]')
     this.linkSiteMenuFindDsp = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
-      hasText: 'Find data service providers',
+      hasText: 'View data service providers',
     })
     this.linkSiteMenuGetSupport = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
-      hasText: 'Get support for your research',
+      hasText: 'Contact research support',
     })
     this.linkSiteMenuDsp = page
       .locator('a[class="link--inverse mb-1 inline-block text-base"]')
-      .getByText('Data Service Providers', { exact: true })
+      .getByText('Data service providers', { exact: true })
     this.linkSiteMenuResearchStaff = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
-      hasText: 'Research Support Staff',
+      hasText: 'Research support colleagues',
     })
     this.linkSiteMenuFeedback = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
       hasText: 'Provide feedback',
     })
     this.txtLinkDescriptions = page.locator('p[class="text-sm text-white"]')
     this.txtSiteMenuInto = page.locator('p[class="max-w-[300px] text-base text-white"]')
+    this.siteSeoMetaTag = page.locator('meta[name="robots"]')
   }
 
   //Page Methods
@@ -103,15 +105,25 @@ export default class CommonItemsPage {
 
   async assertSiteMenuLinkDescriptionsPresent() {
     await expect(this.txtLinkDescriptions.nth(0)).toBeVisible()
-    await expect(this.txtLinkDescriptions.nth(0)).toContainText('Discover a number of data service providers')
-    await expect(this.txtLinkDescriptions.nth(1)).toContainText('Access support for your research study')
-    await expect(this.txtLinkDescriptions.nth(2)).toContainText('register your organisation as a DSP')
-    await expect(this.txtLinkDescriptions.nth(3)).toContainText('Support for CRNCC and DA staff')
+    await expect(this.txtLinkDescriptions.nth(0)).toContainText(
+      'Discover more about the different data service providers'
+    )
+    await expect(this.txtLinkDescriptions.nth(1)).toContainText('Get in touch with research support professionals')
+    await expect(this.txtLinkDescriptions.nth(2)).toContainText(
+      'Information for organisations offering Find, Recruit and Follow-up data services'
+    )
+    await expect(this.txtLinkDescriptions.nth(3)).toContainText(
+      'Information for colleagues within the various research support organisations'
+    )
     await expect(this.txtLinkDescriptions.nth(4)).toContainText('Your feedback on our service')
   }
 
   async assertSiteMenuIntroTextPresent() {
     await expect(this.txtSiteMenuInto).toBeVisible()
     await expect(this.txtSiteMenuInto).toContainText('Discover more with the Find, Recruit and Follow-up website')
+  }
+
+  async assertSeoIsDisabled() {
+    await expect(this.siteSeoMetaTag).toHaveAttribute('content', 'noindex,nofollow')
   }
 }

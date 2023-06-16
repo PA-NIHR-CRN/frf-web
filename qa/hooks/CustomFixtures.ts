@@ -1,4 +1,5 @@
-import { test as base } from '@playwright/test'
+import AxeBuilder from '@axe-core/playwright'
+import { chromium, test as base } from '@playwright/test'
 
 import AccessibilityPage from '../pages/AccessibilityPage'
 import CommonItemsPage from '../pages/CommonItemsPage'
@@ -16,6 +17,7 @@ type CustomFixtures = {
   privacyPage: PrivacyPage
   accessibilityPage: AccessibilityPage
   feedbackFormPage: FeedbackFormPage
+  makeAxeBuilder: () => AxeBuilder
 }
 
 export const test = base.extend<CustomFixtures>({
@@ -45,6 +47,11 @@ export const test = base.extend<CustomFixtures>({
 
   feedbackFormPage: async ({ page }, use) => {
     await use(new FeedbackFormPage(page))
+  },
+
+  makeAxeBuilder: async ({ page }, use) => {
+    const makeAxeBuilder = () => new AxeBuilder({ page })
+    await use(makeAxeBuilder)
   },
 })
 

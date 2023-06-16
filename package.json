@@ -12,6 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@axe-core/playwright": "^4.7.3",
     "@contentful/rich-text-html-renderer": "^16.0.5",
     "@contentful/rich-text-react-renderer": "^15.17.0",
     "@radix-ui/react-collapsible": "^1.0.3",
@@ -37,7 +38,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
-    "@playwright/test": "^1.34.3",
+    "@playwright/test": "^1.35.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",

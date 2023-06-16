@@ -21,7 +21,7 @@ export default class ProviderDetailsPage {
   }
 
   async assertOnProviderDetailsPage() {
-    await expect(this.page).toHaveURL('/providers/detail')
+    await expect(this.page).toHaveURL('/providers/genomic-profile-register')
     await expect(this.linkBackToProviders).toBeVisible()
     await expect(this.linkBackToProviders).toHaveText('Back to list of data service providers')
     await expect(this.headingDetailPage).toBeVisible()
