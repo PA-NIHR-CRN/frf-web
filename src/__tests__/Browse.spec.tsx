@@ -10,7 +10,7 @@ test('Displays the fallback navigation menu page', () => {
 
   expect(screen.getByRole('link', { name: 'View data service providers' })).toHaveAttribute('href', '/')
   expect(
-    screen.getByText('Discover more about the different data services providers within Find Recruit and Follow-up')
+    screen.getByText('Discover more about the different data service providers within Find, Recruit and Follow-up')
   ).toBeInTheDocument()
 
   expect(screen.getByRole('link', { name: 'Contact research support' })).toHaveAttribute('href', '/')
