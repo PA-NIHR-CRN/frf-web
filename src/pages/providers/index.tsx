@@ -147,10 +147,10 @@ export default function ServiceProviders({
                         </div>
 
                         {/* Side info */}
-                        <aside className="govuk-grid-column-one-quarter mt-6 md:mt-0 md:p-0">
+                        <div className="govuk-grid-column-one-quarter mt-6 md:mt-0 md:p-0">
                           {/* Types of Data */}
                           <TypesOfDataList tags={metadata.tags} />
-                        </aside>
+                        </div>
                       </div>
                     </div>
 
