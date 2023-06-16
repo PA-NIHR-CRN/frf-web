@@ -75,10 +75,10 @@ test('Data service provider details newly published', async () => {
   const notSuitedToList = within(result).getByRole('list', { name: 'Not suited to:' })
   expect(within(notSuitedToList).getAllByRole('listitem')).toHaveLength(1)
 
-  // Type of data available
-  expect(within(result).getByRole('heading', { name: 'Type of data available', level: 3 }))
-  expect(within(result).getByText('Hospital in-patient and out-patient episodes')).toBeInTheDocument()
-  expect(within(result).getByText('Primary care')).toBeInTheDocument()
+  // Types of data available
+  expect(within(result).getByRole('list', { name: 'Types of data available' })).toBeInTheDocument()
+  expect(within(result).getByText('Hospital In Patient And Out Patient Episodes')).toBeInTheDocument()
+  expect(within(result).getByText('Primary Care')).toBeInTheDocument()
   expect(within(result).getByText('Other')).toBeInTheDocument()
 
   // Published date & Last updated date
@@ -127,10 +127,10 @@ test('Data service provider details older than 3 months', async () => {
   // Not suited to (not present for this result)
   expect(within(result).queryByRole('list', { name: 'Not suited to:' })).not.toBeInTheDocument()
 
-  // Type of data available
-  expect(within(result).getByRole('heading', { name: 'Type of data available', level: 3 }))
-  expect(within(result).getByText('Hospital in-patient and out-patient episodes')).toBeInTheDocument()
-  expect(within(result).getByText('Primary care')).toBeInTheDocument()
+  // Types of data available
+  expect(within(result).getByRole('list', { name: 'Types of data available' })).toBeInTheDocument()
+  expect(within(result).getByText('Hospital In Patient And Out Patient Episodes')).toBeInTheDocument()
+  expect(within(result).getByText('Primary Care')).toBeInTheDocument()
   expect(within(result).getByText('Other')).toBeInTheDocument()
 
   // Published date & Last updated date

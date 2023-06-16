@@ -5,7 +5,31 @@
   "limit": 100,
   "items": [
     {
-      "metadata": { "tags": [] },
+      "metadata": {
+        "tags": [
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeHospitalInPatientAndOutPatientEpisodes"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeOther"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypePrimaryCare"
+            }
+          }
+        ]
+      },
       "sys": {
         "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
         "type": "Entry",
@@ -83,7 +107,31 @@
       }
     },
     {
-      "metadata": { "tags": [] },
+      "metadata": {
+        "tags": [
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeHospitalInPatientAndOutPatientEpisodes"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeOther"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypePrimaryCare"
+            }
+          }
+        ]
+      },
       "sys": {
         "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
         "type": "Entry",
@@ -209,7 +257,31 @@
       }
     },
     {
-      "metadata": { "tags": [] },
+      "metadata": {
+        "tags": [
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeHospitalInPatientAndOutPatientEpisodes"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeOther"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypePrimaryCare"
+            }
+          }
+        ]
+      },
       "sys": {
         "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
         "type": "Entry",
@@ -292,7 +364,31 @@
       }
     },
     {
-      "metadata": { "tags": [] },
+      "metadata": {
+        "tags": [
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeHospitalInPatientAndOutPatientEpisodes"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeOther"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypePrimaryCare"
+            }
+          }
+        ]
+      },
       "sys": {
         "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
         "type": "Entry",
@@ -379,7 +475,31 @@
   "includes": {
     "Entry": [
       {
-        "metadata": { "tags": [] },
+        "metadata": {
+          "tags": [
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Tag",
+                "id": "dataTypeHospitalInPatientAndOutPatientEpisodes"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Tag",
+                "id": "dataTypeOther"
+              }
+            },
+            {
+              "sys": {
+                "type": "Link",
+                "linkType": "Tag",
+                "id": "dataTypePrimaryCare"
+              }
+            }
+          ]
+        },
         "sys": {
           "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
           "type": "Entry",

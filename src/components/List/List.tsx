@@ -23,9 +23,9 @@ export function List<Element extends ElementType = 'ul'>({
   return (
     <>
       {heading && (
-        <p className="mb-3 font-bold" aria-hidden>
+        <h3 className="mb-3 font-bold" aria-hidden>
           {heading}
-        </p>
+        </h3>
       )}
       <Component className={clsx('list-disc', className)} {...props}>
         {children}
