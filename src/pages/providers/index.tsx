@@ -16,8 +16,8 @@ import {
   ServiceTypesCostTable,
   ShortDescription,
   SuitedList,
+  TypesOfDataList,
 } from '@/components/Provider'
-import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
 import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { numDaysBetween } from '@/utils/numDaysBetween'
@@ -98,7 +98,7 @@ export default function ServiceProviders({
 
             {/* Cards */}
             <div className="mt-5">
-              {items.map(({ sys: { createdAt, updatedAt }, fields }) => {
+              {items.map(({ sys: { createdAt, updatedAt }, fields, metadata }) => {
                 return (
                   <Card
                     as="article"
@@ -148,20 +148,8 @@ export default function ServiceProviders({
 
                         {/* Side info */}
                         <aside className="govuk-grid-column-one-quarter mt-6 md:mt-0 md:p-0">
-                          {fields.dataSpecificsAndCoding &&
-                            fields.dataSpecificsAndCoding.map((item) => {
-                              if (!item?.fields.heading || !item?.fields.text) return null
-                              const { heading, text } = item.fields
-                              return (
-                                <Fragment key={heading}>
-                                  <h3 className="govuk-heading-s mb-3 mt-5 md:mt-0">{heading}</h3>
-                                  <RichTextRenderer
-                                    document={text}
-                                    className="[&>ul>li>p]:mb-0 [&>ul>li>p]:text-sm [&>ul]:px-3"
-                                  />
-                                </Fragment>
-                              )
-                            })}
+                          {/* Types of Data */}
+                          <TypesOfDataList tags={metadata.tags} />
                         </aside>
                       </div>
                     </div>
