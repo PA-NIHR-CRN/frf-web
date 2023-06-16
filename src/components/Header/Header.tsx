@@ -34,7 +34,7 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
     <div>
       <Link
         href="/browse"
-        className="js-disabled-show govuk-button govuk-body mb-0 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
+        className="js-disabled-show govuk-button govuk-body mb-0 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 underline shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
       >
         Menu
       </Link>

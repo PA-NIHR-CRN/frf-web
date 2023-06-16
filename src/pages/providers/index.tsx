@@ -62,7 +62,7 @@ export default function ServiceProviders({
       <NextSeo title={`Find, Recruit and Follow-up – ${titleSuffix}`} />
       <Container>
         <div className="govuk-grid-row">
-          <div className="govuk-grid-column-one-third">
+          <div className="govuk-grid-column-one-third-from-desktop">
             {/* Filter panel */}
             <Filters
               options={filterOptions}
@@ -71,27 +71,21 @@ export default function ServiceProviders({
             />
           </div>
 
-          <div className="govuk-grid-column-two-thirds">
+          <div className="govuk-grid-column-two-thirds-from-desktop">
             {/* Sort bar */}
-            <div className="govuk-grid-row">
-              <div className="flex flex-wrap items-center">
-                <div className="govuk-grid-column-one-half">
-                  <p className="govuk-heading-m mb-0">{totalItems} data service providers found</p>
-                </div>
-                <div className="govuk-grid-column-one-half">
-                  <div className="govuk-form-group mt-5 items-center justify-end md:my-0 md:flex">
-                    {/* Show filters */}
-                    <div>{showFiltersButton()}</div>
-                    {/* Sort by */}
-                    <div className="mt-4 items-center md:mt-0 md:flex">
-                      <label className="govuk-label mb-1 mr-2 md:mb-0" htmlFor="sort">
-                        Sort by
-                      </label>
-                      <select id="sort" name="sort" className="govuk-select w-full md:w-auto">
-                        <option>Recently published</option>
-                      </select>
-                    </div>
-                  </div>
+            <div className="flex-wrap items-center justify-between gap-3 md:flex">
+              <p className="govuk-heading-m mb-0 whitespace-nowrap">{totalItems} data service providers found</p>
+              <div className="govuk-form-group mt-5 items-center justify-end md:my-0 md:flex">
+                {/* Show filters */}
+                <div>{showFiltersButton()}</div>
+                {/* Sort by */}
+                <div className="mt-4 items-center whitespace-nowrap md:mt-0 md:flex">
+                  <label className="govuk-label mb-1 mr-2 md:mb-0" htmlFor="sort">
+                    Sort by
+                  </label>
+                  <select id="sort" name="sort" className="govuk-select w-full md:w-auto">
+                    <option>Recently published</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -118,7 +112,7 @@ export default function ServiceProviders({
 
                     <div className="p-4">
                       <div className="govuk-grid-row">
-                        <div className="govuk-grid-column-three-quarters pr-5">
+                        <div className="govuk-grid-column-three-quarters-from-desktop pr-5">
                           {/* Description */}
                           <ShortDescription>{fields.shortDescription}</ShortDescription>
 
@@ -147,7 +141,7 @@ export default function ServiceProviders({
                         </div>
 
                         {/* Side info */}
-                        <div className="govuk-grid-column-one-quarter mt-6 md:mt-0 md:p-0">
+                        <div className="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0">
                           {/* Types of Data */}
                           <TypesOfDataList tags={metadata.tags} />
                         </div>
@@ -155,21 +149,21 @@ export default function ServiceProviders({
                     </div>
 
                     {/* Card footer */}
-                    <div className="items-center justify-between border-t border-grey-80 p-4 md:flex">
-                      <div className="govuk-body-s mb-3 flex flex-col gap-3 md:mb-0 md:flex-row">
-                        <div>
-                          <strong>First published: </strong>
+                    <div className="items-center justify-between gap-3 border-t border-grey-80 p-4 sm:flex">
+                      <div className="govuk-body-s mb-3 flex flex-col flex-wrap gap-3 md:mb-0 md:flex-row">
+                        <div className="whitespace-nowrap">
+                          <strong>First published:</strong>
                           <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
                         </div>
-                        <div>
-                          <strong>Last updated: </strong>
+                        <div className="whitespace-nowrap">
+                          <strong>Last updated:</strong>
                           <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
                         </div>
                       </div>
                       <div>
                         <Link
                           href={`/providers/${fields.slug}`}
-                          className="govuk-button mb-0"
+                          className="govuk-button mb-0 whitespace-nowrap"
                           aria-label={`View more details for ${fields.name}`}
                         >
                           View more details
