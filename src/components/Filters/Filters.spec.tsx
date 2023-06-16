@@ -66,7 +66,7 @@ test('Allows filtering by costs', async () => {
   render(<Filters options={filterOptions} />)
 
   const fieldset = screen.getByRole('group', { name: 'Costs' })
-  const details = within(fieldset).getAllByRole('group')[0]
+  const details = within(fieldset).getByRole('group', { name: '' })
 
   // Section can be toggled
   const title = screen.getByText('Costs')
