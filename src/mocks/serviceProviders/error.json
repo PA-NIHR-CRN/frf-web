@@ -1,0 +1,8 @@
+{
+  "sys": { "type": "Error", "id": "InvalidQuery" },
+  "message": "The query you sent was invalid. Probably a filter or ordering specification is not applicable to the type of a field.",
+  "details": {
+    "errors": [{ "name": "unknown", "path": ["contentType"], "details": "The path \"contentType\" is not recognized" }]
+  },
+  "requestId": "82a925da-4403-495b-b567-f802478fa541"
+}

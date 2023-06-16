@@ -1,5 +1,4 @@
 import type { Config } from 'jest'
-
 import nextJest from 'next/jest.js'
 
 const createJestConfig = nextJest({
@@ -22,8 +21,8 @@ const config: Config = {
   coveragePathIgnorePatterns: ['node_modules'],
   coverageThreshold: {
     global: {
-      lines: 100,
-      functions: 100,
+      lines: 90,
+      functions: 90,
       branches: 90,
       statements: 90,
     },

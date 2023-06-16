@@ -1,10 +1,11 @@
-import { ReactElement, ReactNode } from 'react'
+import '../globals.scss'
+
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { RootLayout } from '@/components/Layout/RootLayout'
 import { DefaultSeo } from 'next-seo'
+import { ReactElement, ReactNode } from 'react'
 
-import '../globals.scss'
+import { RootLayout } from '@/components/Layout/RootLayout'
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement, props: P) => ReactNode

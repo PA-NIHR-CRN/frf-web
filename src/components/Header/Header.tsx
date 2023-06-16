@@ -1,10 +1,11 @@
+import * as Collapsible from '@radix-ui/react-collapsible'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
-import * as Collapsible from '@radix-ui/react-collapsible'
-import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
 import { useClickAway } from 'react-use'
+
 import { menu } from '@/constants/menu'
 
 function Logo() {

@@ -1,0 +1,39 @@
+{
+  "name": "dev",
+  "sys": {
+    "type": "Environment",
+    "id": "dev",
+    "version": 3,
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "TEST_SPACE_ID"
+      }
+    },
+    "status": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Status",
+        "id": "ready"
+      }
+    },
+    "createdBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "0e5NmQEjI50YvjZsuXVNKL"
+      }
+    },
+    "createdAt": "2023-06-05T14:55:10Z",
+    "updatedBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "0e5NmQEjI50YvjZsuXVNKL"
+      }
+    },
+    "updatedAt": "2023-06-05T14:55:11Z",
+    "aliases": []
+  }
+}

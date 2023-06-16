@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ElementType, ReactNode } from 'react'
+import { ComponentProps, ElementType, ReactNode } from 'react'
 
 type CardProps<Element extends ElementType = ElementType> = {
   /** Content to be rendered within the Card */
@@ -8,7 +8,7 @@ type CardProps<Element extends ElementType = ElementType> = {
   className?: string
   /** Element/component/tag the Card will be rendered as (default: <div>) */
   as?: Element
-}
+} & ComponentProps<Element>
 
 export function Card<Element extends ElementType = 'div'>({ children, className, as, ...props }: CardProps<Element>) {
   const Component = as ?? 'div'

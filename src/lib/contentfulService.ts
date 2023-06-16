@@ -1,9 +1,12 @@
+import type { ContentfulClientApi } from 'contentful'
+import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
+
 import { Filters, OrderType } from '@/@types/filters'
 import { TypeHomepageSkeleton, TypeServiceProviderSkeleton } from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds, TagNames } from '@/constants'
-import type { ContentfulClientApi } from 'contentful'
-import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
+
+export type FilterOptions = Awaited<ReturnType<ContentfulService['getProviderFilterOptionValues']>>
 
 export class ContentfulService {
   constructor(
@@ -16,7 +19,7 @@ export class ContentfulService {
   ) {}
 
   async getProvidersByFilter(filters: Filters) {
-    return await this.contentClient.getEntries<TypeServiceProviderSkeleton>({
+    return await this.contentClient.withoutUnresolvableLinks.getEntries<TypeServiceProviderSkeleton>({
       skip: (filters.page - 1) * PER_PAGE,
       limit: PER_PAGE,
       content_type: 'serviceProvider',
@@ -64,8 +67,8 @@ export class ContentfulService {
 
     return {
       dataType: ContentfulService.filterTagsByName(tags.items, TagNames.DATA_TYPE),
-      geography: geographyField?.items?.validations?.[0].in,
-      costs: costsField?.items?.validations?.[0].in,
+      geography: (geographyField?.items?.validations?.[0].in ?? []) as string[],
+      costs: (costsField?.items?.validations?.[0].in ?? []) as string[],
     }
   }
 
@@ -100,7 +103,7 @@ export class ContentfulService {
       case 'lowest-population':
         return 'fields.population'
       default:
-        return '-sys.createdAt'
+        return 'fields.name'
     }
   }
 

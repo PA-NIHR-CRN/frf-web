@@ -26,6 +26,8 @@ module.exports = {
     colors: {
       black: '#000000',
       white: '#ffffff',
+      darkGrey: 'var(--dark-grey)',
+      red: 'var(--red)',
       aqua: {
         100: 'var(--colour-aqua-100)',
         80: 'var(--colour-aqua-80)',
@@ -52,6 +54,7 @@ module.exports = {
         20: 'var(--colour-green-20)',
       },
       grey: {
+        120: 'var(--colour-grey-120)',
         100: 'var(--colour-grey-100)',
         80: 'var(--colour-grey-80)',
         40: 'var(--colour-grey-40)',

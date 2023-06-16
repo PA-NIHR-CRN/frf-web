@@ -1,4 +1,5 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+
 import type { TypeInformationGovernanceDataSourceSkeleton } from "./TypeInformationGovernanceDataSource";
 import type { TypeServiceTypeBlockSkeleton } from "./TypeServiceTypeBlock";
 import type { TypeTextBlockSkeleton } from "./TypeTextBlock";
@@ -51,7 +52,7 @@ export interface TypeServiceProviderFields {
      * @name Population
      * @localized false
      */
-    population?: EntryFieldTypes.Integer;
+    population?: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'suitedTo' (Suited To)
      * @name Suited To
@@ -138,7 +139,7 @@ export interface TypeServiceProviderFields {
  * @type {TypeServiceProviderSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 1
+ * @version 9
  */
 export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderFields, "serviceProvider">;
 /**
@@ -147,6 +148,6 @@ export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderF
  * @type {TypeServiceProvider}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 1
+ * @version 9
  */
 export type TypeServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeServiceProviderSkeleton, Modifiers, Locales>;

@@ -1,6 +1,7 @@
 import { strict as assert } from 'assert'
 import { createClient as createContentClient } from 'contentful'
 import { createClient as createManagementClient } from 'contentful-management'
+
 import { ContentfulService } from './contentfulService'
 
 const {

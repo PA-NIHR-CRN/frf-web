@@ -1,0 +1,7 @@
+export * from './GeographicalCoverage/GeographicalCoverage'
+export * from './ProviderHeading/ProviderHeading'
+export * from './ProviderOrganisation/ProviderOrganisation'
+export * from './ServiceTypesCostTable/ServiceTypesCostTable'
+export * from './ShortDescription/ShortDescription'
+export * from './SuitedList/SuitedList'
+export * from './TypesOfDataList/TypesOfDataList'

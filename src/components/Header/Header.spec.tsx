@@ -1,6 +1,8 @@
-import { act, render, screen, within } from '@/config/test-utils'
 import userEvent from '@testing-library/user-event'
 import mockRouter from 'next-router-mock'
+
+import { act, render, screen, within } from '@/config/test-utils'
+
 import { Header } from './Header'
 
 jest.mock('next/router', () => require('next-router-mock'))

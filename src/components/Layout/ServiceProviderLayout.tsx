@@ -1,7 +1,8 @@
-import { ReactNode } from 'react'
-import { RootLayout } from './RootLayout'
 import Link from 'next/link'
+import { ReactNode } from 'react'
+
 import { Container } from '../Container/Container'
+import { RootLayout } from './RootLayout'
 
 export function ServiceProviderLayout({ children }: { children: ReactNode }) {
   return (

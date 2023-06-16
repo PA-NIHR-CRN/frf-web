@@ -1,0 +1,300 @@
+{
+  "sys": {
+    "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+    "id": "serviceProvider",
+    "type": "ContentType",
+    "createdAt": "2023-06-05T14:41:52.970Z",
+    "updatedAt": "2023-06-12T10:26:28.231Z",
+    "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+    "publishedVersion": 3,
+    "publishedAt": "2023-06-12T10:26:28.231Z",
+    "firstPublishedAt": "2023-06-05T14:41:54.076Z",
+    "createdBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+    "updatedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } },
+    "publishedCounter": 2,
+    "version": 4,
+    "publishedBy": { "sys": { "type": "Link", "linkType": "User", "id": "0e5NmQEjI50YvjZsuXVNKL" } }
+  },
+  "displayField": "name",
+  "name": "Service Provider",
+  "description": "",
+  "fields": [
+    {
+      "id": "name",
+      "name": "Name",
+      "type": "Symbol",
+      "localized": false,
+      "required": true,
+      "validations": [],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "slug",
+      "name": "Slug",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "providerOrganisation",
+      "name": "Provider Organisation",
+      "type": "Symbol",
+      "localized": false,
+      "required": true,
+      "validations": [],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "shortDescription",
+      "name": "Short Description",
+      "type": "RichText",
+      "localized": false,
+      "required": true,
+      "validations": [
+        { "enabledMarks": ["bold"], "message": "Only bold marks are allowed" },
+        {
+          "enabledNodeTypes": [
+            "heading-2",
+            "unordered-list",
+            "ordered-list",
+            "hyperlink",
+            "asset-hyperlink",
+            "embedded-asset-block",
+            "embedded-entry-block",
+            "embedded-entry-inline"
+          ],
+          "message": "Only heading 2, unordered list, ordered list, link to Url, link to asset, asset, block entry, and inline entry nodes are allowed"
+        },
+        { "nodes": {} }
+      ],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "geography",
+      "name": "Geography",
+      "type": "Array",
+      "localized": false,
+      "required": true,
+      "validations": [],
+      "disabled": false,
+      "omitted": false,
+      "items": {
+        "type": "Symbol",
+        "validations": [{ "in": ["UK wide", "England", "Northern Ireland", "Scotland", "Wales"] }]
+      }
+    },
+    {
+      "id": "regionalCoverage",
+      "name": "Regional Coverage",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "population",
+      "name": "Population",
+      "type": "Integer",
+      "localized": false,
+      "required": false,
+      "validations": [],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "suitedTo",
+      "name": "Suited To",
+      "type": "Array",
+      "localized": false,
+      "required": false,
+      "validations": [],
+      "disabled": false,
+      "omitted": false,
+      "items": { "type": "Symbol", "validations": [] }
+    },
+    {
+      "id": "notSuitedTo",
+      "name": "Not Suited To",
+      "type": "Array",
+      "localized": false,
+      "required": false,
+      "validations": [],
+      "disabled": false,
+      "omitted": false,
+      "items": { "type": "Symbol", "validations": [] }
+    },
+    {
+      "id": "costs",
+      "name": "Costs",
+      "type": "Array",
+      "localized": false,
+      "required": false,
+      "validations": [{ "size": { "max": 3 } }],
+      "disabled": false,
+      "omitted": false,
+      "items": {
+        "type": "Symbol",
+        "validations": [
+          {
+            "in": [
+              "Find: Free of charge (All studies)",
+              "Find: Free of charge (non-commercial studies only)",
+              "Find: Chargeable service",
+              "Recruit: Free of charge (All studies)",
+              "Recruit: Free of charge (non-commercial studies only)",
+              "Recruit: Chargeable service",
+              "Follow-Up: Free of charge (All studies)",
+              "Follow-Up: Free of charge (non-commercial studies only)",
+              "Follow-Up: Chargeable service"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "findCostChargeableDescription",
+      "name": "Find Cost (Chargeable Description)",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [{ "size": { "max": 100 } }],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "recruitCostChargeableDescription",
+      "name": "Recruit Cost (Chargeable Description)",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [{ "size": { "max": 100 } }],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "followUpCostChargeableDescription",
+      "name": "Follow-Up Cost (Chargeable Description)",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [{ "size": { "max": 100 } }],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "videoUrl",
+      "name": "Video URL",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [
+        {
+          "regexp": {
+            "pattern": "^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-/]))?$",
+            "flags": null
+          }
+        }
+      ],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "website",
+      "name": "Website URL",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [
+        {
+          "regexp": {
+            "pattern": "^(ftp|http|https):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-/]))?$",
+            "flags": null
+          }
+        }
+      ],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "websiteName",
+      "name": "Website Name",
+      "type": "Symbol",
+      "localized": false,
+      "required": false,
+      "validations": [],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "dataSpecificsAndCoding",
+      "name": "Data Specifics and Coding",
+      "type": "Array",
+      "localized": false,
+      "required": false,
+      "validations": [],
+      "disabled": false,
+      "omitted": false,
+      "items": { "type": "Link", "validations": [{ "linkContentType": ["textBlock"] }], "linkType": "Entry" }
+    },
+    {
+      "id": "geographicAndPopulationCoverage",
+      "name": "Geographic and Population Coverage",
+      "type": "RichText",
+      "localized": false,
+      "required": false,
+      "validations": [
+        { "enabledMarks": ["bold"], "message": "Only bold marks are allowed" },
+        {
+          "enabledNodeTypes": ["heading-3", "unordered-list", "ordered-list", "hyperlink"],
+          "message": "Only heading 3, unordered list, ordered list, and link to Url nodes are allowed"
+        },
+        { "nodes": {} }
+      ],
+      "disabled": false,
+      "omitted": false
+    },
+    {
+      "id": "serviceTypes",
+      "name": "Service Descriptions",
+      "type": "Array",
+      "localized": false,
+      "required": false,
+      "validations": [{ "size": { "max": 3 } }],
+      "disabled": false,
+      "omitted": false,
+      "items": { "type": "Link", "validations": [{ "linkContentType": ["serviceTypeBlock"] }], "linkType": "Entry" }
+    },
+    {
+      "id": "informationGovernance",
+      "name": "Information Governance Overview",
+      "type": "Link",
+      "localized": false,
+      "required": false,
+      "validations": [{ "linkContentType": ["informationGovernanceDataSource"] }],
+      "disabled": false,
+      "omitted": false,
+      "linkType": "Entry"
+    }
+  ],
+  "metadata": {
+    "annotations": {
+      "ContentType": [{ "sys": { "id": "Contentful:AggregateRoot", "type": "Link", "linkType": "Annotation" } }],
+      "ContentTypeField": {
+        "serviceTypes": [
+          { "sys": { "id": "Contentful:AggregateComponent", "type": "Link", "linkType": "Annotation" } }
+        ],
+        "dataSpecificsAndCoding": [
+          { "sys": { "id": "Contentful:AggregateComponent", "type": "Link", "linkType": "Annotation" } }
+        ]
+      }
+    }
+  }
+}
