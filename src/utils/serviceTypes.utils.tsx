@@ -31,6 +31,7 @@ export const formatServiceTypesCostsTable = (
 
 const formatSingleServiceTypeCostRow = (cost: string, costDescription: string | undefined, key: number) => {
   const costSplit = cost.split(':')
+  const costDescriptionText = costDescription ? ` - ${costDescription}` : ''
   return (
     <tr key={key} className="govuk-table__row border-t border-grey-120">
       <th
@@ -39,7 +40,7 @@ const formatSingleServiceTypeCostRow = (cost: string, costDescription: string | 
       >
         {costSplit[0]}
       </th>
-      <td className="govuk-table__cell pl-4">{costDescription || costSplit[1].trim()}</td>
+      <td className="govuk-table__cell pl-4">{`${costSplit[1].trim()}${costDescriptionText}`}</td>
     </tr>
   )
 }
