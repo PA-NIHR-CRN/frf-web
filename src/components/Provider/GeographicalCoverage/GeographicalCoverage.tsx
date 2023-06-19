@@ -21,7 +21,7 @@ export const GeographicalCoverage = ({
     <List heading="Coverage:" aria-label="Coverage" className={className}>
       <ListItem icon={<MapPin />} className="flex-wrap">
         Geographical: {regionalCoverage || geography.join(', ')}
-        {geographySupportingText && <p className="ml-[36px]">{geographySupportingText}</p>}
+        {geographySupportingText && <p className="mb-0 ml-[36px]">{geographySupportingText}</p>}
       </ListItem>
       {population && <ListItem icon={<Users />}>Population: {population}</ListItem>}
     </List>
