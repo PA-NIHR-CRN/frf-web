@@ -128,6 +128,7 @@ export default function ServiceProviders({
                           {/* Geography */}
                           <GeographicalCoverage
                             geography={fields.geography}
+                            geographySupportingText={fields.geographySupportingText}
                             regionalCoverage={fields.regionalCoverage}
                             population={fields.population}
                             className="mb-6"

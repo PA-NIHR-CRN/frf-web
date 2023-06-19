@@ -7,6 +7,7 @@ test('Geographical coverage with regional coverage', () => {
     <GeographicalCoverage
       regionalCoverage="Wessex and South London"
       geography={['England', 'Wales', 'Scotland']}
+      geographySupportingText=""
       population="Freetext"
     />
   )
@@ -27,6 +28,7 @@ test('Geographical coverage without regional coverage', () => {
     <GeographicalCoverage
       regionalCoverage={undefined}
       geography={['England', 'Wales', 'Scotland']}
+      geographySupportingText=""
       population="10,000,000"
     />
   )
@@ -47,6 +49,7 @@ test('Geographical coverage without population', () => {
     <GeographicalCoverage
       regionalCoverage={undefined}
       geography={['England', 'Wales', 'Scotland']}
+      geographySupportingText=""
       population={undefined}
     />
   )
@@ -59,4 +62,17 @@ test('Geographical coverage without population', () => {
   expect(list).toHaveLength(1)
   expect(within(list[0]).getByText(/Geographical: England, Wales, Scotland/)).toBeInTheDocument()
   expect(within(list[0]).getByTestId('frf-icon-map-pin')).toHaveAttribute('aria-hidden')
+})
+
+test('Geographical supporting text', () => {
+  render(
+    <GeographicalCoverage
+      regionalCoverage={undefined}
+      geography={['England', 'Wales', 'Scotland']}
+      geographySupportingText="Mock supporting text"
+      population={undefined}
+    />
+  )
+
+  expect(screen.getByText(/Mock supporting text/)).toBeInTheDocument()
 })
