@@ -6,7 +6,10 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useClickAway } from 'react-use'
 
+import { PAGE_TITLE } from '@/constants'
 import { menu } from '@/constants/menu'
+
+import HomeIcon from '../Icons/HomeIcon'
 
 function Logo() {
   return (
@@ -30,11 +33,22 @@ function Logo() {
 }
 
 function MenuButton({ navOpen }: { navOpen: boolean }) {
+  const router = useRouter()
+
   return (
-    <div>
+    <div className="flex items-center">
+      {router.asPath !== '/' && (
+        <Link
+          href="/"
+          className="mr-1 flex h-[3rem] items-center border-r border-grey-80 px-3"
+          aria-label={`Go to ${PAGE_TITLE} homepage`}
+        >
+          <HomeIcon className="block fill-navy-100" />
+        </Link>
+      )}
       <Link
         href="/browse"
-        className="js-disabled-show govuk-button govuk-body mb-0 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 underline shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
+        className="js-disabled-show govuk-button govuk-body mb-0 ml-1 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 underline shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
       >
         Menu
       </Link>
