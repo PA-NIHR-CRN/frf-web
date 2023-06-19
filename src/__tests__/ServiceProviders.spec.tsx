@@ -1,12 +1,11 @@
 import userEvent from '@testing-library/user-event'
 import { GetServerSidePropsContext } from 'next'
+import mockRouter from 'next-router-mock'
 
 import { render, screen, within } from '@/config/test-utils'
 import { defaultMock, pageTwoMock } from '@/mocks/serviceProviders'
 import ServiceProviders, { getServerSideProps, ServiceProvidersProps } from '@/pages/providers'
 import { setupMockServer } from '@/utils'
-
-jest.mock('next/router', () => require('next-router-mock'))
 
 const [server, mockContentfulResponse] = setupMockServer()
 
@@ -144,6 +143,8 @@ test('Data service provider details older than 3 months', async () => {
 })
 
 test('Page two results', async () => {
+  mockRouter.push('?page=2')
+
   mockContentfulResponse(pageTwoMock)
 
   const { props } = (await getServerSideProps({
