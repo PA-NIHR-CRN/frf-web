@@ -19,8 +19,10 @@ export const GeographicalCoverage = ({
 }: GeographicalCoverageProps) => {
   return (
     <List heading="Coverage:" aria-label="Coverage" className={className}>
-      <ListItem icon={<MapPin />}>Geographical: {regionalCoverage || geography.join(', ')}</ListItem>
-      <p className="ml-[36px]">{geographySupportingText}</p>
+      <ListItem icon={<MapPin />} className="flex-wrap">
+        Geographical: {regionalCoverage || geography.join(', ')}
+        {geographySupportingText && <p className="ml-[36px]">{geographySupportingText}</p>}
+      </ListItem>
       {population && <ListItem icon={<Users />}>Population: {population}</ListItem>}
     </List>
   )
