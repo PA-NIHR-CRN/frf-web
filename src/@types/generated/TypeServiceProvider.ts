@@ -36,11 +36,23 @@ export interface TypeServiceProviderFields {
      */
     shortDescription: EntryFieldTypes.RichText;
     /**
+     * Field type definition for field 'fundedBy' (Funded by)
+     * @name Funded by
+     * @localized false
+     */
+    fundedBy?: EntryFieldTypes.Symbol;
+    /**
      * Field type definition for field 'geography' (Geography)
      * @name Geography
      * @localized false
      */
     geography: EntryFieldTypes.Array<EntryFieldTypes.Symbol<"England" | "Northern Ireland" | "Scotland" | "UK wide" | "Wales">>;
+    /**
+     * Field type definition for field 'geographySupportingText' (Geography Supporting Text)
+     * @name Geography Supporting Text
+     * @localized false
+     */
+    geographySupportingText?: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'regionalCoverage' (Regional Coverage)
      * @name Regional Coverage
@@ -139,7 +151,7 @@ export interface TypeServiceProviderFields {
  * @type {TypeServiceProviderSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 9
+ * @version 13
  */
 export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderFields, "serviceProvider">;
 /**
@@ -148,6 +160,6 @@ export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderF
  * @type {TypeServiceProvider}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 9
+ * @version 13
  */
 export type TypeServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeServiceProviderSkeleton, Modifiers, Locales>;
