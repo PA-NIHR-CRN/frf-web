@@ -58,15 +58,11 @@ export class ContentfulService {
     const space = await this.managementClient.getSpace(contentfulSpaceId)
     const environment = await space.getEnvironment(contentfulEnvironment)
     const { fields } = await environment.getContentType('serviceProvider')
-    const tags = await environment.getTags({
-      order: 'name',
-    })
 
     const geographyField = fields.find((f) => f.id === 'geography')
     const costsField = fields.find((f) => f.id === 'costs')
 
     return {
-      dataType: ContentfulService.filterTagsByName(tags.items, TagNames.DATA_TYPE),
       geography: (geographyField?.items?.validations?.[0].in ?? []) as string[],
       costs: (costsField?.items?.validations?.[0].in ?? []) as string[],
     }
