@@ -91,89 +91,92 @@ export default function ServiceProviders({
             </div>
 
             {/* Cards */}
-            <div className="mt-5">
+            <ol className="mt-5" aria-label="Data service providers">
               {items.map(({ sys: { createdAt, updatedAt }, fields, metadata }) => {
                 return (
-                  <Card
-                    as="article"
-                    key={fields.slug}
-                    className="govuk-body mb-8"
-                    aria-labelledby={`article-${fields.slug}-title`}
-                  >
-                    <div className="flex flex-col justify-between border-b border-grey-80 p-4">
-                      <ProviderHeading
-                        slug={fields.slug ?? '/'}
-                        isNew={numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT}
-                      >
-                        {fields.name}
-                      </ProviderHeading>
-                      <ProviderOrganisation>{fields.providerOrganisation}</ProviderOrganisation>
-                    </div>
-
-                    <div className="p-4">
-                      <div className="govuk-grid-row">
-                        <div className="govuk-grid-column-three-quarters-from-desktop pr-5">
-                          {/* Description */}
-                          <ShortDescription>{fields.shortDescription}</ShortDescription>
-
-                          {/* Service costs */}
-                          <ServiceTypesCostTable
-                            costs={fields.costs}
-                            findCostChargeableDescription={fields.findCostChargeableDescription}
-                            recruitCostChargeableDescription={fields.recruitCostChargeableDescription}
-                            followUpCostChargeableDescription={fields.followUpCostChargeableDescription}
-                            className="mb-5 mt-6"
-                          />
-
-                          {/* Geography */}
-                          <GeographicalCoverage
-                            geography={fields.geography}
-                            regionalCoverage={fields.regionalCoverage}
-                            population={fields.population}
-                            className="mb-6"
-                          />
-
-                          {/* Suited to */}
-                          <SuitedList showHeading type="positive" items={fields.suitedTo} />
-
-                          {/* Not suited to */}
-                          <SuitedList showHeading={false} type="negative" items={fields.notSuitedTo} className="mt-2" />
-                        </div>
-
-                        {/* Side info */}
-                        <div className="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0">
-                          {/* Types of Data */}
-                          <TypesOfDataList tags={metadata.tags} />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Card footer */}
-                    <div className="items-center justify-between gap-3 border-t border-grey-80 p-4 sm:flex">
-                      <div className="govuk-body-s mb-3 flex flex-col flex-wrap gap-3 md:mb-0 md:flex-row">
-                        <div className="whitespace-nowrap">
-                          <strong>First published:</strong>
-                          <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
-                        </div>
-                        <div className="whitespace-nowrap">
-                          <strong>Last updated:</strong>
-                          <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
-                        </div>
-                      </div>
-                      <div>
-                        <Link
-                          href={`/providers/${fields.slug}`}
-                          className="govuk-button mb-0 whitespace-nowrap"
-                          aria-label={`View more details for ${fields.name}`}
+                  <li key={fields.slug}>
+                    <Card as="article" className="govuk-body mb-8" aria-labelledby={`article-${fields.slug}-title`}>
+                      <div className="flex flex-col justify-between border-b border-grey-80 p-4">
+                        <ProviderHeading
+                          slug={fields.slug ?? '/'}
+                          isNew={numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT}
                         >
-                          View more details
-                        </Link>
+                          {fields.name}
+                        </ProviderHeading>
+                        <ProviderOrganisation>{fields.providerOrganisation}</ProviderOrganisation>
                       </div>
-                    </div>
-                  </Card>
+
+                      <div className="p-4">
+                        <div className="govuk-grid-row">
+                          <div className="govuk-grid-column-three-quarters-from-desktop pr-5">
+                            {/* Description */}
+                            <ShortDescription>{fields.shortDescription}</ShortDescription>
+
+                            {/* Service costs */}
+                            <ServiceTypesCostTable
+                              costs={fields.costs}
+                              findCostChargeableDescription={fields.findCostChargeableDescription}
+                              recruitCostChargeableDescription={fields.recruitCostChargeableDescription}
+                              followUpCostChargeableDescription={fields.followUpCostChargeableDescription}
+                              className="mb-5 mt-6"
+                            />
+
+                            {/* Geography */}
+                            <GeographicalCoverage
+                              geography={fields.geography}
+                              geographySupportingText={fields.geographySupportingText}
+                              regionalCoverage={fields.regionalCoverage}
+                              population={fields.population}
+                              className="mb-6"
+                            />
+
+                            {/* Suited to */}
+                            <SuitedList showHeading type="positive" items={fields.suitedTo} />
+
+                            {/* Not suited to */}
+                            <SuitedList
+                              showHeading={false}
+                              type="negative"
+                              items={fields.notSuitedTo}
+                              className="mt-2"
+                            />
+                          </div>
+
+                          {/* Side info */}
+                          <div className="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0">
+                            {/* Types of Data */}
+                            <TypesOfDataList tags={metadata.tags} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Card footer */}
+                      <div className="items-center justify-between gap-3 border-t border-grey-80 p-4 sm:flex">
+                        <div className="govuk-body-s mb-3 flex flex-col flex-wrap gap-3 md:mb-0 md:flex-row">
+                          <div className="whitespace-nowrap">
+                            <strong>First published:</strong>
+                            <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
+                          </div>
+                          <div className="whitespace-nowrap">
+                            <strong>Last updated:</strong>
+                            <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
+                          </div>
+                        </div>
+                        <div>
+                          <Link
+                            href={`/providers/${fields.slug}`}
+                            className="govuk-button mb-0 whitespace-nowrap"
+                            aria-label={`View more details for ${fields.name}`}
+                          >
+                            View more details
+                          </Link>
+                        </div>
+                      </div>
+                    </Card>
+                  </li>
                 )
               })}
-            </div>
+            </ol>
 
             <Pagination initialPage={initialPage} initialPageSize={initialPageSize} totalItems={totalItems} />
           </div>

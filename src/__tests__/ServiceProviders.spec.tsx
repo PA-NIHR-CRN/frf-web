@@ -1,12 +1,11 @@
 import userEvent from '@testing-library/user-event'
 import { GetServerSidePropsContext } from 'next'
+import mockRouter from 'next-router-mock'
 
 import { render, screen, within } from '@/config/test-utils'
 import { defaultMock, pageTwoMock } from '@/mocks/serviceProviders'
 import ServiceProviders, { getServerSideProps, ServiceProvidersProps } from '@/pages/providers'
 import { setupMockServer } from '@/utils'
-
-jest.mock('next/router', () => require('next-router-mock'))
 
 const [server, mockContentfulResponse] = setupMockServer()
 
@@ -50,10 +49,16 @@ test('Data service provider details newly published', async () => {
 
   render(<ServiceProviders {...props} />)
 
-  const result = screen.getByRole('article', { name: 'Genomic Profile Register – New' })
+  expect(screen.getByRole('list', { name: 'Data service providers' })).toBeInTheDocument()
+
+  const result = screen.getByRole('article', {
+    name: 'Recently published Data service provider: Genomic Profile Register',
+  })
 
   // Heading
-  expect(within(result).getByRole('link', { name: 'Genomic Profile Register – New' })).toBeInTheDocument()
+  expect(
+    within(result).getByRole('link', { name: 'Recently published Data service provider: Genomic Profile Register' })
+  ).toBeInTheDocument()
   expect(
     within(result).getByRole('heading', { name: 'Provider organisation: Genomic Profile Register', level: 4 })
   ).toBeInTheDocument()
@@ -100,10 +105,14 @@ test('Data service provider details older than 3 months', async () => {
 
   render(<ServiceProviders {...props} />)
 
-  const result = screen.getByRole('article', { name: 'Join Dementia Research' })
+  const result = screen.getByRole('article', {
+    name: 'Data service provider: Join Dementia Research',
+  })
 
   // Heading
-  expect(within(result).getByRole('link', { name: 'Join Dementia Research' })).toBeInTheDocument()
+  expect(
+    within(result).getByRole('link', { name: 'Data service provider: Join Dementia Research' })
+  ).toBeInTheDocument()
   expect(
     within(result).getByRole('heading', {
       name: 'Provider organisation: Department of Health and Social Care',
@@ -144,6 +153,8 @@ test('Data service provider details older than 3 months', async () => {
 })
 
 test('Page two results', async () => {
+  mockRouter.push('?page=2')
+
   mockContentfulResponse(pageTwoMock)
 
   const { props } = (await getServerSideProps({

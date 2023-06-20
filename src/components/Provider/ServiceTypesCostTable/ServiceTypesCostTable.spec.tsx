@@ -79,7 +79,7 @@ test('Costs table with a custom description', () => {
   const rows = screen.getAllByRole('row')
   expect(rows).toHaveLength(3)
 
-  expect(within(rows[0]).getByText('Mock find description'))
-  expect(within(rows[1]).getByText('Mock recruit description'))
-  expect(within(rows[2]).getByText('Mock follow-up description'))
+  expect(within(rows[0]).getByText('Free of charge (All studies) - Mock find description'))
+  expect(within(rows[1]).getByText('Chargeable service - Mock recruit description'))
+  expect(within(rows[2]).getByText('Chargeable service - Mock follow-up description'))
 })

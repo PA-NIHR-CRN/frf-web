@@ -154,3 +154,19 @@ test('Hide the navigation menu when changing page', async () => {
 
   expect(menu).not.toBeVisible()
 })
+
+test('Shows a home icon when browsing on pages that are not the home page', async () => {
+  mockRouter.push('/')
+
+  render(<Header />)
+
+  expect(screen.queryByRole('link', { name: 'Go to Find, Recruit and Follow-up homepage' })).not.toBeInTheDocument()
+
+  act(() => {
+    mockRouter.push('/providers')
+  })
+
+  await screen.findByRole('link', { name: 'Go to Find, Recruit and Follow-up homepage' })
+
+  expect(screen.getByTestId('frf-icon-home')).toHaveAttribute('aria-hidden')
+})

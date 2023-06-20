@@ -101,15 +101,6 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
             ))}
           </FilterCategory>
 
-          {/* Source of data */}
-          <FilterCategory title="Source of data">
-            {options.dataType.map((item, i) => (
-              <Checkbox key={i} name="dataType" value={item} small>
-                {item}
-              </Checkbox>
-            ))}
-          </FilterCategory>
-
           {/* Geographical coverage */}
           <FilterCategory title="Geographical coverage">
             {options.geography.map((item, i) => (

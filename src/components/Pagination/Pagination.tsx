@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { usePagination } from 'react-use-pagination'
 
 type PaginationProps = {
@@ -19,6 +20,15 @@ export default function Pagination({ initialPage, initialPageSize, totalItems }:
 
   const router = useRouter()
 
+  /* Ensure client-side state is kept in sync with the URL */
+  useEffect(() => {
+    if (router.query.page) {
+      return setPage(Number(router.query.page) - 1)
+    }
+    return setPage(0)
+  }, [router.query.page, setPage])
+
+  /* Skip rendering if there's no content to show */
   if (totalItems === 0) return null
 
   return (

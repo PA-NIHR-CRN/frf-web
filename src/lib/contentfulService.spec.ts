@@ -182,7 +182,6 @@ describe('ContentfulService', () => {
       const entries = await contentfulService.getProviderFilterOptionValues()
 
       expect(entries).toStrictEqual({
-        dataType: ['Audit', 'Biological samples'],
         geography: ['Test Geography'],
         costs: ['Test Cost'],
       })
