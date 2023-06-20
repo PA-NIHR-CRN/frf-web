@@ -253,6 +253,232 @@
         "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
         "findCostChargeableDescription": "Free of charge (all studies)",
         "recruitCostChargeableDescription": "Chargeable service - £XXX",
+        "typesOfDataAvailableList": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "unordered-list",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "list-item",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Primary care ",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "nodeType": "list-item",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Secondary care",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "nodeType": "list-item",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Participant reported",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
+            }
+          ]
+        },
+        "typesOfDataAvailableDetail": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Primary care ",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Secondary care",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    },
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "COVID 19",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        },
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Medicines dispensed",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        },
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Work force",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        }
+                      ],
+                      "nodeType": "unordered-list"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Participant reported",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    },
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Test sub data type",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        }
+                      ],
+                      "nodeType": "unordered-list"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                }
+              ],
+              "nodeType": "unordered-list"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
         "dataSpecificsAndCoding": [{ "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }]
       }
     },
@@ -468,6 +694,232 @@
         "costs": ["Find: Free of charge (All studies)", "Recruit: Chargeable service", "Follow-Up: Chargeable service"],
         "findCostChargeableDescription": "Free of charge (all studies)",
         "recruitCostChargeableDescription": "Chargeable service - £XXX",
+        "typesOfDataAvailableList": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "unordered-list",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "list-item",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Primary care ",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "nodeType": "list-item",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Secondary care",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "nodeType": "list-item",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Participant reported",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
+            }
+          ]
+        },
+        "typesOfDataAvailableDetail": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Primary care ",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Secondary care",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    },
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "COVID 19",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        },
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Medicines dispensed",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        },
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Work force",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        }
+                      ],
+                      "nodeType": "unordered-list"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Participant reported",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    },
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Test sub data type",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        }
+                      ],
+                      "nodeType": "unordered-list"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                }
+              ],
+              "nodeType": "unordered-list"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
         "dataSpecificsAndCoding": [{ "sys": { "type": "Link", "linkType": "Entry", "id": "1m4Cj1qRu8KllLoBuwUk8l" } }]
       }
     }
