@@ -49,6 +49,8 @@ test('Data service provider details newly published', async () => {
 
   render(<ServiceProviders {...props} />)
 
+  expect(screen.getByRole('list', { name: 'Data service providers' })).toBeInTheDocument()
+
   const result = screen.getByRole('article', {
     name: 'Recently published Data service provider: Genomic Profile Register',
   })
