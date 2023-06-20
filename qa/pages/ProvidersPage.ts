@@ -1,5 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test'
 
+import { numDaysBetween } from '../utils/UtilFunctions'
+
 //Declare Page Objects
 export default class ProvidersPage {
   readonly page: Page
@@ -41,7 +43,7 @@ export default class ProvidersPage {
 
     //Locators
     this.btnViewMoreDetails = page.locator('a[class="govuk-button mb-0 whitespace-nowrap"]')
-    this.dspListArticle = page.locator('div[class="mt-5"]')
+    this.dspListArticle = page.locator('ol[class="mt-5"]')
     this.dspListPageTitle = page.locator('p[class="govuk-heading-m mb-0 whitespace-nowrap"]')
     this.dspResultArticle = page.locator('article[class="shadow-card flex h-full flex-col bg-white govuk-body mb-8"]')
     this.dspResultHeader = page.locator('div[class="flex flex-col justify-between border-b border-grey-80 p-4"]')
@@ -107,9 +109,8 @@ export default class ProvidersPage {
   }
 
   async assertPageTitle() {
-    await expect(this.dspListPageTitle).toBeVisible()
     const titleText = await this.dspListPageTitle.textContent()
-    const txtResTitleNo = titleText?.split(' ').at(0)
+    const txtResTitleNo = await this.getPageTitleNumber()
     const splitIndex = titleText?.indexOf(' ')
 
     if (txtResTitleNo && splitIndex !== undefined) {
@@ -207,15 +208,9 @@ export default class ProvidersPage {
 
       const alignedCurrentDate = new Date(strCurrentDate)
       const alignedPublishDate = new Date(strPublishDate)
-      const daysDifference = this.numDaysBetween(alignedCurrentDate, alignedPublishDate)
-      expect(daysDifference).toBeLessThan(90) //check logic behind it
+      const daysDifference = numDaysBetween(alignedCurrentDate, alignedPublishDate)
+      expect(daysDifference).toBeLessThan(90)
     }
-  }
-
-  //stick this in a utils file
-  numDaysBetween(d1: Date, d2: Date): number {
-    const diff = Math.abs(d1.getTime() - d2.getTime())
-    return diff / (1000 * 60 * 60 * 24)
   }
 
   async assertDspNewIconAppears() {
@@ -224,9 +219,7 @@ export default class ProvidersPage {
   }
 
   async assertDspResultsGreaterThanFour() {
-    await expect(this.dspListPageTitle).toBeVisible()
-    const titleText = await this.dspListPageTitle.textContent()
-    const txtResTitleNo = titleText?.split(' ').at(0)
+    const txtResTitleNo = await this.getPageTitleNumber()
     if (txtResTitleNo !== undefined) {
       expect(parseInt(txtResTitleNo)).toBeGreaterThan(4)
     }
@@ -263,5 +256,12 @@ export default class ProvidersPage {
     expect(await this.dspListPageTabTitle.textContent()).toBe(
       `Find, Recruit and Follow-up – Search results (page ${pageNo} of ${pageCount})`
     )
+  }
+
+  async getPageTitleNumber(): Promise<string | undefined> {
+    await expect(this.dspListPageTitle).toBeVisible()
+    const titleText = await this.dspListPageTitle.textContent()
+    const txtResTitleNo = titleText?.split(' ').at(0)
+    return txtResTitleNo
   }
 }
