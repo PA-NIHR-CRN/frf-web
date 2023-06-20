@@ -4,7 +4,6 @@ import { expect, Locator, Page } from '@playwright/test'
 export default class HomePage {
   readonly page: Page
   readonly btnProviders: Locator
-  readonly headingPageTitle: Locator
   readonly paragraphIntroText: Locator
   readonly iframeIntroVideo: Locator
   readonly iframePlayerIntroVideo: Locator
@@ -30,7 +29,6 @@ export default class HomePage {
 
     //Locators
     this.btnProviders = page.locator('a', { hasText: 'View all data service providers' })
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l mt-2 lg:mt-0"]')
     this.paragraphIntroText = page.locator('p[class="whitespace-pre-wrap lg:mb-0 lg:pr-6"]')
     this.iframeIntroVideo = page.locator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')
     this.iframePlayerIntroVideo = page
@@ -79,8 +77,6 @@ export default class HomePage {
   async assertOnHomePage() {
     await expect(this.page).toHaveURL('')
     await expect(this.btnProviders).toBeVisible()
-    // await expect(this.headingPageTitle).toBeVisible()
-    // await expect(this.headingPageTitle).toHaveText('Find, Recruit and Follow-up Support')
   }
 
   async assertIntroductorySectionDisplayed() {
