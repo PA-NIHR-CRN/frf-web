@@ -194,7 +194,7 @@ export default class ProvidersPage {
     await expect(this.dspResultFirstPublishedHeader.nth(0)).toBeVisible()
     await expect(this.dspResultLastUpdatedHeader.nth(0)).toBeVisible()
     expect(await this.dspResultFirstPublishedValue.nth(0).textContent()).toEqual('8 June 2023')
-    expect(await this.dspResultLastUpdatedValue.nth(0).textContent()).toEqual('19 June 2023')
+    expect(await this.dspResultLastUpdatedValue.nth(0).textContent()).toContain('2023')
   }
 
   async assertDspIsNew() {

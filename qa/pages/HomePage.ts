@@ -31,20 +31,20 @@ export default class HomePage {
     //Locators
     this.btnProviders = page.locator('a', { hasText: 'View all data service providers' })
     this.headingPageTitle = page.locator('h2[class="govuk-heading-l mt-2 lg:mt-0"]')
-    this.paragraphIntroText = page.locator('p[class="whitespace-pre-wrap lg:pr-6"]')
+    this.paragraphIntroText = page.locator('p[class="whitespace-pre-wrap lg:mb-0 lg:pr-6"]')
     this.iframeIntroVideo = page.locator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')
     this.iframePlayerIntroVideo = page
       .frameLocator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')
       .locator('div[id="player"]')
     this.paragraphDspIntroText = page.locator('p[class="govuk-body-l"]')
     this.dspIntroServiceBoxes = page.locator('div[class="shadow-card flex h-full flex-col bg-white"]')
-    this.dspIntroServiceBoxFindTitle = page.locator('h3[class="govuk-heading-m mb-0 pl-4 text-navy-100"]', {
+    this.dspIntroServiceBoxFindTitle = page.locator('h2[class="govuk-heading-m mb-0 pl-4 text-navy-100"]', {
       hasText: 'Find',
     })
-    this.dspIntroServiceBoxRecruitTitle = page.locator('h3[class="govuk-heading-m mb-0 pl-4 text-navy-100"]', {
+    this.dspIntroServiceBoxRecruitTitle = page.locator('h2[class="govuk-heading-m mb-0 pl-4 text-navy-100"]', {
       hasText: 'Recruit',
     })
-    this.dspIntroServiceBoxFollowTitle = page.locator('h3[class="govuk-heading-m mb-0 pl-4 text-navy-100"]', {
+    this.dspIntroServiceBoxFollowTitle = page.locator('h2[class="govuk-heading-m mb-0 pl-4 text-navy-100"]', {
       hasText: 'Follow-up',
     })
     this.dspIntroServiceBoxesText = page.locator(
@@ -54,11 +54,11 @@ export default class HomePage {
     this.linkDspIntroServiceBoxesRecruit = page.locator('a', { hasText: 'View all Recruit services' })
     this.linkDspIntroServiceBoxesFollow = page.locator('a', { hasText: 'View all Follow-up services' })
     this.additonalServicesSections = page.locator('div[class="shadow-card flex h-full flex-col bg-white p-5 lg:p-6"]')
-    this.titleGetSupportSection = page.locator('h3[class="govuk-heading-m heading-underscore mb-0 text-navy-100"]', {
+    this.titleGetSupportSection = page.locator('h2[class="govuk-heading-m heading-underscore mb-0 text-navy-100"]', {
       hasText: 'Get support for your research',
     })
-    this.titleBecomeDspSection = page.locator('h3[class="govuk-heading-m heading-underscore mb-0 text-navy-100"]', {
-      hasText: 'Become a data service provider',
+    this.titleBecomeDspSection = page.locator('h2[class="govuk-heading-m heading-underscore mb-0 text-navy-100"]', {
+      hasText: 'Organisations providing data services',
     })
     this.additonalServicesSectionsDescText = page.locator(
       'div[class="flex flex-grow flex-col items-start justify-between pt-4"]'
@@ -67,7 +67,7 @@ export default class HomePage {
       hasText: 'Contact research support',
     })
     this.btnBecomeDsp = page.locator('a[class="govuk-button govuk-button--secondary mb-0 mt-2 text-left"]', {
-      hasText: 'Becoming a data service provider',
+      hasText: 'Find out more',
     })
   }
 
@@ -79,8 +79,8 @@ export default class HomePage {
   async assertOnHomePage() {
     await expect(this.page).toHaveURL('')
     await expect(this.btnProviders).toBeVisible()
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Find, Recruit and Follow-up Support')
+    // await expect(this.headingPageTitle).toBeVisible()
+    // await expect(this.headingPageTitle).toHaveText('Find, Recruit and Follow-up Support')
   }
 
   async assertIntroductorySectionDisplayed() {

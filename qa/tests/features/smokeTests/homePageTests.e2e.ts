@@ -106,7 +106,7 @@ test.describe('Home Page Smoke Tests - @frf_4', () => {
       await homePage.assertOnHomePage()
     })
     await test.step('Then I should not see the Home Icon', async () => {
-      await commonItemsPage.assertHomeIconVisible()
+      await commonItemsPage.assertHomeIconHidden()
     })
   })
 })
