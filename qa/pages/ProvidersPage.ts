@@ -36,6 +36,8 @@ export default class ProvidersPage {
   readonly dspListPageTabTitle: Locator
   readonly dspListPageOneOption: Locator
   readonly dspListPageTwoOption: Locator
+  readonly dspListTypeDataHeader: Locator
+  readonly dspListTypeDataList: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -79,6 +81,10 @@ export default class ProvidersPage {
     this.dspListPageTabTitle = page.locator('head title')
     this.dspListPageOneOption = page.locator('a[aria-label="Page 1"]')
     this.dspListPageTwoOption = page.locator('a[aria-label="Page 2"]')
+    this.dspListTypeDataHeader = page.locator('h3[class="govuk-heading-s mb-3 mt-5 md:mt-0"]')
+    this.dspListTypeDataList = page.locator(
+      'div[class="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0"] ul[class="list-disc"]'
+    )
   }
 
   //Page Methods
@@ -263,5 +269,13 @@ export default class ProvidersPage {
     const titleText = await this.dspListPageTitle.textContent()
     const txtResTitleNo = titleText?.split(' ').at(0)
     return txtResTitleNo
+  }
+
+  async assertDspTypeOfData() {
+    await expect(this.dspListTypeDataHeader.nth(0)).toBeVisible()
+    await expect(this.dspListTypeDataList.nth(0)).toBeVisible()
+    await expect(this.dspListTypeDataList.nth(0).locator('li')).toHaveCount(3)
+    await expect(this.dspListTypeDataList.nth(0).locator('li').nth(0)).toHaveText('Primary care')
+    await expect(this.dspListTypeDataList.nth(0).locator('li').nth(2)).toHaveText('Participant reported')
   }
 }

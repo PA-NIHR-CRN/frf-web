@@ -74,10 +74,9 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     await test.step('And I should see the DSP Overview', async () => {
       await providersPage.assertDspOverviewPresent()
     })
-    //Add in once Test Type Data bug is sorted
-    // await test.step('And I should see the Type of data available', async () => {
-    //     await providersPage.assertDspTypeOfData()
-    // })
+    await test.step('And I should see the Type of data available', async () => {
+      await providersPage.assertDspTypeOfData()
+    })
     await test.step('And I should see the Services Available and Costs', async () => {
       await providersPage.assertDspServicesCosts()
     })
