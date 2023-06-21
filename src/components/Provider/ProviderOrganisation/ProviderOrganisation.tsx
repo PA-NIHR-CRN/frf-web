@@ -1,11 +1,15 @@
-type ProviderOrganisationProps = {
+import { ElementType } from 'react'
+
+type ProviderOrganisationProps<Element extends ElementType = ElementType> = {
   children: string
+  as?: Element
 }
 
-export const ProviderOrganisation = ({ children }: ProviderOrganisationProps) => {
-  return (
-    <h4 className="mb-0 text-darkGrey" aria-label={`Provider organisation: ${children}`}>
-      {children}
-    </h4>
-  )
+export function ProviderOrganisation<Element extends ElementType = 'h4'>({
+  as,
+  children,
+}: ProviderOrganisationProps<Element>) {
+  const Component = as ?? 'h4'
+
+  return <Component className="govuk-body-m mb-0 text-darkGrey">{children}</Component>
 }

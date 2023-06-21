@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 import MapPin from '@/components/Icons/MapPin'
 import Users from '@/components/Icons/Users'
 import { List, ListItem } from '@/components/List/List'
@@ -18,10 +20,10 @@ export const GeographicalCoverage = ({
   className,
 }: GeographicalCoverageProps) => {
   return (
-    <List heading="Coverage:" aria-label="Coverage" className={className}>
+    <List heading="Coverage:" aria-label="Coverage" className={clsx(className, 'text-sm')}>
       <ListItem icon={<MapPin />} className="flex-wrap">
         Geographical: {regionalCoverage || geography.join(', ')}
-        {geographySupportingText && <p className="mb-0 ml-[36px]">{geographySupportingText}</p>}
+        {geographySupportingText && <p className="mb-0 ml-[36px] w-full text-sm">{geographySupportingText}</p>}
       </ListItem>
       {population && <ListItem icon={<Users />}>Population: {population}</ListItem>}
     </List>

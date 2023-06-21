@@ -23,10 +23,10 @@ export default function Browse() {
 
                   return (
                     <li key={key}>
-                      <Link className="text-base" href={item.link}>
+                      <Link className="govuk-heading-s mb-1" href={item.link}>
                         {item.text}
                       </Link>
-                      <p className="text-sm">{item.description}</p>
+                      <p className="govuk-body-s">{item.description}</p>
                     </li>
                   )
                 })}

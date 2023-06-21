@@ -23,7 +23,7 @@ export function List<Element extends ElementType = 'ul'>({
   return (
     <>
       {heading && (
-        <h3 className="mb-3 font-bold" aria-hidden>
+        <h3 className="govuk-heading-s mb-3" aria-hidden>
           {heading}
         </h3>
       )}
@@ -47,7 +47,7 @@ export function ListItem({ children, icon, className, ...props }: ListItemProps)
   return (
     <li
       className={clsx('[&:not(:last-child)]:mb-2', className, {
-        'flex list-none gap-2': !!icon,
+        'flex list-none items-center gap-x-2 gap-y-1': !!icon,
       })}
       {...props}
     >

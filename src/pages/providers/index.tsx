@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { Fragment, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Filters as FiltersType } from '@/@types/filters'
 import { Card } from '@/components/Card/Card'
@@ -11,7 +11,7 @@ import { Filters } from '@/components/Filters/Filters'
 import Pagination from '@/components/Pagination/Pagination'
 import {
   GeographicalCoverage,
-  ProviderHeading,
+  ProviderHeadingLink,
   ProviderOrganisation,
   ServiceTypesCostTable,
   ShortDescription,
@@ -101,12 +101,12 @@ export default function ServiceProviders({
                     aria-labelledby={`article-${fields.slug}-title`}
                   >
                     <div className="flex flex-col justify-between border-b border-grey-80 p-4">
-                      <ProviderHeading
+                      <ProviderHeadingLink
                         slug={fields.slug ?? '/'}
                         isNew={numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT}
                       >
                         {fields.name}
-                      </ProviderHeading>
+                      </ProviderHeadingLink>
                       <ProviderOrganisation>{fields.providerOrganisation}</ProviderOrganisation>
                     </div>
 
