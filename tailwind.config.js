@@ -3,6 +3,9 @@ module.exports = {
   important: true,
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    fontFamily: {
+      sans: ['var(--font-primary)'],
+    },
     // https://design-system.service.gov.uk/styles/spacing/
     spacing: {
       0: '0',
@@ -24,6 +27,7 @@ module.exports = {
       lg: ['1.5rem', '1.25'],
     },
     colors: {
+      text: 'var(--text-grey)',
       black: '#000000',
       white: '#ffffff',
       darkGrey: 'var(--dark-grey)',
