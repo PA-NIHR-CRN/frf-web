@@ -49,6 +49,8 @@ test('Data service provider details newly published', async () => {
 
   render(<ServiceProviders {...props} />)
 
+  expect(screen.getByRole('list', { name: 'Data service providers' })).toBeInTheDocument()
+
   const result = screen.getByRole('article', {
     name: 'Recently published Data service provider: Genomic Profile Register',
   })
@@ -79,10 +81,10 @@ test('Data service provider details newly published', async () => {
   expect(within(notSuitedToList).getAllByRole('listitem')).toHaveLength(1)
 
   // Types of data available
-  expect(within(result).getByRole('list', { name: 'Types of data available' })).toBeInTheDocument()
-  expect(within(result).getByText('Hospital In Patient And Out Patient Episodes')).toBeInTheDocument()
-  expect(within(result).getByText('Primary Care')).toBeInTheDocument()
-  expect(within(result).getByText('Other')).toBeInTheDocument()
+  expect(within(result).getByRole('heading', { name: 'Type of data available', level: 3 }))
+  expect(within(result).getByText('Primary care')).toBeInTheDocument()
+  expect(within(result).getByText('Secondary care')).toBeInTheDocument()
+  expect(within(result).getByText('Participant reported')).toBeInTheDocument()
 
   // Published date & Last updated date
   expect(within(result).getByText('First published:')).toBeInTheDocument()
@@ -135,10 +137,10 @@ test('Data service provider details older than 3 months', async () => {
   expect(within(result).queryByRole('list', { name: 'Not suited to:' })).not.toBeInTheDocument()
 
   // Types of data available
-  expect(within(result).getByRole('list', { name: 'Types of data available' })).toBeInTheDocument()
-  expect(within(result).getByText('Hospital In Patient And Out Patient Episodes')).toBeInTheDocument()
-  expect(within(result).getByText('Primary Care')).toBeInTheDocument()
-  expect(within(result).getByText('Other')).toBeInTheDocument()
+  expect(within(result).getByRole('heading', { name: 'Type of data available', level: 3 }))
+  expect(within(result).getByText('Primary care')).toBeInTheDocument()
+  expect(within(result).getByText('Secondary care')).toBeInTheDocument()
+  expect(within(result).getByText('Participant reported')).toBeInTheDocument()
 
   // Published date & Last updated date
   expect(within(result).getByText('First published:')).toBeInTheDocument()
