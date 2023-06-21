@@ -2,7 +2,7 @@ import { documentToReactComponents, Options } from '@contentful/rich-text-react-
 import { BLOCKS, Document, MARKS } from '@contentful/rich-text-types'
 import React, { FC, ReactNode } from 'react'
 
-import { List, ListItem } from '../List/List'
+import { List, ListItem } from '@/components/List/List'
 
 const Bold = ({ children }: { children: ReactNode }) => <p className="bold">{children}</p>
 

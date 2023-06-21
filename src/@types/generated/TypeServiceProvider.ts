@@ -1,6 +1,5 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 
-import type { TypeInformationGovernanceDataSourceSkeleton } from "./TypeInformationGovernanceDataSource";
 import type { TypeServiceTypeBlockSkeleton } from "./TypeServiceTypeBlock";
 import type { TypeTextBlockSkeleton } from "./TypeTextBlock";
 
@@ -84,18 +83,6 @@ export interface TypeServiceProviderFields {
      */
     costs?: EntryFieldTypes.Array<EntryFieldTypes.Symbol<"Find: Chargeable service" | "Find: Free of charge (All studies)" | "Find: Free of charge (non-commercial studies only)" | "Follow-Up: Chargeable service" | "Follow-Up: Free of charge (All studies)" | "Follow-Up: Free of charge (non-commercial studies only)" | "Recruit: Chargeable service" | "Recruit: Free of charge (All studies)" | "Recruit: Free of charge (non-commercial studies only)">>;
     /**
-     * Field type definition for field 'typesOfDataAvailableList' (Data Types Available (List))
-     * @name Data Types Available (List)
-     * @localized false
-     */
-    typesOfDataAvailableList?: EntryFieldTypes.RichText;
-    /**
-     * Field type definition for field 'typesOfDataAvailableDetail' (Data Types Available (Detail))
-     * @name Data Types Available (Detail)
-     * @localized false
-     */
-    typesOfDataAvailableDetail?: EntryFieldTypes.RichText;
-    /**
      * Field type definition for field 'findCostChargeableDescription' (Find Cost (Chargeable Description))
      * @name Find Cost (Chargeable Description)
      * @localized false
@@ -113,6 +100,18 @@ export interface TypeServiceProviderFields {
      * @localized false
      */
     followUpCostChargeableDescription?: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'typesOfDataAvailableList' (Data Types Available (List))
+     * @name Data Types Available (List)
+     * @localized false
+     */
+    typesOfDataAvailableList?: EntryFieldTypes.RichText;
+    /**
+     * Field type definition for field 'typesOfDataAvailableDetail' (Data Types Available (Detail))
+     * @name Data Types Available (Detail)
+     * @localized false
+     */
+    typesOfDataAvailableDetail?: EntryFieldTypes.RichText;
     /**
      * Field type definition for field 'videoUrl' (Video URL)
      * @name Video URL
@@ -154,7 +153,7 @@ export interface TypeServiceProviderFields {
      * @name Information Governance Overview
      * @localized false
      */
-    informationGovernance?: EntryFieldTypes.EntryLink<TypeInformationGovernanceDataSourceSkeleton>;
+    informationGovernance?: EntryFieldTypes.RichText;
 }
 
 /**
@@ -163,7 +162,7 @@ export interface TypeServiceProviderFields {
  * @type {TypeServiceProviderSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 25
+ * @version 39
  */
 export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderFields, "serviceProvider">;
 /**
@@ -172,6 +171,6 @@ export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderF
  * @type {TypeServiceProvider}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 25
+ * @version 39
  */
 export type TypeServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeServiceProviderSkeleton, Modifiers, Locales>;

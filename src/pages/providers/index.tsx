@@ -16,8 +16,8 @@ import {
   ServiceTypesCostTable,
   ShortDescription,
   SuitedList,
+  TypesOfData,
 } from '@/components/Provider'
-import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
 import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { numDaysBetween } from '@/utils/numDaysBetween'
@@ -145,15 +145,7 @@ export default function ServiceProviders({
                           {/* Side info */}
                           <div className="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0">
                             {/* Types of Data */}
-                            {fields.typesOfDataAvailableList && (
-                              <>
-                                <h3 className="govuk-heading-s mb-3 mt-5 md:mt-0">Type of data available</h3>
-                                <RichTextRenderer
-                                  document={fields.typesOfDataAvailableList}
-                                  className="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0 [&_ul]:px-4"
-                                />
-                              </>
-                            )}
+                            <TypesOfData>{fields.typesOfDataAvailableList}</TypesOfData>
                           </div>
                         </div>
                       </div>
