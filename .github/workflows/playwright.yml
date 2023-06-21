@@ -125,7 +125,7 @@ jobs:
         run: |
           echo "ENV_MSG=TEST" >> "$GITHUB_ENV"
       - name: Slack Notify
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/tests/feature/FRF-11-Tests '
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
