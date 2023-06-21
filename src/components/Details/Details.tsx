@@ -13,7 +13,7 @@ export const Details = ({ heading, children, className }: DetailsProps) => {
       <summary className="govuk-details__summary">
         <span className="govuk-details__summary-text">{heading}</span>
       </summary>
-      <div className="govuk-details__text">{children}</div>
+      <div className="govuk-details__text [&>*>p:last-child]:mb-0">{children}</div>
     </details>
   )
 }

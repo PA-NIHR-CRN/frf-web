@@ -131,29 +131,29 @@ export interface TypeServiceProviderFields {
      */
     websiteName?: EntryFieldTypes.Symbol;
     /**
-     * Field type definition for field 'dataSpecificsAndCoding' (Data Specifics and Coding)
-     * @name Data Specifics and Coding
+     * Field type definition for field 'dataSpecificsAndCoding' (Data content)
+     * @name Data content
      * @localized false
      */
     dataSpecificsAndCoding?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeTextBlockSkeleton>>;
     /**
-     * Field type definition for field 'geographicAndPopulationCoverage' (Geographic and Population Coverage)
-     * @name Geographic and Population Coverage
+     * Field type definition for field 'geographicAndPopulationCoverage' (Geographical and Population Coverage)
+     * @name Geographical and Population Coverage
      * @localized false
      */
     geographicAndPopulationCoverage?: EntryFieldTypes.RichText;
+    /**
+     * Field type definition for field 'informationGovernance' (Information Governance)
+     * @name Information Governance
+     * @localized false
+     */
+    informationGovernance?: EntryFieldTypes.RichText;
     /**
      * Field type definition for field 'serviceTypes' (Service Descriptions)
      * @name Service Descriptions
      * @localized false
      */
     serviceTypes?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeServiceTypeBlockSkeleton>>;
-    /**
-     * Field type definition for field 'informationGovernance' (Information Governance Overview)
-     * @name Information Governance Overview
-     * @localized false
-     */
-    informationGovernance?: EntryFieldTypes.RichText;
 }
 
 /**
@@ -162,7 +162,7 @@ export interface TypeServiceProviderFields {
  * @type {TypeServiceProviderSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 39
+ * @version 43
  */
 export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderFields, "serviceProvider">;
 /**
@@ -171,6 +171,6 @@ export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderF
  * @type {TypeServiceProvider}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 39
+ * @version 43
  */
 export type TypeServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeServiceProviderSkeleton, Modifiers, Locales>;

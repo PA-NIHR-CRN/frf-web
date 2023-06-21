@@ -14,16 +14,16 @@ const options: Options = {
   },
   renderNode: {
     [BLOCKS.UL_LIST]: (node, children) => <List>{children}</List>,
-    [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
+    [BLOCKS.LIST_ITEM]: (node, children) => <ListItem className="[&>p]:mb-0">{children}</ListItem>,
     [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
   },
 }
 
 type RichTextRendererProps = {
-  document: Document
+  children: Document
   className?: string
 }
 
-export const RichTextRenderer: FC<RichTextRendererProps> = ({ document, className }: RichTextRendererProps) => {
-  return <div className={className}>{documentToReactComponents(document, options)}</div>
+export const RichTextRenderer: FC<RichTextRendererProps> = ({ children, className }: RichTextRendererProps) => {
+  return <div className={className}>{documentToReactComponents(children, options)}</div>
 }

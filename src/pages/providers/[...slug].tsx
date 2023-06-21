@@ -103,7 +103,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     if (!item?.fields.heading || !item.fields.text) return null
                     return (
                       <Details key={key} heading={item.fields.heading}>
-                        <RichTextRenderer document={item.fields.text} />
+                        <RichTextRenderer>{item.fields.text}</RichTextRenderer>
                       </Details>
                     )
                   })}
@@ -129,35 +129,29 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 <>
                   {fields.serviceTypes
                     .filter((item) => item?.fields?.serviceType?.includes(ServiceType.FIND))
-                    .map((item, i) =>
-                      formatServiceTypeBlock(item, fields.costs, fields?.findCostChargeableDescription, i)
-                    )}
+                    .map((item, key) => (
+                      <Section key={key} heading="Find" icon={<FindIcon />} type="find">
+                        {formatServiceTypeBlock(item, fields.costs, fields?.findCostChargeableDescription)}
+                      </Section>
+                    ))}
 
                   {fields.serviceTypes
                     .filter((item) => item?.fields?.serviceType?.includes(ServiceType.RECRUIT))
-                    .map((item, i) =>
-                      formatServiceTypeBlock(item, fields.costs, fields?.recruitCostChargeableDescription, i)
-                    )}
+                    .map((item, key) => (
+                      <Section key={key} heading="Recruit" icon={<RecruitIcon />} type="recruit">
+                        {formatServiceTypeBlock(item, fields.costs, fields?.recruitCostChargeableDescription)}
+                      </Section>
+                    ))}
 
                   {fields.serviceTypes
                     .filter((item) => item?.fields?.serviceType?.includes(ServiceType.FOLLOW_UP))
-                    .map((item, i) =>
-                      formatServiceTypeBlock(item, fields.costs, fields?.followUpCostChargeableDescription, i)
-                    )}
+                    .map((item, key) => (
+                      <Section key={key} heading="Follow-up" icon={<FollowUpIcon />} type="follow_up">
+                        {formatServiceTypeBlock(item, fields.costs, fields?.followUpCostChargeableDescription)}
+                      </Section>
+                    ))}
                 </>
               )}
-
-              <Section heading="Find" icon={<FindIcon />} type="find">
-                find
-              </Section>
-
-              <Section heading="Recruit" icon={<RecruitIcon />} type="recruit">
-                find
-              </Section>
-
-              <Section heading="Follow-up" icon={<FollowUpIcon />} type="followUp">
-                find
-              </Section>
 
               {/* Metadata */}
               <div>
@@ -209,6 +203,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
       sys: { createdAt, updatedAt },
     } = entry
     const videoID = videoUrl ? getVideoID(videoUrl) : ''
+
     return {
       props: {
         fields,

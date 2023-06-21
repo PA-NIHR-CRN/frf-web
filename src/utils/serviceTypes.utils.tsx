@@ -1,3 +1,8 @@
+import { Details } from '@/components/Details/Details'
+import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
+import { TextRenderer } from '@/components/Renderers/TextRenderer/TextRenderer'
+import { ServiceProviderProps } from '@/pages/providers/[...slug]'
+
 export const formatServiceTypesCostsTable = (
   costs: string[],
   findDescription: string | undefined,
@@ -42,5 +47,64 @@ const formatSingleServiceTypeCostRow = (cost: string, costDescription: string | 
       </th>
       <td className="govuk-table__cell pl-4">{`${costSplit[1].trim()}${costDescriptionText}`}</td>
     </tr>
+  )
+}
+
+type Fields = ServiceProviderProps['fields']
+type ServiceType = NonNullable<Fields['serviceTypes']>[number]
+type Costs = Fields['costs']
+type CostDescription =
+  | Fields['findCostChargeableDescription']
+  | Fields['recruitCostChargeableDescription']
+  | Fields['followUpCostChargeableDescription']
+
+export const formatServiceTypeBlock = (serviceType: ServiceType, costs: Costs, costDescription: CostDescription) => {
+  if (!serviceType) return null
+
+  const { fields } = serviceType
+
+  return (
+    <>
+      {fields.description && <TextRenderer>{fields.description}</TextRenderer>}
+
+      {fields.howTheServiceWorks && (
+        <>
+          <p className="govuk-heading-s mb-2 mt-6">How the service works:</p>
+          <TextRenderer>{fields.howTheServiceWorks}</TextRenderer>
+        </>
+      )}
+
+      {fields.expectedTimelines && (
+        <>
+          <p className="govuk-heading-s mb-2 mt-6">Expected timelines:</p>
+          <TextRenderer>{fields.expectedTimelines}</TextRenderer>
+        </>
+      )}
+
+      {costs &&
+        costs
+          .filter((item) => item.includes(fields.serviceType + ':'))
+          .map((item, i) => (
+            <div key={i} className="my-6">
+              <p className="govuk-heading-s mb-2">Costs:</p>
+              <table>
+                <tbody>{formatSingleServiceTypeCostRow(item, costDescription, i)}</tbody>
+              </table>
+            </div>
+          ))}
+
+      {fields.costDescription && <RichTextRenderer className="mb-6">{fields.costDescription}</RichTextRenderer>}
+
+      {fields.additionalInformation &&
+        fields.additionalInformation.map(
+          (item, i) =>
+            item?.fields.heading &&
+            item.fields.text && (
+              <Details key={i} heading={item.fields.heading}>
+                <TextRenderer>{item.fields.text}</TextRenderer>
+              </Details>
+            )
+        )}
+    </>
   )
 }
