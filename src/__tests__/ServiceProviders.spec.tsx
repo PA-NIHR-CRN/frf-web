@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils'
 
 import { render, screen, within } from '@/config/test-utils'
 import { ServiceType } from '@/constants'
-import { defaultMock, pageTwoMock } from '@/mocks/serviceProviders'
+import { defaultMock, noResultsMock, pageTwoMock } from '@/mocks/serviceProviders'
 import ServiceProviders, { getServerSideProps, ServiceProvidersProps } from '@/pages/providers'
 import { setupMockServer } from '@/utils'
 
@@ -320,4 +320,14 @@ test('Loading status', async () => {
   // Does not show loading state when route changes to another page
   act(() => mockRouter.events.emit('routeChangeStart', '/providers/test'))
   expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+})
+
+test('No results', async () => {
+  mockContentfulResponse(noResultsMock)
+
+  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+
+  render(<ServiceProviders {...props} />)
+
+  expect(screen.getByRole('heading', { name: 'There are no matching results.' })).toBeInTheDocument()
 })

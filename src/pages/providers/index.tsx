@@ -18,6 +18,7 @@ import {
   ShortDescription,
   SuitedList,
 } from '@/components/Provider'
+import { NoResults } from '@/components/Providers/NoResults'
 import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
 import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useIsLoadingProviders } from '@/hooks/useIsLoadingProviders'
@@ -114,6 +115,8 @@ export default function ServiceProviders({
             {/* Cards */}
             {isLoading ? (
               <p className="govuk-body mt-5">Loading...</p>
+            ) : items.length === 0 ? (
+              <NoResults />
             ) : (
               <>
                 <ol className="mt-5" aria-label="Data service providers">
