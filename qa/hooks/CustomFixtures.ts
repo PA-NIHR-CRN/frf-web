@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright'
-import { chromium, test as base } from '@playwright/test'
+import { test as base } from '@playwright/test'
 
 import AccessibilityPage from '../pages/AccessibilityPage'
 import CommonItemsPage from '../pages/CommonItemsPage'
