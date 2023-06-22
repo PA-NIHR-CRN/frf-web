@@ -9,7 +9,7 @@ type DetailsProps = {
 
 export const Details = ({ heading, children, className }: DetailsProps) => {
   return (
-    <details className={clsx(className, 'govuk-details mb-4')}>
+    <details className={clsx(className, 'govuk-details govuk-!-margin-bottom-4')}>
       <summary className="govuk-details__summary">
         <span className="govuk-details__summary-text">{heading}</span>
       </summary>

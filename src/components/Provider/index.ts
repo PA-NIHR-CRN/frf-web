@@ -1,3 +1,4 @@
+export * from './Contact/Contact'
 export * from './GeographicalCoverage/GeographicalCoverage'
 export * from './ProviderHeadingLink/ProviderHeadingLink'
 export * from './ProviderHeadingText/ProviderHeadingText'

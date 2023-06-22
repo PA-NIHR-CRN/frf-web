@@ -79,7 +79,7 @@ export default function Home({
             <Card>
               <div className="flex items-center justify-between bg-[var(--colour-recruit-background)]">
                 <h2 className="govuk-heading-m mb-0 pl-4 text-navy-100">Recruit</h2>
-                <div className="bg-[var(--colour-recruit-foreground)] p-3">
+                <div className="bg-[var(--colour-recruit-foreground)] p-3 text-[3rem]">
                   <RecruitIcon />
                 </div>
               </div>
@@ -94,7 +94,7 @@ export default function Home({
             <Card>
               <div className="flex items-center justify-between bg-[var(--colour-follow-up-background)]">
                 <h2 className="govuk-heading-m mb-0 pl-4 text-navy-100">Follow-up</h2>
-                <div className="bg-[var(--colour-follow-up-foreground)] p-3">
+                <div className="bg-[var(--colour-follow-up-foreground)] p-3 text-[3rem]">
                   <FollowUpIcon />
                 </div>
               </div>

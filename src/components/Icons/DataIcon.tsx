@@ -2,7 +2,14 @@ import React from 'react'
 
 function DataIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" aria-hidden data-testid="frf-icon-data">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 48 48"
+      className="h-[1em] w-[1em]"
+      fill="none"
+      aria-hidden
+      data-testid="frf-icon-data"
+    >
       <path
         stroke="#fff"
         strokeLinecap="round"

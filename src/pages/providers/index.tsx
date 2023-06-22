@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
@@ -18,8 +17,9 @@ import {
   SuitedList,
   TypesOfData,
 } from '@/components/Provider'
-import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
+import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
+import { formatDate } from '@/utils/date.utils'
 import { numDaysBetween } from '@/utils/numDaysBetween'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
@@ -157,11 +157,11 @@ export default function ServiceProviders({
                         <div className="govuk-body-s mb-3 flex flex-col flex-wrap gap-3 md:mb-0 md:flex-row">
                           <div className="whitespace-nowrap">
                             <strong>First published:</strong>
-                            <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
+                            <span className="ml-1 mr-3">{formatDate(createdAt)}</span>
                           </div>
                           <div className="whitespace-nowrap">
                             <strong>Last updated:</strong>
-                            <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
+                            <span className="ml-1">{formatDate(updatedAt)}</span>
                           </div>
                         </div>
                         <div>
