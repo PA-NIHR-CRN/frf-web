@@ -4,7 +4,9 @@ export type OnFilterChange = (formValues: Record<string, unknown>) => void
 
 export const useFilters = (formRef: RefObject<HTMLFormElement>, onFilterChange?: OnFilterChange) => {
   const onChange = () => {
-    const formData = new FormData(formRef.current ? formRef.current : undefined)
+    if (!formRef.current) return
+
+    const formData = new FormData(formRef.current)
 
     // https://stackoverflow.com/a/62010324
     const formDataAsObject = Object.fromEntries(

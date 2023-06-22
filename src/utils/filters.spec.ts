@@ -2,7 +2,7 @@ import { ParsedUrlQuery } from 'querystring'
 
 import { ServiceType } from '@/constants'
 
-import { getFiltersFromQuery, transformFilters } from './getFiltersFromQuery'
+import { getFiltersFromQuery, transformFilters } from './filters'
 
 describe('getFiltersFromQuery', () => {
   it('returns the correct filters', () => {

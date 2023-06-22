@@ -1,4 +1,4 @@
-export * from './getFiltersFromQuery'
+export * from './filters'
 export * from './getStaticPropsRevalidateValue'
 export * from './getVideoID'
 export * from './mockServer'

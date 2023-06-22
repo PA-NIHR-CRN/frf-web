@@ -250,9 +250,11 @@ test('Filter default states', async () => {
   const findFieldset = screen.getByRole('group', { name: 'Find' })
   expect(within(findFieldset).getByLabelText('Free of charge (All studies)')).toBeChecked()
   expect(within(findFieldset).getByLabelText('Chargeable service')).not.toBeChecked()
+
   const recruitFieldset = screen.getByRole('group', { name: 'Recruit' })
   expect(within(recruitFieldset).getByLabelText('Free of charge (All studies)')).toBeChecked()
   expect(within(recruitFieldset).getByLabelText('Chargeable service')).not.toBeChecked()
+
   const followUpFieldset = screen.getByRole('group', { name: 'Follow-Up' })
   expect(within(followUpFieldset).getByLabelText('Free of charge (All studies)')).toBeChecked()
   expect(within(followUpFieldset).getByLabelText('Chargeable service')).not.toBeChecked()

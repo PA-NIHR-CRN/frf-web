@@ -1,9 +1,7 @@
 import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
-import { ParsedUrlQueryInput } from 'querystring'
 import { useRef, useState } from 'react'
 
 import { Card } from '@/components/Card/Card'
@@ -21,7 +19,7 @@ import {
 import { NoResults } from '@/components/Providers/NoResults'
 import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
 import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
-import { useIsLoadingProviders } from '@/hooks/useIsLoadingProviders'
+import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
 import { getFiltersFromQuery, transformFilters } from '@/utils'
 import { numDaysBetween } from '@/utils/numDaysBetween'
@@ -34,8 +32,6 @@ export default function ServiceProviders({
   meta: { totalItems, initialPage, initialPageSize },
   filterOptions,
 }: ServiceProvidersProps) {
-  const router = useRouter()
-
   const showFiltersButtonRef = useRef<HTMLAnchorElement>(null)
   const [showFiltersMobile, setShowFiltersMobile] = useState(false)
 
@@ -62,18 +58,7 @@ export default function ServiceProviders({
     }, 0)
   }
 
-  const handleFilterChange = (formValues: Record<string, unknown>) => {
-    router.push(
-      {
-        pathname: '/providers',
-        query: formValues as ParsedUrlQueryInput,
-      },
-      undefined,
-      { scroll: false }
-    )
-  }
-
-  const isLoading = useIsLoadingProviders()
+  const { isLoading, handleFilterChange } = useProviders()
 
   const titleSuffix = `Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
 
