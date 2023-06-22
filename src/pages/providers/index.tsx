@@ -6,8 +6,6 @@ import { NextSeo } from 'next-seo'
 import { ParsedUrlQueryInput } from 'querystring'
 import { useRef, useState } from 'react'
 
-import { Filters as FiltersType, OrderType } from '@/@types/filters'
-import { ServiceTypes } from '@/@types/services'
 import { Card } from '@/components/Card/Card'
 import { Container } from '@/components/Container/Container'
 import { Filters } from '@/components/Filters/Filters'
@@ -24,6 +22,7 @@ import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer
 import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useIsLoadingProviders } from '@/hooks/useIsLoadingProviders'
 import { contentfulService } from '@/lib/contentful'
+import { getFiltersFromQuery, transformFilters } from '@/utils'
 import { numDaysBetween } from '@/utils/numDaysBetween'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
@@ -222,22 +221,9 @@ export default function ServiceProviders({
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const concatFilters = <T,>(filters: T | T[]) => {
-    return ([] as T[]).concat(filters).filter(Boolean) as NonNullable<T>[]
-  }
+  const filters = getFiltersFromQuery(query)
 
-  const filters: FiltersType = {
-    page: Number(query.page) || 1,
-    serviceType: concatFilters(query.serviceType as ServiceTypes[]),
-    dataType: concatFilters(query.dataType),
-    geography: concatFilters(query.geography),
-    costs: concatFilters(query.costs),
-    excludeRegional: Boolean(query.excludeRegional),
-    ...(query.q && { q: query.q as string }),
-    ...(query.order && { order: query.order as OrderType }),
-  }
-
-  const entry = await contentfulService.getProvidersByFilter(filters)
+  const entry = await contentfulService.getProvidersByFilter(transformFilters(filters))
 
   if (!entry) throw new Error('Failed to fetch providers list: null entry')
 
