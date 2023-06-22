@@ -1,5 +1,6 @@
 import { InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 
 import { Card } from '@/components/Card/Card'
 import { Container } from '@/components/Container/Container'
@@ -25,6 +26,7 @@ export default function Home({
 }: HomepageProps) {
   return (
     <>
+      <NextSeo title="Welcome to Find, Recruit and Follow-up" />
       {/* Title, Description & Video */}
       <Container>
         <section className="flex flex-wrap items-center pt-1 lg:flex-nowrap lg:gap-4 lg:pb-3">

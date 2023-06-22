@@ -55,11 +55,13 @@ export default function ServiceProviders({
     }, 0)
   }
 
-  const titleSuffix = `Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
-
   return (
     <>
-      <NextSeo title={`Find, Recruit and Follow-up – ${titleSuffix}`} />
+      <NextSeo
+        title={`List of data service providers (page ${initialPage + 1} of ${Math.ceil(
+          totalItems / initialPageSize
+        )}) - Find, Recruit and Follow-up`}
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third-from-desktop">
