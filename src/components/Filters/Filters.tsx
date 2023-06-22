@@ -1,10 +1,12 @@
 import clsx from 'clsx'
-import { ReactNode, useId } from 'react'
+import Link from 'next/link'
+import { ReactNode, useId, useRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
-import { Button } from '@/components/Button/Button'
+import { Filters } from '@/@types/filters'
 import { Card } from '@/components/Card/Card'
 import { Checkbox } from '@/components/Checkbox/Checkbox'
+import { OnFilterChange, useFilters } from '@/components/Filters/useFilters'
 import CollapseIcon from '@/components/Icons/CollapseIcon'
 import Cross from '@/components/Icons/Cross'
 import FindIcon from '@/components/Icons/FindIcon'
@@ -37,11 +39,15 @@ const FilterCategory = ({ title, children }: { title: string; children: ReactNod
 
 export type FiltersProps = {
   options: FilterOptions
+  filters: Filters
   showFiltersMobile?: boolean
+  onFilterChange?: OnFilterChange
   onRequestClose?: () => void
 }
 
-export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersProps) {
+export function Filters({ options, filters, showFiltersMobile, onRequestClose, onFilterChange }: FiltersProps) {
+  const formRef = useRef(null)
+  const { onChange } = useFilters(formRef, onFilterChange)
   return (
     <FocusLock disabled={!showFiltersMobile}>
       <Card
@@ -53,7 +59,9 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
         )}
       >
         <div className="flex items-center justify-between bg-[var(--panel-bg-color)] p-3 pl-4">
-          <h2 className="govuk-heading-m m-0 font-normal text-white">Filter by</h2>
+          <h2 id="filter-by" className="govuk-heading-m m-0 font-normal text-white">
+            Filter by
+          </h2>
           <a
             href="#show-filters"
             className="text-white focus:text-black md:hidden"
@@ -66,19 +74,28 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
             <Cross className="text-[2em]" />
           </a>
         </div>
-        <form className="p-4">
+        <form
+          role="search"
+          method="get"
+          action="/providers"
+          /* onSubmit={handleSubmit} */
+          ref={formRef}
+          className="p-4"
+          aria-labelledby="filter-by"
+        >
           {/* Keyword */}
           <div className="govuk-form-group mb-3">
-            <label className="govuk-label mb-2" htmlFor="event-name">
+            <label className="govuk-label mb-2" htmlFor="keyword">
               Keyword
             </label>
             <div className="relative">
               <input
                 className="govuk-input h-auto rounded-3xl border-2 border-navy-100 p-2 pl-4 pr-9"
-                id="event-name"
-                name="event-name"
+                id="keyword"
+                name="q"
                 type="text"
                 aria-describedby="keyword-hint"
+                defaultValue={filters.q}
               />
               <button
                 className="focus:focusable absolute right-3 top-[8px] p-[2px] text-lg outline-0 md:p-[4px]"
@@ -95,7 +112,14 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
           {/* Type of service */}
           <FilterCategory title="Type of service">
             {Object.keys(ServiceType).map((item, i) => (
-              <Checkbox key={i} name="serviceType" value={ServiceType[item]} small>
+              <Checkbox
+                key={i}
+                small
+                name="serviceType"
+                value={ServiceType[item]}
+                onChange={onChange}
+                checked={filters.serviceType?.includes(ServiceType[item])}
+              >
                 {ServiceType[item]}
               </Checkbox>
             ))}
@@ -104,13 +128,20 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
           {/* Geographical coverage */}
           <FilterCategory title="Geographical coverage">
             {options.geography.map((item, i) => (
-              <Checkbox key={i} name="geography" value={item} small>
+              <Checkbox
+                key={i}
+                small
+                name="geography"
+                value={item}
+                onChange={onChange}
+                checked={filters.geography?.includes(item)}
+              >
                 {item}
               </Checkbox>
             ))}
             {/* Exclude Regional */}
             <hr className="my-2 border-dotted border-grey-120" />
-            <Checkbox name="excludeRegional" value="true" small>
+            <Checkbox small name="excludeRegional" value="true" onChange={onChange} checked={!!filters.excludeRegional}>
               Exclude regional only services
             </Checkbox>
           </FilterCategory>
@@ -125,7 +156,14 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
               {options.costs
                 .filter((item) => item.includes(ServiceType.FIND + ':'))
                 .map((item, i) => (
-                  <Checkbox key={i} name="costs" value={item} small>
+                  <Checkbox
+                    key={i}
+                    small
+                    name="costs"
+                    value={item}
+                    onChange={onChange}
+                    checked={filters.costs?.includes(item)}
+                  >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
                 ))}
@@ -138,7 +176,14 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
               {options.costs
                 .filter((item) => item.includes(ServiceType.RECRUIT + ':'))
                 .map((item, i) => (
-                  <Checkbox key={i} name="costs" value={item} small>
+                  <Checkbox
+                    key={i}
+                    small
+                    name="costs"
+                    value={item}
+                    onChange={onChange}
+                    checked={filters.costs?.includes(item)}
+                  >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
                 ))}
@@ -151,7 +196,14 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
               {options.costs
                 .filter((item) => item.includes(ServiceType.FOLLOW_UP + ':'))
                 .map((item, i) => (
-                  <Checkbox key={i} name="costs" value={item} small>
+                  <Checkbox
+                    key={i}
+                    small
+                    name="costs"
+                    value={item}
+                    onChange={onChange}
+                    checked={filters.costs?.includes(item)}
+                  >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
                 ))}
@@ -160,9 +212,9 @@ export function Filters({ options, showFiltersMobile, onRequestClose }: FiltersP
 
           {/* Clear all */}
           <div className="border-t border-grey-120 text-center">
-            <Button secondary className="w-full">
+            <Link className="govuk-button govuk-button--secondary w-full text-center" href="/providers">
               Clear all filters
-            </Button>
+            </Link>
           </div>
         </form>
       </Card>
