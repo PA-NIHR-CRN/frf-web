@@ -25,7 +25,8 @@ test('Default search criteria (no search or filters set)', async () => {
   render(<ServiceProviders {...props} />)
 
   // Title
-  expect(screen.getByText('5 data service providers found')).toBeInTheDocument()
+  const serviceProvidersFound = screen.getByText('5 data service providers found')
+  expect(serviceProvidersFound).toHaveAttribute('aria-live', 'polite')
 
   // Sort
   expect(screen.getByLabelText('Sort by')).toBeInTheDocument()
@@ -311,15 +312,16 @@ test('Loading status', async () => {
 
   // Shows loading state when route changes due to filter change
   act(() => mockRouter.events.emit('routeChangeStart', '/providers?serviceType=Find'))
-  expect(screen.getByText(/Loading/)).toBeInTheDocument()
+  const status = screen.getByRole('status')
+  expect(status).toHaveTextContent('Loading...')
 
   // Hides loading state after route change complete
   act(() => mockRouter.events.emit('routeChangeComplete'))
-  expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+  expect(screen.queryByText('Loading...')).not.toBeInTheDocument()
 
   // Does not show loading state when route changes to another page
   act(() => mockRouter.events.emit('routeChangeStart', '/providers/test'))
-  expect(screen.queryByText(/Loading/)).not.toBeInTheDocument()
+  expect(screen.queryByText('Loading...')).not.toBeInTheDocument()
 })
 
 test('No results', async () => {

@@ -96,7 +96,9 @@ export default function ServiceProviders({
           <div className="govuk-grid-column-two-thirds-from-desktop">
             {/* Sort bar */}
             <div className="flex-wrap items-center justify-between gap-3 md:flex">
-              <p className="govuk-heading-m mb-0 whitespace-nowrap">{totalItems} data service providers found</p>
+              <p className="govuk-heading-m mb-0 whitespace-nowrap" aria-live="polite">
+                {totalItems} data service providers found
+              </p>
               <div className="govuk-form-group mt-5 items-center justify-end md:my-0 md:flex">
                 {/* Show filters */}
                 <div>{showFiltersButton()}</div>
@@ -112,10 +114,13 @@ export default function ServiceProviders({
               </div>
             </div>
 
+            {/* Loading status */}
+            <p role="status" className="govuk-body mt-5" aria-live="polite">
+              {isLoading && 'Loading...'}
+            </p>
+
             {/* Cards */}
-            {isLoading ? (
-              <p className="govuk-body mt-5">Loading...</p>
-            ) : items.length === 0 ? (
+            {isLoading ? null : items.length === 0 ? (
               <NoResults />
             ) : (
               <>
