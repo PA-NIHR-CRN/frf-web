@@ -12,7 +12,7 @@ type SectionProps = {
   type?: SectionType
 }
 
-const styles: Record<SectionType, string> = {
+export const styles: Record<SectionType, string> = {
   find: 'bg-[var(--colour-find-background)] after:bg-[var(--colour-find-foreground)]',
   recruit: 'bg-[var(--colour-recruit-background)] after:bg-[var(--colour-recruit-foreground)]',
   follow_up: 'bg-[var(--colour-follow-up-background)] after:bg-[var(--colour-follow-up-foreground)]',
@@ -22,6 +22,7 @@ export function Section({ children, heading, icon, type }: SectionProps) {
   return (
     <>
       <div
+        data-testid="dsp-section"
         className={clsx(
           "govuk-!-margin-top-8 govuk-!-margin-bottom-6 relative flex w-full items-center justify-between after:absolute after:bottom-0 after:right-0 after:top-0 after:z-0 after:min-w-[50px] after:content-[''] after:lg:min-w-[80px]",
           type ? styles[type] : 'bg-grey-30 after:bg-grey-100'

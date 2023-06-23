@@ -11,9 +11,7 @@ import FindIcon from '@/components/Icons/FindIcon'
 import FollowUpIcon from '@/components/Icons/FollowUpIcon'
 import GlobeIcon from '@/components/Icons/GlobeIcon'
 import GovernanceIcon from '@/components/Icons/GovernanceIcon'
-import PrintIcon from '@/components/Icons/PrintIcon'
 import RecruitIcon from '@/components/Icons/RecruitIcon'
-import ShareIcon from '@/components/Icons/ShareIcon'
 import { ServiceProviderLayout } from '@/components/Layout/ServiceProviderLayout'
 import {
   Contact,
@@ -93,7 +91,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     <iframe
                       className="aspect-video w-full max-w-[700px] lg:w-[450px]"
                       src={videoUrl}
-                      title="Video: Find, Recruit and Follow-up Intro"
+                      title={`Video: ${fields.name}`}
                       allow="accelerometer; autoplay; encrypted-media; gyroscope;"
                       srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=${videoUrl}?autoplay=1><img src=https://img.youtube.com/vi/${videoID}/hqdefault.jpg alt='Video: Find, Recruit and Follow-up Intro'><span>▶</span></a>`}
                       allowFullScreen
@@ -192,7 +190,10 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 </Contact>
               </div>
             </div>
-            <div className="govuk-grid-column-one-third-from-desktop govuk-!-padding-4 govuk-!-margin-top-6 border-t-4 border-t-purple-100">
+            <div
+              className="govuk-grid-column-one-third-from-desktop govuk-!-padding-4 govuk-!-margin-top-6 border-t-4 border-t-purple-100"
+              data-testid="frf-dsp-sidebar"
+            >
               {/* Types of Data */}
               <TypesOfData>{fields.typesOfDataAvailableDetail}</TypesOfData>
 
@@ -201,22 +202,22 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 heading="Contact provider"
                 contactName={`Get in touch with ${fields.name}`}
                 contactUrl="/"
-                footer={
-                  <div className="govuk-!-margin-top-4">
-                    <div className="govuk-!-margin-bottom-2 govuk-body flex items-start gap-2">
-                      <div>
-                        <PrintIcon className="text-navy-100" />
-                      </div>
-                      <Link href="/print">Print data service provider details</Link>
-                    </div>
-                    <div className="govuk-!-margin-bottom-2 govuk-body flex items-start gap-2">
-                      <div>
-                        <ShareIcon className="text-navy-100" />
-                      </div>
-                      <Link href="/share">Share details</Link>
-                    </div>
-                  </div>
-                }
+                // footer={
+                //   <div className="govuk-!-margin-top-4">
+                //     <div className="govuk-!-margin-bottom-2 govuk-body flex items-start gap-2">
+                //       <div>
+                //         <PrintIcon className="text-navy-100" />
+                //       </div>
+                //       <Link href="/print">Print data service provider details</Link>
+                //     </div>
+                //     <div className="govuk-!-margin-bottom-2 govuk-body flex items-start gap-2">
+                //       <div>
+                //         <ShareIcon className="text-navy-100" />
+                //       </div>
+                //       <Link href="/share">Share details</Link>
+                //     </div>
+                //   </div>
+                // }
               >
                 If you think {fields.name} might be able to help with your study you can contact them directly using
                 this service.
@@ -252,7 +253,7 @@ export async function getStaticPaths() {
   }
 }
 
-type GetStaticProps = GetStaticPropsContext & { params: { slug: string[] } }
+export type GetStaticProps = GetStaticPropsContext & { params: { slug: string[] } }
 
 export const getStaticProps = async ({ params }: GetStaticProps) => {
   const [slug] = params.slug
