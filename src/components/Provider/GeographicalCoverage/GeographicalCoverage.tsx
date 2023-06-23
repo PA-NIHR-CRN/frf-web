@@ -20,10 +20,19 @@ export const GeographicalCoverage = ({
   className,
 }: GeographicalCoverageProps) => {
   return (
-    <List heading="Coverage:" aria-label="Coverage" className={clsx(className, 'text-sm')}>
-      <ListItem icon={<MapPin />} className="flex-wrap">
-        Geographical: {regionalCoverage || geography.join(', ')}
-        {geographySupportingText && <p className="mb-0 ml-[36px] w-full text-sm">{geographySupportingText}</p>}
+    <List heading="Coverage:" aria-label="Coverage" className={clsx(className, 'govuk-body')}>
+      <ListItem
+        className="items-start"
+        icon={
+          <div>
+            <MapPin />
+          </div>
+        }
+      >
+        <div>
+          <p className="govuk-!-margin-bottom-1">Geographical: {regionalCoverage || geography.join(', ')}</p>
+          {geographySupportingText && <p className="mb-0">{geographySupportingText}</p>}
+        </div>
       </ListItem>
       {population && <ListItem icon={<Users />}>Population: {population}</ListItem>}
     </List>
