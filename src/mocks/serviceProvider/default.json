@@ -583,7 +583,7 @@
                     "content": [
                       {
                         "nodeType": "text",
-                        "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                        "value": "Direct identifers in dataset mock",
                         "marks": [],
                         "data": {}
                       }
@@ -638,7 +638,7 @@
                     "content": [
                       {
                         "nodeType": "text",
-                        "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                        "value": "Clinical content mock",
                         "marks": [],
                         "data": {}
                       }
@@ -693,7 +693,7 @@
                     "content": [
                       {
                         "nodeType": "text",
-                        "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                        "value": "Data entry coding mock",
                         "marks": [],
                         "data": {}
                       }
@@ -748,7 +748,7 @@
                     "content": [
                       {
                         "nodeType": "text",
-                        "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                        "value": "Quality and variability of coding mock",
                         "marks": [],
                         "data": {}
                       }
@@ -803,7 +803,7 @@
                     "content": [
                       {
                         "nodeType": "text",
-                        "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                        "value": "Underserved groups identified mock",
                         "marks": [],
                         "data": {}
                       }
@@ -858,7 +858,7 @@
                     "content": [
                       {
                         "nodeType": "text",
-                        "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                        "value": "Frequency of data updates mock",
                         "marks": [],
                         "data": {}
                       }
@@ -1297,7 +1297,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.",
+                              "value": "Exclusions from Find service mock",
                               "marks": [],
                               "data": {}
                             }
@@ -1364,7 +1364,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.",
+                              "value": "Statistical disclosure controls mock",
                               "marks": [],
                               "data": {}
                             }
@@ -1735,7 +1735,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "Text",
+                              "value": "Specific regulatory approvals mock",
                               "marks": [],
                               "data": {}
                             }
@@ -1790,7 +1790,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "Text",
+                              "value": "Additional approvals required mock",
                               "marks": [],
                               "data": {}
                             }
@@ -1845,7 +1845,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "Text",
+                              "value": "Exclusions from Recruit service mock",
                               "marks": [],
                               "data": {}
                             }
@@ -1889,7 +1889,7 @@
                     "locale": "en-US"
                   },
                   "fields": {
-                    "heading": "Contacting sites set up ",
+                    "heading": "Contacting sites set up",
                     "text": {
                       "nodeType": "document",
                       "data": {},
@@ -1900,7 +1900,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "text",
+                              "value": "Contacting sites set up mock",
                               "marks": [],
                               "data": {}
                             }
@@ -1955,7 +1955,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "TExt",
+                              "value": "User progress of information mock",
                               "marks": [],
                               "data": {}
                             }
@@ -2010,7 +2010,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "text",
+                              "value": "Further cost details mock",
                               "marks": [],
                               "data": {}
                             }
@@ -2488,7 +2488,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "Text",
+                              "value": "Further cost details mock",
                               "marks": [],
                               "data": {}
                             }
@@ -2543,7 +2543,7 @@
                           "content": [
                             {
                               "nodeType": "text",
-                              "value": "Text",
+                              "value": "Study-specific agreements mock",
                               "marks": [],
                               "data": {}
                             }
@@ -3344,7 +3344,7 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "Text",
+                    "value": "Specific regulatory approvals mock",
                     "marks": [],
                     "data": {}
                   }
@@ -3544,7 +3544,7 @@
                       "content": [
                         {
                           "nodeType": "text",
-                          "value": "text",
+                          "value": "Additional approvals required mock",
                           "marks": [],
                           "data": {}
                         }
@@ -3599,7 +3599,7 @@
                       "content": [
                         {
                           "nodeType": "text",
-                          "value": "Text",
+                          "value": "Exclusions from Follow-up service mock",
                           "marks": [],
                           "data": {}
                         }
@@ -3654,7 +3654,7 @@
                       "content": [
                         {
                           "nodeType": "text",
-                          "value": "Text",
+                          "value": "Data transfer mock",
                           "marks": [],
                           "data": {}
                         }
@@ -3709,7 +3709,7 @@
                       "content": [
                         {
                           "nodeType": "text",
-                          "value": "Text",
+                          "value": "Data storage, sharing and retention requirements mock",
                           "marks": [],
                           "data": {}
                         }
@@ -3764,7 +3764,7 @@
                       "content": [
                         {
                           "nodeType": "text",
-                          "value": "Text",
+                          "value": "Further cost details mock",
                           "marks": [],
                           "data": {}
                         }
@@ -3819,7 +3819,7 @@
                       "content": [
                         {
                           "nodeType": "text",
-                          "value": "Text",
+                          "value": "Study-specific agreements mock",
                           "marks": [],
                           "data": {}
                         }

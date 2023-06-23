@@ -18,9 +18,9 @@ export const styles: Record<SectionType, string> = {
   follow_up: 'bg-[var(--colour-follow-up-background)] after:bg-[var(--colour-follow-up-foreground)]',
 }
 
-export function Section({ children, heading, icon, type }: SectionProps) {
+export function Section({ children, heading, icon, type, ...props }: SectionProps) {
   return (
-    <>
+    <section {...props}>
       <div
         data-testid="dsp-section"
         className={clsx(
@@ -36,6 +36,6 @@ export function Section({ children, heading, icon, type }: SectionProps) {
         </div>
       </div>
       {children}
-    </>
+    </section>
   )
 }

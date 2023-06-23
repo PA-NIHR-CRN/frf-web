@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event'
 
 import { render, screen, within } from '@/config/test-utils'
-import { defaultMock } from '@/mocks/serviceProvider'
+import { defaultMock, requiredFieldsOnlyMock } from '@/mocks/serviceProvider'
 import ServiceProvider, { GetStaticProps, getStaticProps, ServiceProviderProps } from '@/pages/providers/[...slug]'
 import { setupMockServer } from '@/utils'
 
@@ -15,14 +15,16 @@ const fields = defaultMock.items[0].fields
 const slug = [fields.slug]
 
 const getComponent = async () => {
-  mockContentfulResponse(defaultMock)
-
   const { props } = (await getStaticProps({ params: { slug } } as GetStaticProps)) as {
     props: ServiceProviderProps
   }
 
   return ServiceProvider.getLayout(<ServiceProvider {...props} />)
 }
+
+beforeEach(() => {
+  mockContentfulResponse(defaultMock)
+})
 
 test('Service provider detail', async () => {
   render(await getComponent())
@@ -96,7 +98,7 @@ test('Sidebar', async () => {
   const sidebar = within(screen.getByTestId('frf-dsp-sidebar'))
 
   // Types of data available
-  expect(sidebar.getByRole('heading', { name: 'Type of data available', level: 3 }))
+  expect(sidebar.getByRole('heading', { name: 'Type of data available', level: 3 })).toBeInTheDocument()
   expect(sidebar.getByText('Primary care')).toBeInTheDocument()
   expect(sidebar.getByText('COVID 19')).toBeInTheDocument()
   expect(sidebar.getByText('Medicines dispensed')).toBeInTheDocument()
@@ -127,11 +129,10 @@ test('Sidebar', async () => {
 })
 
 test('Data content', async () => {
-  userEvent.setup()
+  const user = userEvent.setup()
 
   render(await getComponent())
 
-  // Data content
   expect(screen.getByRole('heading', { name: 'Data content', level: 3 })).toBeInTheDocument()
   expect(screen.getByText('Direct identifers in dataset'))
   expect(screen.getByText('Clinical content'))
@@ -139,6 +140,11 @@ test('Data content', async () => {
   expect(screen.getByText('Quality and variability of coding'))
   expect(screen.getByText('Underserved groups identified'))
   expect(screen.getByText('Frequency of data updates'))
+
+  // Assert that the details component toggles content
+  expect(screen.getByText('Frequency of data updates mock')).not.toBeVisible()
+  await user.click(screen.getByText('Frequency of data updates'))
+  expect(screen.getByText('Frequency of data updates mock')).toBeVisible()
 })
 
 test('Geographical and population coverage', async () => {
@@ -171,32 +177,138 @@ test('Information governance', async () => {
   ).toBeInTheDocument()
 })
 
-test.skip('Find', async () => {
-  userEvent.setup()
+test('Find', async () => {
+  const user = userEvent.setup()
 
   render(await getComponent())
 
-  // Find TODO
-  expect(screen.getByRole('heading', { name: 'Find', level: 3 })).toBeInTheDocument()
+  const section = within(screen.getByTestId('frf-dsp-section-find'))
+
+  expect(section.getByRole('heading', { name: 'Find', level: 3 })).toBeInTheDocument()
+  expect(section.getByText('Feasibility Service:')).toBeVisible()
+  expect(section.getByText('How the service works:')).toBeVisible()
+  expect(section.getByText('Expected timelines:')).toBeVisible()
+  expect(section.getByText('Costs:')).toBeVisible()
+  expect(
+    section.getByText('The service is a cost recovery organisation. Costs to the user are based on the:')
+  ).toBeVisible()
+
+  // Assert that the details component toggles content
+  expect(section.getByText('Statistical disclosure controls mock')).not.toBeVisible()
+  await user.click(section.getByText('Statistical disclosure controls'))
+  expect(section.getByText('Statistical disclosure controls mock')).toBeVisible()
 })
 
-test.skip('Recruit', async () => {
-  userEvent.setup()
+test('Recruit', async () => {
+  const user = userEvent.setup()
 
-  // Recruit TODO
-  expect(screen.getByRole('heading', { name: 'Recruit', level: 3 })).toBeInTheDocument()
+  render(await getComponent())
+
+  const section = within(screen.getByTestId('frf-dsp-section-recruit'))
+
+  expect(section.getByRole('heading', { name: 'Recruit', level: 3 })).toBeInTheDocument()
+  expect(
+    section.getByText(
+      'Recruitment service: Supports recruitment for clinical trials by identifying suitable patients and inviting them to participate on behalf of the research organisation.'
+    )
+  ).toBeVisible()
+  expect(section.getByText('How the service works:')).toBeVisible()
+  expect(section.getByText('Expected timelines:')).toBeVisible()
+  expect(section.getByText('Costs:')).toBeVisible()
+  expect(
+    section.getByText(
+      'Service is a cost recovery organisation and our costs to provide the service are based on staff time to design and conduct the search, set up and manage the technical requirements (online study platform), set up, monitoring and administrative management of practice activity for service delivery and general project management and administration of the service.'
+    )
+  ).toBeVisible()
+
+  // Assert that the details component toggles content
+  expect(section.getByText('Specific regulatory approvals mock')).not.toBeVisible()
+  await user.click(section.getByText('Specific regulatory approvals'))
+  expect(section.getByText('Specific regulatory approvals mock')).toBeVisible()
 })
 
-test.skip('Follow-up', async () => {
-  userEvent.setup()
+test('Follow-up', async () => {
+  const user = userEvent.setup()
 
-  // Follow-up TODO
-  expect(screen.getByRole('heading', { name: 'Follow-up', level: 3 })).toBeInTheDocument()
+  render(await getComponent())
+
+  const section = within(screen.getByTestId('frf-dsp-section-follow-up'))
+
+  expect(section.getByRole('heading', { name: 'Follow-up', level: 3 })).toBeInTheDocument()
+  expect(section.getByText('How the service works:')).toBeVisible()
+  expect(section.getByText('Expected timelines:')).toBeVisible()
+  expect(section.getByText('Costs:')).toBeVisible()
+  expect(
+    section.getByText(
+      'The service is a cost recovery organisation and our costs to provide the service are based on staff time to design and conduct the search, set up and manage the technical requirements (online study platform), set up, monitoring and administrative management of practice activity for service delivery and general project management and administration of the service.'
+    )
+  ).toBeVisible()
+
+  // Assert that the details component toggles content
+  expect(section.getByText('Further cost details mock')).not.toBeVisible()
+  await user.click(section.getByText('Further cost details'))
+  expect(section.getByText('Further cost details mock')).toBeVisible()
 })
 
-test.skip('Service provider with only required content types', async () => {
-  // mock new response
+test('Service provider with only required content types', async () => {
+  mockContentfulResponse(requiredFieldsOnlyMock)
 
-  // Follow-up TODO
-  expect(screen.getByRole('heading', { name: 'Follow-up', level: 3 })).toBeInTheDocument()
+  render(await getComponent())
+
+  // Back link
+  expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
+    'href',
+    '/providers'
+  )
+
+  // Provider heading
+  expect(screen.getByRole('heading', { name: `Data service provider: ${fields.name}`, level: 2 })).toBeInTheDocument()
+
+  // Provider org
+  expect(screen.getByRole('heading', { name: fields.providerOrganisation, level: 3 })).toBeInTheDocument()
+
+  // Short description
+  expect(screen.getByTestId('frf-dsp-description')).toBeInTheDocument()
+
+  // Coverage
+  expect(screen.getByRole('list', { name: 'Coverage' })).toBeInTheDocument()
+  expect(screen.getByText('Geographical: UK wide')).toBeInTheDocument()
+
+  // First published / Last published
+  expect(screen.getByText('First published:')).toBeInTheDocument()
+  expect(screen.getByText('5 June 2023')).toBeInTheDocument()
+  expect(screen.getByText('Last updated:')).toBeInTheDocument()
+  expect(screen.getByText('23 June 2023')).toBeInTheDocument()
+
+  // Contact
+  const heading = screen.getByRole('heading', { name: 'Contact data service provider', level: 3 })
+  expect(heading).toBeInTheDocument()
+  expect(heading.nextSibling).toHaveTextContent(
+    'If you think Genomic Profile Register might be able to help with your study you can contact them directly using this service.'
+  )
+  expect(screen.getAllByRole('link', { name: 'Get in touch with Genomic Profile Register' })[0]).toHaveAttribute(
+    'href',
+    '/'
+  )
+
+  // Non-required fields
+  expect(screen.queryByRole('table', { name: 'Services available and costs:' })).not.toBeInTheDocument()
+  expect(screen.queryByText(fields.geographySupportingText)).not.toBeInTheDocument()
+  expect(screen.queryByText('Population: 35,000,000')).not.toBeInTheDocument()
+
+  expect(screen.queryByRole('list', { name: 'Suited to:' })).not.toBeInTheDocument()
+  expect(screen.queryByRole('list', { name: 'Not suited to:' })).not.toBeInTheDocument()
+  expect(screen.queryByTitle(`Video: ${fields.name}`)).not.toBeInTheDocument()
+  expect(
+    screen.queryByRole('link', {
+      name: `For more information visit ${fields.websiteName} (Opens in a new window)`,
+    })
+  ).not.toBeInTheDocument()
+  expect(screen.queryByText('Funded by:')).not.toBeInTheDocument()
+
+  // Sidebar
+  const sidebar = within(screen.getByTestId('frf-dsp-sidebar'))
+  expect(sidebar.queryByRole('heading', { name: 'Type of data available', level: 3 })).not.toBeInTheDocument()
+  expect(sidebar.getByRole('heading', { name: 'Contact provider', level: 3 })).toBeInTheDocument()
+  expect(sidebar.getByRole('heading', { name: 'Get support for your research', level: 3 })).toBeInTheDocument()
 })

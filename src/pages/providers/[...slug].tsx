@@ -140,7 +140,13 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     {fields.serviceTypes
                       .filter((item) => item?.fields?.serviceType?.includes(ServiceType.FIND))
                       .map((item, key) => (
-                        <Section key={key} heading="Find" icon={<FindIcon />} type="find">
+                        <Section
+                          key={key}
+                          heading="Find"
+                          icon={<FindIcon />}
+                          type="find"
+                          data-testid="frf-dsp-section-find"
+                        >
                           {formatServiceTypeBlock(item, fields.costs, fields?.findCostChargeableDescription)}
                         </Section>
                       ))}
@@ -148,7 +154,13 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     {fields.serviceTypes
                       .filter((item) => item?.fields?.serviceType?.includes(ServiceType.RECRUIT))
                       .map((item, key) => (
-                        <Section key={key} heading="Recruit" icon={<RecruitIcon />} type="recruit">
+                        <Section
+                          key={key}
+                          heading="Recruit"
+                          icon={<RecruitIcon />}
+                          type="recruit"
+                          data-testid="frf-dsp-section-recruit"
+                        >
                           {formatServiceTypeBlock(item, fields.costs, fields?.recruitCostChargeableDescription)}
                         </Section>
                       ))}
@@ -156,7 +168,13 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     {fields.serviceTypes
                       .filter((item) => item?.fields?.serviceType?.includes(ServiceType.FOLLOW_UP))
                       .map((item, key) => (
-                        <Section key={key} heading="Follow-up" icon={<FollowUpIcon />} type="follow_up">
+                        <Section
+                          key={key}
+                          heading="Follow-up"
+                          icon={<FollowUpIcon />}
+                          type="follow_up"
+                          data-testid="frf-dsp-section-follow-up"
+                        >
                           {formatServiceTypeBlock(item, fields.costs, fields?.followUpCostChargeableDescription)}
                         </Section>
                       ))}
@@ -184,6 +202,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                   heading="Contact data service provider"
                   contactName={`Get in touch with ${fields.name}`}
                   contactUrl="/"
+                  className="govuk-!-margin-top-8"
                 >
                   If you think {fields.name} might be able to help with your study you can contact them directly using
                   this service.
@@ -195,7 +214,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
               data-testid="frf-dsp-sidebar"
             >
               {/* Types of Data */}
-              <TypesOfData>{fields.typesOfDataAvailableDetail}</TypesOfData>
+              <TypesOfData className="govuk-!-margin-bottom-8">{fields.typesOfDataAvailableDetail}</TypesOfData>
 
               {/* Provider Contact */}
               <Contact

@@ -1,0 +1,50 @@
+{
+  "sys": {
+    "type": "Array"
+  },
+  "total": 1,
+  "skip": 0,
+  "limit": 1,
+  "items": [
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "3qPHNtoeSCwST5fPiCF20a",
+        "type": "Entry",
+        "createdAt": "2023-06-05T15:02:20.250Z",
+        "updatedAt": "2023-06-23T10:49:40.132Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "revision": 6,
+        "contentType": {
+          "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceProvider" }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Genomic Profile Register",
+        "slug": "genomic-profile-register",
+        "providerOrganisation": "Delivered by Genomic Profile Register",
+        "shortDescription": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Short description test",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "geography": ["UK wide"]
+      }
+    }
+  ]
+}
