@@ -25,7 +25,7 @@ test('Section', () => {
     expect(contentElement[index]).toBeInTheDocument()
 
     // Assert that the section has the correct background style based on the type prop
-    const sectionElement = screen.getAllByTestId('dsp-section')
+    const sectionElement = screen.getAllByTestId('frf-dsp-section-panel')
 
     expect(sectionElement[index]).toHaveClass(styles[type])
   })

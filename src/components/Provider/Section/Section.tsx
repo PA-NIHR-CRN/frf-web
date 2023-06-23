@@ -22,7 +22,7 @@ export function Section({ children, heading, icon, type, ...props }: SectionProp
   return (
     <section {...props}>
       <div
-        data-testid="dsp-section"
+        data-testid="frf-dsp-section-panel"
         className={clsx(
           "govuk-!-margin-top-8 govuk-!-margin-bottom-6 relative flex w-full items-center justify-between after:absolute after:bottom-0 after:right-0 after:top-0 after:z-0 after:min-w-[50px] after:content-[''] after:lg:min-w-[80px]",
           type ? styles[type] : 'bg-grey-30 after:bg-grey-100'
