@@ -25,8 +25,7 @@ test('Default search criteria (no search or filters set)', async () => {
   render(<ServiceProviders {...props} />)
 
   // Title
-  const serviceProvidersFound = screen.getByText('5 data service providers found')
-  expect(serviceProvidersFound).toHaveAttribute('aria-live', 'polite')
+  expect(screen.getByText('5 data service providers found')).toBeInTheDocument()
 
   // Sort
   expect(screen.getByLabelText('Sort by')).toBeInTheDocument()

@@ -60,7 +60,10 @@ export default function ServiceProviders({
 
   const { isLoading, handleFilterChange } = useProviders()
 
-  const titleSuffix = `Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
+  const titleSuffix =
+    totalItems === 0
+      ? `No matching search results`
+      : `${totalItems} search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
 
   return (
     <>
@@ -81,9 +84,7 @@ export default function ServiceProviders({
           <div className="govuk-grid-column-two-thirds-from-desktop">
             {/* Sort bar */}
             <div className="flex-wrap items-center justify-between gap-3 md:flex">
-              <p className="govuk-heading-m mb-0 whitespace-nowrap" aria-live="polite">
-                {totalItems} data service providers found
-              </p>
+              <p className="govuk-heading-m mb-0 whitespace-nowrap">{totalItems} data service providers found</p>
               <div className="govuk-form-group mt-5 items-center justify-end md:my-0 md:flex">
                 {/* Show filters */}
                 <div>{showFiltersButton()}</div>
@@ -105,7 +106,7 @@ export default function ServiceProviders({
             </p>
 
             {/* Cards */}
-            {isLoading ? null : items.length === 0 ? (
+            {isLoading ? null : totalItems === 0 ? (
               <NoResults />
             ) : (
               <>
