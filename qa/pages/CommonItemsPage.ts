@@ -22,6 +22,7 @@ export default class CommonItemsPage {
   readonly txtLinkDescriptions: Locator
   readonly txtSiteMenuInto: Locator
   readonly siteSeoMetaTag: Locator
+  readonly btnHomeIcon: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -57,6 +58,7 @@ export default class CommonItemsPage {
     this.txtLinkDescriptions = page.locator('p[class="text-sm text-white"]')
     this.txtSiteMenuInto = page.locator('p[class="max-w-[300px] text-base text-white"]')
     this.siteSeoMetaTag = page.locator('meta[name="robots"]')
+    this.btnHomeIcon = page.locator('svg[data-testid="frf-icon-home"]')
   }
 
   //Page Methods
@@ -125,5 +127,13 @@ export default class CommonItemsPage {
 
   async assertSeoIsDisabled() {
     await expect(this.siteSeoMetaTag).toHaveAttribute('content', 'noindex,nofollow')
+  }
+
+  async assertHomeIconVisible() {
+    await expect(this.btnHomeIcon).toBeVisible()
+  }
+
+  async assertHomeIconHidden() {
+    await expect(this.btnHomeIcon).toBeHidden()
   }
 }
