@@ -4,6 +4,7 @@ import { ReactNode, useId, useRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
 import { Filters } from '@/@types/filters'
+import { Button } from '@/components/Button/Button'
 import { Card } from '@/components/Card/Card'
 import { Checkbox } from '@/components/Checkbox/Checkbox'
 import { OnFilterChange, useFilters } from '@/components/Filters/useFilters'
@@ -12,6 +13,7 @@ import Cross from '@/components/Icons/Cross'
 import FindIcon from '@/components/Icons/FindIcon'
 import { ServiceType } from '@/constants'
 import { FilterOptions } from '@/lib/contentfulService'
+import { pluralise } from '@/utils'
 
 const FilterCategory = ({ title, children }: { title: string; children: ReactNode }) => {
   const id = useId()
@@ -40,12 +42,20 @@ const FilterCategory = ({ title, children }: { title: string; children: ReactNod
 export type FiltersProps = {
   options: FilterOptions
   filters: Filters
+  totalItems: number
   showFiltersMobile?: boolean
   onFilterChange?: OnFilterChange
   onRequestClose?: () => void
 }
 
-export function Filters({ options, filters, showFiltersMobile, onRequestClose, onFilterChange }: FiltersProps) {
+export function Filters({
+  options,
+  filters,
+  showFiltersMobile,
+  totalItems,
+  onRequestClose,
+  onFilterChange,
+}: FiltersProps) {
   const formRef = useRef(null)
   const { onChange } = useFilters(formRef, onFilterChange)
   return (
@@ -83,30 +93,33 @@ export function Filters({ options, filters, showFiltersMobile, onRequestClose, o
           className="p-4"
           aria-labelledby="filter-by"
         >
+          <p className="govuk-heading-m mb-5 whitespace-nowrap md:hidden">
+            {`${totalItems} ${pluralise('data service provider', totalItems)} found`}
+          </p>
           {/* Keyword */}
           <div className="govuk-form-group mb-3">
             <label className="govuk-label mb-2" htmlFor="keyword">
               Keyword
             </label>
+            <p id="keyword-hint" className="govuk-hint mb-3 text-sm">
+              Search by data service provider name or keyword
+            </p>
             <div className="relative">
               <input
-                className="govuk-input h-auto rounded-3xl border-2 border-navy-100 p-2 pl-4 pr-9"
+                className="govuk-input h-auto rounded-3xl border-2 border-navy-100 p-2 pl-[2.8rem] pr-4"
                 id="keyword"
                 name="q"
                 type="text"
                 aria-describedby="keyword-hint"
                 defaultValue={filters.q}
               />
-              <button
-                className="focus:focusable absolute right-3 top-[8px] p-[2px] text-lg outline-0 md:p-[4px]"
-                aria-label="Search"
-              >
+              <div className="absolute left-2 top-[8px] p-[2px] text-lg outline-0 md:p-[4px]">
                 <FindIcon />
-              </button>
+              </div>
             </div>
-            <div id="keyword-hint" className="govuk-hint pt-3 text-sm">
-              Search by data service provider name or keyword
-            </div>
+            <Button type="submit" secondary className="mb-0 mt-3 w-full">
+              Search
+            </Button>
           </div>
 
           {/* Type of service */}
@@ -212,6 +225,9 @@ export function Filters({ options, filters, showFiltersMobile, onRequestClose, o
 
           {/* Clear all */}
           <div className="border-t border-grey-120 text-center">
+            <Button secondary type="submit" className="mb-3 w-full [.js-enabled_&]:hidden">
+              Apply filters
+            </Button>
             <Link className="govuk-button govuk-button--secondary w-full text-center" href="/providers">
               Clear all filters
             </Link>

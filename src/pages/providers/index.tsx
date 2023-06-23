@@ -21,7 +21,7 @@ import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer
 import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
-import { getFiltersFromQuery, transformFilters } from '@/utils'
+import { getFiltersFromQuery, pluralise, transformFilters } from '@/utils'
 import { numDaysBetween } from '@/utils/numDaysBetween'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
@@ -39,7 +39,7 @@ export default function ServiceProviders({
     <a
       id="show-filters"
       href="#filters"
-      className="govuk-button govuk-button--secondary my-0 mr-3 md:mr-0 md:hidden"
+      className="govuk-button govuk-button--secondary my-0 mr-3 w-full md:mr-0 md:hidden"
       ref={showFiltersButtonRef}
       onClick={(event) => {
         setShowFiltersMobile(true)
@@ -60,14 +60,16 @@ export default function ServiceProviders({
 
   const { isLoading, handleFilterChange } = useProviders()
 
-  const titleSuffix =
+  const titleResultsText =
     totalItems === 0
-      ? `No matching search results`
-      : `${totalItems} search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
+      ? `(no matching search results)`
+      : `(${totalItems} ${pluralise('search result', totalItems)}, page ${initialPage + 1} of ${Math.ceil(
+          totalItems / initialPageSize
+        )})`
 
   return (
     <>
-      <NextSeo title={`Find, Recruit and Follow-up – ${titleSuffix}`} />
+      <NextSeo title={`List of data service providers ${titleResultsText} - Find, Recruit and Follow-up`} />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third-from-desktop">
@@ -75,6 +77,7 @@ export default function ServiceProviders({
             <Filters
               options={filterOptions}
               filters={filters}
+              totalItems={totalItems}
               showFiltersMobile={showFiltersMobile}
               onFilterChange={handleFilterChange}
               onRequestClose={handleCloseFilters}
@@ -84,7 +87,9 @@ export default function ServiceProviders({
           <div className="govuk-grid-column-two-thirds-from-desktop">
             {/* Sort bar */}
             <div className="flex-wrap items-center justify-between gap-3 md:flex">
-              <p className="govuk-heading-m mb-0 whitespace-nowrap">{totalItems} data service providers found</p>
+              <p className="govuk-heading-m mb-0 whitespace-nowrap">
+                {`${totalItems} ${pluralise('data service provider', totalItems)} found`}
+              </p>
               <div className="govuk-form-group mt-5 items-center justify-end md:my-0 md:flex">
                 {/* Show filters */}
                 <div>{showFiltersButton()}</div>
@@ -100,13 +105,10 @@ export default function ServiceProviders({
               </div>
             </div>
 
-            {/* Loading status */}
-            <p role="status" className="govuk-body mt-5" aria-live="polite">
-              {isLoading && 'Loading...'}
-            </p>
-
             {/* Cards */}
-            {isLoading ? null : totalItems === 0 ? (
+            {isLoading ? (
+              <p className="govuk-body mt-5">Loading...</p>
+            ) : totalItems === 0 ? (
               <NoResults />
             ) : (
               <>

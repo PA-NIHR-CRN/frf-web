@@ -12,7 +12,7 @@ export const useFilters = (formRef: RefObject<HTMLFormElement>, onFilterChange?:
     const formDataAsObject = Object.fromEntries(
       Array.from(formData.keys()).map((key) => [
         key,
-        formData.getAll(key).length > 1 ? formData.getAll(key) : formData.get(key),
+        formData.getAll(key).length > 1 ? formData.getAll(key).join(',') : formData.get(key),
       ])
     )
 

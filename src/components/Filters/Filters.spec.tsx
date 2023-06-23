@@ -21,6 +21,7 @@ const filterOptions = {
 const defaultProps = {
   options: filterOptions,
   filters: { page: 1 },
+  totalItems: 1,
 }
 
 test('Allows searching by keyword', () => {
@@ -33,6 +34,11 @@ test('Allows searching by keyword', () => {
   const description = screen.getByText('Search by data service provider name or keyword')
   expect(description).toHaveAttribute('id', 'keyword-hint')
   expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument()
+})
+
+test('Allows non-javascript users to apply filters', () => {
+  render(<Filters {...defaultProps} />)
+  expect(screen.getByRole('button', { name: 'Apply filters' })).toBeInTheDocument()
 })
 
 test('Allows filtering by service type', async () => {
@@ -60,7 +66,7 @@ test('Allows filtering by service type', async () => {
   await userEvent.click(findInput)
   expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '', serviceType: 'Find' })
   await userEvent.click(recruitInput)
-  expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '', serviceType: ['Find', 'Recruit'] })
+  expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '', serviceType: 'Find,Recruit' })
   await userEvent.click(recruitInput)
   expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '', serviceType: 'Find' })
   await userEvent.click(findInput)
@@ -90,7 +96,7 @@ test('Allows filtering by geography', async () => {
   await userEvent.click(within(fieldset).getByLabelText('England'))
   expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '', geography: 'England' })
   await userEvent.click(within(fieldset).getByLabelText('UK wide'))
-  expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '', geography: ['UK wide', 'England'] })
+  expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '', geography: 'UK wide,England' })
 })
 
 test('Allows filtering by costs', async () => {
@@ -128,21 +134,21 @@ test('Allows filtering by costs', async () => {
   await userEvent.click(within(findFieldset).getByLabelText('Chargeable service'))
   expect(onFilterChangeSpy).toHaveBeenLastCalledWith({
     q: '',
-    costs: ['Find: Free of charge', 'Find: Chargeable service'],
+    costs: 'Find: Free of charge,Find: Chargeable service',
   })
 
   // Can check Recruit cost filters
   await userEvent.click(within(recruitFieldset).getByLabelText('Free of charge'))
   expect(onFilterChangeSpy).toHaveBeenLastCalledWith({
     q: '',
-    costs: ['Find: Free of charge', 'Find: Chargeable service', 'Recruit: Free of charge'],
+    costs: 'Find: Free of charge,Find: Chargeable service,Recruit: Free of charge',
   })
 
   // Can check Follow-up cost filters
   await userEvent.click(within(followUpFieldset).getByLabelText('Free of charge'))
   expect(onFilterChangeSpy).toHaveBeenLastCalledWith({
     q: '',
-    costs: ['Find: Free of charge', 'Find: Chargeable service', 'Recruit: Free of charge', 'Follow-Up: Free of charge'],
+    costs: 'Find: Free of charge,Find: Chargeable service,Recruit: Free of charge,Follow-Up: Free of charge',
   })
 })
 
@@ -224,4 +230,11 @@ test('Focus is locked inside filters on mobile only', async () => {
   screen.getByRole('link', { name: 'Clear all filters' }).focus()
   await userEvent.tab()
   expect(screen.getByRole('link', { name: 'Return to search results' })).toHaveFocus()
+})
+
+test('Informs mobile users of the current number of search results', () => {
+  const { rerender } = render(<Filters {...defaultProps} totalItems={5} />)
+  expect(screen.getByText('5 data service providers found')).toBeInTheDocument()
+  rerender(<Filters {...defaultProps} totalItems={1} />)
+  expect(screen.getByText('1 data service provider found')).toBeInTheDocument()
 })
