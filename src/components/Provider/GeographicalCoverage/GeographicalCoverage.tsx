@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import { useMemo } from 'react'
 
 import MapPin from '@/components/Icons/MapPin'
 import Users from '@/components/Icons/Users'
@@ -20,7 +19,7 @@ export const GeographicalCoverage = ({
   geographySupportingText,
   className,
 }: GeographicalCoverageProps) => {
-  const regions = useMemo(() => {
+  const getRegionsText = () => {
     if (regionalCoverage) return regionalCoverage
 
     if (geography.includes('UK wide')) {
@@ -28,7 +27,7 @@ export const GeographicalCoverage = ({
     }
 
     return geography.join(', ')
-  }, [regionalCoverage, geography])
+  }
 
   return (
     <List heading="Coverage:" aria-label="Coverage" className={clsx(className, 'govuk-body')}>
@@ -41,7 +40,7 @@ export const GeographicalCoverage = ({
         }
       >
         <div>
-          <p className="govuk-!-margin-bottom-1">Geographical: {regions}</p>
+          <p className="govuk-!-margin-bottom-1">Geographical: {getRegionsText()}</p>
           {geographySupportingText && <p className="mb-0">{geographySupportingText}</p>}
         </div>
       </ListItem>
