@@ -19,6 +19,16 @@ export const GeographicalCoverage = ({
   geographySupportingText,
   className,
 }: GeographicalCoverageProps) => {
+  const getRegionsText = () => {
+    if (regionalCoverage) return regionalCoverage
+
+    if (geography.includes('UK wide')) {
+      return ['UK wide', ...geography.filter((region) => region !== 'UK wide')].join(', ')
+    }
+
+    return geography.join(', ')
+  }
+
   return (
     <List heading="Coverage:" aria-label="Coverage" className={clsx(className, 'govuk-body')}>
       <ListItem
@@ -30,7 +40,7 @@ export const GeographicalCoverage = ({
         }
       >
         <div>
-          <p className="govuk-!-margin-bottom-1">Geographical: {regionalCoverage || geography.join(', ')}</p>
+          <p className="govuk-!-margin-bottom-1">Geographical: {getRegionsText()}</p>
           {geographySupportingText && <p className="mb-0">{geographySupportingText}</p>}
         </div>
       </ListItem>
