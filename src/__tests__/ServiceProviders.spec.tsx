@@ -1,9 +1,11 @@
 import userEvent from '@testing-library/user-event'
 import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
+import { act } from 'react-dom/test-utils'
 
 import { render, screen, within } from '@/config/test-utils'
-import { defaultMock, pageTwoMock } from '@/mocks/serviceProviders'
+import { ServiceType } from '@/constants'
+import { defaultMock, noResultsMock, pageTwoMock } from '@/mocks/serviceProviders'
 import ServiceProviders, { getServerSideProps, ServiceProvidersProps } from '@/pages/providers'
 import { setupMockServer } from '@/utils'
 
@@ -22,8 +24,8 @@ test('Default search criteria (no search or filters set)', async () => {
 
   render(<ServiceProviders {...props} />)
 
-  // Title
-  expect(screen.getByText('5 data service providers found')).toBeInTheDocument()
+  // Title (duplicated by the filters panel mobile only title)
+  expect(screen.getAllByText('5 data service providers found')).toHaveLength(2)
 
   // Sort
   expect(screen.getByLabelText('Sort by')).toBeInTheDocument()
@@ -205,4 +207,127 @@ test('Toggling filters on mobile', async () => {
   // Focus is returned to show filters button
   expect(scrollToSpy).toHaveBeenCalledWith(0, 0)
   expect(showFiltersButton).toHaveFocus()
+})
+
+test('Filter default states', async () => {
+  mockContentfulResponse(defaultMock)
+
+  const context = {
+    query: {
+      q: 'Test search',
+      page: 1,
+      serviceType: [ServiceType.FIND, ServiceType.FOLLOW_UP],
+      geography: ['England', 'UK wide'],
+      excludeRegional: true,
+      costs: [
+        'Find: Free of charge (All studies)',
+        'Recruit: Free of charge (All studies)',
+        'Follow-Up: Free of charge (All studies)',
+      ],
+    },
+  } as unknown as GetServerSidePropsContext
+
+  const { props } = await getServerSideProps(context)
+
+  render(<ServiceProviders {...props} />)
+
+  // Keyword input has correct default value
+  expect(screen.getByLabelText('Keyword')).toHaveValue('Test search')
+
+  // Correct service types are checked
+  expect(screen.getByLabelText('Find')).toBeChecked()
+  expect(screen.getByLabelText('Recruit')).not.toBeChecked()
+
+  // Correct geographies are checked
+  expect(screen.getByLabelText('England')).toBeChecked()
+  expect(screen.getByLabelText('Wales')).not.toBeChecked()
+  expect(screen.getByLabelText('Exclude regional only services')).toBeChecked()
+
+  // Correct costs are checked
+  const findFieldset = screen.getByRole('group', { name: 'Find' })
+  expect(within(findFieldset).getByLabelText('Free of charge (All studies)')).toBeChecked()
+  expect(within(findFieldset).getByLabelText('Chargeable service')).not.toBeChecked()
+
+  const recruitFieldset = screen.getByRole('group', { name: 'Recruit' })
+  expect(within(recruitFieldset).getByLabelText('Free of charge (All studies)')).toBeChecked()
+  expect(within(recruitFieldset).getByLabelText('Chargeable service')).not.toBeChecked()
+
+  const followUpFieldset = screen.getByRole('group', { name: 'Follow-Up' })
+  expect(within(followUpFieldset).getByLabelText('Free of charge (All studies)')).toBeChecked()
+  expect(within(followUpFieldset).getByLabelText('Chargeable service')).not.toBeChecked()
+})
+
+test('Enabling a filter', async () => {
+  mockContentfulResponse(defaultMock)
+
+  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+
+  render(<ServiceProviders {...props} />)
+
+  mockRouter.asPath = ''
+
+  await userEvent.click(screen.getByLabelText('Find'))
+  expect(mockRouter.asPath).toBe('/providers?q=&serviceType=Find')
+})
+
+test('Disabling a filter', async () => {
+  mockContentfulResponse(defaultMock)
+
+  const context = { query: { serviceType: 'Find' } } as unknown as GetServerSidePropsContext
+
+  const { props } = await getServerSideProps(context)
+
+  render(<ServiceProviders {...props} />)
+
+  mockRouter.asPath = '/providers?q=&serviceType=Find'
+
+  await userEvent.click(screen.getByLabelText('Find'))
+
+  expect(mockRouter.asPath).toBe('/providers?q=')
+})
+
+test('Enabling a filter via keyboard', async () => {
+  mockContentfulResponse(defaultMock)
+
+  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+
+  render(<ServiceProviders {...props} />)
+
+  mockRouter.asPath = ''
+
+  const findInput = screen.getByLabelText('Find')
+  findInput.focus()
+  await userEvent.keyboard(' ')
+
+  expect(mockRouter.asPath).toBe('/providers?q=&serviceType=Find')
+})
+
+test('Loading status', async () => {
+  mockContentfulResponse(defaultMock)
+
+  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+
+  render(<ServiceProviders {...props} />)
+
+  // Shows loading state when route changes due to filter change
+  act(() => mockRouter.events.emit('routeChangeStart', '/providers?serviceType=Find'))
+  expect(screen.getByText('Loading...')).toBeInTheDocument()
+
+  // Hides loading state after route change complete
+  act(() => mockRouter.events.emit('routeChangeComplete'))
+  expect(screen.queryByText('Loading...')).not.toBeInTheDocument()
+
+  // Does not show loading state when route changes to another page
+  act(() => mockRouter.events.emit('routeChangeStart', '/providers/test'))
+  expect(screen.queryByText('Loading...')).not.toBeInTheDocument()
+})
+
+test('No results', async () => {
+  mockContentfulResponse(noResultsMock)
+
+  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+
+  render(<ServiceProviders {...props} />)
+
+  expect(screen.getByRole('heading', { name: 'There are no matching results.' })).toBeInTheDocument()
 })
