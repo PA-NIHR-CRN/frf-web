@@ -1,0 +1,5592 @@
+{
+  "sys": {
+    "type": "Array"
+  },
+  "total": 1,
+  "skip": 0,
+  "limit": 1,
+  "items": [
+    {
+      "metadata": {
+        "tags": [
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeHospitalInPatientAndOutPatientEpisodes"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypeOther"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "dataTypePrimaryCare"
+            }
+          },
+          {
+            "sys": {
+              "type": "Link",
+              "linkType": "Tag",
+              "id": "serviceTypeFind"
+            }
+          }
+        ]
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "qg9njdfd7ka1"
+          }
+        },
+        "id": "indqIR0VHkBNlCMFDIXJi",
+        "type": "Entry",
+        "createdAt": "2023-06-08T14:10:48.849Z",
+        "updatedAt": "2023-06-22T13:01:18.830Z",
+        "environment": {
+          "sys": {
+            "id": "dev",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "revision": 24,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "serviceProvider"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "name": "Genomic Profile Register",
+        "slug": "genomic-profile-register",
+        "providerOrganisation": "Delivered by Genomic Profile Register",
+        "shortDescription": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "value": "Genomic Profile Register:",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": " secure, national database of genomic and health data. It provides whole genome sequencing diagnostics. Within Clinical care, individuals are asked by clinicians whether they would like to add their genome sequence and health data to the Genomic Register.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "\n",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "value": "Find:",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": " The sample is sequenced and genome data is stored and can be analysed within the Genome Profile library. The number of eligible participants can be viewed by carrying out specific study criteria searches via the database.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "\n",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "value": "Recruit:",
+                  "nodeType": "text"
+                },
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": " If individuals consent to further research, the de-identified sample and data in the National Genomic Register can be made identifiable and available ",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "fundedBy": "Department of Health and Social Care",
+        "geography": ["England"],
+        "geographySupportingText": "NHS England holds data for all patients registered in England.",
+        "population": "35,000,000",
+        "suitedTo": [
+          "Drug development trials",
+          "Certain rare disease, indications or cancers",
+          "Inherited diseases",
+          "Large patient cohorts"
+        ],
+        "notSuitedTo": ["Healthy volunteer phase 1"],
+        "costs": [
+          "Find: Free of charge (All studies)",
+          "Recruit: Free of charge (All studies)",
+          "Follow-Up: Free of charge (All studies)"
+        ],
+        "findCostChargeableDescription": "Free of charge (all studies)",
+        "recruitCostChargeableDescription": "Chargeable service - £XXX",
+        "typesOfDataAvailableList": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Primary care",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Hospital in-patient and out-patient episodes",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Audit data",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Cancer registry",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "COVID-19 data",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Demographics",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Emergency care",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                }
+              ],
+              "nodeType": "unordered-list"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "typesOfDataAvailableDetail": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Primary care",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    },
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "COVID 19",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        },
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Medicines dispensed",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        },
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "content": [
+                                {
+                                  "data": {},
+                                  "marks": [],
+                                  "value": "Work force",
+                                  "nodeType": "text"
+                                }
+                              ],
+                              "nodeType": "paragraph"
+                            }
+                          ],
+                          "nodeType": "list-item"
+                        }
+                      ],
+                      "nodeType": "unordered-list"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Hospital in-patient and out-patient episodes",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Audit data",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Cancer registry",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "COVID-19 data",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Demographics",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                },
+                {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Emergency care",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "list-item"
+                }
+              ],
+              "nodeType": "unordered-list"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=3WUh1huCUrM",
+        "website": "https://www.nihr.ac.uk/",
+        "websiteName": "Genomic Profile Register Website Name",
+        "dataSpecificsAndCoding": [
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "6sz9ACgDsXQBX5RjoHyHYL",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:09:42.692Z",
+              "updatedAt": "2023-06-20T14:09:42.692Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "textBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "heading": "Direct identifers in dataset ",
+              "text": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Direct identifers in dataset mock",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "4Kcf2nKg7UviV3AXQjY47d",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:06:18.353Z",
+              "updatedAt": "2023-06-20T14:06:18.353Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "textBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "heading": "Clinical content",
+              "text": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Clinical content mock",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "2eCZBJigwmdNSmDjM4ipUP",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:10:02.820Z",
+              "updatedAt": "2023-06-20T14:10:02.820Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "textBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "heading": "Data entry coding ",
+              "text": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Data entry coding mock",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "3iYb5nO1nWmrSABakp3mfb",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:10:13.166Z",
+              "updatedAt": "2023-06-20T14:10:13.166Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "textBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "heading": "Quality and variability of coding ",
+              "text": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Quality and variability of coding mock",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "3hFbh3lEh908TlqjKlM6jE",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:10:23.157Z",
+              "updatedAt": "2023-06-20T14:10:23.157Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "textBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "heading": "Underserved groups identified ",
+              "text": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Underserved groups identified mock",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "7jaQaNIGyZPid4NmGXz2D4",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:10:34.140Z",
+              "updatedAt": "2023-06-20T14:10:34.140Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "textBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "heading": "Frequency of data updates",
+              "text": {
+                "nodeType": "document",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Frequency of data updates mock",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "geographicAndPopulationCoverage": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Service covers England, Northern Ireland, Scotland and Wales. ",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "value": "Degree of participation by care providers ",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "The service is able to collect data under its statutory power established by the Health and Social Care Act 2012s, under section 259(1)(a), to require data from health or social care bodies, or organisations that provide publicly funded health or adult social care in England, where it has been directed to establish an information system by the Secretary of State for Health and Social Care (Secretary of State) or NHS England.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "value": "Number of live participants’ data held",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "1.6million",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "value": "Total number of participants’ data held",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "65 million",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "informationGovernance": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Full details of this service provider's Information Governance process. ",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "serviceTypes": [
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "1JQX0OFqNKXTdOF0ti2jHN",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:15:43.674Z",
+              "updatedAt": "2023-06-20T14:15:43.674Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "serviceTypeBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "serviceType": "Find",
+              "description": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [
+                          {
+                            "type": "bold"
+                          }
+                        ],
+                        "value": "Feasibility Service:",
+                        "nodeType": "text"
+                      },
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": " Supports planning of Clinical trials by enabling clinical trialists to assess the feasibility of a study. Using national data sets the user can determine the number and location of patients who meet key eligibility criteria.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "howTheServiceWorks": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Search criteria and code lists are based on the study protocol and agreed and validated with client, and undergoes an internal QA prior to the search being carried out",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Search is performed on the national datasets and Primary Care Database",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Any criteria that is recorded in the coded primary care database or linked datasets can be applied to the search",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      }
+                    ],
+                    "nodeType": "unordered-list"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "expectedTimelines": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "A high level search based on a protocol or study outline will take approximately 10 working days.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "More detailed search, conducted with client input may take up to 30 working days.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "costDescription": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "The service is a cost recovery organisation. Costs to the user are based on the:",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "staff time used to design and conduct the search",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "staff time to configure and support the technical requirements to support the service",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "payments to GP practices for their delivery of the service via primary care",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      }
+                    ],
+                    "nodeType": "unordered-list"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "additionalInformation": [
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "2REZM5LrJox2GpyrgLIcrt",
+                    "type": "Entry",
+                    "createdAt": "2023-06-20T14:14:21.719Z",
+                    "updatedAt": "2023-06-20T14:14:21.719Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Exclusions from Find service",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Exclusions from Find service mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        },
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "A&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "6DuMhKol6ocLmUMXSVfog9",
+                    "type": "Entry",
+                    "createdAt": "2023-06-20T14:14:41.092Z",
+                    "updatedAt": "2023-06-20T14:14:41.092Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Statistical disclosure controls ",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Statistical disclosure controls mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        },
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "A&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ],
+              "dataProcessingActivities": [
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "10NQqaYjSB7TV6v2DcT3m2",
+                    "type": "Entry",
+                    "createdAt": "2023-06-20T14:15:41.371Z",
+                    "updatedAt": "2023-06-20T14:15:41.371Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "blockDataTransfer"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "label": "Determining numbers of potentially eligible research participants",
+                    "dataTransfer": [
+                      {
+                        "metadata": {
+                          "tags": []
+                        },
+                        "sys": {
+                          "space": {
+                            "sys": {
+                              "type": "Link",
+                              "linkType": "Space",
+                              "id": "qg9njdfd7ka1"
+                            }
+                          },
+                          "id": "7KX5KgRN2t9nqLOrIbTOG9",
+                          "type": "Entry",
+                          "createdAt": "2023-06-20T14:15:38.479Z",
+                          "updatedAt": "2023-06-20T14:15:38.479Z",
+                          "environment": {
+                            "sys": {
+                              "id": "dev",
+                              "type": "Link",
+                              "linkType": "Environment"
+                            }
+                          },
+                          "revision": 1,
+                          "contentType": {
+                            "sys": {
+                              "type": "Link",
+                              "linkType": "ContentType",
+                              "id": "informationGovernanceBlock"
+                            }
+                          },
+                          "locale": "en-US"
+                        },
+                        "fields": {
+                          "label": {
+                            "metadata": {
+                              "tags": []
+                            },
+                            "sys": {
+                              "space": {
+                                "sys": {
+                                  "type": "Link",
+                                  "linkType": "Space",
+                                  "id": "qg9njdfd7ka1"
+                                }
+                              },
+                              "id": "SDvNT9BUNMWsITehO1Ymc",
+                              "type": "Entry",
+                              "createdAt": "2023-06-20T14:12:09.388Z",
+                              "updatedAt": "2023-06-20T14:12:09.388Z",
+                              "environment": {
+                                "sys": {
+                                  "id": "dev",
+                                  "type": "Link",
+                                  "linkType": "Environment"
+                                }
+                              },
+                              "revision": 1,
+                              "contentType": {
+                                "sys": {
+                                  "type": "Link",
+                                  "linkType": "ContentType",
+                                  "id": "blockLabel"
+                                }
+                              },
+                              "locale": "en-US"
+                            },
+                            "fields": {
+                              "label": "Purpose",
+                              "description": "Test"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "5OquxLmJL1E9H8Cs0pDP1h",
+              "type": "Entry",
+              "createdAt": "2023-06-21T13:11:57.357Z",
+              "updatedAt": "2023-06-21T13:14:18.065Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 2,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "serviceTypeBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "serviceType": "Recruit",
+              "description": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Recruitment service: Supports recruitment for clinical trials by identifying suitable patients and inviting them to participate on behalf of the research organisation.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "howTheServiceWorks": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "The search criteria and code lists are based on the study protocol and agreed and validated with client and performed as for the Find service above",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Invites to potential participant sent by the service on behalf of the client in the form of a letter",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Search Criteria is agreed and validated through completion of Data Sharing Agreement",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "No additional clinical checks are applied other than inclusion/exclusion criteria",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      }
+                    ],
+                    "nodeType": "unordered-list"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "expectedTimelines": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Study set up may take between 1 and 3 months to start recruitment\nRecruitment timelines will be client and project dependent",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "costDescription": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Service is a cost recovery organisation and our costs to provide the service are based on staff time to design and conduct the search, set up and manage the technical requirements (online study platform), set up, monitoring and administrative management of practice activity for service delivery and general project management and administration of the service.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "additionalInformation": [
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "2K7Vhhei0MwTCPoUgPYppy",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:11:54.222Z",
+                    "updatedAt": "2023-06-21T13:12:34.993Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Specific regulatory approvals",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Specific regulatory approvals mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "3OjbPmp9bh5TfjlzaKw5qK",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:12:48.912Z",
+                    "updatedAt": "2023-06-21T13:12:48.912Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Additional approvals required",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Additional approvals required mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "3jgcqpjZvo0baDsTXsCPge",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:12:54.837Z",
+                    "updatedAt": "2023-06-21T13:13:52.665Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Exclusions from Recruit service",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Exclusions from Recruit service mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "3fcMZDhEYw4mjbu9bIk6Hy",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:13:04.985Z",
+                    "updatedAt": "2023-06-21T13:13:47.840Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Contacting sites set up",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Contacting sites set up mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "3atCwaMqdj7aVM4sGUF3dN",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:13:13.910Z",
+                    "updatedAt": "2023-06-21T13:13:43.517Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "User progress of information ",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "User progress of information mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "33uR7OgL7a94GrVVipvLx9",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:13:23.095Z",
+                    "updatedAt": "2023-06-21T13:13:39.417Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Further cost details ",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Further cost details mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "29wLU6zXwWQLiKZN2VNyaH",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:13:34.139Z",
+                    "updatedAt": "2023-06-21T13:14:39.033Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 3,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Study-specific agreements ",
+                    "text": {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "content": [
+                            {
+                              "data": {},
+                              "marks": [],
+                              "value": "Study-specific agreements ",
+                              "nodeType": "text"
+                            }
+                          ],
+                          "nodeType": "paragraph"
+                        }
+                      ],
+                      "nodeType": "document"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "2OfCowNzHLxw1Lca4BhH9z",
+              "type": "Entry",
+              "createdAt": "2023-06-21T13:17:00.028Z",
+              "updatedAt": "2023-06-21T13:17:00.028Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "serviceTypeBlock"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "serviceType": "Follow-Up",
+              "howTheServiceWorks": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "The Outcomes service enable the user to follow up the participants taking part in clinical trials, and link the user with relevant data about participants.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "expectedTimelines": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Set up and recruitment in line with recruitment process and according to timelines in protocol",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "costDescription": {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "The service is a cost recovery organisation and our costs to provide the service are based on staff time to design and conduct the search, set up and manage the technical requirements (online study platform), set up, monitoring and administrative management of practice activity for service delivery and general project management and administration of the service.",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "document"
+              },
+              "additionalInformation": [
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "7vOB9q5me9pK4pwhSGE6n4",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:15:37.700Z",
+                    "updatedAt": "2023-06-21T13:17:03.902Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Specific regulatory approvals",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "text",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "qxMOxVHUozODVZdc5VpeG",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:15:46.303Z",
+                    "updatedAt": "2023-06-21T13:17:09.175Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Additional approvals required",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "text",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "5K6lnKaclS2363h8QrTPde",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:15:58.185Z",
+                    "updatedAt": "2023-06-21T13:17:14.116Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Exclusions from Follow-up service",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Text",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "501qRn1VKgECGzFugmyUFc",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:16:08.347Z",
+                    "updatedAt": "2023-06-21T13:16:34.046Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 2,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Data transfer ",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Text",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "27RneE3p2j7YeMUdAXs2fy",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:16:24.064Z",
+                    "updatedAt": "2023-06-21T13:16:24.064Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Data storage, sharing and retention requirements ",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Text",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "4KvMvGS7s1TOYCUQWBJ8jW",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:16:43.725Z",
+                    "updatedAt": "2023-06-21T13:16:43.725Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Further cost details ",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Further cost details mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "5AYrtTyrdGtFLVOviRpGTI",
+                    "type": "Entry",
+                    "createdAt": "2023-06-21T13:16:53.994Z",
+                    "updatedAt": "2023-06-21T13:16:53.994Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "textBlock"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "heading": "Study-specific agreements ",
+                    "text": {
+                      "nodeType": "document",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "paragraph",
+                          "data": {},
+                          "content": [
+                            {
+                              "nodeType": "text",
+                              "value": "Study-specific agreements mock",
+                              "marks": [],
+                              "data": {}
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "includes": {
+    "Entry": [
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "10NQqaYjSB7TV6v2DcT3m2",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:15:41.371Z",
+          "updatedAt": "2023-06-20T14:15:41.371Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "blockDataTransfer"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "label": "Determining numbers of potentially eligible research participants",
+          "dataTransfer": [
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "7KX5KgRN2t9nqLOrIbTOG9",
+                "type": "Entry",
+                "createdAt": "2023-06-20T14:15:38.479Z",
+                "updatedAt": "2023-06-20T14:15:38.479Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "informationGovernanceBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "label": {
+                  "metadata": {
+                    "tags": []
+                  },
+                  "sys": {
+                    "space": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "Space",
+                        "id": "qg9njdfd7ka1"
+                      }
+                    },
+                    "id": "SDvNT9BUNMWsITehO1Ymc",
+                    "type": "Entry",
+                    "createdAt": "2023-06-20T14:12:09.388Z",
+                    "updatedAt": "2023-06-20T14:12:09.388Z",
+                    "environment": {
+                      "sys": {
+                        "id": "dev",
+                        "type": "Link",
+                        "linkType": "Environment"
+                      }
+                    },
+                    "revision": 1,
+                    "contentType": {
+                      "sys": {
+                        "type": "Link",
+                        "linkType": "ContentType",
+                        "id": "blockLabel"
+                      }
+                    },
+                    "locale": "en-US"
+                  },
+                  "fields": {
+                    "label": "Purpose",
+                    "description": "Test"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "1JQX0OFqNKXTdOF0ti2jHN",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:15:43.674Z",
+          "updatedAt": "2023-06-20T14:15:43.674Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "serviceTypeBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "serviceType": "Find",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [
+                      {
+                        "type": "bold"
+                      }
+                    ],
+                    "value": "Feasibility Service:",
+                    "nodeType": "text"
+                  },
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": " Supports planning of Clinical trials by enabling clinical trialists to assess the feasibility of a study. Using national data sets the user can determine the number and location of patients who meet key eligibility criteria.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "howTheServiceWorks": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "Search criteria and code lists are based on the study protocol and agreed and validated with client, and undergoes an internal QA prior to the search being carried out",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "Search is performed on the national datasets and Primary Care Database",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "Any criteria that is recorded in the coded primary care database or linked datasets can be applied to the search",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "expectedTimelines": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "A high level search based on a protocol or study outline will take approximately 10 working days.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "More detailed search, conducted with client input may take up to 30 working days.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "costDescription": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "The service is a cost recovery organisation. Costs to the user are based on the:",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "staff time used to design and conduct the search",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "staff time to configure and support the technical requirements to support the service",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "payments to GP practices for their delivery of the service via primary care",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "additionalInformation": [
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "2REZM5LrJox2GpyrgLIcrt",
+                "type": "Entry",
+                "createdAt": "2023-06-20T14:14:21.719Z",
+                "updatedAt": "2023-06-20T14:14:21.719Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Exclusions from Find service",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    },
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "A&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "6DuMhKol6ocLmUMXSVfog9",
+                "type": "Entry",
+                "createdAt": "2023-06-20T14:14:41.092Z",
+                "updatedAt": "2023-06-20T14:14:41.092Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Statistical disclosure controls ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    },
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "A&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "dataProcessingActivities": [
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "10NQqaYjSB7TV6v2DcT3m2",
+                "type": "Entry",
+                "createdAt": "2023-06-20T14:15:41.371Z",
+                "updatedAt": "2023-06-20T14:15:41.371Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "blockDataTransfer"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "label": "Determining numbers of potentially eligible research participants",
+                "dataTransfer": [
+                  {
+                    "metadata": {
+                      "tags": []
+                    },
+                    "sys": {
+                      "space": {
+                        "sys": {
+                          "type": "Link",
+                          "linkType": "Space",
+                          "id": "qg9njdfd7ka1"
+                        }
+                      },
+                      "id": "7KX5KgRN2t9nqLOrIbTOG9",
+                      "type": "Entry",
+                      "createdAt": "2023-06-20T14:15:38.479Z",
+                      "updatedAt": "2023-06-20T14:15:38.479Z",
+                      "environment": {
+                        "sys": {
+                          "id": "dev",
+                          "type": "Link",
+                          "linkType": "Environment"
+                        }
+                      },
+                      "revision": 1,
+                      "contentType": {
+                        "sys": {
+                          "type": "Link",
+                          "linkType": "ContentType",
+                          "id": "informationGovernanceBlock"
+                        }
+                      },
+                      "locale": "en-US"
+                    },
+                    "fields": {
+                      "label": {
+                        "metadata": {
+                          "tags": []
+                        },
+                        "sys": {
+                          "space": {
+                            "sys": {
+                              "type": "Link",
+                              "linkType": "Space",
+                              "id": "qg9njdfd7ka1"
+                            }
+                          },
+                          "id": "SDvNT9BUNMWsITehO1Ymc",
+                          "type": "Entry",
+                          "createdAt": "2023-06-20T14:12:09.388Z",
+                          "updatedAt": "2023-06-20T14:12:09.388Z",
+                          "environment": {
+                            "sys": {
+                              "id": "dev",
+                              "type": "Link",
+                              "linkType": "Environment"
+                            }
+                          },
+                          "revision": 1,
+                          "contentType": {
+                            "sys": {
+                              "type": "Link",
+                              "linkType": "ContentType",
+                              "id": "blockLabel"
+                            }
+                          },
+                          "locale": "en-US"
+                        },
+                        "fields": {
+                          "label": "Purpose",
+                          "description": "Test"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "27RneE3p2j7YeMUdAXs2fy",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:16:24.064Z",
+          "updatedAt": "2023-06-21T13:16:24.064Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Data storage, sharing and retention requirements ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "29wLU6zXwWQLiKZN2VNyaH",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:13:34.139Z",
+          "updatedAt": "2023-06-21T13:14:39.033Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 3,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Study-specific agreements ",
+          "text": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Study-specific agreements ",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "2K7Vhhei0MwTCPoUgPYppy",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:11:54.222Z",
+          "updatedAt": "2023-06-21T13:12:34.993Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Specific regulatory approvals",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Specific regulatory approvals mock",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "2OfCowNzHLxw1Lca4BhH9z",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:17:00.028Z",
+          "updatedAt": "2023-06-21T13:17:00.028Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "serviceTypeBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "serviceType": "Follow-Up",
+          "howTheServiceWorks": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "The Outcomes service enable the user to follow up the participants taking part in clinical trials, and link the user with relevant data about participants.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "expectedTimelines": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Set up and recruitment in line with recruitment process and according to timelines in protocol",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "costDescription": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "The service is a cost recovery organisation and our costs to provide the service are based on staff time to design and conduct the search, set up and manage the technical requirements (online study platform), set up, monitoring and administrative management of practice activity for service delivery and general project management and administration of the service.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "additionalInformation": [
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "7vOB9q5me9pK4pwhSGE6n4",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:15:37.700Z",
+                "updatedAt": "2023-06-21T13:17:03.902Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Specific regulatory approvals",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "text",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "qxMOxVHUozODVZdc5VpeG",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:15:46.303Z",
+                "updatedAt": "2023-06-21T13:17:09.175Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Additional approvals required",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Additional approvals required mock",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "5K6lnKaclS2363h8QrTPde",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:15:58.185Z",
+                "updatedAt": "2023-06-21T13:17:14.116Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Exclusions from Follow-up service",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Exclusions from Follow-up service mock",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "501qRn1VKgECGzFugmyUFc",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:16:08.347Z",
+                "updatedAt": "2023-06-21T13:16:34.046Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Data transfer ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Data transfer mock",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "27RneE3p2j7YeMUdAXs2fy",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:16:24.064Z",
+                "updatedAt": "2023-06-21T13:16:24.064Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Data storage, sharing and retention requirements ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Data storage, sharing and retention requirements mock",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "4KvMvGS7s1TOYCUQWBJ8jW",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:16:43.725Z",
+                "updatedAt": "2023-06-21T13:16:43.725Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Further cost details ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Further cost details mock",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "5AYrtTyrdGtFLVOviRpGTI",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:16:53.994Z",
+                "updatedAt": "2023-06-21T13:16:53.994Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Study-specific agreements ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Study-specific agreements mock",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "2REZM5LrJox2GpyrgLIcrt",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:14:21.719Z",
+          "updatedAt": "2023-06-20T14:14:21.719Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Exclusions from Find service",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "A&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "2eCZBJigwmdNSmDjM4ipUP",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:10:02.820Z",
+          "updatedAt": "2023-06-20T14:10:02.820Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Data entry coding ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "33uR7OgL7a94GrVVipvLx9",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:13:23.095Z",
+          "updatedAt": "2023-06-21T13:13:39.417Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Further cost details ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "3OjbPmp9bh5TfjlzaKw5qK",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:12:48.912Z",
+          "updatedAt": "2023-06-21T13:12:48.912Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Additional approvals required",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "3atCwaMqdj7aVM4sGUF3dN",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:13:13.910Z",
+          "updatedAt": "2023-06-21T13:13:43.517Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "User progress of information ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "TExt",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "3fcMZDhEYw4mjbu9bIk6Hy",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:13:04.985Z",
+          "updatedAt": "2023-06-21T13:13:47.840Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Contacting sites set up ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "3hFbh3lEh908TlqjKlM6jE",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:10:23.157Z",
+          "updatedAt": "2023-06-20T14:10:23.157Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Underserved groups identified ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "3iYb5nO1nWmrSABakp3mfb",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:10:13.166Z",
+          "updatedAt": "2023-06-20T14:10:13.166Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Quality and variability of coding ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "3jgcqpjZvo0baDsTXsCPge",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:12:54.837Z",
+          "updatedAt": "2023-06-21T13:13:52.665Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Exclusions from Recruit service",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "4Kcf2nKg7UviV3AXQjY47d",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:06:18.353Z",
+          "updatedAt": "2023-06-20T14:06:18.353Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Clinical content",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "4KvMvGS7s1TOYCUQWBJ8jW",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:16:43.725Z",
+          "updatedAt": "2023-06-21T13:16:43.725Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Further cost details ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "501qRn1VKgECGzFugmyUFc",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:16:08.347Z",
+          "updatedAt": "2023-06-21T13:16:34.046Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Data transfer ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "5AYrtTyrdGtFLVOviRpGTI",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:16:53.994Z",
+          "updatedAt": "2023-06-21T13:16:53.994Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Study-specific agreements ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "5K6lnKaclS2363h8QrTPde",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:15:58.185Z",
+          "updatedAt": "2023-06-21T13:17:14.116Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Exclusions from Follow-up service",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "5OquxLmJL1E9H8Cs0pDP1h",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:11:57.357Z",
+          "updatedAt": "2023-06-21T13:14:18.065Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "serviceTypeBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "serviceType": "Recruit",
+          "description": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Recruitment service: Supports recruitment for clinical trials by identifying suitable patients and inviting them to participate on behalf of the research organisation.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "howTheServiceWorks": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "The search criteria and code lists are based on the study protocol and agreed and validated with client and performed as for the Find service above",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "Invites to potential participant sent by the service on behalf of the client in the form of a letter",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "Search Criteria is agreed and validated through completion of Data Sharing Agreement",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "marks": [],
+                            "value": "No additional clinical checks are applied other than inclusion/exclusion criteria",
+                            "nodeType": "text"
+                          }
+                        ],
+                        "nodeType": "paragraph"
+                      }
+                    ],
+                    "nodeType": "list-item"
+                  }
+                ],
+                "nodeType": "unordered-list"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "expectedTimelines": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Study set up may take between 1 and 3 months to start recruitment\nRecruitment timelines will be client and project dependent",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "costDescription": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Service is a cost recovery organisation and our costs to provide the service are based on staff time to design and conduct the search, set up and manage the technical requirements (online study platform), set up, monitoring and administrative management of practice activity for service delivery and general project management and administration of the service.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          },
+          "additionalInformation": [
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "2K7Vhhei0MwTCPoUgPYppy",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:11:54.222Z",
+                "updatedAt": "2023-06-21T13:12:34.993Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Specific regulatory approvals",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Text",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "3OjbPmp9bh5TfjlzaKw5qK",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:12:48.912Z",
+                "updatedAt": "2023-06-21T13:12:48.912Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 1,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Additional approvals required",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Text",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "3jgcqpjZvo0baDsTXsCPge",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:12:54.837Z",
+                "updatedAt": "2023-06-21T13:13:52.665Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Exclusions from Recruit service",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "Text",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "3fcMZDhEYw4mjbu9bIk6Hy",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:13:04.985Z",
+                "updatedAt": "2023-06-21T13:13:47.840Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Contacting sites set up ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "text",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "3atCwaMqdj7aVM4sGUF3dN",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:13:13.910Z",
+                "updatedAt": "2023-06-21T13:13:43.517Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "User progress of information ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "TExt",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "33uR7OgL7a94GrVVipvLx9",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:13:23.095Z",
+                "updatedAt": "2023-06-21T13:13:39.417Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 2,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Further cost details ",
+                "text": {
+                  "nodeType": "document",
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": "paragraph",
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "text",
+                          "marks": [],
+                          "data": {}
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "metadata": {
+                "tags": []
+              },
+              "sys": {
+                "space": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "Space",
+                    "id": "qg9njdfd7ka1"
+                  }
+                },
+                "id": "29wLU6zXwWQLiKZN2VNyaH",
+                "type": "Entry",
+                "createdAt": "2023-06-21T13:13:34.139Z",
+                "updatedAt": "2023-06-21T13:14:39.033Z",
+                "environment": {
+                  "sys": {
+                    "id": "dev",
+                    "type": "Link",
+                    "linkType": "Environment"
+                  }
+                },
+                "revision": 3,
+                "contentType": {
+                  "sys": {
+                    "type": "Link",
+                    "linkType": "ContentType",
+                    "id": "textBlock"
+                  }
+                },
+                "locale": "en-US"
+              },
+              "fields": {
+                "heading": "Study-specific agreements ",
+                "text": {
+                  "data": {},
+                  "content": [
+                    {
+                      "data": {},
+                      "content": [
+                        {
+                          "data": {},
+                          "marks": [],
+                          "value": "Study-specific agreements ",
+                          "nodeType": "text"
+                        }
+                      ],
+                      "nodeType": "paragraph"
+                    }
+                  ],
+                  "nodeType": "document"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "6DuMhKol6ocLmUMXSVfog9",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:14:41.092Z",
+          "updatedAt": "2023-06-20T14:14:41.092Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Statistical disclosure controls ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "A&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "6sz9ACgDsXQBX5RjoHyHYL",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:09:42.692Z",
+          "updatedAt": "2023-06-20T14:09:42.692Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Direct identifers in dataset ",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "7KX5KgRN2t9nqLOrIbTOG9",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:15:38.479Z",
+          "updatedAt": "2023-06-20T14:15:38.479Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "informationGovernanceBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "label": {
+            "metadata": {
+              "tags": []
+            },
+            "sys": {
+              "space": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "Space",
+                  "id": "qg9njdfd7ka1"
+                }
+              },
+              "id": "SDvNT9BUNMWsITehO1Ymc",
+              "type": "Entry",
+              "createdAt": "2023-06-20T14:12:09.388Z",
+              "updatedAt": "2023-06-20T14:12:09.388Z",
+              "environment": {
+                "sys": {
+                  "id": "dev",
+                  "type": "Link",
+                  "linkType": "Environment"
+                }
+              },
+              "revision": 1,
+              "contentType": {
+                "sys": {
+                  "type": "Link",
+                  "linkType": "ContentType",
+                  "id": "blockLabel"
+                }
+              },
+              "locale": "en-US"
+            },
+            "fields": {
+              "label": "Purpose",
+              "description": "Test"
+            }
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "7jaQaNIGyZPid4NmGXz2D4",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:10:34.140Z",
+          "updatedAt": "2023-06-20T14:10:34.140Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Frequency of data updates",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Medical history, comorbidities, observations and measurements, laboratory tests and results, referrals, chronic disease review record, prescribing records.\n\nA&E department attendances, hospital episodes, outpatient clinics data, imaging record and further investigations",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "7vOB9q5me9pK4pwhSGE6n4",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:15:37.700Z",
+          "updatedAt": "2023-06-21T13:17:03.902Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Specific regulatory approvals",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "SDvNT9BUNMWsITehO1Ymc",
+          "type": "Entry",
+          "createdAt": "2023-06-20T14:12:09.388Z",
+          "updatedAt": "2023-06-20T14:12:09.388Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 1,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "blockLabel"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "label": "Purpose",
+          "description": "Test"
+        }
+      },
+      {
+        "metadata": {
+          "tags": []
+        },
+        "sys": {
+          "space": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Space",
+              "id": "qg9njdfd7ka1"
+            }
+          },
+          "id": "qxMOxVHUozODVZdc5VpeG",
+          "type": "Entry",
+          "createdAt": "2023-06-21T13:15:46.303Z",
+          "updatedAt": "2023-06-21T13:17:09.175Z",
+          "environment": {
+            "sys": {
+              "id": "dev",
+              "type": "Link",
+              "linkType": "Environment"
+            }
+          },
+          "revision": 2,
+          "contentType": {
+            "sys": {
+              "type": "Link",
+              "linkType": "ContentType",
+              "id": "textBlock"
+            }
+          },
+          "locale": "en-US"
+        },
+        "fields": {
+          "heading": "Additional approvals required",
+          "text": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "text",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

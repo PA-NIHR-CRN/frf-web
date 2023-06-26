@@ -1,4 +1,3 @@
-import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
@@ -10,19 +9,18 @@ import { Filters } from '@/components/Filters/Filters'
 import Pagination from '@/components/Pagination/Pagination'
 import {
   GeographicalCoverage,
-  ProviderHeading,
+  ProviderHeadingLink,
   ProviderOrganisation,
   ServiceTypesCostTable,
   ShortDescription,
   SuitedList,
+  TypesOfData,
 } from '@/components/Provider'
 import { NoResults } from '@/components/Providers/NoResults'
-import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
-import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
+import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
-import { getFiltersFromQuery, pluralise, transformFilters } from '@/utils'
-import { numDaysBetween } from '@/utils/numDaysBetween'
+import { formatDate, getFiltersFromQuery, numDaysBetween, pluralise, transformFilters } from '@/utils'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -118,12 +116,12 @@ export default function ServiceProviders({
                       <li key={fields.slug}>
                         <Card as="article" className="govuk-body mb-8" aria-labelledby={`article-${fields.slug}-title`}>
                           <div className="flex flex-col justify-between border-b border-grey-80 p-4">
-                            <ProviderHeading
+                            <ProviderHeadingLink
                               slug={fields.slug ?? '/'}
                               isNew={numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT}
                             >
                               {fields.name}
-                            </ProviderHeading>
+                            </ProviderHeadingLink>
                             <ProviderOrganisation>{fields.providerOrganisation}</ProviderOrganisation>
                           </div>
 
@@ -166,15 +164,7 @@ export default function ServiceProviders({
                               {/* Side info */}
                               <div className="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0">
                                 {/* Types of Data */}
-                                {fields.typesOfDataAvailableList && (
-                                  <>
-                                    <h3 className="govuk-heading-s mb-3 mt-5 md:mt-0">Type of data available</h3>
-                                    <RichTextRenderer
-                                      document={fields.typesOfDataAvailableList}
-                                      className="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0 [&_ul]:px-4"
-                                    />
-                                  </>
-                                )}
+                                <TypesOfData>{fields.typesOfDataAvailableList}</TypesOfData>
                               </div>
                             </div>
                           </div>
@@ -184,11 +174,11 @@ export default function ServiceProviders({
                             <div className="govuk-body-s mb-3 flex flex-col flex-wrap gap-3 md:mb-0 md:flex-row">
                               <div className="whitespace-nowrap">
                                 <strong>First published:</strong>
-                                <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
+                                <span className="ml-1 mr-3">{formatDate(createdAt)}</span>
                               </div>
                               <div className="whitespace-nowrap">
                                 <strong>Last updated:</strong>
-                                <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
+                                <span className="ml-1">{formatDate(updatedAt)}</span>
                               </div>
                             </div>
                             <div>

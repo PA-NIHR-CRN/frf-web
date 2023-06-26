@@ -1,5 +1,6 @@
 import { InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 
 import { Card } from '@/components/Card/Card'
 import { Container } from '@/components/Container/Container'
@@ -25,6 +26,7 @@ export default function Home({
 }: HomepageProps) {
   return (
     <>
+      <NextSeo title="Welcome to Find, Recruit and Follow-up" />
       {/* Title, Description & Video */}
       <Container>
         <section className="flex flex-wrap items-center pt-1 lg:flex-nowrap lg:gap-4 lg:pb-3">
@@ -77,7 +79,7 @@ export default function Home({
             <Card>
               <div className="flex items-center justify-between bg-[var(--colour-recruit-background)]">
                 <h2 className="govuk-heading-m mb-0 pl-4 text-navy-100">Recruit</h2>
-                <div className="bg-[var(--colour-recruit-foreground)] p-3">
+                <div className="bg-[var(--colour-recruit-foreground)] p-3 text-[3rem]">
                   <RecruitIcon />
                 </div>
               </div>
@@ -92,7 +94,7 @@ export default function Home({
             <Card>
               <div className="flex items-center justify-between bg-[var(--colour-follow-up-background)]">
                 <h2 className="govuk-heading-m mb-0 pl-4 text-navy-100">Follow-up</h2>
-                <div className="bg-[var(--colour-follow-up-foreground)] p-3">
+                <div className="bg-[var(--colour-follow-up-foreground)] p-3 text-[3rem]">
                   <FollowUpIcon />
                 </div>
               </div>

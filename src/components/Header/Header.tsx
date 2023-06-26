@@ -94,7 +94,7 @@ function MenuPanel() {
                 {column.map((item, key) => {
                   if (!item.link) {
                     return (
-                      <p key={key} className="max-w-[300px] text-base text-white">
+                      <p key={key} className="govuk-heading-s max-w-[300px] font-normal text-white">
                         {item.text}
                       </p>
                     )
@@ -105,10 +105,10 @@ function MenuPanel() {
                       key={key}
                       className="mb-5 max-w-[400px] lg:mb-0 [&:not(:last-child)]:lg:min-h-[150px] [&:not(:last-child)]:xl:min-h-[145px]"
                     >
-                      <Link className="link--inverse mb-1 inline-block text-base" href={item.link}>
+                      <Link className="link--inverse govuk-heading-s mb-1 inline-block font-normal" href={item.link}>
                         {item.text}
                       </Link>
-                      <p className="text-sm text-white">{item.description}</p>
+                      <p className="govuk-body-s text-white">{item.description}</p>
                     </div>
                   )
                 })}

@@ -13,9 +13,7 @@ const mockServiceProvider = Mock.of<TypeServiceProvider<undefined, ''>>({
 })
 
 const mockHomepage = Mock.of<TypeHomepage<undefined, ''>>({
-  fields: {
-    title: 'Find, Recruit and Follow-up Support',
-  },
+  fields: {},
 })
 
 const contentTypeMocks: Record<string, Entry> = {
@@ -171,7 +169,6 @@ describe('ContentfulService', () => {
       })
 
       expect(entry).toBeDefined()
-      expect(entry?.fields.title).toEqual(mockHomepage.fields.title)
     })
   })
 

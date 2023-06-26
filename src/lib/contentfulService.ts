@@ -4,7 +4,7 @@ import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-managemen
 import { Filters, OrderType } from '@/@types/filters'
 import { TypeHomepageSkeleton, TypeServiceProviderSkeleton } from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
-import { PER_PAGE, TagIds, TagNames } from '@/constants'
+import { PER_PAGE, TagIds } from '@/constants'
 
 export type FilterOptions = Awaited<ReturnType<ContentfulService['getProviderFilterOptionValues']>>
 
@@ -69,7 +69,7 @@ export class ContentfulService {
   }
 
   async getProviderBySlug(slug: string) {
-    const entries = await this.contentClient.getEntries<TypeServiceProviderSkeleton>({
+    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypeServiceProviderSkeleton>({
       limit: 1,
       content_type: 'serviceProvider',
       'fields.slug': slug,

@@ -1,4 +1,4 @@
-import { Roboto } from 'next/font/google'
+import { Lato } from 'next/font/google'
 import Link from 'next/link'
 import { ReactNode, useEffect } from 'react'
 
@@ -7,7 +7,7 @@ import { Header } from '../Header/Header'
 import { Panel } from '../Panel/Panel'
 import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
 
-const roboto = Roboto({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-roboto' })
+const primaryFont = Lato({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-primary' })
 
 type RootLayoutProps = { children: ReactNode; backLink?: ReactNode }
 
@@ -17,7 +17,7 @@ export function RootLayout({ children, backLink }: RootLayoutProps) {
   }, [])
 
   return (
-    <div className={roboto.variable}>
+    <div className={`${primaryFont.variable} font-sans`}>
       <Header />
       <PhaseBanner phase="Beta">
         This is a new service – your{' '}
