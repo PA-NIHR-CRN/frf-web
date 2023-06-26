@@ -59,9 +59,7 @@ test('Data service provider details newly published', async () => {
   expect(
     within(result).getByRole('link', { name: 'Recently published Data service provider: Genomic Profile Register' })
   ).toBeInTheDocument()
-  expect(
-    within(result).getByRole('heading', { name: 'Provider organisation: Genomic Profile Register', level: 4 })
-  ).toBeInTheDocument()
+  expect(within(result).getByRole('heading', { name: 'Genomic Profile Register', level: 4 })).toBeInTheDocument()
 
   // Description
   expect(within(result).getByTestId('frf-dsp-description')).toBeInTheDocument()
@@ -115,7 +113,7 @@ test('Data service provider details older than 3 months', async () => {
   ).toBeInTheDocument()
   expect(
     within(result).getByRole('heading', {
-      name: 'Provider organisation: Department of Health and Social Care',
+      name: 'Department of Health and Social Care',
       level: 4,
     })
   ).toBeInTheDocument()

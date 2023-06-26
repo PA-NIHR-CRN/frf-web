@@ -2,7 +2,7 @@ import { documentToReactComponents, Options } from '@contentful/rich-text-react-
 import { BLOCKS, Document, MARKS } from '@contentful/rich-text-types'
 import React, { FC, ReactNode } from 'react'
 
-import { List, ListItem } from '../List/List'
+import { List, ListItem } from '@/components/List/List'
 
 const Bold = ({ children }: { children: ReactNode }) => <p className="bold">{children}</p>
 
@@ -14,16 +14,16 @@ const options: Options = {
   },
   renderNode: {
     [BLOCKS.UL_LIST]: (node, children) => <List>{children}</List>,
-    [BLOCKS.LIST_ITEM]: (node, children) => <ListItem>{children}</ListItem>,
+    [BLOCKS.LIST_ITEM]: (node, children) => <ListItem className="[&>p]:mb-0">{children}</ListItem>,
     [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
   },
 }
 
 type RichTextRendererProps = {
-  document: Document
+  children: Document
   className?: string
 }
 
-export const RichTextRenderer: FC<RichTextRendererProps> = ({ document, className }: RichTextRendererProps) => {
-  return <div className={className}>{documentToReactComponents(document, options)}</div>
+export const RichTextRenderer: FC<RichTextRendererProps> = ({ children, className }: RichTextRendererProps) => {
+  return <div className={className}>{documentToReactComponents(children, options)}</div>
 }

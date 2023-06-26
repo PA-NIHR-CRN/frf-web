@@ -1,12 +1,12 @@
 import { render, screen } from '@/config/test-utils'
 
-import { ProviderHeading } from './ProviderHeading'
+import { ProviderHeadingLink } from './ProviderHeadingLink'
 
 test('Provider heading', () => {
   render(
-    <ProviderHeading slug="mock-page" isNew={false}>
+    <ProviderHeadingLink slug="mock-page" isNew={false}>
       Mock org
-    </ProviderHeading>
+    </ProviderHeadingLink>
   )
 
   const heading = screen.getByRole('heading', { name: 'Data service provider: Mock org', level: 3 })
@@ -17,9 +17,9 @@ test('Provider heading', () => {
 
 test('Provider heading with new tag', () => {
   render(
-    <ProviderHeading slug="mock-page" isNew>
+    <ProviderHeadingLink slug="mock-page" isNew>
       Mock org
-    </ProviderHeading>
+    </ProviderHeadingLink>
   )
 
   const heading = screen.getByRole('heading', { name: 'Recently published Data service provider: Mock org', level: 3 })

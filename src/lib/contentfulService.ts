@@ -69,7 +69,7 @@ export class ContentfulService {
   }
 
   async getProviderBySlug(slug: string) {
-    const entries = await this.contentClient.getEntries<TypeServiceProviderSkeleton>({
+    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypeServiceProviderSkeleton>({
       limit: 1,
       content_type: 'serviceProvider',
       'fields.slug': slug,

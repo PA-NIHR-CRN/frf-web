@@ -23,11 +23,11 @@ export function List<Element extends ElementType = 'ul'>({
   return (
     <>
       {heading && (
-        <h3 className="mb-3 font-bold" aria-hidden>
+        <h3 className="govuk-heading-s mb-3" aria-hidden>
           {heading}
         </h3>
       )}
-      <Component className={clsx('list-disc', className)} {...props}>
+      <Component className={clsx('list-disc pl-4', className)} {...props}>
         {children}
       </Component>
     </>
@@ -46,8 +46,8 @@ type ListItemProps = {
 export function ListItem({ children, icon, className, ...props }: ListItemProps) {
   return (
     <li
-      className={clsx('[&:not(:last-child)]:mb-2', className, {
-        'flex list-none gap-2': !!icon,
+      className={clsx('govuk-body govuk-!-margin-bottom-2', className, {
+        'flex list-none items-start gap-x-2 gap-y-1': !!icon,
       })}
       {...props}
     >

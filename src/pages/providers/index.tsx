@@ -1,8 +1,7 @@
-import dayjs from 'dayjs'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
-import { Fragment, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Filters as FiltersType } from '@/@types/filters'
 import { Card } from '@/components/Card/Card'
@@ -11,15 +10,16 @@ import { Filters } from '@/components/Filters/Filters'
 import Pagination from '@/components/Pagination/Pagination'
 import {
   GeographicalCoverage,
-  ProviderHeading,
+  ProviderHeadingLink,
   ProviderOrganisation,
   ServiceTypesCostTable,
   ShortDescription,
   SuitedList,
+  TypesOfData,
 } from '@/components/Provider'
-import { RichTextRenderer } from '@/components/RichTextRenderer/RichTextRenderer'
-import { DATE_FORMAT, NEW_LIMIT, PER_PAGE } from '@/constants'
+import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
+import { formatDate } from '@/utils/date.utils'
 import { numDaysBetween } from '@/utils/numDaysBetween'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
@@ -55,11 +55,13 @@ export default function ServiceProviders({
     }, 0)
   }
 
-  const titleSuffix = `Search results (page ${initialPage + 1} of ${Math.ceil(totalItems / initialPageSize)})`
-
   return (
     <>
-      <NextSeo title={`Find, Recruit and Follow-up – ${titleSuffix}`} />
+      <NextSeo
+        title={`List of data service providers (page ${initialPage + 1} of ${Math.ceil(
+          totalItems / initialPageSize
+        )}) - Find, Recruit and Follow-up`}
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third-from-desktop">
@@ -92,17 +94,17 @@ export default function ServiceProviders({
 
             {/* Cards */}
             <ol className="mt-5" aria-label="Data service providers">
-              {items.map(({ sys: { createdAt, updatedAt }, fields, metadata }) => {
+              {items.map(({ sys: { createdAt, updatedAt }, fields }) => {
                 return (
                   <li key={fields.slug}>
                     <Card as="article" className="govuk-body mb-8" aria-labelledby={`article-${fields.slug}-title`}>
                       <div className="flex flex-col justify-between border-b border-grey-80 p-4">
-                        <ProviderHeading
+                        <ProviderHeadingLink
                           slug={fields.slug ?? '/'}
                           isNew={numDaysBetween(new Date(createdAt), new Date()) <= NEW_LIMIT}
                         >
                           {fields.name}
-                        </ProviderHeading>
+                        </ProviderHeadingLink>
                         <ProviderOrganisation>{fields.providerOrganisation}</ProviderOrganisation>
                       </div>
 
@@ -145,15 +147,7 @@ export default function ServiceProviders({
                           {/* Side info */}
                           <div className="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0">
                             {/* Types of Data */}
-                            {fields.typesOfDataAvailableList && (
-                              <>
-                                <h3 className="govuk-heading-s mb-3 mt-5 md:mt-0">Type of data available</h3>
-                                <RichTextRenderer
-                                  document={fields.typesOfDataAvailableList}
-                                  className="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0 [&_ul]:px-4"
-                                />
-                              </>
-                            )}
+                            <TypesOfData>{fields.typesOfDataAvailableList}</TypesOfData>
                           </div>
                         </div>
                       </div>
@@ -163,11 +157,11 @@ export default function ServiceProviders({
                         <div className="govuk-body-s mb-3 flex flex-col flex-wrap gap-3 md:mb-0 md:flex-row">
                           <div className="whitespace-nowrap">
                             <strong>First published:</strong>
-                            <span className="ml-1 mr-3">{dayjs(createdAt).format(DATE_FORMAT)}</span>
+                            <span className="ml-1 mr-3">{formatDate(createdAt)}</span>
                           </div>
                           <div className="whitespace-nowrap">
                             <strong>Last updated:</strong>
-                            <span className="ml-1">{dayjs(updatedAt).format(DATE_FORMAT)}</span>
+                            <span className="ml-1">{formatDate(updatedAt)}</span>
                           </div>
                         </div>
                         <div>

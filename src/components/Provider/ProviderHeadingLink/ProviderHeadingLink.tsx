@@ -2,13 +2,13 @@ import Link from 'next/link'
 
 import { Tag } from '@/components/Tag/Tag'
 
-type ProviderHeadingProps = {
+type ProviderHeadingLinkProps = {
   children: string
   slug: string
   isNew: boolean
 }
 
-export const ProviderHeading = ({ children, slug, isNew }: ProviderHeadingProps) => {
+export const ProviderHeadingLink = ({ children, slug, isNew }: ProviderHeadingLinkProps) => {
   return (
     <h3 className="govuk-heading-m mb-2" id={`article-${slug}-title`}>
       <Link href={`/providers/${slug}`} className="text-black">
