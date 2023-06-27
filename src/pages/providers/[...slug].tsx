@@ -63,6 +63,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                   recruitCostChargeableDescription={fields.recruitCostChargeableDescription}
                   followUpCostChargeableDescription={fields.followUpCostChargeableDescription}
                   className="govuk-!-margin-top-6 govuk-!-margin-bottom-5"
+                  hasAnchor
                 />
 
                 {/* Geography */}
@@ -100,9 +101,9 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 )}
 
                 {/* Website name & url */}
-                {fields.website && fields.websiteName && (
+                {fields.website && (
                   <ExternalLink href={fields.website} className="govuk-!-margin-top-4 govuk-body inline-block">
-                    For more information visit {fields.websiteName}
+                    For more information visit {fields.websiteName || fields.website}
                   </ExternalLink>
                 )}
 
@@ -142,6 +143,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                       .map((item, key) => (
                         <Section
                           key={key}
+                          id="find"
                           heading="Find"
                           icon={<FindIcon />}
                           type="find"
@@ -156,6 +158,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                       .map((item, key) => (
                         <Section
                           key={key}
+                          id="recruit"
                           heading="Recruit"
                           icon={<RecruitIcon />}
                           type="recruit"
@@ -170,6 +173,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                       .map((item, key) => (
                         <Section
                           key={key}
+                          id="follow-up"
                           heading="Follow-up"
                           icon={<FollowUpIcon />}
                           type="follow_up"
