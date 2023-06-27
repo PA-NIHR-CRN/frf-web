@@ -46,6 +46,9 @@ test('Service provider detail', async () => {
 
   // Services available and costs
   expect(screen.getByRole('table', { name: 'Services available and costs:' })).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Find' })).toHaveAttribute('href', '#find')
+  expect(screen.getByRole('link', { name: 'Recruit' })).toHaveAttribute('href', '#recruit')
+  expect(screen.getByRole('link', { name: 'Follow-Up' })).toHaveAttribute('href', '#follow-up')
 
   // Coverage
   expect(screen.getByRole('list', { name: 'Coverage' })).toBeInTheDocument()
@@ -182,8 +185,9 @@ test('Find', async () => {
 
   render(await getComponent())
 
-  const section = within(screen.getByTestId('frf-dsp-section-find'))
+  expect(screen.getByTestId('frf-dsp-section-find')).toHaveAttribute('id', 'find')
 
+  const section = within(screen.getByTestId('frf-dsp-section-find'))
   expect(section.getByRole('heading', { name: 'Find', level: 3 })).toBeInTheDocument()
   expect(section.getByText('Feasibility Service:')).toBeVisible()
   expect(section.getByText('How the service works:')).toBeVisible()
@@ -204,8 +208,9 @@ test('Recruit', async () => {
 
   render(await getComponent())
 
-  const section = within(screen.getByTestId('frf-dsp-section-recruit'))
+  expect(screen.getByTestId('frf-dsp-section-recruit')).toHaveAttribute('id', 'recruit')
 
+  const section = within(screen.getByTestId('frf-dsp-section-recruit'))
   expect(section.getByRole('heading', { name: 'Recruit', level: 3 })).toBeInTheDocument()
   expect(
     section.getByText(
@@ -232,8 +237,9 @@ test('Follow-up', async () => {
 
   render(await getComponent())
 
-  const section = within(screen.getByTestId('frf-dsp-section-follow-up'))
+  expect(screen.getByTestId('frf-dsp-section-follow-up')).toHaveAttribute('id', 'follow-up')
 
+  const section = within(screen.getByTestId('frf-dsp-section-follow-up'))
   expect(section.getByRole('heading', { name: 'Follow-up', level: 3 })).toBeInTheDocument()
   expect(section.getByText('How the service works:')).toBeVisible()
   expect(section.getByText('Expected timelines:')).toBeVisible()

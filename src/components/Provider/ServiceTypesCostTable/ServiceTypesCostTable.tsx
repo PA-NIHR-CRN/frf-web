@@ -8,6 +8,7 @@ type ServiceTypesCostTableProps = {
   recruitCostChargeableDescription: string | undefined
   followUpCostChargeableDescription: string | undefined
   className?: string
+  hasAnchor?: boolean
 }
 
 export const ServiceTypesCostTable = ({
@@ -16,6 +17,7 @@ export const ServiceTypesCostTable = ({
   recruitCostChargeableDescription,
   followUpCostChargeableDescription,
   className,
+  hasAnchor = false,
 }: ServiceTypesCostTableProps) => {
   if (!costs || !costs.length) return null
 
@@ -26,7 +28,8 @@ export const ServiceTypesCostTable = ({
         costs,
         findCostChargeableDescription,
         recruitCostChargeableDescription,
-        followUpCostChargeableDescription
+        followUpCostChargeableDescription,
+        hasAnchor
       )}
     </table>
   )
