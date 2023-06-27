@@ -100,9 +100,9 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 )}
 
                 {/* Website name & url */}
-                {fields.website && fields.websiteName && (
+                {fields.website && (
                   <ExternalLink href={fields.website} className="govuk-!-margin-top-4 govuk-body inline-block">
-                    For more information visit {fields.websiteName}
+                    For more information visit {fields.websiteName || fields.website}
                   </ExternalLink>
                 )}
 
