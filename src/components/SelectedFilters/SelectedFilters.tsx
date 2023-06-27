@@ -74,7 +74,9 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
         'after:absolute after:bottom-[-6px] after:left-0 after:block after:h-[1px] after:w-full after:bg-darkGrey after:content-[""]'
       )}
     >
-      <span id="selected-filters">Selected filters</span>
+      <span id="selected-filters" className="whitespace-nowrap">
+        Selected filters
+      </span>
       <ul
         className="order-3 ml-0 mt-2 flex w-full flex-wrap gap-1 md:order-2 md:ml-4 md:mt-0 md:w-auto"
         aria-labelledby="selected-filters"
@@ -83,7 +85,7 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
           .filter((filter) => SELECTABLE_FILTERS.includes(filter))
           .map((filter, i) => renderSelectedFilters(filter, filters[filter], i))}
       </ul>
-      <div className="order-2 ml-auto min-w-[5rem] md:order-3">
+      <div className="order-2 ml-auto whitespace-nowrap pl-1 md:order-3">
         <Link href="/providers">Clear all filters</Link>
       </div>
     </div>
