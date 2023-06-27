@@ -33,6 +33,9 @@ test('Default search criteria (no search or filters set)', async () => {
   // Search results
   expect(screen.getAllByRole('article')).toHaveLength(4)
 
+  // Selected filters not shown by default
+  expect(screen.queryByRole('list', { name: 'Selected filters' })).not.toBeInTheDocument()
+
   // Pagination
   const pagination = screen.getByRole('navigation', { name: 'results' })
   expect(pagination).toBeInTheDocument()
@@ -330,4 +333,25 @@ test('No results', async () => {
   render(<ServiceProviders {...props} />)
 
   expect(screen.getByRole('heading', { name: 'There are no matching results.' })).toBeInTheDocument()
+})
+
+test('Selected filters panel', async () => {
+  mockContentfulResponse(defaultMock)
+
+  mockRouter.query = {
+    serviceType: [ServiceType.FIND, ServiceType.RECRUIT],
+  }
+
+  const context = { query: { serviceType: ['Find', 'Recruit'] } } as unknown as GetServerSidePropsContext
+
+  const { props } = await getServerSideProps(context)
+
+  render(<ServiceProviders {...props} />)
+
+  expect(screen.getByRole('list', { name: 'Selected filters' })).toBeInTheDocument()
+
+  expect(screen.getByRole('link', { name: 'Clear filter: Find' })).toHaveAttribute(
+    'href',
+    '/providers?serviceType=Recruit'
+  )
 })

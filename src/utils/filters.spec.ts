@@ -10,7 +10,7 @@ describe('getFiltersFromQuery', () => {
       page: '2',
       serviceType: ServiceType.RECRUIT,
       dataType: 'testDataType',
-      geography: 'England,Wales',
+      geography: ['England', 'Wales'],
       costs: 'testCost',
       excludeRegional: 'true',
       q: 'test search',
