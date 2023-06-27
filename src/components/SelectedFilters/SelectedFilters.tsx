@@ -35,7 +35,7 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
       <Link
         href={{ pathname: '/providers', query: omitFilter(name, value) }}
         className="govuk-body-s focus:focusable group mb-0 inline-flex items-center 
-      rounded-md border py-1 pl-1 pr-2 text-black no-underline focus:focus:outline-none group-[.isLoading]/selected:opacity-50"
+      rounded-md border py-1 pl-1 pr-2 text-black no-underline focus:focus:outline-none group-[.isLoading]/selected:pointer-events-none group-[.isLoading]/selected:opacity-50"
       >
         <Cross className="mr-1 inline group-[:not(.isLoading)]/selected:group-hover:text-coral-140" />
         <span className="govuk-visually-hidden">Clear filter:&nbsp;</span>
@@ -69,20 +69,21 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
       className={clsx(
         { isLoading },
         'govuk-!-margin-top-6 govuk-!-margin-bottom-7 govuk-!-padding-2 govuk-body-m group/selected',
-        'relative flex min-h-[60px] items-center bg-grey-50',
+        'relative flex min-h-[60px] flex-wrap items-center bg-grey-50 md:flex-nowrap',
         // Bottom border
         'after:absolute after:bottom-[-6px] after:left-0 after:block after:h-[1px] after:w-full after:bg-darkGrey after:content-[""]'
       )}
     >
-      <div className="flex items-center">
-        <span id="selected-filters">Selected filters</span>
-        <ul className="ml-4 flex flex-wrap gap-1" aria-labelledby="selected-filters">
-          {Object.keys(filters)
-            .filter((filter) => SELECTABLE_FILTERS.includes(filter))
-            .map((filter, i) => renderSelectedFilters(filter, filters[filter], i))}
-        </ul>
-      </div>
-      <div className="ml-auto min-w-[5rem]">
+      <span id="selected-filters">Selected filters</span>
+      <ul
+        className="order-3 ml-0 mt-2 flex w-full flex-wrap gap-1 md:order-2 md:ml-4 md:mt-0 md:w-auto"
+        aria-labelledby="selected-filters"
+      >
+        {Object.keys(filters)
+          .filter((filter) => SELECTABLE_FILTERS.includes(filter))
+          .map((filter, i) => renderSelectedFilters(filter, filters[filter], i))}
+      </ul>
+      <div className="order-2 ml-auto min-w-[5rem] md:order-3">
         <Link href="/providers">Clear all filters</Link>
       </div>
     </div>
