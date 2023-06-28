@@ -12,3 +12,6 @@ export interface Filters {
   excludeRegional?: boolean
   order?: OrderType
 }
+
+export type FilterKey = keyof Filters
+export type FilterValue = Filters[FilterKey]

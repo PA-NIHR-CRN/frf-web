@@ -1,27 +1,47 @@
 import { Details } from '@/components/Details/Details'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
 import { TextRenderer } from '@/components/Renderers/TextRenderer/TextRenderer'
+import { ServiceType } from '@/constants'
 import { ServiceProviderProps } from '@/pages/providers/[...slug]'
 
 export const formatServiceTypesCostsTable = (
   costs: string[],
-  findDescription: string | undefined,
-  recruitDescription: string | undefined,
-  followUpDescription: string | undefined
+  find: {
+    description: string | undefined
+    anchor: boolean
+  },
+  recruit: {
+    description: string | undefined
+    anchor: boolean
+  },
+  followUp: {
+    description: string | undefined
+    anchor: boolean
+  }
 ) => {
   let findRow
   let recruitRow
   let followUpRow
 
-  costs.forEach((cost, i) => {
+  costs.forEach((cost, key) => {
     if (cost.includes('Find:')) {
-      findRow = formatSingleServiceTypeCostRow(cost, findDescription, i)
+      findRow = formatSingleServiceTypeCostRow({ key, cost, description: find.description, hasAnchor: find.anchor })
     }
     if (cost.includes('Recruit:')) {
-      recruitRow = formatSingleServiceTypeCostRow(cost, recruitDescription, i)
+      recruitRow = formatSingleServiceTypeCostRow({
+        key,
+        cost,
+        description: recruit.description,
+        hasAnchor: recruit.anchor,
+      })
     }
     if (cost.includes('Follow-Up:')) {
-      followUpRow = formatSingleServiceTypeCostRow(cost, followUpDescription, i)
+      followUpRow = formatSingleServiceTypeCostRow({
+        key,
+        cost,
+        description: followUp.description,
+        hasAnchor: followUp.anchor,
+      })
     }
   })
 
@@ -34,16 +54,32 @@ export const formatServiceTypesCostsTable = (
   )
 }
 
-const formatSingleServiceTypeCostRow = (cost: string, costDescription: string | undefined, key: number) => {
+const formatSingleServiceTypeCostRow = ({
+  key,
+  cost,
+  description,
+  hasAnchor,
+}: {
+  cost: string
+  description: string | undefined
+  key: number
+  hasAnchor: boolean
+}) => {
   const costSplit = cost.split(':')
-  const costDescriptionText = costDescription ? ` - ${costDescription}` : ''
+  const costDescriptionText = description ? ` - ${description}` : ''
   return (
     <tr key={key} className="govuk-table__row border-t border-grey-120">
       <th
         scope="row"
         className={`govuk-table__cell govuk-body-s bg-[var(--colour-${costSplit[0].toLowerCase()}-background)] p-2 text-center align-middle font-bold uppercase tracking-wider text-navy-100 md:w-[136px]`}
       >
-        {costSplit[0]}
+        {hasAnchor ? (
+          <a href={`#${costSplit[0].toLowerCase()}`} className="text-navy-100">
+            {costSplit[0]}
+          </a>
+        ) : (
+          costSplit[0]
+        )}
       </th>
       <td className="govuk-table__cell govuk-body-s pl-4">{`${costSplit[1].trim()}${costDescriptionText}`}</td>
     </tr>
@@ -84,11 +120,13 @@ export const formatServiceTypeBlock = (serviceType: ServiceType, costs: Costs, c
       {costs &&
         costs
           .filter((item) => item.includes(fields.serviceType + ':'))
-          .map((item, i) => (
-            <div key={i} className="govuk-!-margin-top-6 govuk-!-margin-bottom-6">
+          .map((cost, key) => (
+            <div key={key} className="govuk-!-margin-top-6 govuk-!-margin-bottom-6">
               <p className="govuk-heading-s govuk-!-margin-bottom-2">Costs:</p>
               <table className="govuk-table">
-                <tbody className="govuk-table__body">{formatSingleServiceTypeCostRow(item, costDescription, i)}</tbody>
+                <tbody className="govuk-table__body">
+                  {formatSingleServiceTypeCostRow({ key, cost, description: costDescription, hasAnchor: false })}
+                </tbody>
               </table>
             </div>
           ))}
@@ -110,3 +148,14 @@ export const formatServiceTypeBlock = (serviceType: ServiceType, costs: Costs, c
     </>
   )
 }
+
+type ServiceTypeDataSection = NonNullable<ServiceProviderProps['fields']['serviceTypes']>[number]
+
+export const checkFindServiceTypeExists = (serviceType: ServiceTypeDataSection) =>
+  !!serviceType?.fields?.serviceType?.includes(ServiceType.FIND)
+
+export const checkRecruitServiceTypeExists = (serviceType: ServiceTypeDataSection) =>
+  !!serviceType?.fields?.serviceType?.includes(ServiceType.RECRUIT)
+
+export const checkFollowUpServiceTypeExists = (serviceType: ServiceTypeDataSection) =>
+  !!serviceType?.fields?.serviceType?.includes(ServiceType.FOLLOW_UP)

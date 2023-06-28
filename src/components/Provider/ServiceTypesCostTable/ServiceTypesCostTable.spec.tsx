@@ -10,9 +10,18 @@ test('No costs', () => {
   const { rerender } = render(
     getComponent({
       costs: undefined,
-      findCostChargeableDescription: '',
-      recruitCostChargeableDescription: '',
-      followUpCostChargeableDescription: '',
+      find: {
+        description: '',
+        anchor: false,
+      },
+      recruit: {
+        description: '',
+        anchor: false,
+      },
+      followUp: {
+        description: '',
+        anchor: false,
+      },
     })
   )
 
@@ -21,9 +30,18 @@ test('No costs', () => {
   rerender(
     getComponent({
       costs: [],
-      findCostChargeableDescription: '',
-      recruitCostChargeableDescription: '',
-      followUpCostChargeableDescription: '',
+      find: {
+        description: '',
+        anchor: false,
+      },
+      recruit: {
+        description: '',
+        anchor: false,
+      },
+      followUp: {
+        description: '',
+        anchor: false,
+      },
     })
   )
 
@@ -34,9 +52,18 @@ test('Costs table without a custom description', () => {
   render(
     getComponent({
       costs: ['Find: Free of charge (All studies)', 'Recruit: Chargeable service', 'Follow-Up: Chargeable service'],
-      findCostChargeableDescription: '',
-      recruitCostChargeableDescription: '',
-      followUpCostChargeableDescription: '',
+      find: {
+        description: '',
+        anchor: false,
+      },
+      recruit: {
+        description: '',
+        anchor: false,
+      },
+      followUp: {
+        description: '',
+        anchor: false,
+      },
     })
   )
 
@@ -61,9 +88,18 @@ test('Costs table with a custom description', () => {
   render(
     getComponent({
       costs: ['Find: Free of charge (All studies)', 'Recruit: Chargeable service', 'Follow-Up: Chargeable service'],
-      findCostChargeableDescription: 'Mock find description',
-      recruitCostChargeableDescription: 'Mock recruit description',
-      followUpCostChargeableDescription: 'Mock follow-up description',
+      find: {
+        description: 'Mock find description',
+        anchor: false,
+      },
+      recruit: {
+        description: 'Mock recruit description',
+        anchor: false,
+      },
+      followUp: {
+        description: 'Mock follow-up description',
+        anchor: false,
+      },
     })
   )
 

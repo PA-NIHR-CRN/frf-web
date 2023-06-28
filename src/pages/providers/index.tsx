@@ -17,6 +17,7 @@ import {
   TypesOfData,
 } from '@/components/Provider'
 import { NoResults } from '@/components/Providers/NoResults'
+import { SelectedFilters } from '@/components/SelectedFilters/SelectedFilters'
 import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
@@ -103,6 +104,8 @@ export default function ServiceProviders({
               </div>
             </div>
 
+            <SelectedFilters filters={filters} isLoading={isLoading} />
+
             {/* Cards */}
             {isLoading ? (
               <p className="govuk-body mt-5">Loading...</p>
@@ -134,9 +137,18 @@ export default function ServiceProviders({
                                 {/* Service costs */}
                                 <ServiceTypesCostTable
                                   costs={fields.costs}
-                                  findCostChargeableDescription={fields.findCostChargeableDescription}
-                                  recruitCostChargeableDescription={fields.recruitCostChargeableDescription}
-                                  followUpCostChargeableDescription={fields.followUpCostChargeableDescription}
+                                  find={{
+                                    description: fields.findCostChargeableDescription,
+                                    anchor: false,
+                                  }}
+                                  recruit={{
+                                    description: fields.recruitCostChargeableDescription,
+                                    anchor: false,
+                                  }}
+                                  followUp={{
+                                    description: fields.followUpCostChargeableDescription,
+                                    anchor: false,
+                                  }}
                                   className="mb-5 mt-6"
                                 />
 

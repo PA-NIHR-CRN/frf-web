@@ -4,9 +4,8 @@ import { Filters, OrderType } from '@/@types/filters'
 import { ServiceTypes } from '@/@types/services'
 import { UK_WIDE_COUNTRIES } from '@/constants'
 
-const concatFilters = <T extends string | undefined>(queryFilters: T | T[]) => {
-  const filters = Array.isArray(queryFilters) ? queryFilters : queryFilters?.split(',')
-  return ([] as T[]).concat(filters as T).filter(Boolean) as NonNullable<T>[]
+const concatFilters = <T>(filters: T | T[]) => {
+  return ([] as T[]).concat(filters).filter(Boolean) as NonNullable<T>[]
 }
 
 export const getFiltersFromQuery = (query: ParsedUrlQuery) => {

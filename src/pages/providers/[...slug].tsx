@@ -26,15 +26,21 @@ import {
 } from '@/components/Provider'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
 import { TextRenderer } from '@/components/Renderers/TextRenderer/TextRenderer'
-import { ServiceType } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { getStaticPropsRevalidateValue, getVideoID } from '@/utils'
 import { formatDate } from '@/utils/date.utils'
-import { formatServiceTypeBlock } from '@/utils/serviceTypes.utils'
+import {
+  checkFindServiceTypeExists,
+  checkFollowUpServiceTypeExists,
+  checkRecruitServiceTypeExists,
+  formatServiceTypeBlock,
+} from '@/utils/serviceTypes.utils'
 
 export type ServiceProviderProps = InferGetStaticPropsType<typeof getStaticProps>
 
 export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, updatedAt }: ServiceProviderProps) {
+  const serviceTypes = fields.serviceTypes || []
+
   return (
     <>
       <NextSeo title={`Further details for ${fields.name} - Find, Recruit and Follow-up`} />
@@ -59,9 +65,18 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 {/* Service costs */}
                 <ServiceTypesCostTable
                   costs={fields.costs}
-                  findCostChargeableDescription={fields.findCostChargeableDescription}
-                  recruitCostChargeableDescription={fields.recruitCostChargeableDescription}
-                  followUpCostChargeableDescription={fields.followUpCostChargeableDescription}
+                  find={{
+                    description: fields.findCostChargeableDescription,
+                    anchor: serviceTypes.some(checkFindServiceTypeExists),
+                  }}
+                  recruit={{
+                    description: fields.recruitCostChargeableDescription,
+                    anchor: serviceTypes.some(checkRecruitServiceTypeExists),
+                  }}
+                  followUp={{
+                    description: fields.followUpCostChargeableDescription,
+                    anchor: serviceTypes.some(checkFollowUpServiceTypeExists),
+                  }}
                   className="govuk-!-margin-top-6 govuk-!-margin-bottom-5"
                 />
 
@@ -100,9 +115,9 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 )}
 
                 {/* Website name & url */}
-                {fields.website && fields.websiteName && (
+                {fields.website && (
                   <ExternalLink href={fields.website} className="govuk-!-margin-top-4 govuk-body inline-block">
-                    For more information visit {fields.websiteName}
+                    For more information visit {fields.websiteName || fields.website}
                   </ExternalLink>
                 )}
 
@@ -135,49 +150,46 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 )}
 
                 {/* Service descriptions */}
-                {fields.serviceTypes && (
+                {serviceTypes.length > 0 && (
                   <>
-                    {fields.serviceTypes
-                      .filter((item) => item?.fields?.serviceType?.includes(ServiceType.FIND))
-                      .map((item, key) => (
-                        <Section
-                          key={key}
-                          heading="Find"
-                          icon={<FindIcon />}
-                          type="find"
-                          data-testid="frf-dsp-section-find"
-                        >
-                          {formatServiceTypeBlock(item, fields.costs, fields?.findCostChargeableDescription)}
-                        </Section>
-                      ))}
+                    {serviceTypes.filter(checkFindServiceTypeExists).map((item, key) => (
+                      <Section
+                        key={key}
+                        id="find"
+                        heading="Find"
+                        icon={<FindIcon />}
+                        type="find"
+                        data-testid="frf-dsp-section-find"
+                      >
+                        {formatServiceTypeBlock(item, fields.costs, fields?.findCostChargeableDescription)}
+                      </Section>
+                    ))}
 
-                    {fields.serviceTypes
-                      .filter((item) => item?.fields?.serviceType?.includes(ServiceType.RECRUIT))
-                      .map((item, key) => (
-                        <Section
-                          key={key}
-                          heading="Recruit"
-                          icon={<RecruitIcon />}
-                          type="recruit"
-                          data-testid="frf-dsp-section-recruit"
-                        >
-                          {formatServiceTypeBlock(item, fields.costs, fields?.recruitCostChargeableDescription)}
-                        </Section>
-                      ))}
+                    {serviceTypes.filter(checkRecruitServiceTypeExists).map((item, key) => (
+                      <Section
+                        key={key}
+                        id="recruit"
+                        heading="Recruit"
+                        icon={<RecruitIcon />}
+                        type="recruit"
+                        data-testid="frf-dsp-section-recruit"
+                      >
+                        {formatServiceTypeBlock(item, fields.costs, fields?.recruitCostChargeableDescription)}
+                      </Section>
+                    ))}
 
-                    {fields.serviceTypes
-                      .filter((item) => item?.fields?.serviceType?.includes(ServiceType.FOLLOW_UP))
-                      .map((item, key) => (
-                        <Section
-                          key={key}
-                          heading="Follow-up"
-                          icon={<FollowUpIcon />}
-                          type="follow_up"
-                          data-testid="frf-dsp-section-follow-up"
-                        >
-                          {formatServiceTypeBlock(item, fields.costs, fields?.followUpCostChargeableDescription)}
-                        </Section>
-                      ))}
+                    {serviceTypes.filter(checkFollowUpServiceTypeExists).map((item, key) => (
+                      <Section
+                        key={key}
+                        id="follow-up"
+                        heading="Follow-up"
+                        icon={<FollowUpIcon />}
+                        type="follow_up"
+                        data-testid="frf-dsp-section-follow-up"
+                      >
+                        {formatServiceTypeBlock(item, fields.costs, fields?.followUpCostChargeableDescription)}
+                      </Section>
+                    ))}
                   </>
                 )}
 
