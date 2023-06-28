@@ -137,9 +137,18 @@ export default function ServiceProviders({
                                 {/* Service costs */}
                                 <ServiceTypesCostTable
                                   costs={fields.costs}
-                                  findCostChargeableDescription={fields.findCostChargeableDescription}
-                                  recruitCostChargeableDescription={fields.recruitCostChargeableDescription}
-                                  followUpCostChargeableDescription={fields.followUpCostChargeableDescription}
+                                  find={{
+                                    description: fields.findCostChargeableDescription,
+                                    anchor: false,
+                                  }}
+                                  recruit={{
+                                    description: fields.recruitCostChargeableDescription,
+                                    anchor: false,
+                                  }}
+                                  followUp={{
+                                    description: fields.followUpCostChargeableDescription,
+                                    anchor: false,
+                                  }}
                                   className="mb-5 mt-6"
                                 />
 

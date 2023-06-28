@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import { ReactNode } from 'react'
+import { HTMLProps, ReactNode } from 'react'
 
 import { ServiceType } from '@/constants'
 
 type SectionType = Lowercase<keyof typeof ServiceType>
 
-type SectionProps = {
+type SectionProps = HTMLProps<HTMLElement> & {
   children: ReactNode
   heading: string
   icon: ReactNode
