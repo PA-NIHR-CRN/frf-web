@@ -1,14 +1,23 @@
 import { Details } from '@/components/Details/Details'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
 import { TextRenderer } from '@/components/Renderers/TextRenderer/TextRenderer'
+import { ServiceType } from '@/constants'
 import { ServiceProviderProps } from '@/pages/providers/[...slug]'
 
 export const formatServiceTypesCostsTable = (
   costs: string[],
-  findDescription: string | undefined,
-  recruitDescription: string | undefined,
-  followUpDescription: string | undefined,
-  hasAnchor: boolean
+  find: {
+    description: string | undefined
+    anchor: boolean
+  },
+  recruit: {
+    description: string | undefined
+    anchor: boolean
+  },
+  followUp: {
+    description: string | undefined
+    anchor: boolean
+  }
 ) => {
   let findRow
   let recruitRow
@@ -16,13 +25,23 @@ export const formatServiceTypesCostsTable = (
 
   costs.forEach((cost, key) => {
     if (cost.includes('Find:')) {
-      findRow = formatSingleServiceTypeCostRow({ key, cost, description: findDescription, hasAnchor })
+      findRow = formatSingleServiceTypeCostRow({ key, cost, description: find.description, hasAnchor: find.anchor })
     }
     if (cost.includes('Recruit:')) {
-      recruitRow = formatSingleServiceTypeCostRow({ key, cost, description: recruitDescription, hasAnchor })
+      recruitRow = formatSingleServiceTypeCostRow({
+        key,
+        cost,
+        description: recruit.description,
+        hasAnchor: recruit.anchor,
+      })
     }
     if (cost.includes('Follow-Up:')) {
-      followUpRow = formatSingleServiceTypeCostRow({ key, cost, description: followUpDescription, hasAnchor })
+      followUpRow = formatSingleServiceTypeCostRow({
+        key,
+        cost,
+        description: followUp.description,
+        hasAnchor: followUp.anchor,
+      })
     }
   })
 
@@ -129,3 +148,14 @@ export const formatServiceTypeBlock = (serviceType: ServiceType, costs: Costs, c
     </>
   )
 }
+
+type ServiceTypeDataSection = NonNullable<ServiceProviderProps['fields']['serviceTypes']>[number]
+
+export const checkFindServiceTypeExists = (serviceType: ServiceTypeDataSection) =>
+  !!serviceType?.fields?.serviceType?.includes(ServiceType.FIND)
+
+export const checkRecruitServiceTypeExists = (serviceType: ServiceTypeDataSection) =>
+  !!serviceType?.fields?.serviceType?.includes(ServiceType.RECRUIT)
+
+export const checkFollowUpServiceTypeExists = (serviceType: ServiceTypeDataSection) =>
+  !!serviceType?.fields?.serviceType?.includes(ServiceType.FOLLOW_UP)
