@@ -17,6 +17,7 @@ import {
   TypesOfData,
 } from '@/components/Provider'
 import { NoResults } from '@/components/Providers/NoResults'
+import { SelectedFilters } from '@/components/SelectedFilters/SelectedFilters'
 import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
@@ -102,6 +103,8 @@ export default function ServiceProviders({
                 </div>
               </div>
             </div>
+
+            <SelectedFilters filters={filters} isLoading={isLoading} />
 
             {/* Cards */}
             {isLoading ? (
