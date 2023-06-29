@@ -31,7 +31,7 @@ const description: Document = {
 }
 
 test('Types of data', () => {
-  render(<TypesOfData>{description}</TypesOfData>)
+  render(<TypesOfData heading="Type of data available">{description}</TypesOfData>)
   expect(screen.getByRole('heading', { name: 'Type of data available', level: 3 })).toBeInTheDocument()
   expect(screen.getByText(mockValue)).toBeInTheDocument()
 })

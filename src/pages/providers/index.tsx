@@ -176,7 +176,9 @@ export default function ServiceProviders({
                               {/* Side info */}
                               <div className="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0">
                                 {/* Types of Data */}
-                                <TypesOfData>{fields.typesOfDataAvailableList}</TypesOfData>
+                                <TypesOfData heading="Type of data available">
+                                  {fields.typesOfDataAvailableList}
+                                </TypesOfData>
                               </div>
                             </div>
                           </div>

@@ -15,7 +15,10 @@ export const assertRootLayout = () => {
 
   // Hero Panel
   const panel = screen.getByTestId('frf-panel')
-  expect(within(panel).getByText('Find, Recruit and Follow-up')).toHaveAttribute('href', '/')
+  expect(within(panel).getByRole('link', { name: 'Go to the Find, Recruit and Follow-up homepage' })).toHaveAttribute(
+    'href',
+    '/'
+  )
 }
 
 test('Displays NIHR layout & page content', () => {

@@ -50,6 +50,19 @@ test('Service provider detail', async () => {
   expect(screen.getByRole('link', { name: 'Recruit' })).toHaveAttribute('href', '#recruit')
   expect(screen.getByRole('link', { name: 'Follow-Up' })).toHaveAttribute('href', '#follow-up')
 
+  // Types of data available
+  expect(screen.getByRole('heading', { name: 'Type of data available:', level: 3 })).toBeInTheDocument()
+  expect(screen.getByText('Primary care')).toBeInTheDocument()
+  expect(screen.getByText('COVID 19')).toBeInTheDocument()
+  expect(screen.getByText('Medicines dispensed')).toBeInTheDocument()
+  expect(screen.getByText('Work force')).toBeInTheDocument()
+  expect(screen.getByText('Hospital in-patient and out-patient episodes')).toBeInTheDocument()
+  expect(screen.getByText('Audit data')).toBeInTheDocument()
+  expect(screen.getByText('Cancer registry')).toBeInTheDocument()
+  expect(screen.getByText('COVID-19 data')).toBeInTheDocument()
+  expect(screen.getByText('Demographics')).toBeInTheDocument()
+  expect(screen.getByText('Emergency care')).toBeInTheDocument()
+
   // Coverage
   expect(screen.getByRole('list', { name: 'Coverage' })).toBeInTheDocument()
   expect(screen.getByText('Geographical: England')).toBeInTheDocument()
@@ -84,15 +97,16 @@ test('Service provider detail', async () => {
   expect(screen.getByText('22 June 2023')).toBeInTheDocument()
 
   // Contact
-  const heading = screen.getByRole('heading', { name: 'Contact data service provider', level: 3 })
+  const contentColumn = screen.getByTestId('frf-dsp-content')
+
+  const heading = within(contentColumn).getByRole('heading', { name: 'Contact data service provider', level: 3 })
   expect(heading).toBeInTheDocument()
   expect(heading.nextSibling).toHaveTextContent(
     'If you think Genomic Profile Register might be able to help with your study you can contact them directly using this service.'
   )
-  expect(screen.getAllByRole('link', { name: 'Get in touch with Genomic Profile Register' })[0]).toHaveAttribute(
-    'href',
-    '/'
-  )
+  expect(
+    within(contentColumn).getByRole('link', { name: 'Get in touch with Genomic Profile Register' })
+  ).toHaveAttribute('href', '/')
 })
 
 test('Sidebar', async () => {
@@ -100,21 +114,8 @@ test('Sidebar', async () => {
 
   const sidebar = within(screen.getByTestId('frf-dsp-sidebar'))
 
-  // Types of data available
-  expect(sidebar.getByRole('heading', { name: 'Type of data available', level: 3 })).toBeInTheDocument()
-  expect(sidebar.getByText('Primary care')).toBeInTheDocument()
-  expect(sidebar.getByText('COVID 19')).toBeInTheDocument()
-  expect(sidebar.getByText('Medicines dispensed')).toBeInTheDocument()
-  expect(sidebar.getByText('Work force')).toBeInTheDocument()
-  expect(sidebar.getByText('Hospital in-patient and out-patient episodes')).toBeInTheDocument()
-  expect(sidebar.getByText('Audit data')).toBeInTheDocument()
-  expect(sidebar.getByText('Cancer registry')).toBeInTheDocument()
-  expect(sidebar.getByText('COVID-19 data')).toBeInTheDocument()
-  expect(sidebar.getByText('Demographics')).toBeInTheDocument()
-  expect(sidebar.getByText('Emergency care')).toBeInTheDocument()
-
   // Contact
-  const heading = sidebar.getByRole('heading', { name: 'Contact provider', level: 3 })
+  const heading = sidebar.getByRole('heading', { name: 'Contact data service provider', level: 3 })
   expect(heading).toBeInTheDocument()
   expect(heading.nextSibling).toHaveTextContent(
     'If you think Genomic Profile Register might be able to help with your study you can contact them directly using this service.'
@@ -287,15 +288,15 @@ test('Service provider with only required content types', async () => {
   expect(screen.getByText('23 June 2023')).toBeInTheDocument()
 
   // Contact
-  const heading = screen.getByRole('heading', { name: 'Contact data service provider', level: 3 })
+  const sidebarColumn = screen.getByTestId('frf-dsp-sidebar')
+  const heading = within(sidebarColumn).getByRole('heading', { name: 'Contact data service provider', level: 3 })
   expect(heading).toBeInTheDocument()
   expect(heading.nextSibling).toHaveTextContent(
     'If you think Genomic Profile Register might be able to help with your study you can contact them directly using this service.'
   )
-  expect(screen.getAllByRole('link', { name: 'Get in touch with Genomic Profile Register' })[0]).toHaveAttribute(
-    'href',
-    '/'
-  )
+  expect(
+    within(sidebarColumn).getByRole('link', { name: 'Get in touch with Genomic Profile Register' })
+  ).toHaveAttribute('href', '/')
 
   // Non-required fields
   expect(screen.queryByRole('table', { name: 'Services available and costs:' })).not.toBeInTheDocument()
@@ -315,6 +316,6 @@ test('Service provider with only required content types', async () => {
   // Sidebar
   const sidebar = within(screen.getByTestId('frf-dsp-sidebar'))
   expect(sidebar.queryByRole('heading', { name: 'Type of data available', level: 3 })).not.toBeInTheDocument()
-  expect(sidebar.getByRole('heading', { name: 'Contact provider', level: 3 })).toBeInTheDocument()
+  expect(sidebar.getByRole('heading', { name: 'Contact data service provider', level: 3 })).toBeInTheDocument()
   expect(sidebar.getByRole('heading', { name: 'Get support for your research', level: 3 })).toBeInTheDocument()
 })

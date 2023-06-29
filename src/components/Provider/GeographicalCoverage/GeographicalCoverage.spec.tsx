@@ -77,7 +77,7 @@ test('Geographical supporting text', () => {
   expect(screen.getByText(/Mock supporting text/)).toBeInTheDocument()
 })
 
-test('Geographical coverage with uk wide should appears first in the list', () => {
+test('Geographical coverage with uk wide and other regions should only show uk wide', () => {
   render(
     <GeographicalCoverage
       regionalCoverage={undefined}
@@ -90,5 +90,5 @@ test('Geographical coverage with uk wide should appears first in the list', () =
   const list = screen.getAllByRole('listitem')
 
   expect(list).toHaveLength(1)
-  expect(within(list[0]).getByText(/Geographical: UK wide, England, Wales, Scotland/)).toBeInTheDocument()
+  expect(within(list[0]).getByText('Geographical: UK wide')).toBeInTheDocument()
 })

@@ -23,7 +23,7 @@ export const GeographicalCoverage = ({
     if (regionalCoverage) return regionalCoverage
 
     if (geography.includes('UK wide')) {
-      return ['UK wide', ...geography.filter((region) => region !== 'UK wide')].join(', ')
+      return 'UK wide'
     }
 
     return geography.join(', ')
