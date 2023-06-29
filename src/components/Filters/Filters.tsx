@@ -75,7 +75,7 @@ export function Filters({
           <a
             href="#show-filters"
             className="text-white focus:text-black md:hidden"
-            aria-label="Return to search results"
+            aria-label="Close filters"
             onClick={(event) => {
               onRequestClose?.()
               event.preventDefault()
