@@ -95,18 +95,6 @@ test('Service provider detail', async () => {
   expect(screen.getByText('8 June 2023')).toBeInTheDocument()
   expect(screen.getByText('Last updated:')).toBeInTheDocument()
   expect(screen.getByText('22 June 2023')).toBeInTheDocument()
-
-  // Contact
-  const contentColumn = screen.getByTestId('frf-dsp-content')
-
-  const heading = within(contentColumn).getByRole('heading', { name: 'Contact data service provider', level: 3 })
-  expect(heading).toBeInTheDocument()
-  expect(heading.nextSibling).toHaveTextContent(
-    'If you think Genomic Profile Register might be able to help with your study you can contact them directly using this service.'
-  )
-  expect(
-    within(contentColumn).getByRole('link', { name: 'Get in touch with Genomic Profile Register' })
-  ).toHaveAttribute('href', '/')
 })
 
 test('Sidebar', async () => {

@@ -213,17 +213,6 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     <strong>Last updated:</strong> {formatDate(updatedAt)}
                   </p>
                 </div>
-
-                {/* Provider Contact */}
-                <Contact
-                  heading="Contact data service provider"
-                  contactName={`Get in touch with ${fields.name}`}
-                  contactUrl="/"
-                  className="govuk-!-margin-top-8"
-                >
-                  If you think {fields.name} might be able to help with your study you can contact them directly using
-                  this service.
-                </Contact>
               </div>
             </div>
             <div
@@ -235,7 +224,6 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 heading="Contact data service provider"
                 contactName={`Get in touch with ${fields.name}`}
                 contactUrl="/"
-                className="hidden md:block"
                 // footer={
                 //   <div className="govuk-!-margin-top-4">
                 //     <div className="govuk-!-margin-bottom-2 govuk-body flex items-start gap-2">
