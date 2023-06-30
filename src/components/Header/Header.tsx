@@ -19,6 +19,9 @@ function Logo() {
         'govuk-header__link govuk-header__link--homepage',
         'inline-block h-[var(--logo-height)] min-w-[199px] hover:m-0'
       )}
+      target="_blank"
+      rel="external"
+      aria-label="Go to the National Institute for Health and Care Research website (Opens in a new window)"
     >
       <span className="govuk-header__logotype">
         <Image

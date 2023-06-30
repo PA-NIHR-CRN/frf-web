@@ -14,10 +14,12 @@ test('Displays the header', () => {
   expect(screen.getByText('Skip to main content')).toHaveAttribute('href', '#main-content')
 
   // Logo link
-  expect(screen.getByRole('link', { name: 'National Institute for Health and Care Research logo' })).toHaveAttribute(
-    'href',
-    'https://www.nihr.ac.uk'
-  )
+  const logoLink = screen.getByRole('link', {
+    name: 'Go to the National Institute for Health and Care Research website (Opens in a new window)',
+  })
+  expect(logoLink).toHaveAttribute('href', 'https://www.nihr.ac.uk')
+  expect(logoLink).toHaveAttribute('target', '_blank')
+  expect(logoLink).toHaveAttribute('rel', 'external')
 
   // Logo image
   const logo = screen.getByAltText('National Institute for Health and Care Research logo')

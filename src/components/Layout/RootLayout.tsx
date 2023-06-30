@@ -27,7 +27,11 @@ export function RootLayout({ children, backLink }: RootLayoutProps) {
         will help us to improve it.
       </PhaseBanner>
       <Panel>
-        <Link href="/" className="text-white no-underline focus:text-black">
+        <Link
+          href="/"
+          className="text-white no-underline focus:text-black"
+          aria-label="Go to the Find, Recruit and Follow-up homepage"
+        >
           Find, Recruit and Follow-up
         </Link>
       </Panel>

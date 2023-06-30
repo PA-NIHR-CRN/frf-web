@@ -14,8 +14,8 @@ export const getFiltersFromQuery = (query: ParsedUrlQuery) => {
     serviceType: concatFilters(query.serviceType as ServiceTypes[]),
     dataType: concatFilters(query.dataType),
     geography: concatFilters(query.geography),
-    costs: concatFilters(query.costs),
     excludeRegional: Boolean(query.excludeRegional),
+    costs: concatFilters(query.costs),
     ...(query.q && { q: query.q as string }),
     ...(query.order && { order: query.order as OrderType }),
   }

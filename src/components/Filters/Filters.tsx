@@ -76,7 +76,7 @@ export function Filters({
           <a
             href="#show-filters"
             className="text-white focus:text-black md:hidden"
-            aria-label="Return to search results"
+            aria-label="Close filters"
             onClick={(event) => {
               onRequestClose?.()
               event.preventDefault()
@@ -138,7 +138,7 @@ export function Filters({
                 name="serviceType"
                 value={ServiceType[item]}
                 onChange={onChange}
-                checked={filters.serviceType?.includes(ServiceType[item])}
+                defaultChecked={filters.serviceType?.includes(ServiceType[item])}
               >
                 {ServiceType[item]}
               </Checkbox>
@@ -154,14 +154,20 @@ export function Filters({
                 name="geography"
                 value={item}
                 onChange={onChange}
-                checked={filters.geography?.includes(item)}
+                defaultChecked={filters.geography?.includes(item)}
               >
                 {item}
               </Checkbox>
             ))}
             {/* Exclude Regional */}
             <hr className="my-2 border-dotted border-grey-120" />
-            <Checkbox small name="excludeRegional" value="true" onChange={onChange} checked={!!filters.excludeRegional}>
+            <Checkbox
+              small
+              name="excludeRegional"
+              value="true"
+              onChange={onChange}
+              defaultChecked={!!filters.excludeRegional}
+            >
               Exclude regional only services
             </Checkbox>
           </FilterCategory>
@@ -182,7 +188,7 @@ export function Filters({
                     name="costs"
                     value={item}
                     onChange={onChange}
-                    checked={filters.costs?.includes(item)}
+                    defaultChecked={filters.costs?.includes(item)}
                   >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
@@ -202,7 +208,7 @@ export function Filters({
                     name="costs"
                     value={item}
                     onChange={onChange}
-                    checked={filters.costs?.includes(item)}
+                    defaultChecked={filters.costs?.includes(item)}
                   >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
@@ -222,7 +228,7 @@ export function Filters({
                     name="costs"
                     value={item}
                     onChange={onChange}
-                    checked={filters.costs?.includes(item)}
+                    defaultChecked={filters.costs?.includes(item)}
                   >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
