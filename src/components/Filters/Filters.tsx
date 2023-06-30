@@ -56,7 +56,8 @@ export function Filters({
   onFilterChange,
 }: FiltersProps) {
   const formRef = useRef(null)
-  const { onChange } = useFilters(formRef, onFilterChange)
+  const { onChange, onSubmit } = useFilters(formRef, onFilterChange)
+
   return (
     <FocusLock disabled={!showFiltersMobile}>
       <Card
@@ -87,7 +88,7 @@ export function Filters({
           role="search"
           method="get"
           action="/providers"
-          /* onSubmit={handleSubmit} */
+          onSubmit={onSubmit}
           ref={formRef}
           className="p-4"
           aria-labelledby="filter-by"
@@ -111,6 +112,12 @@ export function Filters({
                 type="text"
                 aria-describedby="keyword-hint"
                 defaultValue={filters.q}
+                onChange={(event) => {
+                  // Reset results when search input is emptied
+                  if (filters.q && event.target.value.trim() === '') {
+                    onChange()
+                  }
+                }}
               />
               <div className="absolute left-2 top-[8px] p-[2px] text-lg outline-0 md:p-[4px]">
                 <FindIcon />
