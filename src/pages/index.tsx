@@ -100,7 +100,7 @@ export default function Home({
               </div>
               <div className="govuk-body mb-0 flex flex-grow flex-col items-start justify-between p-4">
                 <p>{serviceDescriptionFollowUp}</p>
-                <Link href="/providers?serviceType=Follow-up" className="govuk-link">
+                <Link href="/providers?serviceType=Follow-Up" className="govuk-link">
                   View all Follow-up services
                 </Link>
               </div>
