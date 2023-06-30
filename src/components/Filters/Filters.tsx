@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import Link from 'next/link'
 import { ReactNode, useId, useRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
@@ -234,9 +233,10 @@ export function Filters({
             <Button secondary type="submit" className="mb-3 w-full [.js-enabled_&]:hidden">
               Apply filters
             </Button>
-            <Link className="govuk-button govuk-button--secondary w-full text-center" href="/providers">
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a href="/providers" className="govuk-button govuk-button--secondary w-full text-center">
               Clear all filters
-            </Link>
+            </a>
           </div>
         </form>
       </Card>
