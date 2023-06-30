@@ -45,7 +45,7 @@ test('Displays the Home page', async () => {
   expect(screen.getByText(mockData.serviceDescriptionFollowUp)).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'View all Follow-up services' })).toHaveAttribute(
     'href',
-    '/providers?serviceType=Follow-up'
+    '/providers?serviceType=Follow-Up'
   )
 
   // View all services
