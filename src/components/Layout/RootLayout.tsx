@@ -6,18 +6,20 @@ import { Footer } from '../Footer/Footer'
 import { Header } from '../Header/Header'
 import { Panel } from '../Panel/Panel'
 import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
+import { PreviewBanner } from '../PreviewBanner/PreviewBanner'
 
 const primaryFont = Lato({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-primary' })
 
-type RootLayoutProps = { children: ReactNode; backLink?: ReactNode }
+type RootLayoutProps = { children: ReactNode; backLink?: ReactNode; isPreviewMode?: boolean }
 
-export function RootLayout({ children, backLink }: RootLayoutProps) {
+export function RootLayout({ children, backLink, isPreviewMode }: RootLayoutProps) {
   useEffect(() => {
     document.body.classList.add('js-enabled')
   }, [])
 
   return (
     <div className={`${primaryFont.variable} font-sans`}>
+      <PreviewBanner isPreviewMode={!!isPreviewMode} />
       <Header />
       <PhaseBanner phase="Beta">
         This is a new service – your{' '}
