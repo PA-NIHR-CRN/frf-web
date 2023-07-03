@@ -24,3 +24,8 @@ export const PAGE_TITLE = 'Find, Recruit and Follow-up'
  * Date format to use across FRF
  */
 export const DATE_FORMAT = 'D MMMM YYYY'
+
+/**
+ * Default Contentful locale
+ */
+export const DEFAULT_LOCALE = 'en-US'
