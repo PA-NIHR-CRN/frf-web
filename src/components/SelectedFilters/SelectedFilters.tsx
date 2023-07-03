@@ -87,7 +87,7 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
       </ul>
       <div className="order-2 ml-auto whitespace-nowrap pl-1 md:order-3">
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a href="/providers">Clear all filters</a>
+        <a href="/providers#filters">Clear all filters</a>
       </div>
     </div>
   )

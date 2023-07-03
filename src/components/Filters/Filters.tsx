@@ -76,10 +76,7 @@ export function Filters({
             href="#show-filters"
             className="text-white focus:text-black md:hidden"
             aria-label="Close filters"
-            onClick={(event) => {
-              onRequestClose?.()
-              event.preventDefault()
-            }}
+            onClick={onRequestClose}
           >
             <Cross className="text-[2em]" />
           </a>
@@ -241,16 +238,13 @@ export function Filters({
               Apply filters
             </Button>
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/providers" className="govuk-button govuk-button--secondary w-full text-center">
+            <a href="/providers#filters" className="govuk-button govuk-button--secondary w-full text-center">
               Clear all filters
             </a>
             <a
               href="#show-filters"
               className=" govuk-button govuk-button--secondary w-full text-center md:hidden"
-              onClick={(event) => {
-                onRequestClose?.()
-                event.preventDefault()
-              }}
+              onClick={onRequestClose}
             >
               Close filters
             </a>
