@@ -251,26 +251,32 @@ test('Allows toggling filters on mobile', async () => {
   expect(screen.getByTestId('filters-card')).not.toHaveClass('hidden')
 
   // Close filters
-  const closeFiltersButton = screen.getByRole('link', { name: 'Close filters' })
-  expect(closeFiltersButton).toHaveAttribute('href', '#show-filters')
-  await userEvent.click(closeFiltersButton)
-  expect(onRequestCloseSpy).toHaveBeenCalled()
+  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
+  closeFiltersButtons.forEach((element) => expect(element).toHaveAttribute('href', '#show-filters'))
+  await userEvent.click(closeFiltersButtons[0])
+  await userEvent.click(closeFiltersButtons[1])
+  expect(onRequestCloseSpy).toHaveBeenCalledTimes(2)
 })
 
 test('Focus is locked inside filters on mobile only', async () => {
   const { rerender } = render(<Filters {...defaultProps} />)
 
-  // Not focus locked by default
-  screen.getByRole('link', { name: 'Clear all filters' }).focus()
+  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
+
+  // Focus second close filters button, the last interactive element within the filters panel
+  closeFiltersButtons[1].focus()
+
   await userEvent.tab()
-  expect(screen.getByRole('link', { name: 'Close filters' })).not.toHaveFocus()
+
+  // The focus should have moved out of the filters panel
+  closeFiltersButtons.forEach((element) => expect(element).not.toHaveFocus())
 
   rerender(<Filters showFiltersMobile {...defaultProps} />)
 
   // Focus locked when shown on mobile
-  screen.getByRole('link', { name: 'Clear all filters' }).focus()
+  closeFiltersButtons[1].focus()
   await userEvent.tab()
-  expect(screen.getByRole('link', { name: 'Close filters' })).toHaveFocus()
+  expect(closeFiltersButtons[0]).toHaveFocus()
 })
 
 test('Informs mobile users of the current number of search results', () => {
