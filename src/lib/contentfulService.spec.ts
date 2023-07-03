@@ -64,6 +64,9 @@ const mockEnvironment = Mock.of<Environment>({
       },
     ],
   })),
+  getEntry: jest.fn().mockImplementation((id: string) => ({
+    id,
+  })),
 })
 
 const mockSpace = Mock.of<Space>({
@@ -124,12 +127,12 @@ describe('ContentfulService', () => {
         skip: 0,
         limit: 4,
         content_type: 'serviceProvider',
+        'fields.searchKeywords[match]': 'test',
         'fields.costs[in]': 'Find: Free of charge,Recruit: Free of charge',
         'fields.geography[in]': 'England,Scotland',
         'fields.regionalCoverage[exists]': 'false',
         'metadata.tags.sys.id[in]': 'dataTypeAudit,dataTypeClinicallyReported',
         order: ['-fields.name'],
-        query: 'test',
       })
 
       const entry = entries.items[0]
@@ -182,6 +185,16 @@ describe('ContentfulService', () => {
         geography: ['Test Geography'],
         costs: ['Test Cost'],
       })
+    })
+  })
+
+  describe('getProviderEntryById', () => {
+    it('returns a provider entry by ID', async () => {
+      const [contentfulService] = setupContentfulService()
+
+      const entry = await contentfulService.getProviderEntryById('test')
+
+      expect(entry).toStrictEqual({ id: 'test' })
     })
   })
 

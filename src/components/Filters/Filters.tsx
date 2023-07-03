@@ -64,7 +64,7 @@ export function Filters({
         id="filters"
         data-testid="filters-card"
         className={clsx(
-          'left-0 top-0 z-50 mb-5 w-full overflow-y-scroll target:block md:mb-0 md:block md:overflow-y-auto [.js-enabled_&]:fixed [.js-enabled_&]:md:static',
+          'left-0 top-0 z-50 mb-5 w-full overflow-y-scroll target:block md:mb-0 md:block md:overflow-y-auto',
           { hidden: !showFiltersMobile }
         )}
       >
@@ -237,12 +237,22 @@ export function Filters({
 
           {/* Clear all */}
           <div className="border-t border-grey-120 text-center">
-            <Button secondary type="submit" className="mb-3 w-full [.js-enabled_&]:hidden">
+            <Button secondary type="submit" className="w-full [.js-enabled_&]:hidden">
               Apply filters
             </Button>
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
             <a href="/providers" className="govuk-button govuk-button--secondary w-full text-center">
               Clear all filters
+            </a>
+            <a
+              href="#show-filters"
+              className=" govuk-button govuk-button--secondary w-full text-center md:hidden"
+              onClick={(event) => {
+                onRequestClose?.()
+                event.preventDefault()
+              }}
+            >
+              Close filters
             </a>
           </div>
         </form>

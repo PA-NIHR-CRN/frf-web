@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { NextSeo } from 'next-seo'
@@ -38,7 +39,9 @@ export default function ServiceProviders({
     <a
       id="show-filters"
       href="#filters"
-      className="govuk-button govuk-button--secondary my-0 mr-3 w-full md:mr-0 md:hidden"
+      className={clsx('govuk-button govuk-button--secondary my-0 mr-3 w-full md:mr-0 md:hidden', {
+        hidden: showFiltersMobile,
+      })}
       ref={showFiltersButtonRef}
       onClick={(event) => {
         setShowFiltersMobile(true)
