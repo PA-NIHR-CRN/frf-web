@@ -242,6 +242,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
         initialPageSize: PER_PAGE,
         totalItems: entry.total,
       },
+      isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
     },
   }
 }

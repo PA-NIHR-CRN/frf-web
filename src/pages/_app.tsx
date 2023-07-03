@@ -11,7 +11,7 @@ export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P
   getLayout?: (page: ReactElement, props: P) => ReactNode
 }
 
-type AppPropsWithLayout = AppProps & {
+type AppPropsWithLayout = AppProps<{ isPreviewMode?: boolean }> & {
   Component: NextPageWithLayout
 }
 
@@ -19,7 +19,8 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const disableSeo = process.env.NEXT_PUBLIC_APP_ENV !== 'prod'
 
   // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout ?? ((page) => <RootLayout>{page}</RootLayout>)
+  const getLayout =
+    Component.getLayout ?? ((page) => <RootLayout isPreviewMode={pageProps.isPreviewMode}>{page}</RootLayout>)
 
   return getLayout(
     <>
