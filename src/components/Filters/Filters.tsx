@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import Link from 'next/link'
 import { ReactNode, useId, useRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
@@ -57,14 +56,15 @@ export function Filters({
   onFilterChange,
 }: FiltersProps) {
   const formRef = useRef(null)
-  const { onChange } = useFilters(formRef, onFilterChange)
+  const { onChange, onSubmit } = useFilters(formRef, onFilterChange)
+
   return (
     <FocusLock disabled={!showFiltersMobile}>
       <Card
         id="filters"
         data-testid="filters-card"
         className={clsx(
-          'left-0 top-0 z-50 mb-5 w-full overflow-y-scroll target:block md:mb-0 md:block md:overflow-y-auto [.js-enabled_&]:fixed [.js-enabled_&]:md:static',
+          'left-0 top-0 z-50 mb-5 w-full overflow-y-scroll target:block md:mb-0 md:block md:overflow-y-auto',
           { hidden: !showFiltersMobile }
         )}
       >
@@ -88,7 +88,7 @@ export function Filters({
           role="search"
           method="get"
           action="/providers"
-          /* onSubmit={handleSubmit} */
+          onSubmit={onSubmit}
           ref={formRef}
           className="p-4"
           aria-labelledby="filter-by"
@@ -112,6 +112,12 @@ export function Filters({
                 type="text"
                 aria-describedby="keyword-hint"
                 defaultValue={filters.q}
+                onChange={(event) => {
+                  // Reset results when search input is emptied
+                  if (filters.q && event.target.value.trim() === '') {
+                    onChange()
+                  }
+                }}
               />
               <div className="absolute left-2 top-[8px] p-[2px] text-lg outline-0 md:p-[4px]">
                 <FindIcon />
@@ -231,12 +237,23 @@ export function Filters({
 
           {/* Clear all */}
           <div className="border-t border-grey-120 text-center">
-            <Button secondary type="submit" className="mb-3 w-full [.js-enabled_&]:hidden">
+            <Button secondary type="submit" className="w-full [.js-enabled_&]:hidden">
               Apply filters
             </Button>
-            <Link className="govuk-button govuk-button--secondary w-full text-center" href="/providers">
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a href="/providers" className="govuk-button govuk-button--secondary w-full text-center">
               Clear all filters
-            </Link>
+            </a>
+            <a
+              href="#show-filters"
+              className=" govuk-button govuk-button--secondary w-full text-center md:hidden"
+              onClick={(event) => {
+                onRequestClose?.()
+                event.preventDefault()
+              }}
+            >
+              Close filters
+            </a>
           </div>
         </form>
       </Card>

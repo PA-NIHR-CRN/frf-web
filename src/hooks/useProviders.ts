@@ -14,6 +14,11 @@ export const useProviders = () => {
   const handleRouteChangeComplete = () => setIsLoading(false)
 
   const handleFilterChange = (formValues: Record<string, unknown>) => {
+    // Avoid multiple submissions
+    if (isLoading) {
+      return
+    }
+
     router.push(
       {
         pathname: '/providers',

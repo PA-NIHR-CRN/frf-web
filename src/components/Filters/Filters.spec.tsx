@@ -2,11 +2,11 @@ import userEvent from '@testing-library/user-event'
 
 import { render, screen, within } from '@/config/test-utils'
 import { ServiceType } from '@/constants'
+import { FilterOptions } from '@/lib/contentfulService'
 
-import { Filters } from './Filters'
+import { Filters, FiltersProps } from './Filters'
 
-const filterOptions = {
-  dataType: ['Audit', 'Other'],
+const filterOptions: FilterOptions = {
   geography: ['UK wide', 'England', 'Wales'],
   costs: [
     'Find: Free of charge',
@@ -18,27 +18,49 @@ const filterOptions = {
   ],
 }
 
-const defaultProps = {
+const defaultProps: FiltersProps = {
   options: filterOptions,
   filters: { page: 1 },
   totalItems: 1,
 }
 
-test('Allows searching by keyword', () => {
-  render(<Filters {...defaultProps} />)
+test('Allows searching by keyword', async () => {
+  const onFilterChangeSpy = jest.fn()
+
+  render(<Filters {...defaultProps} onFilterChange={onFilterChangeSpy} />)
+
   const form = screen.getByRole('search', { name: 'Filter by' })
   expect(form).toHaveAttribute('method', 'get')
   expect(form).toHaveAttribute('action', '/providers')
+
   const input = screen.getByLabelText('Keyword')
   expect(input).toHaveAttribute('aria-describedby', 'keyword-hint')
+
   const description = screen.getByText('Search by data service provider name or keyword')
   expect(description).toHaveAttribute('id', 'keyword-hint')
-  expect(screen.getByRole('button', { name: 'Search' })).toBeInTheDocument()
+
+  const submitBtn = screen.getByRole('button', { name: 'Search' })
+
+  await userEvent.type(input, 'Test search')
+  await userEvent.click(submitBtn)
+  expect(onFilterChangeSpy).toHaveBeenNthCalledWith(1, { q: 'Test search' })
 })
 
-test('Allows non-javascript users to apply filters', () => {
+test('Allows non-JavaScript users to apply filters', () => {
   render(<Filters {...defaultProps} />)
   expect(screen.getByRole('button', { name: 'Apply filters' })).toBeInTheDocument()
+})
+
+test('Allows users with JavaScript to apply filters', async () => {
+  const onFilterChangeSpy = jest.fn()
+
+  render(<Filters {...defaultProps} onFilterChange={onFilterChangeSpy} />)
+
+  const input = screen.getByLabelText('Keyword')
+  await userEvent.type(input, 'Test search')
+  await userEvent.keyboard('{Enter}')
+
+  expect(onFilterChangeSpy).toHaveBeenNthCalledWith(1, { q: 'Test search' })
 })
 
 test('Allows filtering by service type', async () => {
@@ -196,6 +218,25 @@ test('Allows clearing all filters', () => {
   expect(screen.getByRole('link', { name: 'Clear all filters' })).toHaveAttribute('href', '/providers')
 })
 
+test('Clears the search query after the search input is emptied', async () => {
+  const onFilterChangeSpy = jest.fn()
+
+  render(
+    <Filters
+      {...defaultProps}
+      filters={{
+        q: 'Test search',
+        page: 1,
+      }}
+      onFilterChange={onFilterChangeSpy}
+    />
+  )
+
+  await userEvent.clear(screen.getByLabelText('Keyword'))
+
+  expect(onFilterChangeSpy).toHaveBeenLastCalledWith({ q: '' })
+})
+
 test('Allows toggling filters on mobile', async () => {
   const { rerender } = render(<Filters {...defaultProps} />)
 
@@ -210,26 +251,32 @@ test('Allows toggling filters on mobile', async () => {
   expect(screen.getByTestId('filters-card')).not.toHaveClass('hidden')
 
   // Close filters
-  const closeFiltersButton = screen.getByRole('link', { name: 'Close filters' })
-  expect(closeFiltersButton).toHaveAttribute('href', '#show-filters')
-  await userEvent.click(closeFiltersButton)
-  expect(onRequestCloseSpy).toHaveBeenCalled()
+  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
+  closeFiltersButtons.forEach((element) => expect(element).toHaveAttribute('href', '#show-filters'))
+  await userEvent.click(closeFiltersButtons[0])
+  await userEvent.click(closeFiltersButtons[1])
+  expect(onRequestCloseSpy).toHaveBeenCalledTimes(2)
 })
 
 test('Focus is locked inside filters on mobile only', async () => {
   const { rerender } = render(<Filters {...defaultProps} />)
 
-  // Not focus locked by default
-  screen.getByRole('link', { name: 'Clear all filters' }).focus()
+  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
+
+  // Focus second close filters button, the last interactive element within the filters panel
+  closeFiltersButtons[1].focus()
+
   await userEvent.tab()
-  expect(screen.getByRole('link', { name: 'Close filters' })).not.toHaveFocus()
+
+  // The focus should have moved out of the filters panel
+  closeFiltersButtons.forEach((element) => expect(element).not.toHaveFocus())
 
   rerender(<Filters showFiltersMobile {...defaultProps} />)
 
   // Focus locked when shown on mobile
-  screen.getByRole('link', { name: 'Clear all filters' }).focus()
+  closeFiltersButtons[1].focus()
   await userEvent.tab()
-  expect(screen.getByRole('link', { name: 'Close filters' })).toHaveFocus()
+  expect(closeFiltersButtons[0]).toHaveFocus()
 })
 
 test('Informs mobile users of the current number of search results', () => {
