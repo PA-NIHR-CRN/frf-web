@@ -198,13 +198,14 @@ test('Toggling filters on mobile', async () => {
   // Show filters
   await userEvent.click(showFiltersButton)
   expect(filtersCard).not.toHaveClass('hidden')
+  expect(showFiltersButton).toHaveClass('hidden')
 
   // Close filters
-  const closeFiltersButton = screen.getByRole('link', { name: 'Return to search results' })
-  expect(closeFiltersButton).toHaveAttribute('href', '#show-filters')
-  expect(closeFiltersButton).toHaveFocus()
+  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
+  closeFiltersButtons.forEach((element) => expect(element).toHaveAttribute('href', '#show-filters'))
+  expect(closeFiltersButtons[0]).toHaveFocus()
 
-  await userEvent.click(closeFiltersButton)
+  await userEvent.click(closeFiltersButtons[0])
   expect(filtersCard).toHaveClass('hidden')
 
   // Focus is returned to show filters button

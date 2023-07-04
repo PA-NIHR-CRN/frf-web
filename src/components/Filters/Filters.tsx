@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import Link from 'next/link'
 import { ReactNode, useId, useRef } from 'react'
 import FocusLock from 'react-focus-lock'
 
@@ -57,14 +56,15 @@ export function Filters({
   onFilterChange,
 }: FiltersProps) {
   const formRef = useRef(null)
-  const { onChange } = useFilters(formRef, onFilterChange)
+  const { onChange, onSubmit } = useFilters(formRef, onFilterChange)
+
   return (
     <FocusLock disabled={!showFiltersMobile}>
       <Card
         id="filters"
         data-testid="filters-card"
         className={clsx(
-          'left-0 top-0 z-50 mb-5 w-full overflow-y-scroll target:block md:mb-0 md:block md:overflow-y-auto [.js-enabled_&]:fixed [.js-enabled_&]:md:static',
+          'left-0 top-0 z-50 mb-5 w-full overflow-y-scroll target:block md:mb-0 md:block md:overflow-y-auto',
           { hidden: !showFiltersMobile }
         )}
       >
@@ -75,11 +75,8 @@ export function Filters({
           <a
             href="#show-filters"
             className="text-white focus:text-black md:hidden"
-            aria-label="Return to search results"
-            onClick={(event) => {
-              onRequestClose?.()
-              event.preventDefault()
-            }}
+            aria-label="Close filters"
+            onClick={onRequestClose}
           >
             <Cross className="text-[2em]" />
           </a>
@@ -88,7 +85,7 @@ export function Filters({
           role="search"
           method="get"
           action="/providers"
-          /* onSubmit={handleSubmit} */
+          onSubmit={onSubmit}
           ref={formRef}
           className="p-4"
           aria-labelledby="filter-by"
@@ -112,6 +109,12 @@ export function Filters({
                 type="text"
                 aria-describedby="keyword-hint"
                 defaultValue={filters.q}
+                onChange={(event) => {
+                  // Reset results when search input is emptied
+                  if (filters.q && event.target.value.trim() === '') {
+                    onChange()
+                  }
+                }}
               />
               <div className="absolute left-2 top-[8px] p-[2px] text-lg outline-0 md:p-[4px]">
                 <FindIcon />
@@ -131,7 +134,7 @@ export function Filters({
                 name="serviceType"
                 value={ServiceType[item]}
                 onChange={onChange}
-                checked={filters.serviceType?.includes(ServiceType[item])}
+                defaultChecked={filters.serviceType?.includes(ServiceType[item])}
               >
                 {ServiceType[item]}
               </Checkbox>
@@ -147,14 +150,20 @@ export function Filters({
                 name="geography"
                 value={item}
                 onChange={onChange}
-                checked={filters.geography?.includes(item)}
+                defaultChecked={filters.geography?.includes(item)}
               >
                 {item}
               </Checkbox>
             ))}
             {/* Exclude Regional */}
             <hr className="my-2 border-dotted border-grey-120" />
-            <Checkbox small name="excludeRegional" value="true" onChange={onChange} checked={!!filters.excludeRegional}>
+            <Checkbox
+              small
+              name="excludeRegional"
+              value="true"
+              onChange={onChange}
+              defaultChecked={!!filters.excludeRegional}
+            >
               Exclude regional only services
             </Checkbox>
           </FilterCategory>
@@ -175,7 +184,7 @@ export function Filters({
                     name="costs"
                     value={item}
                     onChange={onChange}
-                    checked={filters.costs?.includes(item)}
+                    defaultChecked={filters.costs?.includes(item)}
                   >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
@@ -195,7 +204,7 @@ export function Filters({
                     name="costs"
                     value={item}
                     onChange={onChange}
-                    checked={filters.costs?.includes(item)}
+                    defaultChecked={filters.costs?.includes(item)}
                   >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
@@ -215,7 +224,7 @@ export function Filters({
                     name="costs"
                     value={item}
                     onChange={onChange}
-                    checked={filters.costs?.includes(item)}
+                    defaultChecked={filters.costs?.includes(item)}
                   >
                     {item.substring(item.indexOf(':') + 1)}
                   </Checkbox>
@@ -225,12 +234,20 @@ export function Filters({
 
           {/* Clear all */}
           <div className="border-t border-grey-120 text-center">
-            <Button secondary type="submit" className="mb-3 w-full [.js-enabled_&]:hidden">
+            <Button secondary type="submit" className="w-full [.js-enabled_&]:hidden">
               Apply filters
             </Button>
-            <Link className="govuk-button govuk-button--secondary w-full text-center" href="/providers">
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
+            <a href="/providers#filters" className="govuk-button govuk-button--secondary w-full text-center">
               Clear all filters
-            </Link>
+            </a>
+            <a
+              href="#show-filters"
+              className=" govuk-button govuk-button--secondary w-full text-center md:hidden"
+              onClick={onRequestClose}
+            >
+              Close filters
+            </a>
           </div>
         </form>
       </Card>

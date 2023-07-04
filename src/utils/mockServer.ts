@@ -3,7 +3,7 @@ import { setupServer } from 'msw/node'
 
 import { environmentMock, serviceProviderMock, spaceMock, tagsMock } from '@/mocks/space'
 
-const API_URL = 'https://preview.contentful.com/spaces/TEST_SPACE_ID/environments/dev/entries'
+const API_URL = 'https://preview.contentful.com/spaces/TEST_SPACE_ID/environments/dev'
 const MANAGEMENT_API_URL = 'https://api.contentful.com/spaces/TEST_SPACE_ID'
 
 const setupMockServer = () => {
@@ -22,9 +22,14 @@ const setupMockServer = () => {
     })
   )
 
-  const mockContentfulResponse = (data: Record<string, unknown>, status = 200) =>
+  const mockContentfulResponse = (
+    data: Record<string, unknown>,
+    status = 200,
+    path = '/entries',
+    isManagement = false
+  ) =>
     server.use(
-      rest.get(API_URL, async (_, res, ctx) => {
+      rest.all(`${isManagement ? MANAGEMENT_API_URL : API_URL}${path}`, async (_, res, ctx) => {
         return res(ctx.status(status), ctx.json(data))
       })
     )

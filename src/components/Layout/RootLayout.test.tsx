@@ -15,7 +15,10 @@ export const assertRootLayout = () => {
 
   // Hero Panel
   const panel = screen.getByTestId('frf-panel')
-  expect(within(panel).getByText('Find, Recruit and Follow-up')).toHaveAttribute('href', '/')
+  expect(within(panel).getByRole('link', { name: 'Go to the Find, Recruit and Follow-up homepage' })).toHaveAttribute(
+    'href',
+    '/'
+  )
 }
 
 test('Displays NIHR layout & page content', () => {
@@ -38,4 +41,15 @@ test('Adds a class to the body to detect js is enabled', () => {
     </RootLayout>
   )
   expect(document.body.classList.contains('js-enabled')).toBeTruthy()
+})
+
+test('Displays a preview banner when preview mode is enabled', () => {
+  render(
+    <RootLayout isPreviewMode>
+      <h1>Service Provider Detail Page</h1>
+    </RootLayout>
+  )
+  expect(
+    screen.getByText('You are viewing the preview site, which shows draft content from Contentful.')
+  ).toBeInTheDocument()
 })

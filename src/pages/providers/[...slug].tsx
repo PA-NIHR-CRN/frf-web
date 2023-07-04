@@ -57,7 +57,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
           </div>
 
           <div className="govuk-grid-row">
-            <div className="govuk-grid-column-two-thirds-from-desktop">
+            <div className="govuk-grid-column-two-thirds-from-desktop" data-testid="frf-dsp-content">
               <div className="max-w-[var(--dsp-detail-container-max-width)]">
                 {/* Description */}
                 <ShortDescription className="govuk-!-margin-top-6">{fields.shortDescription}</ShortDescription>
@@ -77,8 +77,13 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     description: fields.followUpCostChargeableDescription,
                     anchor: serviceTypes.some(checkFollowUpServiceTypeExists),
                   }}
-                  className="govuk-!-margin-top-6 govuk-!-margin-bottom-5"
+                  className="govuk-!-margin-top-6 govuk-!-margin-bottom-6"
                 />
+
+                {/* Types of Data */}
+                <TypesOfData heading="Type of data available:" className="govuk-!-margin-bottom-6">
+                  {fields.typesOfDataAvailableDetail}
+                </TypesOfData>
 
                 {/* Geography */}
                 <GeographicalCoverage
@@ -208,29 +213,15 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                     <strong>Last updated:</strong> {formatDate(updatedAt)}
                   </p>
                 </div>
-
-                {/* Provider Contact */}
-                <Contact
-                  heading="Contact data service provider"
-                  contactName={`Get in touch with ${fields.name}`}
-                  contactUrl="/"
-                  className="govuk-!-margin-top-8"
-                >
-                  If you think {fields.name} might be able to help with your study you can contact them directly using
-                  this service.
-                </Contact>
               </div>
             </div>
             <div
-              className="govuk-grid-column-one-third-from-desktop govuk-!-padding-4 govuk-!-margin-top-6 border-t-4 border-t-purple-100"
+              className="govuk-grid-column-one-third-from-desktop govuk-!-padding-4 md:sticky md:top-4 md:mt-6 md:border-t-4 md:border-t-purple-100"
               data-testid="frf-dsp-sidebar"
             >
-              {/* Types of Data */}
-              <TypesOfData className="govuk-!-margin-bottom-8">{fields.typesOfDataAvailableDetail}</TypesOfData>
-
               {/* Provider Contact */}
               <Contact
-                heading="Contact provider"
+                heading="Contact data service provider"
                 contactName={`Get in touch with ${fields.name}`}
                 contactUrl="/"
                 // footer={
@@ -273,8 +264,8 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
   )
 }
 
-ServiceProvider.getLayout = function getLayout(page: ReactElement) {
-  return <ServiceProviderLayout>{page}</ServiceProviderLayout>
+ServiceProvider.getLayout = function getLayout(page: ReactElement, { isPreviewMode }: ServiceProviderProps) {
+  return <ServiceProviderLayout isPreviewMode={isPreviewMode}>{page}</ServiceProviderLayout>
 }
 
 export async function getStaticPaths() {
@@ -309,6 +300,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
         }),
         createdAt,
         updatedAt,
+        isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

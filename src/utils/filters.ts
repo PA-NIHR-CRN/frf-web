@@ -11,13 +11,13 @@ const concatFilters = <T>(filters: T | T[]) => {
 export const getFiltersFromQuery = (query: ParsedUrlQuery) => {
   const filters: Filters = {
     page: Number(query.page) || 1,
+    ...(query.q && { q: query.q as string }),
+    ...(query.order && { order: query.order as OrderType }),
     serviceType: concatFilters(query.serviceType as ServiceTypes[]),
     dataType: concatFilters(query.dataType),
     geography: concatFilters(query.geography),
-    costs: concatFilters(query.costs),
     excludeRegional: Boolean(query.excludeRegional),
-    ...(query.q && { q: query.q as string }),
-    ...(query.order && { order: query.order as OrderType }),
+    costs: concatFilters(query.costs),
   }
 
   return filters

@@ -19,5 +19,10 @@ export const useFilters = (formRef: RefObject<HTMLFormElement>, onFilterChange?:
     onFilterChange?.(formDataAsObject)
   }
 
-  return { onChange }
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    onChange()
+  }
+
+  return { onChange, onSubmit }
 }
