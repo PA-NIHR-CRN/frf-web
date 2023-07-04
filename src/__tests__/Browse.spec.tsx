@@ -13,7 +13,10 @@ test('Displays the fallback navigation menu page', () => {
     screen.getByText('Discover more about the different data service providers within Find, Recruit and Follow-up')
   ).toBeInTheDocument()
 
-  expect(screen.getByRole('link', { name: 'Contact research support' })).toHaveAttribute('href', '/')
+  expect(screen.getByRole('link', { name: 'Contact research support' })).toHaveAttribute(
+    'href',
+    '/contact-research-support'
+  )
   expect(
     screen.getByText(
       'Get in touch with research support professionals who can help you understand which services might be suitable for your study'

@@ -117,7 +117,10 @@ test('Sidebar', async () => {
       'Need help finding appropriate data services, or any other part of the UK journey to getting your study started? The UK offers multiple services and teams of professionals who can support you.'
     )
   ).toBeInTheDocument()
-  expect(sidebar.getByRole('link', { name: 'Contact research support' })).toHaveAttribute('href', '')
+  expect(sidebar.getByRole('link', { name: 'Contact research support' })).toHaveAttribute(
+    'href',
+    '/contact-research-support'
+  )
 })
 
 test('Data content', async () => {

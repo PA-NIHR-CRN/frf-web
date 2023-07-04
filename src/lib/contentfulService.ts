@@ -2,7 +2,11 @@ import type { ContentfulClientApi } from 'contentful'
 import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
 
 import { Filters, OrderType } from '@/@types/filters'
-import { TypeHomepageSkeleton, TypeServiceProviderSkeleton } from '@/@types/generated'
+import {
+  TypeHomepageSkeleton,
+  TypeLcrnsAndDevolvedAdministrationsSkeleton,
+  TypeServiceProviderSkeleton,
+} from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds } from '@/constants'
 
@@ -84,6 +88,14 @@ export class ContentfulService {
       content_type: 'homepage',
     })
     return entries.items.length ? entries.items[0] : null
+  }
+
+  async getLcrnsAndDevolvedAdministrations() {
+    const entries = await this.contentClient.getEntries<TypeLcrnsAndDevolvedAdministrationsSkeleton>({
+      content_type: 'lcrnsAndDevolvedAdministrations',
+      include: 10,
+    })
+    return entries.items.length ? entries.items : []
   }
 
   static getOrderFilter(orderType?: OrderType) {

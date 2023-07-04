@@ -15,6 +15,8 @@
     "@axe-core/playwright": "^4.7.3",
     "@contentful/rich-text-html-renderer": "^16.0.5",
     "@contentful/rich-text-react-renderer": "^15.17.0",
+    "@hookform/error-message": "^2.0.1",
+    "@hookform/resolvers": "^3.1.1",
     "@radix-ui/react-collapsible": "^1.0.2",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
@@ -32,9 +34,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-focus-lock": "^2.9.4",
+    "react-hook-form": "^7.45.1",
     "react-use": "^17.4.0",
     "react-use-pagination": "^2.0.1",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",

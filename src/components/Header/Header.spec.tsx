@@ -65,7 +65,10 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
     )
   ).toBeInTheDocument()
 
-  expect(within(openMenu).getByRole('link', { name: 'Contact research support' })).toHaveAttribute('href', '/')
+  expect(within(openMenu).getByRole('link', { name: 'Contact research support' })).toHaveAttribute(
+    'href',
+    '/contact-research-support'
+  )
   expect(
     within(openMenu).getByText(
       'Get in touch with research support professionals who can help you understand which services might be suitable for your study'

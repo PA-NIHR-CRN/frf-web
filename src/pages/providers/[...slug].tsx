@@ -252,7 +252,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                   Need help finding appropriate data services, or any other part of the UK journey to getting your study
                   started? The UK offers multiple services and teams of professionals who can support you.
                 </p>
-                <Link href="" className="govuk-button govuk-button--secondary">
+                <Link href="/contact-research-support" className="govuk-button govuk-button--secondary">
                   Contact research support
                 </Link>
               </div>
