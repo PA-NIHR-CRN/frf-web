@@ -54,17 +54,17 @@ export default class ProvidersPage {
       'div[class="items-center justify-between gap-3 border-t border-grey-80 p-4 sm:flex"]'
     )
     this.dspResultTitle = page.locator('a[class="text-black"]')
-    this.dspResultOrgName = page.locator('h4[class="mb-0 text-darkGrey"]')
+    this.dspResultOrgName = page.locator('h4[class="govuk-body-m mb-0 text-darkGrey"]')
     this.dspResultOverview = page.locator('div[data-testid="frf-dsp-description"]')
     this.dspResultServicesCostsHeader = page.locator('caption[class="govuk-table__caption govuk-body-m mb-2"]')
     this.dspResultServiceCostsTbl = page.locator(
       'table[class="govuk-table govuk-!-font-size-16 table-fixed mb-5 mt-6"]'
     )
     this.dspResultServiceCostsTblHeader = page.locator('th[scope="row"]')
-    this.dspResultCoverageHeader = page.locator('h3[class="mb-3 font-bold"]', { hasText: 'Coverage:' })
+    this.dspResultCoverageHeader = page.locator('h3[class="govuk-heading-s mb-3"]', { hasText: 'Coverage:' })
     this.dspResultCoverageTxt = page.locator('ul[aria-label="Coverage"] li')
-    this.dspResultCoverageSupportTxt = page.locator('p[class="mb-0 ml-[36px]"]')
-    this.dspResultSuitedHeader = page.locator('h3[class="mb-3 font-bold"]', { hasText: 'Suited to:' })
+    this.dspResultCoverageSupportTxt = page.locator('p[class="mb-0"]')
+    this.dspResultSuitedHeader = page.locator('h3[class="govuk-heading-s mb-3"]', { hasText: 'Suited to:' })
     this.dspResultSuitedList = page.locator('ul[aria-label="Suited to:"]')
     this.dspResultFirstPublishedHeader = page.locator('strong', { hasText: 'First published:' })
     this.dspResultFirstPublishedValue = page.locator('span[class="ml-1 mr-3"]')
@@ -81,9 +81,11 @@ export default class ProvidersPage {
     this.dspListPageTabTitle = page.locator('head title')
     this.dspListPageOneOption = page.locator('a[aria-label="Page 1"]')
     this.dspListPageTwoOption = page.locator('a[aria-label="Page 2"]')
-    this.dspListTypeDataHeader = page.locator('h3[class="govuk-heading-s mb-3 mt-5 md:mt-0"]')
+    this.dspListTypeDataHeader = page.locator(
+      'h3[class="govuk-heading-s govuk-!-margin-top-5 govuk-!-margin-bottom-3 md:mt-0"]'
+    )
     this.dspListTypeDataList = page.locator(
-      'div[class="govuk-grid-column-one-quarter-from-desktop mt-6 md:mt-0 md:p-0"] ul[class="list-disc"]'
+      'div[class="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0"] ul[class="list-disc pl-4"]'
     )
   }
 
@@ -259,8 +261,9 @@ export default class ProvidersPage {
   async assertCurrentPageTitle(pageNo: string) {
     await this.page.waitForURL(`https://test.findrecruitandfollowup.nihr.ac.uk/providers?page=${pageNo}`)
     const pageCount = await this.dspResultPaginationList.locator('li').count()
+    const txtResTitleNo = await this.getPageTitleNumber()
     expect(await this.dspListPageTabTitle.textContent()).toBe(
-      `Find, Recruit and Follow-up – Search results (page ${pageNo} of ${pageCount})`
+      `List of data service providers (${txtResTitleNo} search results, page ${pageNo} of ${pageCount}) - Find, Recruit and Follow-up`
     )
   }
 

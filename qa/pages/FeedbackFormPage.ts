@@ -18,7 +18,7 @@ export default class FeedbackFormPage {
     await this.page.goto('feedback')
   }
 
-  async assertOnPrivacyPage() {
+  async assertOnFeedbackForm() {
     await expect(this.page).toHaveURL('feedback')
     await expect(this.headingPageTitle).toBeVisible()
     await expect(this.headingPageTitle).toHaveText('Let us know what you think')
