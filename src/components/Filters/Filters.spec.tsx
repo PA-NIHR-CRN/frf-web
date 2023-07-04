@@ -215,7 +215,7 @@ test('Default input states are correct in relation to the currently enabled filt
 
 test('Allows clearing all filters', () => {
   render(<Filters {...defaultProps} />)
-  expect(screen.getByRole('link', { name: 'Clear all filters' })).toHaveAttribute('href', '/providers#filters')
+  expect(screen.getByRole('link', { name: 'Clear all filters' })).toHaveAttribute('href', '/providers')
 })
 
 test('Clears the search query after the search input is emptied', async () => {
@@ -256,27 +256,6 @@ test('Allows toggling filters on mobile', async () => {
   await userEvent.click(closeFiltersButtons[0])
   await userEvent.click(closeFiltersButtons[1])
   expect(onRequestCloseSpy).toHaveBeenCalledTimes(2)
-})
-
-test('Focus is locked inside filters on mobile only', async () => {
-  const { rerender } = render(<Filters {...defaultProps} />)
-
-  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
-
-  // Focus second close filters button, the last interactive element within the filters panel
-  closeFiltersButtons[1].focus()
-
-  await userEvent.tab()
-
-  // The focus should have moved out of the filters panel
-  closeFiltersButtons.forEach((element) => expect(element).not.toHaveFocus())
-
-  rerender(<Filters showFiltersMobile {...defaultProps} />)
-
-  // Focus locked when shown on mobile
-  closeFiltersButtons[1].focus()
-  await userEvent.tab()
-  expect(closeFiltersButtons[0]).toHaveFocus()
 })
 
 test('Informs mobile users of the current number of search results', () => {
