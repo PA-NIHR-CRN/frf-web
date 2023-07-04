@@ -93,7 +93,7 @@ test.describe('DSP Details Page Accessibility Tests - @access_DspDetailPage', ()
     const axeScanner = makeAxeBuilder()
     let axeScanResults: any
     await test.step('Given I have navigated to a DSP Details Page', async () => {
-      await providerDetailsPage.goto()
+      await providerDetailsPage.goto('/providers/testing-dsp')
       await providerDetailsPage.assertOnProviderDetailsPage()
     })
 

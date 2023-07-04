@@ -80,7 +80,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
       await commonItemsPage.assertFeedbackLinkAppears()
     })
     await test.step('Given I have navigated to the Provider Details Page', async () => {
-      await providerDetailsPage.goto()
+      await providerDetailsPage.goto('/providers/testing-dsp')
     })
     await test.step('Then I should see the Header and Footer Items Appear', async () => {
       await commonItemsPage.assertHeaderFooterItemsAppear()
@@ -125,7 +125,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
       await privacyPage.assertOnPrivacyPage()
     })
     await test.step('Given I have navigated to the Provider Details Page', async () => {
-      await providerDetailsPage.goto()
+      await providerDetailsPage.goto('/providers/testing-dsp')
     })
     await test.step('When I click the Privacy Link in the Footer', async () => {
       await commonItemsPage.linkPrivacy.click()
@@ -161,7 +161,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
       await accessibilityPage.assertOnPrivacyPage()
     })
     await test.step('Given I have navigated to the Provider Details Page', async () => {
-      await providerDetailsPage.goto()
+      await providerDetailsPage.goto('/providers/testing-dsp')
     })
     await test.step('When I click the Accessibility Link in the Footer', async () => {
       await commonItemsPage.linkAccessibility.click()
@@ -181,29 +181,29 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     await test.step('Given I have navigated to the HomePage', async () => {
       await homePage.goto()
     })
-    await test.step('When I click the Accessibility Link in the Footer', async () => {
+    await test.step('When I click the Feedback Link in the Header', async () => {
       await commonItemsPage.linkFeedback.click()
     })
-    await test.step('Then I should see the Accessibility Page', async () => {
-      await feedbackFormPage.assertOnPrivacyPage()
+    await test.step('Then I should see the Feedback Page', async () => {
+      await feedbackFormPage.assertOnFeedbackForm()
     })
     await test.step('Given I have navigated to the Providers Page', async () => {
       await providersPage.goto()
     })
-    await test.step('When I click the Accessibility Link in the Footer', async () => {
+    await test.step('When I click the Feedback Link in the Header', async () => {
       await commonItemsPage.linkFeedback.click()
     })
-    await test.step('Then I should see the Accessibility Page', async () => {
-      await feedbackFormPage.assertOnPrivacyPage()
+    await test.step('Then I should see the Feedback Form Page', async () => {
+      await feedbackFormPage.assertOnFeedbackForm()
     })
     await test.step('Given I have navigated to the Provider Details Page', async () => {
-      await providerDetailsPage.goto()
+      await providerDetailsPage.goto('/providers/testing-dsp')
     })
-    await test.step('When I click the Accessibility Link in the Footer', async () => {
+    await test.step('When I click the Feedback Link in the Header', async () => {
       await commonItemsPage.linkFeedback.click()
     })
-    await test.step('Then I should see the Accessibility Page', async () => {
-      await feedbackFormPage.assertOnPrivacyPage()
+    await test.step('Then I should see the Feedback Page', async () => {
+      await feedbackFormPage.assertOnFeedbackForm()
     })
   })
 
