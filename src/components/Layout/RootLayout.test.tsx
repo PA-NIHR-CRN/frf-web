@@ -42,3 +42,14 @@ test('Adds a class to the body to detect js is enabled', () => {
   )
   expect(document.body.classList.contains('js-enabled')).toBeTruthy()
 })
+
+test('Displays a preview banner when preview mode is enabled', () => {
+  render(
+    <RootLayout isPreviewMode>
+      <h1>Service Provider Detail Page</h1>
+    </RootLayout>
+  )
+  expect(
+    screen.getByText('You are viewing the preview site, which shows draft content from Contentful.')
+  ).toBeInTheDocument()
+})

@@ -31,6 +31,7 @@ const contentClient = createContentClient({
 
 const managementClient = createManagementClient({
   accessToken: CONTENTFUL_MANAGEMENT_ACCESS_TOKEN,
+  space: CONTENTFUL_SPACE_ID,
 })
 
 export const contentfulService = new ContentfulService(

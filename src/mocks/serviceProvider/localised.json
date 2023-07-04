@@ -1,0 +1,462 @@
+{
+  "metadata": {
+    "tags": [
+      {
+        "sys": {
+          "type": "Link",
+          "linkType": "Tag",
+          "id": "serviceTypeRecruit"
+        }
+      }
+    ]
+  },
+  "sys": {
+    "space": {
+      "sys": {
+        "type": "Link",
+        "linkType": "Space",
+        "id": "TEST_SPACE_ID"
+      }
+    },
+    "id": "test",
+    "type": "Entry",
+    "createdAt": "2023-06-11T19:51:32.233Z",
+    "updatedAt": "2023-06-30T10:14:01.870Z",
+    "environment": {
+      "sys": {
+        "id": "dev",
+        "type": "Link",
+        "linkType": "Environment"
+      }
+    },
+    "publishedVersion": 507,
+    "publishedAt": "2023-06-30T10:14:01.870Z",
+    "firstPublishedAt": "2023-06-19T16:41:05.381Z",
+    "createdBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "2MXTjjyvpmOzLPW2qSiIPI"
+      }
+    },
+    "updatedBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "0e5NmQEjI50YvjZsuXVNKL"
+      }
+    },
+    "publishedCounter": 237,
+    "version": 508,
+    "publishedBy": {
+      "sys": {
+        "type": "Link",
+        "linkType": "User",
+        "id": "0e5NmQEjI50YvjZsuXVNKL"
+      }
+    },
+    "automationTags": [],
+    "contentType": {
+      "sys": {
+        "type": "Link",
+        "linkType": "ContentType",
+        "id": "serviceProvider"
+      }
+    }
+  },
+  "fields": {
+    "name": {
+      "en-US": "Draft Test search test 5"
+    },
+    "slug": {
+      "en-US": "draft-test"
+    },
+    "providerOrganisation": {
+      "en-US": "Draft Test Org"
+    },
+    "shortDescription": {
+      "en-US": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "Feasibility Service: Supports planning of Clinical trials by enabling clinical trialists to assess the feasibility of a study. Using national data sets the user can determine the number and location of patients who meet key eligibility criteria.",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          },
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "\nRecruitment service: Supports recruitment for clinical trials by identifying suitable patients and inviting them to participate on behalf of the research organisation.",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          },
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "\nOutcomes service: Enables researchers to follow up with patients by linking patient cohorts to rich and detailed NHS data sets to assess clinical safety and effectiveness of treatments.",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          },
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          }
+        ],
+        "nodeType": "document"
+      }
+    },
+    "geography": {
+      "en-US": ["UK wide"]
+    },
+    "suitedTo": {
+      "en-US": [
+        "Drug development trials",
+        "Certain rare disease, indications or cancers",
+        "Inherited diseases",
+        "Large patient cohorts"
+      ]
+    },
+    "costs": {
+      "en-US": [
+        "Find: Free of charge (All studies)",
+        "Recruit: Chargeable service",
+        "Follow-Up: Free of charge (non-commercial studies only)"
+      ]
+    },
+    "findCostChargeableDescription": {
+      "en-US": "Terms and conditions apply"
+    },
+    "recruitCostChargeableDescription": {
+      "en-US": "£XXX"
+    },
+    "followUpCostChargeableDescription": {
+      "en-US": "testx"
+    },
+    "typesOfDataAvailableList": {
+      "en-US": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Primary care sadsa",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "list-item"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Secondary care",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "list-item"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Participant reported",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "list-item"
+              }
+            ],
+            "nodeType": "unordered-list"
+          },
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          },
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "adasdasdas",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          }
+        ],
+        "nodeType": "document"
+      }
+    },
+    "typesOfDataAvailableDetail": {
+      "en-US": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Primary care ",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  }
+                ],
+                "nodeType": "list-item"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Secondary care",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "COVID 19",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Medicines dispensed",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      },
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Work force",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      }
+                    ],
+                    "nodeType": "unordered-list"
+                  }
+                ],
+                "nodeType": "list-item"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "marks": [],
+                        "value": "Participant reported",
+                        "nodeType": "text"
+                      }
+                    ],
+                    "nodeType": "paragraph"
+                  },
+                  {
+                    "data": {},
+                    "content": [
+                      {
+                        "data": {},
+                        "content": [
+                          {
+                            "data": {},
+                            "content": [
+                              {
+                                "data": {},
+                                "marks": [],
+                                "value": "Test sub data type",
+                                "nodeType": "text"
+                              }
+                            ],
+                            "nodeType": "paragraph"
+                          }
+                        ],
+                        "nodeType": "list-item"
+                      }
+                    ],
+                    "nodeType": "unordered-list"
+                  }
+                ],
+                "nodeType": "list-item"
+              }
+            ],
+            "nodeType": "unordered-list"
+          },
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          }
+        ],
+        "nodeType": "document"
+      }
+    },
+    "dataSpecificsAndCoding": {
+      "en-US": [
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "4UavpBXeK55rdJvJh88JQ0"
+          }
+        }
+      ]
+    },
+    "informationGovernance": {
+      "en-US": {
+        "data": {},
+        "content": [
+          {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "marks": [],
+                "value": "test info governance",
+                "nodeType": "text"
+              }
+            ],
+            "nodeType": "paragraph"
+          }
+        ],
+        "nodeType": "document"
+      }
+    },
+    "serviceTypes": {
+      "en-US": [
+        {
+          "sys": {
+            "type": "Link",
+            "linkType": "Entry",
+            "id": "3PCaOcLXvQolWJEYZFjlTD"
+          }
+        }
+      ]
+    },
+    "searchKeywords": {
+      "en-US": "Draft Test search test 4, Draft Test Org, Feasibility Service: Supports planning of Clinical trials by enabling clinical trialists to assess the feasibility of a study. Using national data sets the user can determine the number and location of patients who meet key eligibility criteria. \nRecruitment service: Supports recruitment for clinical trials by identifying suitable patients and inviting them to participate on behalf of the research organisation. \nOutcomes service: Enables researchers to follow up with patients by linking patient cohorts to rich and detailed NHS data sets to assess clinical safety and effectiveness of treatments., UK wide, Drug development trials, Certain rare disease, indications or cancers, Inherited diseases, Large patient cohorts, Find: Free of charge (All studies), Recruit: Chargeable service, Follow-Up: Free of charge (non-commercial studies only), Terms and conditions apply, £XXX, testx, Primary care sadsa Secondary care Participant reported adasdasdas, Primary care  Secondary care COVID 19 Medicines dispensed Work force Participant reported Test sub data type, test info governance, "
+    }
+  }
+}

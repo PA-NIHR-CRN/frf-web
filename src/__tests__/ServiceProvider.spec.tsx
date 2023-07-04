@@ -19,7 +19,7 @@ const getComponent = async () => {
     props: ServiceProviderProps
   }
 
-  return ServiceProvider.getLayout(<ServiceProvider {...props} />)
+  return ServiceProvider.getLayout(<ServiceProvider {...props} />, { ...props, isPreviewMode: false })
 }
 
 beforeEach(() => {
