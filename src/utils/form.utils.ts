@@ -4,11 +4,11 @@ import { FieldErrors } from 'react-hook-form'
 import { contactResearchSupportSchema } from './schemas/contact-research-support.schema'
 
 export function hasErrorsInSearchParams(schema: typeof contactResearchSupportSchema, searchParams: ParsedUrlQuery) {
-  return Object.keys(schema).some((field) => searchParams[`${field}Error`])
+  return Object.keys(schema.shape).some((field) => searchParams[`${field}Error`])
 }
 
 export function getValuesFromSearchParams(schema: typeof contactResearchSupportSchema, searchParams: ParsedUrlQuery) {
-  return Object.keys(schema).reduce<Record<string, string>>((values, field) => {
+  return Object.keys(schema.shape).reduce<Record<string, string>>((values, field) => {
     if (searchParams[field]) {
       values[field] = searchParams[field] as string
       return values
@@ -19,7 +19,7 @@ export function getValuesFromSearchParams(schema: typeof contactResearchSupportS
 }
 
 export function getErrorsFromSearchParams(schema: typeof contactResearchSupportSchema, searchParams: ParsedUrlQuery) {
-  return Object.keys(schema).reduce<FieldErrors>((values, field) => {
+  return Object.keys(schema.shape).reduce<FieldErrors>((values, field) => {
     if (searchParams[`${field}Error`]) {
       values[field] = {
         type: 'required',
