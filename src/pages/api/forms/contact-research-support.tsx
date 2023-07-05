@@ -12,8 +12,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     await contactResearchSupportSchema.validate(req.body, { abortEarly: false })
 
+    console.log('success')
+
     res.redirect(302, '/contact-research-support/confirmation')
   } catch (error) {
+    console.log('error')
+
     if (error instanceof ValidationError) {
       const validationErrors = error.inner
 
@@ -39,6 +43,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.redirect(302, `/contact-research-support?${searchParams}`)
     }
 
-    return res.redirect(302, `/contact-research-support?error=fatal`)
+    return res.redirect(302, `/contact-research-support?fatal=1`)
   }
 }

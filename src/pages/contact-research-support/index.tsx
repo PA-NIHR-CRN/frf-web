@@ -1,52 +1,15 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import {
-  Control,
-  DeepPartial,
-  DefaultValues,
-  SubmitHandler,
-  useController,
-  useForm,
-  UseFormSetError,
-} from 'react-hook-form'
+import { FormState, Path, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
-import { ErrorSummary, Fieldset, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
-import { MAX_WORDS } from '@/constants/forms'
+import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
+import { FORM_ERRORS, MAX_WORDS } from '@/constants/forms'
 import { contentfulService } from '@/lib/contentful'
 import { getErrorsFromSearchParams, getValuesFromSearchParams, hasErrorsInSearchParams } from '@/utils/form.utils'
 import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
-
-function SupportDescriptionTextarea({
-  control,
-  defaultValue,
-}: {
-  control: Control<ContactResearchSupportInputs>
-  defaultValue: string | undefined
-}) {
-  const {
-    field: { value, ...field },
-    formState: { errors },
-  } = useController({
-    name: 'supportDescription',
-    control,
-  })
-
-  const numWords = value ? value.split(' ').length : 0
-
-  return (
-    <Textarea
-      label="Please provide a summary of the support you need"
-      errors={errors}
-      remainingWords={numWords >= MAX_WORDS ? 0 : MAX_WORDS - numWords}
-      defaultValue={defaultValue}
-      {...field}
-    />
-  )
-}
 
 type ContactResearchSupportInputs = {
   enquiryType: string
@@ -64,63 +27,56 @@ type ContactResearchSupportInputs = {
 
 export type ContactResearchSupportProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
-function useServerErrorHydration<T extends ContactResearchSupportInputs = ContactResearchSupportInputs>({
-  defaultValues,
-  setError,
-  onComplete,
+/**
+ * Detects field errors in the URL searchParams on load and injects them into RHF state
+ * After injecting into state, the searchParams are cleared so that subsequent page refreshes clear the form.
+ */
+function useServerErrorHydration<T extends ContactResearchSupportInputs>({
+  formState,
+  onFoundError,
 }: {
-  defaultValues: DefaultValues<DeepPartial<T>> | undefined
-  setError: UseFormSetError<T>
-  onComplete: () => void
+  formState: FormState<T>
+  onFoundError: (field: Path<T>, message: { message: string }) => void
 }) {
   const router = useRouter()
 
+  const fields = Object.keys(formState.defaultValues)
+  const hasServerErrors = hasErrorsInSearchParams(contactResearchSupportSchema, router.query)
+  const serverErrors = getErrorsFromSearchParams(contactResearchSupportSchema, router.query)
+
   useEffect(() => {
-    // Clear the url of any server returned errors
-    router.replace({ query: undefined })
-
-    const fields = Object.keys(defaultValues)
-
-    const hasErrors = fields.some((field) => router.query[`${field}Error`])
-
-    if (hasErrors) {
+    if (hasServerErrors) {
       fields.forEach((field) => {
-        if (router.query[`${field}Error`]) {
-          setError(`root.${field}`, { message: router.query[`${field}Error`] as string })
+        if (router.query[`${field as string}Error`]) {
+          onFoundError(field as Path<T>, { message: router.query[`${field as string}Error`] as string })
         }
       })
 
-      onComplete()
+      router.replace({ query: undefined }, undefined, { shallow: true })
     }
-  }, [])
+  }, [router.asPath])
+
+  return {
+    errors: hasServerErrors ? serverErrors : formState.errors,
+  }
 }
 
 export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors: clientErrors, defaultValues },
-    control,
-    setError,
-  } = useForm<ContactResearchSupportInputs>({
-    resolver: yupResolver(contactResearchSupportSchema),
+  const { register, formState, control, setError, watch } = useForm<ContactResearchSupportInputs>({
+    mode: 'all',
+    // resolver: yupResolver(contactResearchSupportSchema),
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
   })
 
-  const onSubmit: SubmitHandler<ContactResearchSupportInputs> = (data) => console.log(data)
-
-  useServerErrorHydration<ContactResearchSupportInputs>({
-    defaultValues,
-    setError,
-    onComplete: () => {
-      handleSubmit(onSubmit)()
-    },
+  const { errors } = useServerErrorHydration<ContactResearchSupportInputs>({
+    formState,
+    onFoundError: (field, error) => setError(field, error),
   })
 
-  const serverErrors = getErrorsFromSearchParams(contactResearchSupportSchema, query)
+  const supportDescription = watch('supportDescription')
+  const numWords = supportDescription ? supportDescription.split(' ').length : 0
 
-  const errors = hasErrorsInSearchParams(contactResearchSupportSchema, query) ? serverErrors : clientErrors
-
+  const { defaultValues } = formState
   return (
     <Container>
       <div className="govuk-grid-row">
@@ -134,7 +90,17 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
             If you would like to access this support please complete the form below and a professional from the relevant
             research support infrastructure will get in touch to respond to your request
           </p>
-          <form action="/api/forms/contact-research-support" method="POST" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <Form
+            method="post"
+            action="/api/forms/contact-research-support"
+            control={control}
+            onFatalError={() =>
+              setError('root.serverError', {
+                type: '400',
+                message: FORM_ERRORS.fatal,
+              })
+            }
+          >
             <ErrorSummary errors={errors} />
             <h3 className="govuk-heading-l">About your enquiry</h3>
             <Fieldset>
@@ -151,7 +117,13 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
               </RadioGroup>
             </Fieldset>
             <Fieldset>
-              <SupportDescriptionTextarea control={control} defaultValue={defaultValues?.supportDescription} />
+              <Textarea
+                label="Please provide a summary of the support you need"
+                errors={errors}
+                remainingWords={numWords >= MAX_WORDS ? 0 : MAX_WORDS - numWords}
+                defaultValue={defaultValues?.supportDescription}
+                {...register('supportDescription')}
+              />
             </Fieldset>
             <Fieldset legend="About you">
               <TextInput
@@ -252,7 +224,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                 Cancel
               </Link>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
     </Container>
