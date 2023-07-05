@@ -43,9 +43,8 @@ export default function ServiceProviders({
         hidden: showFiltersMobile,
       })}
       ref={showFiltersButtonRef}
-      onClick={(event) => {
+      onClick={() => {
         setShowFiltersMobile(true)
-        event.preventDefault()
       }}
     >
       Open filters
@@ -111,7 +110,7 @@ export default function ServiceProviders({
 
             {/* Cards */}
             {isLoading ? (
-              <p className="govuk-body mt-5">Loading...</p>
+              <p className="govuk-body mt-5 min-h-[40rem]">Loading...</p>
             ) : totalItems === 0 ? (
               <NoResults />
             ) : (

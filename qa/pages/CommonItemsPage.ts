@@ -20,7 +20,7 @@ export default class CommonItemsPage {
   readonly linkSiteMenuResearchStaff: Locator
   readonly linkSiteMenuFeedback: Locator
   readonly txtLinkDescriptions: Locator
-  readonly txtSiteMenuInto: Locator
+  readonly txtSiteMenuIntro: Locator
   readonly siteSeoMetaTag: Locator
   readonly btnHomeIcon: Locator
 
@@ -40,23 +40,29 @@ export default class CommonItemsPage {
     this.linkFeedback = page.locator('a', { hasText: 'feedback' })
     this.btnClosedSiteMenu = page.locator('button[aria-label="Show navigation menu"]')
     this.btnOpenedSiteMenu = page.locator('button[aria-label="Hide navigation menu"]')
-    this.linkSiteMenuFindDsp = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
+    this.linkSiteMenuFindDsp = page.locator('a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]', {
       hasText: 'View data service providers',
     })
-    this.linkSiteMenuGetSupport = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
-      hasText: 'Contact research support',
-    })
+    this.linkSiteMenuGetSupport = page.locator(
+      'a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]',
+      {
+        hasText: 'Contact research support',
+      }
+    )
     this.linkSiteMenuDsp = page
-      .locator('a[class="link--inverse mb-1 inline-block text-base"]')
+      .locator('a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]')
       .getByText('Data service providers', { exact: true })
-    this.linkSiteMenuResearchStaff = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
-      hasText: 'Research support colleagues',
-    })
-    this.linkSiteMenuFeedback = page.locator('a[class="link--inverse mb-1 inline-block text-base"]', {
+    this.linkSiteMenuResearchStaff = page.locator(
+      'a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]',
+      {
+        hasText: 'Research support colleagues',
+      }
+    )
+    this.linkSiteMenuFeedback = page.locator('a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]', {
       hasText: 'Provide feedback',
     })
-    this.txtLinkDescriptions = page.locator('p[class="text-sm text-white"]')
-    this.txtSiteMenuInto = page.locator('p[class="max-w-[300px] text-base text-white"]')
+    this.txtLinkDescriptions = page.locator('p[class="govuk-body-s text-white"]')
+    this.txtSiteMenuIntro = page.locator('p[class="govuk-heading-s max-w-[300px] font-normal text-white"]')
     this.siteSeoMetaTag = page.locator('meta[name="robots"]')
     this.btnHomeIcon = page.locator('svg[data-testid="frf-icon-home"]')
   }
@@ -121,8 +127,8 @@ export default class CommonItemsPage {
   }
 
   async assertSiteMenuIntroTextPresent() {
-    await expect(this.txtSiteMenuInto).toBeVisible()
-    await expect(this.txtSiteMenuInto).toContainText('Discover more with the Find, Recruit and Follow-up website')
+    await expect(this.txtSiteMenuIntro).toBeVisible()
+    await expect(this.txtSiteMenuIntro).toContainText('Discover more with the Find, Recruit and Follow-up website')
   }
 
   async assertSeoIsDisabled() {
