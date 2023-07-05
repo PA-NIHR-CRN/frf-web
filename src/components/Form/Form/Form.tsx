@@ -20,7 +20,7 @@ export function Form<T extends FieldValues>({ action, method, control, children,
       control={control}
       action={action}
       method={method}
-      onSuccess={async ({ response }) => {
+      onSuccess={({ response }) => {
         const redirectUrl = new URL(response.url)
 
         // Confirmation page redirect

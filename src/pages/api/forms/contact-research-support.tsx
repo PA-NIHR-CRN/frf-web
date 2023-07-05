@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await contactResearchSupportSchema.validate(req.body, { abortEarly: false })
+    await contactResearchSupportSchema.parse(req.body)
 
     console.log('success')
 
@@ -21,22 +21,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (error instanceof ValidationError) {
       const validationErrors = error.inner
 
-      const fieldErrors = Object.keys(contactResearchSupportSchema.fields).reduce<Record<string, string>>(
-        (acc, key) => {
-          const foundError = validationErrors.filter((error) => error.path === key)
+      const fieldErrors = Object.keys(contactResearchSupportSchema).reduce<Record<string, string>>((acc, key) => {
+        const foundError = validationErrors.filter((error) => error.path === key)
 
-          if (foundError.length) {
-            acc[`${key}Error`] = foundError[0]?.message
-          }
+        if (foundError.length) {
+          acc[`${key}Error`] = foundError[0]?.message
+        }
 
-          if (req.body[key]) {
-            acc[key] = req.body[key]
-          }
+        if (req.body[key]) {
+          acc[key] = req.body[key]
+        }
 
-          return acc
-        },
-        {}
-      )
+        return acc
+      }, {})
 
       const searchParams = new URLSearchParams(fieldErrors)
 

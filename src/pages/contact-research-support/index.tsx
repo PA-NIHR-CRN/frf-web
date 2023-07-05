@@ -1,8 +1,9 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { FormState, Path, useForm } from 'react-hook-form'
+import { FieldError, FormState, Path, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
 import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
@@ -36,7 +37,7 @@ function useServerErrorHydration<T extends ContactResearchSupportInputs>({
   onFoundError,
 }: {
   formState: FormState<T>
-  onFoundError: (field: Path<T>, message: { message: string }) => void
+  onFoundError: (field: Path<T>, message: FieldError) => void
 }) {
   const router = useRouter()
 
@@ -48,7 +49,7 @@ function useServerErrorHydration<T extends ContactResearchSupportInputs>({
     if (hasServerErrors) {
       fields.forEach((field) => {
         if (router.query[`${field as string}Error`]) {
-          onFoundError(field as Path<T>, { message: router.query[`${field as string}Error`] as string })
+          onFoundError(field as Path<T>, { type: 'custom', message: router.query[`${field as string}Error`] as string })
         }
       })
 
@@ -64,7 +65,7 @@ function useServerErrorHydration<T extends ContactResearchSupportInputs>({
 export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
   const { register, formState, control, setError, watch } = useForm<ContactResearchSupportInputs>({
     mode: 'all',
-    // resolver: yupResolver(contactResearchSupportSchema),
+    resolver: zodResolver(contactResearchSupportSchema),
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
   })
 
@@ -108,9 +109,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                 label="Is your enquiry about"
                 errors={errors}
                 defaultValue={defaultValues?.enquiryType}
-                {...register('enquiryType', {
-                  required: 'Is your enquiry about is required',
-                })}
+                {...register('enquiryType')}
               >
                 <Radio value="data" label="Identifying appropriate data services" />
                 <Radio value="research" label="General research support" />
