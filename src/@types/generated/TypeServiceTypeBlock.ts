@@ -1,4 +1,5 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+
 import type { TypeBlockDataTransferSkeleton } from "./TypeBlockDataTransfer";
 import type { TypeTextBlockSkeleton } from "./TypeTextBlock";
 

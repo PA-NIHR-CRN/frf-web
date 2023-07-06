@@ -1,7 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import { useForm } from 'react-hook-form'
+import { useCallback } from 'react'
+import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
 import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
@@ -23,9 +24,14 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
   })
 
+  const handleFoundError = useCallback(
+    (field: keyof ContactResearchSupportInputs, error: FieldError) => setError(field, error),
+    [setError]
+  )
+
   const { errors } = useFormErrorHydration<ContactResearchSupportInputs>({
     formState,
-    onFoundError: (field, error) => setError(field, error),
+    onFoundError: handleFoundError,
   })
 
   const supportDescription = watch('supportDescription')

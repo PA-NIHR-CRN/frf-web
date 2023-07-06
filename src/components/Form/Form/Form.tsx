@@ -34,7 +34,7 @@ export function Form<T extends FieldValues>({ action, method, control, children,
         }
 
         // Misc error redirect
-        router.replace(`${redirectUrl.pathname}${redirectUrl.search}`, undefined)
+        router.replace(`${redirectUrl.pathname}${redirectUrl.search}`)
       }}
       headers={headers}
       noValidate

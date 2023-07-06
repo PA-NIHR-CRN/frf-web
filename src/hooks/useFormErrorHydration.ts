@@ -1,4 +1,4 @@
-import { useRouter } from 'next-router-mock'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FieldError, FormState, Path } from 'react-hook-form'
 
@@ -9,8 +9,13 @@ import {
 } from '@/utils/schemas/contact-research-support.schema'
 
 /**
- * Detects field errors in the URL searchParams on load and injects them into RHF state
- * After injecting into state, the searchParams are cleared so that subsequent page refreshes clear the form.
+ * This hook detects field-level errors in the URL searchParams on page load
+ *
+ * For js users, it extracts them and injects them into RHF state via the useEffect
+ * It then clears the searchParams so that subsequent page refreshes show an empty form.
+ *
+ * For non-js users, server returned errors will get returned directly and bypass RHF state.
+ * They are then passed directly down to the input components.
  */
 export function useFormErrorHydration<T extends ContactResearchSupportInputs>({
   formState,
@@ -21,21 +26,20 @@ export function useFormErrorHydration<T extends ContactResearchSupportInputs>({
 }) {
   const router = useRouter()
 
-  const fields = Object.keys(formState.defaultValues)
   const hasServerErrors = hasErrorsInSearchParams(contactResearchSupportSchema, router.query)
   const serverErrors = getErrorsFromSearchParams(contactResearchSupportSchema, router.query)
 
   useEffect(() => {
     if (hasServerErrors) {
-      fields.forEach((field) => {
+      Object.keys(formState.defaultValues).forEach((field) => {
         if (router.query[`${field as string}Error`]) {
           onFoundError(field as Path<T>, { type: 'custom', message: router.query[`${field as string}Error`] as string })
         }
       })
 
-      router.replace({ query: undefined }, undefined, { shallow: true })
+      router.replace({ query: undefined }, undefined, { shallow: false })
     }
-  }, [router.asPath])
+  }, [router.asPath, router, hasServerErrors, onFoundError, formState.defaultValues])
 
   return {
     errors: hasServerErrors ? serverErrors : formState.errors,
