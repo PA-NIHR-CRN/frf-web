@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
@@ -37,7 +37,14 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
   const supportDescription = watch('supportDescription')
   const numWords = supportDescription ? supportDescription.split(' ').length : 0
 
+  // Show the "Unknown" select option when org type is commercial
+  // Default to true to ensure non-js users can always access the option regardless of selected org type
+  const organisationType = watch('organisationType')
+  const [unknownOptionVisible, setUnknownOptionVisible] = useState(true)
+  useEffect(() => setUnknownOptionVisible(organisationType === 'commercial'), [organisationType])
+
   const { defaultValues } = formState
+
   return (
     <Container>
       <div className="govuk-grid-row">
@@ -72,7 +79,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                 {...register('enquiryType')}
               >
                 <Radio value="data" label="Identifying appropriate data services" />
-                <Radio value="research" label="General research support" />
+                <Radio value="research" label="General enquiry about research support" />
               </RadioGroup>
             </Fieldset>
             <Fieldset>
@@ -156,6 +163,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                     {name}
                   </Option>
                 ))}
+                {unknownOptionVisible && <Option value="unknown">Unknown</Option>}
               </Select>
 
               <TextInput
