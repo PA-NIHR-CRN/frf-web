@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-import { MAX_WORDS } from '@/constants/forms'
+import { MAX_WORDS, PHONE_NUMBER_REGEX } from '@/constants/forms'
 
 export type ContactResearchSupportInputs = z.infer<typeof contactResearchSupportSchema>
 
@@ -22,6 +22,10 @@ export const contactResearchSupportSchema = z
       .string()
       .email('Email address must be a valid email')
       .min(1, { message: 'Email address is required' }),
+    phoneNumber: z
+      .string()
+      .min(1, { message: 'Phone number is required' })
+      .regex(PHONE_NUMBER_REGEX, { message: 'Phone number is not a recognised format' }),
     jobRole: z.string().min(1, { message: 'Job role is required' }),
     organisationName: z.string().min(1, { message: 'Organisation name is required' }),
     organisationType: z.enum(['commercial', 'nonCommercial'], {

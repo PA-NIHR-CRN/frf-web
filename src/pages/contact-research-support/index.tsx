@@ -98,6 +98,13 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                 {...register('emailAddress')}
               />
               <TextInput
+                label="Phone number"
+                hint="For international numbers please include the country code"
+                errors={errors}
+                defaultValue={defaultValues?.phoneNumber}
+                {...register('phoneNumber')}
+              />
+              <TextInput
                 label="Job role"
                 errors={errors}
                 defaultValue={defaultValues?.jobRole}
