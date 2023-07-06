@@ -101,8 +101,6 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     homePage,
     providersPage,
   }) => {
-    test.fail(true, 'This test should fail until bug fix for FRF-83 is in place')
-
     await test.step('Given I have navigated to the HomePage', async () => {
       await homePage.goto()
     })

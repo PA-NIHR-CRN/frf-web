@@ -50,7 +50,7 @@ export class ContentfulService {
       }),
 
       ...(filters.q && {
-        query: filters.q,
+        'fields.searchKeywords[match]': filters.q,
       }),
 
       order: [ContentfulService.getOrderFilter(filters?.order)],
@@ -70,6 +70,13 @@ export class ContentfulService {
       geography: (geographyField?.items?.validations?.[0].in ?? []) as string[],
       costs: (costsField?.items?.validations?.[0].in ?? []) as string[],
     }
+  }
+
+  async getProviderEntryById(id: string) {
+    const { contentfulSpaceId, contentfulEnvironment } = this.config
+    const space = await this.managementClient.getSpace(contentfulSpaceId)
+    const environment = await space.getEnvironment(contentfulEnvironment)
+    return environment.getEntry(id)
   }
 
   async getProviderBySlug(slug: string) {

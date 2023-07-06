@@ -170,6 +170,7 @@ export const getStaticProps = async () => {
           videoID,
           videoUrl: `https://www.youtube.com/embed/${videoID}`,
         }),
+        isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

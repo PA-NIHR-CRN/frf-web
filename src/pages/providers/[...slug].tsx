@@ -264,8 +264,8 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
   )
 }
 
-ServiceProvider.getLayout = function getLayout(page: ReactElement) {
-  return <ServiceProviderLayout>{page}</ServiceProviderLayout>
+ServiceProvider.getLayout = function getLayout(page: ReactElement, { isPreviewMode }: ServiceProviderProps) {
+  return <ServiceProviderLayout isPreviewMode={isPreviewMode}>{page}</ServiceProviderLayout>
 }
 
 export async function getStaticPaths() {
@@ -300,6 +300,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
         }),
         createdAt,
         updatedAt,
+        isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

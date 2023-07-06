@@ -34,6 +34,7 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
     <li>
       <Link
         href={{ pathname: '/providers', query: omitFilter(name, value) }}
+        scroll={false}
         className="govuk-body-s focus:focusable group mb-0 inline-flex items-center 
       rounded-md border py-1 pl-1 pr-2 text-black no-underline focus:focus:outline-none group-[.isLoading]/selected:pointer-events-none group-[.isLoading]/selected:opacity-50"
       >
@@ -86,8 +87,9 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
           .map((filter, i) => renderSelectedFilters(filter, filters[filter], i))}
       </ul>
       <div className="order-2 ml-auto whitespace-nowrap pl-1 md:order-3">
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a href="/providers">Clear all filters</a>
+        <Link href="/providers" scroll={false}>
+          Clear all filters
+        </Link>
       </div>
     </div>
   )
