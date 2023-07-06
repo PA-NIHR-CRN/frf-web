@@ -28,6 +28,7 @@ test('Contact research support confirmation page', async () => {
   ).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'What did you think of this website?' })).toHaveAttribute('href', '/feedback')
   expect(screen.getByText('(takes 30 seconds)')).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Return to homepage' })).toHaveAttribute('href', '/')
 })
 
 test('Contact research support confirmation page with no reference number', async () => {

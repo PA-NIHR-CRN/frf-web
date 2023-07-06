@@ -23,6 +23,9 @@ export default function ContactResearchSupportConfirmation({
           <p>
             <Link href="/feedback">What did you think of this website?</Link> (takes 30 seconds)
           </p>
+          <Link href="/" className="govuk-button" data-module="govuk-button">
+            Return to homepage
+          </Link>
         </div>
       </div>
     </Container>
