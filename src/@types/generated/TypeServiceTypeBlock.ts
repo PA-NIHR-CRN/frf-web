@@ -60,7 +60,7 @@ export interface TypeServiceTypeBlockFields {
  * @type {TypeServiceTypeBlockSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:55.014Z
- * @version 1
+ * @version 7
  */
 export type TypeServiceTypeBlockSkeleton = EntrySkeletonType<TypeServiceTypeBlockFields, "serviceTypeBlock">;
 /**
@@ -69,6 +69,6 @@ export type TypeServiceTypeBlockSkeleton = EntrySkeletonType<TypeServiceTypeBloc
  * @type {TypeServiceTypeBlock}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:55.014Z
- * @version 1
+ * @version 7
  */
 export type TypeServiceTypeBlock<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeServiceTypeBlockSkeleton, Modifiers, Locales>;

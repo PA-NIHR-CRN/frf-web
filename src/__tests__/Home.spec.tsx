@@ -54,7 +54,10 @@ test('Displays the Home page', async () => {
   // Signposts
   expect(screen.getByRole('heading', { name: 'Get support for your research', level: 2 })).toBeInTheDocument()
   expect(screen.getByText(mockData.signPostDescription1)).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Contact research support' })).toHaveAttribute('href', '#')
+  expect(screen.getByRole('link', { name: 'Contact research support' })).toHaveAttribute(
+    'href',
+    '/contact-research-support'
+  )
 
   expect(screen.getByRole('heading', { name: 'Organisations providing data services', level: 2 })).toBeInTheDocument()
   expect(screen.getByText(mockData.signPostDescription2)).toBeInTheDocument()

@@ -7,7 +7,7 @@ export const menu = [
       description: 'Discover more about the different data service providers within Find, Recruit and Follow-up',
     },
     {
-      link: '/',
+      link: '/contact-research-support',
       text: 'Contact research support',
       description:
         'Get in touch with research support professionals who can help you understand which services might be suitable for your study',

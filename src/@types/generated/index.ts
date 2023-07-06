@@ -3,6 +3,7 @@ export type { TypeBlockLabel, TypeBlockLabelFields, TypeBlockLabelSkeleton } fro
 export type { TypeHomepage, TypeHomepageFields, TypeHomepageSkeleton } from "./TypeHomepage";
 export type { TypeInformationGovernanceBlock, TypeInformationGovernanceBlockFields, TypeInformationGovernanceBlockSkeleton } from "./TypeInformationGovernanceBlock";
 export type { TypeInformationGovernanceDataSource, TypeInformationGovernanceDataSourceFields, TypeInformationGovernanceDataSourceSkeleton } from "./TypeInformationGovernanceDataSource";
+export type { TypeLcrnsAndDevolvedAdministrations, TypeLcrnsAndDevolvedAdministrationsFields, TypeLcrnsAndDevolvedAdministrationsSkeleton } from "./TypeLcrnsAndDevolvedAdministrations";
 export type { TypeServiceProvider, TypeServiceProviderFields, TypeServiceProviderSkeleton } from "./TypeServiceProvider";
 export type { TypeServiceTypeBlock, TypeServiceTypeBlockFields, TypeServiceTypeBlockSkeleton } from "./TypeServiceTypeBlock";
 export type { TypeTextBlock, TypeTextBlockFields, TypeTextBlockSkeleton } from "./TypeTextBlock";
