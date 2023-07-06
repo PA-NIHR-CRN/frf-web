@@ -1,6 +1,6 @@
 import * as z from 'zod'
 
-import { MAX_WORDS, PHONE_NUMBER_REGEX } from '@/constants/forms'
+import { PHONE_NUMBER_REGEX, TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 
 export type ContactResearchSupportInputs = z.infer<typeof contactResearchSupportSchema>
 
@@ -14,8 +14,8 @@ export const contactResearchSupportSchema = z
     supportDescription: z
       .string()
       .min(1, { message: 'Please provide a summary of the support you need is required' })
-      .refine((val) => val.split(' ').length <= MAX_WORDS, {
-        message: `Please provide a summary of the support you need exceeds the maximum of ${MAX_WORDS} words`,
+      .refine((val) => val.split(' ').length <= TEXTAREA_MAX_CHARACTERS, {
+        message: `Please provide a summary of the support you need exceeds the maximum of ${TEXTAREA_MAX_CHARACTERS} characters`,
       }),
     fullName: z.string().min(1, { message: 'Full name is required' }),
     emailAddress: z

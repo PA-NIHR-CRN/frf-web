@@ -6,7 +6,7 @@ import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
 import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
-import { FORM_ERRORS, MAX_WORDS } from '@/constants/forms'
+import { FORM_ERRORS, TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { contentfulService } from '@/lib/contentful'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
@@ -34,8 +34,10 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
     onFoundError: handleFoundError,
   })
 
+  // Watch & update the character count for the "Support summary" textarea
   const supportDescription = watch('supportDescription')
-  const numWords = supportDescription ? supportDescription.split(' ').length : 0
+  const remainingCharacters =
+    supportDescription.length >= TEXTAREA_MAX_CHARACTERS ? 0 : TEXTAREA_MAX_CHARACTERS - supportDescription.length
 
   // Show the "Unknown" select option when org type is commercial
   // Default to true to ensure non-js users can always access the option regardless of selected org type
@@ -86,7 +88,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
               <Textarea
                 label="Please provide a summary of the support you need"
                 errors={errors}
-                remainingWords={numWords >= MAX_WORDS ? 0 : MAX_WORDS - numWords}
+                remainingCharacters={remainingCharacters}
                 defaultValue={defaultValues?.supportDescription}
                 {...register('supportDescription')}
               />
