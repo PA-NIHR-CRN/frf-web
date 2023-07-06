@@ -1,21 +1,41 @@
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import Link from 'next/link'
+
 import { Container } from '@/components/Container/Container'
 
-export default function ContactResearchSupportConfirmation() {
+export type ContactResearchSupportConfirmationProps = InferGetServerSidePropsType<typeof getServerSideProps>
+
+export default function ContactResearchSupportConfirmation({
+  referenceNumber,
+}: ContactResearchSupportConfirmationProps) {
   return (
     <Container>
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-two-thirds-from-desktop">
-          <h2 className="govuk-heading-l">Confirmation</h2>
+          <h2 className="govuk-heading-l">Thank you</h2>
           <p>
-            The UK offers multiple services and teams of professionals who can support you with identifying appropriate
-            data services or wider support with planning and delivering your study in the UK.
+            Your enquiry has been sent to the relevant research support team and they will be in touch in due course.
           </p>
           <p>
-            If you would like to access this support please complete the form below and a professional from the relevant
-            research support infrastructure will get in touch to respond to your request
+            {referenceNumber && `Your enquiry reference number is ${referenceNumber}. `}A copy of your enquiry will be
+            sent to your email address.
+          </p>
+          <p>
+            <Link href="/feedback">What did you think of this website?</Link> (takes 30 seconds)
           </p>
         </div>
       </div>
     </Container>
   )
+}
+
+export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+  const referenceNumber = query.referenceNumber ?? ''
+
+  return {
+    props: {
+      referenceNumber,
+      isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+    },
+  }
 }
