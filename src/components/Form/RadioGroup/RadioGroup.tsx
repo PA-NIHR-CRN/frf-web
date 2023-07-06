@@ -31,14 +31,14 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
             )}
           </div>
           <ErrorInline name={rest.name} errors={errors} />
-          {Children.map(children, (child) =>
+          {Children.map(children, (child, index) =>
             isValidElement(child) ? (
               <>
                 {cloneElement(child, {
                   ...child.props,
                   ...rest,
                   ref,
-                  id: rest.name,
+                  id: `${rest.name}-${index}`,
                   defaultChecked: defaultValue === child.props.value,
                 })}
               </>
