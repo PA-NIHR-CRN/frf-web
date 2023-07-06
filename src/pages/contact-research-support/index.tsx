@@ -1,66 +1,20 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { FieldError, FormState, Path, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
 import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
 import { FORM_ERRORS, MAX_WORDS } from '@/constants/forms'
+import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { contentfulService } from '@/lib/contentful'
-import { getErrorsFromSearchParams, getValuesFromSearchParams, hasErrorsInSearchParams } from '@/utils/form.utils'
-import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
-
-type ContactResearchSupportInputs = {
-  enquiryType: string
-  supportDescription: string
-  fullName: string
-  emailAddress: string
-  jobRole: string
-  organisationName: string
-  organisationType: string
-  lcrn: string
-  studyTitle: string
-  protocolReference: string
-  cpmsId: string
-}
+import { getValuesFromSearchParams } from '@/utils/form.utils'
+import {
+  ContactResearchSupportInputs,
+  contactResearchSupportSchema,
+} from '@/utils/schemas/contact-research-support.schema'
 
 export type ContactResearchSupportProps = InferGetServerSidePropsType<typeof getServerSideProps>
-
-/**
- * Detects field errors in the URL searchParams on load and injects them into RHF state
- * After injecting into state, the searchParams are cleared so that subsequent page refreshes clear the form.
- */
-function useServerErrorHydration<T extends ContactResearchSupportInputs>({
-  formState,
-  onFoundError,
-}: {
-  formState: FormState<T>
-  onFoundError: (field: Path<T>, message: FieldError) => void
-}) {
-  const router = useRouter()
-
-  const fields = Object.keys(formState.defaultValues)
-  const hasServerErrors = hasErrorsInSearchParams(contactResearchSupportSchema, router.query)
-  const serverErrors = getErrorsFromSearchParams(contactResearchSupportSchema, router.query)
-
-  useEffect(() => {
-    if (hasServerErrors) {
-      fields.forEach((field) => {
-        if (router.query[`${field as string}Error`]) {
-          onFoundError(field as Path<T>, { type: 'custom', message: router.query[`${field as string}Error`] as string })
-        }
-      })
-
-      router.replace({ query: undefined }, undefined, { shallow: true })
-    }
-  }, [router.asPath])
-
-  return {
-    errors: hasServerErrors ? serverErrors : formState.errors,
-  }
-}
 
 export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
   const { register, formState, control, setError, watch } = useForm<ContactResearchSupportInputs>({
@@ -69,7 +23,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
   })
 
-  const { errors } = useServerErrorHydration<ContactResearchSupportInputs>({
+  const { errors } = useFormErrorHydration<ContactResearchSupportInputs>({
     formState,
     onFoundError: (field, error) => setError(field, error),
   })

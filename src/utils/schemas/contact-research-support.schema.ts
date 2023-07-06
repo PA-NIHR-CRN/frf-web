@@ -2,6 +2,8 @@ import * as z from 'zod'
 
 import { MAX_WORDS } from '@/constants/forms'
 
+export type ContactResearchSupportInputs = z.infer<typeof contactResearchSupportSchema>
+
 export const contactResearchSupportSchema = z
   .object({
     enquiryType: z.enum(['data', 'research'], {
