@@ -1,5 +1,4 @@
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 import { ReactElement } from 'react'
 
@@ -15,6 +14,7 @@ import RecruitIcon from '@/components/Icons/RecruitIcon'
 import { ServiceProviderLayout } from '@/components/Layout/ServiceProviderLayout'
 import {
   Contact,
+  ContactResearchSupport,
   GeographicalCoverage,
   ProviderHeadingText,
   ProviderOrganisation,
@@ -224,38 +224,13 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 heading="Contact data service provider"
                 contactName={`Get in touch with ${fields.name}`}
                 contactUrl="/"
-                // footer={
-                //   <div className="govuk-!-margin-top-4">
-                //     <div className="govuk-!-margin-bottom-2 govuk-body flex items-start gap-2">
-                //       <div>
-                //         <PrintIcon className="text-navy-100" />
-                //       </div>
-                //       <Link href="/print">Print data service provider details</Link>
-                //     </div>
-                //     <div className="govuk-!-margin-bottom-2 govuk-body flex items-start gap-2">
-                //       <div>
-                //         <ShareIcon className="text-navy-100" />
-                //       </div>
-                //       <Link href="/share">Share details</Link>
-                //     </div>
-                //   </div>
-                // }
               >
                 If you think {fields.name} might be able to help with your study you can contact them directly using
                 this service.
               </Contact>
 
               {/* Get support */}
-              <div className="govuk-!-margin-top-8 govuk-!-padding-top-4 border-t-4 border-t-purple-100">
-                <h3 className="govuk-heading-m heading-underscore text-navy-100">Get support for your research</h3>
-                <p>
-                  Need help finding appropriate data services, or any other part of the UK journey to getting your study
-                  started? The UK offers multiple services and teams of professionals who can support you.
-                </p>
-                <Link href="/contact-research-support" className="govuk-button govuk-button--secondary">
-                  Contact research support
-                </Link>
-              </div>
+              <ContactResearchSupport />
             </div>
           </div>
         </article>

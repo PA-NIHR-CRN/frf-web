@@ -199,6 +199,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
     props: {
       lcrns: lcrnsEntries.map((entry) => entry.fields),
       query,
+      isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
     },
   }
 }

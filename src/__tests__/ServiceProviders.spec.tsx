@@ -355,3 +355,23 @@ test('Selected filters panel', async () => {
     '/providers?serviceType=Recruit'
   )
 })
+
+test('Contact research support', async () => {
+  mockContentfulResponse(defaultMock)
+
+  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as {
+    props: ServiceProvidersProps
+  }
+  render(<ServiceProviders {...props} />)
+
+  expect(screen.getByRole('heading', { name: 'Get support for your research', level: 3 })).toBeInTheDocument()
+  expect(
+    screen.getByText(
+      'Need help finding appropriate data services, or any other part of the UK journey to getting your study started? The UK offers multiple services and teams of professionals who can support you.'
+    )
+  ).toBeInTheDocument()
+  expect(screen.getByRole('link', { name: 'Contact research support' })).toHaveAttribute(
+    'href',
+    '/contact-research-support'
+  )
+})
