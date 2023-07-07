@@ -1,12 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import { useCallback, useEffect, useState } from 'react'
+import { ReCaptchaProvider } from 'next-recaptcha-v3'
+import { ReactElement, useCallback, useEffect, useState } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
 import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
-import { FORM_ERRORS, TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
+import { RootLayout } from '@/components/Layout/RootLayout'
+import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { contentfulService } from '@/lib/contentful'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
@@ -18,7 +20,7 @@ import {
 export type ContactResearchSupportProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
 export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
-  const { register, formState, control, setError, watch } = useForm<ContactResearchSupportInputs>({
+  const { register, formState, control, setError, watch, getValues } = useForm<ContactResearchSupportInputs>({
     mode: 'all',
     resolver: zodResolver(contactResearchSupportSchema),
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
@@ -63,11 +65,11 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
           <Form
             method="post"
             action="/api/forms/contact-research-support"
-            control={control}
-            onFatalError={() =>
+            getValues={getValues}
+            onError={(message: string) =>
               setError('root.serverError', {
                 type: '400',
-                message: FORM_ERRORS.fatal,
+                message,
               })
             }
           >
@@ -204,6 +206,17 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
         </div>
       </div>
     </Container>
+  )
+}
+
+ContactResearchSupport.getLayout = function getLayout(
+  page: ReactElement,
+  { isPreviewMode }: ContactResearchSupportProps
+) {
+  return (
+    <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
+      <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
+    </ReCaptchaProvider>
   )
 }
 

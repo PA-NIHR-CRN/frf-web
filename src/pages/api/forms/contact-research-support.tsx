@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
+import { ReCaptchaService } from '@/lib/reCaptchaService'
 import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,9 +10,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await contactResearchSupportSchema.parse(req.body)
+    if (!req.body.token) {
+      throw new Error('Missing reCaptcha token')
+    }
 
-    console.log('success')
+    const reCaptcha = new ReCaptchaService({
+      projectId: process.env.RECAPTCHA_PROJECT_ID,
+      apiKey: process.env.RECAPTCHA_API_KEY,
+      siteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+    })
+
+    const { valid } = await reCaptcha.validateToken(req.body.token)
+
+    if (!valid) {
+      throw new Error('Invalid reCaptcha token')
+    }
+
+    await contactResearchSupportSchema.parse(req.body)
 
     res.redirect(302, '/contact-research-support/confirmation')
   } catch (error) {

@@ -1,27 +1,47 @@
+import axios from 'axios'
 import { useRouter } from 'next/router'
+import { useReCaptcha } from 'next-recaptcha-v3'
 import { ReactNode } from 'react'
-import { Control, FieldValues, Form as ReactHookForm, FormProps } from 'react-hook-form'
+import { FieldValues, FormProps, UseFormGetValues } from 'react-hook-form'
+
+import { FORM_ERRORS } from '@/constants/forms'
 
 type Props<T extends FieldValues> = {
-  control: Control<T>
-  action: FormProps<T>['action']
+  action: string
   method: FormProps<T>['method']
+  getValues: UseFormGetValues<T>
   children: ReactNode
-  onFatalError: () => void
+  onError: (message: string) => void
 }
 
-const headers = { 'Content-Type': 'application/json' }
-
-export function Form<T extends FieldValues>({ action, method, control, children, onFatalError }: Props<T>) {
+export function Form<T extends FieldValues>({ action, method, children, onError, getValues }: Props<T>) {
   const router = useRouter()
 
+  const { executeRecaptcha } = useReCaptcha()
+
   return (
-    <ReactHookForm
-      control={control}
+    <form
+      noValidate
       action={action}
       method={method}
-      onSuccess={({ response }) => {
-        const redirectUrl = new URL(response.url)
+      onSubmit={async (event) => {
+        event.preventDefault()
+
+        const token = await executeRecaptcha('form_submit')
+
+        if (!token) {
+          console.error('Google reCaptcha failed to execute')
+          onError(FORM_ERRORS.fatal)
+        }
+
+        const {
+          data: { url },
+        } = await axios.post(action, {
+          token,
+          ...getValues(),
+        })
+
+        const redirectUrl = new URL(url)
 
         // Confirmation page redirect
         if (redirectUrl.pathname.includes('/confirmation')) {
@@ -30,16 +50,14 @@ export function Form<T extends FieldValues>({ action, method, control, children,
 
         // Fatal error redirect
         if (redirectUrl.searchParams.has('fatal')) {
-          return onFatalError()
+          onError(FORM_ERRORS.fatal)
         }
 
         // Misc error redirect
         router.replace(`${redirectUrl.pathname}${redirectUrl.search}`)
       }}
-      headers={headers}
-      noValidate
     >
       {children}
-    </ReactHookForm>
+    </form>
   )
 }
