@@ -21,7 +21,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
       <div className={clsx('govuk-form-group', { 'govuk-form-group--error': !!error })}>
         <div className="govuk-radios" data-module="govuk-radios">
           <div className="govuk-label-wrapper">
-            <label id={`${rest.name}-label`} className="govuk-label govuk-label--s" htmlFor={rest.name}>
+            <label id={`${rest.name}-label`} className="govuk-label govuk-label--s" htmlFor={`${rest.name}-0`}>
               {label}
             </label>
             {hint && (

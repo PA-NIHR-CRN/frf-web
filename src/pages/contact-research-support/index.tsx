@@ -161,7 +161,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                   -
                 </Option>
                 {lcrns.map(({ name, emailAddress }) => (
-                  <Option key={emailAddress} value={emailAddress}>
+                  <Option key={name} value={emailAddress}>
                     {name}
                   </Option>
                 ))}

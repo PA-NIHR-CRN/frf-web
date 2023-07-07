@@ -1,0 +1,52 @@
+{
+  "sys": {
+    "type": "Array"
+  },
+  "total": 2,
+  "skip": 0,
+  "limit": 1,
+  "items": [
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "6L9bppaYg5EItajbPeQZcn",
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "lcrnsAndDevolvedAdministrations"
+          }
+        },
+        "revision": 1,
+        "createdAt": "2023-07-02T10:19:23.211Z",
+        "updatedAt": "2023-07-02T10:19:31.139Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": { "name": "Mock region 1", "emailAddress": "mockregion1@nihr.ac.uk" }
+    },
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "3VOzVhEcc41MZfaFkCc9T8",
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "lcrnsAndDevolvedAdministrations"
+          }
+        },
+        "revision": 1,
+        "createdAt": "2023-07-02T10:12:49.220Z",
+        "updatedAt": "2023-07-02T10:13:04.981Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": { "name": "Mock region 2", "emailAddress": "mockregion2@nihr.ac.uk" }
+    }
+  ]
+}
