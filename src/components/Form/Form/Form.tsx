@@ -27,30 +27,32 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
       onSubmit={async (event) => {
         event.preventDefault()
 
-        const token = await executeRecaptcha('form_submit')
+        const reCaptchaToken = await executeRecaptcha('form_submit')
 
-        if (!token) {
+        if (!reCaptchaToken) {
           console.error('Google reCaptcha failed to execute')
           onError(FORM_ERRORS.fatal)
         }
 
         const {
-          data: { url },
+          request: { responseURL },
         } = await axios.post(action, {
-          token,
+          reCaptchaToken,
           ...getValues(),
         })
 
-        const redirectUrl = new URL(url)
+        if (!responseURL) onError(FORM_ERRORS.fatal)
 
-        // Confirmation page redirect
-        if (redirectUrl.pathname.includes('/confirmation')) {
-          return router.push(redirectUrl.pathname)
-        }
+        const redirectUrl = new URL(responseURL)
 
         // Fatal error redirect
         if (redirectUrl.searchParams.has('fatal')) {
           onError(FORM_ERRORS.fatal)
+        }
+
+        // Confirmation page redirect
+        if (redirectUrl.pathname.includes('/confirmation')) {
+          return router.push(redirectUrl.pathname)
         }
 
         // Misc error redirect

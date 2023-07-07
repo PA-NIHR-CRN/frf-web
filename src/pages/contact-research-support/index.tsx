@@ -20,8 +20,8 @@ import {
 export type ContactResearchSupportProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
 export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
-  const { register, formState, control, setError, watch, getValues } = useForm<ContactResearchSupportInputs>({
-    mode: 'all',
+  const { register, formState, setError, watch, getValues } = useForm<ContactResearchSupportInputs>({
+    mode: 'all', // TODO conditionally set this only if errors are in query
     resolver: zodResolver(contactResearchSupportSchema),
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
   })
