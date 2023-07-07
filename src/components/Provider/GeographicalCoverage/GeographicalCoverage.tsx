@@ -15,7 +15,7 @@ type GeographicalCoverageProps = {
 export const GeographicalCoverage = ({
   regionalCoverage,
   population,
-  geography,
+  geography = [],
   geographySupportingText,
   className,
 }: GeographicalCoverageProps) => {
