@@ -33,13 +33,18 @@ export function useFormErrorHydration<T extends ContactResearchSupportInputs>({
     if (hasServerErrors) {
       Object.keys(formState.defaultValues).forEach((field) => {
         if (router.query[`${field as string}Error`]) {
-          onFoundError(field as Path<T>, { type: 'custom', message: router.query[`${field as string}Error`] as string })
+          onFoundError(field as Path<T>, {
+            type: 'custom',
+            message: router.query[`${field as string}Error`] as string,
+          })
         }
       })
 
-      router.replace({ query: undefined }, undefined, { shallow: false })
+      if (formState.isSubmitSuccessful) {
+        router.replace({ query: undefined }, undefined, { shallow: true })
+      }
     }
-  }, [router.asPath, router, hasServerErrors, onFoundError, formState.defaultValues])
+  }, [router.asPath, router, hasServerErrors, onFoundError, formState.defaultValues, formState.isSubmitSuccessful])
 
   return {
     errors: hasServerErrors ? serverErrors : formState.errors,

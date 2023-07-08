@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 import { ReCaptchaProvider } from 'next-recaptcha-v3'
@@ -20,7 +21,7 @@ import {
 export type ContactResearchSupportProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
 export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
-  const { register, formState, setError, watch, getValues } = useForm<ContactResearchSupportInputs>({
+  const { register, formState, setError, watch, handleSubmit } = useForm<ContactResearchSupportInputs>({
     mode: 'all', // TODO conditionally set this only if errors are in query
     resolver: zodResolver(contactResearchSupportSchema),
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
@@ -65,7 +66,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
           <Form
             method="post"
             action="/api/forms/contact-research-support"
-            getValues={getValues}
+            handleSubmit={handleSubmit}
             onError={(message: string) =>
               setError('root.serverError', {
                 type: '400',
@@ -195,7 +196,10 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
             <p>We will email you a copy of this form for your records</p>
 
             <div className="govuk-button-group">
-              <button className="govuk-button" data-module="govuk-button">
+              <button
+                data-module="govuk-button"
+                className={clsx('govuk-button', { 'pointer-events-none': formState.isLoading })}
+              >
                 Save and continue
               </button>
               <Link className="govuk-link" href="/">

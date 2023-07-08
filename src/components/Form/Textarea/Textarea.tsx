@@ -37,6 +37,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           })}
           id={rest.name}
           aria-invalid={!!error ? 'true' : 'false'}
+          aria-errormessage={clsx({
+            [`${rest.name}-error`]: error,
+          })}
           aria-describedby={clsx('with-hint-info', {
             [`${rest.name}-hint`]: hint,
             [`${rest.name}-error`]: error,

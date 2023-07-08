@@ -21,7 +21,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
       <div className={clsx('govuk-form-group', { 'govuk-form-group--error': !!error })}>
         <div className="govuk-radios" data-module="govuk-radios">
           <div className="govuk-label-wrapper">
-            <label id={`${rest.name}-label`} className="govuk-label govuk-label--s" htmlFor={`${rest.name}-0`}>
+            <label id={`${rest.name}-label`} className="govuk-label govuk-label--s" htmlFor={rest.name}>
               {label}
             </label>
             {hint && (
@@ -38,8 +38,15 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
                   ...child.props,
                   ...rest,
                   ref,
-                  id: `${rest.name}-${index}`,
+                  id: clsx({
+                    [rest.name]: index === 0,
+                    [`${rest.name}-${index}`]: index > 0,
+                  }),
                   defaultChecked: defaultValue === child.props.value,
+                  'aria-invalid': !!error ? 'true' : 'false',
+                  'aria-errormessage': clsx({
+                    [`${rest.name}-error`]: error,
+                  }),
                 })}
               </>
             ) : null

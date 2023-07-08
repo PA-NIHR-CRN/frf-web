@@ -29,7 +29,7 @@ export const contactResearchSupportSchema = z
     jobRole: z.string().min(1, { message: 'Job role is required' }),
     organisationName: z.string().min(1, { message: 'Organisation name is required' }),
     organisationType: z.enum(['commercial', 'nonCommercial'], {
-      errorMap: () => ({ message: 'Is your enquiry about is required' }),
+      errorMap: () => ({ message: 'Organisation type is required' }),
     }),
     lcrn: z.string().min(1, { message: 'Which region will take a lead in supporting your research is required' }),
     studyTitle: z.string().optional(),

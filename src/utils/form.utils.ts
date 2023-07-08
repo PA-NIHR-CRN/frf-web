@@ -1,4 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
+import { FieldError, FieldErrors } from 'react-hook-form'
 
 import { contactResearchSupportSchema } from './schemas/contact-research-support.schema'
 
@@ -34,10 +35,14 @@ export function getValuesFromSearchParams(schema: typeof contactResearchSupportS
  * @returns Dictionary with key/value pair of the form field and its error message
  */
 export function getErrorsFromSearchParams(schema: typeof contactResearchSupportSchema, searchParams: ParsedUrlQuery) {
-  return Object.fromEntries(
-    Object.keys(schema.shape).map((field) => {
-      if (searchParams[`${field}Error`]) return [field, searchParams[`${field}Error`]]
-      return []
-    })
-  )
+  return Object.keys(schema.shape).reduce<FieldErrors>((errors, field) => {
+    if (searchParams[`${field}Error`]) {
+      const error: FieldError = {
+        type: 'custom',
+        message: searchParams[`${field}Error`] as string,
+      }
+      errors[field] = error
+    }
+    return errors
+  }, {})
 }
