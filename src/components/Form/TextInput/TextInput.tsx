@@ -31,6 +31,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           </div>
           <ErrorInline name={rest.name} errors={errors} />
           <input
+            type="text"
             className={clsx('govuk-input', { 'govuk-input--error': !!error })}
             id={rest.name}
             aria-invalid={!!error ? 'true' : 'false'}
