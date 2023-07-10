@@ -40,6 +40,8 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
             ...values,
           })
 
+          console.log('IN')
+
           if (!responseURL) onError(FORM_ERRORS.fatal)
 
           const redirectUrl = new URL(responseURL)
