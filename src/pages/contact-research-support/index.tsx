@@ -1,12 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import clsx from 'clsx'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
-import { useCallback } from 'react'
+import { ReCaptchaProvider } from 'next-recaptcha-v3'
+import { ReactElement, useCallback, useEffect, useState } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
 import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
-import { FORM_ERRORS, MAX_WORDS } from '@/constants/forms'
+import { RootLayout } from '@/components/Layout/RootLayout'
+import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { contentfulService } from '@/lib/contentful'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
@@ -18,8 +21,7 @@ import {
 export type ContactResearchSupportProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
 export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
-  const { register, formState, control, setError, watch } = useForm<ContactResearchSupportInputs>({
-    mode: 'all',
+  const { register, formState, setError, watch, handleSubmit } = useForm<ContactResearchSupportInputs>({
     resolver: zodResolver(contactResearchSupportSchema),
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
   })
@@ -34,10 +36,19 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
     onFoundError: handleFoundError,
   })
 
+  // Watch & update the character count for the "Support summary" textarea
   const supportDescription = watch('supportDescription')
-  const numWords = supportDescription ? supportDescription.split(' ').length : 0
+  const remainingCharacters =
+    supportDescription.length >= TEXTAREA_MAX_CHARACTERS ? 0 : TEXTAREA_MAX_CHARACTERS - supportDescription.length
+
+  // Show the "Unknown" select option when org type is commercial
+  // Default to true to ensure non-js users can always access the option regardless of selected org type
+  const organisationType = watch('organisationType')
+  const [unknownOptionVisible, setUnknownOptionVisible] = useState(true)
+  useEffect(() => setUnknownOptionVisible(organisationType === 'commercial'), [organisationType])
 
   const { defaultValues } = formState
+
   return (
     <Container>
       <div className="govuk-grid-row">
@@ -54,11 +65,11 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
           <Form
             method="post"
             action="/api/forms/contact-research-support"
-            control={control}
-            onFatalError={() =>
+            handleSubmit={handleSubmit}
+            onError={(message: string) =>
               setError('root.serverError', {
                 type: '400',
-                message: FORM_ERRORS.fatal,
+                message,
               })
             }
           >
@@ -72,14 +83,14 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                 {...register('enquiryType')}
               >
                 <Radio value="data" label="Identifying appropriate data services" />
-                <Radio value="research" label="General research support" />
+                <Radio value="research" label="General enquiry about research support" />
               </RadioGroup>
             </Fieldset>
             <Fieldset>
               <Textarea
                 label="Please provide a summary of the support you need"
                 errors={errors}
-                remainingWords={numWords >= MAX_WORDS ? 0 : MAX_WORDS - numWords}
+                remainingCharacters={remainingCharacters}
                 defaultValue={defaultValues?.supportDescription}
                 {...register('supportDescription')}
               />
@@ -96,6 +107,13 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                 errors={errors}
                 defaultValue={defaultValues?.emailAddress}
                 {...register('emailAddress')}
+              />
+              <TextInput
+                label="Phone number"
+                hint="For international numbers please include the country code"
+                errors={errors}
+                defaultValue={defaultValues?.phoneNumber}
+                {...register('phoneNumber')}
               />
               <TextInput
                 label="Job role"
@@ -145,10 +163,11 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                   -
                 </Option>
                 {lcrns.map(({ name, emailAddress }) => (
-                  <Option key={emailAddress} value={emailAddress}>
+                  <Option key={name} value={emailAddress}>
                     {name}
                   </Option>
                 ))}
+                {unknownOptionVisible && <Option value="unknown">Unknown</Option>}
               </Select>
 
               <TextInput
@@ -176,7 +195,10 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
             <p>We will email you a copy of this form for your records</p>
 
             <div className="govuk-button-group">
-              <button className="govuk-button" data-module="govuk-button">
+              <button
+                data-module="govuk-button"
+                className={clsx('govuk-button', { 'pointer-events-none': formState.isLoading })}
+              >
                 Save and continue
               </button>
               <Link className="govuk-link" href="/">
@@ -190,6 +212,17 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
   )
 }
 
+ContactResearchSupport.getLayout = function getLayout(
+  page: ReactElement,
+  { isPreviewMode }: ContactResearchSupportProps
+) {
+  return (
+    <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
+      <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
+    </ReCaptchaProvider>
+  )
+}
+
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const lcrnsEntries = await contentfulService.getLcrnsAndDevolvedAdministrations()
 
@@ -199,6 +232,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
     props: {
       lcrns: lcrnsEntries.map((entry) => entry.fields),
       query,
+      isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
     },
   }
 }

@@ -9,8 +9,10 @@ export function ErrorSummary({ errors }: ErrorSummaryProps) {
 
   return (
     <div className="govuk-error-summary">
-      <div role="alert">
-        <h2 className="govuk-error-summary__title">There is a problem</h2>
+      <div role="alert" aria-labelledby="form-summary-errors">
+        <h2 className="govuk-error-summary__title" id="form-summary-errors">
+          There is a problem
+        </h2>
         <div className="govuk-error-summary__body">
           <ul className="govuk-list govuk-error-summary__list">
             {Object.keys(errors).map((id) => {

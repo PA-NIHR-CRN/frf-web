@@ -10,11 +10,11 @@ type TextareaProps = {
   hint?: ReactNode
   errors: FieldErrors
   defaultValue: string | undefined
-  remainingWords?: number
+  remainingCharacters?: number
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ label, errors, hint, remainingWords, defaultValue, ...rest }, ref) => {
+  ({ label, errors, hint, remainingCharacters, defaultValue, ...rest }, ref) => {
     const error = errors[rest.name]
 
     return (
@@ -33,11 +33,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           className={clsx('govuk-textarea', {
             'govuk-textarea--error': !!error,
-            'govuk-!-margin-bottom-1': typeof remainingWords !== 'undefined',
+            'govuk-!-margin-bottom-1': typeof remainingCharacters !== 'undefined',
           })}
           id={rest.name}
           aria-invalid={!!error ? 'true' : 'false'}
-          aria-describedby={clsx({
+          aria-errormessage={clsx({
+            [`${rest.name}-error`]: error,
+          })}
+          aria-describedby={clsx('with-hint-info', {
             [`${rest.name}-hint`]: hint,
             [`${rest.name}-error`]: error,
           })}
@@ -46,7 +49,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           rows={5}
         />
-        <p className="js-disabled-hide text-darkGrey">You have {remainingWords} words remaining</p>
+        <div id="with-hint-info" className="govuk-hint govuk-character-count__message js-disabled-hide">
+          You have {remainingCharacters} characters remaining
+        </div>
       </div>
     )
   }

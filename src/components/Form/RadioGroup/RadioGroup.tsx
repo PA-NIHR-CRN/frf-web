@@ -31,15 +31,22 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
             )}
           </div>
           <ErrorInline name={rest.name} errors={errors} />
-          {Children.map(children, (child) =>
+          {Children.map(children, (child, index) =>
             isValidElement(child) ? (
               <>
                 {cloneElement(child, {
                   ...child.props,
                   ...rest,
                   ref,
-                  id: rest.name,
+                  id: clsx({
+                    [rest.name]: index === 0,
+                    [`${rest.name}-${index}`]: index > 0,
+                  }),
                   defaultChecked: defaultValue === child.props.value,
+                  'aria-invalid': !!error ? 'true' : 'false',
+                  'aria-errormessage': clsx({
+                    [`${rest.name}-error`]: error,
+                  }),
                 })}
               </>
             ) : null

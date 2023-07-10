@@ -34,6 +34,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           className="govuk-select"
           id={rest.name}
           aria-invalid={!!error ? 'true' : 'false'}
+          aria-errormessage={clsx({
+            [`${rest.name}-error`]: error,
+          })}
           aria-describedby={clsx({
             [`${rest.name}-hint`]: hint,
             [`${rest.name}-error`]: error,

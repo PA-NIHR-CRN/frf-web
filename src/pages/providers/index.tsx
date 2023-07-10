@@ -9,6 +9,7 @@ import { Container } from '@/components/Container/Container'
 import { Filters } from '@/components/Filters/Filters'
 import Pagination from '@/components/Pagination/Pagination'
 import {
+  ContactResearchSupport,
   GeographicalCoverage,
   ProviderHeadingLink,
   ProviderOrganisation,
@@ -83,6 +84,7 @@ export default function ServiceProviders({
               onFilterChange={handleFilterChange}
               onRequestClose={handleCloseFilters}
             />
+            <ContactResearchSupport />
           </div>
 
           <div className="govuk-grid-column-two-thirds-from-desktop">

@@ -6,7 +6,7 @@ const createJestConfig = nextJest({
   dir: './',
 })
 
-const config: Config = {
+const customJestConfig: Config = {
   verbose: true,
   setupFiles: ['<rootDir>/src/config/jest/jest.env.js'],
   setupFilesAfterEnv: ['<rootDir>/src/config/jest/jest.setup.js'],
@@ -30,4 +30,7 @@ const config: Config = {
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-export default createJestConfig(config)
+module.exports = async () => ({
+  ...(await createJestConfig(customJestConfig)()),
+  transformIgnorePatterns: ['node_modules/(?!(next-recaptcha-v3)/)'],
+})

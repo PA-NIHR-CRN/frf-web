@@ -1,0 +1,27 @@
+{
+  "name": "mock-project-id",
+  "event": {
+    "token": "mock-token",
+    "siteKey": "mock-site-key",
+    "userAgent": "",
+    "userIpAddress": "",
+    "expectedAction": "form_submit",
+    "hashedAccountId": "",
+    "express": false,
+    "requestedUri": "",
+    "wafTokenAssessment": false,
+    "ja3": "",
+    "headers": [],
+    "firewallPolicyEvaluation": false
+  },
+  "riskAnalysis": { "score": 1, "reasons": [], "extendedVerdictReasons": [] },
+  "tokenProperties": {
+    "valid": true,
+    "invalidReason": "INVALID_REASON_UNSPECIFIED",
+    "hostname": "localhost",
+    "androidPackageName": "",
+    "iosBundleId": "",
+    "action": "form_submit",
+    "createTime": "2023-07-07T14:47:29.358Z"
+  }
+}
