@@ -17,11 +17,15 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-beforeEach(() => {
-  mockContentfulResponse(defaultMock)
-})
-
+// Mock axios
 jest.mock('axios')
+
+beforeEach(() => {
+  console.error = jest.fn()
+  mockRouter.push('/contact-research-support')
+  mockContentfulResponse(defaultMock)
+  jest.clearAllMocks()
+})
 
 test('Initial form state', async () => {
   const context = { query: {} } as unknown as GetServerSidePropsContext
@@ -127,7 +131,7 @@ test('Successful submission redirects to confirmation page', async () => {
   const user = userEvent.setup()
 
   const apiHandlerMock = jest.mocked(axios.post)
-  apiHandlerMock.mockResolvedValue({
+  apiHandlerMock.mockResolvedValueOnce({
     request: { responseURL: 'http://localhost:3000/contact-research-support/confirmation' },
   })
 
@@ -168,7 +172,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
   const user = userEvent.setup()
 
   const apiHandlerMock = jest.mocked(axios.post)
-  apiHandlerMock.mockResolvedValue({
+  apiHandlerMock.mockResolvedValueOnce({
     request: { responseURL: 'http://localhost:3000/contact-research-support/?fatal=1' },
   })
 
@@ -202,7 +206,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
 
   await user.click(screen.getByRole('button', { name: 'Save and continue' }))
 
-  expect(mockRouter.pathname).toBe('/contact-research-support')
+  expect(mockRouter.asPath).toBe('/contact-research-support?fatal=1')
 
   const alert = screen.getByRole('alert')
   expect(

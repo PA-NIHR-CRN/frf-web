@@ -17,6 +17,8 @@ jest.mock('next-recaptcha-v3', () => ({
   useReCaptcha: jest.fn(),
 }))
 
+jest.mock('axios')
+
 afterEach(() => {
   jest.clearAllMocks()
 })
@@ -24,9 +26,9 @@ afterEach(() => {
 test('Handles form submission successfully', async () => {
   console.error = jest.fn()
 
-  const executeRecaptcha = jest.fn().mockResolvedValueOnce('recaptcha-token')
+  const executeRecaptcha = jest.fn().mockResolvedValue('recaptcha-token')
 
-  const axiosPostMock = jest.mocked(axios.post).mockResolvedValueOnce({
+  const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
     request: { responseURL: 'https://example.com/confirmation' },
   })
 
@@ -82,9 +84,9 @@ test('Handles form submission successfully', async () => {
 test('Handles failures due to an api request error', async () => {
   console.error = jest.fn()
 
-  const executeRecaptcha = jest.fn().mockResolvedValueOnce('recaptcha-token')
+  const executeRecaptcha = jest.fn().mockResolvedValue('recaptcha-token')
 
-  const axiosPostMock = jest.mocked(axios.post).mockResolvedValueOnce({
+  const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
     request: { responseURL: undefined },
   })
 
@@ -143,7 +145,7 @@ test('handles failures with recaptcha', async () => {
 
   const executeRecaptcha = jest.fn().mockResolvedValueOnce(null)
 
-  const axiosPostMock = jest.mocked(axios.post).mockResolvedValueOnce({
+  const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
     request: { responseURL: '123' },
   })
   const routerPushMock = jest.fn()

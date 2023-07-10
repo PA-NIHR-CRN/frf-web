@@ -33,8 +33,6 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
         return redirectToFatalError()
       }
 
-      console.log('reCaptchaToken', reCaptchaToken)
-
       const {
         request: { responseURL },
       } = await axios.post(action, {
