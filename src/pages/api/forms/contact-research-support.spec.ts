@@ -66,7 +66,7 @@ test('Validation error redirects back to the form with the errors and original v
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe(
-    '/contact-research-support?supportDescriptionError=Required&emailAddressError=Email+address+must+be+a+valid+email&organisationTypeError=Is+your+enquiry+about+is+required&studyTitleError=Required&protocolReferenceError=Required&cpmsIdError=Required&enquiryType=data&fullName=Test+user&emailAddress=invalid&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&lcrn=lcrnregion%40nihr.ac.uk'
+    '/contact-research-support?supportDescriptionError=Required&emailAddressError=Email+address+must+be+a+valid+email&organisationTypeError=Organisation+type+is+required&studyTitleError=Required&protocolReferenceError=Required&cpmsIdError=Required&enquiryType=data&fullName=Test+user&emailAddress=invalid&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&lcrn=lcrnregion%40nihr.ac.uk'
   )
 })
 
