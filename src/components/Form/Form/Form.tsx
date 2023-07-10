@@ -19,14 +19,21 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
 
   const { executeRecaptcha } = useReCaptcha()
 
+  const redirectToFatalError = () => {
+    onError(FORM_ERRORS.fatal)
+    router.replace(`${router.pathname}?fatal=1`)
+  }
+
   const onValid = async (values: T) => {
     try {
       const reCaptchaToken = await executeRecaptcha('form_submit')
 
       if (!reCaptchaToken) {
         console.error('Google reCaptcha failed to execute')
-        onError(FORM_ERRORS.fatal)
+        return redirectToFatalError()
       }
+
+      console.log('reCaptchaToken', reCaptchaToken)
 
       const {
         request: { responseURL },
@@ -35,14 +42,15 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
         ...values,
       })
 
-      if (!responseURL) onError(FORM_ERRORS.fatal)
+      if (!responseURL) {
+        return redirectToFatalError()
+      }
 
       const redirectUrl = new URL(responseURL)
 
       // Fatal error redirect
       if (redirectUrl.searchParams.has('fatal')) {
-        onError(FORM_ERRORS.fatal)
-        router.replace(redirectUrl.pathname)
+        return redirectToFatalError()
       }
 
       // Confirmation page redirect
@@ -53,9 +61,8 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
       // Misc error redirect
       router.replace(`${redirectUrl.pathname}${redirectUrl.search}`)
     } catch (error) {
-      console.log('handleSubmit failed', error)
-      onError(FORM_ERRORS.fatal)
-      router.replace(`${router.pathname}?fatal=1`)
+      console.error('handleSubmit failed', error)
+      redirectToFatalError()
     }
   }
 
