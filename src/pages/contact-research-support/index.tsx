@@ -216,6 +216,7 @@ ContactResearchSupport.getLayout = function getLayout(
   page: ReactElement,
   { isPreviewMode }: ContactResearchSupportProps
 ) {
+  console.log('SITE_KEY: ', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
   return (
     <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
       <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
