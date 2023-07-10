@@ -96,6 +96,12 @@ ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY $RECAPTCHA_SITE_KEY
 # Any variables not required at build time can be inserted via the task definition genreation step in the workflow
 ENV RECAPTCHA_PROJECT_ID = ''
 ENV RECAPTCHA_API_KEY = ''
+ENV DATABASE_URL = ''
+
+RUN echo "ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY value is $NEXT_PUBLIC_RECAPTCHA_SITE_KEY"
+RUN echo "ENV RECAPTCHA_PROJECT_ID value is $RECAPTCHA_PROJECT_ID"
+RUN echo "ENV RECAPTCHA_API_KEY value is $RECAPTCHA_API_KEY"
+RUN echo "ENV DATABASE_URL value is $DATABASE_URL"
 
 EXPOSE 3000
 

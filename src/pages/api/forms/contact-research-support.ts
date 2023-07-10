@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
+import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
 import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
 
@@ -27,6 +28,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     await contactResearchSupportSchema.parse(req.body)
+
+    delete req.body.reCaptchaToken
+    await prisma.supportRequest.create({ data: req.body })
 
     res.redirect(302, '/contact-research-support/confirmation')
   } catch (error) {
