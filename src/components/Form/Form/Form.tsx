@@ -19,50 +19,50 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
 
   const { executeRecaptcha } = useReCaptcha()
 
+  const onValid = async (values: T) => {
+    try {
+      const reCaptchaToken = await executeRecaptcha('form_submit')
+
+      if (!reCaptchaToken) {
+        console.error('Google reCaptcha failed to execute')
+        onError(FORM_ERRORS.fatal)
+      }
+
+      const {
+        request: { responseURL },
+      } = await axios.post(action, {
+        reCaptchaToken,
+        ...values,
+      })
+
+      if (!responseURL) onError(FORM_ERRORS.fatal)
+
+      const redirectUrl = new URL(responseURL)
+
+      // Fatal error redirect
+      if (redirectUrl.searchParams.has('fatal')) {
+        onError(FORM_ERRORS.fatal)
+        router.replace(redirectUrl.pathname)
+      }
+
+      // Confirmation page redirect
+      if (redirectUrl.pathname.includes('/confirmation')) {
+        return router.push(redirectUrl.pathname)
+      }
+
+      // Misc error redirect
+      router.replace(`${redirectUrl.pathname}${redirectUrl.search}`)
+    } catch (error) {
+      console.log('handleSubmit failed', error)
+      onError(FORM_ERRORS.fatal)
+      router.replace(`${router.pathname}?fatal=1`)
+    }
+  }
+
+  const onInvalid = () => console.error('Form submission failed')
+
   return (
-    <form
-      noValidate
-      action={action}
-      method={method}
-      onSubmit={handleSubmit(async (values) => {
-        try {
-          const reCaptchaToken = await executeRecaptcha('form_submit')
-
-          if (!reCaptchaToken) {
-            console.error('Google reCaptcha failed to execute')
-            onError(FORM_ERRORS.fatal)
-          }
-
-          const {
-            request: { responseURL },
-          } = await axios.post(action, {
-            reCaptchaToken,
-            ...values,
-          })
-
-          console.log('IN')
-
-          if (!responseURL) onError(FORM_ERRORS.fatal)
-
-          const redirectUrl = new URL(responseURL)
-
-          // Fatal error redirect
-          if (redirectUrl.searchParams.has('fatal')) {
-            onError(FORM_ERRORS.fatal)
-          }
-
-          // Confirmation page redirect
-          if (redirectUrl.pathname.includes('/confirmation')) {
-            return router.push(redirectUrl.pathname)
-          }
-
-          // Misc error redirect
-          router.replace(`${redirectUrl.pathname}${redirectUrl.search}`)
-        } catch (error) {
-          console.log('handleSubmit failed', error)
-        }
-      })}
-    >
+    <form noValidate action={action} method={method} onSubmit={handleSubmit(onValid, onInvalid)}>
       {children}
     </form>
   )
