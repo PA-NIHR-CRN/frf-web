@@ -77,6 +77,10 @@ jobs:
           task-definition: ${{ env.ECS_TASK_DEFINITION }}
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
+          environment-variables: |
+            RECAPTCHA_PROJECT_ID=${{ vars.RECAPTCHA_PROJECT_ID }}
+            NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ secrets.RECAPTCHA_SITE_KEY }}
+            RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
 
       - name: Deploy Amazon ECS task definition
         env:
