@@ -189,10 +189,10 @@ describe('ContentfulService', () => {
   })
 
   describe('getProviderEntryById', () => {
-    it('returns a provider entry by ID', async () => {
+    it('returns a manageable entry by ID', async () => {
       const [contentfulService] = setupContentfulService()
 
-      const entry = await contentfulService.getProviderEntryById('test')
+      const entry = await contentfulService.getManageableEntryById('test')
 
       expect(entry).toStrictEqual({ id: 'test' })
     })

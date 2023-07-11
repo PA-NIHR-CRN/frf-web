@@ -1,4 +1,4 @@
-import type { ContentfulClientApi } from 'contentful'
+import type { ContentfulClientApi, EntrySkeletonType } from 'contentful'
 import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
 
 import { Filters, OrderType } from '@/@types/filters'
@@ -72,11 +72,15 @@ export class ContentfulService {
     }
   }
 
-  async getProviderEntryById(id: string) {
+  async getManageableEntryById(id: string) {
     const { contentfulSpaceId, contentfulEnvironment } = this.config
     const space = await this.managementClient.getSpace(contentfulSpaceId)
     const environment = await space.getEnvironment(contentfulEnvironment)
     return environment.getEntry(id)
+  }
+
+  async getEntryById<EntryType extends EntrySkeletonType>(id: string) {
+    return await this.contentClient.withoutUnresolvableLinks.getEntry<EntryType>(id)
   }
 
   async getProviderBySlug(slug: string) {
