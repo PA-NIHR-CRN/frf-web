@@ -231,6 +231,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
 
     return {
       props: {
+        page: 'Contact research support',
         lcrns: lcrnsEntries.map((entry) => entry.fields),
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,

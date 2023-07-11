@@ -96,6 +96,8 @@ ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY $RECAPTCHA_SITE_KEY
 # Any variables not required at build time can be inserted via the task definition genreation step in the workflow
 ENV RECAPTCHA_PROJECT_ID = ''
 ENV RECAPTCHA_API_KEY = ''
+ENV GOOGLE_ANALYTICS_ID = ''
+ENV GOOGLE_ANALYTICS_AUTH = ''
 ENV DATABASE_URL = ''
 
 EXPOSE 3000
