@@ -44,4 +44,4 @@ Note: manually insert the actual `CONTENTFUL_SPACE_ID` and `CONTENTFUL_MANAGEMEN
 
 ## Database
 
-To generate database migrations + rebuild the local Prisma client run: `npx prisma migrate dev`.
+To generate database migrations + rebuild the local Prisma client run: `npm run migrate:dev`.
