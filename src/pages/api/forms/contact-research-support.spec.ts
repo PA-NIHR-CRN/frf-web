@@ -3,6 +3,7 @@ import type { NextApiHandler } from 'next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 
+import { prismaMock } from '@/mocks/prisma'
 import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
 import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-support.schema'
@@ -49,6 +50,7 @@ test('Successful submission redirects to the confirmation page', async () => {
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/contact-research-support/confirmation')
+  expect(prismaMock.supportRequest.create).toHaveBeenCalledWith({ data: body })
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {
