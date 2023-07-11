@@ -225,25 +225,33 @@ export default function ServiceProviders({
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const filters = getFiltersFromQuery(query)
+  try {
+    const filters = getFiltersFromQuery(query)
 
-  const entry = await contentfulService.getProvidersByFilter(transformFilters(filters))
+    const entry = await contentfulService.getProvidersByFilter(transformFilters(filters))
 
-  if (!entry) throw new Error('Failed to fetch providers list: null entry')
+    if (!entry) throw new Error('Failed to fetch providers list: null entry')
 
-  const filterOptions = await contentfulService.getProviderFilterOptionValues()
+    const filterOptions = await contentfulService.getProviderFilterOptionValues()
 
-  return {
-    props: {
-      items: entry.items,
-      filterOptions,
-      filters,
-      meta: {
-        initialPage: entry.skip / entry.limit,
-        initialPageSize: PER_PAGE,
-        totalItems: entry.total,
+    return {
+      props: {
+        items: entry.items,
+        filterOptions,
+        filters,
+        meta: {
+          initialPage: entry.skip / entry.limit,
+          initialPageSize: PER_PAGE,
+          totalItems: entry.total,
+        },
+        isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },
-      isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
-    },
+    }
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/500',
+      },
+    }
   }
 }

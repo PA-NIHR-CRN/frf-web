@@ -25,7 +25,8 @@ COPY . .
 # Disable telemetry during build
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Custom environment variables for the project used at build time (required for SSG)
+# BUILD ARGS
+# These are required for NextJs SSG (Static site generation)
 ARG CONTENTFUL_SPACE_ID
 ARG CONTENTFUL_ACCESS_TOKEN
 ARG CONTENTFUL_PREVIEW_ACCESS_TOKEN
@@ -36,6 +37,7 @@ ARG NEXT_REVALIDATE_TIME
 ARG APP_ENV
 ARG RECAPTCHA_SITE_KEY
 
+# The build args are assigned directly to the corresponding environment variable
 ENV CONTENTFUL_SPACE_ID $CONTENTFUL_SPACE_ID
 ENV CONTENTFUL_ACCESS_TOKEN $CONTENTFUL_ACCESS_TOKEN
 ENV CONTENTFUL_PREVIEW_ACCESS_TOKEN $CONTENTFUL_PREVIEW_ACCESS_TOKEN
@@ -69,7 +71,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
 
-# Custom environment variables for the project used at run time
+# ENVIRONMENT VARIABLES
+# These are used at runtime during NextJs SSR (Server side rendering)
 ARG CONTENTFUL_SPACE_ID
 ARG CONTENTFUL_ACCESS_TOKEN
 ARG CONTENTFUL_PREVIEW_ACCESS_TOKEN
@@ -90,12 +93,9 @@ ENV NEXT_REVALIDATE_TIME $NEXT_REVALIDATE_TIME
 ENV NEXT_PUBLIC_APP_ENV $APP_ENV
 ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY $RECAPTCHA_SITE_KEY
 
+# Any variables not required at build time can be inserted via the task definition genreation step in the workflow
 ENV RECAPTCHA_PROJECT_ID = ''
 ENV RECAPTCHA_API_KEY = ''
-
-RUN echo "ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY value is $NEXT_PUBLIC_RECAPTCHA_SITE_KEY"
-RUN echo "ENV RECAPTCHA_PROJECT_ID value is $RECAPTCHA_PROJECT_ID"
-RUN echo "ENV RECAPTCHA_API_KEY value is $RECAPTCHA_API_KEY"
 
 EXPOSE 3000
 

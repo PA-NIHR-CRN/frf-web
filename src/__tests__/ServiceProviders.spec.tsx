@@ -185,7 +185,9 @@ test('Toggling filters on mobile', async () => {
 
   mockContentfulResponse(defaultMock)
 
-  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
+    Awaited<ReturnType<typeof getServerSideProps>>
+  >
 
   render(<ServiceProviders {...props} />)
 
@@ -230,7 +232,7 @@ test('Filter default states', async () => {
     },
   } as unknown as GetServerSidePropsContext
 
-  const { props } = await getServerSideProps(context)
+  const { props } = (await getServerSideProps(context)) as Required<Awaited<ReturnType<typeof getServerSideProps>>>
 
   render(<ServiceProviders {...props} />)
 
@@ -263,7 +265,9 @@ test('Filter default states', async () => {
 test('Enabling a filter', async () => {
   mockContentfulResponse(defaultMock)
 
-  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
+    Awaited<ReturnType<typeof getServerSideProps>>
+  >
 
   render(<ServiceProviders {...props} />)
 
@@ -278,7 +282,7 @@ test('Disabling a filter', async () => {
 
   const context = { query: { serviceType: 'Find' } } as unknown as GetServerSidePropsContext
 
-  const { props } = await getServerSideProps(context)
+  const { props } = (await getServerSideProps(context)) as Required<Awaited<ReturnType<typeof getServerSideProps>>>
 
   render(<ServiceProviders {...props} />)
 
@@ -292,7 +296,9 @@ test('Disabling a filter', async () => {
 test('Enabling a filter via keyboard', async () => {
   mockContentfulResponse(defaultMock)
 
-  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
+    Awaited<ReturnType<typeof getServerSideProps>>
+  >
 
   render(<ServiceProviders {...props} />)
 
@@ -308,7 +314,9 @@ test('Enabling a filter via keyboard', async () => {
 test('Loading status', async () => {
   mockContentfulResponse(defaultMock)
 
-  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
+    Awaited<ReturnType<typeof getServerSideProps>>
+  >
 
   render(<ServiceProviders {...props} />)
 
@@ -328,7 +336,9 @@ test('Loading status', async () => {
 test('No results', async () => {
   mockContentfulResponse(noResultsMock)
 
-  const { props } = await getServerSideProps({ query: {} } as GetServerSidePropsContext)
+  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
+    Awaited<ReturnType<typeof getServerSideProps>>
+  >
 
   render(<ServiceProviders {...props} />)
 
@@ -344,7 +354,7 @@ test('Selected filters panel', async () => {
 
   const context = { query: { serviceType: ['Find', 'Recruit'] } } as unknown as GetServerSidePropsContext
 
-  const { props } = await getServerSideProps(context)
+  const { props } = (await getServerSideProps(context)) as Required<Awaited<ReturnType<typeof getServerSideProps>>>
 
   render(<ServiceProviders {...props} />)
 

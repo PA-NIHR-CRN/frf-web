@@ -33,12 +33,20 @@ export default function ContactResearchSupportConfirmation({
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const referenceNumber = query.referenceNumber ?? ''
+  try {
+    const referenceNumber = query.referenceNumber ?? ''
 
-  return {
-    props: {
-      referenceNumber,
-      isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
-    },
+    return {
+      props: {
+        referenceNumber,
+        isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+      },
+    }
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/500',
+      },
+    }
   }
 }
