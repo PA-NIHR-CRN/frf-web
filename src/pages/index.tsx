@@ -165,6 +165,7 @@ export const getStaticProps = async () => {
     const videoID = videoUrl ? getVideoID(videoUrl) : ''
     return {
       props: {
+        page: 'Homepage',
         ...fields,
         ...(videoID && {
           videoID,

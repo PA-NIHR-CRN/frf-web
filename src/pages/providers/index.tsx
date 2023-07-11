@@ -236,6 +236,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
 
     return {
       props: {
+        page: 'Data service providers (list)',
         items: entry.items,
         filterOptions,
         filters,

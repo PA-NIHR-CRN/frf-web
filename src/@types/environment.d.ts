@@ -11,5 +11,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_RECAPTCHA_SITE_KEY: string
     RECAPTCHA_PROJECT_ID: string
     RECAPTCHA_API_KEY: string
+    GOOGLE_ANALYTICS_ID: string
+    GOOGLE_ANALYTICS_AUTH: string
   }
 }

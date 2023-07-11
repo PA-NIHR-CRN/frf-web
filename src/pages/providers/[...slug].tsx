@@ -268,6 +268,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
 
     return {
       props: {
+        page: `Data service provider (detail) - ${fields.name}`,
         fields,
         ...(videoID && {
           videoID,
