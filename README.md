@@ -41,3 +41,7 @@ In the terminal run:
 `npm run cf-content-types-generator -X -d -s <CONTENTFUL_SPACE_ID> -t <CONTENTFUL_MANAGEMENT_ACCESS_TOKEN> -o src/@types/generated`
 
 Note: manually insert the actual `CONTENTFUL_SPACE_ID` and `CONTENTFUL_MANAGEMENT_ACCESS_TOKEN` since it doesn't support environment variables.
+
+## Database
+
+To generate database migrations + rebuild the local Prisma client run: `npx prisma migrate dev`.
