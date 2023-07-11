@@ -37,7 +37,7 @@ ARG NEXT_REVALIDATE_TIME
 ARG APP_ENV
 ARG RECAPTCHA_SITE_KEY
 
-# The build args are assigned directly to the corresponding environment variable
+# The environment variables are assigned directly to the corresponding build arg
 ENV CONTENTFUL_SPACE_ID $CONTENTFUL_SPACE_ID
 ENV CONTENTFUL_ACCESS_TOKEN $CONTENTFUL_ACCESS_TOKEN
 ENV CONTENTFUL_PREVIEW_ACCESS_TOKEN $CONTENTFUL_PREVIEW_ACCESS_TOKEN
