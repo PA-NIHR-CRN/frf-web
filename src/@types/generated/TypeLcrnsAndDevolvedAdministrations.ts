@@ -19,23 +19,35 @@ export interface TypeLcrnsAndDevolvedAdministrationsFields {
      * @localized false
      */
     emailAddress: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'salutation' (Salutation)
+     * @name Salutation
+     * @localized false
+     */
+    salutation: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'type' (Type)
+     * @name Type
+     * @localized false
+     */
+    type: EntryFieldTypes.Symbol<"BDM" | "FRF" | "LCRN">;
 }
 
 /**
- * Entry skeleton type definition for content type 'lcrnsAndDevolvedAdministrations' (LCRNs and Devolved Administrations)
+ * Entry skeleton type definition for content type 'lcrnsAndDevolvedAdministrations' (Email Contact)
  * @name TypeLcrnsAndDevolvedAdministrationsSkeleton
  * @type {TypeLcrnsAndDevolvedAdministrationsSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-07-02T10:08:29.344Z
- * @version 7
+ * @version 25
  */
 export type TypeLcrnsAndDevolvedAdministrationsSkeleton = EntrySkeletonType<TypeLcrnsAndDevolvedAdministrationsFields, "lcrnsAndDevolvedAdministrations">;
 /**
- * Entry type definition for content type 'lcrnsAndDevolvedAdministrations' (LCRNs and Devolved Administrations)
+ * Entry type definition for content type 'lcrnsAndDevolvedAdministrations' (Email Contact)
  * @name TypeLcrnsAndDevolvedAdministrations
  * @type {TypeLcrnsAndDevolvedAdministrations}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-07-02T10:08:29.344Z
- * @version 7
+ * @version 25
  */
 export type TypeLcrnsAndDevolvedAdministrations<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeLcrnsAndDevolvedAdministrationsSkeleton, Modifiers, Locales>;
