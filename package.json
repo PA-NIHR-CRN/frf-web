@@ -10,7 +10,7 @@
     "test": "jest --watch",
     "test:ci": "jest --ci --coverage",
     "prepare": "husky install",
-    "migrate:deploy": "dotenv -e .env.local -- npx prisma migrate deploy"
+    "migrate:deploy": "npx dotenv-cli -e .env.local -- npx prisma migrate deploy"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.7.3",
