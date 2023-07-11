@@ -216,7 +216,6 @@ ContactResearchSupport.getLayout = function getLayout(
   page: ReactElement,
   { isPreviewMode }: ContactResearchSupportProps
 ) {
-  console.log('SITE_KEY: ', process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY)
   return (
     <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
       <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
@@ -225,15 +224,23 @@ ContactResearchSupport.getLayout = function getLayout(
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const lcrnsEntries = await contentfulService.getLcrnsAndDevolvedAdministrations()
+  try {
+    const lcrnsEntries = await contentfulService.getLcrnsAndDevolvedAdministrations()
 
-  if (!lcrnsEntries) throw new Error('Failed to fetch lcrn content: null entry')
+    if (!lcrnsEntries) throw new Error('Failed to fetch lcrn content: null entry')
 
-  return {
-    props: {
-      lcrns: lcrnsEntries.map((entry) => entry.fields),
-      query,
-      isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
-    },
+    return {
+      props: {
+        lcrns: lcrnsEntries.map((entry) => entry.fields),
+        query,
+        isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+      },
+    }
+  } catch (error) {
+    return {
+      redirect: {
+        destination: '/500',
+      },
+    }
   }
 }
