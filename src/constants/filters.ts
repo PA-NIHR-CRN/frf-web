@@ -24,4 +24,6 @@ export const SEARCH_FIELDS = [
   'websiteName',
   'informationGovernance',
   'geographicAndPopulationCoverage',
+  'dataSpecificsAndCoding',
+  'serviceTypes',
 ]
