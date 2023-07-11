@@ -85,6 +85,9 @@ function createMockContentClient() {
   return {
     withoutUnresolvableLinks: {
       getEntries,
+      getEntry: jest.fn().mockImplementation((id: string) => ({
+        id,
+      })),
     },
     getEntries,
   }
@@ -188,11 +191,21 @@ describe('ContentfulService', () => {
     })
   })
 
-  describe('getProviderEntryById', () => {
+  describe('getManageableEntryById', () => {
     it('returns a manageable entry by ID', async () => {
       const [contentfulService] = setupContentfulService()
 
       const entry = await contentfulService.getManageableEntryById('test')
+
+      expect(entry).toStrictEqual({ id: 'test' })
+    })
+  })
+
+  describe('getEntryById', () => {
+    it('returns a content entry by ID', async () => {
+      const [contentfulService] = setupContentfulService()
+
+      const entry = await contentfulService.getEntryById('test')
 
       expect(entry).toStrictEqual({ id: 'test' })
     })
