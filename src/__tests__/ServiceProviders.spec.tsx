@@ -15,6 +15,8 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
+type GetServerSidePropsReturnType = Required<Awaited<ReturnType<typeof getServerSideProps>>>
+
 test('Default search criteria (no search or filters set)', async () => {
   mockContentfulResponse(defaultMock)
 
@@ -185,9 +187,9 @@ test('Toggling filters on mobile', async () => {
 
   mockContentfulResponse(defaultMock)
 
-  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
-    Awaited<ReturnType<typeof getServerSideProps>>
-  >
+  const { props } = (await getServerSideProps({
+    query: {},
+  } as GetServerSidePropsContext)) as GetServerSidePropsReturnType
 
   render(<ServiceProviders {...props} />)
 
@@ -265,9 +267,9 @@ test('Filter default states', async () => {
 test('Enabling a filter', async () => {
   mockContentfulResponse(defaultMock)
 
-  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
-    Awaited<ReturnType<typeof getServerSideProps>>
-  >
+  const { props } = (await getServerSideProps({
+    query: {},
+  } as GetServerSidePropsContext)) as GetServerSidePropsReturnType
 
   render(<ServiceProviders {...props} />)
 
@@ -296,9 +298,9 @@ test('Disabling a filter', async () => {
 test('Enabling a filter via keyboard', async () => {
   mockContentfulResponse(defaultMock)
 
-  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
-    Awaited<ReturnType<typeof getServerSideProps>>
-  >
+  const { props } = (await getServerSideProps({
+    query: {},
+  } as GetServerSidePropsContext)) as GetServerSidePropsReturnType
 
   render(<ServiceProviders {...props} />)
 
@@ -314,9 +316,9 @@ test('Enabling a filter via keyboard', async () => {
 test('Loading status', async () => {
   mockContentfulResponse(defaultMock)
 
-  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
-    Awaited<ReturnType<typeof getServerSideProps>>
-  >
+  const { props } = (await getServerSideProps({
+    query: {},
+  } as GetServerSidePropsContext)) as GetServerSidePropsReturnType
 
   render(<ServiceProviders {...props} />)
 
@@ -336,9 +338,9 @@ test('Loading status', async () => {
 test('No results', async () => {
   mockContentfulResponse(noResultsMock)
 
-  const { props } = (await getServerSideProps({ query: {} } as GetServerSidePropsContext)) as Required<
-    Awaited<ReturnType<typeof getServerSideProps>>
-  >
+  const { props } = (await getServerSideProps({
+    query: {},
+  } as GetServerSidePropsContext)) as GetServerSidePropsReturnType
 
   render(<ServiceProviders {...props} />)
 
