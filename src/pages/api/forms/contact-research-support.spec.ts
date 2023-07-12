@@ -3,6 +3,7 @@ import type { NextApiHandler } from 'next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 
+import { logger } from '@/lib/logger'
 import { prismaMock } from '@/mocks/prisma'
 import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
@@ -11,6 +12,8 @@ import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-s
 import handler from './contact-research-support'
 
 const [server] = setupMockServer()
+
+jest.mock('@/lib/logger')
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
@@ -27,7 +30,7 @@ const testHandler = async (handler: NextApiHandler, options: RequestOptions) => 
 }
 
 beforeEach(() => {
-  console.error = jest.fn()
+  jest.clearAllMocks()
 })
 
 test('Successful submission redirects to the confirmation page', async () => {
@@ -81,12 +84,12 @@ test('Invalid reCaptcha token redirects with an error', async () => {
   const res = await testHandler(handler, { method: 'POST', body: { reCaptchaToken: 'mock-token' } })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/contact-research-support?fatal=1')
-  expect(console.error).toHaveBeenCalledWith(new Error('Invalid reCaptcha token'))
+  expect(logger.error).toHaveBeenCalledWith(new Error('Invalid reCaptcha token'))
 })
 
 test('Wrong http method redirects with an error', async () => {
   const res = await testHandler(handler, { method: 'GET' })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/contact-research-support?fatal=1')
-  expect(console.error).toHaveBeenCalledWith(new Error('Wrong method'))
+  expect(logger.error).toHaveBeenCalledWith(new Error('Wrong method'))
 })

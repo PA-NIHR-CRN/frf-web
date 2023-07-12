@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
+import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
 import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
@@ -52,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.redirect(302, `/contact-research-support?${searchParams}`)
     }
 
-    console.error(error)
+    logger.error(error)
     return res.redirect(302, `/contact-research-support?fatal=1`)
   }
 }
