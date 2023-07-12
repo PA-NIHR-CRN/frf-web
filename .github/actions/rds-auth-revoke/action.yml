@@ -5,7 +5,8 @@ inputs:
     required: true
 
 runs:
-  runs-on: ubuntu-latest
+  using: 'composite'
+  shell: bash
   steps:
     - name: Remove Github Actions IP from RDS security group
       run: |
