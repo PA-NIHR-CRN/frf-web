@@ -3,7 +3,8 @@ import type { ClientAPI as ManagementClientApi, Environment, Space } from 'conte
 import { Mock } from 'ts-mockery'
 
 import { TypeHomepage, TypeServiceProvider } from '@/@types/generated'
-import { ContentfulService } from '@/lib/contentfulService'
+
+import { ContentfulService } from './contentfulService'
 
 const mockServiceProvider = Mock.of<TypeServiceProvider<undefined, ''>>({
   fields: {

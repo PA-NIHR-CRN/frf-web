@@ -98,6 +98,8 @@ jobs:
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            SES_ACCESS_KEY_ID=${{ secrets.SES_ACCESS_KEY_ID }}
+            SES_SECRET_KEY=${{ secrets.SES_SECRET_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Dev)
         run: |
@@ -173,6 +175,8 @@ jobs:
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            SES_ACCESS_KEY_ID=${{ secrets.SES_ACCESS_KEY_ID }}
+            SES_SECRET_KEY=${{ secrets.SES_SECRET_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Test)
         run: |
@@ -248,6 +252,8 @@ jobs:
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            SES_ACCESS_KEY_ID=${{ secrets.SES_ACCESS_KEY_ID }}
+            SES_SECRET_KEY=${{ secrets.SES_SECRET_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Uat)
         run: |
@@ -323,6 +329,8 @@ jobs:
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            SES_ACCESS_KEY_ID=${{ secrets.SES_ACCESS_KEY_ID }}
+            SES_SECRET_KEY=${{ secrets.SES_SECRET_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Oat)
         run: |
@@ -398,6 +406,8 @@ jobs:
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            SES_ACCESS_KEY_ID=${{ secrets.SES_ACCESS_KEY_ID }}
+            SES_SECRET_KEY=${{ secrets.SES_SECRET_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Prod)
         run: |

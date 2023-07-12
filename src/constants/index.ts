@@ -1,4 +1,5 @@
 export * from './content'
+export * from './email'
 export * from './filters'
 export * from './serviceType'
 export * from './tags'
