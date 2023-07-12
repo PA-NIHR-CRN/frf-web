@@ -50,6 +50,6 @@ test('Displays a preview banner when preview mode is enabled', () => {
     </RootLayout>
   )
   expect(
-    screen.getByText('You are viewing the preview site, which shows draft content from Contentful.')
+    screen.getByText('You are viewing the preview site, which includes draft content (not for onwards sharing).')
   ).toBeInTheDocument()
 })

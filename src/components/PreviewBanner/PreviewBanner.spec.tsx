@@ -6,12 +6,12 @@ test('Preview banner', () => {
   // Enabled
   const { rerender } = render(<PreviewBanner isPreviewMode />)
   expect(
-    screen.getByText('You are viewing the preview site, which shows draft content from Contentful.')
+    screen.getByText('You are viewing the preview site, which includes draft content (not for onwards sharing).')
   ).toBeInTheDocument()
 
   // Disabled
   rerender(<PreviewBanner isPreviewMode={false} />)
   expect(
-    screen.queryByText('You are viewing the preview site, which shows draft content from Contentful.')
+    screen.queryByText('You are viewing the preview site, which includes draft content (not for onwards sharing).')
   ).not.toBeInTheDocument()
 })

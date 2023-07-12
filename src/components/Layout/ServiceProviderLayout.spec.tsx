@@ -31,7 +31,7 @@ test('Displays a preview banner & hides the back button when preview mode is ena
     </ServiceProviderLayout>
   )
   expect(
-    screen.getByText('You are viewing the preview site, which shows draft content from Contentful.')
+    screen.getByText('You are viewing the preview site, which includes draft content (not for onwards sharing).')
   ).toBeInTheDocument()
 
   expect(screen.queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()

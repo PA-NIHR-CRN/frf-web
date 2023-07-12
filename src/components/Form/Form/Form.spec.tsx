@@ -5,6 +5,8 @@ import { useRouter } from 'next/router'
 import { useReCaptcha } from 'next-recaptcha-v3'
 import { FieldValues, UseFormHandleSubmit } from 'react-hook-form'
 
+import { logger } from '@/lib/logger'
+
 import { Form } from './Form'
 
 // Mock next/router
@@ -18,14 +20,15 @@ jest.mock('next-recaptcha-v3', () => ({
 }))
 
 jest.mock('axios')
+jest.mock('@/lib/logger')
+
+console.error = jest.fn()
 
 afterEach(() => {
   jest.clearAllMocks()
 })
 
 test('Handles form submission successfully', async () => {
-  console.error = jest.fn()
-
   const executeRecaptcha = jest.fn().mockResolvedValue('recaptcha-token')
 
   const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
@@ -82,8 +85,6 @@ test('Handles form submission successfully', async () => {
 })
 
 test('Handles failures due to an api request error', async () => {
-  console.error = jest.fn()
-
   const executeRecaptcha = jest.fn().mockResolvedValue('recaptcha-token')
 
   const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
@@ -141,8 +142,6 @@ test('Handles failures due to an api request error', async () => {
 })
 
 test('handles failures with recaptcha', async () => {
-  console.error = jest.fn()
-
   const executeRecaptcha = jest.fn().mockResolvedValueOnce(null)
 
   const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
@@ -196,5 +195,5 @@ test('handles failures with recaptcha', async () => {
   expect(routerPushMock).not.toHaveBeenCalled()
   expect(routerReplaceMock).toHaveBeenCalledWith('mock-url?fatal=1')
   expect(onError).toHaveBeenCalled()
-  expect(console.error).toHaveBeenCalledWith('Google reCaptcha failed to execute')
+  expect(logger.error).toHaveBeenCalledWith('Google reCaptcha failed to execute')
 })

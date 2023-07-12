@@ -1,0 +1,8 @@
+name: 'RDS Auth Revoke'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Remove Github Actions IP from RDS security group
+      run: |
+        aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'

@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { logger } from './logger'
+
 export interface ReCaptchaAssessmentResponse {
   name: string
   event: {
@@ -66,7 +68,7 @@ export class ReCaptchaService {
 
       return { valid }
     } catch (error) {
-      console.log(error)
+      logger.error(error)
       return { valid: false }
     }
   }

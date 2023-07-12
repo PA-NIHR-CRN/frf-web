@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 import { FieldValues, FormProps, UseFormHandleSubmit } from 'react-hook-form'
 
 import { FORM_ERRORS } from '@/constants/forms'
+import { logger } from '@/lib/logger'
 
 type Props<T extends FieldValues> = {
   action: string
@@ -29,7 +30,7 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
       const reCaptchaToken = await executeRecaptcha('form_submit')
 
       if (!reCaptchaToken) {
-        console.error('Google reCaptcha failed to execute')
+        logger.error('Google reCaptcha failed to execute')
         return redirectToFatalError()
       }
 
@@ -59,12 +60,12 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
       // Misc error redirect
       router.replace(`${redirectUrl.pathname}${redirectUrl.search}`)
     } catch (error) {
-      console.error('handleSubmit failed', error)
+      logger.error('handleSubmit failed', error)
       redirectToFatalError()
     }
   }
 
-  const onInvalid = () => console.error('Form submission failed')
+  const onInvalid = () => logger.error('Form submission failed')
 
   return (
     <form noValidate action={action} method={method} onSubmit={handleSubmit(onValid, onInvalid)}>

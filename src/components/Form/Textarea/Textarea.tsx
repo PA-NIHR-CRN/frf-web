@@ -2,6 +2,8 @@ import clsx from 'clsx'
 import { forwardRef, ReactNode } from 'react'
 import { FieldErrors } from 'react-hook-form'
 
+import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
+
 import { ErrorInline } from '../ErrorInline/ErrorInline'
 
 type TextareaProps = {
@@ -45,6 +47,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             [`${rest.name}-error`]: error,
           })}
           defaultValue={defaultValue}
+          maxLength={TEXTAREA_MAX_CHARACTERS}
           {...rest}
           ref={ref}
           rows={5}

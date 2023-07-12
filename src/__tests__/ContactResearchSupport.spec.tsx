@@ -19,6 +19,7 @@ afterAll(() => server.close())
 
 // Mock axios
 jest.mock('axios')
+jest.mock('@/lib/logger')
 
 beforeEach(() => {
   console.error = jest.fn()

@@ -12,6 +12,7 @@ import { RootLayout } from '@/components/Layout/RootLayout'
 import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { contentfulService } from '@/lib/contentful'
+import { logger } from '@/lib/logger'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
 import {
   ContactResearchSupportInputs,
@@ -20,7 +21,7 @@ import {
 
 export type ContactResearchSupportProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
-export default function ContactResearchSupport({ lcrns, query }: ContactResearchSupportProps) {
+export default function ContactResearchSupport({ contacts, query }: ContactResearchSupportProps) {
   const { register, formState, setError, watch, handleSubmit } = useForm<ContactResearchSupportInputs>({
     resolver: zodResolver(contactResearchSupportSchema),
     defaultValues: getValuesFromSearchParams(contactResearchSupportSchema, query),
@@ -162,7 +163,7 @@ export default function ContactResearchSupport({ lcrns, query }: ContactResearch
                 <Option value="" disabled>
                   -
                 </Option>
-                {lcrns.map(({ name, emailAddress }) => (
+                {contacts.map(({ name, emailAddress }) => (
                   <Option key={name} value={emailAddress}>
                     {name}
                   </Option>
@@ -225,19 +226,20 @@ ContactResearchSupport.getLayout = function getLayout(
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   try {
-    const lcrnsEntries = await contentfulService.getLcrnsAndDevolvedAdministrations()
+    const emailContacts = await contentfulService.getEmailContacts()
 
-    if (!lcrnsEntries) throw new Error('Failed to fetch lcrn content: null entry')
+    if (!emailContacts) throw new Error('Failed to fetch email contacts: null entry')
 
     return {
       props: {
         page: 'Contact research support',
-        lcrns: lcrnsEntries.map((entry) => entry.fields),
+        contacts: emailContacts.map((entry) => entry.fields),
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },
     }
   } catch (error) {
+    logger.error(error)
     return {
       redirect: {
         destination: '/500',
