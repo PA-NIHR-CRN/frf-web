@@ -55,9 +55,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - uses: ./.github/actions/rds-auth-add
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Get Github Actions Runner Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+      - name: Add Github Actions IP to RDS security group (Dev)
+        if: github.event.inputs.env-context == 'dev'
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -96,9 +100,10 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
-      - uses: ./.github/actions/rds-auth-revoke
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Remove Github Actions IP from RDS security group (Dev)
+        if: github.event.inputs.env-context == 'dev'
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -131,9 +136,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - uses: ./.github/actions/rds-auth-add
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Get Github Actions Runner Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+      - name: Add Github Actions IP to RDS security group (Test)
+        if: github.event.inputs.env-context == 'test'
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -168,9 +177,10 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
-      - uses: ./.github/actions/rds-auth-revoke
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Remove Github Actions IP from RDS security group (Test)
+        if: github.event.inputs.env-context == 'test'
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -203,9 +213,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - uses: ./.github/actions/rds-auth-add
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Get Github Actions Runner Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+      - name: Add Github Actions IP to RDS security group (Uat)
+        if: github.event.inputs.env-context == 'uat'
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -240,9 +254,10 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
-      - uses: ./.github/actions/rds-auth-revoke
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Remove Github Actions IP from RDS security group (Uat)
+        if: github.event.inputs.env-context == 'uat'
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -275,9 +290,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - uses: ./.github/actions/rds-auth-add
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Get Github Actions Runner Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+      - name: Add Github Actions IP to RDS security group (Oat)
+        if: github.event.inputs.env-context == 'oat'
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -312,9 +331,10 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
-      - uses: ./.github/actions/rds-auth-revoke
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Remove Github Actions IP from RDS security group (Oat)
+        if: github.event.inputs.env-context == 'oat'
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -347,9 +367,13 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - uses: ./.github/actions/rds-auth-add
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Get Github Actions Runner Public IP
+        id: ip
+        uses: haythem/public-ip@v1.3
+      - name: Add Github Actions IP to RDS security group (Prod)
+        if: github.event.inputs.env-context == 'prod'
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -384,9 +408,10 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
-      - uses: ./.github/actions/rds-auth-revoke
-        with:
-          RDS_SG: ${{ secrets.RDS_SG }}
+      - name: Remove Github Actions IP from RDS security group (Prod)
+        if: github.event.inputs.env-context == 'prod'
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
       - name: Deploy Amazon ECS task definition
         env:
