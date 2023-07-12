@@ -56,6 +56,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - uses: ./.github/actions/rds-auth-add
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -95,6 +97,8 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - uses: ./.github/actions/rds-auth-revoke
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -128,6 +132,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - uses: ./.github/actions/rds-auth-add
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -163,6 +169,8 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - uses: ./.github/actions/rds-auth-revoke
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -196,6 +204,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - uses: ./.github/actions/rds-auth-add
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -231,6 +241,8 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - uses: ./.github/actions/rds-auth-revoke
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -264,6 +276,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - uses: ./.github/actions/rds-auth-add
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -299,6 +313,8 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - uses: ./.github/actions/rds-auth-revoke
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Deploy Amazon ECS task definition
         env:
@@ -332,6 +348,8 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - uses: ./.github/actions/rds-auth-add
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -367,6 +385,8 @@ jobs:
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - uses: ./.github/actions/rds-auth-revoke
+        with:
+          RDS_SG: ${{ secrets.RDS_SG }}
 
       - name: Deploy Amazon ECS task definition
         env:
