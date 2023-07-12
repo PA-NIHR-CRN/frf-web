@@ -6,6 +6,7 @@ inputs:
 
 runs:
   runs-on: ubuntu-latest
+  shell: bash
   steps:
     - name: Get Github Actions Runner Public IP
       id: ip
