@@ -55,6 +55,8 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - uses: ./.github/actions/rds-auth-add
+
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
@@ -92,6 +94,8 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
+      - uses: ./.github/actions/rds-auth-revoke
+
       - name: Deploy Amazon ECS task definition
         env:
           ECS_SERVICE: crnccd-ecs-dev-frf-service
@@ -122,6 +126,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - uses: ./.github/actions/rds-auth-add
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -156,6 +162,8 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
+      - uses: ./.github/actions/rds-auth-revoke
+
       - name: Deploy Amazon ECS task definition
         env:
           ECS_SERVICE: crnccd-ecs-test-frf-service
@@ -186,6 +194,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - uses: ./.github/actions/rds-auth-add
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -220,6 +230,8 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
+      - uses: ./.github/actions/rds-auth-revoke
+
       - name: Deploy Amazon ECS task definition
         env:
           ECS_SERVICE: crnccs-ecs-uat-frf-service
@@ -250,6 +262,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - uses: ./.github/actions/rds-auth-add
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -284,6 +298,8 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
+      - uses: ./.github/actions/rds-auth-revoke
+
       - name: Deploy Amazon ECS task definition
         env:
           ECS_SERVICE: crnccp-ecs-oat-frf-service
@@ -314,6 +330,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - uses: ./.github/actions/rds-auth-add
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
@@ -347,6 +365,8 @@ jobs:
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+
+      - uses: ./.github/actions/rds-auth-revoke
 
       - name: Deploy Amazon ECS task definition
         env:

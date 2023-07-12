@@ -1,0 +1,11 @@
+name: 'RDS Auth Add'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Get Github Actions Runner Public IP
+      id: ip
+      uses: haythem/public-ip@v1.3
+    - name: Add Github Actions IP to RDS security group
+      run: |
+        aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
