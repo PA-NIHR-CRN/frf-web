@@ -72,7 +72,7 @@ test('Initial form state', async () => {
   expect(about.getByLabelText('Email address')).toBeInTheDocument()
 
   // Phone
-  expect(about.getByLabelText('Phone number')).toBeInTheDocument()
+  expect(about.getByLabelText('Telephone')).toBeInTheDocument()
   expect(about.getByText('For international numbers please include the country code')).toBeInTheDocument()
 
   // Job
@@ -153,7 +153,7 @@ test('Successful submission redirects to confirmation page', async () => {
   )
   await user.type(screen.getByLabelText('Full name'), 'John Terry')
   await user.type(screen.getByLabelText('Email address'), 'testemail@nihr.ac.ul')
-  await user.type(screen.getByLabelText('Phone number'), '+447552121212')
+  await user.type(screen.getByLabelText('Telephone'), '+447552121212')
   await user.type(screen.getByLabelText('Job role'), 'Researcher')
   await user.type(screen.getByLabelText('Organisation name'), 'NIHR')
   await user.click(screen.getByLabelText('Commercial'))
@@ -194,7 +194,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
   )
   await user.type(screen.getByLabelText('Full name'), 'John Terry')
   await user.type(screen.getByLabelText('Email address'), 'testemail@nihr.ac.ul')
-  await user.type(screen.getByLabelText('Phone number'), '+447552121212')
+  await user.type(screen.getByLabelText('Telephone'), '+447552121212')
   await user.type(screen.getByLabelText('Job role'), 'Researcher')
   await user.type(screen.getByLabelText('Organisation name'), 'NIHR')
   await user.click(screen.getByLabelText('Commercial'))
@@ -241,7 +241,7 @@ test('Form submission with client side validation errors', async () => {
     'href',
     '#emailAddress'
   )
-  expect(within(alert).getByRole('link', { name: 'Phone number is required' })).toHaveAttribute('href', '#phoneNumber')
+  expect(within(alert).getByRole('link', { name: 'Telephone is required' })).toHaveAttribute('href', '#phoneNumber')
   expect(within(alert).getByRole('link', { name: 'Job role is required' })).toHaveAttribute('href', '#jobRole')
   expect(within(alert).getByRole('link', { name: 'Organisation name is required' })).toHaveAttribute(
     'href',
@@ -262,7 +262,7 @@ test('Form submission with client side validation errors', async () => {
   )
   expect(screen.getByLabelText('Full name')).toHaveErrorMessage('Error: Full name is required')
   expect(screen.getByLabelText('Email address')).toHaveErrorMessage('Error: Email address must be a valid email')
-  expect(screen.getByLabelText('Phone number')).toHaveErrorMessage('Error: Phone number is required')
+  expect(screen.getByLabelText('Telephone')).toHaveErrorMessage('Error: Telephone is required')
   expect(screen.getByLabelText('Job role')).toHaveErrorMessage('Error: Job role is required')
   expect(screen.getByLabelText('Organisation name')).toHaveErrorMessage('Error: Organisation name is required')
   expect(screen.getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Organisation type is required')
@@ -273,7 +273,7 @@ test('Form submission with client side validation errors', async () => {
 
 test('Server side field validation errors', async () => {
   mockRouter.push(
-    '?enquiryTypeError=Is+your+enquiry+about+is+required&supportDescriptionError=Please+provide+a+summary+of+the+support+you+need+is+required&fullNameError=Full+name+is+required&emailAddressError=Email+address+is+required&phoneNumberError=Phone+number+is+not+a+recognised+format&jobRoleError=Job+role+is+required&organisationNameError=Organisation+name+is+required&organisationTypeError=Organisation+type+is+required&lcrnError=Which+region+will+take+a+lead+in+supporting+your+research+is+required'
+    '?enquiryTypeError=Is+your+enquiry+about+is+required&supportDescriptionError=Please+provide+a+summary+of+the+support+you+need+is+required&fullNameError=Full+name+is+required&emailAddressError=Email+address+is+required&phoneNumberError=Telephone+is+not+a+recognised+format&jobRoleError=Job+role+is+required&organisationNameError=Organisation+name+is+required&organisationTypeError=Organisation+type+is+required&lcrnError=Which+region+will+take+a+lead+in+supporting+your+research+is+required'
   )
 
   const context = { query: {} } as unknown as GetServerSidePropsContext
@@ -297,7 +297,7 @@ test('Server side field validation errors', async () => {
     'href',
     '#emailAddress'
   )
-  expect(within(alert).getByRole('link', { name: 'Phone number is not a recognised format' })).toHaveAttribute(
+  expect(within(alert).getByRole('link', { name: 'Telephone is not a recognised format' })).toHaveAttribute(
     'href',
     '#phoneNumber'
   )
@@ -321,7 +321,7 @@ test('Server side field validation errors', async () => {
   )
   expect(screen.getByLabelText('Full name')).toHaveErrorMessage('Error: Full name is required')
   expect(screen.getByLabelText('Email address')).toHaveErrorMessage('Error: Email address is required')
-  expect(screen.getByLabelText('Phone number')).toHaveErrorMessage('Error: Phone number is not a recognised format')
+  expect(screen.getByLabelText('Telephone')).toHaveErrorMessage('Error: Telephone is not a recognised format')
   expect(screen.getByLabelText('Job role')).toHaveErrorMessage('Error: Job role is required')
   expect(screen.getByLabelText('Organisation name')).toHaveErrorMessage('Error: Organisation name is required')
   expect(screen.getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Organisation type is required')

@@ -24,8 +24,8 @@ export const contactResearchSupportSchema = z
       .min(1, { message: 'Email address is required' }),
     phoneNumber: z
       .string()
-      .min(1, { message: 'Phone number is required' })
-      .regex(PHONE_NUMBER_REGEX, { message: 'Phone number is not a recognised format' }),
+      .min(1, { message: 'Telephone is required' })
+      .regex(PHONE_NUMBER_REGEX, { message: 'Telephone is not a recognised format' }),
     jobRole: z.string().min(1, { message: 'Job role is required' }),
     organisationName: z.string().min(1, { message: 'Organisation name is required' }),
     organisationType: z.enum(['commercial', 'nonCommercial'], {
