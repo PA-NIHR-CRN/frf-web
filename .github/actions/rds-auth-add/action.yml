@@ -5,7 +5,7 @@ inputs:
     required: true
 
 runs:
-  using: 'composite'
+  runs-on: ubuntu-latest
   steps:
     - name: Get Github Actions Runner Public IP
       id: ip
