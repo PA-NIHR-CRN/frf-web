@@ -11,7 +11,7 @@ import CollapseIcon from '@/components/Icons/CollapseIcon'
 import Cross from '@/components/Icons/Cross'
 import FindIcon from '@/components/Icons/FindIcon'
 import { ServiceType } from '@/constants'
-import { FilterOptions } from '@/lib/contentfulService'
+import { FilterOptions } from '@/lib/contentful/contentfulService'
 import { pluralise } from '@/utils'
 
 const FilterCategory = ({ title, children }: { title: string; children: ReactNode }) => {

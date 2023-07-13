@@ -1,9 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
+import { contentfulService } from '@/lib/contentful'
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
+import { createReferenceNumber, getNotificationMessages } from '@/utils'
 import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -28,10 +31,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
+    const referenceNumber = createReferenceNumber()
+
     await contactResearchSupportSchema.parse(req.body)
 
     delete req.body.reCaptchaToken
     await prisma.supportRequest.create({ data: req.body })
+
+    // Send emails
+    const contacts = await contentfulService.getEmailContacts()
+    const messages = getNotificationMessages({ ...req.body, referenceNumber }, contacts)
+    await Promise.all(messages.map(emailService.sendEmail))
 
     res.redirect(302, '/contact-research-support/confirmation')
   } catch (error) {

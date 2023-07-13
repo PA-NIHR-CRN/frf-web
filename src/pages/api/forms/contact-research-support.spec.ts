@@ -2,8 +2,11 @@ import { rest } from 'msw'
 import type { NextApiHandler } from 'next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
+import { Mock } from 'ts-mockery'
 
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
+import { defaultMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
 import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
@@ -11,7 +14,7 @@ import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-s
 
 import handler from './contact-research-support'
 
-const [server] = setupMockServer()
+const [server, mockContentfulResponse] = setupMockServer()
 
 jest.mock('@/lib/logger')
 
@@ -31,9 +34,13 @@ const testHandler = async (handler: NextApiHandler, options: RequestOptions) => 
 
 beforeEach(() => {
   jest.clearAllMocks()
+  mockContentfulResponse(defaultMock)
+  console.error = jest.fn()
 })
 
 test('Successful submission redirects to the confirmation page', async () => {
+  const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
+
   const body: ContactResearchSupportInputs & { reCaptchaToken: string } = {
     reCaptchaToken: 'mock-token',
     enquiryType: 'data',
@@ -43,8 +50,8 @@ test('Successful submission redirects to the confirmation page', async () => {
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
-    organisationType: 'commercial',
-    lcrn: 'lcrnregion@nihr.ac.uk',
+    organisationType: 'nonCommercial',
+    lcrn: 'mockregion1@nihr.ac.uk',
     studyTitle: '',
     protocolReference: '',
     cpmsId: '',
@@ -53,7 +60,20 @@ test('Successful submission redirects to the confirmation page', async () => {
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/contact-research-support/confirmation')
+
+  // Form data is saved in the database
   expect(prismaMock.supportRequest.create).toHaveBeenCalledWith({ data: body })
+
+  // Email notifications are sent with a reference number
+  expect(sendEmailSpy).toHaveBeenCalledTimes(2)
+
+  const [emailOne, emailTwo] = sendEmailSpy.mock.calls
+
+  expect(emailOne[0].to).toBe('mockregion1@nihr.ac.uk')
+  expect(emailOne[0].templateData.referenceNumber).toEqual(expect.any(String))
+
+  expect(emailTwo[0].to).toBe('testemail@nihr.ac.uk')
+  expect(emailTwo[0].templateData.referenceNumber).toEqual(expect.any(String))
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {

@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event'
 
 import { render, screen, within } from '@/config/test-utils'
 import { ServiceType } from '@/constants'
-import { FilterOptions } from '@/lib/contentfulService'
+import { FilterOptions } from '@/lib/contentful/contentfulService'
 
 import { Filters, FiltersProps } from './Filters'
 
