@@ -99,7 +99,11 @@ test('Initial form state', async () => {
   ).toBeInTheDocument()
 
   expect(research.getByText(/If you are unsure which region to select, please visit/)).toBeInTheDocument()
-  expect(research.getByText(/Local Clinical Research Networks/)).toHaveAttribute('href', '#')
+  expect(research.getByText(/Local Clinical Research Networks/)).toHaveAttribute(
+    'href',
+    'https://local.nihr.ac.uk/lcrn'
+  )
+  expect(research.getByText(/(for regions within England)/)).toBeInTheDocument()
   expect(research.getByText(/or email supportmystudy@nihr.ac.uk/)).toBeInTheDocument()
 
   expect(within(regionSelect).getByText('-')).toHaveAttribute('selected')

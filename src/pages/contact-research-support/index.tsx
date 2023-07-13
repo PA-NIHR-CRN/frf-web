@@ -153,7 +153,15 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                     </p>
                     <p>
                       If you are unsure which region to select, please visit{' '}
-                      <a href="#">Local Clinical Research Networks</a> or email supportmystudy@nihr.ac.uk
+                      <a
+                        href="https://local.nihr.ac.uk/lcrn"
+                        target="_blank"
+                        rel="external"
+                        aria-label="Local Clinical Research Networks (Opens in a new window)"
+                      >
+                        Local Clinical Research Networks
+                      </a>
+                      &nbsp;(for regions within England) or email supportmystudy@nihr.ac.uk
                     </p>
                   </>
                 }
