@@ -50,6 +50,8 @@ ENV NEXT_PUBLIC_RECAPTCHA_SITE_KEY $RECAPTCHA_SITE_KEY
 
 RUN npm run build
 
+RUN npx prisma generate
+
 # Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
