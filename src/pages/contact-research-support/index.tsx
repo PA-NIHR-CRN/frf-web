@@ -200,7 +200,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 data-module="govuk-button"
                 className={clsx('govuk-button', { 'pointer-events-none': formState.isLoading })}
               >
-                Save and continue
+                Submit
               </button>
               <Link className="govuk-link" href="/">
                 Cancel
