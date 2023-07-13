@@ -99,7 +99,11 @@ test('Initial form state', async () => {
   ).toBeInTheDocument()
 
   expect(research.getByText(/If you are unsure which region to select, please visit/)).toBeInTheDocument()
-  expect(research.getByText(/Local Clinical Research Networks/)).toHaveAttribute('href', '#')
+  expect(research.getByText(/Local Clinical Research Networks/)).toHaveAttribute(
+    'href',
+    'https://local.nihr.ac.uk/lcrn'
+  )
+  expect(research.getByText(/(for regions within England)/)).toBeInTheDocument()
   expect(research.getByText(/or email supportmystudy@nihr.ac.uk/)).toBeInTheDocument()
 
   expect(within(regionSelect).getByText('-')).toHaveAttribute('selected')
@@ -124,7 +128,7 @@ test('Initial form state', async () => {
 
   // Form CTAs
   expect(screen.getByText('We will email you a copy of this form for your records')).toBeInTheDocument()
-  expect(screen.getByRole('button', { name: 'Save and continue' })).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'Cancel' })).toHaveAttribute('href', '/')
 })
 
@@ -164,7 +168,7 @@ test('Successful submission redirects to confirmation page', async () => {
   await user.type(screen.getByLabelText('Protocol reference (optional)'), 'test-protocol-ref')
   await user.type(screen.getByLabelText('CPMS ID (optional)'), 'test-cpms-id')
 
-  await user.click(screen.getByRole('button', { name: 'Save and continue' }))
+  await user.click(screen.getByRole('button', { name: 'Submit' }))
 
   expect(mockRouter.pathname).toBe('/contact-research-support/confirmation')
 })
@@ -205,7 +209,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
   await user.type(screen.getByLabelText('Protocol reference (optional)'), 'test-protocol-ref')
   await user.type(screen.getByLabelText('CPMS ID (optional)'), 'test-cpms-id')
 
-  await user.click(screen.getByRole('button', { name: 'Save and continue' }))
+  await user.click(screen.getByRole('button', { name: 'Submit' }))
 
   expect(mockRouter.asPath).toBe('/contact-research-support?fatal=1')
 
@@ -225,7 +229,7 @@ test('Form submission with client side validation errors', async () => {
 
   render(ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false }))
 
-  await user.click(screen.getByRole('button', { name: 'Save and continue' }))
+  await user.click(screen.getByRole('button', { name: 'Submit' }))
 
   // Summary errors
   const alert = screen.getByRole('alert', { name: 'There is a problem' })
