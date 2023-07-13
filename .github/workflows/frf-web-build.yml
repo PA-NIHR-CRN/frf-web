@@ -42,6 +42,7 @@ jobs:
           echo CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
           echo NEXT_PUBLIC_APP_ENV=${{ vars.APP_ENV }} >> .env.local
           npm run build
+          npx prisma generate
 
   # Code quality checks
   quality-checks:
