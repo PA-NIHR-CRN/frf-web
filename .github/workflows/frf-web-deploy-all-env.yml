@@ -154,6 +154,10 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} --build-arg RECAPTCHA_SITE_KEY=${{ vars.RECAPTCHA_SITE_KEY }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Generate task definition file from container
         run: |
           aws ecs describe-task-definition --task-definition crnccd-ecs-test-frf-task-definition --query taskDefinition > ./task-definition.json
@@ -229,6 +233,10 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} --build-arg RECAPTCHA_SITE_KEY=${{ vars.RECAPTCHA_SITE_KEY }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Generate task definition file from container
         run: |
           aws ecs describe-task-definition --task-definition crnccs-ecs-uat-frf-task-definition --query taskDefinition > ./task-definition.json
@@ -304,6 +312,10 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} --build-arg RECAPTCHA_SITE_KEY=${{ vars.RECAPTCHA_SITE_KEY }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Generate task definition file from container
         run: |
           aws ecs describe-task-definition --task-definition crnccp-ecs-oat-frf-task-definition --query taskDefinition > ./task-definition.json
@@ -379,6 +391,10 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ secrets.CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} --build-arg RECAPTCHA_SITE_KEY=${{ vars.RECAPTCHA_SITE_KEY }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Generate task definition file from container
         run: |
           aws ecs describe-task-definition --task-definition crnccp-ecs-prod-frf-task-definition --query taskDefinition > ./task-definition.json

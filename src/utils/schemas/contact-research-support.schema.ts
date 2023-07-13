@@ -8,30 +8,27 @@ export const contactResearchSupportSchema = z
   .object({
     enquiryType: z.enum(['data', 'research'], {
       errorMap: () => ({
-        message: 'Is your enquiry about is required',
+        message: 'Select the type of enquiry',
       }),
     }),
     supportDescription: z
       .string()
-      .min(1, { message: 'Please provide a summary of the support you need is required' })
+      .min(1, { message: 'Enter a summary of the support you need' })
       .refine((val) => val.split(' ').length <= TEXTAREA_MAX_CHARACTERS, {
         message: `Please provide a summary of the support you need exceeds the maximum of ${TEXTAREA_MAX_CHARACTERS} characters`,
       }),
-    fullName: z.string().min(1, { message: 'Full name is required' }),
-    emailAddress: z
-      .string()
-      .email('Email address must be a valid email')
-      .min(1, { message: 'Email address is required' }),
+    fullName: z.string().min(1, { message: 'Enter a full name' }),
+    emailAddress: z.string().email('Enter a valid email address').min(1, { message: 'Enter an email address' }),
     phoneNumber: z
       .string()
-      .min(1, { message: 'Phone number is required' })
-      .regex(PHONE_NUMBER_REGEX, { message: 'Phone number is not a recognised format' }),
-    jobRole: z.string().min(1, { message: 'Job role is required' }),
-    organisationName: z.string().min(1, { message: 'Organisation name is required' }),
+      .min(1, { message: 'Enter a telephone' })
+      .regex(PHONE_NUMBER_REGEX, { message: 'Telephone is not a recognised format' }),
+    jobRole: z.string().min(1, { message: 'Enter a job role' }),
+    organisationName: z.string().min(1, { message: 'Enter an organisation name' }),
     organisationType: z.enum(['commercial', 'nonCommercial'], {
-      errorMap: () => ({ message: 'Organisation type is required' }),
+      errorMap: () => ({ message: 'Select the type of organisation' }),
     }),
-    lcrn: z.string().min(1, { message: 'Which region will take a lead in supporting your research is required' }),
+    lcrn: z.string().min(1, { message: 'Select a lead region' }),
     studyTitle: z.string().optional(),
     protocolReference: z.string().optional(),
     cpmsId: z.string().optional(),
