@@ -9,8 +9,6 @@ import { DEFAULT_LOCALE, SEARCH_FIELDS } from '@/constants'
 import { contentfulService } from '@/lib/contentful'
 import { logger } from '@/lib/logger'
 
-jest.mock('@/lib/logger')
-
 const isRichTextBlock = (block: Block) => block === Object(block) && block.nodeType === 'document'
 
 const getRichTextContent = (block: Block) => `${documentToPlainTextString(block).replace(/\n|\r/g, ' ').trim()}`
