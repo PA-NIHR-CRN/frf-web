@@ -8,12 +8,13 @@ type TextInputProps = {
   label: string
   name: string
   hint?: ReactNode
+  required?: boolean
   errors: FieldErrors
   defaultValue: string | undefined
 }
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ label, errors, hint, defaultValue, ...rest }, ref) => {
+  ({ label, errors, hint, defaultValue, required = true, ...rest }, ref) => {
     const error = errors[rest.name]
 
     return (
@@ -34,6 +35,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             type="text"
             className={clsx('govuk-input', { 'govuk-input--error': !!error })}
             id={rest.name}
+            aria-required={required}
             aria-invalid={!!error ? 'true' : 'false'}
             aria-errormessage={clsx({
               [`${rest.name}-error`]: error,

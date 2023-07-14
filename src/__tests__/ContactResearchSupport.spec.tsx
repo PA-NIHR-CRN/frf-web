@@ -55,11 +55,13 @@ test('Initial form state', async () => {
 
   // Is your enquiry about
   expect(screen.getByLabelText('Is your enquiry about')).toBeInTheDocument()
+  expect(screen.getByLabelText('Is your enquiry about')).toBeRequired()
   expect(screen.getByLabelText('Identifying appropriate data services')).toBeInTheDocument()
   expect(screen.getByLabelText('General enquiry about research support')).toBeInTheDocument()
 
   // Please provide a summary of the support you need
   expect(screen.getByLabelText('Please provide a summary of the support you need')).toBeInTheDocument()
+  expect(screen.getByLabelText('Please provide a summary of the support you need')).toBeRequired()
   expect(screen.getByText('You have 500 characters remaining')).toBeInTheDocument()
 
   // Fieldset - About you
@@ -67,22 +69,28 @@ test('Initial form state', async () => {
 
   // Name
   expect(about.getByLabelText('Full name')).toBeInTheDocument()
+  expect(about.getByLabelText('Full name')).toBeRequired()
 
   // Email
   expect(about.getByLabelText('Email address')).toBeInTheDocument()
+  expect(about.getByLabelText('Email address')).toBeRequired()
 
   // Phone
   expect(about.getByLabelText('Telephone')).toBeInTheDocument()
+  expect(about.getByLabelText('Telephone')).toBeRequired()
   expect(about.getByText('For international numbers please include the country code')).toBeInTheDocument()
 
   // Job
   expect(about.getByLabelText('Job role')).toBeInTheDocument()
+  expect(about.getByLabelText('Job role')).toBeRequired()
 
   // Org name
   expect(about.getByLabelText('Organisation name')).toBeInTheDocument()
+  expect(about.getByLabelText('Organisation name')).toBeRequired()
 
   // Org type
   expect(about.getByLabelText('Is your organisation')).toBeInTheDocument()
+  expect(about.getByLabelText('Is your organisation')).toBeRequired()
   expect(about.getByLabelText('Commercial')).toBeInTheDocument()
   expect(about.getByLabelText('Non-commercial')).toBeInTheDocument()
 
@@ -92,6 +100,7 @@ test('Initial form state', async () => {
   // Region
   const regionSelect = research.getByLabelText('Which region will take a lead in supporting your research?')
   expect(regionSelect).toBeInTheDocument()
+  expect(regionSelect).toBeRequired()
   expect(
     research.getByText(
       'This is the region within which the Chief Investigator or Clinical Trials Unit (CTU) is based (or for Commercial Studies the lead region selected by the Sponsor).'
@@ -114,12 +123,15 @@ test('Initial form state', async () => {
 
   // Study title (optional)
   expect(research.getByLabelText('Study title (optional)')).toBeInTheDocument()
+  expect(research.getByLabelText('Study title (optional)')).not.toBeRequired()
 
   // Protocol reference (optional)
   expect(research.getByLabelText('Protocol reference (optional)')).toBeInTheDocument()
+  expect(research.getByLabelText('Protocol reference (optional)')).not.toBeRequired()
 
   // CPMS ID (optional)
   expect(research.getByLabelText('CPMS ID (optional)')).toBeInTheDocument()
+  expect(research.getByLabelText('CPMS ID (optional)')).not.toBeRequired()
   expect(
     research.getByText(
       'A unique study identifier given to all eligible studies recorded on the NIHR CRN Central Portfolio Management System (CPMS) database.'

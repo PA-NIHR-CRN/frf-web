@@ -183,12 +183,14 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 label="Study title (optional)"
                 errors={errors}
                 defaultValue={defaultValues?.studyTitle}
+                required={false}
                 {...register('studyTitle')}
               />
               <TextInput
                 label="Protocol reference (optional)"
                 errors={errors}
                 defaultValue={defaultValues?.protocolReference}
+                required={false}
                 {...register('protocolReference')}
               />
               <TextInput
@@ -197,6 +199,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
           System (CPMS) database."
                 errors={errors}
                 defaultValue={defaultValues?.cpmsId}
+                required={false}
                 {...register('cpmsId')}
               />
             </Fieldset>
