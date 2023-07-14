@@ -234,7 +234,7 @@ ContactResearchSupport.getLayout = function getLayout(
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   try {
-    const emailContacts = await contentfulService.getEmailContacts()
+    const emailContacts = await contentfulService.getEmailContactsByType('LCRN - DA')
 
     if (!emailContacts) throw new Error('Failed to fetch email contacts: null entry')
 

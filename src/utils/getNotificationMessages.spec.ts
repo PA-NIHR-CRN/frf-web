@@ -13,7 +13,7 @@ describe('getNotificationMessages', () => {
         emailAddress: 'lcrn@example.com',
         name: 'Region 0',
         salutation: 'Mx.',
-        type: 'LCRN',
+        type: 'LCRN - DA',
       },
     }),
     Mock.of<Entry<TypeEmailContactSkeleton>>({

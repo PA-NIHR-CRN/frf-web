@@ -2,7 +2,12 @@ import type { ContentfulClientApi, EntrySkeletonType } from 'contentful'
 import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-management'
 
 import { Filters, OrderType } from '@/@types/filters'
-import { TypeEmailContactSkeleton, TypeHomepageSkeleton, TypeServiceProviderSkeleton } from '@/@types/generated'
+import {
+  TypeEmailContactFields,
+  TypeEmailContactSkeleton,
+  TypeHomepageSkeleton,
+  TypeServiceProviderSkeleton,
+} from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds } from '@/constants'
 
@@ -109,6 +114,17 @@ export class ContentfulService {
     const entries = await this.contentClient.getEntries<TypeEmailContactSkeleton>({
       content_type: 'emailContact',
       include: 10,
+      order: ['fields.name'],
+    })
+    return entries.items.length ? entries.items : []
+  }
+
+  async getEmailContactsByType(type: TypeEmailContactFields['type']['values']) {
+    const entries = await this.contentClient.getEntries<TypeEmailContactSkeleton>({
+      'fields.type[match]': type,
+      content_type: 'emailContact',
+      include: 10,
+      order: ['fields.name'],
     })
     return entries.items.length ? entries.items : []
   }
