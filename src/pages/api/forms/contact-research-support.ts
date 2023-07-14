@@ -43,7 +43,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const messages = getNotificationMessages({ ...req.body, referenceNumber }, contacts)
     await Promise.all(messages.map(emailService.sendEmail))
 
-    res.redirect(302, '/contact-research-support/confirmation')
+    res.redirect(302, `/contact-research-support/confirmation?referenceNumber=${referenceNumber}`)
   } catch (error) {
     if (error instanceof ZodError) {
       // Create an object containing the Zod validation errors
