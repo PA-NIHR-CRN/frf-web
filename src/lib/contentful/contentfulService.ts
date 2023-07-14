@@ -89,6 +89,14 @@ export class ContentfulService {
     return entries.items.length ? entries.items[0] : null
   }
 
+  async getLinkedProviders(id: string) {
+    return await this.contentClient.withoutUnresolvableLinks.getEntries<TypeServiceProviderSkeleton>({
+      content_type: 'serviceProvider',
+      links_to_entry: id,
+      include: 10, // How deep to include linked items
+    })
+  }
+
   async getHomePage() {
     const entries = await this.contentClient.getEntries<TypeHomepageSkeleton>({
       limit: 1,
