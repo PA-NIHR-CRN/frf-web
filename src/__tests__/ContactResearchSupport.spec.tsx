@@ -258,7 +258,11 @@ test('Form submission with client side validation errors', async () => {
     'href',
     '#emailAddress'
   )
-  expect(within(alert).getByRole('link', { name: 'Enter a telephone' })).toHaveAttribute('href', '#phoneNumber')
+  expect(
+    within(alert).getByRole('link', {
+      name: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192',
+    })
+  ).toHaveAttribute('href', '#phoneNumber')
   expect(within(alert).getByRole('link', { name: 'Enter a job role' })).toHaveAttribute('href', '#jobRole')
   expect(within(alert).getByRole('link', { name: 'Enter an organisation name' })).toHaveAttribute(
     'href',
@@ -277,7 +281,9 @@ test('Form submission with client side validation errors', async () => {
   )
   expect(screen.getByLabelText('Full name')).toHaveErrorMessage('Error: Enter a full name')
   expect(screen.getByLabelText('Email address')).toHaveErrorMessage('Error: Enter a valid email address')
-  expect(screen.getByLabelText('Telephone')).toHaveErrorMessage('Error: Enter a telephone')
+  expect(screen.getByLabelText('Telephone')).toHaveErrorMessage(
+    'Error: Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192'
+  )
   expect(screen.getByLabelText('Job role')).toHaveErrorMessage('Error: Enter a job role')
   expect(screen.getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter an organisation name')
   expect(screen.getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Select the type of organisation')

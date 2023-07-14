@@ -111,6 +111,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 hint="For international numbers please include the country code"
                 errors={errors}
                 defaultValue={defaultValues?.phoneNumber}
+                autocomplete="tel"
                 {...register('phoneNumber')}
               />
               <TextInput

@@ -10,11 +10,12 @@ type TextInputProps = {
   hint?: ReactNode
   required?: boolean
   errors: FieldErrors
+  autocomplete?: string
   defaultValue: string | undefined
 }
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ label, errors, hint, defaultValue, required = true, ...rest }, ref) => {
+  ({ label, errors, hint, defaultValue, required = true, autocomplete, ...rest }, ref) => {
     const error = errors[rest.name]
 
     return (
@@ -33,6 +34,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           <ErrorInline name={rest.name} errors={errors} />
           <input
             type="text"
+            autoComplete={autocomplete}
             className={clsx('govuk-input', { 'govuk-input--error': !!error })}
             id={rest.name}
             aria-required={required}
