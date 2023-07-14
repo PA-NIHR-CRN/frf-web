@@ -7,6 +7,8 @@ import { setupMockServer } from '@/utils'
 
 import handler from './update_search_index'
 
+jest.mock('@/lib/logger')
+
 const [server, mockContentfulResponse] = setupMockServer()
 
 beforeAll(() => server.listen())
