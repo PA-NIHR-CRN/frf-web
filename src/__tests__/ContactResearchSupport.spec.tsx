@@ -51,7 +51,7 @@ test('Initial form state', async () => {
     )
   ).toBeInTheDocument()
 
-  expect(screen.getByRole('heading', { name: 'About your enquiry', level: 3 })).toBeInTheDocument()
+  expect(screen.getByRole('group', { name: 'About your enquiry' })).toBeInTheDocument()
 
   // Is your enquiry about
   expect(screen.getByLabelText('Is your enquiry about')).toBeInTheDocument()

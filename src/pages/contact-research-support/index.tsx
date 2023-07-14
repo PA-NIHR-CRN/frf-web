@@ -75,8 +75,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
             }
           >
             <ErrorSummary errors={errors} />
-            <h3 className="govuk-heading-l">About your enquiry</h3>
-            <Fieldset>
+            <Fieldset legend="About your enquiry">
               <RadioGroup
                 label="Is your enquiry about"
                 errors={errors}
@@ -86,8 +85,6 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 <Radio value="data" label="Identifying appropriate data services" />
                 <Radio value="research" label="General enquiry about research support" />
               </RadioGroup>
-            </Fieldset>
-            <Fieldset>
               <Textarea
                 label="Please provide a summary of the support you need"
                 errors={errors}
