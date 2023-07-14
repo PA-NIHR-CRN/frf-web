@@ -75,8 +75,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
             }
           >
             <ErrorSummary errors={errors} />
-            <h3 className="govuk-heading-l">About your enquiry</h3>
-            <Fieldset>
+            <Fieldset legend="About your enquiry">
               <RadioGroup
                 label="Is your enquiry about"
                 errors={errors}
@@ -86,8 +85,6 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 <Radio value="data" label="Identifying appropriate data services" />
                 <Radio value="research" label="General enquiry about research support" />
               </RadioGroup>
-            </Fieldset>
-            <Fieldset>
               <Textarea
                 label="Please provide a summary of the support you need"
                 errors={errors}
@@ -114,6 +111,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 hint="For international numbers please include the country code"
                 errors={errors}
                 defaultValue={defaultValues?.phoneNumber}
+                autocomplete="tel"
                 {...register('phoneNumber')}
               />
               <TextInput
@@ -183,12 +181,14 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 label="Study title (optional)"
                 errors={errors}
                 defaultValue={defaultValues?.studyTitle}
+                required={false}
                 {...register('studyTitle')}
               />
               <TextInput
                 label="Protocol reference (optional)"
                 errors={errors}
                 defaultValue={defaultValues?.protocolReference}
+                required={false}
                 {...register('protocolReference')}
               />
               <TextInput
@@ -197,6 +197,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
           System (CPMS) database."
                 errors={errors}
                 defaultValue={defaultValues?.cpmsId}
+                required={false}
                 {...register('cpmsId')}
               />
             </Fieldset>
@@ -234,7 +235,7 @@ ContactResearchSupport.getLayout = function getLayout(
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   try {
-    const emailContacts = await contentfulService.getEmailContacts()
+    const emailContacts = await contentfulService.getEmailContactsByType('LCRN - DA')
 
     if (!emailContacts) throw new Error('Failed to fetch email contacts: null entry')
 

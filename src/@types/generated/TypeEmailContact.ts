@@ -30,7 +30,7 @@ export interface TypeEmailContactFields {
      * @name Type
      * @localized false
      */
-    type: EntryFieldTypes.Symbol<"BDM" | "FRF" | "LCRN">;
+    type: EntryFieldTypes.Symbol<"BDM" | "FRF" | "LCRN - DA">;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface TypeEmailContactFields {
  * @type {TypeEmailContactSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-11T16:34:42.182Z
- * @version 1
+ * @version 7
  */
 export type TypeEmailContactSkeleton = EntrySkeletonType<TypeEmailContactFields, "emailContact">;
 /**
@@ -48,6 +48,6 @@ export type TypeEmailContactSkeleton = EntrySkeletonType<TypeEmailContactFields,
  * @type {TypeEmailContact}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-11T16:34:42.182Z
- * @version 1
+ * @version 7
  */
 export type TypeEmailContact<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailContactSkeleton, Modifiers, Locales>;
