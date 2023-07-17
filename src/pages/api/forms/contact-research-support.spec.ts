@@ -62,7 +62,7 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
-  expect(res._getRedirectUrl()).toBe('/contact-research-support/confirmation?referenceNumber=mock-ref-number')
+  expect(res._getRedirectUrl()).toBe('/contact-research-support/confirmation/mock-ref-number')
 
   // Form data is saved in the database
   expect(prismaMock.supportRequest.create).toHaveBeenCalledWith({
