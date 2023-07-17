@@ -65,7 +65,9 @@ test('Successful submission redirects to the confirmation page', async () => {
   expect(res._getRedirectUrl()).toBe('/contact-research-support/confirmation?referenceNumber=mock-ref-number')
 
   // Form data is saved in the database
-  expect(prismaMock.supportRequest.create).toHaveBeenCalledWith({ data: body })
+  expect(prismaMock.supportRequest.create).toHaveBeenCalledWith({
+    data: { ...body, referenceNumber: 'mock-ref-number' },
+  })
 
   // Email notifications are sent with a reference number
   expect(sendEmailSpy).toHaveBeenCalledTimes(2)
