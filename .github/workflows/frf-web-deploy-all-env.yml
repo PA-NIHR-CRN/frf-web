@@ -31,6 +31,7 @@ jobs:
           echo NEXT_PUBLIC_RECAPTCHA_SITE_KEY=${{ vars.RECAPTCHA_SITE_KEY }} >> .env.local
           echo GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }} >> .env.local
           echo GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }} >> .env.local
+          echo GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }} >> .env.local
           npm run build
       - name: Test
         run: npm run test:ci
@@ -97,6 +98,7 @@ jobs:
             RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
+            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - name: Remove Github Actions IP from RDS security group (Dev)
@@ -176,6 +178,7 @@ jobs:
             RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
+            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - name: Remove Github Actions IP from RDS security group (Test)
@@ -255,6 +258,7 @@ jobs:
             RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
+            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - name: Remove Github Actions IP from RDS security group (Uat)
@@ -334,6 +338,7 @@ jobs:
             RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
+            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - name: Remove Github Actions IP from RDS security group (Oat)
@@ -413,6 +418,7 @@ jobs:
             RECAPTCHA_API_KEY=${{ secrets.RECAPTCHA_API_KEY }}
             GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
+            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
 
       - name: Remove Github Actions IP from RDS security group (Prod)
