@@ -1,7 +1,7 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 
+import type { TypeDataContentBlockSkeleton } from "./TypeDataContentBlock";
 import type { TypeServiceTypeBlockSkeleton } from "./TypeServiceTypeBlock";
-import type { TypeTextBlockSkeleton } from "./TypeTextBlock";
 
 /**
  * Fields type definition for content type 'TypeServiceProvider'
@@ -141,7 +141,7 @@ export interface TypeServiceProviderFields {
      * @name Data content
      * @localized false
      */
-    dataSpecificsAndCoding?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeTextBlockSkeleton>>;
+    dataSpecificsAndCoding?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeDataContentBlockSkeleton>>;
     /**
      * Field type definition for field 'geographicAndPopulationCoverage' (Geographical and Population Coverage)
      * @name Geographical and Population Coverage
@@ -168,7 +168,7 @@ export interface TypeServiceProviderFields {
  * @type {TypeServiceProviderSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 69
+ * @version 73
  */
 export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderFields, "serviceProvider">;
 /**
@@ -177,6 +177,6 @@ export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderF
  * @type {TypeServiceProvider}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 69
+ * @version 73
  */
 export type TypeServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeServiceProviderSkeleton, Modifiers, Locales>;

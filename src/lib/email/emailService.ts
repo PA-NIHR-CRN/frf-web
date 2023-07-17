@@ -34,7 +34,7 @@ export class EmailService {
     const textBody = handlebars.compile(textSource)(data.templateData)
 
     const message: SES.Types.SendEmailRequest = {
-      Source: `Find, Recruit & Follow-Up <${EMAIL_FROM_ADDRESS}>`,
+      Source: `"Find, Recruit & Follow-Up" <${EMAIL_FROM_ADDRESS}>`,
       Destination: {
         ToAddresses: [data.to],
       },

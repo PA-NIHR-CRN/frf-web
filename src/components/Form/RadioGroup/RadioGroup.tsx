@@ -9,12 +9,13 @@ type RadioGroupProps = {
   label?: string
   name: string
   hint?: ReactNode
+  required?: boolean
   errors: FieldErrors
   defaultValue: string | undefined
 }
 
 export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
-  ({ children, label, errors, hint, defaultValue, ...rest }, ref) => {
+  ({ children, label, errors, hint, defaultValue, required = true, ...rest }, ref) => {
     const error = errors[rest.name]
 
     return (
@@ -43,6 +44,7 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
                     [`${rest.name}-${index}`]: index > 0,
                   }),
                   defaultChecked: defaultValue === child.props.value,
+                  'aria-required': required,
                   'aria-invalid': !!error ? 'true' : 'false',
                   'aria-errormessage': clsx({
                     [`${rest.name}-error`]: error,

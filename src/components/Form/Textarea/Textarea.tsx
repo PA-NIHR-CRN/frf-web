@@ -10,13 +10,14 @@ type TextareaProps = {
   label: string
   name: string
   hint?: ReactNode
+  required?: boolean
   errors: FieldErrors
   defaultValue: string | undefined
   remainingCharacters?: number
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ label, errors, hint, remainingCharacters, defaultValue, ...rest }, ref) => {
+  ({ label, errors, hint, remainingCharacters, defaultValue, required = true, ...rest }, ref) => {
     const error = errors[rest.name]
 
     return (
@@ -38,6 +39,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             'govuk-!-margin-bottom-1': typeof remainingCharacters !== 'undefined',
           })}
           id={rest.name}
+          aria-required={required}
           aria-invalid={!!error ? 'true' : 'false'}
           aria-errormessage={clsx({
             [`${rest.name}-error`]: error,

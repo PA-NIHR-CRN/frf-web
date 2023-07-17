@@ -9,12 +9,13 @@ type SelectProps = {
   label: string
   name: string
   hint?: ReactNode
+  required?: boolean
   errors: FieldErrors
   defaultValue: string | undefined
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ children, label, errors, hint, defaultValue, ...rest }, ref) => {
+  ({ children, label, errors, hint, defaultValue, required = true, ...rest }, ref) => {
     const error = errors[rest.name]
 
     return (
@@ -33,6 +34,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         <select
           className="govuk-select"
           id={rest.name}
+          aria-required={required}
           aria-invalid={!!error ? 'true' : 'false'}
           aria-errormessage={clsx({
             [`${rest.name}-error`]: error,
