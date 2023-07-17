@@ -11,6 +11,7 @@ model SupportRequest {
   id                 Int      @id @default(autoincrement())
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
+  referenceNumber    String   @default("")
   enquiryType        String
   supportDescription String
   fullName           String

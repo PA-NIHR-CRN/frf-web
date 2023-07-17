@@ -36,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await contactResearchSupportSchema.parse(req.body)
 
     delete req.body.reCaptchaToken
-    await prisma.supportRequest.create({ data: req.body })
+    await prisma.supportRequest.create({ data: { ...req.body, referenceNumber } })
 
     // Send emails
     const contacts = await contentfulService.getEmailContacts()
