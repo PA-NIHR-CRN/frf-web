@@ -38,6 +38,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
 
     return {
       props: {
+        page: 'Confirmation - Contact research support',
         referenceNumber,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },
