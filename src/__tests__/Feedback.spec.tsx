@@ -180,14 +180,14 @@ test('Form submission with client side validation errors', async () => {
 
   // Summary errors
   const alert = getByRole('alert', { name: 'There is a problem' })
-  expect(within(alert).getByRole('link', { name: 'Select the type of enquiry' })).toHaveAttribute(
+  expect(within(alert).getByRole('link', { name: 'Select how helpful you found the FRF website' })).toHaveAttribute(
     'href',
     '#helpfulness'
   )
 
   // Field errors
   expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toHaveErrorMessage(
-    'Error: Select the type of enquiry'
+    'Error: Select how helpful you found the FRF website'
   )
   expect(
     getByLabelText(
@@ -200,7 +200,7 @@ test('Form submission with client side validation errors', async () => {
 })
 
 test('Server side field validation errors', async () => {
-  mockRouter.push('?helpfulnessError=Select+the+type+of+enquiry')
+  mockRouter.push('?helpfulnessError=Select+how+helpful+you+found+the+FRF+website')
 
   const context = { query: {} } as unknown as GetServerSidePropsContext
   const { props } = (await getServerSideProps(context)) as {
@@ -213,14 +213,14 @@ test('Server side field validation errors', async () => {
 
   // Summary errors
   const alert = getByRole('alert', { name: 'There is a problem' })
-  expect(within(alert).getByRole('link', { name: 'Select the type of enquiry' })).toHaveAttribute(
+  expect(within(alert).getByRole('link', { name: 'Select how helpful you found the FRF website' })).toHaveAttribute(
     'href',
     '#helpfulness'
   )
 
   // Field errors
   expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toHaveErrorMessage(
-    'Error: Select the type of enquiry'
+    'Error: Select how helpful you found the FRF website'
   )
   expect(
     getByLabelText(

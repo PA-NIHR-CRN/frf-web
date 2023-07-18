@@ -86,7 +86,7 @@ test('Validation error redirects back to the form with the errors and original v
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe(
-    '/feedback?helpfulnessError=Select+the+type+of+enquiry&suggestions=great+site%21&fullName=Test+user&emailAddress=testemail%40nihr.ac.uk&organisationName=NIHR'
+    '/feedback?helpfulnessError=Select+how+helpful+you+found+the+FRF+website&suggestions=great+site%21&fullName=Test+user&emailAddress=testemail%40nihr.ac.uk&organisationName=NIHR'
   )
 })
 

@@ -8,7 +8,7 @@ export const feedbackSchema = z
   .object({
     helpfulness: z.enum(['very-helpful', 'somewhat-helpful', 'neither-helpful-or-unhelpful', 'not-at-all-helpful'], {
       errorMap: () => ({
-        message: 'Select the type of enquiry',
+        message: 'Select how helpful you found the FRF website',
       }),
     }),
     suggestions: z
@@ -18,7 +18,7 @@ export const feedbackSchema = z
         return (
           val && val.split(' ').length >= TEXTAREA_MAX_CHARACTERS,
           {
-            message: `Please provide a summary of the support you need exceeds the maximum of ${TEXTAREA_MAX_CHARACTERS} characters`,
+            message: `Please provide feedback with less than the maximum of ${TEXTAREA_MAX_CHARACTERS} characters`,
           }
         )
       }),
