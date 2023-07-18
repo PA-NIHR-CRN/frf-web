@@ -23,7 +23,7 @@ export const feedbackSchema = z
         )
       }),
     fullName: z.string().optional(),
-    emailAddress: z.string().optional(),
+    emailAddress: z.string().email('Enter a valid email address').optional().or(z.literal('')),
     organisationName: z.string().optional(),
   })
   .required()
