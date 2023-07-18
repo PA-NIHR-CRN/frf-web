@@ -4,7 +4,7 @@ import { render, screen } from '@/config/test-utils'
 import ContactResearchSupportConfirmation, {
   ContactResearchSupportConfirmationProps,
   getServerSideProps,
-} from '@/pages/contact-research-support/confirmation'
+} from '@/pages/contact-research-support/confirmation/[referenceNumber]'
 
 test('Contact research support confirmation page', async () => {
   const context = { query: { referenceNumber: 'mock-123' } } as unknown as GetServerSidePropsContext
