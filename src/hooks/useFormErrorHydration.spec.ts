@@ -2,6 +2,8 @@ import { renderHook } from '@testing-library/react'
 import { useRouter } from 'next/router'
 import { FieldValues, FormState } from 'react-hook-form'
 
+import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
+
 import { useFormErrorHydration } from './useFormErrorHydration'
 
 // Mock useRouter
@@ -50,6 +52,7 @@ describe('useFormErrorHydration', () => {
     // Render the hook
     const { result } = renderHook(() =>
       useFormErrorHydration({
+        schema: contactResearchSupportSchema,
         formState,
         onFoundError,
       })
@@ -83,6 +86,7 @@ describe('useFormErrorHydration', () => {
     // Render the hook
     const { result } = renderHook(() =>
       useFormErrorHydration({
+        schema: contactResearchSupportSchema,
         formState: {
           ...formState,
           isSubmitSuccessful: false,

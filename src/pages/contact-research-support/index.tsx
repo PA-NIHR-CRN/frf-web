@@ -33,6 +33,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
   )
 
   const { errors } = useFormErrorHydration<ContactResearchSupportInputs>({
+    schema: contactResearchSupportSchema,
     formState,
     onFoundError: handleFoundError,
   })
