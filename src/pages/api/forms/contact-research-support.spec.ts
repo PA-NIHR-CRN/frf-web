@@ -6,11 +6,11 @@ import { Mock } from 'ts-mockery'
 
 import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
+import { prisma } from '@/lib/prisma'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
 import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
-import { createReferenceNumber } from '@/utils/generic.utils'
 import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-support.schema'
 
 import handler from './contact-research-support'
@@ -18,9 +18,6 @@ import handler from './contact-research-support'
 const [server, mockContentfulResponse] = setupMockServer()
 
 jest.mock('@/lib/logger')
-
-jest.mock('@/utils/generic.utils')
-jest.mocked(createReferenceNumber).mockReturnValue('mock-ref-number')
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
@@ -61,14 +58,37 @@ test('Successful submission redirects to the confirmation page', async () => {
     cpmsId: '',
   }
 
+  const createMock = jest.mocked(prisma.supportRequest.create)
+  createMock.mockResolvedValueOnce({
+    id: 999,
+    createdAt: new Date('123'),
+    updatedAt: new Date('123'),
+    referenceNumber: '',
+    enquiryType: 'data',
+    supportDescription: 'help me',
+    fullName: 'Test user',
+    emailAddress: 'testemail@nihr.ac.uk',
+    phoneNumber: '+447443121812',
+    jobRole: 'Researcher',
+    organisationName: 'NIHR',
+    organisationType: 'nonCommercial',
+    lcrn: 'mockregion1@nihr.ac.uk',
+    studyTitle: '',
+    protocolReference: '',
+    cpmsId: '',
+  })
+
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
-  expect(res._getRedirectUrl()).toBe('/contact-research-support/confirmation/mock-ref-number')
+  expect(res._getRedirectUrl()).toBe('/contact-research-support/confirmation/R00999')
 
   // Form data is saved in the database
-  expect(createReferenceNumber).toHaveBeenCalledWith({ prefix: 'R' })
   expect(prismaMock.supportRequest.create).toHaveBeenCalledWith({
-    data: { ...body, referenceNumber: 'mock-ref-number' },
+    data: { ...body },
+  })
+  expect(prismaMock.supportRequest.update).toHaveBeenCalledWith({
+    where: { id: 999 },
+    data: { referenceNumber: 'R00999' },
   })
 
   // Email notifications are sent with a reference number
