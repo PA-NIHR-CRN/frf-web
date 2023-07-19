@@ -16,7 +16,7 @@ model SupportRequest {
   supportDescription String
   fullName           String
   emailAddress       String
-  phoneNumber        String
+  phoneNumber        String?
   jobRole            String
   organisationName   String
   organisationType   String

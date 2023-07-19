@@ -21,8 +21,11 @@ export const contactResearchSupportSchema = z
     emailAddress: z.string().email('Enter a valid email address').min(1, { message: 'Enter an email address' }),
     phoneNumber: z
       .string()
-      .min(1, { message: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192' })
-      .regex(PHONE_NUMBER_REGEX, { message: 'Telephone is not a recognised format' }),
+      .regex(PHONE_NUMBER_REGEX, {
+        message: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192',
+      })
+      .optional()
+      .or(z.literal('')),
     jobRole: z.string().min(1, { message: 'Enter a job role' }),
     organisationName: z.string().min(1, { message: 'Enter an organisation name' }),
     organisationType: z.enum(['commercial', 'nonCommercial'], {

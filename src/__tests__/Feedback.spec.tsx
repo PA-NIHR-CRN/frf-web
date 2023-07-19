@@ -61,7 +61,7 @@ test('Initial form state', async () => {
       'Please provide us with any other feedback on your experience of our website or suggestions for improvement. (optional)'
     )
   ).not.toBeRequired()
-  expect(getByText('You have 500 characters remaining')).toBeInTheDocument()
+  expect(getByText('You have 1200 characters remaining')).toBeInTheDocument()
 
   // Fieldset - We may wish to contact you to follow up on your feedback. If you are happy for us to do so please provide your contact details.
   expect(
