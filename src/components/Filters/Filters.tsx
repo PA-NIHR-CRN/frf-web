@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Link from 'next/link'
-import { ReactNode, useEffect, useId, useRef, useState } from 'react'
+import { ReactNode, useEffect, useRef, useState } from 'react'
 
 import { Filters } from '@/@types/filters'
 import { Button } from '@/components/Button/Button'
@@ -15,26 +15,21 @@ import { FilterOptions } from '@/lib/contentful/contentfulService'
 import { pluralise } from '@/utils'
 
 const FilterCategory = ({ title, children }: { title: string; children: ReactNode }) => {
-  const id = useId()
   return (
-    <fieldset
-      className="govuk-fieldset govuk-checkboxes--small pt-0 first-of-type:mt-5"
-      aria-labelledby={`${id}-title`}
-    >
-      <details open className="group/details border-t border-grey-120 open:pb-3">
-        <summary className="group/summary flex cursor-pointer py-2 outline-none">
-          <div className="group-focus/summary:focusable-text flex w-full items-start justify-between py-1">
-            <span className="govuk-body m-0" id={`${id}-title`}>
-              {title}
-            </span>
-            <span className={clsx('text-lg', 'group-open/details:rotate-180')}>
-              <CollapseIcon />
-            </span>
-          </div>
-        </summary>
+    <details open className="group/details border-t border-grey-120 first-of-type:mt-5 open:pb-3">
+      <summary className="group/summary flex cursor-pointer py-2 outline-none">
+        <div className="group-focus/summary:focusable-text flex w-full items-start justify-between py-1">
+          <span className="govuk-body m-0">{title}</span>
+          <span className={clsx('text-lg', 'group-open/details:rotate-180')}>
+            <CollapseIcon />
+          </span>
+        </div>
+      </summary>
+      <fieldset className="govuk-fieldset govuk-checkboxes--small pt-0">
+        <legend className="govuk-visually-hidden">{title} filters</legend>
         {children}
-      </details>
-    </fieldset>
+      </fieldset>
+    </details>
   )
 }
 
