@@ -32,12 +32,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    const referenceNumber = createReferenceNumber({ prefix: 'R' })
-
     await contactResearchSupportSchema.parse(req.body)
 
     delete req.body.reCaptchaToken
-    await prisma.supportRequest.create({ data: { ...req.body, referenceNumber } })
+    const { id } = await prisma.supportRequest.create({ data: { ...req.body } })
+
+    const referenceNumber = createReferenceNumber({ id, prefix: 'R' })
+    await prisma.supportRequest.update({
+      where: {
+        id,
+      },
+      data: {
+        referenceNumber,
+      },
+    })
 
     // Send emails
     const contacts = await contentfulService.getEmailContacts()

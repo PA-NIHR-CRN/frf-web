@@ -31,12 +31,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    const referenceNumber = createReferenceNumber({ prefix: 'F' })
-
     await feedbackSchema.parse(req.body)
 
     delete req.body.reCaptchaToken
-    await prisma.feedback.create({ data: { ...req.body, referenceNumber } })
+    const { id } = await prisma.feedback.create({ data: { ...req.body } })
+
+    const referenceNumber = createReferenceNumber({ id, prefix: 'F' })
+    await prisma.feedback.update({
+      where: {
+        id,
+      },
+      data: {
+        referenceNumber,
+      },
+    })
 
     // Send emails
     // const contacts = await contentfulService.getEmailContacts()

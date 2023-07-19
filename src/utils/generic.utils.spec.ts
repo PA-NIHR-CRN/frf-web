@@ -1,5 +1,3 @@
-import crypto from 'crypto'
-
 import { TagIds } from '@/constants'
 
 import { createReferenceNumber, formatTags, TagList } from './generic.utils'
@@ -33,45 +31,19 @@ describe('formatTags', () => {
   })
 })
 
-jest.mock('crypto', () => ({
-  randomBytes: jest.fn(),
-}))
-
 describe('createReferenceNumber', () => {
-  beforeEach(() => {
-    ;(crypto.randomBytes as jest.Mock).mockClear()
-  })
-
   test('generates a reference number of length 5', () => {
-    const mockRandomBytes = jest.spyOn(crypto, 'randomBytes')
-    mockRandomBytes.mockImplementationOnce(() => Buffer.from('abcdef', 'hex'))
-
-    const referenceNumber = createReferenceNumber()
-
-    expect(referenceNumber).toHaveLength(5)
-    expect(referenceNumber).toEqual('ABCDE')
-    expect(mockRandomBytes).toHaveBeenCalledWith(4)
-  })
-
-  test('generates a reference number using uppercase hex characters', () => {
-    const mockRandomBytes = jest.spyOn(crypto, 'randomBytes')
-    mockRandomBytes.mockImplementationOnce(() => Buffer.from('123456', 'hex'))
-
-    const referenceNumber = createReferenceNumber()
-
-    expect(referenceNumber).toMatch(/^[A-F0-9]+$/)
-    expect(referenceNumber).toEqual('12345')
-    expect(mockRandomBytes).toHaveBeenCalledWith(4)
+    expect(createReferenceNumber({ id: 1 })).toEqual('00001')
+    expect(createReferenceNumber({ id: 5 })).toEqual('00005')
+    expect(createReferenceNumber({ id: 15 })).toEqual('00015')
+    expect(createReferenceNumber({ id: 200 })).toEqual('00200')
+    expect(createReferenceNumber({ id: 6125 })).toEqual('06125')
+    expect(createReferenceNumber({ id: 136125 })).toEqual('136125')
   })
 
   test('supports a custom prefix', () => {
-    const mockRandomBytes = jest.spyOn(crypto, 'randomBytes')
-    mockRandomBytes.mockImplementationOnce(() => Buffer.from('123456', 'hex'))
-
-    const referenceNumber = createReferenceNumber({ prefix: 'F' })
-
+    const referenceNumber = createReferenceNumber({ id: 5, prefix: 'F' })
     expect(referenceNumber).toMatch(/^F[A-F0-9]+$/)
-    expect(referenceNumber).toEqual('F12345')
-    expect(mockRandomBytes).toHaveBeenCalledWith(4)
+    expect(referenceNumber).toEqual('F00005')
   })
 })

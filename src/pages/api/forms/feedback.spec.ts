@@ -6,11 +6,11 @@ import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 // import { Mock } from 'ts-mockery'
 // import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
+import { prisma } from '@/lib/prisma'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
 import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
-import { createReferenceNumber } from '@/utils/generic.utils'
 import { FeedbackInputs } from '@/utils/schemas/feedback.schema'
 
 import handler from './feedback'
@@ -18,9 +18,6 @@ import handler from './feedback'
 const [server, mockContentfulResponse] = setupMockServer()
 
 jest.mock('@/lib/logger')
-
-jest.mock('@/utils/generic.utils')
-jest.mocked(createReferenceNumber).mockReturnValue('mock-ref-number')
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
@@ -54,14 +51,30 @@ test('Successful submission redirects to the confirmation page', async () => {
     organisationName: 'NIHR',
   }
 
+  const createMock = jest.mocked(prisma.feedback.create)
+  createMock.mockResolvedValueOnce({
+    id: 1,
+    createdAt: new Date('123'),
+    updatedAt: new Date('123'),
+    referenceNumber: '1',
+    helpfulness: 'very-helpful',
+    suggestions: 'great site!',
+    fullName: 'Test user',
+    emailAddress: 'testemail@nihr.ac.uk',
+    organisationName: 'NIHR',
+  })
+
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/feedback/confirmation')
 
   // Form data is saved in the database
-  expect(createReferenceNumber).toHaveBeenCalledWith({ prefix: 'F' })
   expect(prismaMock.feedback.create).toHaveBeenCalledWith({
-    data: { ...body, referenceNumber: 'mock-ref-number' },
+    data: { ...body },
+  })
+  expect(prismaMock.feedback.update).toHaveBeenCalledWith({
+    where: { id: 1 },
+    data: { referenceNumber: 'F00001' },
   })
 
   // Email notifications are sent with a reference number

@@ -1,5 +1,4 @@
 import { UnresolvedLink } from 'contentful'
-import crypto from 'crypto'
 
 import type { TagIds } from '@/constants'
 
@@ -23,8 +22,6 @@ export const formatTags = (tagList: TagList, tagGroup: TagGroup) => {
   return tags
 }
 
-export const createReferenceNumber = (options?: { prefix: string }) => {
-  const referenceNumber = crypto.randomBytes(4).toString('hex').slice(0, 5).toUpperCase()
-  if (options?.prefix) return `${options.prefix}${referenceNumber}`
-  return referenceNumber
+export const createReferenceNumber = ({ prefix = '', id }: { prefix?: string; id: number }) => {
+  return `${prefix}${String(id).padStart(5, '0')}`
 }
