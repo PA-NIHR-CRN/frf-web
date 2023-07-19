@@ -68,15 +68,15 @@ test('Allows filtering by service type', async () => {
 
   render(<Filters {...defaultProps} onFilterChange={onFilterChangeSpy} />)
 
-  const fieldset = screen.getByRole('group', { name: 'Type of service' })
-  const details = within(fieldset).getByRole('group')
+  const fieldset = screen.getByRole('group', { name: 'Type of service filters' })
 
   // Section can be toggled
   const title = screen.getByText('Type of service')
+  expect(fieldset).toBeVisible()
   await userEvent.click(title)
-  expect(details).not.toHaveAttribute('open')
+  expect(fieldset).not.toBeVisible()
   await userEvent.click(title)
-  expect(details).toHaveAttribute('open')
+  expect(fieldset).toBeVisible()
 
   // Has expected inputs
   Object.keys(ServiceType).forEach((type) => expect(screen.getByLabelText(ServiceType[type])).toBeInTheDocument())
@@ -100,15 +100,15 @@ test('Allows filtering by geography', async () => {
 
   render(<Filters {...defaultProps} onFilterChange={onFilterChangeSpy} />)
 
-  const fieldset = screen.getByRole('group', { name: 'Geographical coverage' })
-  const details = within(fieldset).getByRole('group')
+  const fieldset = screen.getByRole('group', { name: 'Geographical coverage filters' })
 
   // Section can be toggled
   const title = screen.getByText('Geographical coverage')
+  expect(fieldset).toBeVisible()
   await userEvent.click(title)
-  expect(details).not.toHaveAttribute('open')
+  expect(fieldset).not.toBeVisible()
   await userEvent.click(title)
-  expect(details).toHaveAttribute('open')
+  expect(fieldset).toBeVisible()
 
   // Has expected inputs
   filterOptions.geography.forEach((item) => expect(screen.getByLabelText(item)).toBeInTheDocument())
@@ -126,15 +126,15 @@ test('Allows filtering by costs', async () => {
 
   render(<Filters {...defaultProps} onFilterChange={onFilterChangeSpy} />)
 
-  const fieldset = screen.getByRole('group', { name: 'Costs' })
-  const details = within(fieldset).getByRole('group', { name: '' })
+  const fieldset = screen.getByRole('group', { name: 'Costs filters' })
 
   // Section can be toggled
   const title = screen.getByText('Costs')
+  expect(fieldset).toBeVisible()
   await userEvent.click(title)
-  expect(details).not.toHaveAttribute('open')
+  expect(fieldset).not.toBeVisible()
   await userEvent.click(title)
-  expect(details).toHaveAttribute('open')
+  expect(fieldset).toBeVisible()
 
   const expectedInputs = ['Free of charge', 'Chargeable service']
 
