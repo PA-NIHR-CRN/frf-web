@@ -6,7 +6,8 @@ import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
-import { createReferenceNumber, getNotificationMessages } from '@/utils'
+import { getNotificationMessages } from '@/utils'
+import { createReferenceNumber } from '@/utils/generic.utils'
 import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -31,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    const referenceNumber = createReferenceNumber()
+    const referenceNumber = createReferenceNumber({ prefix: 'R' })
 
     await contactResearchSupportSchema.parse(req.body)
 

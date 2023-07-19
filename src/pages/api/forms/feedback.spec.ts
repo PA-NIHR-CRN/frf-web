@@ -9,7 +9,8 @@ import { logger } from '@/lib/logger'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
 import reCaptchaMock from '@/mocks/reCaptcha.json'
-import { createReferenceNumber, setupMockServer } from '@/utils'
+import { setupMockServer } from '@/utils'
+import { createReferenceNumber } from '@/utils/generic.utils'
 import { FeedbackInputs } from '@/utils/schemas/feedback.schema'
 
 import handler from './feedback'
@@ -18,7 +19,7 @@ const [server, mockContentfulResponse] = setupMockServer()
 
 jest.mock('@/lib/logger')
 
-jest.mock('@/utils/createReferenceNumber')
+jest.mock('@/utils/generic.utils')
 jest.mocked(createReferenceNumber).mockReturnValue('mock-ref-number')
 
 beforeAll(() => server.listen())
@@ -58,6 +59,7 @@ test('Successful submission redirects to the confirmation page', async () => {
   expect(res._getRedirectUrl()).toBe('/feedback/confirmation')
 
   // Form data is saved in the database
+  expect(createReferenceNumber).toHaveBeenCalledWith({ prefix: 'F' })
   expect(prismaMock.feedback.create).toHaveBeenCalledWith({
     data: { ...body, referenceNumber: 'mock-ref-number' },
   })

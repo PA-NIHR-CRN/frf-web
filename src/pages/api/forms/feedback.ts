@@ -6,7 +6,7 @@ import { ZodError } from 'zod'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
-import { createReferenceNumber } from '@/utils'
+import { createReferenceNumber } from '@/utils/generic.utils'
 import { feedbackSchema } from '@/utils/schemas/feedback.schema'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -31,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    const referenceNumber = createReferenceNumber()
+    const referenceNumber = createReferenceNumber({ prefix: 'F' })
 
     await feedbackSchema.parse(req.body)
 
