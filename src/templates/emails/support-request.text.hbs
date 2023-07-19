@@ -16,7 +16,7 @@ Name: {{ fullName }}
 
 Email address: {{ emailAddress }}
 
-Phone number: {{ phoneNumber }}
+Phone number: {{#if phoneNumber}}{{phoneNumber}}{{else}}Not provided{{/if}}
 
 Role: {{ jobRole }}
 

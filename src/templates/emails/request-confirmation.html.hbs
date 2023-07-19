@@ -24,7 +24,7 @@
 
       <p>Email address: {{emailAddress}}</p>
 
-      <p>Phone number: {{phoneNumber}}</p>
+      <p>Phone number: {{#if phoneNumber}}{{phoneNumber}}{{else}}Not provided{{/if}}</p>
 
       <p>Role: {{jobRole}}</p>
 
