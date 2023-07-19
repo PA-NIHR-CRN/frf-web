@@ -25,3 +25,15 @@ model SupportRequest {
   protocolReference  String?
   cpmsId             String?
 }
+
+model Feedback {
+  id                 Int      @id @default(autoincrement())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  referenceNumber    String   @default("")
+  helpfulness        String
+  suggestions        String
+  fullName           String?
+  emailAddress       String?
+  organisationName   String?
+}

@@ -4,9 +4,9 @@ import { ZodError } from 'zod'
 // import { contentfulService } from '@/lib/contentful'
 // import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
-// import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
-// import { createReferenceNumber, getNotificationMessages } from '@/utils'
+import { createReferenceNumber } from '@/utils/generic.utils'
 import { feedbackSchema } from '@/utils/schemas/feedback.schema'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -31,12 +31,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
-    // const referenceNumber = createReferenceNumber()
+    const referenceNumber = createReferenceNumber({ prefix: 'F' })
 
     await feedbackSchema.parse(req.body)
 
-    // delete req.body.reCaptchaToken
-    // await prisma.supportRequest.create({ data: { ...req.body, referenceNumber } })
+    delete req.body.reCaptchaToken
+    await prisma.feedback.create({ data: { ...req.body, referenceNumber } })
 
     // Send emails
     // const contacts = await contentfulService.getEmailContacts()
