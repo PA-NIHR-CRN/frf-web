@@ -3,7 +3,7 @@ import axios from 'axios'
 import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 
-import { render, screen, within } from '@/config/test-utils'
+import { render, within } from '@/config/test-utils'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import ContactResearchSupport, {
   ContactResearchSupportProps,
@@ -35,37 +35,37 @@ test('Initial form state', async () => {
     props: ContactResearchSupportProps
   }
 
-  render(<ContactResearchSupport {...props} />)
+  const { getByLabelText, getByRole, getByText } = render(<ContactResearchSupport {...props} />)
 
-  expect(screen.getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
 
   expect(
-    screen.getByText(
+    getByText(
       'The UK offers multiple services and teams of professionals who can support you with identifying appropriate data services or wider support with planning and delivering your study in the UK.'
     )
   ).toBeInTheDocument()
 
   expect(
-    screen.getByText(
+    getByText(
       'If you would like to access this support please complete the form below and a professional from the relevant research support infrastructure will get in touch to respond to your request'
     )
   ).toBeInTheDocument()
 
-  expect(screen.getByRole('group', { name: 'About your enquiry' })).toBeInTheDocument()
+  expect(getByRole('group', { name: 'About your enquiry' })).toBeInTheDocument()
 
   // Is your enquiry about
-  expect(screen.getByLabelText('Is your enquiry about')).toBeInTheDocument()
-  expect(screen.getByLabelText('Is your enquiry about')).toBeRequired()
-  expect(screen.getByLabelText('Identifying appropriate data services')).toBeInTheDocument()
-  expect(screen.getByLabelText('General enquiry about research support')).toBeInTheDocument()
+  expect(getByLabelText('Is your enquiry about')).toBeInTheDocument()
+  expect(getByLabelText('Is your enquiry about')).toBeRequired()
+  expect(getByLabelText('Identifying appropriate data services')).toBeInTheDocument()
+  expect(getByLabelText('General enquiry about research support')).toBeInTheDocument()
 
   // Please provide a summary of the support you need
-  expect(screen.getByLabelText('Please provide a summary of the support you need')).toBeInTheDocument()
-  expect(screen.getByLabelText('Please provide a summary of the support you need')).toBeRequired()
-  expect(screen.getByText('You have 500 characters remaining')).toBeInTheDocument()
+  expect(getByLabelText('Please provide a summary of the support you need')).toBeInTheDocument()
+  expect(getByLabelText('Please provide a summary of the support you need')).toBeRequired()
+  expect(getByText('You have 1200 characters remaining')).toBeInTheDocument()
 
   // Fieldset - About you
-  const about = within(screen.getByRole('group', { name: 'About you' }))
+  const about = within(getByRole('group', { name: 'About you' }))
 
   // Name
   expect(about.getByLabelText('Full name')).toBeInTheDocument()
@@ -76,8 +76,8 @@ test('Initial form state', async () => {
   expect(about.getByLabelText('Email address')).toBeRequired()
 
   // Phone
-  expect(about.getByLabelText('Telephone')).toBeInTheDocument()
-  expect(about.getByLabelText('Telephone')).toBeRequired()
+  expect(about.getByLabelText('Telephone (optional)')).toBeInTheDocument()
+  expect(about.getByLabelText('Telephone (optional)')).not.toBeRequired()
   expect(about.getByText('For international numbers please include the country code')).toBeInTheDocument()
 
   // Job
@@ -95,7 +95,7 @@ test('Initial form state', async () => {
   expect(about.getByLabelText('Non-commercial')).toBeInTheDocument()
 
   // Fieldset - About your research
-  const research = within(screen.getByRole('group', { name: 'About your research' }))
+  const research = within(getByRole('group', { name: 'About your research' }))
 
   // Region
   const regionSelect = research.getByLabelText('Which region will take a lead in supporting your research?')
@@ -139,9 +139,9 @@ test('Initial form state', async () => {
   ).toBeInTheDocument()
 
   // Form CTAs
-  expect(screen.getByText('We will email you a copy of this form for your records')).toBeInTheDocument()
-  expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Cancel' })).toHaveAttribute('href', '/')
+  expect(getByText('We will email you a copy of this form for your records')).toBeInTheDocument()
+  expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument()
+  expect(getByRole('link', { name: 'Cancel' })).toHaveAttribute('href', '/')
 })
 
 test('Successful submission redirects to confirmation page', async () => {
@@ -158,29 +158,31 @@ test('Successful submission redirects to confirmation page', async () => {
     props: ContactResearchSupportProps
   }
 
-  render(ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false }))
+  const { getByLabelText, getByRole } = render(
+    ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false })
+  )
 
-  expect(screen.getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
 
-  await user.click(screen.getByLabelText('General enquiry about research support'))
+  await user.click(getByLabelText('General enquiry about research support'))
   await user.type(
-    screen.getByLabelText('Please provide a summary of the support you need'),
+    getByLabelText('Please provide a summary of the support you need'),
     'Looking for help on my research study'
   )
-  await user.type(screen.getByLabelText('Full name'), 'John Terry')
-  await user.type(screen.getByLabelText('Email address'), 'testemail@nihr.ac.ul')
-  await user.type(screen.getByLabelText('Telephone'), '+447552121212')
-  await user.type(screen.getByLabelText('Job role'), 'Researcher')
-  await user.type(screen.getByLabelText('Organisation name'), 'NIHR')
-  await user.click(screen.getByLabelText('Commercial'))
-  await user.selectOptions(screen.getByLabelText('Which region will take a lead in supporting your research?'), [
+  await user.type(getByLabelText('Full name'), 'John Terry')
+  await user.type(getByLabelText('Email address'), 'testemail@nihr.ac.ul')
+  await user.type(getByLabelText('Telephone (optional)'), '+447552121212')
+  await user.type(getByLabelText('Job role'), 'Researcher')
+  await user.type(getByLabelText('Organisation name'), 'NIHR')
+  await user.click(getByLabelText('Commercial'))
+  await user.selectOptions(getByLabelText('Which region will take a lead in supporting your research?'), [
     'Mock region 2',
   ])
-  await user.type(screen.getByLabelText('Study title (optional)'), 'My Test Study')
-  await user.type(screen.getByLabelText('Protocol reference (optional)'), 'test-protocol-ref')
-  await user.type(screen.getByLabelText('CPMS ID (optional)'), 'test-cpms-id')
+  await user.type(getByLabelText('Study title (optional)'), 'My Test Study')
+  await user.type(getByLabelText('Protocol reference (optional)'), 'test-protocol-ref')
+  await user.type(getByLabelText('CPMS ID (optional)'), 'test-cpms-id')
 
-  await user.click(screen.getByRole('button', { name: 'Submit' }))
+  await user.click(getByRole('button', { name: 'Submit' }))
 
   expect(mockRouter.pathname).toBe('/contact-research-support/confirmation')
 })
@@ -199,33 +201,35 @@ test('Failed submission due to a misc server error shows an error at the top of 
     props: ContactResearchSupportProps
   }
 
-  render(ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false }))
+  const { getByLabelText, getByRole } = render(
+    ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false })
+  )
 
-  expect(screen.getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
 
-  await user.click(screen.getByLabelText('General enquiry about research support'))
+  await user.click(getByLabelText('General enquiry about research support'))
   await user.type(
-    screen.getByLabelText('Please provide a summary of the support you need'),
+    getByLabelText('Please provide a summary of the support you need'),
     'Looking for help on my research study'
   )
-  await user.type(screen.getByLabelText('Full name'), 'John Terry')
-  await user.type(screen.getByLabelText('Email address'), 'testemail@nihr.ac.ul')
-  await user.type(screen.getByLabelText('Telephone'), '+447552121212')
-  await user.type(screen.getByLabelText('Job role'), 'Researcher')
-  await user.type(screen.getByLabelText('Organisation name'), 'NIHR')
-  await user.click(screen.getByLabelText('Commercial'))
-  await user.selectOptions(screen.getByLabelText('Which region will take a lead in supporting your research?'), [
+  await user.type(getByLabelText('Full name'), 'John Terry')
+  await user.type(getByLabelText('Email address'), 'testemail@nihr.ac.ul')
+  await user.type(getByLabelText('Telephone (optional)'), '+447552121212')
+  await user.type(getByLabelText('Job role'), 'Researcher')
+  await user.type(getByLabelText('Organisation name'), 'NIHR')
+  await user.click(getByLabelText('Commercial'))
+  await user.selectOptions(getByLabelText('Which region will take a lead in supporting your research?'), [
     'Mock region 2',
   ])
-  await user.type(screen.getByLabelText('Study title (optional)'), 'My Test Study')
-  await user.type(screen.getByLabelText('Protocol reference (optional)'), 'test-protocol-ref')
-  await user.type(screen.getByLabelText('CPMS ID (optional)'), 'test-cpms-id')
+  await user.type(getByLabelText('Study title (optional)'), 'My Test Study')
+  await user.type(getByLabelText('Protocol reference (optional)'), 'test-protocol-ref')
+  await user.type(getByLabelText('CPMS ID (optional)'), 'test-cpms-id')
 
-  await user.click(screen.getByRole('button', { name: 'Submit' }))
+  await user.click(getByRole('button', { name: 'Submit' }))
 
   expect(mockRouter.asPath).toBe('/contact-research-support?fatal=1')
 
-  const alert = screen.getByRole('alert')
+  const alert = getByRole('alert')
   expect(
     within(alert).getByText('An unexpected error occured whilst processing the form, please try again later.')
   ).toBeInTheDocument()
@@ -239,12 +243,16 @@ test('Form submission with client side validation errors', async () => {
     props: ContactResearchSupportProps
   }
 
-  render(ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false }))
+  const { getByLabelText, getByRole } = render(
+    ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false })
+  )
 
-  await user.click(screen.getByRole('button', { name: 'Submit' }))
+  await userEvent.type(getByLabelText('Telephone (optional)'), 'Fake number')
+
+  await user.click(getByRole('button', { name: 'Submit' }))
 
   // Summary errors
-  const alert = screen.getByRole('alert', { name: 'There is a problem' })
+  const alert = getByRole('alert', { name: 'There is a problem' })
   expect(within(alert).getByRole('link', { name: 'Select the type of enquiry' })).toHaveAttribute(
     'href',
     '#enquiryType'
@@ -275,26 +283,26 @@ test('Form submission with client side validation errors', async () => {
   expect(within(alert).getByRole('link', { name: 'Select a lead region' })).toHaveAttribute('href', '#lcrn')
 
   // Field errors
-  expect(screen.getByLabelText('Is your enquiry about')).toHaveErrorMessage('Error: Select the type of enquiry')
-  expect(screen.getByLabelText('Please provide a summary of the support you need')).toHaveErrorMessage(
+  expect(getByLabelText('Is your enquiry about')).toHaveErrorMessage('Error: Select the type of enquiry')
+  expect(getByLabelText('Please provide a summary of the support you need')).toHaveErrorMessage(
     'Error: Enter a summary of the support you need'
   )
-  expect(screen.getByLabelText('Full name')).toHaveErrorMessage('Error: Enter a full name')
-  expect(screen.getByLabelText('Email address')).toHaveErrorMessage('Error: Enter a valid email address')
-  expect(screen.getByLabelText('Telephone')).toHaveErrorMessage(
+  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter a full name')
+  expect(getByLabelText('Email address')).toHaveErrorMessage('Error: Enter a valid email address')
+  expect(getByLabelText('Telephone (optional)')).toHaveErrorMessage(
     'Error: Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192'
   )
-  expect(screen.getByLabelText('Job role')).toHaveErrorMessage('Error: Enter a job role')
-  expect(screen.getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter an organisation name')
-  expect(screen.getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Select the type of organisation')
-  expect(screen.getByLabelText('Which region will take a lead in supporting your research?')).toHaveErrorMessage(
+  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter a job role')
+  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter an organisation name')
+  expect(getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Select the type of organisation')
+  expect(getByLabelText('Which region will take a lead in supporting your research?')).toHaveErrorMessage(
     'Error: Select a lead region'
   )
 })
 
 test('Server side field validation errors', async () => {
   mockRouter.push(
-    '?enquiryTypeError=Select+the+type+of+enquiry&supportDescriptionError=Enter+a+summary+of+the+support+you+need&fullNameError=Full+name+is+required&emailAddressError=Email+address+is+required&phoneNumberError=Telephone+is+not+a+recognised+format&jobRoleError=Job+role+is+required&organisationNameError=Organisation+name+is+required&organisationTypeError=Organisation+type+is+required&lcrnError=Which+region+will+take+a+lead+in+supporting+your+research+is+required'
+    '?enquiryTypeError=Select+the+type+of+enquiry&supportDescriptionError=Enter+a+summary+of+the+support+you+need&fullNameError=Full+name+is+required&emailAddressError=Email+address+is+required&jobRoleError=Job+role+is+required&organisationNameError=Organisation+name+is+required&organisationTypeError=Organisation+type+is+required&lcrnError=Which+region+will+take+a+lead+in+supporting+your+research+is+required'
   )
 
   const context = { query: {} } as unknown as GetServerSidePropsContext
@@ -302,10 +310,12 @@ test('Server side field validation errors', async () => {
     props: ContactResearchSupportProps
   }
 
-  render(ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false }))
+  const { getByLabelText, getByRole } = render(
+    ContactResearchSupport.getLayout(<ContactResearchSupport {...props} />, { ...props, isPreviewMode: false })
+  )
 
   // Summary errors
-  const alert = screen.getByRole('alert', { name: 'There is a problem' })
+  const alert = getByRole('alert', { name: 'There is a problem' })
   expect(within(alert).getByRole('link', { name: 'Select the type of enquiry' })).toHaveAttribute(
     'href',
     '#enquiryType'
@@ -318,10 +328,6 @@ test('Server side field validation errors', async () => {
   expect(within(alert).getByRole('link', { name: 'Email address is required' })).toHaveAttribute(
     'href',
     '#emailAddress'
-  )
-  expect(within(alert).getByRole('link', { name: 'Telephone is not a recognised format' })).toHaveAttribute(
-    'href',
-    '#phoneNumber'
   )
   expect(within(alert).getByRole('link', { name: 'Job role is required' })).toHaveAttribute('href', '#jobRole')
   expect(within(alert).getByRole('link', { name: 'Organisation name is required' })).toHaveAttribute(
@@ -337,17 +343,17 @@ test('Server side field validation errors', async () => {
   ).toHaveAttribute('href', '#lcrn')
 
   // Field errors
-  expect(screen.getByLabelText('Is your enquiry about')).toHaveErrorMessage('Error: Select the type of enquiry')
-  expect(screen.getByLabelText('Please provide a summary of the support you need')).toHaveErrorMessage(
+  expect(getByLabelText('Is your enquiry about')).toHaveErrorMessage('Error: Select the type of enquiry')
+  expect(getByLabelText('Please provide a summary of the support you need')).toHaveErrorMessage(
     'Error: Enter a summary of the support you need'
   )
-  expect(screen.getByLabelText('Full name')).toHaveErrorMessage('Error: Full name is required')
-  expect(screen.getByLabelText('Email address')).toHaveErrorMessage('Error: Email address is required')
-  expect(screen.getByLabelText('Telephone')).toHaveErrorMessage('Error: Telephone is not a recognised format')
-  expect(screen.getByLabelText('Job role')).toHaveErrorMessage('Error: Job role is required')
-  expect(screen.getByLabelText('Organisation name')).toHaveErrorMessage('Error: Organisation name is required')
-  expect(screen.getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Organisation type is required')
-  expect(screen.getByLabelText('Which region will take a lead in supporting your research?')).toHaveErrorMessage(
+  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Full name is required')
+  expect(getByLabelText('Email address')).toHaveErrorMessage('Error: Email address is required')
+  expect(getByLabelText('Telephone (optional)')).not.toHaveErrorMessage()
+  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Job role is required')
+  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Organisation name is required')
+  expect(getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Organisation type is required')
+  expect(getByLabelText('Which region will take a lead in supporting your research?')).toHaveErrorMessage(
     'Error: Which region will take a lead in supporting your research is required'
   )
 })

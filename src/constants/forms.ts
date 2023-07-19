@@ -1,7 +1,7 @@
 /**
  * Max amount of characters for a textarea
  */
-export const TEXTAREA_MAX_CHARACTERS = 500
+export const TEXTAREA_MAX_CHARACTERS = 1200
 
 /**
  * Max amount of words for a textarea

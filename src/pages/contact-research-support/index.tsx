@@ -108,7 +108,8 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 {...register('emailAddress')}
               />
               <TextInput
-                label="Telephone"
+                required={false}
+                label="Telephone (optional)"
                 hint="For international numbers please include the country code"
                 errors={errors}
                 defaultValue={defaultValues?.phoneNumber}
