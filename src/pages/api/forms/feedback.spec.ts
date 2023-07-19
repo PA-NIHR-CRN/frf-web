@@ -7,7 +7,7 @@ import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 // import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { defaultMock } from '@/mocks/contactResearchSupport'
-// import { prismaMock } from '@/mocks/prisma'
+import { prismaMock } from '@/mocks/prisma'
 import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { createReferenceNumber, setupMockServer } from '@/utils'
 import { FeedbackInputs } from '@/utils/schemas/feedback.schema'
@@ -58,9 +58,9 @@ test('Successful submission redirects to the confirmation page', async () => {
   expect(res._getRedirectUrl()).toBe('/feedback/confirmation')
 
   // Form data is saved in the database
-  // expect(prismaMock.supportRequest.create).toHaveBeenCalledWith({
-  //   data: { ...body, referenceNumber: 'mock-ref-number' },
-  // })
+  expect(prismaMock.feedback.create).toHaveBeenCalledWith({
+    data: { ...body, referenceNumber: 'mock-ref-number' },
+  })
 
   // Email notifications are sent with a reference number
   // expect(sendEmailSpy).toHaveBeenCalledTimes(2)
