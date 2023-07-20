@@ -39,11 +39,64 @@ export default class ProvidersPage {
   readonly dspListTypeDataHeader: Locator
   readonly dspListTypeDataList: Locator
 
+  //Filter Objects
+  readonly dspFilterMobileBtnOpen: Locator
+  readonly dspFilterMobileBtnClose: Locator
+  readonly dspFilterMobileIconClose: Locator
+  readonly dspFilterPanel: Locator
+  readonly dspFilterServiceTitle: Locator
+  readonly dspFilterCoverageTitle: Locator
+  readonly dspFilterCostsTitle: Locator
+  readonly dspFilterOptionFind: Locator
+  readonly dspFilterOptionFindLbl: Locator
+  readonly dspFilterOptionRecruit: Locator
+  readonly dspFilterOptionRecruitLbl: Locator
+  readonly dspFilterOptionFollow: Locator
+  readonly dspFilterOptionFollowLbl: Locator
+  readonly dspFilterOptionUk: Locator
+  readonly dspFilterOptionUkLbl: Locator
+  readonly dspFilterOptionEngland: Locator
+  readonly dspFilterOptionEnglandLbl: Locator
+  readonly dspFilterOptionNi: Locator
+  readonly dspFilterOptionNiLbl: Locator
+  readonly dspFilterOptionScotland: Locator
+  readonly dspFilterOptionScotlandLbl: Locator
+  readonly dspFilterOptionWales: Locator
+  readonly dspFilterOptionWalesLbl: Locator
+  readonly dspFilterOptionRegional: Locator
+  readonly dspFilterOptionRegionalLbl: Locator
+  readonly dspFilterOptionFindFocAll: Locator
+  readonly dspFilterOptionFindFocAllLbl: Locator
+  readonly dspFilterOptionFindFocNonComm: Locator
+  readonly dspFilterOptionFindFocNonCommLbl: Locator
+  readonly dspFilterOptionFindChargeable: Locator
+  readonly dspFilterOptionFindChargeableLbl: Locator
+  readonly dspFilterOptionRecruitFocAll: Locator
+  readonly dspFilterOptionRecruitFocAllLbl: Locator
+  readonly dspFilterOptionRecruitFocNonComm: Locator
+  readonly dspFilterOptionRecruitFocNonCommLbl: Locator
+  readonly dspFilterOptionRecruitChargeable: Locator
+  readonly dspFilterOptionRecruitChargeableLbl: Locator
+  readonly dspFilterOptionFollowFocAll: Locator
+  readonly dspFilterOptionFollowFocAllLbl: Locator
+  readonly dspFilterOptionFollowFocNonComm: Locator
+  readonly dspFilterOptionFollowFocNonCommLbl: Locator
+  readonly dspFilterOptionFollowChargeable: Locator
+  readonly dspFilterOptionFollowChargeableLbl: Locator
+
+  readonly dspFilterServiceSection: Locator
+  readonly dspFilterCoverageSection: Locator
+  readonly dspFilterCostsSection: Locator
+
+  readonly dspFilterOptionCostsFindHeader: Locator
+  readonly dspFilterOptionCostsRecruitHeader: Locator
+  readonly dspFilterOptionCostsFollowHeader: Locator
+
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page
 
-    //Locators
+    //List Locators
     this.btnViewMoreDetails = page.locator('a[class="govuk-button mb-0 whitespace-nowrap"]')
     this.dspListArticle = page.locator('ol[class="mt-5"]')
     this.dspListPageTitle = page.locator('p[class="govuk-heading-m mb-0 whitespace-nowrap"]')
@@ -86,6 +139,71 @@ export default class ProvidersPage {
     )
     this.dspListTypeDataList = page.locator(
       'div[class="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0"] ul[class="list-disc pl-4"]'
+    )
+
+    //Filter Locators
+    this.dspFilterMobileBtnOpen = page.locator('a[id="show-filters"]')
+    this.dspFilterMobileBtnClose = page.locator(
+      'a[href="#show-filters"][class=" govuk-button govuk-button--secondary w-full text-center md:hidden"]'
+    )
+    this.dspFilterMobileIconClose = page.locator('a[href="#show-filters"][aria-label="Close filters"]')
+    this.dspFilterPanel = page.locator('div[id="filters"]')
+    this.dspFilterServiceTitle = page.locator('details span[class="govuk-body m-0"]', { hasText: 'Type of service' })
+    this.dspFilterServiceSection = page.locator('legend[class="govuk-visually-hidden"]', {
+      hasText: 'Type of service filters',
+    })
+    this.dspFilterCoverageTitle = page.locator('details span[class="govuk-body m-0"]', {
+      hasText: 'Geographical coverage',
+    })
+    this.dspFilterCoverageSection = page.locator('legend[class="govuk-visually-hidden"]', {
+      hasText: 'Geographical coverage filters',
+    })
+    this.dspFilterCostsTitle = page.locator('details span[class="govuk-body m-0"]', { hasText: 'Costs' })
+    this.dspFilterCostsSection = page.locator('legend[class="govuk-visually-hidden"]', { hasText: 'Costs filters' })
+    this.dspFilterOptionFind = page.locator('input[name="serviceType"][id=":Rqebb6:"]')
+    this.dspFilterOptionFindLbl = page.locator('label[for=":Rqebb6:"]')
+    this.dspFilterOptionRecruit = page.locator('input[name="serviceType"][id=":R1aebb6:"]')
+    this.dspFilterOptionRecruitLbl = page.locator('label[for=":R1aebb6:"]')
+    this.dspFilterOptionFollow = page.locator('input[name="serviceType"][id=":R1qebb6:"]')
+    this.dspFilterOptionFollowLbl = page.locator('label[for=":R1qebb6:"]')
+    this.dspFilterOptionUk = page.locator('input[name="geography"][id=":R2qibb6:"]')
+    this.dspFilterOptionUkLbl = page.locator('label[for=":R2qibb6:"]')
+    this.dspFilterOptionEngland = page.locator('input[name="geography"][id=":R4qibb6:"]')
+    this.dspFilterOptionEnglandLbl = page.locator('label[for=":R4qibb6:"]')
+    this.dspFilterOptionNi = page.locator('input[name="geography"][id=":R6qibb6:"]')
+    this.dspFilterOptionNiLbl = page.locator('label[for=":R6qibb6:"]')
+    this.dspFilterOptionScotland = page.locator('input[name="geography"][id=":R8qibb6:"]')
+    this.dspFilterOptionScotlandLbl = page.locator('label[for=":R8qibb6:"]')
+    this.dspFilterOptionWales = page.locator('input[name="geography"][id=":Raqibb6:"]')
+    this.dspFilterOptionWalesLbl = page.locator('label[for=":Raqibb6:"]')
+    this.dspFilterOptionRegional = page.locator('input[name="excludeRegional"][id=":R1qibb6:"]')
+    this.dspFilterOptionRegionalLbl = page.locator('label[for=":R1qibb6:"]')
+    this.dspFilterOptionFindFocAll = page.locator('input[name="costs"][id=":Rcqmbb6:"]')
+    this.dspFilterOptionFindFocAllLbl = page.locator('label[for=":Rcqmbb6:"]')
+    this.dspFilterOptionFindFocNonComm = page.locator('input[name="costs"][id=":Rkqmbb6:"]')
+    this.dspFilterOptionFindFocNonCommLbl = page.locator('label[for=":Rkqmbb6:"]')
+    this.dspFilterOptionFindChargeable = page.locator('input[name="costs"][id=":Rsqmbb6:"]')
+    this.dspFilterOptionFindChargeableLbl = page.locator('label[for=":Rsqmbb6:"]')
+    this.dspFilterOptionRecruitFocAll = page.locator('input[name="costs"][id=":Rdambb6:"]')
+    this.dspFilterOptionRecruitFocAllLbl = page.locator('label[for=":Rdambb6:"]')
+    this.dspFilterOptionRecruitFocNonComm = page.locator('input[name="costs"][id=":Rlambb6:"]')
+    this.dspFilterOptionRecruitFocNonCommLbl = page.locator('label[for=":Rlambb6:"]')
+    this.dspFilterOptionRecruitChargeable = page.locator('input[name="costs"][id=":Rtambb6:"]')
+    this.dspFilterOptionRecruitChargeableLbl = page.locator('label[for=":Rtambb6:"]')
+    this.dspFilterOptionFollowFocAll = page.locator('input[name="costs"][id=":Rdqmbb6:"]')
+    this.dspFilterOptionFollowFocAllLbl = page.locator('label[for=":Rdqmbb6:"]')
+    this.dspFilterOptionFollowFocNonComm = page.locator('input[name="costs"][id=":Rlqmbb6:"]')
+    this.dspFilterOptionFollowFocNonCommLbl = page.locator('label[for=":Rlqmbb6:"]')
+    this.dspFilterOptionFollowChargeable = page.locator('input[name="costs"][id=":Rtqmbb6:"]')
+    this.dspFilterOptionFollowChargeableLbl = page.locator('label[for=":Rtqmbb6:"]')
+    this.dspFilterOptionCostsFindHeader = page.locator(
+      'legend[class="govuk-fieldset__legend bg-[var(--colour-find-background)] px-7 py-1 text-sm font-bold uppercase tracking-wide text-navy-100"]'
+    )
+    this.dspFilterOptionCostsRecruitHeader = page.locator(
+      'legend[class="govuk-fieldset__legend bg-[var(--colour-recruit-background)] px-7 py-1 text-sm font-bold uppercase tracking-wide text-navy-100"]'
+    )
+    this.dspFilterOptionCostsFollowHeader = page.locator(
+      'legend[class="govuk-fieldset__legend bg-[var(--colour-follow-up-background)] px-7 py-1 text-sm font-bold uppercase tracking-wide text-navy-100"]'
     )
   }
 
@@ -280,5 +398,218 @@ export default class ProvidersPage {
     await expect(this.dspListTypeDataList.nth(0).locator('li')).toHaveCount(3)
     await expect(this.dspListTypeDataList.nth(0).locator('li').nth(0)).toHaveText('Primary care')
     await expect(this.dspListTypeDataList.nth(0).locator('li').nth(2)).toHaveText('Participant reported')
+  }
+
+  async assertMobileFilterToggle(buttonType: string) {
+    if (buttonType.toLowerCase() == 'close') {
+      await expect(this.dspFilterMobileBtnClose).toBeVisible()
+      await expect(this.dspFilterMobileBtnClose).toHaveText('Close filters')
+      await expect(this.dspFilterMobileIconClose).toBeVisible()
+      await expect(this.dspFilterMobileBtnOpen).toBeHidden()
+    } else {
+      await expect(this.dspFilterMobileBtnOpen).toBeVisible()
+      await expect(this.dspFilterMobileBtnOpen).toHaveText('Open filters')
+      await expect(this.dspFilterMobileIconClose).toBeHidden()
+      await expect(this.dspFilterMobileBtnClose).toBeHidden()
+    }
+  }
+
+  async assertFilterPanelVisibility(filterState: string) {
+    if (filterState.toLowerCase() == 'visible') {
+      await expect(this.dspFilterPanel).toBeVisible()
+    } else {
+      await expect(this.dspFilterPanel).toBeHidden()
+    }
+  }
+
+  async assertFilterCategoryPresent(category: string) {
+    switch (category.toLowerCase()) {
+      case 'type of service':
+        await expect(this.dspFilterServiceTitle).toBeVisible()
+        break
+      case 'geographical coverage':
+        await expect(this.dspFilterCoverageTitle).toBeVisible()
+        break
+      case 'costs':
+        await expect(this.dspFilterCostsTitle).toBeVisible()
+        break
+      default:
+        throw new Error(`${category} is not a valid Filter Category option`)
+    }
+  }
+
+  async assertFilterOptionPresent(option: string) {
+    switch (option.toLowerCase()) {
+      case 'find':
+        await expect(this.dspFilterOptionFind).toBeVisible()
+        await expect(this.dspFilterOptionFindLbl).toBeVisible()
+        await expect(this.dspFilterOptionFind).toHaveValue('Find')
+        await expect(this.dspFilterOptionFindLbl).toHaveText('Find')
+        break
+      case 'recruit':
+        await expect(this.dspFilterOptionRecruit).toBeVisible()
+        await expect(this.dspFilterOptionRecruitLbl).toBeVisible()
+        await expect(this.dspFilterOptionRecruit).toHaveValue('Recruit')
+        await expect(this.dspFilterOptionRecruitLbl).toHaveText('Recruit')
+        break
+      case 'follow-up':
+        await expect(this.dspFilterOptionFollow).toBeVisible()
+        await expect(this.dspFilterOptionFollowLbl).toBeVisible()
+        await expect(this.dspFilterOptionFollow).toHaveValue('Follow-Up')
+        await expect(this.dspFilterOptionFollowLbl).toHaveText('Follow-Up')
+        break
+      case 'uk wide':
+        await expect(this.dspFilterOptionUk).toBeVisible()
+        await expect(this.dspFilterOptionUkLbl).toBeVisible()
+        await expect(this.dspFilterOptionUk).toHaveValue('UK wide')
+        await expect(this.dspFilterOptionUkLbl).toHaveText('UK wide')
+        break
+      case 'england':
+        await expect(this.dspFilterOptionEngland).toBeVisible()
+        await expect(this.dspFilterOptionEnglandLbl).toBeVisible()
+        await expect(this.dspFilterOptionEngland).toHaveValue('England')
+        await expect(this.dspFilterOptionEnglandLbl).toHaveText('England')
+        break
+      case 'northern ireland':
+        await expect(this.dspFilterOptionNi).toBeVisible()
+        await expect(this.dspFilterOptionNiLbl).toBeVisible()
+        await expect(this.dspFilterOptionNi).toHaveValue('Northern Ireland')
+        await expect(this.dspFilterOptionNiLbl).toHaveText('Northern Ireland')
+        break
+      case 'scotland':
+        await expect(this.dspFilterOptionScotland).toBeVisible()
+        await expect(this.dspFilterOptionScotlandLbl).toBeVisible()
+        await expect(this.dspFilterOptionScotland).toHaveValue('Scotland')
+        await expect(this.dspFilterOptionScotlandLbl).toHaveText('Scotland')
+        break
+      case 'wales':
+        await expect(this.dspFilterOptionWales).toBeVisible()
+        await expect(this.dspFilterOptionWalesLbl).toBeVisible()
+        await expect(this.dspFilterOptionWales).toHaveValue('Wales')
+        await expect(this.dspFilterOptionWalesLbl).toHaveText('Wales')
+        break
+      case 'exclude regional':
+        await expect(this.dspFilterOptionRegional).toBeVisible()
+        await expect(this.dspFilterOptionRegionalLbl).toBeVisible()
+        await expect(this.dspFilterOptionRegional).toHaveValue('true')
+        await expect(this.dspFilterOptionRegionalLbl).toHaveText('Exclude regional only services')
+        break
+      case 'find foc all':
+        await expect(this.dspFilterOptionFindFocAll).toBeVisible()
+        await expect(this.dspFilterOptionFindFocAllLbl).toBeVisible()
+        await expect(this.dspFilterOptionFindFocAll).toHaveValue('Find: Free of charge (All studies)')
+        await expect(this.dspFilterOptionFindFocAllLbl).toHaveText('Free of charge (All studies)')
+        break
+      case 'find foc non-comm':
+        await expect(this.dspFilterOptionFindFocNonComm).toBeVisible()
+        await expect(this.dspFilterOptionFindFocNonCommLbl).toBeVisible()
+        await expect(this.dspFilterOptionFindFocNonComm).toHaveValue(
+          'Find: Free of charge (non-commercial studies only)'
+        )
+        await expect(this.dspFilterOptionFindFocNonCommLbl).toHaveText('Free of charge (non-commercial studies only)')
+        break
+      case 'find chargeable':
+        await expect(this.dspFilterOptionFindChargeable).toBeVisible()
+        await expect(this.dspFilterOptionFindChargeableLbl).toBeVisible()
+        await expect(this.dspFilterOptionFindChargeable).toHaveValue('Find: Chargeable service')
+        await expect(this.dspFilterOptionFindChargeableLbl).toHaveText('Chargeable service')
+        break
+      case 'recruit foc all':
+        await expect(this.dspFilterOptionRecruitFocAll).toBeVisible()
+        await expect(this.dspFilterOptionRecruitFocAllLbl).toBeVisible()
+        await expect(this.dspFilterOptionRecruitFocAll).toHaveValue('Recruit: Free of charge (All studies)')
+        await expect(this.dspFilterOptionRecruitFocAllLbl).toHaveText('Free of charge (All studies)')
+        break
+      case 'recruit foc non-comm':
+        await expect(this.dspFilterOptionRecruitFocNonComm).toBeVisible()
+        await expect(this.dspFilterOptionRecruitFocNonCommLbl).toBeVisible()
+        await expect(this.dspFilterOptionRecruitFocNonComm).toHaveValue(
+          'Recruit: Free of charge (non-commercial studies only)'
+        )
+        await expect(this.dspFilterOptionRecruitFocNonCommLbl).toHaveText(
+          'Free of charge (non-commercial studies only)'
+        )
+        break
+      case 'recruit chargeable':
+        await expect(this.dspFilterOptionRecruitChargeable).toBeVisible()
+        await expect(this.dspFilterOptionRecruitChargeableLbl).toBeVisible()
+        await expect(this.dspFilterOptionRecruitChargeable).toHaveValue('Recruit: Chargeable service')
+        await expect(this.dspFilterOptionRecruitChargeableLbl).toHaveText('Chargeable service')
+        break
+      case 'follow-up foc all':
+        await expect(this.dspFilterOptionFollowFocAll).toBeVisible()
+        await expect(this.dspFilterOptionFollowFocAllLbl).toBeVisible()
+        await expect(this.dspFilterOptionFollowFocAll).toHaveValue('Follow-Up: Free of charge (All studies)')
+        await expect(this.dspFilterOptionFollowFocAllLbl).toHaveText('Free of charge (All studies)')
+        break
+      case 'follow-up foc non-comm':
+        await expect(this.dspFilterOptionFollowFocNonComm).toBeVisible()
+        await expect(this.dspFilterOptionFollowFocNonCommLbl).toBeVisible()
+        await expect(this.dspFilterOptionFollowFocNonComm).toHaveValue(
+          'Follow-Up: Free of charge (non-commercial studies only)'
+        )
+        await expect(this.dspFilterOptionFollowFocNonCommLbl).toHaveText('Free of charge (non-commercial studies only)')
+        break
+      case 'follow-up chargeable':
+        await expect(this.dspFilterOptionFollowChargeable).toBeVisible()
+        await expect(this.dspFilterOptionFollowChargeableLbl).toBeVisible()
+        await expect(this.dspFilterOptionFollowChargeable).toHaveValue('Follow-Up: Chargeable service')
+        await expect(this.dspFilterOptionFollowChargeableLbl).toHaveText('Chargeable service')
+        break
+      default:
+        throw new Error(`${option} is not a valid Filter option`)
+    }
+  }
+
+  async assertFilterCategoryHeaderPresent(header: string) {
+    switch (header.toLowerCase()) {
+      case 'find':
+        await expect(this.dspFilterOptionCostsFindHeader).toBeVisible()
+        await expect(this.dspFilterOptionCostsFindHeader).toHaveText('Find')
+        break
+      case 'recruit':
+        await expect(this.dspFilterOptionCostsRecruitHeader).toBeVisible()
+        await expect(this.dspFilterOptionCostsRecruitHeader).toHaveText('Recruit')
+        break
+      case 'follow-up':
+        await expect(this.dspFilterOptionCostsFollowHeader).toBeVisible()
+        await expect(this.dspFilterOptionCostsFollowHeader).toHaveText('Follow--Up')
+        break
+      default:
+        throw new Error(`${header} is not a valid Filter Category option`)
+    }
+  }
+
+  async assertFilterCategoryState(category: string, state: string) {
+    let categoryLocator: Locator
+    let sectionLocator: Locator
+    switch (category.toLowerCase()) {
+      case 'type of service':
+        categoryLocator = this.dspFilterServiceTitle
+        sectionLocator = this.dspFilterServiceSection
+        break
+      case 'geographical coverage':
+        categoryLocator = this.dspFilterCoverageTitle
+        sectionLocator = this.dspFilterCoverageSection
+        break
+      case 'costs':
+        categoryLocator = this.dspFilterCostsTitle
+        sectionLocator = this.dspFilterCostsSection
+        break
+      default:
+        throw new Error(`${category} is not a valid Filter Category option`)
+    }
+    switch (state.toLowerCase()) {
+      case 'expanded':
+        expect(await categoryLocator.locator('..').locator('..').locator('..').getAttribute('open')).not.toBeNull()
+        await expect(sectionLocator).toBeVisible()
+        break
+      case 'collapsed':
+        expect(await categoryLocator.locator('..').locator('..').locator('..').getAttribute('open')).toBeNull()
+        await expect(sectionLocator).toBeHidden()
+        break
+      default:
+        throw new Error(`${state} is not a valid state option`)
+    }
   }
 }
