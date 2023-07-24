@@ -11,8 +11,8 @@ export const getNotificationMessages = (messageData: MessageData, contacts: Entr
 
   const supportRequestMessage = {
     subject: `${messageData.referenceNumber} - New enquiry via Find, Recruit and Follow-up`,
-    templateName: 'support-request' as const,
-  }
+    templateName: 'support-request',
+  } as const
 
   // FRF-70 AC1/AC4
   if (messageData.organisationType === 'nonCommercial' || messageData.lcrn !== 'unknown') {

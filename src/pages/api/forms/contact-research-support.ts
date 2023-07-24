@@ -6,7 +6,7 @@ import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
-import { getNotificationMessages } from '@/utils'
+import { getNotificationMessages } from '@/utils/email/contact-research-support/messages.utils'
 import { createReferenceNumber } from '@/utils/generic.utils'
 import { contactResearchSupportSchema } from '@/utils/schemas/contact-research-support.schema'
 

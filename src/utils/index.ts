@@ -1,6 +1,5 @@
 export * from './date.utils'
 export * from './filters'
-export * from './getNotificationMessages'
 export * from './getStaticPropsRevalidateValue'
 export * from './getVideoID'
 export * from './mockServer'
