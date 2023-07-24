@@ -8,8 +8,8 @@ import ChevronIcon from '@/components/Icons/ChevronIcon'
 import FindIcon from '@/components/Icons/FindIcon'
 import FollowUpIcon from '@/components/Icons/FollowUpIcon'
 import RecruitIcon from '@/components/Icons/RecruitIcon'
+import { Video } from '@/components/Video/Video'
 import { contentfulService } from '@/lib/contentful'
-import { getVideoID } from '@/utils'
 import { getStaticPropsRevalidateValue } from '@/utils/getStaticPropsRevalidateValue'
 
 export type HomepageProps = InferGetStaticPropsType<typeof getStaticProps>
@@ -17,7 +17,6 @@ export type HomepageProps = InferGetStaticPropsType<typeof getStaticProps>
 export default function Home({
   description,
   videoUrl,
-  videoID,
   serviceDescriptionFind,
   serviceDescriptionRecruit,
   serviceDescriptionFollowUp,
@@ -40,14 +39,7 @@ export default function Home({
           </div>
           {videoUrl && (
             <div className="mt-4 flex w-full justify-center lg:mt-0">
-              <iframe
-                className="aspect-video w-full max-w-[700px] lg:w-[450px]"
-                src={videoUrl}
-                title="Video: Find, Recruit and Follow-up Intro"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope;"
-                srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=${videoUrl}?autoplay=1><img src=https://img.youtube.com/vi/${videoID}/hqdefault.jpg alt='Video: Find, Recruit and Follow-up Intro'><span>▶</span></a>`}
-                allowFullScreen
-              ></iframe>
+              <Video url={videoUrl} title="Video: Find, Recruit and Follow-up Intro" />
             </div>
           )}
         </section>
@@ -158,24 +150,16 @@ export default function Home({
 export const getStaticProps = async () => {
   try {
     const entry = await contentfulService.getHomePage()
-    if (!entry) throw new Error('Failed to fetch homepage content: null entry')
-    const {
-      fields: { videoUrl, ...fields },
-    } = entry
-    const videoID = videoUrl ? getVideoID(videoUrl) : ''
+    if (!entry) throw new Error('Null entry')
     return {
       props: {
         page: 'Homepage',
-        ...fields,
-        ...(videoID && {
-          videoID,
-          videoUrl: `https://www.youtube.com/embed/${videoID}`,
-        }),
+        ...entry.fields,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },
       revalidate: getStaticPropsRevalidateValue(),
     }
   } catch (error) {
-    throw new Error(`Failed to fetch homepage content: ${error}`)
+    throw new Error(`Failed to fetch homepage content (${error})`)
   }
 }

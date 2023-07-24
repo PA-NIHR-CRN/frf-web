@@ -72,10 +72,10 @@ test('Sets the static cache revalidation period', async () => {
 
 test('Handles no data returned', async () => {
   mockContentfulResponse({})
-  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content')
+  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content (Error: Null entry)')
 })
 
 test('Handles errors when fetching data', async () => {
   mockContentfulResponse(errorMock, 400)
-  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content')
+  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content (InvalidQuery: {')
 })
