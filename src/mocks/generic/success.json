@@ -1,0 +1,295 @@
+{
+  "sys": { "type": "Array" },
+  "total": 1,
+  "skip": 0,
+  "limit": 100,
+  "items": [
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "6F3earxJpVZniqnHXjz6rl",
+        "type": "Entry",
+        "createdAt": "2023-07-19T19:34:24.870Z",
+        "updatedAt": "2023-07-24T10:22:05.829Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "revision": 26,
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "page" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "title": "Research Support Staff",
+        "slug": "research-support",
+        "content": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "heading-2",
+              "data": {},
+              "content": [{ "nodeType": "text", "value": "Research support teams", "marks": [], "data": {} }]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "The Find, Recruit and Follow up (FRF) ‘wrap around’ advisory service will be embedded within the UK’s Research Support infrastructure. We will need the help of colleagues within the various research support organisations across the UK to assist researchers and companies in understanding, navigating and using find, recruit and follow up services.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "You may direct researchers and companies to ",
+                  "marks": [],
+                  "data": {}
+                },
+                {
+                  "nodeType": "hyperlink",
+                  "data": { "uri": "https://test.com" },
+                  "content": [{ "nodeType": "text", "value": "this website", "marks": [], "data": {} }]
+                },
+                {
+                  "nodeType": "text",
+                  "value": " or you may receive enquiries via this website, for support with understanding data services or indeed other elements of research support that the UK offers.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "\nResources to help me provide support to those looking to use FRF services",
+                  "marks": [{ "type": "bold" }],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "\nWe have developed guidance documents and learning material to enable you to help companies and researchers to understand and utilise data services to Find, Recruit and Follow-up as relevant for their study.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "\nVisit NIHR Learn to browse our toolkits, 'how to\" guides and resources here:",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "embedded-entry-block",
+              "data": { "target": { "sys": { "id": "6JpftTFlb65yJ3bqgP6Sml", "type": "Link", "linkType": "Entry" } } },
+              "content": []
+            },
+            {
+              "nodeType": "embedded-entry-block",
+              "data": { "target": { "sys": { "id": "XsxWH1AbLCoWkTkXCOr3b", "type": "Link", "linkType": "Entry" } } },
+              "content": []
+            },
+            {
+              "nodeType": "embedded-asset-block",
+              "data": { "target": { "sys": { "id": "3fom56qMS8kwh6E6WGUkpA", "type": "Link", "linkType": "Asset" } } },
+              "content": []
+            },
+            {
+              "nodeType": "embedded-asset-block",
+              "data": { "target": { "sys": { "id": "5rys0R2mPo76QWAYme2FRZ", "type": "Link", "linkType": "Asset" } } },
+              "content": []
+            },
+            {
+              "nodeType": "embedded-asset-block",
+              "data": { "target": { "sys": { "id": "2NV55Iqwn1YjxOVSCIsrLJ", "type": "Link", "linkType": "Asset" } } },
+              "content": []
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
+            }
+          ]
+        },
+        "sidebar": { "sys": { "type": "Link", "linkType": "Entry", "id": "5lQHqbYaxF0nZcoJALI8Tp" } }
+      }
+    }
+  ],
+  "includes": {
+    "Entry": [
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "id": "5lQHqbYaxF0nZcoJALI8Tp",
+          "type": "Entry",
+          "createdAt": "2023-07-20T21:08:00.436Z",
+          "updatedAt": "2023-07-20T22:02:13.092Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "revision": 13,
+          "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "promoBlock" } },
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Contact FRF central team",
+          "buttonText": "Contact FRF central team",
+          "url": "/contact-research-support",
+          "description": {
+            "nodeType": "document",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Further support is available from the Find, Recruit and Follow-up team as necessary for complex enquiries.\r",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "paragraph",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "If you have any questions or issues, please contact the ",
+                    "marks": [],
+                    "data": {}
+                  },
+                  { "nodeType": "text", "value": "FRF central team", "marks": [{ "type": "bold" }], "data": {} },
+                  { "nodeType": "text", "value": ".", "marks": [], "data": {} }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "id": "6JpftTFlb65yJ3bqgP6Sml",
+          "type": "Entry",
+          "createdAt": "2023-07-19T19:31:04.346Z",
+          "updatedAt": "2023-07-24T10:20:58.470Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "revision": 12,
+          "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "button" } },
+          "locale": "en-US"
+        },
+        "fields": { "text": "Visit NIHR Learn", "url": "#", "type": "Primary", "external": false }
+      },
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "id": "XsxWH1AbLCoWkTkXCOr3b",
+          "type": "Entry",
+          "createdAt": "2023-07-20T22:15:22.772Z",
+          "updatedAt": "2023-07-20T22:15:26.262Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "revision": 2,
+          "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "video" } },
+          "locale": "en-US"
+        },
+        "fields": { "title": "Research Support Staff Video", "url": "https://www.youtube.com/watch?v=3WUh1huCUrM" }
+      }
+    ],
+    "Asset": [
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "id": "2NV55Iqwn1YjxOVSCIsrLJ",
+          "type": "Asset",
+          "createdAt": "2023-07-20T22:36:13.951Z",
+          "updatedAt": "2023-07-20T22:36:13.951Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Video",
+          "description": "",
+          "file": {
+            "url": "//videos.ctfassets.net/qg9njdfd7ka1/2NV55Iqwn1YjxOVSCIsrLJ/32a8c7fb88fad384c31f2c7ebd603ee1/chrome_H9Gu0JpQqH.mp4",
+            "details": { "size": 565999 },
+            "fileName": "chrome_H9Gu0JpQqH.mp4",
+            "contentType": "video/mp4"
+          }
+        }
+      },
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "id": "3fom56qMS8kwh6E6WGUkpA",
+          "type": "Asset",
+          "createdAt": "2023-07-20T22:50:39.429Z",
+          "updatedAt": "2023-07-20T22:50:39.429Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "revision": 1,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "Large Image",
+          "description": "",
+          "file": {
+            "url": "//images.ctfassets.net/qg9njdfd7ka1/3fom56qMS8kwh6E6WGUkpA/bddc1b8f8c0464aa209c39bd12cb58d8/astronomy-1867616_1280.jpg",
+            "details": { "size": 542143, "image": { "width": 1280, "height": 874 } },
+            "fileName": "astronomy-1867616_1280.jpg",
+            "contentType": "image/jpeg"
+          }
+        }
+      },
+      {
+        "metadata": { "tags": [] },
+        "sys": {
+          "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+          "id": "5rys0R2mPo76QWAYme2FRZ",
+          "type": "Asset",
+          "createdAt": "2023-07-20T23:00:37.040Z",
+          "updatedAt": "2023-07-20T23:03:05.972Z",
+          "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+          "revision": 2,
+          "locale": "en-US"
+        },
+        "fields": {
+          "title": "NIHR logo",
+          "description": "NIHR logo alt text",
+          "file": {
+            "url": "//images.ctfassets.net/qg9njdfd7ka1/5rys0R2mPo76QWAYme2FRZ/efded7eb9afe4fa59de11aabafba514a/nihr.svg",
+            "details": { "size": 25601, "image": { "width": 323, "height": 32 } },
+            "fileName": "nihr.svg",
+            "contentType": "image/svg+xml"
+          }
+        }
+      }
+    ]
+  }
+}

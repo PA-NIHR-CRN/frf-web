@@ -6,6 +6,7 @@ import {
   TypeEmailContactFields,
   TypeEmailContactSkeleton,
   TypeHomepageSkeleton,
+  TypePageSkeleton,
   TypeServiceProviderSkeleton,
 } from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
@@ -88,6 +89,16 @@ export class ContentfulService {
     const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypeServiceProviderSkeleton>({
       limit: 1,
       content_type: 'serviceProvider',
+      'fields.slug': slug,
+      include: 10, // How deep to include linked items
+    })
+    return entries.items.length ? entries.items[0] : null
+  }
+
+  async getGenericPageBySlug(slug: string) {
+    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypePageSkeleton>({
+      limit: 1,
+      content_type: 'page',
       'fields.slug': slug,
       include: 10, // How deep to include linked items
     })
