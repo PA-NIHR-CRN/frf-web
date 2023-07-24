@@ -21,7 +21,7 @@ test('Displays a generic contentful page', async () => {
   render(<GenericPage {...props} />)
 
   // Title
-  expect(screen.getByRole('heading', { name: 'Research Support Staff', level: 2 }))
+  expect(screen.getByRole('heading', { name: 'Research support teams', level: 2 }))
 
   // Content is rendered
   expect(

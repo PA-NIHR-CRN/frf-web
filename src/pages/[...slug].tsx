@@ -13,7 +13,7 @@ export type GenericPageProps = InferGetStaticPropsType<typeof getStaticProps>
 export default function GenericPage({ fields }: GenericPageProps) {
   return (
     <>
-      <NextSeo title={fields.title} />
+      <NextSeo title={`${fields.title} - Find, Recruit and Follow-up`} />
       <Container>
         <article aria-labelledby={`article-${fields.slug}-title`}>
           <div className="govuk-grid-row">
@@ -22,10 +22,7 @@ export default function GenericPage({ fields }: GenericPageProps) {
               data-testid="main-column"
             >
               <div className={clsx({ ['max-w-[var(--generic-page-container-max-width)]']: fields.sidebar })}>
-                <h2 className="govuk-heading-l">{fields.title}</h2>
-                <div>
-                  <RichTextRenderer>{fields.content}</RichTextRenderer>
-                </div>
+                <RichTextRenderer>{fields.content}</RichTextRenderer>
               </div>
             </div>
             {fields.sidebar && (

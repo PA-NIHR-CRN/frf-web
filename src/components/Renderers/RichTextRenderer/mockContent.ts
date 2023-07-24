@@ -29,6 +29,66 @@ export const mockContent: Document = {
       ],
     },
     {
+      nodeType: BLOCKS.HEADING_2,
+      data: {},
+      content: [
+        {
+          nodeType: 'text',
+          value: 'Heading level 2',
+          marks: [],
+          data: {},
+        },
+      ],
+    },
+    {
+      nodeType: BLOCKS.HEADING_3,
+      data: {},
+      content: [
+        {
+          nodeType: 'text',
+          value: 'Heading level 3',
+          marks: [],
+          data: {},
+        },
+      ],
+    },
+    {
+      nodeType: BLOCKS.HEADING_4,
+      data: {},
+      content: [
+        {
+          nodeType: 'text',
+          value: 'Heading level 4',
+          marks: [],
+          data: {},
+        },
+      ],
+    },
+    {
+      nodeType: BLOCKS.HEADING_5,
+      data: {},
+      content: [
+        {
+          nodeType: 'text',
+          value: 'Heading level 5',
+          marks: [],
+          data: {},
+        },
+      ],
+    },
+    {
+      nodeType: BLOCKS.HEADING_6,
+      data: {},
+      content: [
+        {
+          nodeType: 'text',
+          value: 'Heading level 6',
+          marks: [],
+          data: {},
+        },
+      ],
+    },
+    {
       nodeType: BLOCKS.UL_LIST,
       data: {},
       content: [
@@ -87,7 +147,7 @@ export const mockContent: Document = {
               sys: {
                 contentType: { sys: { id: 'button' } },
               },
-              fields: { text: 'Button text (secondary)', url: '#', type: 'Secondary', external: true },
+              fields: { text: 'Button text secondary', url: '#', type: 'Secondary', external: true },
             },
           },
           content: [],
