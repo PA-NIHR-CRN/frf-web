@@ -83,7 +83,7 @@ test('Successful submission redirects to the confirmation page', async () => {
   const [emailOne] = sendEmailSpy.mock.calls
 
   expect(emailOne[0].to).toBe('frfteam@nihr.ac.uk')
-  expect(emailOne[0].templateData.referenceNumber).toEqual('mock-ref-number')
+  expect(emailOne[0].templateData.referenceNumber).toEqual('F00001')
   expect(emailOne[0].templateData.fullName).toEqual('Test user')
 })
 
