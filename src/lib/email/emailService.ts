@@ -3,14 +3,14 @@ import * as fs from 'fs'
 import handlebars from 'handlebars'
 import path from 'path'
 
-import { EMAIL_CHARSET, EMAIL_FROM_ADDRESS } from '@/constants'
+import { EMAIL_CHARSET, EMAIL_FRF_INBOX } from '@/constants'
 
 handlebars.registerHelper('eq', (a, b) => a == b)
 
 export type EmailArgs = {
   to: string
   subject: string
-  templateName: 'support-request' | 'request-confirmation'
+  templateName: 'support-request' | 'request-confirmation' | 'feedback'
   templateData: Record<string, unknown>
 }
 
@@ -34,7 +34,7 @@ export class EmailService {
     const textBody = handlebars.compile(textSource)(data.templateData)
 
     const message: SES.Types.SendEmailRequest = {
-      Source: `"Find, Recruit & Follow-Up" <${EMAIL_FROM_ADDRESS}>`,
+      Source: `"Find, Recruit & Follow-Up" <${EMAIL_FRF_INBOX}>`,
       Destination: {
         ToAddresses: [data.to],
       },

@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
-// import { contentfulService } from '@/lib/contentful'
-// import { emailService } from '@/lib/email'
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
+import { getNotificationMessages } from '@/utils/email/feedback/messages.utils'
 import { createReferenceNumber } from '@/utils/generic.utils'
 import { feedbackSchema } from '@/utils/schemas/feedback.schema'
 
@@ -46,10 +46,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     })
 
-    // Send emails
-    // const contacts = await contentfulService.getEmailContacts()
-    // const messages = getNotificationMessages({ ...req.body, referenceNumber }, contacts)
-    // await Promise.all(messages.map(emailService.sendEmail))
+    // Send email
+    const messages = getNotificationMessages({ ...req.body, referenceNumber })
+    await Promise.all(messages.map(emailService.sendEmail))
 
     res.redirect(302, `/feedback/confirmation`)
   } catch (error) {

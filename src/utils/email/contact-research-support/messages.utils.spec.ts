@@ -4,7 +4,7 @@ import { Mock } from 'ts-mockery'
 import { TypeEmailContactSkeleton } from '@/@types/generated'
 import { EmailArgs } from '@/lib/email/emailService'
 
-import { getNotificationMessages, MessageData } from './getNotificationMessages' // Replace with the correct path to your module
+import { getNotificationMessages, MessageData } from './messages.utils' // Replace with the correct path to your module
 
 describe('getNotificationMessages', () => {
   const contacts = [
