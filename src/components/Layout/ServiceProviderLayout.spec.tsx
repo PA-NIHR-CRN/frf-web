@@ -1,3 +1,6 @@
+import userEvent from '@testing-library/user-event'
+import mockRouter from 'next-router-mock'
+
 import { render, screen } from '@/config/test-utils'
 
 import { assertRootLayout } from './RootLayout.test'
@@ -22,6 +25,20 @@ test('Displays a back link & page content', () => {
 
   // Page content
   expect(screen.getByRole('heading', { name: 'Service Provider Detail Page' })).toBeInTheDocument()
+})
+
+test('Back link goes back to the previous url state', async () => {
+  mockRouter.back = jest.fn()
+
+  const { getByRole } = render(
+    <ServiceProviderLayout>
+      <h1>Service Provider Detail Page</h1>
+    </ServiceProviderLayout>
+  )
+
+  await userEvent.click(getByRole('link', { name: 'Back to list of data service providers' }))
+
+  expect(mockRouter.back).toHaveBeenCalledTimes(1)
 })
 
 test('Displays a preview banner & hides the back button when preview mode is enabled', () => {
