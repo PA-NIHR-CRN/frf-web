@@ -101,7 +101,7 @@ export default function Feedback({ query }: FeedbackProps) {
               />
               <TextInput
                 required={false}
-                label="Organisation (optional)"
+                label="Organisation name (optional)"
                 errors={errors}
                 defaultValue={defaultValues?.organisationName}
                 {...register('organisationName')}

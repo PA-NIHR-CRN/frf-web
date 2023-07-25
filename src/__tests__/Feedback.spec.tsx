@@ -79,8 +79,8 @@ test('Initial form state', async () => {
   expect(getByLabelText('Email address (optional)')).not.toBeRequired()
 
   // Org
-  expect(getByLabelText('Organisation (optional)')).toBeInTheDocument()
-  expect(getByLabelText('Organisation (optional)')).not.toBeRequired()
+  expect(getByLabelText('Organisation name (optional)')).toBeInTheDocument()
+  expect(getByLabelText('Organisation name (optional)')).not.toBeRequired()
 
   // Form CTAs
   expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument()
@@ -116,7 +116,7 @@ test('Successful submission redirects to confirmation page', async () => {
   )
   await user.type(getByLabelText('Full name (optional)'), 'John Terry')
   await user.type(getByLabelText('Email address (optional)'), 'testemail@nihr.ac.ul')
-  await user.type(getByLabelText('Organisation (optional)'), 'NIHR')
+  await user.type(getByLabelText('Organisation name (optional)'), 'NIHR')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -152,7 +152,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
   )
   await user.type(getByLabelText('Full name (optional)'), 'John Terry')
   await user.type(getByLabelText('Email address (optional)'), 'testemail@nihr.ac.ul')
-  await user.type(getByLabelText('Organisation (optional)'), 'NIHR')
+  await user.type(getByLabelText('Organisation name (optional)'), 'NIHR')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -196,7 +196,7 @@ test('Form submission with client side validation errors', async () => {
   ).not.toHaveErrorMessage()
   expect(getByLabelText('Full name (optional)')).not.toHaveErrorMessage()
   expect(getByLabelText('Email address (optional)')).not.toHaveErrorMessage()
-  expect(getByLabelText('Organisation (optional)')).not.toHaveErrorMessage()
+  expect(getByLabelText('Organisation name (optional)')).not.toHaveErrorMessage()
 })
 
 test('Server side field validation errors', async () => {
@@ -229,5 +229,5 @@ test('Server side field validation errors', async () => {
   ).not.toHaveErrorMessage()
   expect(getByLabelText('Full name (optional)')).not.toHaveErrorMessage()
   expect(getByLabelText('Email address (optional)')).not.toHaveErrorMessage()
-  expect(getByLabelText('Organisation (optional)')).not.toHaveErrorMessage()
+  expect(getByLabelText('Organisation name (optional)')).not.toHaveErrorMessage()
 })
