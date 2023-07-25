@@ -23,7 +23,7 @@ export function RootLayout({ children, backLink, isPreviewMode }: RootLayoutProp
       <Header />
       <PhaseBanner phase="Beta">
         This is a new service – your{' '}
-        <Link className="govuk-link" href="/feedback">
+        <Link className="govuk-link govuk-link--no-visited-state" href="/feedback">
           feedback
         </Link>{' '}
         will help us to improve it.

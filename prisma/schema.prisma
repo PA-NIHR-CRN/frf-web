@@ -13,7 +13,7 @@ model SupportRequest {
   updatedAt          DateTime @updatedAt
   referenceNumber    String   @default("")
   enquiryType        String
-  supportDescription String
+  supportDescription String   @db.Text
   fullName           String
   emailAddress       String
   phoneNumber        String?
@@ -32,7 +32,7 @@ model Feedback {
   updatedAt          DateTime @updatedAt
   referenceNumber    String   @default("")
   helpfulness        String
-  suggestions        String
+  suggestions        String   @db.Text
   fullName           String?
   emailAddress       String?
   organisationName   String?
