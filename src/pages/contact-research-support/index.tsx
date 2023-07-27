@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import Link from 'next/link'
 import { ReCaptchaProvider } from 'next-recaptcha-v3'
 import { NextSeo } from 'next-seo'
 import { ReactElement, useCallback, useEffect, useState } from 'react'
@@ -216,9 +215,6 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                 >
                   Submit
                 </button>
-                <Link className="govuk-link" href="/">
-                  Cancel
-                </Link>
               </div>
             </Form>
           </div>

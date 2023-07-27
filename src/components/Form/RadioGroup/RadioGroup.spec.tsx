@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-import React from 'react'
 import { FieldErrors } from 'react-hook-form'
 
 import { Radio } from '../Radio/Radio'
@@ -11,7 +10,7 @@ test('Renders correctly without errors or hint', () => {
   const errors: FieldErrors = {}
   const defaultValue = 'option2'
 
-  const { getByLabelText } = render(
+  const { getByLabelText, getByRole } = render(
     <RadioGroup label={label} name={name} errors={errors} defaultValue={defaultValue}>
       <Radio value="option1" label="option1" />
       <Radio value="option2" label="option2" />
@@ -19,7 +18,7 @@ test('Renders correctly without errors or hint', () => {
     </RadioGroup>
   )
 
-  const labelElement = getByLabelText(label)
+  const labelElement = getByRole('group', { name: label })
   expect(labelElement).toBeInTheDocument()
 
   const radioElement = getByLabelText('option2') as HTMLInputElement
@@ -44,7 +43,7 @@ test('Renders correctly with errors and hint', () => {
   const hint = 'Radio group hint'
   const defaultValue = 'option3'
 
-  const { getByLabelText, getByText } = render(
+  const { getByLabelText, getByText, getByRole } = render(
     <RadioGroup label={label} name={name} errors={errors} hint={hint} defaultValue={defaultValue}>
       <Radio value="option1" label="option1" />
       <Radio value="option2" label="option2" />
@@ -52,7 +51,7 @@ test('Renders correctly with errors and hint', () => {
     </RadioGroup>
   )
 
-  const labelElement = getByLabelText(label)
+  const labelElement = getByRole('group', { name: label })
   expect(labelElement).toBeInTheDocument()
 
   const radioElement = getByLabelText('option3') as HTMLInputElement

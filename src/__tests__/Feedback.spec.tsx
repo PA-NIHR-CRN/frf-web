@@ -40,11 +40,12 @@ test('Initial form state', async () => {
     screen.getByText('The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.')
   ).toBeInTheDocument()
 
-  expect(screen.getAllByRole('group')).toHaveLength(2)
+  expect(screen.getAllByRole('group')).toHaveLength(3)
 
   // How helpful was the Find, Recruit and Follow-up (FRF) website?
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toBeInTheDocument()
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toBeRequired()
+  expect(
+    getByRole('group', { name: 'How helpful was the Find, Recruit and Follow-up (FRF) website?' })
+  ).toBeInTheDocument()
   expect(getByLabelText('Very helpful')).toBeInTheDocument()
   expect(getByLabelText('Somewhat helpful')).toBeInTheDocument()
   expect(getByLabelText('Neither helpful or unhelpful')).toBeInTheDocument()
@@ -84,7 +85,6 @@ test('Initial form state', async () => {
 
   // Form CTAs
   expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument()
-  expect(getByRole('link', { name: 'Cancel' })).toHaveAttribute('href', '/')
 })
 
 test('Successful submission redirects to confirmation page', async () => {
@@ -186,9 +186,9 @@ test('Form submission with client side validation errors', async () => {
   )
 
   // Field errors
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toHaveErrorMessage(
-    'Error: Select how helpful you found the FRF website'
-  )
+  expect(
+    getByRole('group', { name: 'How helpful was the Find, Recruit and Follow-up (FRF) website?' })
+  ).toHaveErrorMessage('Error: Select how helpful you found the FRF website')
   expect(
     getByLabelText(
       'Please provide us with any other feedback on your experience of our website or suggestions for improvement. (optional)'
@@ -219,9 +219,9 @@ test('Server side field validation errors', async () => {
   )
 
   // Field errors
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toHaveErrorMessage(
-    'Error: Select how helpful you found the FRF website'
-  )
+  expect(
+    getByRole('group', { name: 'How helpful was the Find, Recruit and Follow-up (FRF) website?' })
+  ).toHaveErrorMessage('Error: Select how helpful you found the FRF website')
   expect(
     getByLabelText(
       'Please provide us with any other feedback on your experience of our website or suggestions for improvement. (optional)'
