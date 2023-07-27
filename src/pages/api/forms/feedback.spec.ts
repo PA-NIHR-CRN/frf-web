@@ -121,3 +121,35 @@ test('Wrong http method redirects with an error', async () => {
   expect(res._getRedirectUrl()).toBe('/feedback?fatal=1')
   expect(logger.error).toHaveBeenCalledWith(new Error('Wrong method'))
 })
+
+test('Successful submission without contact details does not email the FRF inbox', async () => {
+  const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
+
+  const body: FeedbackInputs & { reCaptchaToken: string } = {
+    reCaptchaToken: 'mock-token',
+    helpfulness: 'very-helpful',
+    suggestions: 'great site!',
+    fullName: 'Test user',
+    emailAddress: '',
+    organisationName: 'NIHR',
+  }
+
+  const createMock = jest.mocked(prisma.feedback.create)
+  createMock.mockResolvedValueOnce({
+    id: 1,
+    createdAt: new Date('123'),
+    updatedAt: new Date('123'),
+    referenceNumber: '1',
+    helpfulness: 'very-helpful',
+    suggestions: 'great site!',
+    fullName: 'Test user',
+    emailAddress: '',
+    organisationName: 'NIHR',
+  })
+
+  const res = await testHandler(handler, { method: 'POST', body })
+  expect(res.statusCode).toBe(302)
+  expect(res._getRedirectUrl()).toBe('/feedback/confirmation')
+
+  expect(sendEmailSpy).not.toHaveBeenCalled()
+})

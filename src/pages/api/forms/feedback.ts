@@ -47,8 +47,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     // Send email
-    const messages = getNotificationMessages({ ...req.body, referenceNumber })
-    await Promise.all(messages.map(emailService.sendEmail))
+    if (req.body.emailAddress) {
+      const messages = getNotificationMessages({ ...req.body, referenceNumber })
+      await Promise.all(messages.map(emailService.sendEmail))
+    }
 
     res.redirect(302, `/feedback/confirmation`)
   } catch (error) {
