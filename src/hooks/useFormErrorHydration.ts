@@ -3,8 +3,6 @@ import { useEffect } from 'react'
 import { FieldError, FormState, Path } from 'react-hook-form'
 
 import { getErrorsFromSearchParams, hasErrorsInSearchParams, Schemas } from '@/utils/form.utils'
-import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-support.schema'
-import { FeedbackInputs } from '@/utils/schemas/feedback.schema'
 
 /**
  * This hook detects field-level errors in the URL searchParams on page load
@@ -15,7 +13,7 @@ import { FeedbackInputs } from '@/utils/schemas/feedback.schema'
  * For non-js users, server returned errors will get returned directly and bypass RHF state.
  * They are then passed directly down to the input components.
  */
-export function useFormErrorHydration<T extends ContactResearchSupportInputs | FeedbackInputs>({
+export function useFormErrorHydration<T extends Record<string, unknown>>({
   schema,
   formState,
   onFoundError,
