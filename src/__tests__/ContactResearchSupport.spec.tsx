@@ -54,8 +54,7 @@ test('Initial form state', async () => {
   expect(getByRole('group', { name: 'About your enquiry' })).toBeInTheDocument()
 
   // Is your enquiry about
-  expect(getByLabelText('Is your enquiry about')).toBeInTheDocument()
-  expect(getByLabelText('Is your enquiry about')).toBeRequired()
+  expect(getByRole('group', { name: 'Is your enquiry about' })).toBeInTheDocument()
   expect(getByLabelText('Identifying appropriate data services')).toBeInTheDocument()
   expect(getByLabelText('General enquiry about research support')).toBeInTheDocument()
 
@@ -89,8 +88,7 @@ test('Initial form state', async () => {
   expect(about.getByLabelText('Organisation name')).toBeRequired()
 
   // Org type
-  expect(about.getByLabelText('Is your organisation')).toBeInTheDocument()
-  expect(about.getByLabelText('Is your organisation')).toBeRequired()
+  expect(about.getByRole('group', { name: 'Is your organisation' })).toBeInTheDocument()
   expect(about.getByLabelText('Commercial')).toBeInTheDocument()
   expect(about.getByLabelText('Non-commercial')).toBeInTheDocument()
 
@@ -283,7 +281,7 @@ test('Form submission with client side validation errors', async () => {
   expect(within(alert).getByRole('link', { name: 'Select a lead region' })).toHaveAttribute('href', '#lcrn')
 
   // Field errors
-  expect(getByLabelText('Is your enquiry about')).toHaveErrorMessage('Error: Select the type of enquiry')
+  expect(getByRole('group', { name: 'Is your enquiry about' })).toHaveErrorMessage('Error: Select the type of enquiry')
   expect(getByLabelText('Please provide a summary of the support you need')).toHaveErrorMessage(
     'Error: Enter a summary of the support you need'
   )
@@ -294,7 +292,9 @@ test('Form submission with client side validation errors', async () => {
   )
   expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter a job role')
   expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter an organisation name')
-  expect(getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Select the type of organisation')
+  expect(getByRole('group', { name: 'Is your organisation' })).toHaveErrorMessage(
+    'Error: Select the type of organisation'
+  )
   expect(getByLabelText('Which region will take a lead in supporting your research?')).toHaveErrorMessage(
     'Error: Select a lead region'
   )
@@ -343,7 +343,7 @@ test('Server side field validation errors', async () => {
   ).toHaveAttribute('href', '#lcrn')
 
   // Field errors
-  expect(getByLabelText('Is your enquiry about')).toHaveErrorMessage('Error: Select the type of enquiry')
+  expect(getByRole('group', { name: 'Is your enquiry about' })).toHaveErrorMessage('Error: Select the type of enquiry')
   expect(getByLabelText('Please provide a summary of the support you need')).toHaveErrorMessage(
     'Error: Enter a summary of the support you need'
   )
@@ -352,7 +352,9 @@ test('Server side field validation errors', async () => {
   expect(getByLabelText('Telephone (optional)')).not.toHaveErrorMessage()
   expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Job role is required')
   expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Organisation name is required')
-  expect(getByLabelText('Is your organisation')).toHaveErrorMessage('Error: Organisation type is required')
+  expect(getByRole('group', { name: 'Is your organisation' })).toHaveErrorMessage(
+    'Error: Organisation type is required'
+  )
   expect(getByLabelText('Which region will take a lead in supporting your research?')).toHaveErrorMessage(
     'Error: Which region will take a lead in supporting your research is required'
   )
