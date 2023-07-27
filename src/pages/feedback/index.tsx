@@ -84,12 +84,14 @@ export default function Feedback({ query }: FeedbackProps) {
             <Fieldset
               className="govuk-!-margin-top-7"
               legend="We may wish to contact you to follow up on your feedback. If you are happy for us to do so please provide your contact details."
+              legendSize="s"
             >
               <TextInput
                 required={false}
                 label="Full name (optional)"
                 errors={errors}
                 defaultValue={defaultValues?.fullName}
+                className="govuk-!-margin-top-4"
                 {...register('fullName')}
               />
               <TextInput
