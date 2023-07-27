@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import Link from 'next/link'
 import { ReCaptchaProvider } from 'next-recaptcha-v3'
 import { ReactElement, useCallback } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
@@ -117,9 +116,6 @@ export default function Feedback({ query }: FeedbackProps) {
               >
                 Submit
               </button>
-              <Link className="govuk-link" href="/">
-                Cancel
-              </Link>
             </div>
           </Form>
         </div>
