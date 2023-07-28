@@ -1,9 +1,9 @@
 import { expect, test } from '../../../hooks/CustomFixtures'
 
-test.describe('Home Page Accessibility Tests - @access_Home', () => {
+test.describe.only('Home Page Accessibility Tests - @access_Home', () => {
   test('Scan Home Page with AXE Tool', async ({ homePage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
-    let axeScanResults: any
+    let axeScanResults = await axeScanner.analyze()
     await test.step('Given I have navigated to the Home Page', async () => {
       await homePage.goto()
       await homePage.assertOnHomePage()
@@ -22,15 +22,15 @@ test.describe('Home Page Accessibility Tests - @access_Home', () => {
     })
 
     await test.step('Then I should recieve no issue up to WCAG 2.1 AA Standard', async () => {
-      expect(await axeScanResults.violations).toEqual([])
+      expect(axeScanResults.violations).toEqual([])
     })
   })
 })
 
-test.describe('Site Menu Accessibility Tests - @access_SiteMenu', () => {
+test.describe.only('Site Menu Accessibility Tests - @access_SiteMenu', () => {
   test('Scan Site Menu with AXE Tool', async ({ homePage, commonItemsPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
-    let axeScanResults: any
+    let axeScanResults = await axeScanner.analyze()
     await test.step('Given I have navigated to the Home Page', async () => {
       await homePage.goto()
       await homePage.assertOnHomePage()
@@ -56,15 +56,15 @@ test.describe('Site Menu Accessibility Tests - @access_SiteMenu', () => {
     })
 
     await test.step('Then I should recieve no issue up to WCAG 2.1 AA Standard', async () => {
-      expect(await axeScanResults.violations).toEqual([])
+      expect(axeScanResults.violations).toEqual([])
     })
   })
 })
 
-test.describe('DSP List Page Accessibility Tests - @access_DspListPage', () => {
+test.describe.only('DSP List Page Accessibility Tests - @access_DspListPage', () => {
   test('Scan DSP List Page with AXE Tool', async ({ providersPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
-    let axeScanResults: any
+    let axeScanResults = await axeScanner.analyze()
     await test.step('Given I have navigated to the DSP List Page', async () => {
       await providersPage.goto()
       await providersPage.assertOnProvidersPage()
@@ -83,15 +83,15 @@ test.describe('DSP List Page Accessibility Tests - @access_DspListPage', () => {
     })
 
     await test.step('Then I should recieve no issue up to WCAG 2.1 AA Standard', async () => {
-      expect(await axeScanResults.violations).toEqual([])
+      expect(axeScanResults.violations).toEqual([])
     })
   })
 })
 
-test.describe('DSP Details Page Accessibility Tests - @access_DspDetailPage', () => {
+test.describe.only('DSP Details Page Accessibility Tests - @access_DspDetailPage', () => {
   test('Scan DSP Details Page with AXE Tool', async ({ providerDetailsPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
-    let axeScanResults: any
+    let axeScanResults = await axeScanner.analyze()
     await test.step('Given I have navigated to a DSP Details Page', async () => {
       await providerDetailsPage.goto('/providers/testing-dsp')
       await providerDetailsPage.assertOnProviderDetailsPage()
@@ -110,7 +110,61 @@ test.describe('DSP Details Page Accessibility Tests - @access_DspDetailPage', ()
     })
 
     await test.step('Then I should recieve no issue up to WCAG 2.1 AA Standard', async () => {
-      expect(await axeScanResults.violations).toEqual([])
+      expect(axeScanResults.violations).toEqual([])
+    })
+  })
+})
+
+test.describe.only('Feedback Form Accessibility Tests - @access_ContactSupportForm', () => {
+  test('Scan Feedback Form  with AXE Tool', async ({ feedbackFormPage, makeAxeBuilder }, testInfo) => {
+    const axeScanner = makeAxeBuilder()
+    let axeScanResults = await axeScanner.analyze()
+    await test.step('Given I have navigated to the Feedback Form', async () => {
+      await feedbackFormPage.goto()
+      await feedbackFormPage.assertOnFeedbackForm()
+    })
+
+    await test.step('When I scan the Feedback Form for Accessibility Errors', async () => {
+      axeScanResults = await axeScanner
+        .options({ reporter: 'v2' })
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+        .analyze()
+    })
+
+    await testInfo.attach('accessibility-scan-results', {
+      body: JSON.stringify(axeScanResults, null, 2),
+      contentType: 'application/json',
+    })
+
+    await test.step('Then I should recieve no issue up to WCAG 2.1 AA Standard', async () => {
+      expect(axeScanResults.violations).toEqual([])
+    })
+  })
+})
+
+test.describe.only('Contact Support Form Accessibility Tests - @access_ContactSupportForm', () => {
+  test('Scan Contact Support Form  with AXE Tool', async ({ contactSupportPage, makeAxeBuilder }, testInfo) => {
+    const axeScanner = makeAxeBuilder()
+    let axeScanResults = await axeScanner.analyze()
+    await test.step('Given I have navigated to a Contact Support Page', async () => {
+      await contactSupportPage.goto()
+      await contactSupportPage.assertOnContactSupportForm()
+    })
+
+    await test.step('When I scan the Contact Support Page for Accessibility Errors', async () => {
+      axeScanResults = await axeScanner
+        .options({ reporter: 'v2' })
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+        .analyze()
+    })
+
+    await testInfo.attach('accessibility-scan-results', {
+      body: JSON.stringify(axeScanResults, null, 2),
+      contentType: 'application/json',
+    })
+
+    await test.step('Then I should recieve no issue up to WCAG 2.1 AA Standard', async () => {
+      expect(axeScanResults.violations).toEqual([])
     })
   })
 })

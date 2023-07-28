@@ -166,9 +166,7 @@ test.describe('DSP List Filter Options Tests - @frf_13 @frf_13_options', () => {
     })
   })
 
-  test.only('As a user I can Expand and Collapse each Filter Category - @frf_13_options_ac6', async ({
-    providersPage,
-  }) => {
+  test('As a user I can Expand and Collapse each Filter Category - @frf_13_options_ac6', async ({ providersPage }) => {
     await test.step('Given I have navigated to the DSP List Page', async () => {
       await providersPage.goto()
       await providersPage.assertOnProvidersPage()
