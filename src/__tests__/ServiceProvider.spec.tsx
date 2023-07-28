@@ -108,7 +108,10 @@ test('Sidebar', async () => {
   expect(heading.nextSibling).toHaveTextContent(
     'If you think Genomic Profile Register might be able to help with your study you can contact them directly using this service.'
   )
-  expect(sidebar.getByRole('link', { name: 'Get in touch with Genomic Profile Register' })).toHaveAttribute('href', '/')
+  expect(sidebar.getByRole('link', { name: 'Get in touch with Genomic Profile Register' })).toHaveAttribute(
+    'href',
+    '/contact-data-service-provider/Genomic%20Profile%20Register'
+  )
 
   // Support
   expect(sidebar.getByRole('heading', { name: 'Get support for your research', level: 3 })).toBeInTheDocument()
@@ -287,7 +290,7 @@ test('Service provider with only required content types', async () => {
   )
   expect(
     within(sidebarColumn).getByRole('link', { name: 'Get in touch with Genomic Profile Register' })
-  ).toHaveAttribute('href', '/')
+  ).toHaveAttribute('href', '/contact-data-service-provider/Genomic%20Profile%20Register')
 
   // Non-required fields
   expect(screen.queryByRole('table', { name: 'Services available and costs:' })).not.toBeInTheDocument()

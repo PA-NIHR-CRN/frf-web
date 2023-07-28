@@ -37,3 +37,16 @@ model Feedback {
   emailAddress       String?
   organisationName   String?
 }
+
+model DataServiceProviderRequest {
+  id                 Int      @id @default(autoincrement())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  referenceNumber    String   @default("")
+  fullName           String
+  emailAddress       String
+  phoneNumber        String?
+  jobRole            String
+  organisationName   String
+  studyDescription   String   @db.Text
+}
