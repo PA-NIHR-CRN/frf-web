@@ -12,15 +12,16 @@ type TextInputProps = {
   errors: FieldErrors
   autocomplete?: string
   defaultValue: string | undefined
+  className?: string
 }
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ label, errors, hint, defaultValue, required = true, autocomplete, ...rest }, ref) => {
+  ({ label, errors, hint, defaultValue, required = true, autocomplete, className, ...rest }, ref) => {
     const error = errors[rest.name]
 
     return (
       <>
-        <div className={clsx('govuk-form-group', { 'govuk-form-group--error': !!error })}>
+        <div className={clsx('govuk-form-group', { 'govuk-form-group--error': !!error }, className)}>
           <div className="govuk-label-wrapper">
             <label id={`${rest.name}-label`} className="govuk-label govuk-label--s" htmlFor={rest.name}>
               {label}

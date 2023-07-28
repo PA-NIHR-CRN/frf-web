@@ -134,7 +134,10 @@ export default function Home({
               <div className="flex flex-grow flex-col items-start justify-between pt-4">
                 <p>{signPostDescription2}</p>
                 <div>
-                  <Link className="govuk-button govuk-button--secondary mb-0 mt-2 text-left" href="#">
+                  <Link
+                    className="govuk-button govuk-button--secondary mb-0 mt-2 text-left"
+                    href="/become-data-service-provider"
+                  >
                     Find out more
                   </Link>
                 </div>
