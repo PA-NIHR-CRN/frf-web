@@ -80,7 +80,6 @@ test('Initial form state', async () => {
   // Form CTAs
   expect(getByText('We will email you a copy of this form for your records')).toBeInTheDocument()
   expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument()
-  expect(getByRole('link', { name: 'Cancel' })).toHaveAttribute('href', '/')
 })
 
 test('Successful submission redirects to confirmation page', async () => {

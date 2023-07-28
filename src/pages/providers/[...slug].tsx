@@ -223,7 +223,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
               <Contact
                 heading="Contact data service provider"
                 contactName={`Get in touch with ${fields.name}`}
-                contactUrl="/"
+                contactUrl={`/contact-data-service-provider/${encodeURIComponent(fields.name)}`}
               >
                 If you think {fields.name} might be able to help with your study you can contact them directly using
                 this service.
