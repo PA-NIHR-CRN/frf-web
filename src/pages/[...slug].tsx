@@ -7,6 +7,7 @@ import { Container } from '@/components/Container/Container'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
 import { contentfulService } from '@/lib/contentful'
 import { getStaticPropsRevalidateValue } from '@/utils'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 
 export type GenericPageProps = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -76,6 +77,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
       props: {
         fields: entry.fields,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(),
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

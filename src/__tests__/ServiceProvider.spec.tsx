@@ -79,7 +79,7 @@ test('Service provider detail', async () => {
 
   // Video
   const videoIframe = screen.getByTitle(`Video: ${fields.name}`)
-  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube.com/embed/3WUh1huCUrM')
+  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube-nocookie.com/embed/3WUh1huCUrM')
 
   // More information
   expect(

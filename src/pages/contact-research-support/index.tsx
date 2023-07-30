@@ -14,6 +14,7 @@ import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { contentfulService } from '@/lib/contentful'
 import { logger } from '@/lib/logger'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 import {
   ContactResearchSupportInputs,
   contactResearchSupportSchema,
@@ -226,16 +227,18 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
 
 ContactResearchSupport.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode }: ContactResearchSupportProps
+  { isPreviewMode, cookieBanner }: ContactResearchSupportProps
 ) {
   return (
     <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
-      <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
+      <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+        {page}
+      </RootLayout>
     </ReCaptchaProvider>
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   try {
     const emailContacts = await contentfulService.getEmailContactsByType('LCRN - DA')
 
@@ -247,6 +250,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
         contacts: emailContacts.map((entry) => entry.fields),
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {

@@ -24,13 +24,13 @@ export interface TypeButtonFields {
      * @name Type
      * @localized false
      */
-    type?: EntryFieldTypes.Symbol<"Primary" | "Secondary">;
+    type: EntryFieldTypes.Symbol<"Primary" | "Secondary">;
     /**
      * Field type definition for field 'external' (External)
      * @name External
      * @localized false
      */
-    external?: EntryFieldTypes.Boolean;
+    external: EntryFieldTypes.Boolean;
 }
 
 /**
@@ -39,7 +39,7 @@ export interface TypeButtonFields {
  * @type {TypeButtonSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:25:50.328Z
- * @version 11
+ * @version 15
  */
 export type TypeButtonSkeleton = EntrySkeletonType<TypeButtonFields, "button">;
 /**
@@ -48,6 +48,6 @@ export type TypeButtonSkeleton = EntrySkeletonType<TypeButtonFields, "button">;
  * @type {TypeButton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:25:50.328Z
- * @version 11
+ * @version 15
  */
 export type TypeButton<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeButtonSkeleton, Modifiers, Locales>;

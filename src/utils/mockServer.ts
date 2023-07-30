@@ -35,7 +35,7 @@ const setupMockServer = () => {
     isManagement = false
   ) =>
     server.use(
-      rest.all(`${isManagement ? MANAGEMENT_API_URL : API_URL}${path}`, async (_, res, ctx) => {
+      rest.all(`${isManagement ? MANAGEMENT_API_URL : API_URL}${path}`, async (req, res, ctx) => {
         return res(ctx.status(status), ctx.json(data))
       })
     )
@@ -43,4 +43,4 @@ const setupMockServer = () => {
   return [server, mockContentfulResponse] as const
 }
 
-export { setupMockServer }
+export { API_URL, setupMockServer }

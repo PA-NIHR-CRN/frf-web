@@ -1,7 +1,11 @@
+import { rest } from 'msw'
+
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { render, screen } from '@/config/test-utils'
+import { defaultMock as cookieBannerMock } from '@/mocks/cookieBanner'
 import { errorMock, successMock } from '@/mocks/homepage'
 import Home, { getStaticProps } from '@/pages'
-import { setupMockServer } from '@/utils'
+import { API_URL, setupMockServer } from '@/utils'
 
 const [server, mockContentfulResponse] = setupMockServer()
 
@@ -10,11 +14,20 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 test('Displays the Home page', async () => {
-  mockContentfulResponse(successMock)
+  server.use(
+    rest.all(`${API_URL}/entries`, async (req, res, ctx) => {
+      const contentType = req.url.searchParams.get('content_type')
+      return res(ctx.status(200), ctx.json(contentType === 'homepage' ? successMock : cookieBannerMock))
+    })
+  )
 
   const { props } = await getStaticProps()
 
-  render(<Home {...props} />)
+  render(
+    <RootLayout {...props}>
+      <Home {...props} />
+    </RootLayout>
+  )
 
   const mockData = successMock.items[0].fields
 
@@ -24,7 +37,7 @@ test('Displays the Home page', async () => {
 
   // Video
   const videoIframe = screen.getByTitle('Video: Find, Recruit and Follow-up Intro')
-  expect(videoIframe).toHaveAttribute('src', mockData.videoUrl)
+  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube-nocookie.com/embed/msizPweg3kE')
 
   // Service Info
   expect(screen.getByRole('heading', { name: 'Find', level: 2 })).toBeInTheDocument()
@@ -62,6 +75,9 @@ test('Displays the Home page', async () => {
   expect(screen.getByRole('heading', { name: 'Organisations providing data services', level: 2 })).toBeInTheDocument()
   expect(screen.getByText(mockData.signPostDescription2)).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'Find out more' })).toHaveAttribute('href', '/data-service-providers')
+
+  // Cookie banner
+  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
 })
 
 test('Sets the static cache revalidation period', async () => {

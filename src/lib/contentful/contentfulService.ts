@@ -3,6 +3,7 @@ import type { ClientAPI as ManagementClientApi, Tag } from 'contentful-managemen
 
 import { Filters, OrderType } from '@/@types/filters'
 import {
+  TypeCookieBannerSkeleton,
   TypeEmailContactFields,
   TypeEmailContactSkeleton,
   TypeHomepageSkeleton,
@@ -117,6 +118,14 @@ export class ContentfulService {
     const entries = await this.contentClient.getEntries<TypeHomepageSkeleton>({
       limit: 1,
       content_type: 'homepage',
+    })
+    return entries.items.length ? entries.items[0] : null
+  }
+
+  async getCookieBanner() {
+    const entries = await this.contentClient.getEntries<TypeCookieBannerSkeleton>({
+      limit: 1,
+      content_type: 'cookieBanner',
     })
     return entries.items.length ? entries.items[0] : null
   }
