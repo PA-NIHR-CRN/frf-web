@@ -13,9 +13,11 @@ const Bold = ({ children }: { children: ReactNode }) => <span className="font-bo
 
 const Text = ({ children }: { children: ReactNode }) => <p>{children}</p>
 
-const Heading = ({ level, children }: { level: 2 | 3 | 4 | 5 | 6; children: ReactNode }) => {
+const headingVariants = ['xl', 'l', 'm', 's']
+
+const Heading = ({ level, children }: { level: 1 | 2 | 3 | 4; children: ReactNode }) => {
   const Tag = `h${level}` as const
-  return <Tag className={level > 2 ? 'govuk-heading-m' : 'govuk-heading-l'}>{children}</Tag>
+  return <Tag className={`govuk-heading-${headingVariants[level - 1]}`}>{children}</Tag>
 }
 
 const ButtonEntry = ({
@@ -49,13 +51,13 @@ const options: Options = {
   },
   renderNode: {
     [BLOCKS.UL_LIST]: (node, children) => <List>{children}</List>,
+    [BLOCKS.OL_LIST]: (node, children) => <List as="ol">{children}</List>,
     [BLOCKS.LIST_ITEM]: (node, children) => <ListItem className="[&>p]:mb-0">{children}</ListItem>,
     [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
+    [BLOCKS.HEADING_1]: (node, children) => <Heading level={1}>{children}</Heading>,
     [BLOCKS.HEADING_2]: (node, children) => <Heading level={2}>{children}</Heading>,
     [BLOCKS.HEADING_3]: (node, children) => <Heading level={3}>{children}</Heading>,
     [BLOCKS.HEADING_4]: (node, children) => <Heading level={4}>{children}</Heading>,
-    [BLOCKS.HEADING_5]: (node, children) => <Heading level={5}>{children}</Heading>,
-    [BLOCKS.HEADING_6]: (node, children) => <Heading level={6}>{children}</Heading>,
     [BLOCKS.EMBEDDED_ENTRY]: (node) => {
       const entryType = node.data.target.sys.contentType.sys.id
       switch (entryType) {

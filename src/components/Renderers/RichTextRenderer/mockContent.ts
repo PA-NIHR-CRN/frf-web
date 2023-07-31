@@ -29,6 +29,18 @@ export const mockContent: Document = {
       ],
     },
     {
+      nodeType: BLOCKS.HEADING_1,
+      data: {},
+      content: [
+        {
+          nodeType: 'text',
+          value: 'Heading level 1',
+          marks: [],
+          data: {},
+        },
+      ],
+    },
+    {
       nodeType: BLOCKS.HEADING_2,
       data: {},
       content: [
@@ -59,30 +71,6 @@ export const mockContent: Document = {
         {
           nodeType: 'text',
           value: 'Heading level 4',
-          marks: [],
-          data: {},
-        },
-      ],
-    },
-    {
-      nodeType: BLOCKS.HEADING_5,
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Heading level 5',
-          marks: [],
-          data: {},
-        },
-      ],
-    },
-    {
-      nodeType: BLOCKS.HEADING_6,
-      data: {},
-      content: [
-        {
-          nodeType: 'text',
-          value: 'Heading level 6',
           marks: [],
           data: {},
         },
