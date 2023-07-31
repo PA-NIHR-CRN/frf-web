@@ -2,6 +2,8 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Link from 'next/link'
 
 import { Container } from '@/components/Container/Container'
+import { contentfulService } from '@/lib/contentful'
+import { logger } from '@/lib/logger'
 
 export type ContactDataServiceProviderConfirmationProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -32,9 +34,17 @@ export default function ContactDataServiceProviderConfirmation({
 }
 
 export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+  const slug = String(query.slug)
+  const referenceNumber = String(query.referenceNumber)
+
   try {
-    const referenceNumber = query.referenceNumber ?? ''
-    const name = query.name ?? ''
+    const entry = await contentfulService.getProviderBySlug(slug)
+
+    if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
+
+    const {
+      fields: { name },
+    } = entry
 
     return {
       props: {
@@ -45,6 +55,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
       },
     }
   } catch (error) {
+    logger.error(error)
     return {
       redirect: {
         destination: '/500',

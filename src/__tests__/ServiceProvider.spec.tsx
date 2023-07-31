@@ -110,7 +110,7 @@ test('Sidebar', async () => {
   )
   expect(sidebar.getByRole('link', { name: 'Get in touch with Genomic Profile Register' })).toHaveAttribute(
     'href',
-    '/contact-data-service-provider/Genomic%20Profile%20Register'
+    '/contact-data-service-provider/genomic-profile-register'
   )
 
   // Support
@@ -290,7 +290,7 @@ test('Service provider with only required content types', async () => {
   )
   expect(
     within(sidebarColumn).getByRole('link', { name: 'Get in touch with Genomic Profile Register' })
-  ).toHaveAttribute('href', '/contact-data-service-provider/Genomic%20Profile%20Register')
+  ).toHaveAttribute('href', '/contact-data-service-provider/genomic-profile-register')
 
   // Non-required fields
   expect(screen.queryByRole('table', { name: 'Services available and costs:' })).not.toBeInTheDocument()

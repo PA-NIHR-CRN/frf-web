@@ -67,10 +67,10 @@ test('Successful submission redirects to the confirmation page', async () => {
   const res = await testHandler(handler, {
     method: 'POST',
     body,
-    query: { name: encodeURIComponent('Test Service Provider') },
+    query: { slug: 'genonmic-profile-register' },
   })
   expect(res.statusCode).toBe(302)
-  expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/Test%20Service%20Provider/confirmation/D00999')
+  expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/genonmic-profile-register/confirmation/D00999')
 
   // Form data is saved in the database
   expect(prismaMock.dataServiceProviderRequest.create).toHaveBeenCalledWith({
@@ -104,11 +104,11 @@ test('Validation error redirects back to the form with the errors and original v
   const res = await testHandler(handler, {
     method: 'POST',
     body,
-    query: { name: encodeURIComponent('Test Service Provider') },
+    query: { slug: 'genonmic-profile-register' },
   })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe(
-    '/contact-data-service-provider/Test%20Service%20Provider?fullNameError=Required&emailAddressError=Required&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&studyDescription=Study+description+here'
+    '/contact-data-service-provider/genonmic-profile-register?fullNameError=Required&emailAddressError=Required&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&studyDescription=Study+description+here'
   )
 })
 
@@ -123,20 +123,20 @@ test('Invalid reCaptcha token redirects with an error', async () => {
     body: {
       reCaptchaToken: 'mock-token',
     },
-    query: { name: encodeURIComponent('Test Service Provider') },
+    query: { slug: 'genonmic-profile-register' },
   })
   expect(res.statusCode).toBe(302)
-  expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/Test%20Service%20Provider?fatal=1')
+  expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/genonmic-profile-register?fatal=1')
   expect(logger.error).toHaveBeenCalledWith(new Error('Invalid reCaptcha token'))
 })
 
 test('Wrong http method redirects with an error', async () => {
   const res = await testHandler(handler, {
     method: 'GET',
-    query: { name: encodeURIComponent('Test Service Provider') },
+    query: { slug: 'genonmic-profile-register' },
   })
   expect(res.statusCode).toBe(302)
-  expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/Test%20Service%20Provider?fatal=1')
+  expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/genonmic-profile-register?fatal=1')
   expect(logger.error).toHaveBeenCalledWith(new Error('Wrong method'))
 })
 

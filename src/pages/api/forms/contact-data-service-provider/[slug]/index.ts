@@ -11,14 +11,14 @@ import { createReferenceNumber } from '@/utils/generic.utils'
 import { contactDataServiceProviderSchema } from '@/utils/schemas/contact-data-service-provider.schema'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const name = req.query.name
+  const slug = req.query.slug
 
   try {
     if (req.method !== 'POST') {
       throw new Error('Wrong method')
     }
 
-    if (!name) {
+    if (!slug) {
       throw new Error('Missing DSP')
     }
 
@@ -58,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // const messages = getNotificationMessages({ ...req.body, referenceNumber }, contacts)
     // await Promise.all(messages.map(emailService.sendEmail))
 
-    res.redirect(302, `/contact-data-service-provider/${name}/confirmation/${referenceNumber}`)
+    res.redirect(302, `/contact-data-service-provider/${slug}/confirmation/${referenceNumber}`)
   } catch (error) {
     if (error instanceof ZodError) {
       // Create an object containing the Zod validation errors
@@ -75,10 +75,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const searchParams = new URLSearchParams(fieldErrors)
 
-      return res.redirect(302, `/contact-data-service-provider/${name}?${searchParams}`)
+      return res.redirect(302, `/contact-data-service-provider/${slug}?${searchParams}`)
     }
 
     logger.error(error)
-    return res.redirect(302, `/contact-data-service-provider/${name || ''}?fatal=1`)
+    return res.redirect(302, `/contact-data-service-provider/${slug || ''}?fatal=1`)
   }
 }
