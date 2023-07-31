@@ -61,7 +61,7 @@ test('Displays the Home page', async () => {
 
   expect(screen.getByRole('heading', { name: 'Organisations providing data services', level: 2 })).toBeInTheDocument()
   expect(screen.getByText(mockData.signPostDescription2)).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Find out more' })).toHaveAttribute('href', '/become-data-service-provider')
+  expect(screen.getByRole('link', { name: 'Find out more' })).toHaveAttribute('href', '/data-service-providers')
 })
 
 test('Sets the static cache revalidation period', async () => {
