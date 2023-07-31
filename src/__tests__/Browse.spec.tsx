@@ -25,7 +25,7 @@ test('Displays the fallback navigation menu page', () => {
 
   expect(screen.getByRole('link', { name: 'Data service providers' })).toHaveAttribute(
     'href',
-    '/become-data-service-provider'
+    '/data-service-providers'
   )
   expect(
     screen.getByText(
