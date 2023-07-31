@@ -27,7 +27,7 @@ export function List<Element extends ElementType = 'ul'>({
           {heading}
         </h3>
       )}
-      <Component className={clsx('list-disc pl-4', className)} {...props}>
+      <Component className={clsx('list-disc pl-4', { 'list-decimal': as === 'ol' }, className)} {...props}>
         {children}
       </Component>
     </>

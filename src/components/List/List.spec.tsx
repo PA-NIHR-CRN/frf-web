@@ -29,7 +29,9 @@ test('Ordered list', () => {
     </List>
   )
   expect(screen.queryByText('mock-list')).not.toBeInTheDocument()
-  expect(screen.getByRole('list', { name: 'mock-list' }).tagName).toBe('OL')
+  const orderedList = screen.getByRole('list', { name: 'mock-list' })
+  expect(orderedList.tagName).toBe('OL')
+  expect(orderedList).toHaveClass('list-decimal')
 })
 
 test('List item with icon', () => {
