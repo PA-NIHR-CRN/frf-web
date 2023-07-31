@@ -136,7 +136,7 @@ export default function Home({
                 <div>
                   <Link
                     className="govuk-button govuk-button--secondary mb-0 mt-2 text-left"
-                    href="/become-data-service-provider"
+                    href="/data-service-providers"
                   >
                     Find out more
                   </Link>

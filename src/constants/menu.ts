@@ -15,7 +15,7 @@ export const menu = [
   ],
   [
     {
-      link: '/become-data-service-provider',
+      link: '/data-service-providers',
       text: 'Data service providers',
       description:
         'Information for organisations offering Find, Recruit and Follow-up data services to researchers and life sciences companies',

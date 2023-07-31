@@ -81,7 +81,7 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   // 3rd column
   expect(within(openMenu).getByRole('link', { name: 'Data service providers' })).toHaveAttribute(
     'href',
-    '/become-data-service-provider'
+    '/data-service-providers'
   )
   expect(
     within(openMenu).getByText(
