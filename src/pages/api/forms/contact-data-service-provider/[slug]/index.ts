@@ -1,24 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
-// import { contentfulService } from '@/lib/contentful'
-// import { emailService } from '@/lib/email'
+import { contentfulService } from '@/lib/contentful'
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
-// import { getNotificationMessages } from '@/utils/email/contact-research-support/messages.utils'
+import { getNotificationMessages } from '@/utils/email/contact-data-service-provider/messages.utils'
 import { createReferenceNumber } from '@/utils/generic.utils'
 import { contactDataServiceProviderSchema } from '@/utils/schemas/contact-data-service-provider.schema'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const name = req.query.name
+  const slug = req.query.slug
 
   try {
     if (req.method !== 'POST') {
       throw new Error('Wrong method')
     }
 
-    if (!name) {
+    if (!slug) {
       throw new Error('Missing DSP')
     }
 
@@ -53,12 +53,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     })
 
-    // Send emails
-    // const contacts = await contentfulService.getEmailContacts()
-    // const messages = getNotificationMessages({ ...req.body, referenceNumber }, contacts)
-    // await Promise.all(messages.map(emailService.sendEmail))
+    const entry = await contentfulService.getProviderBySlug(String(slug))
 
-    res.redirect(302, `/contact-data-service-provider/${name}/confirmation/${referenceNumber}`)
+    if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
+
+    const {
+      fields: { name: dspName },
+    } = entry
+
+    // Send emails
+    const messages = getNotificationMessages({ ...req.body, referenceNumber, dspName })
+    await Promise.all(messages.map(emailService.sendEmail))
+
+    res.redirect(302, `/contact-data-service-provider/${slug}/confirmation/${referenceNumber}`)
   } catch (error) {
     if (error instanceof ZodError) {
       // Create an object containing the Zod validation errors
@@ -75,10 +82,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       const searchParams = new URLSearchParams(fieldErrors)
 
-      return res.redirect(302, `/contact-data-service-provider/${name}?${searchParams}`)
+      return res.redirect(302, `/contact-data-service-provider/${slug}?${searchParams}`)
     }
-
     logger.error(error)
-    return res.redirect(302, `/contact-data-service-provider/${name || ''}?fatal=1`)
+
+    if (slug) return res.redirect(302, `/contact-data-service-provider/${slug}?fatal=1`)
+
+    return res.redirect(302, `/500`)
   }
 }

@@ -11,6 +11,7 @@ import { ErrorSummary, Fieldset, Form, Textarea, TextInput } from '@/components/
 import { RootLayout } from '@/components/Layout/RootLayout'
 import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
+import { contentfulService } from '@/lib/contentful'
 import { logger } from '@/lib/logger'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
 import {
@@ -57,7 +58,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
             </p>
             <Form
               method="post"
-              action={`/api/forms/contact-data-service-provider/${name}`}
+              action={`/api/forms/contact-data-service-provider/${query.slug}`}
               handleSubmit={handleSubmit}
               onError={(message: string) =>
                 setError('root.serverError', {
@@ -67,7 +68,6 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
               }
             >
               <ErrorSummary errors={errors} />
-
               <Fieldset>
                 <TextInput
                   label="Full name"
@@ -140,9 +140,17 @@ ContactDataServiceProvider.getLayout = function getLayout(
   )
 }
 
-export const getServerSideProps = ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+  const slug = String(query.slug)
+
   try {
-    const name = query.name
+    const entry = await contentfulService.getProviderBySlug(slug)
+
+    if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
+
+    const {
+      fields: { name },
+    } = entry
 
     return {
       props: {
