@@ -35,6 +35,11 @@ test('Rich text renderer', () => {
   const listItem2Element = screen.getByText('List item 2')
   expect(listItem2Element).toBeInTheDocument()
 
+  // Assert that the heading (level 1) node is rendered
+  const h1Element = screen.getByRole('heading', { level: 1, name: 'Heading level 1' })
+  expect(h1Element).toBeInTheDocument()
+  expect(h1Element).toHaveClass('govuk-heading-xl')
+
   // Assert that the heading (level 2) node is rendered
   const h2Element = screen.getByRole('heading', { level: 2, name: 'Heading level 2' })
   expect(h2Element).toBeInTheDocument()
@@ -48,17 +53,7 @@ test('Rich text renderer', () => {
   // Assert that the heading (level 4) node is rendered
   const h4Element = screen.getByRole('heading', { level: 4, name: 'Heading level 4' })
   expect(h4Element).toBeInTheDocument()
-  expect(h4Element).toHaveClass('govuk-heading-m')
-
-  // Assert that the heading (level 5) node is rendered
-  const h5Element = screen.getByRole('heading', { level: 5, name: 'Heading level 5' })
-  expect(h5Element).toBeInTheDocument()
-  expect(h5Element).toHaveClass('govuk-heading-m')
-
-  // Assert that the heading (level 6) node is rendered
-  const h6Element = screen.getByRole('heading', { level: 6, name: 'Heading level 6' })
-  expect(h6Element).toBeInTheDocument()
-  expect(h6Element).toHaveClass('govuk-heading-m')
+  expect(h4Element).toHaveClass('govuk-heading-s')
 
   // Assert that a custom button is rendered
   const buttonLink = screen.getByRole('link', { name: 'Button text' })
