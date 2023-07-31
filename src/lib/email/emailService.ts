@@ -10,7 +10,12 @@ handlebars.registerHelper('eq', (a, b) => a == b)
 export type EmailArgs = {
   to: string
   subject: string
-  templateName: 'support-request' | 'request-confirmation' | 'feedback'
+  templateName:
+    | 'support-request'
+    | 'request-confirmation'
+    | 'feedback'
+    | 'data-service-provider/dsp-confirmation'
+    | 'data-service-provider/researcher-confirmation'
   templateData: Record<string, unknown>
 }
 

@@ -1,14 +1,29 @@
 import { GetServerSidePropsContext } from 'next'
 
 import { render, screen } from '@/config/test-utils'
+import { defaultMock } from '@/mocks/serviceProvider'
 import ContactDataServiceProviderConfirmation, {
   ContactDataServiceProviderConfirmationProps,
   getServerSideProps,
-} from '@/pages/contact-data-service-provider/[name]/confirmation/[referenceNumber]'
+} from '@/pages/contact-data-service-provider/[slug]/confirmation/[referenceNumber]'
+import { setupMockServer } from '@/utils'
+
+const [server, mockContentfulResponse] = setupMockServer()
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+jest.mock('@/lib/logger')
+
+beforeEach(() => {
+  mockContentfulResponse(defaultMock)
+  jest.clearAllMocks()
+})
 
 test('Contact data service provider confirmation page', async () => {
   const context = {
-    query: { referenceNumber: 'mock-123', name: 'mock-dsp-name' },
+    query: { referenceNumber: 'mock-123', name: defaultMock.items[0].fields.slug },
   } as unknown as GetServerSidePropsContext
 
   const { props } = (await getServerSideProps(context)) as {
@@ -18,7 +33,7 @@ test('Contact data service provider confirmation page', async () => {
   render(<ContactDataServiceProviderConfirmation {...props} />)
 
   expect(screen.getByRole('heading', { name: 'Thank you', level: 2 })).toBeInTheDocument()
-  expect(screen.getByText(/Your enquiry has been sent to mock-dsp-name/)).toBeInTheDocument()
+  expect(screen.getByText(/Your enquiry has been sent to Genomic Profile Register/)).toBeInTheDocument()
   expect(
     screen.getByText(
       /Your enquiry reference number is mock-123. A copy of your enquiry will be sent to your email address./

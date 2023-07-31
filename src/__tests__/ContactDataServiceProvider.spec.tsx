@@ -4,13 +4,14 @@ import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 
 import { render, within } from '@/config/test-utils'
+import { defaultMock } from '@/mocks/serviceProvider'
 import ContactDataServiceProvider, {
   ContactDataServiceProviderProps,
   getServerSideProps,
-} from '@/pages/contact-data-service-provider/[name]'
+} from '@/pages/contact-data-service-provider/[slug]'
 import { setupMockServer } from '@/utils'
 
-const [server] = setupMockServer()
+const [server, mockContentfulResponse] = setupMockServer()
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
@@ -21,13 +22,14 @@ jest.mock('axios')
 jest.mock('@/lib/logger')
 
 beforeEach(() => {
+  mockContentfulResponse(defaultMock)
   console.error = jest.fn()
   mockRouter.push('/contact-data-service-provider/mock-dsp')
   jest.clearAllMocks()
 })
 
 test('Initial form state', async () => {
-  const context = { query: { name: 'mock-dsp-name' } } as unknown as GetServerSidePropsContext
+  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
 
   const { props } = (await getServerSideProps(context)) as {
     props: ContactDataServiceProviderProps
@@ -35,11 +37,11 @@ test('Initial form state', async () => {
 
   const { getByLabelText, getByRole, getByText } = render(<ContactDataServiceProvider {...props} />)
 
-  expect(getByRole('heading', { name: 'Get in touch with mock-dsp-name', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Get in touch with Genomic Profile Register', level: 2 })).toBeInTheDocument()
 
   expect(
     getByText(
-      'Upon submitting this form, your contact details will be shared with mock-dsp-name so they can contact you to discuss further.'
+      'Upon submitting this form, your contact details will be shared with Genomic Profile Register so they can contact you to discuss further.'
     )
   ).toBeInTheDocument()
 
@@ -90,7 +92,7 @@ test('Successful submission redirects to confirmation page', async () => {
     request: { responseURL: 'http://localhost:3000/contact-data-service-provider/mock-dsp/confirmation/mock-ref-123' },
   })
 
-  const context = { query: { name: 'mock-dsp-name' } } as unknown as GetServerSidePropsContext
+  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
 
   const { props } = (await getServerSideProps(context)) as {
     props: ContactDataServiceProviderProps
@@ -100,7 +102,7 @@ test('Successful submission redirects to confirmation page', async () => {
     ContactDataServiceProvider.getLayout(<ContactDataServiceProvider {...props} />, { ...props, isPreviewMode: false })
   )
 
-  expect(getByRole('heading', { name: 'Get in touch with mock-dsp-name', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Get in touch with Genomic Profile Register', level: 2 })).toBeInTheDocument()
 
   await user.type(getByLabelText('Full name'), 'John Terry')
   await user.type(getByLabelText('Email address'), 'testemail@nihr.ac.ul')
@@ -127,7 +129,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
     request: { responseURL: 'http://localhost:3000/contact-data-service-provider/mock-dsp?fatal=1' },
   })
 
-  const context = { query: { name: 'mock-dsp-name' } } as unknown as GetServerSidePropsContext
+  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
 
   const { props } = (await getServerSideProps(context)) as {
     props: ContactDataServiceProviderProps
@@ -137,7 +139,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
     ContactDataServiceProvider.getLayout(<ContactDataServiceProvider {...props} />, { ...props, isPreviewMode: false })
   )
 
-  expect(getByRole('heading', { name: 'Get in touch with mock-dsp-name', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Get in touch with Genomic Profile Register', level: 2 })).toBeInTheDocument()
 
   await user.type(getByLabelText('Full name'), 'John Terry')
   await user.type(getByLabelText('Email address'), 'testemail@nihr.ac.ul')
@@ -164,7 +166,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
 test('Form submission with client side validation errors', async () => {
   const user = userEvent.setup()
 
-  const context = { query: { name: 'mock-dsp-name' } } as unknown as GetServerSidePropsContext
+  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
   const { props } = (await getServerSideProps(context)) as {
     props: ContactDataServiceProviderProps
   }
@@ -219,7 +221,7 @@ test('Server side field validation errors', async () => {
     '/contact-data-service-provider/mock-dps-name?fullNameError=Enter+a+full+name&emailAddressError=Enter+an+email+address&jobRoleError=Enter+a+job+role&organisationNameError=Enter+an+organisation+name&studyDescriptionError=Enter+a+description+of+your+study%2Fstudies+and+services+of+interest'
   )
 
-  const context = { query: { name: 'mock-dsp-name' } } as unknown as GetServerSidePropsContext
+  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
   const { props } = (await getServerSideProps(context)) as {
     props: ContactDataServiceProviderProps
   }
