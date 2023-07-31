@@ -1,8 +1,9 @@
 import { rest } from 'msw'
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
+import { Mock } from 'ts-mockery'
 
-// import { emailService } from '@/lib/email'
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { defaultMock } from '@/mocks/contactResearchSupport'
@@ -38,7 +39,7 @@ beforeEach(() => {
 })
 
 test('Successful submission redirects to the confirmation page', async () => {
-  // const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
+  const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
   const body: ContactDataServiceProviderInputs & { reCaptchaToken: string } = {
     reCaptchaToken: 'mock-token',
@@ -82,12 +83,14 @@ test('Successful submission redirects to the confirmation page', async () => {
   })
 
   // Email notifications are sent with a reference number
-  // expect(sendEmailSpy).toHaveBeenCalledTimes(1)
+  expect(sendEmailSpy).toHaveBeenCalledTimes(2)
 
-  // const [emailOne] = sendEmailSpy.mock.calls
+  const [emailOne, emailTwo] = sendEmailSpy.mock.calls
 
-  // expect(emailOne[0].to).toBe('testemail@nihr.ac.uk')
-  // expect(emailOne[0].templateData.referenceNumber).toEqual(expect.any(String))
+  expect(emailOne[0].to).toBe('frfteam@nihr.ac.uk')
+  expect(emailOne[0].templateData.referenceNumber).toEqual('D00999')
+  expect(emailTwo[0].to).toBe('testemail@nihr.ac.uk')
+  expect(emailTwo[0].templateData.referenceNumber).toEqual('D00999')
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {
@@ -146,6 +149,6 @@ test('Missing data service provider', async () => {
     params: {},
   })
   expect(res.statusCode).toBe(302)
-  expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/?fatal=1')
+  expect(res._getRedirectUrl()).toBe('/500')
   expect(logger.error).toHaveBeenCalledWith(new Error('Wrong method'))
 })

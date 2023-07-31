@@ -68,7 +68,6 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
               }
             >
               <ErrorSummary errors={errors} />
-
               <Fieldset>
                 <TextInput
                   label="Full name"
