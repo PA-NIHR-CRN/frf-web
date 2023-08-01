@@ -37,7 +37,8 @@ export default class ProviderDetailsPage {
   readonly dspDetailFirstPublished: Locator
   readonly dspDetailSummaryLastUpdated: Locator
   readonly dspDetailDataContentHeader: Locator
-  readonly dspDetailDataContentSubSectionHeader: Locator
+  readonly dspDetailDataContentSubSectionBlockHeader: Locator
+  readonly dspDetailDataContentSubSectionSearchTestHeader: Locator
   readonly dspDetailDataContentTxtContent: Locator
   readonly dspDetailGeoPopulationHeader: Locator
   readonly dspDetailInfoGovHeader: Locator
@@ -53,6 +54,7 @@ export default class ProviderDetailsPage {
   readonly dspDetailFollowLvlTwoSection: Locator
   readonly dspDetailFollowLvlTwoHeader: Locator
   readonly dspDetailCoverageGeography: Locator
+  readonly dspDetailBulletList: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -111,9 +113,18 @@ export default class ProviderDetailsPage {
     this.dspDetailDataContentHeader = page.locator('section div[data-testid="frf-dsp-section-panel"] h3', {
       hasText: 'Data content',
     })
-    this.dspDetailDataContentSubSectionHeader = page.locator('section summary[class="govuk-details__summary"] span', {
-      hasText: 'This is a Test Block',
-    })
+    this.dspDetailDataContentSubSectionBlockHeader = page.locator(
+      'section summary[class="govuk-details__summary"] span',
+      {
+        hasText: 'This is a Test Block',
+      }
+    )
+    this.dspDetailDataContentSubSectionSearchTestHeader = page.locator(
+      'section summary[class="govuk-details__summary"] span',
+      {
+        hasText: 'Header for FRF-120 Testing',
+      }
+    )
     this.dspDetailDataContentTxtContent = page
       .locator('div[class="govuk-details__text [&>*>p:last-child]:mb-0"]')
       .nth(0)
@@ -145,6 +156,7 @@ export default class ProviderDetailsPage {
     this.dspDetailFollowLvlTwoSection = page.locator('section[id="follow-up"]')
     this.dspDetailFollowLvlTwoHeader = page.locator('section[id="follow-up"] h3')
     this.dspDetailCoverageGeography = page.locator('p[class="govuk-!-margin-bottom-1"]')
+    this.dspDetailBulletList = page.locator('ul[class="govuk-list govuk-list--bullet"]')
   }
 
   //Page Methods
@@ -260,7 +272,7 @@ export default class ProviderDetailsPage {
   async assertDataContentPresent(visibilty: boolean) {
     if (visibilty) {
       await expect(this.dspDetailDataContentHeader).toBeVisible()
-      await expect(this.dspDetailDataContentSubSectionHeader).toBeVisible()
+      await expect(this.dspDetailDataContentSubSectionBlockHeader).toBeVisible()
       await expect(this.dspDetailDataContentTxtContent).toBeHidden()
     } else {
       await expect(this.dspDetailDataContentHeader).toBeHidden()
@@ -408,5 +420,47 @@ export default class ProviderDetailsPage {
       'frf-icon-cross'
     )
   }
+
+  async assertDspSearchResultFundedBy(expectedFundedBy: string) {
+    await expect(this.dspDetailFundedBy).toContainText(expectedFundedBy, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultFindServiceDescription(expectedServiceDesc: string) {
+    await expect(this.dspDetailFindLvlTwoSection.locator('div p').nth(0)).toContainText(expectedServiceDesc, {
+      ignoreCase: true,
+    })
+  }
+
+  async assertDspSearchResultTypeOfData(expectedTypeData: string) {
+    await expect(
+      this.dspDetailTypeOfDataSection.nth(0).locator(this.dspDetailBulletList).locator('li p')
+    ).toContainText(expectedTypeData, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultWebName(expectedWebName: string) {
+    await expect(this.linkDspDetailExternal).toContainText(expectedWebName, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultDataContent(expectedContent: string) {
+    await this.dspDetailDataContentSubSectionSearchTestHeader.click()
+    await expect(
+      this.dspDetailDataContentTxtContent
+        .locator(this.dspDetailBulletList)
+        .locator('li p', { hasText: expectedContent })
+    ).toBeVisible()
+  }
+
+  async assertDspSearchResultGeoPopCoverage(expectedGeoPop: string) {
+    await expect(this.dspDetailGeoPopulationHeader.locator('..').locator('..').locator('div p')).toContainText(
+      expectedGeoPop,
+      { ignoreCase: true }
+    )
+  }
+
+  async assertDspSearchResultInfoGov(expectedGeoPop: string) {
+    await expect(this.dspDetailInfoGovHeader.locator('..').locator('..').locator('div p')).toContainText(
+      expectedGeoPop,
+      { ignoreCase: true }
+    )
+  }
 }
-//fix issues, likely related to adding file path in goto methods

@@ -15,6 +15,7 @@ test.describe('DSP List Filter Page Behaviour Tests - @frf_13 @frf_13_page_behav
     })
     await test.step('Then there will be no Matching Results', async () => {
       await providersPage.assertNumberOfDspResults(0)
+      await providersPage.assertNoResultsScreen()
     })
   })
 

@@ -171,6 +171,22 @@ test.describe('DSP List Filters Applied Behaviour Tests - @frf_13 @frf_13_applie
     })
   })
 
+  test('As a user I can Filter the DSP List by Welsh Coverage & it includes UK Wide - @frf_13_applied_behaviours_ac5_4', async ({
+    providersPage,
+  }) => {
+    await test.step('Given I am on the DSP List Page', async () => {
+      await providersPage.goto()
+      await providersPage.assertOnProvidersPage()
+    })
+    await test.step('When I click the Wales Filter Option', async () => {
+      await providersPage.dspFilterOptionWales.click()
+      await providersPage.waitForListReload()
+    })
+    await test.step('Then the Result List shows DSPs with Welsh Coverage, including UK Wide', async () => {
+      await providersPage.assertCoverageFilterOptionApplied('Wales')
+    })
+  })
+
   test('As a user I can combine Filters in the same Category to Widen my Search Criteria - @frf_13_applied_behaviours_ac8_0', async ({
     providersPage,
   }) => {

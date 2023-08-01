@@ -23,6 +23,8 @@ export default class ProvidersPage {
   readonly dspResultServiceCostsTblHeader: Locator
   readonly dspResultsServiceCostsTblCell: Locator
   readonly dspResultCoverageHeader: Locator
+  readonly dspResultCoverageSection: Locator
+  readonly dspResultSectionContent: Locator
   readonly dspResultCoverageTxt: Locator
   readonly dspResultCoverageSupportTxt: Locator
   readonly dspResultSuitedHeader: Locator
@@ -43,6 +45,9 @@ export default class ProvidersPage {
   readonly dspListTypeDataHeader: Locator
   readonly dspListTypeDataList: Locator
   readonly dspListLoading: Locator
+  readonly dspNoResultsHeader: Locator
+  readonly dspNoResultHelpMsg: Locator
+  readonly dspNoResultHelpList: Locator
 
   //Filter Objects
   readonly dspFilterMobileBtnOpen: Locator
@@ -80,6 +85,8 @@ export default class ProvidersPage {
   readonly dspFilterSelectedPanel: Locator
   readonly dspFilterPanelClearBtn: Locator
   readonly dspFilterSelectedPanelClearLink: Locator
+  readonly dspFilterSearchInput: Locator
+  readonly dspFilterSearchBtn: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -108,6 +115,10 @@ export default class ProvidersPage {
     this.dspResultServiceCostsTblHeader = page.locator('th[scope="row"]')
     this.dspResultsServiceCostsTblCell = page.locator('td[class="govuk-table__cell govuk-body-s pl-4"]')
     this.dspResultCoverageHeader = page.locator('h3[class="govuk-heading-s mb-3"]', { hasText: 'Coverage:' })
+    this.dspResultCoverageSection = page.locator('ul[aria-label="Coverage"]')
+    this.dspResultSectionContent = page.locator(
+      'li[class="govuk-body govuk-!-margin-bottom-2 flex list-none items-start gap-x-2 gap-y-1"]'
+    )
     this.dspResultCoverageTxt = page.locator('p[class="govuk-!-margin-bottom-1"]')
     this.dspResultCoverageSupportTxt = page.locator('p[class="mb-0"]')
     this.dspResultSuitedHeader = page.locator('h3[class="govuk-heading-s mb-3"]', { hasText: 'Suited to:' })
@@ -131,9 +142,12 @@ export default class ProvidersPage {
       'h3[class="govuk-heading-s govuk-!-margin-top-5 govuk-!-margin-bottom-3 md:mt-0"]'
     )
     this.dspListTypeDataList = page.locator(
-      'div[class="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0"] ul[class="list-disc pl-4"]'
+      'div[class="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0"] ul[class="govuk-list govuk-list--bullet"]'
     )
     this.dspListLoading = page.locator('p[class="govuk-body mt-5 min-h-[40rem]"]')
+    this.dspNoResultsHeader = page.locator('h3[class="govuk-heading-l"]')
+    this.dspNoResultHelpMsg = page.locator('p[id="improve-search-results"]')
+    this.dspNoResultHelpList = page.locator('ul[aria-labelledby="improve-search-results"]')
 
     //Filter Locators
     this.dspFilterMobileBtnOpen = page.locator('a[id="show-filters"]')
@@ -197,6 +211,8 @@ export default class ProvidersPage {
     this.dspFilterSelectedPanelClearLink = page.locator(
       'div[class="order-2 ml-auto whitespace-nowrap pl-1 md:order-3"] a'
     )
+    this.dspFilterSearchInput = page.locator('input[id="keyword"]')
+    this.dspFilterSearchBtn = page.locator('button[class="mb-0 mt-3 w-full govuk-button govuk-button--secondary"]')
   }
 
   //Page Methods
@@ -347,6 +363,15 @@ export default class ProvidersPage {
     if (txtResultNo !== undefined) {
       expect(parseInt(txtResultNo)).toEqual(expectedNo)
     }
+  }
+
+  async assertNoResultsScreen() {
+    await expect(this.dspNoResultsHeader).toBeVisible()
+    await expect(this.dspNoResultHelpMsg).toBeVisible()
+    await expect(this.dspNoResultHelpList).toBeVisible()
+    await expect(this.dspNoResultsHeader).toHaveText('There are no matching results.')
+    await expect(this.dspNoResultHelpMsg).toHaveText('Improve your search results by:')
+    expect(await this.dspNoResultHelpList.locator('li').count()).toEqual(4)
   }
 
   async assertPageControlPresent() {
@@ -1036,5 +1061,58 @@ export default class ProvidersPage {
 
   async assertResultsEqual(previousNoResults: number, currentNoResults: number) {
     expect(currentNoResults).toEqual(previousNoResults)
+  }
+
+  async enterSearchPhrase(searchPhrase: string) {
+    await this.dspFilterSearchInput.fill(searchPhrase)
+  }
+
+  async removeSearchPhrase() {
+    await this.dspFilterSearchInput.clear()
+  }
+
+  async assertDspSearchResultName(expectedName: string) {
+    await expect(this.dspResultTitle.nth(0)).toContainText(expectedName, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultOrg(expectedOrg: string) {
+    await expect(this.dspResultOrgName.nth(0)).toContainText(expectedOrg, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultDescription(expectedDesc: string) {
+    await expect(this.dspResultOverview.nth(0)).toContainText(expectedDesc, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultGeoSupportTxt(expectedGeoTxt: string) {
+    await expect(this.dspResultCoverageSupportTxt.nth(0)).toContainText(expectedGeoTxt, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultRegionalCoverage(expectedRegCov: string) {
+    await expect(this.dspResultCoverageTxt.nth(0)).toContainText(expectedRegCov, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultPopulation(expectedPopulation: string) {
+    await expect(this.dspResultCoverageSection.locator(this.dspResultSectionContent).nth(0)).toContainText(
+      expectedPopulation
+    )
+  }
+
+  async assertDspSearchResultSuitedTo(expectedSuited: string) {
+    await expect(this.dspResultSuitedList.nth(0)).toContainText(expectedSuited, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultCostDescription(expectedCostDesc: string) {
+    await expect(
+      this.dspResultServiceCostsTbl
+        .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
+        .locator('..')
+        .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+    ).toContainText(expectedCostDesc, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultTypeOfData(expectedTypeData: string) {
+    await expect(this.dspListTypeDataList.nth(0).locator('li').nth(0)).toContainText(expectedTypeData, {
+      ignoreCase: true,
+    })
   }
 }

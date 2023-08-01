@@ -1,6 +1,6 @@
 import { expect, test } from '../../../hooks/CustomFixtures'
 
-test.describe.only('Home Page Accessibility Tests - @access_Home', () => {
+test.describe('Home Page Accessibility Tests - @access_Home', () => {
   test('Scan Home Page with AXE Tool', async ({ homePage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
     let axeScanResults = await axeScanner.analyze()
@@ -27,7 +27,7 @@ test.describe.only('Home Page Accessibility Tests - @access_Home', () => {
   })
 })
 
-test.describe.only('Site Menu Accessibility Tests - @access_SiteMenu', () => {
+test.describe('Site Menu Accessibility Tests - @access_SiteMenu', () => {
   test('Scan Site Menu with AXE Tool', async ({ homePage, commonItemsPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
     let axeScanResults = await axeScanner.analyze()
@@ -61,7 +61,7 @@ test.describe.only('Site Menu Accessibility Tests - @access_SiteMenu', () => {
   })
 })
 
-test.describe.only('DSP List Page Accessibility Tests - @access_DspListPage', () => {
+test.describe('DSP List Page Accessibility Tests - @access_DspListPage', () => {
   test('Scan DSP List Page with AXE Tool', async ({ providersPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
     let axeScanResults = await axeScanner.analyze()
@@ -88,7 +88,7 @@ test.describe.only('DSP List Page Accessibility Tests - @access_DspListPage', ()
   })
 })
 
-test.describe.only('DSP Details Page Accessibility Tests - @access_DspDetailPage', () => {
+test.describe('DSP Details Page Accessibility Tests - @access_DspDetailPage', () => {
   test('Scan DSP Details Page with AXE Tool', async ({ providerDetailsPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
     let axeScanResults = await axeScanner.analyze()
@@ -115,7 +115,7 @@ test.describe.only('DSP Details Page Accessibility Tests - @access_DspDetailPage
   })
 })
 
-test.describe.only('Feedback Form Accessibility Tests - @access_ContactSupportForm', () => {
+test.describe('Feedback Form Accessibility Tests - @access_ContactSupportForm', () => {
   test('Scan Feedback Form  with AXE Tool', async ({ feedbackFormPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
     let axeScanResults = await axeScanner.analyze()
@@ -142,7 +142,7 @@ test.describe.only('Feedback Form Accessibility Tests - @access_ContactSupportFo
   })
 })
 
-test.describe.only('Contact Support Form Accessibility Tests - @access_ContactSupportForm', () => {
+test.describe('Contact Support Form Accessibility Tests - @access_ContactSupportForm', () => {
   test('Scan Contact Support Form  with AXE Tool', async ({ contactSupportPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
     let axeScanResults = await axeScanner.analyze()
