@@ -15,7 +15,7 @@ const Text = ({ children }: { children: ReactNode }) => <p>{children}</p>
 
 const headingVariants = ['xl', 'l', 'm', 's']
 
-const Heading = ({ level, children }: { level: 1 | 2 | 3 | 4; children: ReactNode }) => {
+const Heading = ({ level, children }: { level: 2 | 3 | 4; children: ReactNode }) => {
   const Tag = `h${level}` as const
   return <Tag className={`govuk-heading-${headingVariants[level - 1]}`}>{children}</Tag>
 }
@@ -54,7 +54,6 @@ const options: Options = {
     [BLOCKS.OL_LIST]: (node, children) => <List as="ol">{children}</List>,
     [BLOCKS.LIST_ITEM]: (node, children) => <ListItem className="[&>p]:mb-0">{children}</ListItem>,
     [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
-    [BLOCKS.HEADING_1]: (node, children) => <Heading level={1}>{children}</Heading>,
     [BLOCKS.HEADING_2]: (node, children) => <Heading level={2}>{children}</Heading>,
     [BLOCKS.HEADING_3]: (node, children) => <Heading level={3}>{children}</Heading>,
     [BLOCKS.HEADING_4]: (node, children) => <Heading level={4}>{children}</Heading>,

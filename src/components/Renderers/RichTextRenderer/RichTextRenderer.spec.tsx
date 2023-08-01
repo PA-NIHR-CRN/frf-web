@@ -35,11 +35,6 @@ test('Rich text renderer', () => {
   const listItem2Element = screen.getByText('List item 2')
   expect(listItem2Element).toBeInTheDocument()
 
-  // Assert that the heading (level 1) node is rendered
-  const h1Element = screen.getByRole('heading', { level: 1, name: 'Heading level 1' })
-  expect(h1Element).toBeInTheDocument()
-  expect(h1Element).toHaveClass('govuk-heading-xl')
-
   // Assert that the heading (level 2) node is rendered
   const h2Element = screen.getByRole('heading', { level: 2, name: 'Heading level 2' })
   expect(h2Element).toBeInTheDocument()
