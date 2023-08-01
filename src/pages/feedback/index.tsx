@@ -1,8 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import Link from 'next/link'
 import { ReCaptchaProvider } from 'next-recaptcha-v3'
+import { NextSeo } from 'next-seo'
 import { ReactElement, useCallback } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
@@ -42,87 +42,89 @@ export default function Feedback({ query }: FeedbackProps) {
   const { defaultValues } = formState
 
   return (
-    <Container>
-      <div className="govuk-grid-row">
-        <div className="govuk-grid-column-two-thirds-from-desktop">
-          <h2 className="govuk-heading-l">Let us know what you think</h2>
-          <p>The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.</p>
-          <Form
-            method="post"
-            action="/api/forms/feedback"
-            handleSubmit={handleSubmit}
-            onError={(message: string) =>
-              setError('root.serverError', {
-                type: '400',
-                message,
-              })
-            }
-          >
-            <ErrorSummary errors={errors} />
-            <Fieldset>
-              <RadioGroup
-                label="How helpful was the Find, Recruit and Follow-up (FRF) website?"
-                errors={errors}
-                defaultValue={defaultValues?.helpfulness}
-                {...register('helpfulness')}
-              >
-                <Radio value="very-helpful" label="Very helpful" />
-                <Radio value="somewhat-helpful" label="Somewhat helpful" />
-                <Radio value="neither-helpful-or-unhelpful" label="Neither helpful or unhelpful" />
-                <Radio value="not-at-all-helpful" label="Not at all helpful" />
-              </RadioGroup>
-              <Textarea
-                required={false}
-                label="Please provide us with any other feedback on your experience of our website or suggestions for improvement. (optional)"
-                errors={errors}
-                remainingCharacters={remainingCharacters}
-                defaultValue={defaultValues?.suggestions}
-                {...register('suggestions')}
-              />
-            </Fieldset>
-
-            <Fieldset
-              className="govuk-!-margin-top-7"
-              legend="We may wish to contact you to follow up on your feedback. If you are happy for us to do so please provide your contact details."
+    <>
+      <NextSeo title={`Feedback - Find, Recruit and Follow-up`} />
+      <Container>
+        <div className="govuk-grid-row">
+          <div className="govuk-grid-column-two-thirds-from-desktop">
+            <h2 className="govuk-heading-l">Let us know what you think</h2>
+            <p>The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.</p>
+            <Form
+              method="post"
+              action="/api/forms/feedback"
+              handleSubmit={handleSubmit}
+              onError={(message: string) =>
+                setError('root.serverError', {
+                  type: '400',
+                  message,
+                })
+              }
             >
-              <TextInput
-                required={false}
-                label="Full name (optional)"
-                errors={errors}
-                defaultValue={defaultValues?.fullName}
-                {...register('fullName')}
-              />
-              <TextInput
-                required={false}
-                label="Email address (optional)"
-                errors={errors}
-                defaultValue={defaultValues?.emailAddress}
-                {...register('emailAddress')}
-              />
-              <TextInput
-                required={false}
-                label="Organisation (optional)"
-                errors={errors}
-                defaultValue={defaultValues?.organisationName}
-                {...register('organisationName')}
-              />
-            </Fieldset>
+              <ErrorSummary errors={errors} />
+              <Fieldset>
+                <RadioGroup
+                  label="How helpful was the Find, Recruit and Follow-up (FRF) website?"
+                  errors={errors}
+                  defaultValue={defaultValues?.helpfulness}
+                  {...register('helpfulness')}
+                >
+                  <Radio value="very-helpful" label="Very helpful" />
+                  <Radio value="somewhat-helpful" label="Somewhat helpful" />
+                  <Radio value="neither-helpful-or-unhelpful" label="Neither helpful or unhelpful" />
+                  <Radio value="not-at-all-helpful" label="Not at all helpful" />
+                </RadioGroup>
+                <Textarea
+                  required={false}
+                  label="Please provide us with any other feedback on your experience of our website or suggestions for improvement. (optional)"
+                  errors={errors}
+                  remainingCharacters={remainingCharacters}
+                  defaultValue={defaultValues?.suggestions}
+                  {...register('suggestions')}
+                />
+              </Fieldset>
 
-            <div className="govuk-button-group">
-              <button
-                data-module="govuk-button"
-                className={clsx('govuk-button', { 'pointer-events-none': formState.isLoading })}
+              <Fieldset
+                className="govuk-!-margin-top-7"
+                legend="We may wish to contact you to follow up on your feedback. If you are happy for us to do so please provide your contact details."
+                legendSize="s"
               >
-                Submit
-              </button>
-              <Link className="govuk-link" href="/">
-                Cancel
-              </Link>
-            </div>
-          </Form>
+                <TextInput
+                  required={false}
+                  label="Full name (optional)"
+                  errors={errors}
+                  defaultValue={defaultValues?.fullName}
+                  className="govuk-!-margin-top-4"
+                  {...register('fullName')}
+                />
+                <TextInput
+                  required={false}
+                  label="Email address (optional)"
+                  errors={errors}
+                  defaultValue={defaultValues?.emailAddress}
+                  {...register('emailAddress')}
+                />
+                <TextInput
+                  required={false}
+                  label="Organisation name (optional)"
+                  errors={errors}
+                  defaultValue={defaultValues?.organisationName}
+                  {...register('organisationName')}
+                />
+              </Fieldset>
+
+              <div className="govuk-button-group">
+                <button
+                  data-module="govuk-button"
+                  className={clsx('govuk-button', { 'pointer-events-none': formState.isLoading })}
+                >
+                  Submit
+                </button>
+              </div>
+            </Form>
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   )
 }
 
@@ -138,7 +140,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
   try {
     return {
       props: {
-        page: 'Let us know what you think',
+        page: 'Feedback',
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       },

@@ -1,10 +1,14 @@
 export type { TypeBlockDataTransfer, TypeBlockDataTransferFields, TypeBlockDataTransferSkeleton } from "./TypeBlockDataTransfer";
 export type { TypeBlockLabel, TypeBlockLabelFields, TypeBlockLabelSkeleton } from "./TypeBlockLabel";
+export type { TypeButton, TypeButtonFields, TypeButtonSkeleton } from "./TypeButton";
 export type { TypeDataContentBlock, TypeDataContentBlockFields, TypeDataContentBlockSkeleton } from "./TypeDataContentBlock";
 export type { TypeEmailContact, TypeEmailContactFields, TypeEmailContactSkeleton } from "./TypeEmailContact";
 export type { TypeHomepage, TypeHomepageFields, TypeHomepageSkeleton } from "./TypeHomepage";
 export type { TypeInformationGovernanceBlock, TypeInformationGovernanceBlockFields, TypeInformationGovernanceBlockSkeleton } from "./TypeInformationGovernanceBlock";
 export type { TypeInformationGovernanceDataSource, TypeInformationGovernanceDataSourceFields, TypeInformationGovernanceDataSourceSkeleton } from "./TypeInformationGovernanceDataSource";
+export type { TypePage, TypePageFields, TypePageSkeleton } from "./TypePage";
+export type { TypePromoBlock, TypePromoBlockFields, TypePromoBlockSkeleton } from "./TypePromoBlock";
 export type { TypeServiceProvider, TypeServiceProviderFields, TypeServiceProviderSkeleton } from "./TypeServiceProvider";
 export type { TypeServiceTypeBlock, TypeServiceTypeBlockFields, TypeServiceTypeBlockSkeleton } from "./TypeServiceTypeBlock";
 export type { TypeTextBlock, TypeTextBlockFields, TypeTextBlockSkeleton } from "./TypeTextBlock";
+export type { TypeVideo, TypeVideoFields, TypeVideoSkeleton } from "./TypeVideo";

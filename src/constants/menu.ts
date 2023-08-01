@@ -2,7 +2,7 @@ export const menu = [
   [{ link: null, text: 'Discover more with the Find, Recruit and Follow-up website', description: null }],
   [
     {
-      link: '/',
+      link: '/providers',
       text: 'View data service providers',
       description: 'Discover more about the different data service providers within Find, Recruit and Follow-up',
     },
@@ -15,13 +15,13 @@ export const menu = [
   ],
   [
     {
-      link: '/',
+      link: '/data-service-providers',
       text: 'Data service providers',
       description:
         'Information for organisations offering Find, Recruit and Follow-up data services to researchers and life sciences companies',
     },
     {
-      link: '/',
+      link: '/research-support',
       text: 'Research support colleagues',
       description: 'Information for colleagues within the various research support organisations across the UK',
     },

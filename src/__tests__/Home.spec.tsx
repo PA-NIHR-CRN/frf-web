@@ -61,7 +61,7 @@ test('Displays the Home page', async () => {
 
   expect(screen.getByRole('heading', { name: 'Organisations providing data services', level: 2 })).toBeInTheDocument()
   expect(screen.getByText(mockData.signPostDescription2)).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Find out more' })).toHaveAttribute('href', '#')
+  expect(screen.getByRole('link', { name: 'Find out more' })).toHaveAttribute('href', '/data-service-providers')
 })
 
 test('Sets the static cache revalidation period', async () => {
@@ -72,10 +72,10 @@ test('Sets the static cache revalidation period', async () => {
 
 test('Handles no data returned', async () => {
   mockContentfulResponse({})
-  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content')
+  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content (Error: Null entry)')
 })
 
 test('Handles errors when fetching data', async () => {
   mockContentfulResponse(errorMock, 400)
-  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content')
+  await expect(getStaticProps()).rejects.toThrow('Failed to fetch homepage content (InvalidQuery: {')
 })

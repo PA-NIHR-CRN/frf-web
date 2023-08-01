@@ -1,4 +1,4 @@
-import { Lato } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import Link from 'next/link'
 import { ReactNode, useEffect } from 'react'
 
@@ -8,7 +8,7 @@ import { Panel } from '../Panel/Panel'
 import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
 import { PreviewBanner } from '../PreviewBanner/PreviewBanner'
 
-const primaryFont = Lato({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-primary' })
+const primaryFont = Roboto({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-primary' })
 
 type RootLayoutProps = { children: ReactNode; backLink?: ReactNode; isPreviewMode?: boolean }
 
@@ -23,7 +23,7 @@ export function RootLayout({ children, backLink, isPreviewMode }: RootLayoutProp
       <Header />
       <PhaseBanner phase="Beta">
         This is a new service – your{' '}
-        <Link className="govuk-link" href="/feedback">
+        <Link className="govuk-link govuk-link--no-visited-state" href="/feedback">
           feedback
         </Link>{' '}
         will help us to improve it.

@@ -20,6 +20,7 @@ export function List<Element extends ElementType = 'ul'>({
   ...props
 }: ListProps<Element>) {
   const Component = as ?? 'ul'
+  const listStyle = as === 'ol' ? 'govuk-list--number' : 'govuk-list--bullet'
   return (
     <>
       {heading && (
@@ -27,7 +28,7 @@ export function List<Element extends ElementType = 'ul'>({
           {heading}
         </h3>
       )}
-      <Component className={clsx('list-disc pl-4', className)} {...props}>
+      <Component className={clsx('govuk-list', listStyle, className)} {...props}>
         {children}
       </Component>
     </>

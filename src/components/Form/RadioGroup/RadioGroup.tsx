@@ -3,6 +3,7 @@ import { Children, cloneElement, forwardRef, isValidElement, ReactNode } from 'r
 import { FieldErrors } from 'react-hook-form'
 
 import { ErrorInline } from '../ErrorInline/ErrorInline'
+import { Fieldset } from '../Fieldset/Fieldset'
 
 type RadioGroupProps = {
   children: ReactNode
@@ -20,40 +21,46 @@ export const RadioGroup = forwardRef<HTMLInputElement, RadioGroupProps>(
 
     return (
       <div className={clsx('govuk-form-group', { 'govuk-form-group--error': !!error })}>
-        <div className="govuk-radios" data-module="govuk-radios">
-          <div className="govuk-label-wrapper">
-            <label id={`${rest.name}-label`} className="govuk-label govuk-label--s" htmlFor={rest.name}>
-              {label}
-            </label>
-            {hint && (
-              <div id={`${name}-hint`} className="govuk-hint">
-                {hint}
-              </div>
+        <Fieldset
+          legend={label}
+          legendSize="s"
+          aria-invalid={!!error ? 'true' : 'false'}
+          aria-errormessage={clsx({
+            [`${rest.name}-error`]: error,
+          })}
+        >
+          <div className="govuk-radios" data-module="govuk-radios">
+            <div className="govuk-label-wrapper">
+              {hint && (
+                <div id={`${name}-hint`} className="govuk-hint">
+                  {hint}
+                </div>
+              )}
+            </div>
+            <ErrorInline name={rest.name} errors={errors} />
+            {Children.map(children, (child, index) =>
+              isValidElement(child) ? (
+                <>
+                  {cloneElement(child, {
+                    ...child.props,
+                    ...rest,
+                    ref,
+                    id: clsx({
+                      [rest.name]: index === 0,
+                      [`${rest.name}-${index}`]: index > 0,
+                    }),
+                    defaultChecked: defaultValue === child.props.value,
+                    'aria-required': required,
+                    'aria-invalid': !!error ? 'true' : 'false',
+                    'aria-errormessage': clsx({
+                      [`${rest.name}-error`]: error,
+                    }),
+                  })}
+                </>
+              ) : null
             )}
           </div>
-          <ErrorInline name={rest.name} errors={errors} />
-          {Children.map(children, (child, index) =>
-            isValidElement(child) ? (
-              <>
-                {cloneElement(child, {
-                  ...child.props,
-                  ...rest,
-                  ref,
-                  id: clsx({
-                    [rest.name]: index === 0,
-                    [`${rest.name}-${index}`]: index > 0,
-                  }),
-                  defaultChecked: defaultValue === child.props.value,
-                  'aria-required': required,
-                  'aria-invalid': !!error ? 'true' : 'false',
-                  'aria-errormessage': clsx({
-                    [`${rest.name}-error`]: error,
-                  }),
-                })}
-              </>
-            ) : null
-          )}
-        </div>
+        </Fieldset>
       </div>
     )
   }

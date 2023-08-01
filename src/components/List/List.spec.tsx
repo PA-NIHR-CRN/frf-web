@@ -11,7 +11,7 @@ test('Unordered list', () => {
   )
   expect(screen.getByText('mock-list')).toHaveAttribute('aria-hidden')
   const list = screen.getByRole('list', { name: 'mock-list' })
-  expect(list).toHaveClass('custom-class')
+  expect(list).toHaveClass('custom-class', 'govuk-list', 'govuk-list--bullet')
   expect(list.tagName).toBe('UL')
 
   const listItems = within(list).getAllByRole('listitem')
@@ -29,7 +29,9 @@ test('Ordered list', () => {
     </List>
   )
   expect(screen.queryByText('mock-list')).not.toBeInTheDocument()
-  expect(screen.getByRole('list', { name: 'mock-list' }).tagName).toBe('OL')
+  const orderedList = screen.getByRole('list', { name: 'mock-list' })
+  expect(orderedList.tagName).toBe('OL')
+  expect(orderedList).toHaveClass('govuk-list--number')
 })
 
 test('List item with icon', () => {

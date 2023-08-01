@@ -40,11 +40,12 @@ test('Initial form state', async () => {
     screen.getByText('The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.')
   ).toBeInTheDocument()
 
-  expect(screen.getAllByRole('group')).toHaveLength(2)
+  expect(screen.getAllByRole('group')).toHaveLength(3)
 
   // How helpful was the Find, Recruit and Follow-up (FRF) website?
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toBeInTheDocument()
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toBeRequired()
+  expect(
+    getByRole('group', { name: 'How helpful was the Find, Recruit and Follow-up (FRF) website?' })
+  ).toBeInTheDocument()
   expect(getByLabelText('Very helpful')).toBeInTheDocument()
   expect(getByLabelText('Somewhat helpful')).toBeInTheDocument()
   expect(getByLabelText('Neither helpful or unhelpful')).toBeInTheDocument()
@@ -79,12 +80,11 @@ test('Initial form state', async () => {
   expect(getByLabelText('Email address (optional)')).not.toBeRequired()
 
   // Org
-  expect(getByLabelText('Organisation (optional)')).toBeInTheDocument()
-  expect(getByLabelText('Organisation (optional)')).not.toBeRequired()
+  expect(getByLabelText('Organisation name (optional)')).toBeInTheDocument()
+  expect(getByLabelText('Organisation name (optional)')).not.toBeRequired()
 
   // Form CTAs
   expect(getByRole('button', { name: 'Submit' })).toBeInTheDocument()
-  expect(getByRole('link', { name: 'Cancel' })).toHaveAttribute('href', '/')
 })
 
 test('Successful submission redirects to confirmation page', async () => {
@@ -116,7 +116,7 @@ test('Successful submission redirects to confirmation page', async () => {
   )
   await user.type(getByLabelText('Full name (optional)'), 'John Terry')
   await user.type(getByLabelText('Email address (optional)'), 'testemail@nihr.ac.ul')
-  await user.type(getByLabelText('Organisation (optional)'), 'NIHR')
+  await user.type(getByLabelText('Organisation name (optional)'), 'NIHR')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -152,7 +152,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
   )
   await user.type(getByLabelText('Full name (optional)'), 'John Terry')
   await user.type(getByLabelText('Email address (optional)'), 'testemail@nihr.ac.ul')
-  await user.type(getByLabelText('Organisation (optional)'), 'NIHR')
+  await user.type(getByLabelText('Organisation name (optional)'), 'NIHR')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -186,9 +186,9 @@ test('Form submission with client side validation errors', async () => {
   )
 
   // Field errors
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toHaveErrorMessage(
-    'Error: Select how helpful you found the FRF website'
-  )
+  expect(
+    getByRole('group', { name: 'How helpful was the Find, Recruit and Follow-up (FRF) website?' })
+  ).toHaveErrorMessage('Error: Select how helpful you found the FRF website')
   expect(
     getByLabelText(
       'Please provide us with any other feedback on your experience of our website or suggestions for improvement. (optional)'
@@ -196,7 +196,7 @@ test('Form submission with client side validation errors', async () => {
   ).not.toHaveErrorMessage()
   expect(getByLabelText('Full name (optional)')).not.toHaveErrorMessage()
   expect(getByLabelText('Email address (optional)')).not.toHaveErrorMessage()
-  expect(getByLabelText('Organisation (optional)')).not.toHaveErrorMessage()
+  expect(getByLabelText('Organisation name (optional)')).not.toHaveErrorMessage()
 })
 
 test('Server side field validation errors', async () => {
@@ -219,9 +219,9 @@ test('Server side field validation errors', async () => {
   )
 
   // Field errors
-  expect(getByLabelText('How helpful was the Find, Recruit and Follow-up (FRF) website?')).toHaveErrorMessage(
-    'Error: Select how helpful you found the FRF website'
-  )
+  expect(
+    getByRole('group', { name: 'How helpful was the Find, Recruit and Follow-up (FRF) website?' })
+  ).toHaveErrorMessage('Error: Select how helpful you found the FRF website')
   expect(
     getByLabelText(
       'Please provide us with any other feedback on your experience of our website or suggestions for improvement. (optional)'
@@ -229,5 +229,5 @@ test('Server side field validation errors', async () => {
   ).not.toHaveErrorMessage()
   expect(getByLabelText('Full name (optional)')).not.toHaveErrorMessage()
   expect(getByLabelText('Email address (optional)')).not.toHaveErrorMessage()
-  expect(getByLabelText('Organisation (optional)')).not.toHaveErrorMessage()
+  expect(getByLabelText('Organisation name (optional)')).not.toHaveErrorMessage()
 })

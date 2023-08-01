@@ -58,7 +58,10 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   expect(within(openMenu).getByText('Discover more with the Find, Recruit and Follow-up website')).toBeInTheDocument()
 
   // 2nd column
-  expect(within(openMenu).getByRole('link', { name: 'View data service providers' })).toHaveAttribute('href', '/')
+  expect(within(openMenu).getByRole('link', { name: 'View data service providers' })).toHaveAttribute(
+    'href',
+    '/providers'
+  )
   expect(
     within(openMenu).getByText(
       'Discover more about the different data service providers within Find, Recruit and Follow-up'
@@ -76,14 +79,20 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   ).toBeInTheDocument()
 
   // 3rd column
-  expect(within(openMenu).getByRole('link', { name: 'Data service providers' })).toHaveAttribute('href', '/')
+  expect(within(openMenu).getByRole('link', { name: 'Data service providers' })).toHaveAttribute(
+    'href',
+    '/data-service-providers'
+  )
   expect(
     within(openMenu).getByText(
       'Information for organisations offering Find, Recruit and Follow-up data services to researchers and life sciences companies'
     )
   ).toBeInTheDocument()
 
-  expect(within(openMenu).getByRole('link', { name: 'Research support colleagues' })).toHaveAttribute('href', '/')
+  expect(within(openMenu).getByRole('link', { name: 'Research support colleagues' })).toHaveAttribute(
+    'href',
+    '/research-support'
+  )
   expect(
     within(openMenu).getByText(
       'Information for colleagues within the various research support organisations across the UK'
