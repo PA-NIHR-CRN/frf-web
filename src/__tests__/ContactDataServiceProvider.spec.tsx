@@ -39,6 +39,8 @@ test('Initial form state', async () => {
 
   expect(getByRole('heading', { name: 'Get in touch with Genomic Profile Register', level: 2 })).toBeInTheDocument()
 
+  expect(getByText('All fields are required unless marked as optional.')).toBeInTheDocument()
+
   expect(
     getByText(
       'Upon submitting this form, your contact details will be shared with Genomic Profile Register so they can contact you to discuss further.'

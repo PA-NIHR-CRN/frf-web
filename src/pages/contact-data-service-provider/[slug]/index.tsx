@@ -56,6 +56,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
               Upon submitting this form, your contact details will be shared with {name} so they can contact you to
               discuss further.
             </p>
+            <p>All fields are required unless marked as optional.</p>
             <Form
               method="post"
               action={`/api/forms/contact-data-service-provider/${query.slug}`}
