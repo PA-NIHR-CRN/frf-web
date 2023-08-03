@@ -41,7 +41,7 @@ test('Displays a generic contentful page', async () => {
 
   // Video is rendered
   const videoIframe = screen.getByTitle('Research Support Staff Video')
-  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube.com/embed/3WUh1huCUrM')
+  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube-nocookie.com/embed/3WUh1huCUrM')
 
   // Sidebar title is rendered
   expect(screen.getByRole('heading', { name: 'Contact FRF central team', level: 3 }))

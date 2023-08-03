@@ -66,7 +66,7 @@ test('Rich text renderer', () => {
 
   // Assert that a custom video is rendered
   const videoIframe = screen.getByTitle('Video title')
-  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube.com/embed/3WUh1huCUrM')
+  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube-nocookie.com/embed/3WUh1huCUrM')
 
   // Assert that an embedded video is rendered
   const videoElement = screen.getByTitle('Embedded video description')

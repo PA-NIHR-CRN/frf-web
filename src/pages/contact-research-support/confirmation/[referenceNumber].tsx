@@ -32,7 +32,7 @@ export default function ContactResearchSupportConfirmation({
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   try {
     const referenceNumber = query.referenceNumber ?? ''
 

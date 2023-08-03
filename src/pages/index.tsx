@@ -10,6 +10,7 @@ import FollowUpIcon from '@/components/Icons/FollowUpIcon'
 import RecruitIcon from '@/components/Icons/RecruitIcon'
 import { Video } from '@/components/Video/Video'
 import { contentfulService } from '@/lib/contentful'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 import { getStaticPropsRevalidateValue } from '@/utils/getStaticPropsRevalidateValue'
 
 export type HomepageProps = InferGetStaticPropsType<typeof getStaticProps>
@@ -159,6 +160,7 @@ export const getStaticProps = async () => {
         page: 'Homepage',
         ...entry.fields,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(),
       },
       revalidate: getStaticPropsRevalidateValue(),
     }
