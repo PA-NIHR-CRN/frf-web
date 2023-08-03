@@ -58,11 +58,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
 
     const {
-      fields: { name: dspName },
+      fields: { name: dspName, emailAddress: dspEmail },
     } = entry
 
     // Send emails
-    const messages = getNotificationMessages({ ...req.body, referenceNumber, dspName })
+    const messages = getNotificationMessages({ ...req.body, referenceNumber, dspName, dspEmail })
     await Promise.all(messages.map(emailService.sendEmail))
 
     res.redirect(302, `/contact-data-service-provider/${slug}/confirmation/${referenceNumber}`)

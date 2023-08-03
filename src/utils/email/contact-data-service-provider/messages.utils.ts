@@ -1,16 +1,19 @@
-import { EMAIL_FRF_INBOX } from '@/constants'
 import { EmailArgs } from '@/lib/email/emailService'
 import { ContactDataServiceProviderInputs } from '@/utils/schemas/contact-data-service-provider.schema'
 
-export type MessageData = ContactDataServiceProviderInputs & { dspName: string; referenceNumber: string }
+export type MessageData = ContactDataServiceProviderInputs & {
+  dspName: string
+  dspEmail: string
+  referenceNumber: string
+}
 
 export const getNotificationMessages = (messageData: MessageData) => {
   const messages: EmailArgs[] = []
 
-  const { emailAddress, dspName, referenceNumber } = messageData
+  const { emailAddress, dspName, dspEmail, referenceNumber } = messageData
 
   messages.push({
-    to: EMAIL_FRF_INBOX,
+    to: dspEmail,
     subject: `${referenceNumber} - New enquiry via Find, Recruit & Follow-up`,
     templateName: 'data-service-provider/dsp-confirmation',
     templateData: {
