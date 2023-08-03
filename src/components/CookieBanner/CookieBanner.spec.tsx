@@ -12,7 +12,7 @@ jest.mock('cookies-next', () => ({
   setCookie: jest.fn(),
 }))
 
-test('should render the cookie banner selection view', () => {
+test('Renders the cookie banner selection view', () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   expect(screen.getByRole('heading', { name: /cookies on find, recruit and follow-up/i })).toBeInTheDocument()
@@ -25,7 +25,7 @@ test('should render the cookie banner selection view', () => {
   expect(screen.queryByTestId('confirmation-message')).not.toBeInTheDocument()
 })
 
-test('should change the view to the confirmation view when accepting cookies', async () => {
+test('Changes to the confirmation view when accepting cookies', async () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   await userEvent.click(screen.getByRole('button', { name: /accept additional cookies/i }))
@@ -34,16 +34,19 @@ test('should change the view to the confirmation view when accepting cookies', a
   expect(screen.getByText(/You’ve accepted additional cookies./)).toBeInTheDocument()
 })
 
-test('should change the view to the confirmation view when rejecting cookies', async () => {
+test('Changes to the confirmation view when rejecting cookies', async () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   await userEvent.click(screen.getByRole('button', { name: /reject additional cookies/i }))
 
   expect(screen.getByTestId('confirmation-message')).toBeInTheDocument()
   expect(screen.getByText(/You’ve rejected additional cookies./)).toBeInTheDocument()
+
+  expect(screen.getByRole('link', { name: /cookie policy/ })).toHaveAttribute('href', '/cookie-policy')
+  expect(screen.getByRole('link', { name: /change your cookie settings/ })).toHaveAttribute('href', '#cookie-banner')
 })
 
-test('should hide the cookie banner when "Hide cookie message" is clicked', async () => {
+test('Hides the cookie banner when "Hide cookie message" is clicked', async () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   // Click "Accept additional cookies" to show the confirmation view
@@ -60,7 +63,7 @@ test('should hide the cookie banner when "Hide cookie message" is clicked', asyn
   expect(screen.queryByLabelText('Cookies on Find, Recruit and Follow-Up')).not.toBeInTheDocument()
 })
 
-test('should change the view back to the selection view when "change your cookie settings" is clicked', async () => {
+test('Changes back to the selection view when "change your cookie settings" is clicked', async () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   // Click "Accept additional cookies" to show the confirmation view
@@ -83,7 +86,44 @@ test('should change the view back to the selection view when "change your cookie
   expect(screen.queryByTestId('confirmation-message')).not.toBeInTheDocument()
 })
 
-test('should not render the cookie banner if the cookie is already set', () => {
+test('Accepting or rejecting cookies via keyboard', async () => {
+  const user = userEvent.setup()
+
+  render(<CookieBanner content={mockCookieBannerContent} />)
+
+  const acceptButton = screen.getByRole('button', { name: /accept additional cookies/i })
+
+  acceptButton.focus()
+
+  await user.keyboard('{Enter}')
+
+  expect(screen.getByText(/You’ve accepted additional cookies./)).toBeInTheDocument()
+
+  await user.tab()
+
+  expect(screen.getByRole('link', { name: /cookie policy/ })).toHaveFocus()
+
+  await user.tab()
+
+  expect(screen.getByRole('link', { name: /change your cookie settings/ })).toHaveFocus()
+
+  await user.keyboard('{Enter}')
+
+  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
+
+  await user.tab()
+  await user.tab()
+
+  const rejectButton = screen.getByRole('button', { name: /reject additional cookies/i })
+
+  expect(rejectButton).toHaveFocus()
+
+  await user.keyboard('{Enter}')
+
+  expect(screen.getByText(/You’ve rejected additional cookies./)).toBeInTheDocument()
+})
+
+test('Does not render the cookie banner if the GDPR cookie is already set', () => {
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
   ;(getCookie as jest.Mock).mockReturnValueOnce('FRF_GDPR_COOKIE_ACCEPT_VALUE=1;')
 
