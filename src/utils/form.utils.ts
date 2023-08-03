@@ -1,14 +1,18 @@
 import { ParsedUrlQuery } from 'querystring'
 import { FieldError, FieldErrors } from 'react-hook-form'
 
-import { contactDataServiceProviderSchema } from './schemas/contact-data-service-provider.schema'
-import { contactResearchSupportSchema } from './schemas/contact-research-support.schema'
-import { feedbackSchema } from './schemas/feedback.schema'
+import {
+  contactDataServiceProviderSchema,
+  contactFrfTeamSchema,
+  contactResearchSupportSchema,
+  feedbackSchema,
+} from './schemas'
 
 export type Schemas =
   | typeof contactResearchSupportSchema
   | typeof contactDataServiceProviderSchema
   | typeof feedbackSchema
+  | typeof contactFrfTeamSchema
 
 /**
  * Checks if there's any form errors present in the URL searchParams for a given schema
