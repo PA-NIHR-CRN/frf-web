@@ -104,7 +104,8 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
                   {...register('organisationName')}
                 />
                 <Textarea
-                  label="Please outline which services you are interested in and, if applicable, a brief description of your research"
+                  label="Enquiry details"
+                  hint="Please outline which services you are interested in and, if applicable, a brief description of your research"
                   errors={errors}
                   remainingCharacters={remainingCharacters}
                   defaultValue={defaultValues?.studyDescription}

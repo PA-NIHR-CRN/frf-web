@@ -69,16 +69,13 @@ test('Initial form state', async () => {
   expect(getByLabelText('Organisation name')).toBeRequired()
 
   // Please outline which services you are interested in and, if applicable, a brief description of your research
+  expect(getByLabelText('Enquiry details')).toBeInTheDocument()
+  expect(getByLabelText('Enquiry details')).toBeRequired()
   expect(
-    getByLabelText(
+    getByText(
       'Please outline which services you are interested in and, if applicable, a brief description of your research'
     )
   ).toBeInTheDocument()
-  expect(
-    getByLabelText(
-      'Please outline which services you are interested in and, if applicable, a brief description of your research'
-    )
-  ).toBeRequired()
   expect(getByText('You have 1200 characters remaining')).toBeInTheDocument()
 
   // Form CTAs
@@ -111,12 +108,7 @@ test('Successful submission redirects to confirmation page', async () => {
   await user.type(getByLabelText('Telephone (optional)'), '+447552121212')
   await user.type(getByLabelText('Job role'), 'Researcher')
   await user.type(getByLabelText('Organisation name'), 'NIHR')
-  await user.type(
-    getByLabelText(
-      'Please outline which services you are interested in and, if applicable, a brief description of your research'
-    ),
-    'Looking for help on my research study'
-  )
+  await user.type(getByLabelText('Enquiry details'), 'Looking for help on my research study')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -148,12 +140,7 @@ test('Failed submission due to a misc server error shows an error at the top of 
   await user.type(getByLabelText('Telephone (optional)'), '+447552121212')
   await user.type(getByLabelText('Job role'), 'Researcher')
   await user.type(getByLabelText('Organisation name'), 'NIHR')
-  await user.type(
-    getByLabelText(
-      'Please outline which services you are interested in and, if applicable, a brief description of your research'
-    ),
-    'Looking for help on my research study'
-  )
+  await user.type(getByLabelText('Enquiry details'), 'Looking for help on my research study')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -211,11 +198,9 @@ test('Form submission with client side validation errors', async () => {
   )
   expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter your job role')
   expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter your organisation name')
-  expect(
-    getByLabelText(
-      'Please outline which services you are interested in and, if applicable, a brief description of your research'
-    )
-  ).toHaveErrorMessage('Error: Enter a description of your study and/ or service of interest')
+  expect(getByLabelText('Enquiry details')).toHaveErrorMessage(
+    'Error: Enter a description of your study and/ or service of interest'
+  )
 })
 
 test('Server side field validation errors', async () => {
@@ -252,9 +237,7 @@ test('Server side field validation errors', async () => {
   expect(getByLabelText('Telephone (optional)')).not.toHaveErrorMessage()
   expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter your job role')
   expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter your organisation name')
-  expect(
-    getByLabelText(
-      'Please outline which services you are interested in and, if applicable, a brief description of your research'
-    )
-  ).toHaveErrorMessage('Error: Enter a description of your study and/ or service of interest')
+  expect(getByLabelText('Enquiry details')).toHaveErrorMessage(
+    'Error: Enter a description of your study and/ or service of interest'
+  )
 })
