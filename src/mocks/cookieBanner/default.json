@@ -1,0 +1,67 @@
+{
+  "sys": { "type": "Array" },
+  "total": 1,
+  "skip": 0,
+  "limit": 100,
+  "items": [
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "3YscUYDulRJSuj7RFLTwlb",
+        "type": "Entry",
+        "createdAt": "2023-07-27T22:53:36.754Z",
+        "updatedAt": "2023-08-01T18:13:14.221Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "revision": 3,
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "cookieBanner" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "description": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "We use some essential cookies to make this service work.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "We’d like to set additional cookies so we can remember your settings, understand how people use the Find, Recruit and Follow-up website and make improvements.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            }
+          ]
+        },
+        "confirmation": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                { "data": {}, "marks": [], "value": "You’ve accepted additional cookies.", "nodeType": "text" }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        }
+      }
+    }
+  ]
+}

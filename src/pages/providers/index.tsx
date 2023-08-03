@@ -24,6 +24,7 @@ import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
 import { formatDate, getFiltersFromQuery, numDaysBetween, pluralise, transformFilters } from '@/utils'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 
 export type ServiceProvidersProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -224,7 +225,7 @@ export default function ServiceProviders({
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   try {
     const filters = getFiltersFromQuery(query)
 
@@ -246,6 +247,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
           totalItems: entry.total,
         },
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {

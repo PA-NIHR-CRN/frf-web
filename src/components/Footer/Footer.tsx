@@ -15,6 +15,11 @@ export function Footer() {
                 </Link>
               </li>
               <li className="govuk-footer__inline-list-item">
+                <Link className="govuk-footer__link link--inverse" href="/cookie-policy">
+                  Cookie policy
+                </Link>
+              </li>
+              <li className="govuk-footer__inline-list-item">
                 <Link className="govuk-footer__link link--inverse" href="/accessibility">
                   Accessibility
                 </Link>

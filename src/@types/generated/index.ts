@@ -1,6 +1,7 @@
 export type { TypeBlockDataTransfer, TypeBlockDataTransferFields, TypeBlockDataTransferSkeleton } from "./TypeBlockDataTransfer";
 export type { TypeBlockLabel, TypeBlockLabelFields, TypeBlockLabelSkeleton } from "./TypeBlockLabel";
 export type { TypeButton, TypeButtonFields, TypeButtonSkeleton } from "./TypeButton";
+export type { TypeCookieBanner, TypeCookieBannerFields, TypeCookieBannerSkeleton } from "./TypeCookieBanner";
 export type { TypeDataContentBlock, TypeDataContentBlockFields, TypeDataContentBlockSkeleton } from "./TypeDataContentBlock";
 export type { TypeEmailContact, TypeEmailContactFields, TypeEmailContactSkeleton } from "./TypeEmailContact";
 export type { TypeHomepage, TypeHomepageFields, TypeHomepageSkeleton } from "./TypeHomepage";
