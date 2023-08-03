@@ -10,7 +10,7 @@ import { ReactElement, ReactNode, useEffect } from 'react'
 
 import { TypeCookieBanner } from '@/@types/generated'
 import { RootLayout } from '@/components/Layout/RootLayout'
-import { FRF_GDPR_COOKIE_NAME } from '@/constants/cookies'
+import { FRF_GDPR_COOKIE_ACCEPT_VALUE, FRF_GDPR_COOKIE_NAME } from '@/constants/cookies'
 import { gtmVirtualPageView } from '@/lib/gtm'
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
@@ -46,7 +46,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
       </RootLayout>
     ))
 
-  const isGDPRCookieSet = getCookie(FRF_GDPR_COOKIE_NAME)
+  const hasAcceptedCookies = getCookie(FRF_GDPR_COOKIE_NAME) === FRF_GDPR_COOKIE_ACCEPT_VALUE
 
   return getLayout(
     <>
@@ -57,7 +57,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
         dangerouslySetAllPagesToNoIndex={disableSeo}
       />
       <Component {...pageProps} />
-      {isGDPRCookieSet && (
+      {hasAcceptedCookies && (
         <Script
           id="gtm-consent"
           strategy="afterInteractive"
