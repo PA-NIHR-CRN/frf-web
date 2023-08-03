@@ -182,7 +182,7 @@ test('Form submission with client side validation errors', async () => {
   // Summary errors
   const alert = getByRole('alert', { name: 'There is a problem' })
 
-  expect(within(alert).getByRole('link', { name: 'Enter a full name' })).toHaveAttribute('href', '#fullName')
+  expect(within(alert).getByRole('link', { name: 'Enter your full name' })).toHaveAttribute('href', '#fullName')
   expect(within(alert).getByRole('link', { name: 'Enter a valid email address' })).toHaveAttribute(
     'href',
     '#emailAddress'
@@ -192,33 +192,33 @@ test('Form submission with client side validation errors', async () => {
       name: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192',
     })
   ).toHaveAttribute('href', '#phoneNumber')
-  expect(within(alert).getByRole('link', { name: 'Enter a job role' })).toHaveAttribute('href', '#jobRole')
-  expect(within(alert).getByRole('link', { name: 'Enter an organisation name' })).toHaveAttribute(
+  expect(within(alert).getByRole('link', { name: 'Enter your job role' })).toHaveAttribute('href', '#jobRole')
+  expect(within(alert).getByRole('link', { name: 'Enter your organisation name' })).toHaveAttribute(
     'href',
     '#organisationName'
   )
   expect(
-    within(alert).getByRole('link', { name: 'Enter a description of your study/studies and services of interest' })
+    within(alert).getByRole('link', { name: 'Enter a description of your study and/ or service of interest' })
   ).toHaveAttribute('href', '#studyDescription')
 
   // Field errors
-  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter a full name')
+  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter your full name')
   expect(getByLabelText('Email address')).toHaveErrorMessage('Error: Enter a valid email address')
   expect(getByLabelText('Telephone (optional)')).toHaveErrorMessage(
     'Error: Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192'
   )
-  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter a job role')
-  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter an organisation name')
+  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter your job role')
+  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter your organisation name')
   expect(
     getByLabelText(
       'Please outline which services you are interested in and, if applicable, a brief description of your research'
     )
-  ).toHaveErrorMessage('Error: Enter a description of your study/studies and services of interest')
+  ).toHaveErrorMessage('Error: Enter a description of your study and/ or service of interest')
 })
 
 test('Server side field validation errors', async () => {
   mockRouter.push(
-    '/contact-data-service-provider/mock-dps-name?fullNameError=Enter+a+full+name&emailAddressError=Enter+an+email+address&jobRoleError=Enter+a+job+role&organisationNameError=Enter+an+organisation+name&studyDescriptionError=Enter+a+description+of+your+study%2Fstudies+and+services+of+interest'
+    '/contact-data-service-provider/mock-dps-name?fullNameError=Enter+your+full+name&emailAddressError=Enter+an+email+address&jobRoleError=Enter+your+job+role&organisationNameError=Enter+your+organisation+name&studyDescriptionError=Enter+a+description+of+your+study+and%2F+or+service+of+interest'
   )
 
   const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
@@ -233,26 +233,26 @@ test('Server side field validation errors', async () => {
   // Summary errors
   const alert = getByRole('alert', { name: 'There is a problem' })
 
-  expect(within(alert).getByRole('link', { name: 'Enter a full name' })).toHaveAttribute('href', '#fullName')
+  expect(within(alert).getByRole('link', { name: 'Enter your full name' })).toHaveAttribute('href', '#fullName')
   expect(within(alert).getByRole('link', { name: 'Enter an email address' })).toHaveAttribute('href', '#emailAddress')
-  expect(within(alert).getByRole('link', { name: 'Enter a job role' })).toHaveAttribute('href', '#jobRole')
-  expect(within(alert).getByRole('link', { name: 'Enter an organisation name' })).toHaveAttribute(
+  expect(within(alert).getByRole('link', { name: 'Enter your job role' })).toHaveAttribute('href', '#jobRole')
+  expect(within(alert).getByRole('link', { name: 'Enter your organisation name' })).toHaveAttribute(
     'href',
     '#organisationName'
   )
   expect(
-    within(alert).getByRole('link', { name: 'Enter a description of your study/studies and services of interest' })
+    within(alert).getByRole('link', { name: 'Enter a description of your study and/ or service of interest' })
   ).toHaveAttribute('href', '#studyDescription')
 
   // Field errors
-  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter a full name')
+  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter your full name')
   expect(getByLabelText('Email address')).toHaveErrorMessage('Error: Enter an email address')
   expect(getByLabelText('Telephone (optional)')).not.toHaveErrorMessage()
-  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter a job role')
-  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter an organisation name')
+  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter your job role')
+  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter your organisation name')
   expect(
     getByLabelText(
       'Please outline which services you are interested in and, if applicable, a brief description of your research'
     )
-  ).toHaveErrorMessage('Error: Enter a description of your study/studies and services of interest')
+  ).toHaveErrorMessage('Error: Enter a description of your study and/ or service of interest')
 })

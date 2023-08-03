@@ -6,7 +6,7 @@ export type ContactDataServiceProviderInputs = z.infer<typeof contactDataService
 
 export const contactDataServiceProviderSchema = z
   .object({
-    fullName: z.string().min(1, { message: 'Enter a full name' }),
+    fullName: z.string().min(1, { message: 'Enter your full name' }),
     emailAddress: z.string().email('Enter a valid email address').min(1, { message: 'Enter an email address' }),
     phoneNumber: z
       .string()
@@ -15,11 +15,11 @@ export const contactDataServiceProviderSchema = z
       })
       .optional()
       .or(z.literal('')),
-    jobRole: z.string().min(1, { message: 'Enter a job role' }),
-    organisationName: z.string().min(1, { message: 'Enter an organisation name' }),
+    jobRole: z.string().min(1, { message: 'Enter your job role' }),
+    organisationName: z.string().min(1, { message: 'Enter your organisation name' }),
     studyDescription: z
       .string()
-      .min(1, { message: 'Enter a description of your study/studies and services of interest' })
+      .min(1, { message: 'Enter a description of your study and/ or service of interest' })
       .refine((val) => val.split(' ').length <= TEXTAREA_MAX_CHARACTERS, {
         message: `Description of your study/studies and services of interest exceeds the maximum of ${TEXTAREA_MAX_CHARACTERS} characters`,
       }),
