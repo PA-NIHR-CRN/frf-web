@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
-// import { emailService } from '@/lib/email'
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { ReCaptchaService } from '@/lib/reCaptchaService'
-// import { getNotificationMessages } from '@/utils/email/contact-frf-team
+import { getNotificationMessages } from '@/utils/email/contact-frf-team/messages.utils'
 import { createReferenceNumber } from '@/utils/generic.utils'
 import { contactFrfTeamSchema } from '@/utils/schemas/contact-frf-team.schema'
 
@@ -47,8 +47,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     // Send emails
-    // const messages = getNotificationMessages({ ...req.body, referenceNumber, dspName, dspEmail })
-    // await Promise.all(messages.map(emailService.sendEmail))
+    const messages = getNotificationMessages({ ...req.body, referenceNumber })
+    await Promise.all(messages.map(emailService.sendEmail))
 
     res.redirect(302, `/contact-frf-team/confirmation/${referenceNumber}`)
   } catch (error) {

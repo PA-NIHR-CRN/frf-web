@@ -16,6 +16,8 @@ export type EmailArgs = {
     | 'feedback'
     | 'data-service-provider/dsp-confirmation'
     | 'data-service-provider/researcher-confirmation'
+    | 'contact-frf-team/frf-confirmation'
+    | 'contact-frf-team/request-confirmation'
   templateData: Record<string, unknown>
 }
 
