@@ -258,7 +258,7 @@ test('Form submission with client side validation errors', async () => {
     'href',
     '#supportDescription'
   )
-  expect(within(alert).getByRole('link', { name: 'Enter a full name' })).toHaveAttribute('href', '#fullName')
+  expect(within(alert).getByRole('link', { name: 'Enter your full name' })).toHaveAttribute('href', '#fullName')
   expect(within(alert).getByRole('link', { name: 'Enter a valid email address' })).toHaveAttribute(
     'href',
     '#emailAddress'
@@ -268,8 +268,8 @@ test('Form submission with client side validation errors', async () => {
       name: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192',
     })
   ).toHaveAttribute('href', '#phoneNumber')
-  expect(within(alert).getByRole('link', { name: 'Enter a job role' })).toHaveAttribute('href', '#jobRole')
-  expect(within(alert).getByRole('link', { name: 'Enter an organisation name' })).toHaveAttribute(
+  expect(within(alert).getByRole('link', { name: 'Enter your job role' })).toHaveAttribute('href', '#jobRole')
+  expect(within(alert).getByRole('link', { name: 'Enter your organisation name' })).toHaveAttribute(
     'href',
     '#organisationName'
   )
@@ -284,13 +284,13 @@ test('Form submission with client side validation errors', async () => {
   expect(getByLabelText('Please provide a summary of the support you need')).toHaveErrorMessage(
     'Error: Enter a summary of the support you need'
   )
-  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter a full name')
+  expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter your full name')
   expect(getByLabelText('Email address')).toHaveErrorMessage('Error: Enter a valid email address')
   expect(getByLabelText('Telephone (optional)')).toHaveErrorMessage(
     'Error: Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192'
   )
-  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter a job role')
-  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter an organisation name')
+  expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter your job role')
+  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter your organisation name')
   expect(getByRole('group', { name: 'Is your organisation' })).toHaveErrorMessage(
     'Error: Select the type of organisation'
   )

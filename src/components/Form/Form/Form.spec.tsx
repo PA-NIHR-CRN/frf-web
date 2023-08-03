@@ -98,7 +98,7 @@ test('Handles failures due to an api request error', async () => {
   ;(useRouter as jest.Mock).mockReturnValueOnce({
     push: routerPushMock,
     replace: routerReplaceMock,
-    pathname: 'mock-url',
+    asPath: 'mock-url',
   })
 
   // Mock useReCaptcha hook to return the mocked executeRecaptcha function
@@ -154,7 +154,7 @@ test('handles failures with recaptcha', async () => {
   ;(useRouter as jest.Mock).mockReturnValue({
     push: routerPushMock,
     replace: routerReplaceMock,
-    pathname: 'mock-url',
+    asPath: 'mock-url',
   })
 
   // Mock useReCaptcha hook to return the mocked executeRecaptcha function

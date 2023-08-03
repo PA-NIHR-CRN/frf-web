@@ -56,6 +56,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
               Upon submitting this form, your contact details will be shared with {name} so they can contact you to
               discuss further.
             </p>
+            <p>All fields are required unless marked as optional.</p>
             <Form
               method="post"
               action={`/api/forms/contact-data-service-provider/${query.slug}`}
@@ -103,7 +104,8 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
                   {...register('organisationName')}
                 />
                 <Textarea
-                  label="Please outline which services you are interested in and, if applicable, a brief description of your research"
+                  label="Enquiry details"
+                  hint="Please outline which services you are interested in and, if applicable, a brief description of your research"
                   errors={errors}
                   remainingCharacters={remainingCharacters}
                   defaultValue={defaultValues?.studyDescription}

@@ -15,11 +15,9 @@ test('Displays the header', () => {
 
   // Logo link
   const logoLink = screen.getByRole('link', {
-    name: 'Go to the National Institute for Health and Care Research website (Opens in a new window)',
+    name: 'Go to the National Institute for Health and Care Research website',
   })
   expect(logoLink).toHaveAttribute('href', 'https://www.nihr.ac.uk')
-  expect(logoLink).toHaveAttribute('target', '_blank')
-  expect(logoLink).toHaveAttribute('rel', 'external')
 
   // Logo image
   const logo = screen.getByAltText('National Institute for Health and Care Research logo')

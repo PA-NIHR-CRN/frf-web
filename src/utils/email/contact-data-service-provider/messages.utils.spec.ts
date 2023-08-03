@@ -5,6 +5,7 @@ import { getNotificationMessages, MessageData } from './messages.utils'
 describe('getNotificationMessages', () => {
   const defaultMessageData: MessageData = {
     dspName: 'Test DSP',
+    dspEmail: 'testdsp@nihr.ac.uk',
     referenceNumber: 'D00029',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
@@ -19,7 +20,7 @@ describe('getNotificationMessages', () => {
       {
         subject: 'D00029 - New enquiry via Find, Recruit & Follow-up',
         templateName: 'data-service-provider/dsp-confirmation',
-        to: 'frfteam@nihr.ac.uk',
+        to: defaultMessageData.dspEmail,
         templateData: defaultMessageData,
       },
       {
