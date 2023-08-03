@@ -7,7 +7,7 @@ export type VideoProps = {
 
 export const Video = ({ url, title }: VideoProps) => {
   const videoID = getVideoID(url)
-  const videoURL = `https://www.youtube.com/embed/${videoID}`
+  const videoURL = `https://www.youtube-nocookie.com/embed/${videoID}`
   return (
     <iframe
       className="aspect-video w-full max-w-[700px] lg:w-[450px]"

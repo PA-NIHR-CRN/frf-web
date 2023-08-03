@@ -1,6 +1,7 @@
 import userEvent from '@testing-library/user-event'
 import mockRouter from 'next-router-mock'
 
+import { mockCookieBannerContent } from '@/components/CookieBanner/mockContent'
 import { render, screen } from '@/config/test-utils'
 
 import { assertRootLayout } from './RootLayout.test'
@@ -52,4 +53,13 @@ test('Displays a preview banner & hides the back button when preview mode is ena
   ).toBeInTheDocument()
 
   expect(screen.queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()
+})
+
+test('Displays the cookie banner', () => {
+  render(
+    <ServiceProviderLayout cookieBanner={mockCookieBannerContent}>
+      <h1>Service Provider Detail Page</h1>
+    </ServiceProviderLayout>
+  )
+  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
 })

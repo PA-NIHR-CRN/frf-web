@@ -1,3 +1,4 @@
+import { mockCookieBannerContent } from '@/components/CookieBanner/mockContent'
 import { render, screen, within } from '@/config/test-utils'
 
 import { RootLayout } from './RootLayout'
@@ -52,4 +53,13 @@ test('Displays a preview banner when preview mode is enabled', () => {
   expect(
     screen.getByText('You are viewing the preview site, which includes draft content (not for onwards sharing).')
   ).toBeInTheDocument()
+})
+
+test('Displays the cookie banner', () => {
+  render(
+    <RootLayout cookieBanner={mockCookieBannerContent}>
+      <h1>Service Provider Detail Page</h1>
+    </RootLayout>
+  )
+  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
 })

@@ -26,9 +26,11 @@ import {
 } from '@/components/Provider'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
 import { TextRenderer } from '@/components/Renderers/TextRenderer/TextRenderer'
+import { Video } from '@/components/Video/Video'
 import { contentfulService } from '@/lib/contentful'
-import { getStaticPropsRevalidateValue, getVideoID } from '@/utils'
+import { getStaticPropsRevalidateValue } from '@/utils'
 import { formatDate } from '@/utils/date.utils'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 import {
   checkFindServiceTypeExists,
   checkFollowUpServiceTypeExists,
@@ -38,7 +40,7 @@ import {
 
 export type ServiceProviderProps = InferGetStaticPropsType<typeof getStaticProps>
 
-export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, updatedAt }: ServiceProviderProps) {
+export default function ServiceProvider({ fields, createdAt, updatedAt }: ServiceProviderProps) {
   const serviceTypes = fields.serviceTypes || []
 
   return (
@@ -106,18 +108,7 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
                 />
 
                 {/* Video */}
-                {videoUrl && (
-                  <div className="govuk-!-margin-top-6">
-                    <iframe
-                      className="aspect-video w-full max-w-[700px] lg:w-[450px]"
-                      src={videoUrl}
-                      title={`Video: ${fields.name}`}
-                      allow="accelerometer; autoplay; encrypted-media; gyroscope;"
-                      srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=${videoUrl}?autoplay=1><img src=https://img.youtube.com/vi/${videoID}/hqdefault.jpg alt='Video: Find, Recruit and Follow-up Intro'><span>▶</span></a>`}
-                      allowFullScreen
-                    />
-                  </div>
-                )}
+                {fields.videoUrl && <Video url={fields.videoUrl} title={`Video: ${fields.name}`} />}
 
                 {/* Website name & url */}
                 {fields.website && (
@@ -239,8 +230,15 @@ export default function ServiceProvider({ fields, videoID, videoUrl, createdAt, 
   )
 }
 
-ServiceProvider.getLayout = function getLayout(page: ReactElement, { isPreviewMode }: ServiceProviderProps) {
-  return <ServiceProviderLayout isPreviewMode={isPreviewMode}>{page}</ServiceProviderLayout>
+ServiceProvider.getLayout = function getLayout(
+  page: ReactElement,
+  { isPreviewMode, cookieBanner }: ServiceProviderProps
+) {
+  return (
+    <ServiceProviderLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+      {page}
+    </ServiceProviderLayout>
+  )
 }
 
 export async function getStaticPaths() {
@@ -261,22 +259,17 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
     if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
 
     const {
-      fields: { videoUrl, ...fields },
+      fields,
       sys: { createdAt, updatedAt },
     } = entry
-    const videoID = videoUrl ? getVideoID(videoUrl) : ''
-
     return {
       props: {
         page: `Data service provider (detail) - ${fields.name}`,
         fields,
-        ...(videoID && {
-          videoID,
-          videoUrl: `https://www.youtube.com/embed/${videoID}`,
-        }),
         createdAt,
         updatedAt,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(),
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

@@ -1,15 +1,17 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
 
 import { Container } from '../Container/Container'
-import { RootLayout } from './RootLayout'
+import { RootLayout, RootLayoutProps } from './RootLayout'
 
-export function ServiceProviderLayout({ children, isPreviewMode }: { children: ReactNode; isPreviewMode?: boolean }) {
+type ServiceProviderLayoutProps = Omit<RootLayoutProps, 'backLink'>
+
+export function ServiceProviderLayout({ children, isPreviewMode, cookieBanner }: ServiceProviderLayoutProps) {
   const router = useRouter()
   return (
     <RootLayout
       isPreviewMode={isPreviewMode}
+      cookieBanner={cookieBanner}
       backLink={
         !isPreviewMode && (
           <Container>
