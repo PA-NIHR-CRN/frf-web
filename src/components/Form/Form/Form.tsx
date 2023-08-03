@@ -22,7 +22,7 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
 
   const redirectToFatalError = () => {
     onError(FORM_ERRORS.fatal)
-    router.replace(`${router.pathname}?fatal=1`)
+    router.replace(`${router.asPath}?fatal=1`)
   }
 
   const onValid = async (values: T) => {
