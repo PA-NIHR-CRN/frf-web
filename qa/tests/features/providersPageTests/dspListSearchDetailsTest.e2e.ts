@@ -35,21 +35,22 @@ test.describe('DSP List Search Details Tests - @frf_14 @frf_14_details', () => {
       await providersPage.goto()
       await providersPage.assertOnProvidersPage()
     })
-    await test.step('When I enter key phrase `specific find service desc` into the Search Field', async () => {
-      await providersPage.enterSearchPhrase('specific find service desc')
+    await test.step('When I enter key phrase `unique find service desc` into the Search Field', async () => {
+      await providersPage.enterSearchPhrase('unique find service desc')
     })
     await test.step('And I click the Search Button', async () => {
       await providersPage.dspFilterSearchBtn.click()
       await providersPage.waitForListReload()
     })
     await test.step('Then the DSP list shows a single result', async () => {
+      await providersPage.page.pause()
       await providersPage.assertNumberOfDspResults(1)
     })
     await test.step('When I click the `View more details` button', async () => {
       await providersPage.btnViewMoreDetails.click()
     })
-    await test.step('Then the DSPs detail contains `specific find service desc` in its Find Service Description', async () => {
-      await providerDetailsPage.assertDspSearchResultFindServiceDescription('specific find service desc')
+    await test.step('Then the DSPs detail contains `unique find service desc` in its Find Service Description', async () => {
+      await providerDetailsPage.assertDspSearchResultFindServiceDescription('unique find service desc')
     })
   })
 
