@@ -5,10 +5,7 @@ import mockRouter from 'next-router-mock'
 
 import { render, within } from '@/config/test-utils'
 import { defaultMock } from '@/mocks/serviceProvider'
-import ContactDataServiceProvider, {
-  ContactDataServiceProviderProps,
-  getServerSideProps,
-} from '@/pages/contact-data-service-provider/[slug]'
+import ContactFrfTeam, { ContactFrfTeamProps, getServerSideProps } from '@/pages/contact-frf-team/index'
 import { setupMockServer } from '@/utils'
 
 const [server, mockContentfulResponse] = setupMockServer()
@@ -29,23 +26,31 @@ beforeEach(() => {
 })
 
 test('Initial form state', async () => {
-  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
+  const context = { query: {} } as unknown as GetServerSidePropsContext
 
   const { props } = (await getServerSideProps(context)) as {
-    props: ContactDataServiceProviderProps
+    props: ContactFrfTeamProps
   }
 
-  const { getByLabelText, getByRole, getByText } = render(<ContactDataServiceProvider {...props} />)
+  const { getByLabelText, getByRole, getByText } = render(<ContactFrfTeam {...props} />)
 
-  expect(getByRole('heading', { name: 'Get in touch with Genomic Profile Register', level: 2 })).toBeInTheDocument()
-
-  expect(getByText('All fields are required unless marked as optional.')).toBeInTheDocument()
+  expect(
+    getByRole('heading', { name: 'Contact Find, Recruit and Follow-up central team', level: 2 })
+  ).toBeInTheDocument()
 
   expect(
     getByText(
-      'Upon submitting this form, your contact details will be shared with Genomic Profile Register so they can contact you to discuss further.'
+      'The Find, Recruit and Follow-up central team manage the content of this website and can be contacted in relation to general enquiries about Find, Recruit and Follow-up advisory support.'
     )
   ).toBeInTheDocument()
+
+  expect(
+    getByText(
+      'If you would like to get in touch with the team, please complete the form below and a member of the team will respond to your enquiry.'
+    )
+  ).toBeInTheDocument()
+
+  expect(getByText('All fields are required unless marked as optional.')).toBeInTheDocument()
 
   // Name
   expect(getByLabelText('Full name')).toBeInTheDocument()
@@ -67,15 +72,14 @@ test('Initial form state', async () => {
   // Org name
   expect(getByLabelText('Organisation name')).toBeInTheDocument()
   expect(getByLabelText('Organisation name')).toBeRequired()
-
-  // Please outline which services you are interested in and, if applicable, a brief description of your research
-  expect(getByLabelText('Enquiry details')).toBeInTheDocument()
-  expect(getByLabelText('Enquiry details')).toBeRequired()
   expect(
     getByText(
-      'Please outline which services you are interested in and, if applicable, a brief description of your research'
+      'For research support colleagues, please specify where you are based (CRNCC, Local Clinical Research Network or Devolve Nation)'
     )
   ).toBeInTheDocument()
+
+  expect(getByLabelText('Please provide details of your enquiry')).toBeInTheDocument()
+  expect(getByLabelText('Please provide details of your enquiry')).toBeRequired()
   expect(getByText('You have 1200 characters remaining')).toBeInTheDocument()
 
   // Form CTAs
@@ -91,24 +95,26 @@ test('Successful submission redirects to confirmation page', async () => {
     request: { responseURL: 'http://localhost:3000/contact-data-service-provider/mock-dsp/confirmation/mock-ref-123' },
   })
 
-  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
+  const context = { query: {} } as unknown as GetServerSidePropsContext
 
   const { props } = (await getServerSideProps(context)) as {
-    props: ContactDataServiceProviderProps
+    props: ContactFrfTeamProps
   }
 
   const { getByLabelText, getByRole } = render(
-    ContactDataServiceProvider.getLayout(<ContactDataServiceProvider {...props} />, { ...props, isPreviewMode: false })
+    ContactFrfTeam.getLayout(<ContactFrfTeam {...props} />, { ...props, isPreviewMode: false })
   )
 
-  expect(getByRole('heading', { name: 'Get in touch with Genomic Profile Register', level: 2 })).toBeInTheDocument()
+  expect(
+    getByRole('heading', { name: 'Contact Find, Recruit and Follow-up central team', level: 2 })
+  ).toBeInTheDocument()
 
   await user.type(getByLabelText('Full name'), 'John Terry')
   await user.type(getByLabelText('Email address'), 'testemail@nihr.ac.ul')
   await user.type(getByLabelText('Telephone (optional)'), '+447552121212')
   await user.type(getByLabelText('Job role'), 'Researcher')
   await user.type(getByLabelText('Organisation name'), 'NIHR')
-  await user.type(getByLabelText('Enquiry details'), 'Looking for help on my research study')
+  await user.type(getByLabelText('Please provide details of your enquiry'), 'Looking for help on my research study')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -123,24 +129,26 @@ test('Failed submission due to a misc server error shows an error at the top of 
     request: { responseURL: 'http://localhost:3000/contact-data-service-provider/mock-dsp?fatal=1' },
   })
 
-  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
+  const context = { query: {} } as unknown as GetServerSidePropsContext
 
   const { props } = (await getServerSideProps(context)) as {
-    props: ContactDataServiceProviderProps
+    props: ContactFrfTeamProps
   }
 
   const { getByLabelText, getByRole } = render(
-    ContactDataServiceProvider.getLayout(<ContactDataServiceProvider {...props} />, { ...props, isPreviewMode: false })
+    ContactFrfTeam.getLayout(<ContactFrfTeam {...props} />, { ...props, isPreviewMode: false })
   )
 
-  expect(getByRole('heading', { name: 'Get in touch with Genomic Profile Register', level: 2 })).toBeInTheDocument()
+  expect(
+    getByRole('heading', { name: 'Contact Find, Recruit and Follow-up central team', level: 2 })
+  ).toBeInTheDocument()
 
   await user.type(getByLabelText('Full name'), 'John Terry')
   await user.type(getByLabelText('Email address'), 'testemail@nihr.ac.ul')
   await user.type(getByLabelText('Telephone (optional)'), '+447552121212')
   await user.type(getByLabelText('Job role'), 'Researcher')
   await user.type(getByLabelText('Organisation name'), 'NIHR')
-  await user.type(getByLabelText('Enquiry details'), 'Looking for help on my research study')
+  await user.type(getByLabelText('Please provide details of your enquiry'), 'Looking for help on my research study')
 
   await user.click(getByRole('button', { name: 'Submit' }))
 
@@ -155,13 +163,13 @@ test('Failed submission due to a misc server error shows an error at the top of 
 test('Form submission with client side validation errors', async () => {
   const user = userEvent.setup()
 
-  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
+  const context = { query: {} } as unknown as GetServerSidePropsContext
   const { props } = (await getServerSideProps(context)) as {
-    props: ContactDataServiceProviderProps
+    props: ContactFrfTeamProps
   }
 
   const { getByLabelText, getByRole } = render(
-    ContactDataServiceProvider.getLayout(<ContactDataServiceProvider {...props} />, { ...props, isPreviewMode: false })
+    ContactFrfTeam.getLayout(<ContactFrfTeam {...props} />, { ...props, isPreviewMode: false })
   )
 
   await userEvent.type(getByLabelText('Telephone (optional)'), 'Fake number')
@@ -182,13 +190,14 @@ test('Form submission with client side validation errors', async () => {
     })
   ).toHaveAttribute('href', '#phoneNumber')
   expect(within(alert).getByRole('link', { name: 'Enter your job role' })).toHaveAttribute('href', '#jobRole')
-  expect(within(alert).getByRole('link', { name: 'Enter your organisation name' })).toHaveAttribute(
-    'href',
-    '#organisationName'
-  )
   expect(
-    within(alert).getByRole('link', { name: 'Enter a description of your study and/ or service of interest' })
-  ).toHaveAttribute('href', '#studyDescription')
+    within(alert).getByRole('link', {
+      name: 'Enter your organisation name, Local Clinical Research Network or Devolved Nation',
+    })
+  ).toHaveAttribute('href', '#organisationName')
+  expect(
+    within(alert).getByRole('link', { name: 'Enter a description of your study(ies) and/ or service(s) of interest' })
+  ).toHaveAttribute('href', '#details')
 
   // Field errors
   expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter your full name')
@@ -197,24 +206,26 @@ test('Form submission with client side validation errors', async () => {
     'Error: Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 808 157 0192'
   )
   expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter your job role')
-  expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter your organisation name')
-  expect(getByLabelText('Enquiry details')).toHaveErrorMessage(
-    'Error: Enter a description of your study and/ or service of interest'
+  expect(getByLabelText('Organisation name')).toHaveErrorMessage(
+    'Error: Enter your organisation name, Local Clinical Research Network or Devolved Nation'
+  )
+  expect(getByLabelText('Please provide details of your enquiry')).toHaveErrorMessage(
+    'Error: Enter a description of your study(ies) and/ or service(s) of interest'
   )
 })
 
 test('Server side field validation errors', async () => {
   mockRouter.push(
-    '/contact-data-service-provider/mock-dps-name?fullNameError=Enter+your+full+name&emailAddressError=Enter+an+email+address&jobRoleError=Enter+your+job+role&organisationNameError=Enter+your+organisation+name&studyDescriptionError=Enter+a+description+of+your+study+and%2F+or+service+of+interest'
+    '/contact-frf-team/?fullNameError=Enter+your+full+name&emailAddressError=Enter+an+email+address&jobRoleError=Enter+your+job+role&organisationNameError=Enter+your+organisation+name'
   )
 
-  const context = { query: { slug: defaultMock.items[0].fields.slug } } as unknown as GetServerSidePropsContext
+  const context = { query: {} } as unknown as GetServerSidePropsContext
   const { props } = (await getServerSideProps(context)) as {
-    props: ContactDataServiceProviderProps
+    props: ContactFrfTeamProps
   }
 
   const { getByLabelText, getByRole } = render(
-    ContactDataServiceProvider.getLayout(<ContactDataServiceProvider {...props} />, { ...props, isPreviewMode: false })
+    ContactFrfTeam.getLayout(<ContactFrfTeam {...props} />, { ...props, isPreviewMode: false })
   )
 
   // Summary errors
@@ -227,9 +238,6 @@ test('Server side field validation errors', async () => {
     'href',
     '#organisationName'
   )
-  expect(
-    within(alert).getByRole('link', { name: 'Enter a description of your study and/ or service of interest' })
-  ).toHaveAttribute('href', '#studyDescription')
 
   // Field errors
   expect(getByLabelText('Full name')).toHaveErrorMessage('Error: Enter your full name')
@@ -237,7 +245,4 @@ test('Server side field validation errors', async () => {
   expect(getByLabelText('Telephone (optional)')).not.toHaveErrorMessage()
   expect(getByLabelText('Job role')).toHaveErrorMessage('Error: Enter your job role')
   expect(getByLabelText('Organisation name')).toHaveErrorMessage('Error: Enter your organisation name')
-  expect(getByLabelText('Enquiry details')).toHaveErrorMessage(
-    'Error: Enter a description of your study and/ or service of interest'
-  )
 })

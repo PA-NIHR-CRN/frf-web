@@ -3,50 +3,9 @@
   <body>
     {{! Main content }}
     <div>
-      <p>Dear {{salutation}},</p>
-
-      <p>We would like to confirm that your research support enquiry has been sent to the relevant research support team
-        and they will be in touch in due course.</p>
-
-      <p>For your reference the enquiry details submitted are as follows:
-      </p>
-
-      <p><strong>Enquiry Type:
-          {{#if (eq enquiryType 'data')}}Identifying appropriate data services{{else}}General research support{{/if}}</strong></p>
-
-      <p><strong>Selected Lead Region: {{regionName}}</strong></p>
-
-      <p><strong>Enquiry details: {{supportDescription}}</strong></p>
-
-      <h2>Contact details</h2>
-
-      <p>Name: {{fullName}}</p>
-
-      <p>Email address: {{emailAddress}}</p>
-
-      <p>Telephone: {{#if phoneNumber}}{{phoneNumber}}{{else}}Not provided{{/if}}</p>
-
-      <p>Role: {{jobRole}}</p>
-
-      <p>Organisation name: {{organisationName}}</p>
-
-      <p>Organisation type:
-        {{#if (eq organisationType 'commercial')}}Commercial{{else}}Non-commercial{{/if}}</p>
-
-      <h2> Study information</h2>
-
-      <p>Study title: {{#if studyTitle}}{{studyTitle}}{{else}}Not provided{{/if}}</p>
-
-      <p>Protocol reference: {{#if protocolReference}}{{protocolReference}}{{else}}Not provided{{/if}}</p>
-
-      <p>CPMS ID: {{#if cpmsId}}{{cpmsId}}{{else}}Not provided{{/if}}</p>
-
-      <p>If you do not receive a response or have any further questions, please contact the Find, Recruit & Follow-up
-        Central Team at frfteam@nihr.ac.uk.</p>
-
-      <p>Best wishes,</p>
-
-      <p><strong>Find, Recruit &amp; Follow-up Central Team</strong></p>
+      <p>{{fullName}} has submitted an enquiry to the Find, Recruit and Follow-up central team.</p>
+      
+      <p>Please review the details on the FRF central team enquiry list reference number {{referenceNumber}}.</p>
     </div>
 
     <br />
