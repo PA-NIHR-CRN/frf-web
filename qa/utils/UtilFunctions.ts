@@ -11,3 +11,4 @@ export function convertPromiseStringToNumber(inputString: string | undefined): n
   }
   return inputAsNumber
 }
+//Adding this temporarily to get past empty commit
