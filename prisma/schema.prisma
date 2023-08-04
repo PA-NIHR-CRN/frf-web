@@ -50,3 +50,16 @@ model DataServiceProviderRequest {
   organisationName   String
   studyDescription   String   @db.Text
 }
+
+model FrfTeamRequest {
+  id                 Int      @id @default(autoincrement())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  referenceNumber    String   @default("")
+  fullName           String
+  emailAddress       String
+  phoneNumber        String?
+  jobRole            String
+  organisationName   String
+  details            String   @db.Text
+}

@@ -11,55 +11,55 @@ import { ErrorSummary, Fieldset, Form, Textarea, TextInput } from '@/components/
 import { RootLayout } from '@/components/Layout/RootLayout'
 import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
-import { contentfulService } from '@/lib/contentful'
 import { logger } from '@/lib/logger'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
-import {
-  ContactDataServiceProviderInputs,
-  contactDataServiceProviderSchema,
-} from '@/utils/schemas/contact-data-service-provider.schema'
+import { getCookieBanner } from '@/utils/getCookieBanner'
+import { ContactFrfTeamInputs, contactFrfTeamSchema } from '@/utils/schemas/contact-frf-team.schema'
 
-export type ContactDataServiceProviderProps = InferGetServerSidePropsType<typeof getServerSideProps>
+export type ContactFrfTeamProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
-export default function ContactDataServiceProvider({ name, query }: ContactDataServiceProviderProps) {
-  const { register, formState, setError, watch, handleSubmit } = useForm<ContactDataServiceProviderInputs>({
-    resolver: zodResolver(contactDataServiceProviderSchema),
-    defaultValues: getValuesFromSearchParams(contactDataServiceProviderSchema, query),
+export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
+  const { register, formState, setError, watch, handleSubmit } = useForm<ContactFrfTeamInputs>({
+    resolver: zodResolver(contactFrfTeamSchema),
+    defaultValues: getValuesFromSearchParams(contactFrfTeamSchema, query),
   })
 
   const handleFoundError = useCallback(
-    (field: keyof ContactDataServiceProviderInputs, error: FieldError) => setError(field, error),
+    (field: keyof ContactFrfTeamInputs, error: FieldError) => setError(field, error),
     [setError]
   )
 
-  const { errors } = useFormErrorHydration<ContactDataServiceProviderInputs>({
-    schema: contactDataServiceProviderSchema,
+  const { errors } = useFormErrorHydration<ContactFrfTeamInputs>({
+    schema: contactFrfTeamSchema,
     formState,
     onFoundError: handleFoundError,
   })
 
   // Watch & update the character count for the "Study description" textarea
-  const supportDescription = watch('studyDescription')
-  const remainingCharacters =
-    supportDescription.length >= TEXTAREA_MAX_CHARACTERS ? 0 : TEXTAREA_MAX_CHARACTERS - supportDescription.length
+  const details = watch('details')
+  const remainingCharacters = details.length >= TEXTAREA_MAX_CHARACTERS ? 0 : TEXTAREA_MAX_CHARACTERS - details.length
 
   const { defaultValues } = formState
 
   return (
     <>
-      <NextSeo title={`Get in touch with ${name} - Find, Recruit and Follow-up`} />
+      <NextSeo title={`Contact Find, Recruit and Follow-up specialist team - Find, Recruit and Follow-up`} />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
-            <h2 className="govuk-heading-l">Get in touch with {name}</h2>
+            <h2 className="govuk-heading-l">Contact Find, Recruit and Follow-up central team</h2>
             <p>
-              Upon submitting this form, your contact details will be shared with {name} so they can contact you to
-              discuss further.
+              The Find, Recruit and Follow-up central team manage the content of this website and can be contacted in
+              relation to general enquiries about Find, Recruit and Follow-up advisory support.
+            </p>
+            <p>
+              If you would like to get in touch with the team, please complete the form below and a member of the team
+              will respond to your enquiry.
             </p>
             <p>All fields are required unless marked as optional.</p>
             <Form
               method="post"
-              action={`/api/forms/contact-data-service-provider/${query.slug}`}
+              action={`/api/forms/contact-frf-team`}
               handleSubmit={handleSubmit}
               onError={(message: string) =>
                 setError('root.serverError', {
@@ -99,17 +99,17 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
                 />
                 <TextInput
                   label="Organisation name"
+                  hint="For research support colleagues, please specify where you are based (CRNCC, Local Clinical Research Network or Devolve Nation)"
                   errors={errors}
                   defaultValue={defaultValues?.organisationName}
                   {...register('organisationName')}
                 />
                 <Textarea
-                  label="Enquiry details"
-                  hint="Please outline which services you are interested in and, if applicable, a brief description of your research"
+                  label="Please provide details of your enquiry"
                   errors={errors}
                   remainingCharacters={remainingCharacters}
-                  defaultValue={defaultValues?.studyDescription}
-                  {...register('studyDescription')}
+                  defaultValue={defaultValues?.details}
+                  {...register('details')}
                 />
               </Fieldset>
 
@@ -131,35 +131,27 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
   )
 }
 
-ContactDataServiceProvider.getLayout = function getLayout(
+ContactFrfTeam.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode }: ContactDataServiceProviderProps
+  { isPreviewMode, cookieBanner }: ContactFrfTeamProps
 ) {
   return (
     <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
-      <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
+      <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+        {page}
+      </RootLayout>
     </ReCaptchaProvider>
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const slug = String(query.slug)
-
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   try {
-    const entry = await contentfulService.getProviderBySlug(slug)
-
-    if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
-
-    const {
-      fields: { name },
-    } = entry
-
     return {
       props: {
-        page: `Get in touch with ${name}`,
-        name,
+        page: `Contact Find, Recruit and Follow-up specialist team`,
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {

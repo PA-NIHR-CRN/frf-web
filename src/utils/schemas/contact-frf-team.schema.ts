@@ -2,9 +2,9 @@ import * as z from 'zod'
 
 import { PHONE_NUMBER_REGEX, TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 
-export type ContactDataServiceProviderInputs = z.infer<typeof contactDataServiceProviderSchema>
+export type ContactFrfTeamInputs = z.infer<typeof contactFrfTeamSchema>
 
-export const contactDataServiceProviderSchema = z
+export const contactFrfTeamSchema = z
   .object({
     fullName: z.string().min(1, { message: 'Enter your full name' }),
     emailAddress: z.string().email('Enter a valid email address').min(1, { message: 'Enter an email address' }),
@@ -16,10 +16,12 @@ export const contactDataServiceProviderSchema = z
       .optional()
       .or(z.literal('')),
     jobRole: z.string().min(1, { message: 'Enter your job role' }),
-    organisationName: z.string().min(1, { message: 'Enter your organisation name' }),
-    studyDescription: z
+    organisationName: z
       .string()
-      .min(1, { message: 'Enter a description of your study and/ or service of interest' })
+      .min(1, { message: 'Enter your organisation name, Local Clinical Research Network or Devolved Nation' }),
+    details: z
+      .string()
+      .min(1, { message: 'Enter a description of your study(ies) and/ or service(s) of interest' })
       .refine((val) => val.split(' ').length <= TEXTAREA_MAX_CHARACTERS, {
         message: `Description of your study/studies and services of interest exceeds the maximum of ${TEXTAREA_MAX_CHARACTERS} characters`,
       }),

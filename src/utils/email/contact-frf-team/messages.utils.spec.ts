@@ -1,31 +1,30 @@
+import { EMAIL_FRF_INBOX } from '@/constants'
 import { EmailArgs } from '@/lib/email/emailService'
 
 import { getNotificationMessages, MessageData } from './messages.utils'
 
 describe('getNotificationMessages', () => {
   const defaultMessageData: MessageData = {
-    dspName: 'Test DSP',
-    dspEmail: 'testdsp@nihr.ac.uk',
-    referenceNumber: 'D00029',
+    referenceNumber: 'C00029',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
-    studyDescription: 'Study description here',
+    details: 'details here',
   }
 
-  test('should generate feedback message', () => {
+  test('should generate email messages', () => {
     const expectedMessages: EmailArgs[] = [
       {
-        subject: 'D00029 - New enquiry via Find, Recruit & Follow-up',
-        templateName: 'data-service-provider/dsp-confirmation',
-        to: defaultMessageData.dspEmail,
+        subject: 'C00029 - New enquiry for FRF central team',
+        templateName: 'contact-frf-team/frf-confirmation',
+        to: EMAIL_FRF_INBOX,
         templateData: defaultMessageData,
       },
       {
-        subject: 'D00029 - Your enquiry has been sent to Test DSP (Find, Recruit & Follow-up)',
-        templateName: 'data-service-provider/researcher-confirmation',
+        subject: 'C00029 - Contact FRF central team enquiry submitted',
+        templateName: 'contact-frf-team/request-confirmation',
         to: 'testemail@nihr.ac.uk',
         templateData: defaultMessageData,
       },
