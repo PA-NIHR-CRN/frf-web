@@ -37,7 +37,8 @@ export default class ProviderDetailsPage {
   readonly dspDetailFirstPublished: Locator
   readonly dspDetailSummaryLastUpdated: Locator
   readonly dspDetailDataContentHeader: Locator
-  readonly dspDetailDataContentSubSectionHeader: Locator
+  readonly dspDetailDataContentSubSectionBlockHeader: Locator
+  readonly dspDetailDataContentSubSectionGenericHeader: Locator
   readonly dspDetailDataContentTxtContent: Locator
   readonly dspDetailGeoPopulationHeader: Locator
   readonly dspDetailInfoGovHeader: Locator
@@ -53,6 +54,7 @@ export default class ProviderDetailsPage {
   readonly dspDetailFollowLvlTwoSection: Locator
   readonly dspDetailFollowLvlTwoHeader: Locator
   readonly dspDetailCoverageGeography: Locator
+  readonly dspDetailChrisTestPageLink: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -111,9 +113,18 @@ export default class ProviderDetailsPage {
     this.dspDetailDataContentHeader = page.locator('section div[data-testid="frf-dsp-section-panel"] h3', {
       hasText: 'Data content',
     })
-    this.dspDetailDataContentSubSectionHeader = page.locator('section summary[class="govuk-details__summary"] span', {
-      hasText: 'This is a Test Block',
-    })
+    this.dspDetailDataContentSubSectionBlockHeader = page.locator(
+      'section summary[class="govuk-details__summary"] span',
+      {
+        hasText: 'This is a Test Block',
+      }
+    )
+    this.dspDetailDataContentSubSectionGenericHeader = page.locator(
+      'section summary[class="govuk-details__summary"] span',
+      {
+        hasText: 'Link To Generic Test Page',
+      }
+    )
     this.dspDetailDataContentTxtContent = page
       .locator('div[class="govuk-details__text [&>*>p:last-child]:mb-0"]')
       .nth(0)
@@ -145,6 +156,9 @@ export default class ProviderDetailsPage {
     this.dspDetailFollowLvlTwoSection = page.locator('section[id="follow-up"]')
     this.dspDetailFollowLvlTwoHeader = page.locator('section[id="follow-up"] h3')
     this.dspDetailCoverageGeography = page.locator('p[class="govuk-!-margin-bottom-1"]')
+    this.dspDetailChrisTestPageLink = page.locator(
+      'a[href="https://test.findrecruitandfollowup.nihr.ac.uk/chris-testing-page"]'
+    )
   }
 
   //Page Methods
@@ -260,7 +274,7 @@ export default class ProviderDetailsPage {
   async assertDataContentPresent(visibilty: boolean) {
     if (visibilty) {
       await expect(this.dspDetailDataContentHeader).toBeVisible()
-      await expect(this.dspDetailDataContentSubSectionHeader).toBeVisible()
+      await expect(this.dspDetailDataContentSubSectionBlockHeader).toBeVisible()
       await expect(this.dspDetailDataContentTxtContent).toBeHidden()
     } else {
       await expect(this.dspDetailDataContentHeader).toBeHidden()
@@ -409,4 +423,3 @@ export default class ProviderDetailsPage {
     )
   }
 }
-//fix issues, likely related to adding file path in goto methods
