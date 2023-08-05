@@ -13,6 +13,7 @@ import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { logger } from '@/lib/logger'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 import { ContactFrfTeamInputs, contactFrfTeamSchema } from '@/utils/schemas/contact-frf-team.schema'
 
 export type ContactFrfTeamProps = InferGetServerSidePropsType<typeof getServerSideProps>
@@ -130,21 +131,27 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
   )
 }
 
-ContactFrfTeam.getLayout = function getLayout(page: ReactElement, { isPreviewMode }: ContactFrfTeamProps) {
+ContactFrfTeam.getLayout = function getLayout(
+  page: ReactElement,
+  { isPreviewMode, cookieBanner }: ContactFrfTeamProps
+) {
   return (
     <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
-      <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
+      <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+        {page}
+      </RootLayout>
     </ReCaptchaProvider>
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   try {
     return {
       props: {
         page: `Contact Find, Recruit and Follow-up specialist team`,
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {
