@@ -81,6 +81,7 @@ export function Filters({
         </a>
       </div>
       <form
+        id="filters-form"
         role="search"
         method="get"
         action="/providers"
