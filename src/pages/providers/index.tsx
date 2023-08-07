@@ -20,6 +20,7 @@ import {
 } from '@/components/Provider'
 import { NoResults } from '@/components/Providers/NoResults'
 import { SelectedFilters } from '@/components/SelectedFilters/SelectedFilters'
+import { Sort } from '@/components/Sort/Sort'
 import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
@@ -99,12 +100,7 @@ export default function ServiceProviders({
                 <div>{showFiltersButton()}</div>
                 {/* Sort by */}
                 <div className="mt-4 items-center whitespace-nowrap md:mt-0 md:flex">
-                  <label className="govuk-label mb-1 mr-2 md:mb-0" htmlFor="sort">
-                    Sort by
-                  </label>
-                  <select id="sort" name="sort" className="govuk-select w-full md:w-auto">
-                    <option>Recently published</option>
-                  </select>
+                  <Sort form="filters-form" defaultOrder={filters.order} />
                 </div>
               </div>
             </div>
