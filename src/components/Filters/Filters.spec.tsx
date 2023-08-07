@@ -32,6 +32,7 @@ test('Allows searching by keyword', async () => {
   const form = screen.getByRole('search', { name: 'Filter by' })
   expect(form).toHaveAttribute('method', 'get')
   expect(form).toHaveAttribute('action', '/providers')
+  expect(form).toHaveAttribute('id', 'filters-form')
 
   const input = screen.getByLabelText('Keyword')
   expect(input).toHaveAttribute('aria-describedby', 'keyword-hint')
