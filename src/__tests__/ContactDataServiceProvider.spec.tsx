@@ -43,7 +43,7 @@ test('Initial form state', async () => {
 
   expect(
     getByText(
-      'Upon submitting this form, your contact details will be shared with Genomic Profile Register so they can contact you to discuss further.'
+      'Upon submitting this form, your contact details and enquiry will be shared with Genomic Profile Register so they can contact you to discuss further.'
     )
   ).toBeInTheDocument()
 

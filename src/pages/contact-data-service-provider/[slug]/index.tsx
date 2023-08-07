@@ -53,8 +53,8 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
           <div className="govuk-grid-column-two-thirds-from-desktop">
             <h2 className="govuk-heading-l">Get in touch with {name}</h2>
             <p>
-              Upon submitting this form, your contact details will be shared with {name} so they can contact you to
-              discuss further.
+              Upon submitting this form, your contact details and enquiry will be shared with {name} so they can contact
+              you to discuss further.
             </p>
             <p>All fields are required unless marked as optional.</p>
             <Form
