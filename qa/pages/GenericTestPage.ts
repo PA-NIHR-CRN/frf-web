@@ -162,6 +162,7 @@ export default class GenericTestPage {
         expect(await this.page.title()).toEqual('Welcome to Find, Recruit and Follow-up')
         break
       case 'contact':
+        await this.page.waitForURL('/feedback')
         expect(await this.page.title()).toEqual('Feedback - Find, Recruit and Follow-up')
         break
       default:

@@ -1,4 +1,4 @@
-import { PlaywrightTestConfig, devices } from '@playwright/test'
+import { devices, PlaywrightTestConfig } from '@playwright/test'
 
 const config: PlaywrightTestConfig = {
   testDir: './qa/tests/features',
@@ -22,6 +22,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },

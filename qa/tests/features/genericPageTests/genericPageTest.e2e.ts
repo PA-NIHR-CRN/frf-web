@@ -136,9 +136,6 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
   }) => {
     await test.step('Given I have Published a Generic Page with a Secondary Button with Internal Link', async () => {
       await genericTestPage.goto('/chris-testing-page')
-      // make own function to clear cookies and do before all tests - check regression
-      await genericTestPage.acceptCookieButton.click()
-      await genericTestPage.hideCookieMsgButton.click()
     })
     await test.step('When I Click the Secondary Button', async () => {
       await genericTestPage.secondaryButton.click()
