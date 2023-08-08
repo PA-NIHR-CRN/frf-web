@@ -8,6 +8,7 @@ import ChevronIcon from '@/components/Icons/ChevronIcon'
 import FindIcon from '@/components/Icons/FindIcon'
 import FollowUpIcon from '@/components/Icons/FollowUpIcon'
 import RecruitIcon from '@/components/Icons/RecruitIcon'
+import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
 import { Video } from '@/components/Video/Video'
 import { contentfulService } from '@/lib/contentful'
 import { getCookieBanner } from '@/utils/getCookieBanner'
@@ -30,13 +31,8 @@ export default function Home({
       {/* Title, Description & Video */}
       <Container>
         <section className="flex flex-wrap items-center pt-1 lg:flex-nowrap lg:gap-4 lg:pb-3">
-          <div>
-            <p
-              className="whitespace-pre-wrap lg:mb-0 lg:pr-6"
-              dangerouslySetInnerHTML={{
-                __html: description,
-              }}
-            />
+          <div className="whitespace-pre-wrap lg:pr-6 [&_p:last-of-type]:lg:mb-0">
+            <RichTextRenderer>{description}</RichTextRenderer>
           </div>
           {videoUrl && (
             <div className="mt-4 flex w-full justify-center lg:mt-0">
