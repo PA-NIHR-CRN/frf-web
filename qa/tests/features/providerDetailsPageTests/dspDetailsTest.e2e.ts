@@ -73,7 +73,7 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
       await providerDetailsPage.assertDataContentPresent(true)
     })
     await test.step('And I can view the Sub-sections content by expanding it', async () => {
-      await providerDetailsPage.dspDetailDataContentSubSectionHeader.click()
+      await providerDetailsPage.dspDetailDataContentSubSectionBlockHeader.click()
       await providerDetailsPage.assertDataContentTxtVisible()
     })
     await test.step('And I will see a Geographical and Population Coverage Section', async () => {

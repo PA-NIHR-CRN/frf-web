@@ -149,7 +149,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
       await commonItemsPage.linkAccessibility.click()
     })
     await test.step('Then I should see the Accessibility Page', async () => {
-      await accessibilityPage.assertOnPrivacyPage()
+      await accessibilityPage.assertOnAccessibilityPage()
     })
     await test.step('Given I have navigated to the Providers Page', async () => {
       await providersPage.goto()
@@ -158,7 +158,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
       await commonItemsPage.linkAccessibility.click()
     })
     await test.step('Then I should see the Accessibility Page', async () => {
-      await accessibilityPage.assertOnPrivacyPage()
+      await accessibilityPage.assertOnAccessibilityPage()
     })
     await test.step('Given I have navigated to the Provider Details Page', async () => {
       await providerDetailsPage.goto('/providers/testing-dsp')
@@ -167,7 +167,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
       await commonItemsPage.linkAccessibility.click()
     })
     await test.step('Then I should see the Accessibility Page', async () => {
-      await accessibilityPage.assertOnPrivacyPage()
+      await accessibilityPage.assertOnAccessibilityPage()
     })
   })
 
