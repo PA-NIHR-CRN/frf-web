@@ -33,7 +33,7 @@ test('Displays the Home page', async () => {
 
   // Title + Description
   // expect(screen.getByRole('heading', { name: mockData.title, level: 2 }))
-  expect(screen.getByText(mockData.description))
+  expect(screen.getByText(/This website will enable researchers and life sciences companies/)).toBeInTheDocument()
 
   // Video
   const videoIframe = screen.getByTitle('Video: Find, Recruit and Follow-up Intro')
