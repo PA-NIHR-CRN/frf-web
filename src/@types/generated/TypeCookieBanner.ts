@@ -8,17 +8,17 @@ import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleC
  */
 export interface TypeCookieBannerFields {
     /**
+     * Field type definition for field 'title' (Title)
+     * @name Title
+     * @localized false
+     */
+    title?: EntryFieldTypes.Symbol;
+    /**
      * Field type definition for field 'description' (Description)
      * @name Description
      * @localized false
      */
     description?: EntryFieldTypes.RichText;
-    /**
-     * Field type definition for field 'confirmation' (Confirmation)
-     * @name Confirmation
-     * @localized false
-     */
-    confirmation?: EntryFieldTypes.RichText;
 }
 
 /**
@@ -27,7 +27,7 @@ export interface TypeCookieBannerFields {
  * @type {TypeCookieBannerSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-27T22:49:25.236Z
- * @version 1
+ * @version 7
  */
 export type TypeCookieBannerSkeleton = EntrySkeletonType<TypeCookieBannerFields, "cookieBanner">;
 /**
@@ -36,6 +36,6 @@ export type TypeCookieBannerSkeleton = EntrySkeletonType<TypeCookieBannerFields,
  * @type {TypeCookieBanner}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-27T22:49:25.236Z
- * @version 1
+ * @version 7
  */
 export type TypeCookieBanner<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeCookieBannerSkeleton, Modifiers, Locales>;

@@ -1,7 +1,7 @@
 import { expect, Locator, Page } from '@playwright/test'
 
 //Declare Page Objects
-export default class AccessibilityPage {
+export default class ContactSupportPage {
   readonly page: Page
   readonly headingPageTitle: Locator
 
@@ -15,12 +15,12 @@ export default class AccessibilityPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('accessibility')
+    await this.page.goto('contact-research-support')
   }
 
-  async assertOnAccessibilityPage() {
-    await expect(this.page).toHaveURL('accessibility')
+  async assertOnContactSupportForm() {
+    await expect(this.page).toHaveURL('contact-research-support')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Accessibility statement for findrecruitandfollowup.nihr.ac.uk')
+    await expect(this.headingPageTitle).toHaveText('Contact research support')
   }
 }

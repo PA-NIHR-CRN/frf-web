@@ -38,6 +38,7 @@ export default class ProviderDetailsPage {
   readonly dspDetailSummaryLastUpdated: Locator
   readonly dspDetailDataContentHeader: Locator
   readonly dspDetailDataContentSubSectionBlockHeader: Locator
+  readonly dspDetailDataContentSubSectionSearchTestHeader: Locator
   readonly dspDetailDataContentSubSectionGenericHeader: Locator
   readonly dspDetailDataContentTxtContent: Locator
   readonly dspDetailGeoPopulationHeader: Locator
@@ -54,6 +55,7 @@ export default class ProviderDetailsPage {
   readonly dspDetailFollowLvlTwoSection: Locator
   readonly dspDetailFollowLvlTwoHeader: Locator
   readonly dspDetailCoverageGeography: Locator
+  readonly dspDetailBulletList: Locator
   readonly dspDetailChrisTestPageLink: Locator
 
   //Initialize Page Objects
@@ -115,8 +117,15 @@ export default class ProviderDetailsPage {
     })
     this.dspDetailDataContentSubSectionBlockHeader = page.locator(
       'section summary[class="govuk-details__summary"] span',
+
       {
         hasText: 'This is a Test Block',
+      }
+    )
+    this.dspDetailDataContentSubSectionSearchTestHeader = page.locator(
+      'section summary[class="govuk-details__summary"] span',
+      {
+        hasText: 'Header for FRF-120 Testing',
       }
     )
     this.dspDetailDataContentSubSectionGenericHeader = page.locator(
@@ -156,6 +165,7 @@ export default class ProviderDetailsPage {
     this.dspDetailFollowLvlTwoSection = page.locator('section[id="follow-up"]')
     this.dspDetailFollowLvlTwoHeader = page.locator('section[id="follow-up"] h3')
     this.dspDetailCoverageGeography = page.locator('p[class="govuk-!-margin-bottom-1"]')
+    this.dspDetailBulletList = page.locator('ul[class="govuk-list govuk-list--bullet"]')
     this.dspDetailChrisTestPageLink = page.locator(
       'a[href="https://test.findrecruitandfollowup.nihr.ac.uk/chris-testing-page"]'
     )
@@ -420,6 +430,49 @@ export default class ProviderDetailsPage {
     await expect(this.dspDetailNotSuitedValueRecruitment.locator('svg')).toHaveAttribute(
       'data-testid',
       'frf-icon-cross'
+    )
+  }
+
+  async assertDspSearchResultFundedBy(expectedFundedBy: string) {
+    await expect(this.dspDetailFundedBy).toContainText(expectedFundedBy, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultFindServiceDescription(expectedServiceDesc: string) {
+    await expect(this.dspDetailFindLvlTwoSection.locator('div p').nth(0)).toContainText(expectedServiceDesc, {
+      ignoreCase: true,
+    })
+  }
+
+  async assertDspSearchResultTypeOfData(expectedTypeData: string) {
+    await expect(
+      this.dspDetailTypeOfDataSection.nth(0).locator(this.dspDetailBulletList).locator('li p')
+    ).toContainText(expectedTypeData, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultWebName(expectedWebName: string) {
+    await expect(this.linkDspDetailExternal).toContainText(expectedWebName, { ignoreCase: true })
+  }
+
+  async assertDspSearchResultDataContent(expectedContent: string) {
+    await this.dspDetailDataContentSubSectionSearchTestHeader.click()
+    await expect(
+      this.dspDetailDataContentTxtContent
+        .locator(this.dspDetailBulletList)
+        .locator('li p', { hasText: expectedContent })
+    ).toBeVisible()
+  }
+
+  async assertDspSearchResultGeoPopCoverage(expectedGeoPop: string) {
+    await expect(this.dspDetailGeoPopulationHeader.locator('..').locator('..').locator('div p')).toContainText(
+      expectedGeoPop,
+      { ignoreCase: true }
+    )
+  }
+
+  async assertDspSearchResultInfoGov(expectedGeoPop: string) {
+    await expect(this.dspDetailInfoGovHeader.locator('..').locator('..').locator('div p')).toContainText(
+      expectedGeoPop,
+      { ignoreCase: true }
     )
   }
 }

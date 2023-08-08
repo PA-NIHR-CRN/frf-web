@@ -21,6 +21,6 @@ export default class PrivacyPage {
   async assertOnPrivacyPage() {
     await expect(this.page).toHaveURL('privacy')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Privacy')
+    await expect(this.headingPageTitle).toHaveText('Privacy policy')
   }
 }

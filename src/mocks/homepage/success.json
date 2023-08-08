@@ -19,7 +19,43 @@
       },
       "fields": {
         "title": "Find, Recruit and Follow-up Support",
-        "description": "This website will enable researchers and life sciences companies to understand and navigate the emerging landscape around Find, Recruit and Follow-up Services and to make more informed and timely choices about which services to use and what logistical, legal and financial implications are involved.",
+        "description": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "This website will enable researchers and life sciences companies to understand and navigate the emerging landscape around Find, Recruit and Follow-up Services and to make more informed and timely choices about which services to use and what logistical, legal and financial implications are involved.",
+                  "marks": [{ "type": "bold" }],
+                  "data": {}
+                },
+                {
+                  "nodeType": "text",
+                  "value": "\r\n\r\nIt will also enable users to access ",
+                  "marks": [],
+                  "data": {}
+                },
+                {
+                  "nodeType": "hyperlink",
+                  "data": { "uri": "/research-support" },
+                  "content": [
+                    { "nodeType": "text", "value": "research support infrastructure", "marks": [], "data": {} }
+                  ]
+                },
+                {
+                  "nodeType": "text",
+                  "value": " to ensure that specialist local and clinical knowledge can be accessed, understood and applied alongside insight from data services. All data service providers listed on this website have indicated compliance with the Health Research Authority's Information Governance Framework.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            }
+          ]
+        },
         "videoUrl": "https://www.youtube.com/embed/msizPweg3kE",
         "serviceDescriptionFind": "Identifying potential numbers of participants to support the planning of appropriate placement of studies in the UK.",
         "serviceDescriptionRecruit": "Enabling individuals identified by data analysis to be approached about taking part in research.",

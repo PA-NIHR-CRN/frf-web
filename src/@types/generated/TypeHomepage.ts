@@ -8,11 +8,17 @@ import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleC
  */
 export interface TypeHomepageFields {
     /**
+     * Field type definition for field 'title' (Title)
+     * @name Title
+     * @localized false
+     */
+    title: EntryFieldTypes.Symbol;
+    /**
      * Field type definition for field 'description' (Description)
      * @name Description
      * @localized false
      */
-    description: EntryFieldTypes.Text;
+    description: EntryFieldTypes.RichText;
     /**
      * Field type definition for field 'videoUrl' (Video URL)
      * @name Video URL
@@ -57,7 +63,7 @@ export interface TypeHomepageFields {
  * @type {TypeHomepageSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 23
+ * @version 33
  */
 export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepage">;
 /**
@@ -66,6 +72,6 @@ export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepa
  * @type {TypeHomepage}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 23
+ * @version 33
  */
 export type TypeHomepage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeHomepageSkeleton, Modifiers, Locales>;

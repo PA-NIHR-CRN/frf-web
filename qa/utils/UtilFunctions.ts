@@ -15,3 +15,12 @@ export async function getTextFromElementArray(inputArray: Locator[]): Promise<(s
   }
   return arrInputText
 }
+
+export function convertPromiseStringToNumber(inputString: string | undefined): number {
+  let inputAsNumber = 0
+  if (inputString != undefined) {
+    inputAsNumber = parseInt(inputString)
+    return inputAsNumber
+  }
+  return inputAsNumber
+}

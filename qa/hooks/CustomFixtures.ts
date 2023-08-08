@@ -3,6 +3,7 @@ import { test as base } from '@playwright/test'
 
 import AccessibilityPage from '../pages/AccessibilityPage'
 import CommonItemsPage from '../pages/CommonItemsPage'
+import ContactSupportPage from '../pages/ContactSupportPage'
 import FeedbackFormPage from '../pages/FeedbackFormPage'
 import GenericTestPage from '../pages/GenericTestPage'
 import HomePage from '../pages/HomePage'
@@ -19,6 +20,7 @@ type CustomFixtures = {
   accessibilityPage: AccessibilityPage
   feedbackFormPage: FeedbackFormPage
   genericTestPage: GenericTestPage
+  contactSupportPage: ContactSupportPage
   makeAxeBuilder: () => AxeBuilder
 }
 
@@ -53,6 +55,10 @@ export const test = base.extend<CustomFixtures>({
 
   genericTestPage: async ({ page }, use) => {
     await use(new GenericTestPage(page))
+  },
+
+  contactSupportPage: async ({ page }, use) => {
+    await use(new ContactSupportPage(page))
   },
 
   makeAxeBuilder: async ({ page }, use) => {
