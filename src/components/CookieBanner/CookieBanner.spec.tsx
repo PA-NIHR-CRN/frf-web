@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { getCookie } from 'cookies-next'
+import mockRouter from 'next-router-mock'
 
 import { mockCookieBannerContent } from '@/components/CookieBanner/mockContent'
 
@@ -61,6 +62,19 @@ test('Hides the cookie banner when "Hide cookie message" is clicked', async () =
 
   // Ensure that the entire cookie banner is no longer visible
   expect(screen.queryByLabelText('Cookies on Find, Recruit and Follow-Up')).not.toBeInTheDocument()
+})
+
+test.only('Hides the cookie banner and redirects to the cookie policy page when "cookie policy" link is clicked', async () => {
+  render(<CookieBanner content={mockCookieBannerContent} />)
+
+  await userEvent.click(screen.getByRole('button', { name: /accept additional cookies/i }))
+  ;(getCookie as jest.Mock).mockReturnValueOnce('FRF_GDPR_COOKIE_ACCEPT_VALUE=1;')
+
+  await userEvent.click(screen.getByRole('link', { name: /cookie policy/i }))
+
+  expect(screen.queryByLabelText('Cookies on Find, Recruit and Follow-Up')).not.toBeInTheDocument()
+
+  expect(mockRouter.asPath).toBe('/cookie-policy')
 })
 
 test('Changes back to the selection view when "change your cookie settings" is clicked', async () => {

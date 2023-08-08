@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 
 import { Container } from '@/components/Container/Container'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 
 export type FeedbackConfirmationProps = InferGetStaticPropsType<typeof getStaticProps>
 
@@ -31,6 +32,7 @@ export const getStaticProps = async () => {
     props: {
       page: 'Feedback Confirmation',
       isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+      cookieBanner: await getCookieBanner(),
     },
   }
 }
