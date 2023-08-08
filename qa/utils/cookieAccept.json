@@ -1,0 +1,15 @@
+{
+  "cookies": [
+    {
+      "name": "FRFConsentGDPR",
+      "value": "Accept",
+      "domain": "test.findrecruitandfollowup.nihr.ac.uk",
+      "path": "/",
+      "expires": 1723133764,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
