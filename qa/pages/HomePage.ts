@@ -29,7 +29,7 @@ export default class HomePage {
 
     //Locators
     this.btnProviders = page.locator('a', { hasText: 'View all data service providers' })
-    this.paragraphIntroText = page.locator('p[class="whitespace-pre-wrap lg:mb-0 lg:pr-6"]')
+    this.paragraphIntroText = page.locator('div[class="whitespace-pre-wrap lg:pr-6 [&_p:last-of-type]:lg:mb-0"] p')
     this.iframeIntroVideo = page.locator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')
     this.iframePlayerIntroVideo = page
       .frameLocator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')

@@ -39,6 +39,7 @@ export default class ProviderDetailsPage {
   readonly dspDetailDataContentHeader: Locator
   readonly dspDetailDataContentSubSectionBlockHeader: Locator
   readonly dspDetailDataContentSubSectionSearchTestHeader: Locator
+  readonly dspDetailDataContentSubSectionGenericHeader: Locator
   readonly dspDetailDataContentTxtContent: Locator
   readonly dspDetailGeoPopulationHeader: Locator
   readonly dspDetailInfoGovHeader: Locator
@@ -55,6 +56,7 @@ export default class ProviderDetailsPage {
   readonly dspDetailFollowLvlTwoHeader: Locator
   readonly dspDetailCoverageGeography: Locator
   readonly dspDetailBulletList: Locator
+  readonly dspDetailChrisTestPageLink: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -115,6 +117,7 @@ export default class ProviderDetailsPage {
     })
     this.dspDetailDataContentSubSectionBlockHeader = page.locator(
       'section summary[class="govuk-details__summary"] span',
+
       {
         hasText: 'This is a Test Block',
       }
@@ -123,6 +126,12 @@ export default class ProviderDetailsPage {
       'section summary[class="govuk-details__summary"] span',
       {
         hasText: 'Header for FRF-120 Testing',
+      }
+    )
+    this.dspDetailDataContentSubSectionGenericHeader = page.locator(
+      'section summary[class="govuk-details__summary"] span',
+      {
+        hasText: 'Link To Generic Test Page',
       }
     )
     this.dspDetailDataContentTxtContent = page
@@ -157,6 +166,9 @@ export default class ProviderDetailsPage {
     this.dspDetailFollowLvlTwoHeader = page.locator('section[id="follow-up"] h3')
     this.dspDetailCoverageGeography = page.locator('p[class="govuk-!-margin-bottom-1"]')
     this.dspDetailBulletList = page.locator('ul[class="govuk-list govuk-list--bullet"]')
+    this.dspDetailChrisTestPageLink = page.locator(
+      'a[href="https://test.findrecruitandfollowup.nihr.ac.uk/chris-testing-page"]'
+    )
   }
 
   //Page Methods
