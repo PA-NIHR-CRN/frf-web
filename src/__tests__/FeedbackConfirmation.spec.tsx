@@ -1,5 +1,17 @@
 import { render, screen } from '@/config/test-utils'
+import { defaultMock } from '@/mocks/contactResearchSupport'
 import FeedbackConfirmation, { getStaticProps } from '@/pages/feedback/confirmation'
+import { setupMockServer } from '@/utils'
+
+const [server, mockContentfulResponse] = setupMockServer()
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+beforeEach(() => {
+  mockContentfulResponse(defaultMock)
+})
 
 test('Feedback confirmation page', async () => {
   const { props } = await getStaticProps()

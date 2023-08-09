@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 
 import { Container } from '@/components/Container/Container'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 
 export type ContactResearchSupportConfirmationProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -45,6 +46,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
         page: 'Thank you for contacting research support',
         referenceNumber,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {

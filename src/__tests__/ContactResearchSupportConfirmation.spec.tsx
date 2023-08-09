@@ -1,10 +1,22 @@
 import { GetServerSidePropsContext } from 'next'
 
 import { render, screen } from '@/config/test-utils'
+import { defaultMock } from '@/mocks/contactResearchSupport'
 import ContactResearchSupportConfirmation, {
   ContactResearchSupportConfirmationProps,
   getServerSideProps,
 } from '@/pages/contact-research-support/confirmation/[referenceNumber]'
+import { setupMockServer } from '@/utils'
+
+const [server, mockContentfulResponse] = setupMockServer()
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
+
+beforeEach(() => {
+  mockContentfulResponse(defaultMock)
+})
 
 test('Contact research support confirmation page', async () => {
   const context = { query: { referenceNumber: 'mock-123' } } as unknown as GetServerSidePropsContext

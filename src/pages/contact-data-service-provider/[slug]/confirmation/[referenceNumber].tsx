@@ -5,6 +5,7 @@ import { NextSeo } from 'next-seo'
 import { Container } from '@/components/Container/Container'
 import { contentfulService } from '@/lib/contentful'
 import { logger } from '@/lib/logger'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 
 export type ContactDataServiceProviderConfirmationProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -37,7 +38,7 @@ export default function ContactDataServiceProviderConfirmation({
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   const slug = String(query.slug)
   const referenceNumber = String(query.referenceNumber)
 
@@ -56,6 +57,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
         name,
         referenceNumber,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {

@@ -4,6 +4,7 @@ import { NextSeo } from 'next-seo'
 
 import { Container } from '@/components/Container/Container'
 import { logger } from '@/lib/logger'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 
 export type ContactFrfTeamConfirmationProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
@@ -33,7 +34,7 @@ export default function ContactFrfTeamConfirmation({ referenceNumber }: ContactF
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   const referenceNumber = String(query.referenceNumber)
 
   try {
@@ -42,6 +43,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
         page: `Thank you for contacting the Find, Recruit and Follow-up specialist team`,
         referenceNumber,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {
