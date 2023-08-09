@@ -14,6 +14,7 @@ import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
 import { contentfulService } from '@/lib/contentful'
 import { logger } from '@/lib/logger'
 import { getValuesFromSearchParams } from '@/utils/form.utils'
+import { getCookieBanner } from '@/utils/getCookieBanner'
 import {
   ContactDataServiceProviderInputs,
   contactDataServiceProviderSchema,
@@ -133,16 +134,18 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
 
 ContactDataServiceProvider.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode }: ContactDataServiceProviderProps
+  { isPreviewMode, cookieBanner }: ContactDataServiceProviderProps
 ) {
   return (
     <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
-      <RootLayout isPreviewMode={isPreviewMode}>{page}</RootLayout>
+      <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+        {page}
+      </RootLayout>
     </ReCaptchaProvider>
   )
 }
 
-export const getServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({ query, req }: GetServerSidePropsContext) => {
   const slug = String(query.slug)
 
   try {
@@ -160,6 +163,7 @@ export const getServerSideProps = async ({ query }: GetServerSidePropsContext) =
         name,
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
+        cookieBanner: await getCookieBanner(req),
       },
     }
   } catch (error) {
