@@ -1,5 +1,6 @@
 import { getCookie, setCookie } from 'cookies-next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { MouseEventHandler, useEffect, useRef, useState } from 'react'
 
 import { TypeCookieBanner } from '@/@types/generated'
@@ -22,6 +23,8 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
   const [view, setView] = useState(CookieBannerView.Hidden)
 
   const regionRef = useRef<HTMLDivElement>(null)
+
+  const router = useRouter()
 
   useEffect(() => {
     const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
@@ -54,6 +57,12 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
 
   const handleHide: MouseEventHandler = () => {
     setView(CookieBannerView.Hidden)
+  }
+
+  const handleViewCookiePolicy: MouseEventHandler = (event) => {
+    event.preventDefault()
+    setView(CookieBannerView.Hidden)
+    router.push('/cookie-policy')
   }
 
   const handleChange: MouseEventHandler = (e) => {
@@ -100,7 +109,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
               <p className="govuk-body" data-testid="confirmation-message">
                 You’ve {view === CookieBannerView.Accepted ? 'accepted' : 'rejected'} additional cookies. You can view
                 the{' '}
-                <Link className="govuk-link" href="/cookie-policy">
+                <Link className="govuk-link" href="/cookie-policy" onClick={handleViewCookiePolicy}>
                   cookie policy
                 </Link>{' '}
                 or{' '}
