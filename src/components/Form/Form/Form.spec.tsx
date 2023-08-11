@@ -2,10 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useReCaptcha } from 'next-recaptcha-v3'
 import { FieldValues, UseFormHandleSubmit } from 'react-hook-form'
-
-import { logger } from '@/lib/logger'
 
 import { Form } from './Form'
 
@@ -13,12 +10,6 @@ import { Form } from './Form'
 jest.mock('next/router', () => ({
   useRouter: jest.fn(),
 }))
-
-// Mock next-recaptcha-v3
-jest.mock('next-recaptcha-v3', () => ({
-  useReCaptcha: jest.fn(),
-}))
-
 jest.mock('axios')
 jest.mock('@/lib/logger')
 
@@ -29,8 +20,6 @@ afterEach(() => {
 })
 
 test('Handles form submission successfully', async () => {
-  const executeRecaptcha = jest.fn().mockResolvedValue('recaptcha-token')
-
   const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
     request: { responseURL: 'https://example.com/confirmation' },
   })
@@ -42,11 +31,6 @@ test('Handles form submission successfully', async () => {
   ;(useRouter as jest.Mock).mockReturnValueOnce({
     push: routerPushMock,
     replace: routerReplaceMock,
-  })
-
-  // Mock useReCaptcha hook to return the mocked executeRecaptcha function
-  ;(useReCaptcha as jest.Mock).mockReturnValueOnce({
-    executeRecaptcha,
   })
 
   const mockEvt = {}
@@ -70,12 +54,8 @@ test('Handles form submission successfully', async () => {
   // Simulate form submission
   await userEvent.click(screen.getByText('Submit'))
 
-  // Verify that executeRecaptcha was called with the correct site key
-  expect(executeRecaptcha).toHaveBeenCalledWith('form_submit')
-
   // Verify that axios.post was called with the correct data
   expect(axiosPostMock).toHaveBeenCalledWith('/submit', {
-    reCaptchaToken: 'recaptcha-token',
     fullName: 'John', // Add the expected form values here
   })
 
@@ -85,8 +65,6 @@ test('Handles form submission successfully', async () => {
 })
 
 test('Handles failures due to an api request error', async () => {
-  const executeRecaptcha = jest.fn().mockResolvedValue('recaptcha-token')
-
   const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
     request: { responseURL: undefined },
   })
@@ -101,11 +79,6 @@ test('Handles failures due to an api request error', async () => {
     asPath: 'mock-url',
   })
 
-  // Mock useReCaptcha hook to return the mocked executeRecaptcha function
-  ;(useReCaptcha as jest.Mock).mockReturnValueOnce({
-    executeRecaptcha,
-  })
-
   const mockEvt = {}
   const handleSubmit = (callback: (values: FieldValues) => void) => {
     callback({ fullName: 'John' })
@@ -129,71 +102,11 @@ test('Handles failures due to an api request error', async () => {
   // Simulate form submission
   await userEvent.click(screen.getByText('Submit'))
 
-  // Verify that executeRecaptcha was called with the correct site key
-  expect(executeRecaptcha).toHaveBeenCalledWith('form_submit')
-
   // Verify that axios.post was called with the correct data
-  expect(axiosPostMock).toHaveBeenCalledWith('/submit', { fullName: 'John', reCaptchaToken: 'recaptcha-token' })
+  expect(axiosPostMock).toHaveBeenCalledWith('/submit', { fullName: 'John' })
 
   // Verify that router functions were not called
   expect(routerReplaceMock).toHaveBeenCalledWith('mock-url?fatal=1')
   expect(routerPushMock).not.toHaveBeenCalled()
   expect(onError).toHaveBeenCalled()
-})
-
-test('handles failures with recaptcha', async () => {
-  const executeRecaptcha = jest.fn().mockResolvedValueOnce(null)
-
-  const axiosPostMock = jest.mocked(axios.post).mockResolvedValue({
-    request: { responseURL: '123' },
-  })
-  const routerPushMock = jest.fn()
-  const routerReplaceMock = jest.fn()
-
-  // Mock useRouter hook to return the mocked router functions
-  ;(useRouter as jest.Mock).mockReturnValue({
-    push: routerPushMock,
-    replace: routerReplaceMock,
-    asPath: 'mock-url',
-  })
-
-  // Mock useReCaptcha hook to return the mocked executeRecaptcha function
-  ;(useReCaptcha as jest.Mock).mockReturnValueOnce({
-    executeRecaptcha,
-  })
-
-  const mockEvt = {}
-  const handleSubmit = (callback: (values: FieldValues) => void) => {
-    callback({ fullName: 'John' })
-    return () => mockEvt
-  }
-
-  const onError = jest.fn()
-
-  render(
-    <Form
-      action="/submit"
-      method="post"
-      handleSubmit={handleSubmit as UseFormHandleSubmit<FieldValues>}
-      onError={onError}
-    >
-      <input type="text" name="name" />
-      <button type="submit">Submit</button>
-    </Form>
-  )
-
-  // Simulate form submission
-  await userEvent.click(screen.getByText('Submit'))
-
-  // Verify that executeRecaptcha was called with the correct site key
-  expect(executeRecaptcha).toHaveBeenCalledWith('form_submit')
-
-  // Verify that axios.post was called with the correct data
-  expect(axiosPostMock).not.toHaveBeenCalled()
-
-  // // Verify that router functions were not called
-  expect(routerPushMock).not.toHaveBeenCalled()
-  expect(routerReplaceMock).toHaveBeenCalledWith('mock-url?fatal=1')
-  expect(onError).toHaveBeenCalled()
-  expect(logger.error).toHaveBeenCalledWith('Google reCaptcha failed to execute')
 })

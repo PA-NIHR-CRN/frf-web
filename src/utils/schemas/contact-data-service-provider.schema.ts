@@ -23,5 +23,6 @@ export const contactDataServiceProviderSchema = z
       .refine((val) => val.split(' ').length <= TEXTAREA_MAX_CHARACTERS, {
         message: `Description of your study/studies and services of interest exceeds the maximum of ${TEXTAREA_MAX_CHARACTERS} characters`,
       }),
+    workEmailAddress: z.string().optional(), // Honeypot
   })
   .required()
