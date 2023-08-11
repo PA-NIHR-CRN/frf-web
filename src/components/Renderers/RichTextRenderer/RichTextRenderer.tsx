@@ -3,6 +3,7 @@ import { BLOCKS, Document, MARKS } from '@contentful/rich-text-types'
 import clsx from 'clsx'
 import { Entry } from 'contentful'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { FC, ReactNode } from 'react'
 
 import { TypeButtonSkeleton, TypeVideoSkeleton } from '@/@types/generated'
@@ -26,15 +27,16 @@ const ButtonEntry = ({
   url,
   external,
 }: Entry<TypeButtonSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', string>['fields']) => (
-  <a
+  <Link
     href={url}
     target={external ? '_blank' : undefined}
     className={clsx('govuk-button govuk-!-margin-top-3', {
       'govuk-button--secondary': type === 'Secondary',
     })}
+    shallow={url.includes('?change-settings=1')}
   >
     {external ? `${text} (Opens in a new window)` : text}
-  </a>
+  </Link>
 )
 
 const VideoEntry = ({ title, url }: Entry<TypeVideoSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', string>['fields']) => {
