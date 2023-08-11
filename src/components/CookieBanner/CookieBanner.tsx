@@ -27,6 +27,17 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
   const router = useRouter()
 
   useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      if (url.includes('?change-settings=1')) {
+        setView(CookieBannerView.Selection)
+        regionRef?.current?.focus()
+      }
+    }
+    router.events.on('routeChangeStart', handleRouteChange)
+    return () => router.events.off('routeChangeStart', handleRouteChange)
+  }, [router])
+
+  useEffect(() => {
     const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
 
     // Set initial visibility on client
@@ -45,14 +56,24 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
     }
   }, [view])
 
+  const updateQueryParams = () => {
+    const url = new URL(window.location.href)
+    if (url.searchParams.has('change-settings')) {
+      url.searchParams.delete('change-settings')
+      router.push(url, undefined, { shallow: true })
+    }
+  }
+
   const handleAccept: MouseEventHandler = () => {
     setView(CookieBannerView.Accepted)
     setCookie(FRF_GDPR_COOKIE_NAME, FRF_GDPR_COOKIE_ACCEPT_VALUE, { expires: getGDPRCookieExpiryDate(), secure: true })
+    updateQueryParams()
   }
 
   const handleReject: MouseEventHandler = () => {
     setView(CookieBannerView.Rejected)
     setCookie(FRF_GDPR_COOKIE_NAME, FRF_GDPR_COOKIE_REJECT_VALUE, { expires: getGDPRCookieExpiryDate(), secure: true })
+    updateQueryParams()
   }
 
   const handleHide: MouseEventHandler = () => {
@@ -85,7 +106,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
           </div>
         </div>
 
-        <div className="govuk-button-group">
+        <div className="govuk-button-group mb-0">
           <button value="accept" type="button" name="cookies" className="govuk-button" onClick={handleAccept}>
             Accept additional cookies
           </button>
@@ -121,7 +142,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
             </div>
           </div>
         </div>
-        <div className="govuk-button-group">
+        <div className="govuk-button-group mb-0">
           <button className="govuk-button" onClick={handleHide}>
             Hide cookie message
           </button>
@@ -134,7 +155,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
 
   return (
     <div
-      className="govuk-cookie-banner govuk-!-padding-top-5 govuk-!-padding-bottom-3 fixed bottom-0 left-0 z-10 w-full"
+      className="govuk-cookie-banner govuk-!-padding-top-5 govuk-!-padding-bottom-3 w-full"
       data-nosnippet=""
       role="region"
       aria-label="Cookies on Find, Recruit and Follow-Up"
