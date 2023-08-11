@@ -48,6 +48,7 @@ describe('getNotificationMessages', () => {
     studyTitle: 'test',
     protocolReference: 'test',
     cpmsId: 'test',
+    workEmailAddress: '', // honeypot
   }
 
   test('should generate support request message for non-commercial organisation or known LCRN', () => {

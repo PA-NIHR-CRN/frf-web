@@ -1,4 +1,3 @@
-import { rest } from 'msw'
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 import { Mock } from 'ts-mockery'
@@ -8,7 +7,6 @@ import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
-import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
 import { ContactDataServiceProviderInputs } from '@/utils/schemas/contact-data-service-provider.schema'
 
@@ -41,14 +39,14 @@ beforeEach(() => {
 test('Successful submission redirects to the confirmation page', async () => {
   const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
-  const body: ContactDataServiceProviderInputs & { reCaptchaToken: string } = {
-    reCaptchaToken: 'mock-token',
+  const body: ContactDataServiceProviderInputs = {
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     studyDescription: 'Study description here',
+    workEmailAddress: '', // honeypot
   }
 
   const createMock = jest.mocked(prisma.dataServiceProviderRequest.create)
@@ -94,14 +92,14 @@ test('Successful submission redirects to the confirmation page', async () => {
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {
-  const body: Partial<ContactDataServiceProviderInputs> & { reCaptchaToken: string } = {
-    reCaptchaToken: 'mock-token',
+  const body: Partial<ContactDataServiceProviderInputs> = {
     fullName: undefined,
     emailAddress: undefined,
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     studyDescription: 'Study description here',
+    workEmailAddress: '', // honeypot
   }
 
   const res = await testHandler(handler, {
@@ -115,22 +113,17 @@ test('Validation error redirects back to the form with the errors and original v
   )
 })
 
-test('Invalid reCaptcha token redirects with an error', async () => {
-  server.use(
-    rest.post('https://recaptchaenterprise.googleapis.com/v1/projects/mock-project-id/assessments', (req, res, ctx) =>
-      res(ctx.json({ ...reCaptchaMock, tokenProperties: { ...reCaptchaMock.tokenProperties, valid: false } }))
-    )
-  )
+test('Honeypot value caught redirects with an error', async () => {
   const res = await testHandler(handler, {
     method: 'POST',
     body: {
-      reCaptchaToken: 'mock-token',
+      workEmailAddress: 'I am a bot',
     },
     query: { slug: 'genonmic-profile-register' },
   })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/contact-data-service-provider/genonmic-profile-register?fatal=1')
-  expect(logger.error).toHaveBeenCalledWith(new Error('Invalid reCaptcha token'))
+  expect(logger.error).toHaveBeenCalledWith(new Error('Bot request caught in honeypot: I am a bot'))
 })
 
 test('Wrong http method redirects with an error', async () => {
