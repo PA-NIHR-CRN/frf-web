@@ -1,6 +1,6 @@
 import { ServiceTypes } from '@/@types/services'
 
-export type OrderType = 'updated' | 'a-z' | 'z-a' | 'highest-population' | 'lowest-population'
+export type OrderType = 'updated' | 'published' | 'a-z' | 'z-a' | 'highest-population' | 'lowest-population'
 
 export interface Filters {
   page: number

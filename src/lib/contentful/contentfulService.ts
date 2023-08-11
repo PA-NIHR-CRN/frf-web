@@ -153,6 +153,8 @@ export class ContentfulService {
     switch (orderType) {
       case 'updated':
         return '-sys.updatedAt'
+      case 'published':
+        return '-sys.createdAt'
       case 'a-z':
         return 'fields.name'
       case 'z-a':
