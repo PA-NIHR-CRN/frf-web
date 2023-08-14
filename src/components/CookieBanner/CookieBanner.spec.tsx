@@ -14,6 +14,8 @@ jest.mock('cookies-next', () => ({
   setCookie: jest.fn(),
 }))
 
+window.gtag = jest.fn()
+
 test('Renders the cookie banner selection view', () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
@@ -34,6 +36,11 @@ test('Changes to the confirmation view when accepting cookies', async () => {
 
   expect(screen.getByTestId('confirmation-message')).toBeInTheDocument()
   expect(screen.getByText(/You’ve accepted additional cookies./)).toBeInTheDocument()
+
+  expect(window.gtag).toHaveBeenLastCalledWith('consent', 'update', {
+    ad_storage: 'granted',
+    analytics_storage: 'granted',
+  })
 })
 
 test('Changes to the confirmation view when rejecting cookies', async () => {
@@ -46,6 +53,11 @@ test('Changes to the confirmation view when rejecting cookies', async () => {
 
   expect(screen.getByRole('link', { name: /cookie policy/ })).toHaveAttribute('href', '/cookie-policy')
   expect(screen.getByRole('link', { name: /change your cookie settings/ })).toHaveAttribute('href', '#cookie-banner')
+
+  expect(window.gtag).toHaveBeenLastCalledWith('consent', 'update', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+  })
 })
 
 test('Hides the cookie banner when "Hide cookie message" is clicked', async () => {

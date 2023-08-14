@@ -67,12 +67,20 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
   const handleAccept: MouseEventHandler = () => {
     setView(CookieBannerView.Accepted)
     setCookie(FRF_GDPR_COOKIE_NAME, FRF_GDPR_COOKIE_ACCEPT_VALUE, { expires: getGDPRCookieExpiryDate(), secure: true })
+    window.gtag('consent', 'update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+    })
     updateQueryParams()
   }
 
   const handleReject: MouseEventHandler = () => {
     setView(CookieBannerView.Rejected)
     setCookie(FRF_GDPR_COOKIE_NAME, FRF_GDPR_COOKIE_REJECT_VALUE, { expires: getGDPRCookieExpiryDate(), secure: true })
+    window.gtag('consent', 'update', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+    })
     updateQueryParams()
   }
 
