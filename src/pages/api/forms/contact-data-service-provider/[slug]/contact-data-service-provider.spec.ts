@@ -65,7 +65,7 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   const res = await testHandler(handler, {
     method: 'POST',
-    body: { ...body },
+    body,
     query: { slug: 'genonmic-profile-register' },
   })
   expect(res.statusCode).toBe(302)
