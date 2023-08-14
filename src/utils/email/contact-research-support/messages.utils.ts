@@ -54,7 +54,9 @@ export const getNotificationMessages = (messageData: MessageData, contacts: Entr
       regionName:
         messageData.lcrn === 'unknown'
           ? 'Unknown'
-          : contacts.find((contact) => contact.fields.emailAddress === messageData.lcrn)?.fields.name,
+          : contacts.find(
+              (contact) => contact.fields.emailAddress === messageData.lcrn && contact.fields.type === 'LCRN - DA'
+            )?.fields.name,
     },
   })
 

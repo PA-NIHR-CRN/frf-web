@@ -73,7 +73,14 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   // Form data is saved in the database
   expect(prismaMock.dataServiceProviderRequest.create).toHaveBeenCalledWith({
-    data: { ...body },
+    data: {
+      fullName: 'Test user',
+      emailAddress: 'testemail@nihr.ac.uk',
+      phoneNumber: '+447443121812',
+      jobRole: 'Researcher',
+      organisationName: 'NIHR',
+      studyDescription: 'Study description here',
+    },
   })
   expect(prismaMock.dataServiceProviderRequest.update).toHaveBeenCalledWith({
     where: { id: 999 },

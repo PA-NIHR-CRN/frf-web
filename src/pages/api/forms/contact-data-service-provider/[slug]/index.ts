@@ -28,6 +28,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await contactDataServiceProviderSchema.parse(req.body)
 
+    delete req.body.workEmailAddress // Clear honeypot before db entry
+
     const { id } = await prisma.dataServiceProviderRequest.create({ data: { ...req.body } })
 
     const referenceNumber = createReferenceNumber({ id, prefix: 'D' })
