@@ -160,4 +160,32 @@ describe('getNotificationMessages', () => {
 
     expect(messages).toContainEqual(expectedMessage)
   })
+
+  test('should generate request confirmation message for LCRNs containing a duplicate email address with a BDM', () => {
+    const expectedMessage: EmailArgs = {
+      subject: 'ABC123 - Research Support Enquiry Submitted (Find, Recruit and Follow-up)',
+      templateName: 'request-confirmation',
+      to: 'researcher@example.com',
+      templateData: {
+        ...defaultMessageData,
+        salutation: 'John Doe',
+        regionName: 'Region 0',
+      },
+    }
+
+    const contactsWithDuplicateLcrnEmail = [
+      Mock.of<Entry<TypeEmailContactSkeleton>>({
+        fields: {
+          emailAddress: 'lcrn@example.com',
+          name: 'Region 3',
+          salutation: 'Dr',
+          type: 'BDM',
+        },
+      }),
+    ].concat(contacts)
+
+    const messages = getNotificationMessages(defaultMessageData, contactsWithDuplicateLcrnEmail)
+
+    expect(messages).toContainEqual(expectedMessage)
+  })
 })
