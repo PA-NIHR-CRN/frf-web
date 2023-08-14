@@ -15,7 +15,7 @@ export default class CommonItemsPage {
   readonly btnClosedSiteMenu: Locator
   readonly btnOpenedSiteMenu: Locator
   readonly linkSiteMenuFindDsp: Locator
-  readonly linkSiteMenuGetSupport: Locator
+  readonly linkSiteMenuContactSupport: Locator
   readonly linkSiteMenuDsp: Locator
   readonly linkSiteMenuResearchStaff: Locator
   readonly linkSiteMenuFeedback: Locator
@@ -43,7 +43,7 @@ export default class CommonItemsPage {
     this.linkSiteMenuFindDsp = page.locator('a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]', {
       hasText: 'View data service providers',
     })
-    this.linkSiteMenuGetSupport = page.locator(
+    this.linkSiteMenuContactSupport = page.locator(
       'a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]',
       {
         hasText: 'Contact research support',
@@ -105,7 +105,7 @@ export default class CommonItemsPage {
 
   async assertSiteMenuLinksAppear() {
     await expect(this.linkSiteMenuFindDsp).toBeVisible()
-    await expect(this.linkSiteMenuGetSupport).toBeVisible()
+    await expect(this.linkSiteMenuContactSupport).toBeVisible()
     await expect(this.linkSiteMenuDsp).toBeVisible()
     await expect(this.linkSiteMenuResearchStaff).toBeVisible()
     await expect(this.linkSiteMenuFeedback).toBeVisible()

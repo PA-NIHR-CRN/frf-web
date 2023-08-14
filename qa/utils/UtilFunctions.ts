@@ -24,3 +24,7 @@ export function convertPromiseStringToNumber(inputString: string | undefined): n
   }
   return inputAsNumber
 }
+
+export function extractRefNoDigits(inputString: string | undefined): string | undefined {
+  return inputString?.replaceAll('R', '')
+}
