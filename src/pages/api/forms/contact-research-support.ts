@@ -22,6 +22,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await contactResearchSupportSchema.parse(req.body)
 
+    delete req.body.workEmailAddress // Clear honeypot before db entry
+
     const { id } = await prisma.supportRequest.create({ data: { ...req.body } })
 
     const referenceNumber = createReferenceNumber({ id, prefix: 'R' })

@@ -41,12 +41,12 @@ test('Successful submission redirects to the confirmation page', async () => {
   const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
   const body: FeedbackInputs & { workEmailAddress: string } = {
-    workEmailAddress: '', // Honeypot
     helpfulness: 'very-helpful',
     suggestions: 'great site!',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     organisationName: 'NIHR',
+    workEmailAddress: '', // Honeypot
   }
 
   const createMock = jest.mocked(prisma.feedback.create)
@@ -68,7 +68,13 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   // Form data is saved in the database
   expect(prismaMock.feedback.create).toHaveBeenCalledWith({
-    data: { ...body },
+    data: {
+      helpfulness: 'very-helpful',
+      suggestions: 'great site!',
+      fullName: 'Test user',
+      emailAddress: 'testemail@nihr.ac.uk',
+      organisationName: 'NIHR',
+    },
   })
   expect(prismaMock.feedback.update).toHaveBeenCalledWith({
     where: { id: 1 },
