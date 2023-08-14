@@ -216,6 +216,7 @@ describe('ContentfulService', () => {
     it('returns the correct order query', () => {
       expect(ContentfulService.getOrderFilter()).toEqual('fields.name')
       expect(ContentfulService.getOrderFilter('updated')).toEqual('-sys.updatedAt')
+      expect(ContentfulService.getOrderFilter('published')).toEqual('-sys.createdAt')
       expect(ContentfulService.getOrderFilter('a-z')).toEqual('fields.name')
       expect(ContentfulService.getOrderFilter('z-a')).toEqual('-fields.name')
       expect(ContentfulService.getOrderFilter('highest-population')).toEqual('-fields.population')

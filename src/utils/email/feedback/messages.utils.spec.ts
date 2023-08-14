@@ -10,6 +10,7 @@ describe('getNotificationMessages', () => {
     emailAddress: 'testemail@nihr.ac.uk',
     organisationName: 'NIHR',
     referenceNumber: 'ABC123',
+    workEmailAddress: '', // honeypot
   }
 
   test('should generate feedback message', () => {

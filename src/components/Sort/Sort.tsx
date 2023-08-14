@@ -19,7 +19,7 @@ export const Sort = ({ form, defaultOrder }: SortProps) => {
         id="order"
         name="order"
         form={form}
-        defaultValue={defaultOrder || 'published'}
+        defaultValue={defaultOrder}
         className="govuk-select w-full md:w-auto"
         onChange={() => sortButtonRef.current?.click()}
       >

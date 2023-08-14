@@ -31,6 +31,7 @@ test('Default search criteria (no search or filters set)', async () => {
 
   // Sort
   expect(screen.getByRole('combobox', { name: 'Sort by' })).toBeInTheDocument()
+  expect((screen.getByRole('option', { name: 'Alphabetical (ascending)' }) as HTMLOptionElement).selected).toBe(true)
 
   // Search results
   expect(screen.getAllByRole('article')).toHaveLength(4)
@@ -276,7 +277,7 @@ test('Enabling a filter', async () => {
   mockRouter.asPath = ''
 
   await userEvent.click(screen.getByLabelText('Find'))
-  expect(mockRouter.asPath).toBe('/providers?q=&serviceType=Find&order=published')
+  expect(mockRouter.asPath).toBe('/providers?q=&serviceType=Find&order=a-z')
 })
 
 test('Disabling a filter', async () => {
@@ -288,11 +289,11 @@ test('Disabling a filter', async () => {
 
   render(<ServiceProviders {...props} />)
 
-  mockRouter.asPath = '/providers?q=&serviceType=Find&order=published'
+  mockRouter.asPath = '/providers?q=&serviceType=Find&order=a-z'
 
   await userEvent.click(screen.getByLabelText('Find'))
 
-  expect(mockRouter.asPath).toBe('/providers?q=&order=published')
+  expect(mockRouter.asPath).toBe('/providers?q=&order=a-z')
 })
 
 test('Enabling a filter via keyboard', async () => {
@@ -310,7 +311,7 @@ test('Enabling a filter via keyboard', async () => {
   findInput.focus()
   await userEvent.keyboard(' ')
 
-  expect(mockRouter.asPath).toBe('/providers?q=&serviceType=Find&order=published')
+  expect(mockRouter.asPath).toBe('/providers?q=&serviceType=Find&order=a-z')
 })
 
 test('Changing sort order', async () => {
@@ -322,7 +323,7 @@ test('Changing sort order', async () => {
 
   render(<ServiceProviders {...props} />)
 
-  mockRouter.asPath = '/providers?q=&serviceType=Find&order=published'
+  mockRouter.asPath = '/providers?q=&serviceType=Find&order=a-z'
 
   await userEvent.selectOptions(screen.getByLabelText('Sort by'), 'Alphabetical (descending)')
 
@@ -339,7 +340,7 @@ test('Loading status', async () => {
   render(<ServiceProviders {...props} />)
 
   // Shows loading state when route changes due to filter change
-  act(() => mockRouter.events.emit('routeChangeStart', '/providers?serviceType=Find&order=published'))
+  act(() => mockRouter.events.emit('routeChangeStart', '/providers?serviceType=Find&order=a-z'))
   expect(screen.getByText('Loading...')).toBeInTheDocument()
 
   // Hides loading state after route change complete

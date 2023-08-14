@@ -1,13 +1,23 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import clsx from 'clsx'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import { ReCaptchaProvider } from 'next-recaptcha-v3'
 import { NextSeo } from 'next-seo'
 import { ReactElement, useCallback, useEffect, useState } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
-import { ErrorSummary, Fieldset, Form, Option, Radio, RadioGroup, Select, Textarea, TextInput } from '@/components/Form'
+import {
+  ErrorSummary,
+  Fieldset,
+  Form,
+  HoneyPot,
+  Option,
+  Radio,
+  RadioGroup,
+  Select,
+  Textarea,
+  TextInput,
+} from '@/components/Form'
 import { RootLayout } from '@/components/Layout/RootLayout'
 import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
@@ -79,6 +89,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
               }
             >
               <ErrorSummary errors={errors} />
+              <HoneyPot {...register('workEmailAddress')} />
               <Fieldset legend="About your enquiry">
                 <RadioGroup
                   label="Is your enquiry about"
@@ -230,11 +241,9 @@ ContactResearchSupport.getLayout = function getLayout(
   { isPreviewMode, cookieBanner }: ContactResearchSupportProps
 ) {
   return (
-    <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} useEnterprise>
-      <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
-        {page}
-      </RootLayout>
-    </ReCaptchaProvider>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+      {page}
+    </RootLayout>
   )
 }
 

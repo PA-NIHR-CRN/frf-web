@@ -5,7 +5,4 @@ process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN = 'TEST_PREVIEW_ACCESS_TOKEN'
 process.env.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN = 'TEST_MANAGEMENT_ACCESS_TOKEN'
 process.env.CONTENTFUL_ENVIRONMENT = 'dev'
 process.env.NEXT_REVALIDATE_TIME = 60
-process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY = 'mock-site-key'
-process.env.RECAPTCHA_PROJECT_ID = 'mock-project-id'
-process.env.RECAPTCHA_API_KEY = 'mock-api-key'
 process.env.DATABASE_URL = ''

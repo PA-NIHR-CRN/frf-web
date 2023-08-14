@@ -1,4 +1,3 @@
-import { rest } from 'msw'
 import type { NextApiHandler } from 'next'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
@@ -9,7 +8,6 @@ import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
-import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
 import { FeedbackInputs } from '@/utils/schemas/feedback.schema'
 
@@ -42,13 +40,13 @@ beforeEach(() => {
 test('Successful submission redirects to the confirmation page', async () => {
   const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
-  const body: FeedbackInputs & { reCaptchaToken: string } = {
-    reCaptchaToken: 'mock-token',
+  const body: FeedbackInputs & { workEmailAddress: string } = {
     helpfulness: 'very-helpful',
     suggestions: 'great site!',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     organisationName: 'NIHR',
+    workEmailAddress: '', // Honeypot
   }
 
   const createMock = jest.mocked(prisma.feedback.create)
@@ -70,7 +68,13 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   // Form data is saved in the database
   expect(prismaMock.feedback.create).toHaveBeenCalledWith({
-    data: { ...body },
+    data: {
+      helpfulness: 'very-helpful',
+      suggestions: 'great site!',
+      fullName: 'Test user',
+      emailAddress: 'testemail@nihr.ac.uk',
+      organisationName: 'NIHR',
+    },
   })
   expect(prismaMock.feedback.update).toHaveBeenCalledWith({
     where: { id: 1 },
@@ -88,8 +92,8 @@ test('Successful submission redirects to the confirmation page', async () => {
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {
-  const body: Partial<FeedbackInputs> & { reCaptchaToken: string } = {
-    reCaptchaToken: 'mock-token',
+  const body: Partial<FeedbackInputs> & { workEmailAddress: string } = {
+    workEmailAddress: '', // Honeypot
     suggestions: 'great site!',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
@@ -103,16 +107,11 @@ test('Validation error redirects back to the form with the errors and original v
   )
 })
 
-test('Invalid reCaptcha token redirects with an error', async () => {
-  server.use(
-    rest.post('https://recaptchaenterprise.googleapis.com/v1/projects/mock-project-id/assessments', (req, res, ctx) =>
-      res(ctx.json({ ...reCaptchaMock, tokenProperties: { ...reCaptchaMock.tokenProperties, valid: false } }))
-    )
-  )
-  const res = await testHandler(handler, { method: 'POST', body: { reCaptchaToken: 'mock-token' } })
+test('Honeypot value caught redirects with an error', async () => {
+  const res = await testHandler(handler, { method: 'POST', body: { workEmailAddress: 'I am a bot' } })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/feedback?fatal=1')
-  expect(logger.error).toHaveBeenCalledWith(new Error('Invalid reCaptcha token'))
+  expect(logger.error).toHaveBeenCalledWith(new Error('Bot request caught in honeypot: I am a bot'))
 })
 
 test('Wrong http method redirects with an error', async () => {
@@ -125,8 +124,8 @@ test('Wrong http method redirects with an error', async () => {
 test('Successful submission without contact details does not email the FRF inbox', async () => {
   const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
-  const body: FeedbackInputs & { reCaptchaToken: string } = {
-    reCaptchaToken: 'mock-token',
+  const body: FeedbackInputs & { workEmailAddress: string } = {
+    workEmailAddress: '', // Honeypot
     helpfulness: 'very-helpful',
     suggestions: 'great site!',
     fullName: 'Test user',

@@ -1,13 +1,10 @@
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
-import { ReCaptchaAssessmentResponse } from '@/lib/reCaptchaService'
-import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { environmentMock, serviceProviderMock, spaceMock, tagsMock } from '@/mocks/space'
 
 const API_URL = 'https://preview.contentful.com/spaces/TEST_SPACE_ID/environments/dev'
 const MANAGEMENT_API_URL = 'https://api.contentful.com/spaces/TEST_SPACE_ID'
-const RECAPTCHA_ENTERPRISE_URL = 'https://recaptchaenterprise.googleapis.com/v1/projects/mock-project-id/assessments'
 
 const setupMockServer = () => {
   const server = setupServer(
@@ -22,9 +19,6 @@ const setupMockServer = () => {
     }),
     rest.get(`${MANAGEMENT_API_URL}/environments/dev/content_types/serviceProvider`, async (_, res, ctx) => {
       return res(ctx.json(serviceProviderMock))
-    }),
-    rest.post(RECAPTCHA_ENTERPRISE_URL, async (_, res, ctx) => {
-      return res(ctx.json<ReCaptchaAssessmentResponse>(reCaptchaMock))
     })
   )
 

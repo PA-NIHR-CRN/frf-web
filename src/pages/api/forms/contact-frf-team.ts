@@ -4,7 +4,6 @@ import { ZodError } from 'zod'
 import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
-import { ReCaptchaService } from '@/lib/reCaptchaService'
 import { getNotificationMessages } from '@/utils/email/contact-frf-team/messages.utils'
 import { createReferenceNumber } from '@/utils/generic.utils'
 import { contactFrfTeamSchema } from '@/utils/schemas/contact-frf-team.schema'
@@ -15,25 +14,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error('Wrong method')
     }
 
-    // reCaptcha token generation can only happen in the form onSubmit event due to a 2 minute TTL
-    // The parameter must be optional so that non-js submissions can still be sent
-    if (req.body.reCaptchaToken) {
-      const reCaptcha = new ReCaptchaService({
-        projectId: process.env.RECAPTCHA_PROJECT_ID,
-        apiKey: process.env.RECAPTCHA_API_KEY,
-        siteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
-      })
-
-      const { valid } = await reCaptcha.validateToken(req.body.reCaptchaToken)
-
-      if (!valid) {
-        throw new Error('Invalid reCaptcha token')
-      }
+    // Check for automated bot requests
+    if (req.body.workEmailAddress) {
+      throw new Error(`Bot request caught in honeypot: ${req.body.workEmailAddress}`)
     }
 
     await contactFrfTeamSchema.parse(req.body)
 
-    delete req.body.reCaptchaToken
+    delete req.body.workEmailAddress // Clear honeypot before db entry
+
     const { id } = await prisma.frfTeamRequest.create({ data: { ...req.body } })
 
     const referenceNumber = createReferenceNumber({ id, prefix: 'C' })

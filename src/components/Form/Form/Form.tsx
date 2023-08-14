@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import { useReCaptcha } from 'next-recaptcha-v3'
 import { ReactNode } from 'react'
 import { FieldValues, FormProps, UseFormHandleSubmit } from 'react-hook-form'
 
@@ -18,8 +17,6 @@ type Props<T extends FieldValues> = {
 export function Form<T extends FieldValues>({ action, method, children, onError, handleSubmit }: Props<T>) {
   const router = useRouter()
 
-  const { executeRecaptcha } = useReCaptcha()
-
   const redirectToFatalError = () => {
     onError(FORM_ERRORS.fatal)
     router.replace(`${router.asPath}?fatal=1`)
@@ -27,19 +24,9 @@ export function Form<T extends FieldValues>({ action, method, children, onError,
 
   const onValid = async (values: T) => {
     try {
-      const reCaptchaToken = await executeRecaptcha('form_submit')
-
-      if (!reCaptchaToken) {
-        logger.error('Google reCaptcha failed to execute')
-        return redirectToFatalError()
-      }
-
       const {
         request: { responseURL },
-      } = await axios.post(action, {
-        reCaptchaToken,
-        ...values,
-      })
+      } = await axios.post(action, values)
 
       if (!responseURL) {
         return redirectToFatalError()

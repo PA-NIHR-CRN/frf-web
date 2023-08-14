@@ -48,6 +48,7 @@ describe('getNotificationMessages', () => {
     studyTitle: 'test',
     protocolReference: 'test',
     cpmsId: 'test',
+    workEmailAddress: '', // honeypot
   }
 
   test('should generate support request message for non-commercial organisation or known LCRN', () => {
@@ -63,6 +64,34 @@ describe('getNotificationMessages', () => {
     }
 
     const messages = getNotificationMessages(defaultMessageData, contacts)
+
+    expect(messages).toContainEqual(expectedMessage)
+  })
+
+  test('support request message for non-commercial organisation or known LCRN with a duplicate email address', () => {
+    const expectedMessage: EmailArgs = {
+      subject: 'ABC123 - New enquiry via Find, Recruit and Follow-up',
+      templateName: 'support-request',
+      to: 'lcrn@example.com',
+      templateData: {
+        ...defaultMessageData,
+        salutation: 'Mx.',
+        regionName: 'Region 0',
+      },
+    }
+
+    const contactsWithDuplicateLcrnEmail = [
+      Mock.of<Entry<TypeEmailContactSkeleton>>({
+        fields: {
+          emailAddress: 'lcrn@example.com',
+          name: 'Region 3',
+          salutation: 'Dr',
+          type: 'BDM',
+        },
+      }),
+    ].concat(contacts)
+
+    const messages = getNotificationMessages(defaultMessageData, contactsWithDuplicateLcrnEmail)
 
     expect(messages).toContainEqual(expectedMessage)
   })
@@ -128,6 +157,34 @@ describe('getNotificationMessages', () => {
     }
 
     const messages = getNotificationMessages(defaultMessageData, contacts)
+
+    expect(messages).toContainEqual(expectedMessage)
+  })
+
+  test('should generate request confirmation message for LCRNs containing a duplicate email address with a BDM', () => {
+    const expectedMessage: EmailArgs = {
+      subject: 'ABC123 - Research Support Enquiry Submitted (Find, Recruit and Follow-up)',
+      templateName: 'request-confirmation',
+      to: 'researcher@example.com',
+      templateData: {
+        ...defaultMessageData,
+        salutation: 'John Doe',
+        regionName: 'Region 0',
+      },
+    }
+
+    const contactsWithDuplicateLcrnEmail = [
+      Mock.of<Entry<TypeEmailContactSkeleton>>({
+        fields: {
+          emailAddress: 'lcrn@example.com',
+          name: 'Region 3',
+          salutation: 'Dr',
+          type: 'BDM',
+        },
+      }),
+    ].concat(contacts)
+
+    const messages = getNotificationMessages(defaultMessageData, contactsWithDuplicateLcrnEmail)
 
     expect(messages).toContainEqual(expectedMessage)
   })

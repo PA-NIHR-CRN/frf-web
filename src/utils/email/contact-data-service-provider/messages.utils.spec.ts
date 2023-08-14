@@ -13,6 +13,7 @@ describe('getNotificationMessages', () => {
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     studyDescription: 'Study description here',
+    workEmailAddress: '', // honeypot
   }
 
   test('should generate feedback message', () => {

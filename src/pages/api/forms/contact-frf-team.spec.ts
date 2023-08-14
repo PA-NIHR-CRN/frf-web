@@ -1,4 +1,3 @@
-import { rest } from 'msw'
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 import { Mock } from 'ts-mockery'
@@ -9,7 +8,6 @@ import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
-import reCaptchaMock from '@/mocks/reCaptcha.json'
 import { setupMockServer } from '@/utils'
 import { ContactFrfTeamInputs } from '@/utils/schemas/contact-frf-team.schema'
 
@@ -42,14 +40,14 @@ beforeEach(() => {
 test('Successful submission redirects to the confirmation page', async () => {
   const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
-  const body: ContactFrfTeamInputs & { reCaptchaToken: string } = {
-    reCaptchaToken: 'mock-token',
+  const body: ContactFrfTeamInputs = {
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     details: 'details here',
+    workEmailAddress: '', // honeypot
   }
 
   const createMock = jest.mocked(prisma.frfTeamRequest.create)
@@ -75,7 +73,14 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   // Form data is saved in the database
   expect(prismaMock.frfTeamRequest.create).toHaveBeenCalledWith({
-    data: { ...body },
+    data: {
+      fullName: 'Test user',
+      emailAddress: 'testemail@nihr.ac.uk',
+      phoneNumber: '+447443121812',
+      jobRole: 'Researcher',
+      organisationName: 'NIHR',
+      details: 'details here',
+    },
   })
   expect(prismaMock.frfTeamRequest.update).toHaveBeenCalledWith({
     where: { id: 999 },
@@ -94,14 +99,14 @@ test('Successful submission redirects to the confirmation page', async () => {
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {
-  const body: Partial<ContactFrfTeamInputs> & { reCaptchaToken: string } = {
-    reCaptchaToken: 'mock-token',
+  const body: Partial<ContactFrfTeamInputs> = {
     fullName: undefined,
     emailAddress: undefined,
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     details: 'details here',
+    workEmailAddress: '', // honeypot
   }
 
   const res = await testHandler(handler, {
@@ -114,21 +119,16 @@ test('Validation error redirects back to the form with the errors and original v
   )
 })
 
-test('Invalid reCaptcha token redirects with an error', async () => {
-  server.use(
-    rest.post('https://recaptchaenterprise.googleapis.com/v1/projects/mock-project-id/assessments', (req, res, ctx) =>
-      res(ctx.json({ ...reCaptchaMock, tokenProperties: { ...reCaptchaMock.tokenProperties, valid: false } }))
-    )
-  )
+test('Honeypot value caught redirects with an error', async () => {
   const res = await testHandler(handler, {
     method: 'POST',
     body: {
-      reCaptchaToken: 'mock-token',
+      workEmailAddress: 'I am a bot',
     },
   })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/contact-frf-team?fatal=1')
-  expect(logger.error).toHaveBeenCalledWith(new Error('Invalid reCaptcha token'))
+  expect(logger.error).toHaveBeenCalledWith(new Error('Bot request caught in honeypot: I am a bot'))
 })
 
 test('Wrong http method redirects with an error', async () => {
