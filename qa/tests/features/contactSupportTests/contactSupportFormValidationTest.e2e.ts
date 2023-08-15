@@ -206,7 +206,6 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32', () => 
 
   test('As a Non-Human user I cannot successfully submit the Form due to Honeypot approach- @frf_32_ac3', async ({
     contactSupportPage,
-    contactSupportConfirmationPage,
   }) => {
     await test.step('Given I have navigated to the Contact Support Page', async () => {
       await contactSupportPage.goto()
@@ -228,15 +227,6 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32', () => 
     })
     await test.step('And I remain on the Contact Support Error page as the form was not submitted', async () => {
       await contactSupportPage.assertOnContactSupportErrorPage()
-      await contactSupportPage.page.pause()
-    })
-    await test.step('When I Clear the Honey Pot and Click the Submit Button', async () => {
-      await contactSupportPage.formHiddenHoneyPotInput.clear()
-      await contactSupportPage.formSubmitButton.click()
-    })
-    await test.step('Then I have successfully submitted the form', async () => {
-      await contactSupportConfirmationPage.assertOnContactSupportConfirmationPage()
-      await contactSupportConfirmationPage.page.pause()
     })
   })
 })

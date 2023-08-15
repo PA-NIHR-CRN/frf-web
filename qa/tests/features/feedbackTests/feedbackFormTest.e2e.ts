@@ -122,7 +122,7 @@ test.describe('Feedback Form Tests - @frf_2', () => {
     })
   })
 
-  test.only('The Feedback Form has a Submit button - @frf_2_ac1_submit', async ({ feedbackFormPage }) => {
+  test('The Feedback Form has a Submit button - @frf_2_ac1_submit', async ({ feedbackFormPage }) => {
     await test.step('Given I have navigated to the Feedback Page', async () => {
       await feedbackFormPage.goto()
     })
