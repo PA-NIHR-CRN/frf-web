@@ -65,8 +65,8 @@ export default class ContactSupportConfirmationPage {
   }
 
   async assertEnquiryRefNoIncrements(firstRefNo: string | undefined, secondRefNo: string | undefined) {
-    firstRefNo = extractRefNoDigits(firstRefNo)
-    secondRefNo = extractRefNoDigits(secondRefNo)
+    firstRefNo = extractRefNoDigits(firstRefNo, 'R')
+    secondRefNo = extractRefNoDigits(secondRefNo, 'R')
     let incrementedFirstRefNo = convertPromiseStringToNumber(firstRefNo)
     incrementedFirstRefNo++
     expect(incrementedFirstRefNo).toEqual(convertPromiseStringToNumber(secondRefNo))

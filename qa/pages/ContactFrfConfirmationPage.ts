@@ -26,6 +26,10 @@ export default class ContactFrfTeamConfirmationPage {
     await this.page.goto('contact-frf-team/confirmation/C00001')
   }
 
+  async gotoAlt() {
+    await this.page.goto('contact-frf-team/confirmation/C00002')
+  }
+
   async assertOnContactFrfConfirmationPage() {
     await expect(this.headingPageTitle).toBeVisible()
     await expect(this.headingPageTitle).toHaveText('Thank you')
@@ -65,8 +69,8 @@ export default class ContactFrfTeamConfirmationPage {
   }
 
   async assertEnquiryRefNoIncrements(firstRefNo: string | undefined, secondRefNo: string | undefined) {
-    firstRefNo = extractRefNoDigits(firstRefNo)
-    secondRefNo = extractRefNoDigits(secondRefNo)
+    firstRefNo = extractRefNoDigits(firstRefNo, 'C')
+    secondRefNo = extractRefNoDigits(secondRefNo, 'C')
     let incrementedFirstRefNo = convertPromiseStringToNumber(firstRefNo)
     incrementedFirstRefNo++
     expect(incrementedFirstRefNo).toEqual(convertPromiseStringToNumber(secondRefNo))
