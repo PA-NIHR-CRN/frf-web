@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe.only('Feedback Form Complete Tests - @frf_8', () => {
+test.describe('Feedback Form Complete Tests - @frf_8', () => {
   test('As a user I am shown a Confirmation Page, when I successfully complete the Form - @frf_8_success', async ({
     feedbackFormPage,
     feedbackFormConfirmationPage,

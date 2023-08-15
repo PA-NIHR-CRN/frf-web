@@ -213,7 +213,7 @@ test.describe('Contact Research Support Form Tests - @frf_32', () => {
       await contactSupportPage.assertOnContactSupportPage()
       await contactSupportPage.assertContactSupportFormPresent()
     })
-    await test.step('Then the Form will have Text Notifying that an Email Copy will be sent', async () => {
+    await test.step('Then the Form will have Text Notifying me that an Email Copy will be sent', async () => {
       await contactSupportPage.assertEmailCopyTxtPresent()
     })
     await test.step('And the Form will have a Submit button', async () => {

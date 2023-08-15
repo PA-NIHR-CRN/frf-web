@@ -9,7 +9,7 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32', () => 
       await contactSupportPage.goto()
       await contactSupportPage.assertOnContactSupportPage()
     })
-    await test.step('And I have not entered any values in the Mandatory', async () => {
+    await test.step('And I have not entered any values in the Mandatory fields', async () => {
       await contactSupportPage.assertContactSupportFormPresent()
     })
     await test.step('When I Click the Submit Button', async () => {
@@ -67,7 +67,7 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32', () => 
       await contactSupportPage.goto()
       await contactSupportPage.assertOnContactSupportPage()
     })
-    await test.step('And I have not entered any values in the Mandatory', async () => {
+    await test.step('And I have not entered any values in the Mandatory fields', async () => {
       await contactSupportPage.assertContactSupportFormPresent()
     })
     await test.step('When I Click the Submit Button', async () => {

@@ -3,13 +3,13 @@ import { expect, Locator, Page } from '@playwright/test'
 import { convertPromiseStringToNumber } from '../utils/UtilFunctions'
 
 //Declare Page Objects
-export default class ContactSupportPage {
+export default class ContactFrfPage {
   readonly page: Page
   readonly researchLeadExampleOption: string
   readonly researchLeadChrisOption: string
   readonly headingPageTitle: Locator
-  readonly contactSupportForm: Locator
-  readonly contactSupportFormTxtBlocks: Locator
+  readonly contactFrfForm: Locator
+  readonly contactFrfFormTxtBlocks: Locator
   readonly formAboutEnquirySectionLbl: Locator
   readonly formAboutYouSectionLbl: Locator
   readonly formAboutResearchSectionLbl: Locator
@@ -19,9 +19,9 @@ export default class ContactSupportPage {
   readonly formEnquiryRadioButtonDataLbl: Locator
   readonly formEnquiryRadioButtonResearch: Locator
   readonly formEnquiryRadioButtonResearchLbl: Locator
-  readonly formSummarySupportLbl: Locator
-  readonly formSummarySupportTxt: Locator
-  readonly formSummarySupportGuideChars: Locator
+  readonly formEnquiryDetailsLbl: Locator
+  readonly formEnquiryDetailsTxt: Locator
+  readonly formEnquiryDetailsGuideChars: Locator
   readonly formFullNameLbl: Locator
   readonly formFullNameInput: Locator
   readonly formEmailAddressLbl: Locator
@@ -55,22 +55,17 @@ export default class ContactSupportPage {
   readonly validationSummaryBox: Locator
   readonly validationSummaryHeading: Locator
   readonly validationSummaryList: Locator
-  readonly validationSummaryEnquiryError: Locator
+  readonly validationEnquiryDetailsError: Locator
   readonly validationSummarySupportSummaryError: Locator
   readonly validationSummaryNameError: Locator
   readonly validationSummaryEmailError: Locator
   readonly validationSummaryJobRoleError: Locator
   readonly validationSummaryOrgNameError: Locator
-  readonly validationSummaryOrgTypeError: Locator
-  readonly validationSummaryLeadRegionError: Locator
-  readonly validationFieldEnquiryError: Locator
-  readonly validationFieldSupportSummaryError: Locator
   readonly validationFieldNameError: Locator
   readonly validationFieldEmailError: Locator
   readonly validationFieldJobRoleError: Locator
   readonly validationFieldOrgNameError: Locator
-  readonly validationFieldOrgTypeError: Locator
-  readonly validationFieldLeadRegionError: Locator
+  readonly validationFieldEnquiryDetailsError: Locator
   readonly validationFieldTelephoneError: Locator
   readonly validationSummaryTelephoneError: Locator
   readonly genericErrorMsg: Locator
@@ -81,8 +76,8 @@ export default class ContactSupportPage {
 
     //Locators
     this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
-    this.contactSupportForm = page.locator('form[action="/api/forms/contact-research-support"]')
-    this.contactSupportFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
+    this.contactFrfForm = page.locator('form[action="/api/forms/contact-frf-team"]')
+    this.contactFrfFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.formAboutEnquirySectionLbl = page.locator('legend[class="govuk-fieldset__legend govuk-fieldset__legend--m"]', {
       hasText: 'About your enquiry',
     })
@@ -103,9 +98,9 @@ export default class ContactSupportPage {
     this.formEnquiryRadioButtonDataLbl = page.locator('label[for="enquiryType"]')
     this.formEnquiryRadioButtonResearch = page.locator('input[value="research"]')
     this.formEnquiryRadioButtonResearchLbl = page.locator('label[for="enquiryType-1"]')
-    this.formSummarySupportLbl = page.locator('label[id="supportDescription-label"]')
-    this.formSummarySupportTxt = page.locator('textarea[id="supportDescription"]')
-    this.formSummarySupportGuideChars = page.locator('div[id="with-hint-info"]')
+    this.formEnquiryDetailsLbl = page.locator('label[id="details-label"]')
+    this.formEnquiryDetailsTxt = page.locator('textarea[id="details"]')
+    this.formEnquiryDetailsGuideChars = page.locator('div[id="with-hint-info"]')
     this.formFullNameLbl = page.locator('label[id="fullName-label"]')
     this.formFullNameInput = page.locator('input[id="fullName"]')
     this.formEmailAddressLbl = page.locator('label[id="emailAddress-label"]')
@@ -135,28 +130,23 @@ export default class ContactSupportPage {
     this.formResearchCpmsInput = page.locator('input[id="cpmsId"]')
     this.formResearchCpmsLbl = page.locator('label[id="cpmsId-label"]')
     this.formResearchCpmsGuideTxt = this.page.locator('div[id="cpmsId-hint"]')
-    this.formEmailCopyTxt = this.contactSupportForm.locator('p').nth(2)
+    this.formEmailCopyTxt = this.contactFrfForm.locator('p')
     this.formSubmitButton = page.locator('button[data-module="govuk-button"]')
     this.formHiddenHoneyPotInput = page.locator('input[name="workEmailAddress"]')
     this.validationSummaryBox = page.locator('div[class="govuk-error-summary"]')
     this.validationSummaryHeading = page.locator('h2[id="form-summary-errors"]')
     this.validationSummaryList = page.locator('ul[class="govuk-list govuk-error-summary__list"]')
-    this.validationSummaryEnquiryError = page.locator('a[href="#enquiryType"]')
+    this.validationEnquiryDetailsError = page.locator('a[href="#details"]')
     this.validationSummarySupportSummaryError = page.locator('a[href="#supportDescription"]')
     this.validationSummaryNameError = page.locator('a[href="#fullName"]')
     this.validationSummaryEmailError = page.locator('a[href="#emailAddress"]')
     this.validationSummaryJobRoleError = page.locator('a[href="#jobRole"]')
     this.validationSummaryOrgNameError = page.locator('a[href="#organisationName"]')
-    this.validationSummaryOrgTypeError = page.locator('a[href="#organisationType"]')
-    this.validationSummaryLeadRegionError = page.locator('a[href="#lcrn"]')
-    this.validationFieldEnquiryError = page.locator('p[id="enquiryType-error"]')
-    this.validationFieldSupportSummaryError = page.locator('p[id="supportDescription-error"]')
     this.validationFieldNameError = page.locator('p[id="fullName-error"]')
     this.validationFieldEmailError = page.locator('p[id="emailAddress-error"]')
     this.validationFieldJobRoleError = page.locator('p[id="jobRole-error"]')
     this.validationFieldOrgNameError = page.locator('p[id="organisationName-error"]')
-    this.validationFieldOrgTypeError = page.locator('p[id="organisationType-error"]')
-    this.validationFieldLeadRegionError = page.locator('p[id="lcrn-error"]')
+    this.validationFieldEnquiryDetailsError = page.locator('p[id="details-error"]')
     this.validationFieldTelephoneError = page.locator('p[id="phoneNumber-error"]')
     this.validationSummaryTelephoneError = page.locator('a[href="#phoneNumber"]')
     this.genericErrorMsg = this.validationSummaryList.locator('li')
@@ -168,27 +158,28 @@ export default class ContactSupportPage {
 
   //Page Methods
   async goto() {
-    await this.page.goto('contact-research-support')
+    await this.page.goto('contact-frf-team')
   }
 
-  async assertOnContactSupportPage() {
-    await expect(this.page).toHaveURL('contact-research-support')
+  async assertOnContactFrfPage() {
+    await expect(this.page).toHaveURL('contact-frf-team')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact research support')
+    await expect(this.headingPageTitle).toHaveText('Contact Find, Recruit and Follow-up central team')
   }
 
-  async assertContactSupportFormPresent() {
-    await expect(this.contactSupportForm).toBeVisible()
+  async assertContactFrfFormPresent() {
+    await expect(this.contactFrfForm).toBeVisible()
   }
 
   async assertIntroText() {
-    await expect(this.contactSupportFormTxtBlocks.first()).toBeVisible()
-    await expect(this.contactSupportFormTxtBlocks.first()).toContainText(
-      'The UK offers multiple services and teams of professionals who can support you'
+    await expect(this.contactFrfFormTxtBlocks.first()).toBeVisible()
+    await expect(this.contactFrfFormTxtBlocks.first()).toContainText(
+      'The Find, Recruit and Follow-up central team manage the content of this website'
     )
-    await expect(this.contactSupportFormTxtBlocks.nth(1)).toContainText(
-      'to access this support please complete the form below'
+    await expect(this.contactFrfFormTxtBlocks.nth(1)).toContainText(
+      'If you would like to get in touch with the team, please complete the form below'
     )
+    await expect(this.contactFrfFormTxtBlocks.nth(2)).toHaveText('All fields are required unless marked as optional.')
   }
 
   async assertAboutEnquirySectionPresent() {
@@ -211,16 +202,16 @@ export default class ContactSupportPage {
     await expect(this.formEnquiryRadioButtonResearchLbl).toHaveText('General enquiry about research support')
   }
 
-  async assertEnquirySupportSummary() {
-    await expect(this.formSummarySupportLbl).toBeVisible()
-    await expect(this.formSummarySupportTxt).toBeVisible()
-    await expect(this.formSummarySupportGuideChars).toBeVisible()
-    await expect(this.formSummarySupportLbl).toHaveText('Please provide a summary of the support you need')
-    await expect(this.formSummarySupportGuideChars).toHaveText('You have 1200 characters remaining')
+  async assertEnquiryDetails() {
+    await expect(this.formEnquiryDetailsLbl).toBeVisible()
+    await expect(this.formEnquiryDetailsTxt).toBeVisible()
+    await expect(this.formEnquiryDetailsGuideChars).toBeVisible()
+    await expect(this.formEnquiryDetailsLbl).toHaveText('Please provide details of your enquiry')
+    await expect(this.formEnquiryDetailsGuideChars).toHaveText('You have 1200 characters remaining')
   }
 
-  async assertSupportSummaryCharCount(expectedCount: number) {
-    const charsGuideText = await this.formSummarySupportGuideChars.textContent()
+  async assertEnquiryDetailsCharCount(expectedCount: number) {
+    const charsGuideText = await this.formEnquiryDetailsGuideChars.textContent()
     const charsNumberEndIndex = charsGuideText?.indexOf('characters')
     const currentCharsCount = convertPromiseStringToNumber(charsGuideText?.substring(8, charsNumberEndIndex))
     expect(currentCharsCount).toEqual(expectedCount)
@@ -341,37 +332,32 @@ export default class ContactSupportPage {
   }
 
   async assertValidationSummaryMandatoryMessages() {
-    await expect(this.validationSummaryEnquiryError).toBeVisible()
-    await expect(this.validationSummarySupportSummaryError).toBeVisible()
     await expect(this.validationSummaryNameError).toBeVisible()
     await expect(this.validationSummaryEmailError).toBeVisible()
     await expect(this.validationSummaryJobRoleError).toBeVisible()
     await expect(this.validationSummaryOrgNameError).toBeVisible()
-    await expect(this.validationSummaryOrgTypeError).toBeVisible()
-    await expect(this.validationSummaryLeadRegionError).toBeVisible()
-    await expect(this.validationSummaryEnquiryError).toHaveText('Select the type of enquiry')
-    await expect(this.validationSummarySupportSummaryError).toHaveText('Enter a summary of the support you need')
+    await expect(this.validationEnquiryDetailsError).toBeVisible()
     await expect(this.validationSummaryNameError).toHaveText('Enter your full name')
     await expect(this.validationSummaryEmailError).toHaveText('Enter a valid email address')
     await expect(this.validationSummaryJobRoleError).toHaveText('Enter your job role')
-    await expect(this.validationSummaryOrgNameError).toHaveText('Enter your organisation name')
-    await expect(this.validationSummaryOrgTypeError).toHaveText('Select the type of organisation')
-    await expect(this.validationSummaryLeadRegionError).toHaveText('Select a lead region')
+    await expect(this.validationSummaryOrgNameError).toHaveText(
+      'Enter your organisation name, Local Clinical Research Network or Devolved Nation'
+    )
+    await expect(this.validationEnquiryDetailsError).toHaveText(
+      'Enter a description of your study(ies) and/ or service(s) of interest'
+    )
   }
 
   async assertValidationSummaryLinks(field: string) {
     switch (field.toLowerCase()) {
       case 'enquiry':
-        await expect(this.formEnquiryRadioButtonData).toBeFocused()
+        await expect(this.formEnquiryDetailsTxt).toBeFocused()
         break
-      case 'summary':
-        await expect(this.formSummarySupportTxt).toBeFocused()
+      case 'name':
+        await expect(this.formFullNameInput).toBeFocused()
         break
-      case 'job':
-        await expect(this.formJobRoleInput).toBeFocused()
-        break
-      case 'region':
-        await expect(this.formResearchLeadDropdown).toBeFocused()
+      case 'org':
+        await expect(this.formOrgNameInput).toBeFocused()
         break
       default:
         throw new Error(`${field} is not a valid option`)
@@ -379,22 +365,20 @@ export default class ContactSupportPage {
   }
 
   async assertValidationMandatoryFieldMessages() {
-    await expect(this.validationFieldEnquiryError).toBeVisible()
-    await expect(this.validationFieldSupportSummaryError).toBeVisible()
     await expect(this.validationFieldNameError).toBeVisible()
     await expect(this.validationFieldEmailError).toBeVisible()
     await expect(this.validationFieldJobRoleError).toBeVisible()
     await expect(this.validationFieldOrgNameError).toBeVisible()
-    await expect(this.validationFieldOrgTypeError).toBeVisible()
-    await expect(this.validationFieldLeadRegionError).toBeVisible()
-    await expect(this.validationFieldEnquiryError).toContainText('Select the type of enquiry')
-    await expect(this.validationFieldSupportSummaryError).toContainText('Enter a summary of the support you need')
+    await expect(this.validationFieldEnquiryDetailsError).toBeVisible()
     await expect(this.validationFieldNameError).toContainText('Enter your full name')
     await expect(this.validationFieldEmailError).toContainText('Enter a valid email address')
     await expect(this.validationFieldJobRoleError).toContainText('Enter your job role')
-    await expect(this.validationFieldOrgNameError).toContainText('Enter your organisation name')
-    await expect(this.validationFieldOrgTypeError).toContainText('Select the type of organisation')
-    await expect(this.validationFieldLeadRegionError).toContainText('Select a lead region')
+    await expect(this.validationFieldOrgNameError).toContainText(
+      'Enter your organisation name, Local Clinical Research Network or Devolved Nation'
+    )
+    await expect(this.validationFieldEnquiryDetailsError).toContainText(
+      'Enter a description of your study(ies) and/ or service(s) of interest'
+    )
   }
 
   async assertValidationTelephoneFieldMessagePresent(visible: boolean) {
@@ -438,18 +422,15 @@ export default class ContactSupportPage {
   }
 
   async enterValuesAllMandatory() {
-    await this.formEnquiryRadioButtonResearch.click()
-    await this.formSummarySupportTxt.type('Testing Value')
     await this.formFullNameInput.type('Testing Name')
     await this.formEmailAddressInput.type('chris.mcneill@nihr.ac.uk')
     await this.formJobRoleInput.type('Testing Job')
     await this.formOrgNameInput.type('Testing Org')
-    await this.formOrgRadioButtonNonComm.click()
-    await this.formResearchLeadDropdown.selectOption(this.researchLeadChrisOption)
+    await this.formEnquiryDetailsTxt.type('Testing FRF Value')
   }
 
-  async assertSupportSummaryContent(expectedTextContent: string) {
-    expect(await this.formSummarySupportTxt.inputValue()).toEqual(expectedTextContent)
+  async assertEnquiryDetailsContent(expectedTextContent: string) {
+    expect(await this.formEnquiryDetailsTxt.inputValue()).toEqual(expectedTextContent)
   }
 
   async enterValueAsSpamBot() {
@@ -463,9 +444,9 @@ export default class ContactSupportPage {
     )
   }
 
-  async assertOnContactSupportErrorPage() {
-    await expect(this.page).toHaveURL('contact-research-support?fatal=1')
+  async assertOnContactFrfErrorPage() {
+    await expect(this.page).toHaveURL('contact-frf-team?fatal=1')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact research support')
+    await expect(this.headingPageTitle).toHaveText('Contact Find, Recruit and Follow-up central team')
   }
 }

@@ -9,7 +9,7 @@ test.describe('Feedback Form Validation Tests - @frf_2', () => {
       await feedbackFormPage.goto()
       await feedbackFormPage.assertOnFeedbackForm()
     })
-    await test.step('And I have not entered any values in the Mandatory', async () => {
+    await test.step('And I have not entered any values in the Mandatory fields', async () => {
       await feedbackFormPage.assertFeedbackFormPresent()
     })
     await test.step('When I Click the Submit Button', async () => {
@@ -33,7 +33,7 @@ test.describe('Feedback Form Validation Tests - @frf_2', () => {
       await feedbackFormPage.goto()
       await feedbackFormPage.assertOnFeedbackForm()
     })
-    await test.step('And I have not entered any values in the Mandatory', async () => {
+    await test.step('And I have not entered any values in the Mandatory fields', async () => {
       await feedbackFormPage.assertFeedbackFormPresent()
     })
     await test.step('When I Click the Submit Button', async () => {

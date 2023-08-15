@@ -158,6 +158,7 @@ export default class FeedbackFormPage {
 
   async assertSubmitButtonPresent() {
     await expect(this.formSubmitButton).toBeVisible()
+    await expect(this.formSubmitButton).toHaveText('Submit')
   }
 
   async assertValidationSummaryPresent(visible: boolean) {
@@ -238,7 +239,6 @@ export default class FeedbackFormPage {
 
   async enterValueAsSpamBot() {
     await this.formHiddenHoneyPotInput.type('spam@bot.com')
-    console.log(await this.formHiddenHoneyPotInput.inputValue())
   }
 
   async assertGenericErrorMsg() {
