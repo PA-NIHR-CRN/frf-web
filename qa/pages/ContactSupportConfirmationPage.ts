@@ -3,7 +3,7 @@ import { expect, Locator, Page } from '@playwright/test'
 import { convertPromiseStringToNumber, extractRefNoDigits } from '../utils/UtilFunctions'
 
 //Declare Page Objects
-export default class ContactSupportPage {
+export default class ContactSupportConfirmationPage {
   readonly page: Page
   readonly headingPageTitle: Locator
   readonly confirmTextBlocks: Locator

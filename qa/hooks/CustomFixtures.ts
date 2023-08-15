@@ -5,6 +5,7 @@ import AccessibilityPage from '../pages/AccessibilityPage'
 import CommonItemsPage from '../pages/CommonItemsPage'
 import ContactSupportConfirmationPage from '../pages/ContactSupportConfirmationPage'
 import ContactSupportPage from '../pages/ContactSupportPage'
+import FeedbackConfirmationPage from '../pages/FeedbackFormConfirmationPage'
 import FeedbackFormPage from '../pages/FeedbackFormPage'
 import GenericTestPage from '../pages/GenericTestPage'
 import HomePage from '../pages/HomePage'
@@ -20,9 +21,11 @@ type CustomFixtures = {
   privacyPage: PrivacyPage
   accessibilityPage: AccessibilityPage
   feedbackFormPage: FeedbackFormPage
+  feedbackFormConfirmationPage: FeedbackConfirmationPage
   genericTestPage: GenericTestPage
   contactSupportPage: ContactSupportPage
   contactSupportConfirmationPage: ContactSupportConfirmationPage
+
   makeAxeBuilder: () => AxeBuilder
 }
 
@@ -65,6 +68,10 @@ export const test = base.extend<CustomFixtures>({
 
   contactSupportConfirmationPage: async ({ page }, use) => {
     await use(new ContactSupportConfirmationPage(page))
+  },
+
+  feedbackFormConfirmationPage: async ({ page }, use) => {
+    await use(new FeedbackConfirmationPage(page))
   },
 
   makeAxeBuilder: async ({ page }, use) => {
