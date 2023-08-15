@@ -5,6 +5,7 @@ import mockRouter from 'next-router-mock'
 import React from 'react'
 
 import { mockCookieBannerContent } from '@/components/CookieBanner/mockContent'
+import { FRF_GDPR_COOKIE_ACCEPT_VALUE } from '@/constants/cookies'
 
 import { CookieBanner } from './CookieBanner'
 
@@ -70,7 +71,7 @@ test('Hides the cookie banner when "Hide cookie message" is clicked', async () =
 
   // Ensure that the confirmation message is visible
   expect(screen.getByTestId('confirmation-message')).toBeInTheDocument()
-  ;(getCookie as jest.Mock).mockReturnValue('FRF_GDPR_COOKIE_ACCEPT_VALUE=1;')
+  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   // Click "Hide cookie message" to hide the entire cookie banner
   await userEvent.click(screen.getByRole('button', { name: /hide cookie message/i }))
@@ -83,7 +84,7 @@ test('Hides the cookie banner and redirects to the cookie policy page when "cook
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   await userEvent.click(screen.getByRole('button', { name: /accept additional cookies/i }))
-  ;(getCookie as jest.Mock).mockReturnValue('FRF_GDPR_COOKIE_ACCEPT_VALUE=1;')
+  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   await userEvent.click(screen.getByRole('link', { name: /cookie policy/i }))
 
@@ -154,7 +155,7 @@ test('Accepting or rejecting cookies via keyboard', async () => {
 
 test('Does not render the cookie banner if the GDPR cookie is already set', () => {
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValue('FRF_GDPR_COOKIE_ACCEPT_VALUE=1;')
+  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   render(<CookieBanner content={mockCookieBannerContent} />)
 
@@ -163,18 +164,11 @@ test('Does not render the cookie banner if the GDPR cookie is already set', () =
 })
 
 test('Displays cookie banner via magic link', async () => {
-  Object.defineProperty(window, 'location', {
-    value: {
-      href: 'http://localhost/cookie-policy?change-settings=1',
-    },
-    writable: true,
-  })
-
   const mockFocus = jest.fn()
   jest.spyOn(React, 'useRef').mockReturnValue({ current: { focus: mockFocus } })
 
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValue('FRF_GDPR_COOKIE_ACCEPT_VALUE=1;')
+  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   render(<CookieBanner content={mockCookieBannerContent} />)
 
@@ -186,10 +180,6 @@ test('Displays cookie banner via magic link', async () => {
 
   // Refocuses cookie banner after route change
   expect(mockFocus).toHaveBeenCalled()
-
-  // Removes query parameter after clicking accept
-  await userEvent.click(screen.getByRole('button', { name: /accept additional cookies/i }))
-  expect(mockRouter.query['change-settings']).toBeUndefined()
 })
 
 test('Hides cookie banner on page change if cookie was already set', async () => {
@@ -198,9 +188,38 @@ test('Hides cookie banner on page change if cookie was already set', async () =>
   expect(screen.getByLabelText('Cookies on Find, Recruit and Follow-Up')).toBeInTheDocument()
 
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValue('FRF_GDPR_COOKIE_ACCEPT_VALUE=1;')
+  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   await act(() => mockRouter.push('/'))
 
   expect(screen.queryByLabelText('Cookies on Find, Recruit and Follow-Up')).not.toBeInTheDocument()
+})
+
+test('Initiates the cookies accepted route with the correct query parameter', async () => {
+  jest.spyOn(mockRouter, 'push')
+
+  render(<CookieBanner content={mockCookieBannerContent} />)
+
+  // Accept cookies
+  await userEvent.click(screen.getByRole('button', { name: /accept additional cookies/i }))
+  expect(mockRouter.push).toHaveBeenNthCalledWith(1, 'http://localhost/?cookies-accepted=1', undefined, {
+    shallow: true,
+  })
+
+  // Cleans URL
+  expect(mockRouter.push).toHaveBeenNthCalledWith(2, 'http://localhost/', undefined, {
+    shallow: true,
+  })
+
+  // Reject cookies
+  await userEvent.click(screen.getByRole('link', { name: /change your cookie settings/i }))
+  await userEvent.click(screen.getByRole('button', { name: /reject additional cookies/i }))
+  expect(mockRouter.push).toHaveBeenNthCalledWith(3, 'http://localhost/?cookies-accepted=0', undefined, {
+    shallow: true,
+  })
+
+  // Cleans URL
+  expect(mockRouter.push).toHaveBeenNthCalledWith(4, 'http://localhost/', undefined, {
+    shallow: true,
+  })
 })

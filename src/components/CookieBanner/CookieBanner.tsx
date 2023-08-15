@@ -28,19 +28,27 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
 
   useEffect(() => {
     const handleRouteChange = (url: string) => {
+      if (url.includes('cookies-accepted')) {
+        const newURL = new URL(window.location.href)
+        newURL.searchParams.delete('cookies-accepted')
+        return router.push(newURL.toString(), undefined, { shallow: true })
+      }
+
       if (url.includes('?change-settings=1')) {
         setView(CookieBannerView.Selection)
-        regionRef?.current?.focus()
-      } else {
-        // Hide banner after navigating away from cookie policy page
-        const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
-        if (view === CookieBannerView.Selection && isCookieSet) {
-          setView(CookieBannerView.Hidden)
-        }
+        return regionRef?.current?.focus()
+      }
+
+      // Hide banner after navigating away from cookie policy page
+      const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
+      if (view === CookieBannerView.Selection && isCookieSet) {
+        setView(CookieBannerView.Hidden)
       }
     }
-    router.events.on('routeChangeStart', handleRouteChange)
-    return () => router.events.off('routeChangeStart', handleRouteChange)
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    return () => router.events.off('routeChangeComplete', handleRouteChange)
   }, [router, view])
 
   useEffect(() => {
@@ -62,12 +70,13 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
     }
   }, [view])
 
-  const updateQueryParams = () => {
+  const updateQueryParams = (hasAccepted: boolean) => {
     const url = new URL(window.location.href)
     if (url.searchParams.has('change-settings')) {
       url.searchParams.delete('change-settings')
-      router.push(url, undefined, { shallow: true })
     }
+    url.searchParams.set('cookies-accepted', hasAccepted ? '1' : '0')
+    router.push(url.toString(), undefined, { shallow: true })
   }
 
   const handleAccept: MouseEventHandler = () => {
@@ -77,7 +86,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
       ad_storage: 'granted',
       analytics_storage: 'granted',
     })
-    updateQueryParams()
+    updateQueryParams(true)
   }
 
   const handleReject: MouseEventHandler = () => {
@@ -87,7 +96,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
       ad_storage: 'denied',
       analytics_storage: 'denied',
     })
-    updateQueryParams()
+    updateQueryParams(false)
   }
 
   const handleHide: MouseEventHandler = () => {
