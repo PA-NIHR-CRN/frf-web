@@ -31,11 +31,17 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
       if (url.includes('?change-settings=1')) {
         setView(CookieBannerView.Selection)
         regionRef?.current?.focus()
+      } else {
+        // Hide banner after navigating away from cookie policy page
+        const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
+        if (view === CookieBannerView.Selection && isCookieSet) {
+          setView(CookieBannerView.Hidden)
+        }
       }
     }
     router.events.on('routeChangeStart', handleRouteChange)
     return () => router.events.off('routeChangeStart', handleRouteChange)
-  }, [router])
+  }, [router, view])
 
   useEffect(() => {
     const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
