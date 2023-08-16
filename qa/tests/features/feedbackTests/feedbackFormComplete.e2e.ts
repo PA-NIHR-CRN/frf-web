@@ -26,11 +26,11 @@ test.describe('Feedback Form Complete Tests - @frf_8', () => {
     })
   })
 
-  test('As a user I can navigate from the Confirmation Page to the Home Page, using the button Provided - @frf_8_homepage', async ({
+  test.only('As a user I can navigate from the Confirmation Page to the Home Page, using the button Provided - @frf_8_homepage', async ({
     feedbackFormConfirmationPage,
     homePage,
   }) => {
-    await test.step('Given I am on the Feedback Page', async () => {
+    await test.step('Given I am on the Feedback Confirmation Page', async () => {
       await feedbackFormConfirmationPage.goto()
       await feedbackFormConfirmationPage.assertOnFeedbackConfirmationPage()
     })

@@ -96,7 +96,7 @@ test.describe('Contact DSP Form Complete Tests - @frf_29', () => {
     contactDspConfirmationPage,
     feedbackFormPage,
   }) => {
-    await test.step('Given I am on a Contact DSP Page', async () => {
+    await test.step('Given I am on a Contact DSP Confirmation Page', async () => {
       await contactDspConfirmationPage.goto('genomic-profile-register')
       await contactDspConfirmationPage.assertOnContactDspConfirmationPage('genomic-profile-register')
     })
@@ -113,7 +113,7 @@ test.describe('Contact DSP Form Complete Tests - @frf_29', () => {
     contactDspConfirmationPage,
     homePage,
   }) => {
-    await test.step('Given I am on a Contact DSP Page', async () => {
+    await test.step('Given I am on a Contact DSP Confirmation Page', async () => {
       await contactDspConfirmationPage.goto('genomic-profile-register')
       await contactDspConfirmationPage.assertOnContactDspConfirmationPage('genomic-profile-register')
     })

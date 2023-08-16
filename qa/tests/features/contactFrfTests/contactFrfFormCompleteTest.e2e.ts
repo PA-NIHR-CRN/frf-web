@@ -76,7 +76,7 @@ test.describe('Contact FRF Form Complete Tests - @frf_39', () => {
       await contactFrfConfirmationPage.assertEnquiryRefNoFormat()
       firstRefNo = await contactFrfConfirmationPage.getEnquiryRefNoString()
     })
-    await test.step('When I re-submit the Contact Research Support Form', async () => {
+    await test.step('When I re-submit the Contact FRF Form', async () => {
       await contactFrfPage.goto()
       await contactFrfPage.assertOnContactFrfPage()
       await contactFrfPage.enterValuesAllMandatory()
@@ -96,7 +96,7 @@ test.describe('Contact FRF Form Complete Tests - @frf_39', () => {
     contactFrfConfirmationPage,
     feedbackFormPage,
   }) => {
-    await test.step('Given I am on the Contact Support Page', async () => {
+    await test.step('Given I am on the Contact FRF Confirmation Page', async () => {
       await contactFrfConfirmationPage.goto()
       await contactFrfConfirmationPage.assertOnContactFrfConfirmationPage()
     })
@@ -113,7 +113,7 @@ test.describe('Contact FRF Form Complete Tests - @frf_39', () => {
     contactFrfConfirmationPage,
     homePage,
   }) => {
-    await test.step('Given I am on the Contact Support Page', async () => {
+    await test.step('Given I am on the Contact FRF Confirmation Page', async () => {
       await contactFrfConfirmationPage.goto()
       await contactFrfConfirmationPage.assertOnContactFrfConfirmationPage()
     })

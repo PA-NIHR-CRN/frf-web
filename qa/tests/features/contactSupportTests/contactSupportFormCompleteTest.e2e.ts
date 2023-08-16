@@ -94,7 +94,7 @@ test.describe('Contact Research Support Form Complete Tests - @frf_68', () => {
     contactSupportConfirmationPage,
     feedbackFormPage,
   }) => {
-    await test.step('Given I am on the Contact Support Page', async () => {
+    await test.step('Given I am on the Contact Research Support Confirmation Page', async () => {
       await contactSupportConfirmationPage.goto()
       await contactSupportConfirmationPage.assertOnContactSupportConfirmationPage()
     })
@@ -111,7 +111,7 @@ test.describe('Contact Research Support Form Complete Tests - @frf_68', () => {
     contactSupportConfirmationPage,
     homePage,
   }) => {
-    await test.step('Given I am on the Contact Support Page', async () => {
+    await test.step('Given I am on the Contact Research Support Confirmation Page', async () => {
       await contactSupportConfirmationPage.goto()
       await contactSupportConfirmationPage.assertOnContactSupportConfirmationPage()
     })

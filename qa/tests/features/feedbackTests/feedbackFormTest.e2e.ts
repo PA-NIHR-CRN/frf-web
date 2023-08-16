@@ -126,7 +126,7 @@ test.describe('Feedback Form Tests - @frf_2', () => {
     await test.step('Given I have navigated to the Feedback Page', async () => {
       await feedbackFormPage.goto()
     })
-    await test.step('When I View the Contact Research Support Form', async () => {
+    await test.step('When I View the Feedback Form', async () => {
       await feedbackFormPage.assertOnFeedbackForm()
       await feedbackFormPage.assertFeedbackFormPresent()
     })
