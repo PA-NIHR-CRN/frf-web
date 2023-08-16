@@ -15,6 +15,8 @@ jest.mock('cookies-next', () => ({
   setCookie: jest.fn(),
 }))
 
+const mockedGetCookie = jest.mocked(getCookie)
+
 window.gtag = jest.fn()
 
 beforeEach(() => jest.resetAllMocks())
@@ -71,7 +73,7 @@ test('Hides the cookie banner when "Hide cookie message" is clicked', async () =
 
   // Ensure that the confirmation message is visible
   expect(screen.getByTestId('confirmation-message')).toBeInTheDocument()
-  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
+  mockedGetCookie.mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   // Click "Hide cookie message" to hide the entire cookie banner
   await userEvent.click(screen.getByRole('button', { name: /hide cookie message/i }))
@@ -84,7 +86,7 @@ test('Hides the cookie banner and redirects to the cookie policy page when "cook
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   await userEvent.click(screen.getByRole('button', { name: /accept additional cookies/i }))
-  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
+  mockedGetCookie.mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   await userEvent.click(screen.getByRole('link', { name: /cookie policy/i }))
 
@@ -155,7 +157,7 @@ test('Accepting or rejecting cookies via keyboard', async () => {
 
 test('Does not render the cookie banner if the GDPR cookie is already set', () => {
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
+  mockedGetCookie.mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   render(<CookieBanner content={mockCookieBannerContent} />)
 
@@ -175,7 +177,7 @@ test('Displays cookie banner via magic link', async () => {
   jest.spyOn(React, 'useRef').mockReturnValue({ current: { focus: mockFocus } })
 
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
+  mockedGetCookie.mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   render(<CookieBanner content={mockCookieBannerContent} />)
 
@@ -199,7 +201,7 @@ test('Hides cookie banner on page change if cookie was already set', async () =>
   expect(screen.getByLabelText('Cookies on Find, Recruit and Follow-Up')).toBeInTheDocument()
 
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
+  mockedGetCookie.mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   await act(() => mockRouter.push('/'))
 

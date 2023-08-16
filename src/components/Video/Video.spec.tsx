@@ -10,6 +10,8 @@ jest.mock('cookies-next', () => ({
   getCookie: jest.fn(),
 }))
 
+const mockedGetCookie = jest.mocked(getCookie)
+
 const testProps: VideoProps = {
   url: 'https://www.youtube.com/watch?v=ABCDEFG',
   title: 'Test Video',
@@ -37,7 +39,7 @@ test('Includes necessary attributes in the iframe element', () => {
 
 test('Updates domain if cookies have been previously accepted', () => {
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValueOnce(FRF_GDPR_COOKIE_ACCEPT_VALUE)
+  mockedGetCookie.mockReturnValueOnce(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   render(<Video {...testProps} />)
 
@@ -56,7 +58,7 @@ test('Updates domain after cookies are accepted', async () => {
 
 test('Updates domain after cookies are rejected', () => {
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
-  ;(getCookie as jest.Mock).mockReturnValueOnce(FRF_GDPR_COOKIE_ACCEPT_VALUE)
+  mockedGetCookie.mockReturnValueOnce(FRF_GDPR_COOKIE_ACCEPT_VALUE)
 
   render(<Video {...testProps} />)
 
