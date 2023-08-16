@@ -81,7 +81,6 @@ test.describe('Contact FRF Form Complete Tests - @frf_39', () => {
       await contactFrfPage.assertOnContactFrfPage()
       await contactFrfPage.enterValuesAllMandatory()
       await contactFrfPage.formSubmitButton.click()
-      await contactFrfConfirmationPage.gotoAlt()
     })
     await test.step('Then I am redirected to the Confirmation Page', async () => {
       await contactFrfConfirmationPage.assertOnContactFrfConfirmationPage()

@@ -68,7 +68,6 @@ test.describe('Contact DSP Form Complete Tests - @frf_29', () => {
     })
     await test.step('When I Click the Submit Button', async () => {
       await contactDspPage.formSubmitButton.click()
-      await contactDspConfirmationPage.goto('genomic-profile-register')
     })
     await test.step('Then I am redirected to the Confirmation Page', async () => {
       await contactDspConfirmationPage.assertOnContactDspConfirmationPage('genomic-profile-register')
@@ -82,7 +81,6 @@ test.describe('Contact DSP Form Complete Tests - @frf_29', () => {
       await contactDspPage.assertOnContactDspPage('Genomic Profile Register')
       await contactDspPage.enterValuesAllMandatory()
       await contactDspPage.formSubmitButton.click()
-      await contactDspConfirmationPage.gotoAlt()
     })
     await test.step('Then I am redirected to the Confirmation Page', async () => {
       await contactDspConfirmationPage.assertOnContactDspConfirmationPage('genomic-profile-register')
