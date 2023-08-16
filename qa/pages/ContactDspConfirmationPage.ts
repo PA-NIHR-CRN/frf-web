@@ -22,21 +22,23 @@ export default class ContactDspConfirmationPage {
   }
 
   //Page Methods
-  async goto() {
-    await this.page.goto('contact-research-support/confirmation/R00057')
+  async goto(dspPath: string) {
+    await this.page.goto(`contact-data-service-provider/${dspPath}/confirmation/D00003`)
   }
 
-  async assertOnContactDspConfirmationPage() {
+  async gotoAlt() {
+    await this.page.goto('contact-data-service-provider/genomic-profile-register/confirmation/D00004')
+  }
+
+  async assertOnContactDspConfirmationPage(dspPath: string) {
     await expect(this.headingPageTitle).toBeVisible()
     await expect(this.headingPageTitle).toHaveText('Thank you')
-    expect(this.page.url()).toContain('contact-research-support/confirmation/R')
+    expect(this.page.url()).toContain(`contact-data-service-provider/${dspPath}/confirmation/D`)
   }
 
-  async assertConfirmationPageTextBlock() {
+  async assertConfirmationPageTextBlock(dspName: string) {
     await expect(this.confirmTextBlocks.first()).toBeVisible()
-    await expect(this.confirmTextBlocks.nth(0)).toContainText(
-      'Your enquiry has been sent to the relevant research support team'
-    )
+    await expect(this.confirmTextBlocks.nth(0)).toContainText(`Your enquiry has been sent to ${dspName}.`)
     await expect(this.confirmTextBlocks.nth(1)).toContainText(
       'A copy of your enquiry will be sent to your email address.'
     )
@@ -55,7 +57,7 @@ export default class ContactDspConfirmationPage {
 
   async assertEnquiryRefNoFormat() {
     const actualRefNo = await this.getEnquiryRefNoString()
-    expect(actualRefNo).toMatch(/R\d{5}$/)
+    expect(actualRefNo).toMatch(/D\d{5}$/)
   }
 
   async getEnquiryRefNoString(): Promise<string | undefined> {
@@ -65,8 +67,8 @@ export default class ContactDspConfirmationPage {
   }
 
   async assertEnquiryRefNoIncrements(firstRefNo: string | undefined, secondRefNo: string | undefined) {
-    firstRefNo = extractRefNoDigits(firstRefNo, 'R')
-    secondRefNo = extractRefNoDigits(secondRefNo, 'R')
+    firstRefNo = extractRefNoDigits(firstRefNo, 'D')
+    secondRefNo = extractRefNoDigits(secondRefNo, 'D')
     let incrementedFirstRefNo = convertPromiseStringToNumber(firstRefNo)
     incrementedFirstRefNo++
     expect(incrementedFirstRefNo).toEqual(convertPromiseStringToNumber(secondRefNo))

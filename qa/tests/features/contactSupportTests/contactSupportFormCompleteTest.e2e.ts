@@ -116,7 +116,7 @@ test.describe('Contact Research Support Form Complete Tests - @frf_68', () => {
       await contactSupportConfirmationPage.assertOnContactSupportConfirmationPage()
     })
     await test.step('When I Click the Return to homepage Button provided', async () => {
-      await contactSupportConfirmationPage.assertContainsFeedbackLink()
+      await contactSupportConfirmationPage.assertContainsHomePageButton()
       await contactSupportConfirmationPage.returnToHomePageButton.click()
     })
     await test.step('Then I am taken to the Home Page', async () => {

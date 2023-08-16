@@ -119,7 +119,7 @@ test.describe('Contact FRF Form Complete Tests - @frf_39', () => {
       await contactFrfConfirmationPage.assertOnContactFrfConfirmationPage()
     })
     await test.step('When I Click the Return to homepage Button provided', async () => {
-      await contactFrfConfirmationPage.assertContainsFeedbackLink()
+      await contactFrfConfirmationPage.assertContainsHomePageButton()
       await contactFrfConfirmationPage.returnToHomePageButton.click()
     })
     await test.step('Then I am taken to the Home Page', async () => {

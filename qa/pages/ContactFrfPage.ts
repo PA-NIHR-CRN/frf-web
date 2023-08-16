@@ -5,8 +5,6 @@ import { convertPromiseStringToNumber } from '../utils/UtilFunctions'
 //Declare Page Objects
 export default class ContactFrfPage {
   readonly page: Page
-  readonly researchLeadExampleOption: string
-  readonly researchLeadChrisOption: string
   readonly headingPageTitle: Locator
   readonly contactFrfForm: Locator
   readonly contactFrfFormTxtBlocks: Locator
@@ -23,23 +21,6 @@ export default class ContactFrfPage {
   readonly formJobRoleInput: Locator
   readonly formOrgNameLbl: Locator
   readonly formOrgNameInput: Locator
-  readonly formIsYourOrgLbl: Locator
-  readonly formOrgRadioButtonGroup: Locator
-  readonly formOrgRadioButtonComm: Locator
-  readonly formOrgRadioButtonCommLbl: Locator
-  readonly formOrgRadioButtonNonComm: Locator
-  readonly formOrgRadioButtonNonCommLbl: Locator
-  readonly formWhichRegionLbl: Locator
-  readonly formResearchLeadGuideTxt: Locator
-  readonly formResearchLcrnLink: Locator
-  readonly formResearchLeadDropdown: Locator
-  readonly formResearchStudyInput: Locator
-  readonly formResearchStudyLbl: Locator
-  readonly formResearchProtocolInput: Locator
-  readonly formResearchProtocolLbl: Locator
-  readonly formResearchCpmsInput: Locator
-  readonly formResearchCpmsLbl: Locator
-  readonly formResearchCpmsGuideTxt: Locator
   readonly formEmailCopyTxt: Locator
   readonly formSubmitButton: Locator
   readonly formHiddenHoneyPotInput: Locator
@@ -82,25 +63,6 @@ export default class ContactFrfPage {
     this.formJobRoleInput = page.locator('input[id="jobRole"]')
     this.formOrgNameLbl = page.locator('label[id="organisationName-label"]')
     this.formOrgNameInput = page.locator('input[id="organisationName"]')
-    this.formIsYourOrgLbl = page.locator('legend[class="govuk-fieldset__legend govuk-fieldset__legend--s"]', {
-      hasText: 'Is your organisation',
-    })
-    this.formOrgRadioButtonGroup = this.formIsYourOrgLbl.locator('..').locator('div[data-module="govuk-radios"]')
-    this.formOrgRadioButtonComm = page.locator('input[value="commercial"]')
-    this.formOrgRadioButtonCommLbl = page.locator('label[for="organisationType"]')
-    this.formOrgRadioButtonNonComm = page.locator('input[value="nonCommercial"]')
-    this.formOrgRadioButtonNonCommLbl = page.locator('label[for="organisationType-1"]')
-    this.formWhichRegionLbl = page.locator('label[id="lcrn-label"]')
-    this.formResearchLeadGuideTxt = page.locator('div[id="lcrn-hint"]')
-    this.formResearchLcrnLink = page.locator('a[aria-label="Local Clinical Research Networks (Opens in a new window)"]')
-    this.formResearchLeadDropdown = page.locator('select[name="lcrn"]')
-    this.formResearchStudyInput = page.locator('input[id="studyTitle"]')
-    this.formResearchStudyLbl = page.locator('label[id="studyTitle-label"]')
-    this.formResearchProtocolInput = page.locator('input[id="protocolReference"]')
-    this.formResearchProtocolLbl = page.locator('label[id="protocolReference-label"]')
-    this.formResearchCpmsInput = page.locator('input[id="cpmsId"]')
-    this.formResearchCpmsLbl = page.locator('label[id="cpmsId-label"]')
-    this.formResearchCpmsGuideTxt = this.page.locator('div[id="cpmsId-hint"]')
     this.formEmailCopyTxt = this.contactFrfForm.locator('p')
     this.formSubmitButton = page.locator('button[data-module="govuk-button"]')
     this.formHiddenHoneyPotInput = page.locator('input[name="workEmailAddress"]')
@@ -121,10 +83,6 @@ export default class ContactFrfPage {
     this.validationFieldTelephoneError = page.locator('p[id="phoneNumber-error"]')
     this.validationSummaryTelephoneError = page.locator('a[href="#phoneNumber"]')
     this.genericErrorMsg = this.validationSummaryList.locator('li')
-
-    //Page Variables
-    this.researchLeadExampleOption = 'LCRN Example'
-    this.researchLeadChrisOption = 'Chris LCRN DA Test'
   }
 
   //Page Methods
