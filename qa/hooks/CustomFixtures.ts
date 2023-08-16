@@ -3,6 +3,8 @@ import { test as base } from '@playwright/test'
 
 import AccessibilityPage from '../pages/AccessibilityPage'
 import CommonItemsPage from '../pages/CommonItemsPage'
+import ContactDspConfirmationPage from '../pages/ContactDspConfirmationPage'
+import ContactDspPage from '../pages/ContactDspPage'
 import ContactFrfConfirmationPage from '../pages/ContactFrfConfirmationPage'
 import ContactFrfPage from '../pages/ContactFrfPage'
 import ContactSupportConfirmationPage from '../pages/ContactSupportConfirmationPage'
@@ -33,6 +35,8 @@ type CustomFixtures = {
   contactFrfConfirmationPage: ContactFrfConfirmationPage
   dataServiceProvidersPage: DataServiceProvidersPage
   researchSupportPage: ResearchSupportPage
+  contactDspPage: ContactDspPage
+  contactDspConfirmationPage: ContactDspConfirmationPage
 
   makeAxeBuilder: () => AxeBuilder
 }
@@ -96,6 +100,14 @@ export const test = base.extend<CustomFixtures>({
 
   researchSupportPage: async ({ page }, use) => {
     await use(new ResearchSupportPage(page))
+  },
+
+  contactDspPage: async ({ page }, use) => {
+    await use(new ContactDspPage(page))
+  },
+
+  contactDspConfirmationPage: async ({ page }, use) => {
+    await use(new ContactDspConfirmationPage(page))
   },
 
   makeAxeBuilder: async ({ page }, use) => {

@@ -3,16 +3,17 @@ import { expect, Locator, Page } from '@playwright/test'
 import { convertPromiseStringToNumber } from '../utils/UtilFunctions'
 
 //Declare Page Objects
-export default class ContactFrfPage {
+export default class ContactDspPage {
   readonly page: Page
   readonly researchLeadExampleOption: string
   readonly researchLeadChrisOption: string
   readonly headingPageTitle: Locator
-  readonly contactFrfForm: Locator
-  readonly contactFrfFormTxtBlocks: Locator
+  readonly contactDspForm: Locator
+  readonly contactDspFormTxtBlocks: Locator
   readonly formEnquiryDetailsLbl: Locator
   readonly formEnquiryDetailsTxt: Locator
   readonly formEnquiryDetailsGuideChars: Locator
+  readonly formEnquiryDetailsGuideTxt: Locator
   readonly formFullNameLbl: Locator
   readonly formFullNameInput: Locator
   readonly formEmailAddressLbl: Locator
@@ -46,17 +47,17 @@ export default class ContactFrfPage {
   readonly validationSummaryBox: Locator
   readonly validationSummaryHeading: Locator
   readonly validationSummaryList: Locator
-  readonly validationSummaryEnquiryDetailsError: Locator
-  readonly validationSummarySupportSummaryError: Locator
   readonly validationSummaryNameError: Locator
   readonly validationSummaryEmailError: Locator
   readonly validationSummaryJobRoleError: Locator
   readonly validationSummaryOrgNameError: Locator
+  readonly validationSummaryEnquiryDetailsError: Locator
   readonly validationFieldNameError: Locator
   readonly validationFieldEmailError: Locator
   readonly validationFieldJobRoleError: Locator
   readonly validationFieldOrgNameError: Locator
   readonly validationFieldEnquiryDetailsError: Locator
+  readonly validationFieldLeadRegionError: Locator
   readonly validationFieldTelephoneError: Locator
   readonly validationSummaryTelephoneError: Locator
   readonly genericErrorMsg: Locator
@@ -67,11 +68,12 @@ export default class ContactFrfPage {
 
     //Locators
     this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
-    this.contactFrfForm = page.locator('form[action="/api/forms/contact-frf-team"]')
-    this.contactFrfFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
-    this.formEnquiryDetailsLbl = page.locator('label[id="details-label"]')
-    this.formEnquiryDetailsTxt = page.locator('textarea[id="details"]')
+    this.contactDspForm = page.locator('form[method="post"]')
+    this.contactDspFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
+    this.formEnquiryDetailsLbl = page.locator('label[id="studyDescription-label"]')
+    this.formEnquiryDetailsTxt = page.locator('textarea[id="studyDescription"]')
     this.formEnquiryDetailsGuideChars = page.locator('div[id="with-hint-info"]')
+    this.formEnquiryDetailsGuideTxt = page.locator('div[id="studyDescription-hint"]')
     this.formFullNameLbl = page.locator('label[id="fullName-label"]')
     this.formFullNameInput = page.locator('input[id="fullName"]')
     this.formEmailAddressLbl = page.locator('label[id="emailAddress-label"]')
@@ -101,23 +103,23 @@ export default class ContactFrfPage {
     this.formResearchCpmsInput = page.locator('input[id="cpmsId"]')
     this.formResearchCpmsLbl = page.locator('label[id="cpmsId-label"]')
     this.formResearchCpmsGuideTxt = this.page.locator('div[id="cpmsId-hint"]')
-    this.formEmailCopyTxt = this.contactFrfForm.locator('p')
+    this.formEmailCopyTxt = this.contactDspForm.locator('p')
     this.formSubmitButton = page.locator('button[data-module="govuk-button"]')
     this.formHiddenHoneyPotInput = page.locator('input[name="workEmailAddress"]')
     this.validationSummaryBox = page.locator('div[class="govuk-error-summary"]')
     this.validationSummaryHeading = page.locator('h2[id="form-summary-errors"]')
     this.validationSummaryList = page.locator('ul[class="govuk-list govuk-error-summary__list"]')
-    this.validationSummaryEnquiryDetailsError = page.locator('a[href="#details"]')
-    this.validationSummarySupportSummaryError = page.locator('a[href="#supportDescription"]')
     this.validationSummaryNameError = page.locator('a[href="#fullName"]')
     this.validationSummaryEmailError = page.locator('a[href="#emailAddress"]')
     this.validationSummaryJobRoleError = page.locator('a[href="#jobRole"]')
     this.validationSummaryOrgNameError = page.locator('a[href="#organisationName"]')
+    this.validationSummaryEnquiryDetailsError = page.locator('a[href="#studyDescription"]')
     this.validationFieldNameError = page.locator('p[id="fullName-error"]')
     this.validationFieldEmailError = page.locator('p[id="emailAddress-error"]')
     this.validationFieldJobRoleError = page.locator('p[id="jobRole-error"]')
     this.validationFieldOrgNameError = page.locator('p[id="organisationName-error"]')
-    this.validationFieldEnquiryDetailsError = page.locator('p[id="details-error"]')
+    this.validationFieldEnquiryDetailsError = page.locator('p[id="studyDescription-error"]')
+    this.validationFieldLeadRegionError = page.locator('p[id="lcrn-error"]')
     this.validationFieldTelephoneError = page.locator('p[id="phoneNumber-error"]')
     this.validationSummaryTelephoneError = page.locator('a[href="#phoneNumber"]')
     this.genericErrorMsg = this.validationSummaryList.locator('li')
@@ -128,36 +130,35 @@ export default class ContactFrfPage {
   }
 
   //Page Methods
-  async goto() {
-    await this.page.goto('contact-frf-team')
+  async goto(path: string) {
+    await this.page.goto(path)
   }
 
-  async assertOnContactFrfPage() {
-    await expect(this.page).toHaveURL('contact-frf-team')
+  async assertOnContactDspPage(dspName: string) {
+    expect(this.page.url()).toContain('contact-data-service-provider/')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact Find, Recruit and Follow-up central team')
+    await expect(this.headingPageTitle).toHaveText(`Get in touch with ${dspName}`)
   }
 
-  async assertContactFrfFormPresent() {
-    await expect(this.contactFrfForm).toBeVisible()
+  async assertContactDspFormPresent() {
+    await expect(this.contactDspForm).toBeVisible()
   }
 
   async assertIntroText() {
-    await expect(this.contactFrfFormTxtBlocks.first()).toBeVisible()
-    await expect(this.contactFrfFormTxtBlocks.first()).toContainText(
-      'The Find, Recruit and Follow-up central team manage the content of this website'
+    await expect(this.contactDspFormTxtBlocks.first()).toBeVisible()
+    await expect(this.contactDspFormTxtBlocks.first()).toContainText(
+      'Upon submitting this form, your contact details and enquiry will be shared with'
     )
-    await expect(this.contactFrfFormTxtBlocks.nth(1)).toContainText(
-      'If you would like to get in touch with the team, please complete the form below'
-    )
-    await expect(this.contactFrfFormTxtBlocks.nth(2)).toHaveText('All fields are required unless marked as optional.')
+    await expect(this.contactDspFormTxtBlocks.nth(1)).toHaveText('All fields are required unless marked as optional.')
   }
 
   async assertEnquiryDetails() {
     await expect(this.formEnquiryDetailsLbl).toBeVisible()
+    await expect(this.formEnquiryDetailsGuideTxt).toBeVisible()
     await expect(this.formEnquiryDetailsTxt).toBeVisible()
     await expect(this.formEnquiryDetailsGuideChars).toBeVisible()
-    await expect(this.formEnquiryDetailsLbl).toHaveText('Please provide details of your enquiry')
+    await expect(this.formEnquiryDetailsLbl).toHaveText('Enquiry details')
+    await expect(this.formEnquiryDetailsGuideTxt).toContainText('Please outline which services you are interested in')
     await expect(this.formEnquiryDetailsGuideChars).toHaveText('You have 1200 characters remaining')
   }
 
@@ -232,11 +233,9 @@ export default class ContactFrfPage {
     await expect(this.validationSummaryNameError).toHaveText('Enter your full name')
     await expect(this.validationSummaryEmailError).toHaveText('Enter a valid email address')
     await expect(this.validationSummaryJobRoleError).toHaveText('Enter your job role')
-    await expect(this.validationSummaryOrgNameError).toHaveText(
-      'Enter your organisation name, Local Clinical Research Network or Devolved Nation'
-    )
+    await expect(this.validationSummaryOrgNameError).toHaveText('Enter your organisation name')
     await expect(this.validationSummaryEnquiryDetailsError).toHaveText(
-      'Enter a description of your study(ies) and/ or service(s) of interest'
+      'Enter a description of your study and/ or service of interest'
     )
   }
 
@@ -245,8 +244,8 @@ export default class ContactFrfPage {
       case 'enquiry':
         await expect(this.formEnquiryDetailsTxt).toBeFocused()
         break
-      case 'name':
-        await expect(this.formFullNameInput).toBeFocused()
+      case 'email':
+        await expect(this.formEmailAddressInput).toBeFocused()
         break
       case 'org':
         await expect(this.formOrgNameInput).toBeFocused()
@@ -265,11 +264,9 @@ export default class ContactFrfPage {
     await expect(this.validationFieldNameError).toContainText('Enter your full name')
     await expect(this.validationFieldEmailError).toContainText('Enter a valid email address')
     await expect(this.validationFieldJobRoleError).toContainText('Enter your job role')
-    await expect(this.validationFieldOrgNameError).toContainText(
-      'Enter your organisation name, Local Clinical Research Network or Devolved Nation'
-    )
+    await expect(this.validationFieldOrgNameError).toContainText('Enter your organisation name')
     await expect(this.validationFieldEnquiryDetailsError).toContainText(
-      'Enter a description of your study(ies) and/ or service(s) of interest'
+      'Enter a description of your study and/ or service of interest'
     )
   }
 
@@ -318,7 +315,7 @@ export default class ContactFrfPage {
     await this.formEmailAddressInput.type('chris.mcneill@nihr.ac.uk')
     await this.formJobRoleInput.type('Testing Job')
     await this.formOrgNameInput.type('Testing Org')
-    await this.formEnquiryDetailsTxt.type('Testing FRF Value')
+    await this.formEnquiryDetailsTxt.type('Testing DSP Value')
   }
 
   async assertEnquiryDetailsContent(expectedTextContent: string) {
@@ -336,9 +333,10 @@ export default class ContactFrfPage {
     )
   }
 
-  async assertOnContactFrfErrorPage() {
-    await expect(this.page).toHaveURL('contact-frf-team?fatal=1')
+  async assertOnContactDspErrorPage(dspName: string) {
+    expect(this.page.url()).toContain('contact-data-service-provider/')
+    expect(this.page.url()).toContain('?fatal=1')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact Find, Recruit and Follow-up central team')
+    await expect(this.headingPageTitle).toHaveText(`Get in touch with ${dspName}`)
   }
 }

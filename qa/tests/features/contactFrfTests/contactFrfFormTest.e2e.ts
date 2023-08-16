@@ -89,7 +89,7 @@ test.describe('Contact FRF Form Tests - @frf_75', () => {
     })
   })
 
-  test('The Contact FRF Form contains a Text Area to Enquiry Details - @frf_75_ac1_enquiry_input', async ({
+  test('The Contact FRF Form contains a Text Area to input Enquiry Details - @frf_75_ac1_enquiry_input', async ({
     contactFrfPage,
   }) => {
     await test.step('Given I have navigated to the Contact FRF Page', async () => {

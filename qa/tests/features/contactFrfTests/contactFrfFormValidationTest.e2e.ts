@@ -35,7 +35,7 @@ test.describe('Contact FRF Form Validation Tests - @frf_75', () => {
       await contactFrfPage.formSubmitButton.click()
     })
     await test.step('When I Click the Enquiry Details Validation Summary Message', async () => {
-      await contactFrfPage.validationEnquiryDetailsError.click()
+      await contactFrfPage.validationSummaryEnquiryDetailsError.click()
     })
     await test.step('Then the Enquiry Details Text Area has been focused', async () => {
       await contactFrfPage.assertValidationSummaryLinks('Enquiry')
