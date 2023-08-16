@@ -97,6 +97,7 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Dev)
         run: |
@@ -175,6 +176,7 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Test)
         run: |
@@ -253,6 +255,7 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Uat)
         run: |
@@ -331,6 +334,7 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Oat)
         run: |
@@ -409,6 +413,7 @@ jobs:
             GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
             GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Prod)
         run: |
