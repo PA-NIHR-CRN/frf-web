@@ -242,7 +242,6 @@ export default class FeedbackFormPage {
   }
 
   async assertGenericErrorMsg() {
-    await this.page.pause()
     await expect(this.genericErrorMsg).toBeVisible()
     await expect(this.genericErrorMsg).toHaveText(
       'An unexpected error occured whilst processing the form, please try again later.'
