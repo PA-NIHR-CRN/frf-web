@@ -26,10 +26,6 @@ export default class ContactFrfTeamConfirmationPage {
     await this.page.goto('contact-frf-team/confirmation/C00001')
   }
 
-  async gotoAlt() {
-    await this.page.goto('contact-frf-team/confirmation/C00002')
-  }
-
   async assertOnContactFrfConfirmationPage() {
     await expect(this.headingPageTitle).toBeVisible()
     await expect(this.headingPageTitle).toHaveText('Thank you')

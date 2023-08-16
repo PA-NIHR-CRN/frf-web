@@ -26,10 +26,6 @@ export default class ContactDspConfirmationPage {
     await this.page.goto(`contact-data-service-provider/${dspPath}/confirmation/D00003`)
   }
 
-  async gotoAlt() {
-    await this.page.goto('contact-data-service-provider/genomic-profile-register/confirmation/D00004')
-  }
-
   async assertOnContactDspConfirmationPage(dspPath: string) {
     await expect(this.headingPageTitle).toBeVisible()
     await expect(this.headingPageTitle).toHaveText('Thank you')
