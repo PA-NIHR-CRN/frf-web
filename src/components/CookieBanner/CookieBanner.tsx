@@ -5,7 +5,12 @@ import { MouseEventHandler, useEffect, useRef, useState } from 'react'
 
 import { TypeCookieBanner } from '@/@types/generated'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
-import { FRF_GDPR_COOKIE_ACCEPT_VALUE, FRF_GDPR_COOKIE_NAME, FRF_GDPR_COOKIE_REJECT_VALUE } from '@/constants/cookies'
+import {
+  COOKIE_SETTINGS_CHANGE_EVENT,
+  FRF_GDPR_COOKIE_ACCEPT_VALUE,
+  FRF_GDPR_COOKIE_NAME,
+  FRF_GDPR_COOKIE_REJECT_VALUE,
+} from '@/constants/cookies'
 import { getGDPRCookieExpiryDate } from '@/utils/date.utils'
 
 export type CookieBannerProps = {
@@ -31,11 +36,17 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
       if (url.includes('?change-settings=1')) {
         setView(CookieBannerView.Selection)
         regionRef?.current?.focus()
+      } else {
+        // Hide banner after navigating away from cookie policy page
+        const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
+        if (view === CookieBannerView.Selection && isCookieSet) {
+          setView(CookieBannerView.Hidden)
+        }
       }
     }
-    router.events.on('routeChangeStart', handleRouteChange)
-    return () => router.events.off('routeChangeStart', handleRouteChange)
-  }, [router])
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => router.events.off('routeChangeComplete', handleRouteChange)
+  }, [router, view])
 
   useEffect(() => {
     const isCookieSet = !!getCookie(FRF_GDPR_COOKIE_NAME)
@@ -71,6 +82,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
       ad_storage: 'granted',
       analytics_storage: 'granted',
     })
+    document.dispatchEvent(new CustomEvent(COOKIE_SETTINGS_CHANGE_EVENT, { detail: 1 }))
     updateQueryParams()
   }
 
@@ -81,6 +93,7 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
       ad_storage: 'denied',
       analytics_storage: 'denied',
     })
+    document.dispatchEvent(new CustomEvent(COOKIE_SETTINGS_CHANGE_EVENT, { detail: 0 }))
     updateQueryParams()
   }
 
