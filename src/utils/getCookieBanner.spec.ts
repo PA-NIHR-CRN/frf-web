@@ -1,6 +1,8 @@
 import { getCookie } from 'cookies-next'
 import { IncomingMessage } from 'http'
+import { Mock } from 'ts-mockery'
 
+import { TypeCookieBanner } from '@/@types/generated'
 import { FRF_GDPR_COOKIE_NAME } from '@/constants/cookies'
 import { contentfulService } from '@/lib/contentful'
 
@@ -8,6 +10,8 @@ import { getCookieBanner } from './getCookieBanner'
 
 jest.mock('@/lib/contentful')
 jest.mock('cookies-next')
+
+const mockedGetCookie = jest.mocked(getCookie)
 
 const mockRequest = {} as IncomingMessage
 
@@ -21,7 +25,7 @@ describe('getCookieBanner', () => {
   })
 
   it('should return null if GDPR cookie is set', async () => {
-    ;(getCookie as jest.Mock).mockReturnValue(true)
+    mockedGetCookie.mockReturnValue(true)
 
     const result = await getCookieBanner(mockRequest)
 
@@ -29,7 +33,7 @@ describe('getCookieBanner', () => {
   })
 
   it('should call contentfulService.getCookieBanner() if GDPR cookie is not set', async () => {
-    ;(getCookie as jest.Mock).mockReturnValue(false)
+    mockedGetCookie.mockReturnValue(false)
 
     await getCookieBanner(mockRequest)
 
@@ -37,9 +41,9 @@ describe('getCookieBanner', () => {
   })
 
   it('should return the result of contentfulService.getCookieBanner() if GDPR cookie is not set', async () => {
-    const mockContentfulData = { message: 'Cookie Banner Content' }
-    ;(getCookie as jest.Mock).mockReturnValue(false)
-    ;(contentfulService.getCookieBanner as jest.Mock).mockResolvedValue(mockContentfulData)
+    const mockContentfulData = Mock.of<TypeCookieBanner<undefined, ''>>({ fields: { title: 'Test cookie banner' } })
+    mockedGetCookie.mockReturnValue(false)
+    jest.mocked(contentfulService.getCookieBanner).mockResolvedValue(mockContentfulData)
 
     const result = await getCookieBanner(mockRequest)
 
