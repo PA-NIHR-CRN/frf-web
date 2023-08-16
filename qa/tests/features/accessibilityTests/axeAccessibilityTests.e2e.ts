@@ -148,7 +148,7 @@ test.describe('Contact Support Form Accessibility Tests - @access_ContactSupport
     let axeScanResults = await axeScanner.analyze()
     await test.step('Given I have navigated to a Contact Support Page', async () => {
       await contactSupportPage.goto()
-      await contactSupportPage.assertOnContactSupportForm()
+      await contactSupportPage.assertOnContactSupportPage()
     })
 
     await test.step('When I scan the Contact Support Page for Accessibility Errors', async () => {

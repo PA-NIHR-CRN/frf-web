@@ -48,6 +48,7 @@ export default class ProvidersPage {
   readonly dspNoResultsHeader: Locator
   readonly dspNoResultHelpMsg: Locator
   readonly dspNoResultHelpList: Locator
+  readonly dspContactSupportBtn: Locator
 
   //Filter Objects
   readonly dspFilterMobileBtnOpen: Locator
@@ -148,6 +149,7 @@ export default class ProvidersPage {
     this.dspNoResultsHeader = page.locator('h3[class="govuk-heading-l"]')
     this.dspNoResultHelpMsg = page.locator('p[id="improve-search-results"]')
     this.dspNoResultHelpList = page.locator('ul[aria-labelledby="improve-search-results"]')
+    this.dspContactSupportBtn = page.locator('a[class="govuk-button govuk-button--secondary"]')
 
     //Filter Locators
     this.dspFilterMobileBtnOpen = page.locator('a[id="show-filters"]')

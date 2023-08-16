@@ -61,7 +61,7 @@ test.describe('Home Page Smoke Tests - @frf_4', () => {
     await test.step('Then I can see the "Get Support for your research" section', async () => {
       await homePage.assertGetSupportSectionVisible()
     })
-    await test.step('And I can see the "Become a DSP" section', async () => {
+    await test.step('And I can see the "Organisations providing data services" section', async () => {
       await homePage.assertBecomeDspVisible()
     })
     await test.step('And both Sections have a Title', async () => {
