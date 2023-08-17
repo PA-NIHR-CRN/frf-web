@@ -6,7 +6,7 @@ declare namespace NodeJS {
     CONTENTFUL_PREVIEW_ACCESS_TOKEN: string
     CONTENTFUL_MANAGEMENT_ACCESS_TOKEN: string
     CONTENTFUL_ENVIRONMENT: 'dev' | 'test' | 'uat' | 'master'
-    CONTENTFUL_CACHE_TTL: number
+    CONTENTFUL_CACHE_TTL: string
     NEXT_REVALIDATE_TIME: string
     NEXT_PUBLIC_APP_ENV: 'dev' | 'test' | 'uat' | 'oat' | 'prod'
     GOOGLE_ANALYTICS_ID: string
