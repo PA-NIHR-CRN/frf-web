@@ -43,7 +43,6 @@ test.describe('DSP List Search Details Tests - @frf_14 @frf_14_details', () => {
       await providersPage.waitForListReload()
     })
     await test.step('Then the DSP list shows a single result', async () => {
-      await providersPage.page.pause()
       await providersPage.assertNumberOfDspResults(1)
     })
     await test.step('When I click the `View more details` button', async () => {

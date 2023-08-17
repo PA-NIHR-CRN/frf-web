@@ -20,7 +20,7 @@ export default class HomePage {
   readonly titleGetSupportSection: Locator
   readonly titleBecomeDspSection: Locator
   readonly additonalServicesSectionsDescText: Locator
-  readonly btnGetSupport: Locator
+  readonly btnContactSupport: Locator
   readonly btnBecomeDsp: Locator
 
   //Initialize Page Objects
@@ -61,7 +61,7 @@ export default class HomePage {
     this.additonalServicesSectionsDescText = page.locator(
       'div[class="flex flex-grow flex-col items-start justify-between pt-4"]'
     )
-    this.btnGetSupport = page.locator('a[class="govuk-button govuk-button--secondary mb-0 mt-2 text-left"]', {
+    this.btnContactSupport = page.locator('a[class="govuk-button govuk-button--secondary mb-0 mt-2 text-left"]', {
       hasText: 'Contact research support',
     })
     this.btnBecomeDsp = page.locator('a[class="govuk-button govuk-button--secondary mb-0 mt-2 text-left"]', {
@@ -150,7 +150,7 @@ export default class HomePage {
   }
 
   async assertGetSupportButtonVisible() {
-    await expect(this.btnGetSupport).toBeVisible()
+    await expect(this.btnContactSupport).toBeVisible()
   }
 
   async assertBecomeDspButtonVisible() {

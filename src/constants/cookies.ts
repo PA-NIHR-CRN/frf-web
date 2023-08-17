@@ -17,3 +17,8 @@ export const FRF_GDPR_COOKIE_REJECT_VALUE = 'Reject'
  * Number of months until GDPR consent cookie expires
  */
 export const FRF_GDPR_COOKIE_EXPIRY_MONTHS = 12
+
+/**
+ * Name of custom event for when a user changes their cookie settings
+ */
+export const COOKIE_SETTINGS_CHANGE_EVENT = 'cookieSettingsChanged'
