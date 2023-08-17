@@ -1,6 +1,6 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-import { numDaysBetween } from '../utils/UtilFunctions'
+import { confirmStringNotNull, numDaysBetween } from '../utils/UtilFunctions'
 
 //Declare Page Objects
 export default class ProvidersPage {
@@ -49,6 +49,9 @@ export default class ProvidersPage {
   readonly dspNoResultHelpMsg: Locator
   readonly dspNoResultHelpList: Locator
   readonly dspContactSupportBtn: Locator
+  readonly dspListSortDropdown: Locator
+  readonly dspListSortDropdownLbl: Locator
+  readonly dspListAllPageListItems: Locator
 
   //Filter Objects
   readonly dspFilterMobileBtnOpen: Locator
@@ -150,6 +153,9 @@ export default class ProvidersPage {
     this.dspNoResultHelpMsg = page.locator('p[id="improve-search-results"]')
     this.dspNoResultHelpList = page.locator('ul[aria-labelledby="improve-search-results"]')
     this.dspContactSupportBtn = page.locator('a[class="govuk-button govuk-button--secondary"]')
+    this.dspListSortDropdown = page.locator('select[id="order"]')
+    this.dspListSortDropdownLbl = page.locator('label[for="order"]')
+    this.dspListAllPageListItems = page.locator('ul[class="govuk-pagination__list"] li')
 
     //Filter Locators
     this.dspFilterMobileBtnOpen = page.locator('a[id="show-filters"]')
@@ -255,7 +261,7 @@ export default class ProvidersPage {
     }
   }
 
-  async assertDspListAlphabetical() {
+  async assertDspListAlphabetical(ordering: string) {
     await expect(this.dspListArticle).toBeVisible()
     await expect(this.dspResultHeader.nth(0)).toBeVisible()
     const titleElements = await this.dspResultTitle.all()
@@ -268,7 +274,11 @@ export default class ProvidersPage {
       }
     }
     const expectedTitleOrder = JSON.parse(JSON.stringify(actualTitleOrder))
-    expect(actualTitleOrder).toEqual(expectedTitleOrder.sort())
+    expectedTitleOrder.sort()
+    if (ordering.toLowerCase() == 'ascending') expect(actualTitleOrder).toEqual(expectedTitleOrder)
+    else {
+      expect(actualTitleOrder).toEqual(expectedTitleOrder.reverse())
+    }
   }
 
   async assertDspNameOrg() {
@@ -1116,5 +1126,110 @@ export default class ProvidersPage {
     await expect(this.dspListTypeDataList.nth(0).locator('li').nth(0)).toContainText(expectedTypeData, {
       ignoreCase: true,
     })
+  }
+
+  async assertDspSortDropdownPresent() {
+    await expect(this.dspListSortDropdown).toBeVisible()
+    await expect(this.dspListSortDropdownLbl).toBeVisible()
+    await expect(this.dspListSortDropdownLbl).toHaveText('Sort by')
+  }
+
+  async selectDspSortDropdownOption(option: string) {
+    switch (option.toLowerCase()) {
+      case 'ascending':
+        await this.dspListSortDropdown.selectOption({ value: 'a-z' })
+        break
+      case 'descending':
+        await this.dspListSortDropdown.selectOption({ value: 'z-a' })
+        break
+      case 'updated':
+        await this.dspListSortDropdown.selectOption({ value: 'updated' })
+        break
+      case 'published':
+        await this.dspListSortDropdown.selectOption({ value: 'published' })
+        break
+      default:
+        throw new Error(`${option} is not a valid Sort option`)
+    }
+  }
+
+  async assertSelectedSortOption(expectedOption: string) {
+    const selectedOptionText = await this.dspListSortDropdown.evaluate(
+      (node: HTMLSelectElement) => node.options[node.options.selectedIndex].textContent
+    )
+    let expectedOptionText: string
+    switch (expectedOption) {
+      case 'ascending':
+        expectedOptionText = 'Alphabetical (ascending)'
+        break
+      case 'descending':
+        expectedOptionText = 'Alphabetical (descending)'
+        break
+      case 'updated':
+        expectedOptionText = 'Recently updated'
+        break
+      case 'published':
+        expectedOptionText = 'Recently published'
+        break
+      default:
+        throw new Error(`${expectedOption} is not a valid Sort option`)
+    }
+    expect(selectedOptionText).toEqual(expectedOptionText)
+  }
+
+  async assertDspListRecentlyUpdated() {
+    const arrayOfResultDates = await this.gatherDspDateEpochNos('updated')
+    const arrayOfExpectedResults: number[] = []
+    arrayOfResultDates.forEach((result) => arrayOfExpectedResults.push(result))
+    //Expect Largest to Smallest as the more recent the date the Larger the Number
+    expect(arrayOfResultDates).toEqual(
+      arrayOfExpectedResults.sort(function (a, b) {
+        return b - a
+      })
+    )
+  }
+
+  async assertDspListRecentlyPublished() {
+    const arrayOfResultDates = await this.gatherDspDateEpochNos('published')
+    const arrayOfExpectedResults: number[] = []
+    arrayOfResultDates.forEach((result) => arrayOfExpectedResults.push(result))
+    //Expect Largest to Smallest as the more recent the date the Larger the Number
+    expect(arrayOfResultDates).toEqual(
+      arrayOfExpectedResults.sort(function (a, b) {
+        return b - a
+      })
+    )
+  }
+
+  async gatherDspDateEpochNos(dateType: string): Promise<number[]> {
+    await this.assertCurrentPage('1')
+    const arrayOfDates: number[] = []
+    if (dateType.toLowerCase() == 'updated') {
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultLastUpdatedValue.first().textContent())).getTime()
+      )
+      await this.dspListPageTwoOption.click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultLastUpdatedValue.nth(2).textContent())).getTime()
+      )
+      await this.dspListAllPageListItems.last().click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultLastUpdatedValue.last().textContent())).getTime()
+      )
+      return arrayOfDates
+    } else {
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultFirstPublishedValue.first().textContent())).getTime()
+      )
+      await this.dspListPageTwoOption.click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultFirstPublishedValue.nth(2).textContent())).getTime()
+      )
+      await this.dspListAllPageListItems.last().click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultFirstPublishedValue.last().textContent())).getTime()
+      )
+      return arrayOfDates
+    }
   }
 }

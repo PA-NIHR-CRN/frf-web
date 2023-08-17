@@ -91,9 +91,9 @@ export default class ContactDspPage {
   }
 
   async assertOnContactDspPage(dspName: string) {
-    expect(this.page.url()).toContain('contact-data-service-provider/')
     await expect(this.headingPageTitle).toBeVisible()
     await expect(this.headingPageTitle).toHaveText(`Get in touch with ${dspName}`)
+    expect(this.page.url()).toContain('contact-data-service-provider/')
   }
 
   async assertContactDspFormPresent() {
