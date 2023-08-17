@@ -9,6 +9,7 @@ import ContactFrfConfirmationPage from '../pages/ContactFrfConfirmationPage'
 import ContactFrfPage from '../pages/ContactFrfPage'
 import ContactSupportConfirmationPage from '../pages/ContactSupportConfirmationPage'
 import ContactSupportPage from '../pages/ContactSupportPage'
+import CookiePolicyPage from '../pages/CookiePolicyPage'
 import DataServiceProvidersPage from '../pages/DataServiceProvidersPage'
 import FeedbackConfirmationPage from '../pages/FeedbackFormConfirmationPage'
 import FeedbackFormPage from '../pages/FeedbackFormPage'
@@ -37,6 +38,7 @@ type CustomFixtures = {
   researchSupportPage: ResearchSupportPage
   contactDspPage: ContactDspPage
   contactDspConfirmationPage: ContactDspConfirmationPage
+  cookiePolicyPage: CookiePolicyPage
 
   makeAxeBuilder: () => AxeBuilder
 }
@@ -108,6 +110,10 @@ export const test = base.extend<CustomFixtures>({
 
   contactDspConfirmationPage: async ({ page }, use) => {
     await use(new ContactDspConfirmationPage(page))
+  },
+
+  cookiePolicyPage: async ({ page }, use) => {
+    await use(new CookiePolicyPage(page))
   },
 
   makeAxeBuilder: async ({ page }, use) => {
