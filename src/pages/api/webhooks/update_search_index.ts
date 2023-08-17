@@ -81,8 +81,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error('Wrong method')
     }
 
-    const authToken = (req.headers.authorization || '').split('Bearer ').at(1)
-
+    const authToken = (req.headers.authorization || '').split('Basic ').at(1)
     if (!authToken || authToken !== process.env.CONTENTFUL_WEBHOOK_API_KEY) {
       res.status(401).send('Unauthorised')
       return
