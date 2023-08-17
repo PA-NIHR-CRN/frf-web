@@ -77,6 +77,16 @@ const updateServiceProviderKeywords = async (entry: Entry<TypeServiceProviderSke
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
+    if (req.method !== 'POST') {
+      throw new Error('Wrong method')
+    }
+
+    const authToken = (req.headers.authorization || '').split('Basic ').at(1)
+    if (!authToken || authToken !== process.env.CONTENTFUL_WEBHOOK_API_KEY) {
+      res.status(401).send('Unauthorised')
+      return
+    }
+
     let searchKeywords
     if (req.body.contentType === 'serviceProvider') {
       const entry = await contentfulService.getEntryById<TypeServiceProviderSkeleton>(req.body.id)

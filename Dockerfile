@@ -91,11 +91,12 @@ ENV CONTENTFUL_ENVIRONMENT $CONTENTFUL_ENVIRONMENT
 ENV NEXT_REVALIDATE_TIME $NEXT_REVALIDATE_TIME
 ENV NEXT_PUBLIC_APP_ENV $APP_ENV
 
-# Any variables not required at build time can be inserted via the task definition genreation step in the workflow
+# Any variables not required at build time can be inserted via the task definition generation step in the workflow
 ENV GOOGLE_ANALYTICS_ID = ''
 ENV GOOGLE_ANALYTICS_AUTH = ''
 ENV GOOGLE_ANALYTICS_PREVIEW = ''
 ENV DATABASE_URL = ''
+ENV CONTENTFUL_WEBHOOK_API_KEY = ''
 
 EXPOSE 3000
 
