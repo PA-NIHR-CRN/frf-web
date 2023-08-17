@@ -40,7 +40,7 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I should see the list of DSPs is sorted Alphabetically - @frf_11_ac1_2', async ({
+  test('As a user I should see the list of DSPs is sorted Alphabetically by default - @frf_11_ac1_2', async ({
     homePage,
     providersPage,
   }) => {
@@ -53,8 +53,11 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     await test.step('And I am on the Providers Page', async () => {
       await providersPage.assertOnProvidersPage()
     })
-    await test.step('Then the DSPs are Shown in Alphabetical Order', async () => {
-      await providersPage.assertDspListAlphabetical()
+    await test.step('Then Sort Option `Alphabetical (ascending)` is Selected by Default', async () => {
+      await providersPage.assertSelectedSortOption('ascending')
+    })
+    await test.step('And the DSPs are Shown in Alphabetical Order (Ascending)', async () => {
+      await providersPage.assertDspListAlphabetical('Ascending')
     })
   })
 

@@ -25,6 +25,14 @@ export function convertPromiseStringToNumber(inputString: string | undefined): n
   return inputAsNumber
 }
 
+export function confirmStringNotNull(inputString: string | null): string {
+  if (inputString != null) {
+    return inputString
+  } else {
+    throw new Error(`The input string is null`)
+  }
+}
+
 export function extractRefNoDigits(inputString: string | undefined, charToBeReplaced: string): string | undefined {
   return inputString?.replaceAll(charToBeReplaced, '')
 }
