@@ -15,7 +15,7 @@ Merges to `main` branch will trigger a staged deployment workflow in `.github/wo
 NextJs SSG (Static site generation) requires environment variables to be available at build time before `npm run build` which means we have to bake in these variables as build args into newly built images for each deployment rather than using run time environment variables.
 
 Build
-`docker build --build-arg CONTENTFUL_SPACE_ID=XXX --build-arg CONTENTFUL_ACCESS_TOKEN=XXX --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=XXX --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=XXX --build-arg CONTENTFUL_PREVIEW_MODE=XXX --build-arg CONTENTFUL_ENVIRONMENT=XXX --build-arg NEXT_REVALIDATE_TIME=XXX --build-arg APP_ENV=XXX . -t frf-web`
+`docker build --build-arg CONTENTFUL_SPACE_ID=XXX --build-arg CONTENTFUL_ACCESS_TOKEN=XXX --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=XXX --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=XXX --build-arg CONTENTFUL_PREVIEW_MODE=XXX --build-arg CONTENTFUL_ENVIRONMENT=XXX --build-arg CONTENTFUL_CACHE_TTL=XXX --build-arg NEXT_REVALIDATE_TIME=XXX --build-arg APP_ENV=XXX . -t frf-web`
 
 Run
 `docker run -e DATABASE_URL=XXX -e GOOGLE_ANALYTICS_ID=xxx -e GOOGLE_ANALYTICS_AUTH=xxx -e GOOGLE_ANALYTICS_PREVIEW=xxx -p 3000:3000 frf-web`

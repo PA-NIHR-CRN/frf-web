@@ -2,6 +2,8 @@ import { strict as assert } from 'assert'
 import { createClient as createContentClient } from 'contentful'
 import { createClient as createManagementClient } from 'contentful-management'
 
+import { axios } from '@/lib/axios'
+
 import { ContentfulService } from './contentfulService'
 
 const {
@@ -32,6 +34,19 @@ const contentClient = createContentClient({
 const managementClient = createManagementClient({
   accessToken: CONTENTFUL_MANAGEMENT_ACCESS_TOKEN,
   space: CONTENTFUL_SPACE_ID,
+  adapter: (config) => {
+    config.adapter = undefined
+    return axios.request({
+      ...config,
+      cache: {
+        interpretHeader: false,
+        cachePredicate: {
+          statusCheck: (status) => status === 200,
+        },
+        ttl: Number(process.env.CONTENTFUL_CACHE_TTL) * 1000,
+      },
+    })
+  },
 })
 
 export const contentfulService = new ContentfulService(

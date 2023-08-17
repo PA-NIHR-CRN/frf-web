@@ -28,6 +28,7 @@
     "@types/react-dom": "18.2.4",
     "aws-sdk": "^2.1413.0",
     "axios": "^1.4.0",
+    "axios-cache-interceptor": "^1.2.0",
     "clsx": "^1.2.1",
     "contentful": "^10.2.3",
     "contentful-management": "^10.35.6",
