@@ -33,6 +33,18 @@ export interface TypePageFields {
      * @localized false
      */
     sidebar?: EntryFieldTypes.EntryLink<TypePromoBlockSkeleton>;
+    /**
+     * Field type definition for field 'metaTitle' (Meta: Title)
+     * @name Meta: Title
+     * @localized false
+     */
+    metaTitle?: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'metaDescription' (Meta: Description)
+     * @name Meta: Description
+     * @localized false
+     */
+    metaDescription?: EntryFieldTypes.Symbol;
 }
 
 /**
@@ -41,7 +53,7 @@ export interface TypePageFields {
  * @type {TypePageSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:16:36.460Z
- * @version 23
+ * @version 27
  */
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
 /**
@@ -50,6 +62,6 @@ export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
  * @type {TypePage}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:16:36.460Z
- * @version 23
+ * @version 27
  */
 export type TypePage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePageSkeleton, Modifiers, Locales>;
