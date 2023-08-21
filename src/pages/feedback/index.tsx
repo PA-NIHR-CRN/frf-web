@@ -49,6 +49,7 @@ export default function Feedback({ query }: FeedbackProps) {
           <div className="govuk-grid-column-two-thirds-from-desktop">
             <h2 className="govuk-heading-l">Let us know what you think</h2>
             <p>The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.</p>
+            <p>All fields are required unless marked as optional.</p>
             <Form
               method="post"
               action="/api/forms/feedback"
