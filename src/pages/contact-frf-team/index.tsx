@@ -99,7 +99,6 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
                 />
                 <TextInput
                   label="Organisation name"
-                  hint="For research support colleagues, please specify where you are based (CRNCC, Local Clinical Research Network or Devolve Nation)"
                   errors={errors}
                   defaultValue={defaultValues?.organisationName}
                   {...register('organisationName')}

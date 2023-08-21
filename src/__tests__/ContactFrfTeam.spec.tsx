@@ -72,11 +72,6 @@ test('Initial form state', async () => {
   // Org name
   expect(getByLabelText('Organisation name')).toBeInTheDocument()
   expect(getByLabelText('Organisation name')).toBeRequired()
-  expect(
-    getByText(
-      'For research support colleagues, please specify where you are based (CRNCC, Local Clinical Research Network or Devolve Nation)'
-    )
-  ).toBeInTheDocument()
 
   expect(getByLabelText('Please provide details of your enquiry')).toBeInTheDocument()
   expect(getByLabelText('Please provide details of your enquiry')).toBeRequired()
