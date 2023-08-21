@@ -77,6 +77,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
               If you would like to access this support please complete the form below and a professional from the
               relevant research support infrastructure will get in touch to respond to your request
             </p>
+            <p>All fields are required unless marked as optional.</p>
             <Form
               method="post"
               action="/api/forms/contact-research-support"

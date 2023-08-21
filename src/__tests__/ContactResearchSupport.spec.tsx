@@ -51,6 +51,8 @@ test('Initial form state', async () => {
     )
   ).toBeInTheDocument()
 
+  expect(getByText('All fields are required unless marked as optional.')).toBeInTheDocument()
+
   expect(getByRole('group', { name: 'About your enquiry' })).toBeInTheDocument()
 
   // Is your enquiry about
