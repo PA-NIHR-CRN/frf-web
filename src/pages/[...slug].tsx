@@ -14,7 +14,7 @@ export type GenericPageProps = InferGetStaticPropsType<typeof getStaticProps>
 export default function GenericPage({ fields }: GenericPageProps) {
   return (
     <>
-      <NextSeo title={`${fields.title} - Find, Recruit and Follow-up`} />
+      <NextSeo title={fields.metaTitle} description={fields.metaDescription} />
       <Container>
         <article aria-labelledby={`article-${fields.slug}-title`}>
           <div className="govuk-grid-row">
