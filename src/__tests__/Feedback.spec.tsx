@@ -40,6 +40,8 @@ test('Initial form state', async () => {
     screen.getByText('The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.')
   ).toBeInTheDocument()
 
+  expect(getByText('All fields are required unless marked as optional.')).toBeInTheDocument()
+
   expect(screen.getAllByRole('group')).toHaveLength(3)
 
   // How helpful was the Find, Recruit and Follow-up (FRF) website?
