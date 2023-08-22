@@ -9,7 +9,7 @@ import { Footer } from '../Footer/Footer'
 import { Header } from '../Header/Header'
 import { Panel } from '../Panel/Panel'
 import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
-import { PreviewBanner } from '../PreviewBanner/PreviewBanner'
+import { WarningBanner } from '../WarningBanner/WarningBanner'
 
 const primaryFont = Roboto({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-primary' })
 
@@ -28,7 +28,7 @@ export function RootLayout({ children, backLink, isPreviewMode, cookieBanner }: 
   return (
     <div className={`${primaryFont.variable} font-sans`}>
       {cookieBanner && <CookieBanner content={cookieBanner} />}
-      <PreviewBanner isPreviewMode={!!isPreviewMode} />
+      <WarningBanner isPreviewMode={!!isPreviewMode} isTestEnvironment={process.env.NEXT_PUBLIC_APP_ENV === 'uat'} />
       <Header />
       <PhaseBanner phase="Beta">
         This is a new service – your{' '}
