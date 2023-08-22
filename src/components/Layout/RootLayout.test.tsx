@@ -44,7 +44,7 @@ test('Adds a class to the body to detect js is enabled', () => {
   expect(document.body.classList.contains('js-enabled')).toBeTruthy()
 })
 
-test('Displays a preview banner when preview mode is enabled', () => {
+test('Displays a preview warning banner when preview mode is enabled', () => {
   render(
     <RootLayout isPreviewMode>
       <h1>Service Provider Detail Page</h1>
@@ -53,6 +53,18 @@ test('Displays a preview banner when preview mode is enabled', () => {
   expect(
     screen.getByText('You are viewing the preview site, which includes draft content (not for onwards sharing).')
   ).toBeInTheDocument()
+})
+
+test('Displays a test site warning banner in the UAT environment', () => {
+  const oldAppEnv = process.env.NEXT_PUBLIC_APP_ENV
+  process.env.NEXT_PUBLIC_APP_ENV = 'uat'
+  render(
+    <RootLayout>
+      <h1>Service Provider Detail Page</h1>
+    </RootLayout>
+  )
+  expect(screen.getByText('You are viewing the test site.')).toBeInTheDocument()
+  process.env.NEXT_PUBLIC_APP_ENV = oldAppEnv
 })
 
 test('Displays the cookie banner', () => {
