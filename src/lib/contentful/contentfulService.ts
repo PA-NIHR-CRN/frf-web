@@ -6,8 +6,8 @@ import {
   TypeCookieBannerSkeleton,
   TypeEmailContactFields,
   TypeEmailContactSkeleton,
+  TypeEmailTemplateContactFrfCentralTeamSkeleton,
   TypeEmailTemplateFeedbackSkeleton,
-  TypeEmailTemplateSkeleton,
   TypeHomepageSkeleton,
   TypePageSkeleton,
   TypeServiceProviderSkeleton,
@@ -16,6 +16,8 @@ import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds } from '@/constants'
 
 export type FilterOptions = Awaited<ReturnType<ContentfulService['getProviderFilterOptionValues']>>
+
+export type EmailTemplateTypes = 'emailTemplateFeedback' | 'emailTemplateContactFrfCentralTeam'
 
 export class ContentfulService {
   constructor(
@@ -151,17 +153,15 @@ export class ContentfulService {
     return entries.items.length ? entries.items : []
   }
 
-  async getEmailTemplateFeedback() {
-    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypeEmailTemplateFeedbackSkeleton>({
-      content_type: 'emailTemplateFeedback',
-      limit: 1,
-    })
-    return entries.items.length ? entries.items[0] : null
-  }
+  async getEmailTemplateByType<T extends EmailTemplateTypes>(type: T) {
+    type EmailTemplate = T extends 'emailTemplateFeedback'
+      ? TypeEmailTemplateFeedbackSkeleton
+      : T extends 'emailTemplateContactFrfCentralTeam'
+      ? TypeEmailTemplateContactFrfCentralTeamSkeleton
+      : TypeEmailTemplateContactFrfCentralTeamSkeleton
 
-  async getEmailTemplateContactFrfTeam() {
-    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypeEmailTemplateSkeleton>({
-      content_type: 'emailTemplate',
+    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<EmailTemplate>({
+      content_type: type,
       limit: 1,
     })
     return entries.items.length ? entries.items[0] : null

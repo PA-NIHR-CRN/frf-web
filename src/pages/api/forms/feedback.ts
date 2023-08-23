@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Send email
     if (req.body.emailAddress) {
-      const emailTemplate = await contentfulService.getEmailTemplateFeedback()
+      const emailTemplate = await contentfulService.getEmailTemplateByType('emailTemplateFeedback')
 
       if (emailTemplate) {
         const messages = getNotificationMessages({ ...req.body, referenceNumber }, emailTemplate.fields)

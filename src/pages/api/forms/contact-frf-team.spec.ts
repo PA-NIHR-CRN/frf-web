@@ -2,11 +2,10 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 import { Mock } from 'ts-mockery'
 
-import { EMAIL_FRF_INBOX } from '@/constants'
-import { emailService } from '@/lib/email'
+import { emailServiceV2 as emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
-import { defaultMock } from '@/mocks/contactResearchSupport'
+import { defaultMock } from '@/mocks/contactFrfCentralTeam'
 import { prismaMock } from '@/mocks/prisma'
 import { setupMockServer } from '@/utils'
 import { ContactFrfTeamInputs } from '@/utils/schemas/contact-frf-team.schema'
@@ -92,10 +91,19 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   const [emailOne, emailTwo] = sendEmailSpy.mock.calls
 
-  expect(emailOne[0].to).toBe(EMAIL_FRF_INBOX)
+  expect(emailOne[0].to).toEqual(['frfteam@nihr.ac.uk'])
   expect(emailOne[0].templateData.referenceNumber).toEqual('C00999')
-  expect(emailTwo[0].to).toBe('testemail@nihr.ac.uk')
+  expect(emailOne[0].templateData.signatureText).toEqual('<p><b>Find, Recruit and Follow-up</b></p>')
+  expect(emailOne[0].templateData.signatureLogo).toEqual(
+    'https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png'
+  )
+
+  expect(emailTwo[0].to).toEqual(['testemail@nihr.ac.uk'])
   expect(emailTwo[0].templateData.referenceNumber).toEqual('C00999')
+  expect(emailTwo[0].templateData.signatureText).toEqual('<p><b>Find, Recruit and Follow-up</b></p>')
+  expect(emailTwo[0].templateData.signatureLogo).toEqual(
+    'https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png'
+  )
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {

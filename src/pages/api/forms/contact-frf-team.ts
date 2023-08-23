@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
-import { emailService } from '@/lib/email'
+import { contentfulService } from '@/lib/contentful'
+import { emailServiceV2 as emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { getNotificationMessages } from '@/utils/email/contact-frf-team/messages.utils'
@@ -36,8 +37,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     // Send emails
-    const messages = getNotificationMessages({ ...req.body, referenceNumber })
-    await Promise.all(messages.map(emailService.sendEmail))
+    if (req.body.emailAddress) {
+      const emailTemplate = await contentfulService.getEmailTemplateByType('emailTemplateContactFrfCentralTeam')
+
+      if (emailTemplate) {
+        const messages = getNotificationMessages({ ...req.body, referenceNumber }, emailTemplate.fields)
+        await Promise.all(messages.map(emailService.sendEmail))
+      }
+    }
 
     res.redirect(302, `/contact-frf-team/confirmation/${referenceNumber}`)
   } catch (error) {
