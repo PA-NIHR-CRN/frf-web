@@ -6,6 +6,8 @@ import {
   TypeCookieBannerSkeleton,
   TypeEmailContactFields,
   TypeEmailContactSkeleton,
+  TypeEmailTemplateFeedbackSkeleton,
+  TypeEmailTemplateSkeleton,
   TypeHomepageSkeleton,
   TypePageSkeleton,
   TypeServiceProviderSkeleton,
@@ -147,6 +149,22 @@ export class ContentfulService {
       order: ['fields.name'],
     })
     return entries.items.length ? entries.items : []
+  }
+
+  async getEmailTemplateFeedback() {
+    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypeEmailTemplateFeedbackSkeleton>({
+      content_type: 'emailTemplateFeedback',
+      limit: 1,
+    })
+    return entries.items.length ? entries.items[0] : null
+  }
+
+  async getEmailTemplateContactFrfTeam() {
+    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<TypeEmailTemplateSkeleton>({
+      content_type: 'emailTemplate',
+      limit: 1,
+    })
+    return entries.items.length ? entries.items[0] : null
   }
 
   static getOrderFilter(orderType?: OrderType) {

@@ -44,7 +44,7 @@ export interface TypePageFields {
      * @name Meta: Description
      * @localized false
      */
-    metaDescription?: EntryFieldTypes.Symbol;
+    metaDescription?: EntryFieldTypes.Text;
 }
 
 /**
@@ -53,7 +53,7 @@ export interface TypePageFields {
  * @type {TypePageSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:16:36.460Z
- * @version 27
+ * @version 37
  */
 export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
 /**
@@ -62,6 +62,6 @@ export type TypePageSkeleton = EntrySkeletonType<TypePageFields, "page">;
  * @type {TypePage}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:16:36.460Z
- * @version 27
+ * @version 37
  */
 export type TypePage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypePageSkeleton, Modifiers, Locales>;

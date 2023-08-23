@@ -66,7 +66,7 @@ export interface TypeHomepageFields {
      * @name Meta: Description
      * @localized false
      */
-    metaDescription?: EntryFieldTypes.Symbol;
+    metaDescription?: EntryFieldTypes.Text;
 }
 
 /**
@@ -75,7 +75,7 @@ export interface TypeHomepageFields {
  * @type {TypeHomepageSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 53
+ * @version 61
  */
 export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepage">;
 /**
@@ -84,6 +84,6 @@ export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepa
  * @type {TypeHomepage}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 53
+ * @version 61
  */
 export type TypeHomepage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeHomepageSkeleton, Modifiers, Locales>;
