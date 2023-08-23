@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 import { Mock } from 'ts-mockery'
 
-import { emailService } from '@/lib/email'
+import { emailServiceV2 as emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
-import { defaultMock } from '@/mocks/contactResearchSupport'
+import { defaultMock } from '@/mocks/feedback'
 import { prismaMock } from '@/mocks/prisma'
 import { setupMockServer } from '@/utils'
 import { FeedbackInputs } from '@/utils/schemas/feedback.schema'
@@ -86,9 +86,13 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   const [emailOne] = sendEmailSpy.mock.calls
 
-  expect(emailOne[0].to).toBe('frfteam@nihr.ac.uk')
+  expect(emailOne[0].to).toEqual(['frfteam@nihr.ac.uk'])
   expect(emailOne[0].templateData.referenceNumber).toEqual('F00001')
   expect(emailOne[0].templateData.fullName).toEqual('Test user')
+  expect(emailOne[0].templateData.signatureText).toEqual('<p><b>Find, Recruit and Follow-up</b></p>')
+  expect(emailOne[0].templateData.signatureLogo).toEqual(
+    'https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png'
+  )
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {

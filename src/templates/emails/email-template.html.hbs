@@ -1,0 +1,26 @@
+<html lang='en'>
+  <body>
+    {{! Main content }}
+    <div>
+      {{> bodyHtml }}
+    </div>
+
+    <br />
+
+    {{! Email signature }}
+    <div>
+      {{> signatureText}}
+      {{#if signatureLogo}}
+        <table style='width:540px;border-collapse:collapse'>
+          <tbody>
+            <tr>
+              <td style='width:162px;'>
+                <p><img src='{{signatureLogo}}' alt='NIHRLogo' width='206' class='CToWUd' data-bit='iit' /></p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      {{/if}}
+    </div>
+  </body>
+</html>

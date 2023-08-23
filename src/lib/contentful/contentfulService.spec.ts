@@ -2,7 +2,7 @@ import type { ContentfulClientApi, Entry } from 'contentful'
 import type { ClientAPI as ManagementClientApi, Environment, Space } from 'contentful-management'
 import { Mock } from 'ts-mockery'
 
-import { TypeHomepage, TypeServiceProvider } from '@/@types/generated'
+import { TypeEmailTemplate, TypeEmailTemplateFeedback, TypeHomepage, TypeServiceProvider } from '@/@types/generated'
 
 import { ContentfulService } from './contentfulService'
 
@@ -17,9 +17,19 @@ const mockHomepage = Mock.of<TypeHomepage<undefined, ''>>({
   fields: {},
 })
 
+const mockEmailTemplate = Mock.of<TypeEmailTemplate<undefined, ''>>({
+  fields: {},
+})
+
+const mockEmailTemplateFeedback = Mock.of<TypeEmailTemplateFeedback<undefined, ''>>({
+  fields: {},
+})
+
 const contentTypeMocks: Record<string, Entry> = {
   homepage: mockHomepage,
   serviceProvider: mockServiceProvider,
+  emailTemplate: mockEmailTemplate,
+  emailTemplateFeedback: mockEmailTemplateFeedback,
 }
 
 const mockEnvironment = Mock.of<Environment>({
@@ -173,6 +183,21 @@ describe('ContentfulService', () => {
       expect(mockContentClient.getEntries).toHaveBeenCalledWith({
         limit: 1,
         content_type: 'homepage',
+      })
+
+      expect(entry).toBeDefined()
+    })
+  })
+
+  describe('getEmailTemplateFeedback', () => {
+    it('returns content for the email template', async () => {
+      const [contentfulService, mockContentClient] = setupContentfulService()
+
+      const entry = await contentfulService.getEmailTemplateFeedback()
+
+      expect(mockContentClient.getEntries).toHaveBeenCalledWith({
+        limit: 1,
+        content_type: 'emailTemplateFeedback',
       })
 
       expect(entry).toBeDefined()
