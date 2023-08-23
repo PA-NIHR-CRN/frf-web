@@ -61,7 +61,9 @@
         "serviceDescriptionRecruit": "Enabling individuals identified by data analysis to be approached about taking part in research.",
         "serviceDescriptionFollowUp": "Collecting participant specific events and outcomes by matching to existing data sets.",
         "signPostDescription1": "Need help finding appropriate data services, or any other part of the UK journey to getting your study started? The UK offers multiple services and teams of professionals who can support you.",
-        "signPostDescription2": "If you provide services that support Find, Recruit or Follow-up activties and would be interested in inclusion within this website, we would love to hear from you."
+        "signPostDescription2": "If you provide services that support Find, Recruit or Follow-up activties and would be interested in inclusion within this website, we would love to hear from you.",
+        "metaTitle": "Homepage Title",
+        "metaDescription": "Homepage Description"
       }
     }
   ]

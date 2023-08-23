@@ -24,10 +24,12 @@ export default function Home({
   serviceDescriptionFollowUp,
   signPostDescription1,
   signPostDescription2,
+  metaTitle,
+  metaDescription,
 }: HomepageProps) {
   return (
     <>
-      <NextSeo title="Welcome to Find, Recruit and Follow-up" />
+      <NextSeo title={metaTitle} description={metaDescription} />
       {/* Title, Description & Video */}
       <Container>
         <section className="flex flex-wrap items-center pt-1 lg:flex-nowrap lg:gap-4 lg:pb-3">

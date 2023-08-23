@@ -13,6 +13,15 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
+jest.mock('next/head', () => {
+  return {
+    __esModule: true,
+    default: ({ children }: { children: unknown }) => {
+      return children
+    },
+  }
+})
+
 test('Displays the Home page', async () => {
   server.use(
     rest.all(`${API_URL}/entries`, async (req, res, ctx) => {
@@ -20,6 +29,8 @@ test('Displays the Home page', async () => {
       return res(ctx.status(200), ctx.json(contentType === 'homepage' ? successMock : cookieBannerMock))
     })
   )
+
+  const mockData = successMock.items[0].fields
 
   const { props } = await getStaticProps()
 
@@ -29,7 +40,19 @@ test('Displays the Home page', async () => {
     </RootLayout>
   )
 
-  const mockData = successMock.items[0].fields
+  // Page title
+  expect(document.title).toBe(mockData.metaTitle)
+
+  // Meta data
+  expect(document.querySelector('meta[name=description]')?.attributes.getNamedItem('content')?.value).toBe(
+    mockData.metaDescription
+  )
+  expect(document.querySelector("meta[property='og:description']")?.attributes.getNamedItem('content')?.value).toBe(
+    mockData.metaDescription
+  )
+  expect(document.querySelector("meta[property='og:title']")?.attributes.getNamedItem('content')?.value).toBe(
+    mockData.metaTitle
+  )
 
   // Title + Description
   // expect(screen.getByRole('heading', { name: mockData.title, level: 2 }))
