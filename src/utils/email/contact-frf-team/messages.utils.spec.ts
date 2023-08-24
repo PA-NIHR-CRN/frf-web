@@ -1,7 +1,7 @@
 import { BLOCKS, Document } from '@contentful/rich-text-types'
 
 import { TypeEmailTemplateContactFrfCentralTeam } from '@/@types/generated'
-import { EmailArgs } from '@/lib/email/emailServiceV2'
+import { EmailArgs } from '@/lib/email/emailService'
 
 import { getNotificationMessages, MessageData } from './messages.utils'
 

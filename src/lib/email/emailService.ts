@@ -1,5 +1,5 @@
 import { SES } from 'aws-sdk'
-import * as fs from 'fs'
+import fs from 'fs'
 import handlebars from 'handlebars'
 import path from 'path'
 
@@ -8,46 +8,40 @@ import { EMAIL_CHARSET, EMAIL_FRF_INBOX } from '@/constants'
 handlebars.registerHelper('eq', (a, b) => a == b)
 
 export type EmailArgs = {
-  to: string
+  to: string[]
   subject: string
-  templateName:
-    | 'support-request'
-    | 'request-confirmation'
-    | 'feedback'
-    | 'data-service-provider/dsp-confirmation'
-    | 'data-service-provider/researcher-confirmation'
-    | 'contact-frf-team/frf-confirmation'
-    | 'contact-frf-team/request-confirmation'
+  bodyHtml: string
+  bodyText: string
   templateData: Record<string, unknown>
 }
 
 export class EmailService {
   constructor(private sesClient: SES) {}
 
-  sendEmail = async (data: EmailArgs) => {
-    const htmlSource = fs.readFileSync(
-      path.resolve(process.cwd(), `src/templates/emails/${data.templateName}.html.hbs`),
-      {
-        encoding: EMAIL_CHARSET,
-      }
-    )
-    const textSource = fs.readFileSync(
-      path.resolve(process.cwd(), `src/templates/emails/${data.templateName}.text.hbs`),
-      {
-        encoding: EMAIL_CHARSET,
-      }
-    )
-    const htmlBody = handlebars.compile(htmlSource)(data.templateData)
-    const textBody = handlebars.compile(textSource)(data.templateData)
+  sendEmail = async ({ templateData: { signatureText, ...data }, bodyHtml, bodyText, to, subject }: EmailArgs) => {
+    handlebars.registerPartial('bodyHtml', handlebars.compile(bodyHtml)(data))
+    handlebars.registerPartial('bodyText', handlebars.compile(bodyText)(data))
+    handlebars.registerPartial('signatureText', handlebars.compile(signatureText)(data))
+
+    const htmlSource = fs.readFileSync(path.resolve(process.cwd(), `src/templates/emails/email-template.html.hbs`), {
+      encoding: EMAIL_CHARSET,
+    })
+
+    const textSource = fs.readFileSync(path.resolve(process.cwd(), `src/templates/emails/email-template.text.hbs`), {
+      encoding: EMAIL_CHARSET,
+    })
+
+    const htmlBody = handlebars.compile(htmlSource)(data)
+    const textBody = handlebars.compile(textSource)(data)
 
     const message: SES.Types.SendEmailRequest = {
       Source: `"Find, Recruit & Follow-Up" <${EMAIL_FRF_INBOX}>`,
       Destination: {
-        ToAddresses: [data.to],
+        ToAddresses: to,
       },
       Message: {
         Subject: {
-          Data: data.subject,
+          Data: subject,
           Charset: EMAIL_CHARSET,
         },
         Body: {

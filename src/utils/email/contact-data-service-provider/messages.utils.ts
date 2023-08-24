@@ -2,7 +2,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 
 import { TypeEmailTemplateContactDataServiceProvider } from '@/@types/generated'
-import { EmailArgs } from '@/lib/email/emailServiceV2'
+import { EmailArgs } from '@/lib/email/emailService'
 import { ContactDataServiceProviderInputs } from '@/utils/schemas/contact-data-service-provider.schema'
 
 export type MessageData = ContactDataServiceProviderInputs & {

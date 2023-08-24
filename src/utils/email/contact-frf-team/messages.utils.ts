@@ -2,7 +2,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 
 import { TypeEmailTemplateContactFrfCentralTeam } from '@/@types/generated'
-import { EmailArgs } from '@/lib/email/emailServiceV2'
+import { EmailArgs } from '@/lib/email/emailService'
 import { ContactFrfTeamInputs } from '@/utils/schemas'
 
 export type MessageData = ContactFrfTeamInputs & {

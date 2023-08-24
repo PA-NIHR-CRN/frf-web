@@ -2,7 +2,7 @@ import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import { createRequest, createResponse, RequestOptions } from 'node-mocks-http'
 import { Mock } from 'ts-mockery'
 
-import { emailServiceV2 as emailService } from '@/lib/email'
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { defaultMock } from '@/mocks/contactFrfCentralTeam'

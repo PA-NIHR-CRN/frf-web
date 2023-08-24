@@ -3,7 +3,7 @@ import { Entry } from 'contentful'
 import { Mock } from 'ts-mockery'
 
 import { TypeEmailContactSkeleton, TypeEmailTemplateContactResearchSupport } from '@/@types/generated'
-import { EmailArgs } from '@/lib/email/emailServiceV2'
+import { EmailArgs } from '@/lib/email/emailService'
 
 import { getNotificationMessages, MessageData } from './messages.utils' // Replace with the correct path to your module
 

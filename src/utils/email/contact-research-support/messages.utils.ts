@@ -3,7 +3,7 @@ import { documentToPlainTextString } from '@contentful/rich-text-plain-text-rend
 import { Entry } from 'contentful'
 
 import { TypeEmailContactSkeleton, TypeEmailTemplateContactResearchSupport } from '@/@types/generated'
-import { EmailArgs } from '@/lib/email/emailServiceV2'
+import { EmailArgs } from '@/lib/email/emailService'
 import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-support.schema'
 
 export type MessageData = ContactResearchSupportInputs & { referenceNumber: string }
