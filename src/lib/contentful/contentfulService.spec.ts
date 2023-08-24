@@ -200,21 +200,23 @@ describe('ContentfulService', () => {
   })
 
   describe('getEmailTemplateByType', () => {
-    test.each<[EmailTemplateTypes]>([['emailTemplateFeedback'], ['emailTemplateContactFrfCentralTeam']])(
-      'returns content for the email template %s',
-      async (type) => {
-        const [contentfulService, mockContentClient] = setupContentfulService()
+    test.each<EmailTemplateTypes>([
+      'emailTemplateFeedback',
+      'emailTemplateContactFrfCentralTeam',
+      'emailTemplateContactResearchSupport',
+      'emailTemplateContactDataServiceProvider',
+    ])('returns content for the email template %s', async (type) => {
+      const [contentfulService, mockContentClient] = setupContentfulService()
 
-        const entry = await contentfulService.getEmailTemplateByType(type)
+      const entry = await contentfulService.getEmailTemplateByType(type)
 
-        expect(mockContentClient.getEntries).toHaveBeenCalledWith({
-          limit: 1,
-          content_type: type,
-        })
+      expect(mockContentClient.getEntries).toHaveBeenCalledWith({
+        limit: 1,
+        content_type: type,
+      })
 
-        expect(entry).toBeDefined()
-      }
-    )
+      expect(entry).toBeDefined()
+    })
   })
 
   describe('getProviderFilterOptionValues', () => {

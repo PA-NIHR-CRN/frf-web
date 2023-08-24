@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
 import { contentfulService } from '@/lib/contentful'
-import { emailService } from '@/lib/email'
+import { emailServiceV2 as emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { getNotificationMessages } from '@/utils/email/contact-data-service-provider/messages.utils'
@@ -51,8 +51,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } = entry
 
     // Send emails
-    const messages = getNotificationMessages({ ...req.body, referenceNumber, dspName, dspEmail })
-    await Promise.all(messages.map(emailService.sendEmail))
+    const emailTemplate = await contentfulService.getEmailTemplateByType('emailTemplateContactDataServiceProvider')
+
+    if (emailTemplate) {
+      const messages = getNotificationMessages(
+        { ...req.body, referenceNumber, dspName, dspEmail },
+        emailTemplate.fields
+      )
+
+      await Promise.all(messages.map(emailService.sendEmail))
+    }
 
     res.redirect(302, `/contact-data-service-provider/${slug}/confirmation/${referenceNumber}`)
   } catch (error) {

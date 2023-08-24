@@ -6,7 +6,9 @@ import {
   TypeCookieBannerSkeleton,
   TypeEmailContactFields,
   TypeEmailContactSkeleton,
+  TypeEmailTemplateContactDataServiceProviderSkeleton,
   TypeEmailTemplateContactFrfCentralTeamSkeleton,
+  TypeEmailTemplateContactResearchSupportSkeleton,
   TypeEmailTemplateFeedbackSkeleton,
   TypeHomepageSkeleton,
   TypePageSkeleton,
@@ -17,7 +19,11 @@ import { PER_PAGE, TagIds } from '@/constants'
 
 export type FilterOptions = Awaited<ReturnType<ContentfulService['getProviderFilterOptionValues']>>
 
-export type EmailTemplateTypes = 'emailTemplateFeedback' | 'emailTemplateContactFrfCentralTeam'
+export type EmailTemplateTypes =
+  | 'emailTemplateFeedback'
+  | 'emailTemplateContactFrfCentralTeam'
+  | 'emailTemplateContactResearchSupport'
+  | 'emailTemplateContactDataServiceProvider'
 
 export class ContentfulService {
   constructor(
@@ -158,7 +164,11 @@ export class ContentfulService {
       ? TypeEmailTemplateFeedbackSkeleton
       : T extends 'emailTemplateContactFrfCentralTeam'
       ? TypeEmailTemplateContactFrfCentralTeamSkeleton
-      : TypeEmailTemplateContactFrfCentralTeamSkeleton
+      : T extends 'emailTemplateContactResearchSupport'
+      ? TypeEmailTemplateContactResearchSupportSkeleton
+      : T extends 'emailTemplateContactDataServiceProvider'
+      ? TypeEmailTemplateContactDataServiceProviderSkeleton
+      : void
 
     const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<EmailTemplate>({
       content_type: type,

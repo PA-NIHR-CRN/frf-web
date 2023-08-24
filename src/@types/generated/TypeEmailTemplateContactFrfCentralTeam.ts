@@ -57,7 +57,7 @@ export interface TypeEmailTemplateContactFrfCentralTeamFields {
  * @type {TypeEmailTemplateContactFrfCentralTeamSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T15:56:17.369Z
- * @version 1
+ * @version 3
  */
 export type TypeEmailTemplateContactFrfCentralTeamSkeleton = EntrySkeletonType<TypeEmailTemplateContactFrfCentralTeamFields, "emailTemplateContactFrfCentralTeam">;
 /**
@@ -66,6 +66,6 @@ export type TypeEmailTemplateContactFrfCentralTeamSkeleton = EntrySkeletonType<T
  * @type {TypeEmailTemplateContactFrfCentralTeam}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T15:56:17.369Z
- * @version 1
+ * @version 3
  */
 export type TypeEmailTemplateContactFrfCentralTeam<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateContactFrfCentralTeamSkeleton, Modifiers, Locales>;

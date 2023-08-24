@@ -70,6 +70,7 @@
       },
       "fields": {
         "name": "Genomic Profile Register",
+        "emailAddress": "mockregion1@nihr.ac.uk",
         "slug": "genomic-profile-register",
         "providerOrganisation": "Delivered by Genomic Profile Register",
         "shortDescription": {
