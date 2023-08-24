@@ -27,4 +27,4 @@ if (!globalForAxios.axios) {
   })
 }
 
-if (process.env.NODE_ENV !== 'production') globalForAxios.axios = axios
+globalForAxios.axios = axios
