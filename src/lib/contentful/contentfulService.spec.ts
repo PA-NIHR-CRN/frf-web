@@ -3,7 +3,9 @@ import type { ClientAPI as ManagementClientApi, Environment, Space } from 'conte
 import { Mock } from 'ts-mockery'
 
 import {
+  TypeEmailTemplateContactDataServiceProvider,
   TypeEmailTemplateContactFrfCentralTeam,
+  TypeEmailTemplateContactResearchSupport,
   TypeEmailTemplateFeedback,
   TypeHomepage,
   TypeServiceProvider,
@@ -27,10 +29,10 @@ const mockEmailTemplateFeedback = Mock.of<TypeEmailTemplateFeedback<undefined, '
 const mockEmailTemplateContactFrfCentralTeam = Mock.of<TypeEmailTemplateContactFrfCentralTeam<undefined, ''>>({
   fields: {},
 })
-const mockEmailTempContactDataServiceProvider = Mock.of<TypeEmailTemplateFeedback<undefined, ''>>({
+const mockEmailTempContactDataServiceProvider = Mock.of<TypeEmailTemplateContactDataServiceProvider<undefined, ''>>({
   fields: {},
 })
-const mockEmailTempContactResearchSupport = Mock.of<TypeEmailTemplateFeedback<undefined, ''>>({
+const mockEmailTempContactResearchSupport = Mock.of<TypeEmailTemplateContactResearchSupport<undefined, ''>>({
   fields: {},
 })
 const contentTypeMocks: Record<string, Entry> = {
