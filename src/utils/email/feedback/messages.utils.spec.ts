@@ -41,6 +41,7 @@ describe('getNotificationMessages', () => {
   }
 
   const contentType: TypeEmailTemplateFeedback<undefined, ''>['fields'] = {
+    title: 'Email template title',
     recipients: ['frfteam@nihr.ac.uk'],
     subject: '{{referenceNumber}} FRF - feedback received',
     body,

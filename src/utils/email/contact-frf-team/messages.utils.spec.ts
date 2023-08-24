@@ -42,6 +42,7 @@ describe('getNotificationMessages', () => {
   }
 
   const contentType: TypeEmailTemplateContactFrfCentralTeam<undefined, ''>['fields'] = {
+    title: 'Email template title',
     recipients: ['frfteam@nihr.ac.uk'],
     senderSubject: '{{referenceNumber}} - Contact FRF central team enquiry submitted',
     senderBody: body,

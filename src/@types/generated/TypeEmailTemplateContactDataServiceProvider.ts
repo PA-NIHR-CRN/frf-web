@@ -8,6 +8,12 @@ import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleC
  */
 export interface TypeEmailTemplateContactDataServiceProviderFields {
     /**
+     * Field type definition for field 'title' (Title)
+     * @name Title
+     * @localized false
+     */
+    title: EntryFieldTypes.Symbol;
+    /**
      * Field type definition for field 'senderSubject' (Researcher Subject)
      * @name Researcher Subject
      * @localized false
@@ -51,7 +57,7 @@ export interface TypeEmailTemplateContactDataServiceProviderFields {
  * @type {TypeEmailTemplateContactDataServiceProviderSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T19:05:10.798Z
- * @version 5
+ * @version 7
  */
 export type TypeEmailTemplateContactDataServiceProviderSkeleton = EntrySkeletonType<TypeEmailTemplateContactDataServiceProviderFields, "emailTemplateContactDataServiceProvider">;
 /**
@@ -60,6 +66,6 @@ export type TypeEmailTemplateContactDataServiceProviderSkeleton = EntrySkeletonT
  * @type {TypeEmailTemplateContactDataServiceProvider}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T19:05:10.798Z
- * @version 5
+ * @version 7
  */
 export type TypeEmailTemplateContactDataServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateContactDataServiceProviderSkeleton, Modifiers, Locales>;

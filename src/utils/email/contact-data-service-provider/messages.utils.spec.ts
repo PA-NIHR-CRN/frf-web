@@ -44,6 +44,7 @@ describe('getNotificationMessages', () => {
   }
 
   const contentType: TypeEmailTemplateContactDataServiceProvider<undefined, ''>['fields'] = {
+    title: 'Email template title',
     senderSubject: '{{referenceNumber}} - Your enquiry has been sent to {{dspName}} (Find, Recruit & Follow-up)',
     senderBody: body,
     teamSubject: '{{referenceNumber}} - New enquiry via Find, Recruit & Follow-up',

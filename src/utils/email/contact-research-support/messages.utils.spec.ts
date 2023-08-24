@@ -77,6 +77,7 @@ describe('getNotificationMessages', () => {
   }
 
   const contentType: TypeEmailTemplateContactResearchSupport<undefined, ''>['fields'] = {
+    title: 'Email template title',
     senderSubject: '{{referenceNumber}} - Research Support Enquiry Submitted (Find, Recruit and Follow-up)',
     senderBody: body,
     teamSubject: '{{referenceNumber}} - New enquiry via Find, Recruit and Follow-up',
