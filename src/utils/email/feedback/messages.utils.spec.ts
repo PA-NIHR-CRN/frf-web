@@ -1,7 +1,7 @@
 import { BLOCKS, Document } from '@contentful/rich-text-types'
 
 import { TypeEmailTemplateFeedback } from '@/@types/generated'
-import { EmailArgs } from '@/lib/email/emailServiceV2'
+import { EmailArgs } from '@/lib/email/emailService'
 
 import { getNotificationMessages, MessageData } from './messages.utils'
 
@@ -41,6 +41,7 @@ describe('getNotificationMessages', () => {
   }
 
   const contentType: TypeEmailTemplateFeedback<undefined, ''>['fields'] = {
+    title: 'Email template title',
     recipients: ['frfteam@nihr.ac.uk'],
     subject: '{{referenceNumber}} FRF - feedback received',
     body,

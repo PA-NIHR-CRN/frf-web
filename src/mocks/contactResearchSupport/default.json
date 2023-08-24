@@ -10,43 +10,510 @@
       "metadata": { "tags": [] },
       "sys": {
         "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "7lQRgsa6oWqX4ZjuUULffH",
         "type": "Entry",
-        "id": "6L9bppaYg5EItajbPeQZcn",
+        "createdAt": "2023-08-23T17:14:30.866Z",
+        "updatedAt": "2023-08-24T08:26:38.680Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "revision": 9,
         "contentType": {
           "sys": {
             "type": "Link",
             "linkType": "ContentType",
-            "id": "emailContact"
+            "id": "emailTemplateContactResearchSupport"
           }
         },
-        "revision": 1,
-        "createdAt": "2023-07-02T10:19:23.211Z",
-        "updatedAt": "2023-07-02T10:19:31.139Z",
-        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
         "locale": "en-US"
       },
-      "fields": { "name": "Mock region 1", "emailAddress": "mockregion1@nihr.ac.uk", "type": "LCRN - DA" }
-    },
-    {
-      "metadata": { "tags": [] },
-      "sys": {
-        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
-        "type": "Entry",
-        "id": "3VOzVhEcc41MZfaFkCc9T8",
-        "contentType": {
-          "sys": {
-            "type": "Link",
-            "linkType": "ContentType",
-            "id": "emailContact"
-          }
+      "fields": {
+        "senderSubject": "{{referenceNumber}} - Research Support Enquiry Submitted (Find, Recruit and Follow-up)",
+        "senderBody": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Dear {{salutation}},",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "We would like to confirm that your research support enquiry has been sent to the relevant research support team and they will be in touch in due course.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "For your reference the enquiry details submitted are as follows:",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Enquiry Type: Identifying appropriate data services",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [{ "type": "bold" }],
+                  "value": "Selected Lead Region: {{regionName}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [{ "type": "bold" }],
+                  "value": "Enquiry details: {{supportDescription}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [{ "type": "bold" }],
+                  "value": "Contact details",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Name: {{fullName}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Email address: {{emailAddress}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Telephone: {{#if phoneNumber}}{{phoneNumber}}{{else}}Not provided{{/if}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Role: {{jobRole}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Organisation name: {{organisationName}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Organisation type: {{#if (eq organisationType 'commercial')}}Commercial{{else}}Non-commercial{{/if}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [{ "type": "bold" }],
+                  "value": "Study information",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Study title: {{#if studyTitle}}{{studyTitle}}{{else}}Not provided{{/if}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Protocol reference: {{#if protocolReference}}{{protocolReference}}{{else}}Not provided{{/if}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "CPMS ID: {{#if cpmsId}}{{cpmsId}}{{else}}Not provided{{/if}}",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "If you do not receive a response or have any further questions, please contact the Find, Recruit & Follow-up Central Team at frfteam@nihr.ac.uk.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [{ "data": {}, "marks": [], "value": "", "nodeType": "text" }],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Best wishes,",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
         },
-        "revision": 1,
-        "createdAt": "2023-07-02T10:12:49.220Z",
-        "updatedAt": "2023-07-02T10:13:04.981Z",
-        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
-        "locale": "en-US"
-      },
-      "fields": { "name": "Mock region 2", "emailAddress": "mockregion2@nihr.ac.uk", "type": "LCRN" }
+        "teamSubject": "{{referenceNumber}} - New enquiry via Find, Recruit and Follow-up",
+        "teamBody": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Dear {{salutation}},",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "{{fullName}} has submitted the following enquiry via the Find, Recruit and Follow-up (FRF) website. Please respond to {{fullName}} at your earliest convenience.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Enquiry Type: {{#if (eq enquiryType 'data')}}Identifying appropriate data services{{else}}General research support{{/if}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Selected Lead Region: {{regionName}}",
+                  "marks": [{ "type": "bold" }],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Enquiry details: {{supportDescription}}",
+                  "marks": [{ "type": "bold" }],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Contact details",
+                  "marks": [{ "type": "bold" }],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Name: {{fullName}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Email address: {{emailAddress}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Telephone: {{#if phoneNumber}}{{phoneNumber}}{{else}}Not provided{{/if}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Role: {{jobRole}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Organisation name: {{organisationName}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Organisation type: {{#if (eq organisationType 'commercial')}}Commercial{{else}}Non-commercial{{/if}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Study information",
+                  "marks": [{ "type": "bold" }],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Study title: {{#if studyTitle}}{{studyTitle}}{{else}}Not provided{{/if}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Protocol reference: {{#if protocolReference}}{{protocolReference}}{{else}}Not provided{{/if}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "CPMS ID: {{#if cpmsId}}{{cpmsId}}{{else}}Not provided{{/if}}",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "If you have any questions or feel unable to support this enquiry then please contact the FRF Central Team at frfteam@nihr.ac.uk.",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [{ "nodeType": "text", "value": "", "marks": [], "data": {} }]
+            },
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Best wishes,",
+                  "marks": [],
+                  "data": {}
+                }
+              ]
+            }
+          ]
+        },
+        "signature": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [{ "type": "bold" }],
+                  "value": "Find, Recruit and Follow-up",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "signatureLogo": "https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png"
+      }
     }
   ]
 }

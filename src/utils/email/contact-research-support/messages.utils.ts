@@ -1,17 +1,33 @@
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { Entry } from 'contentful'
 
-import { TypeEmailContactSkeleton } from '@/@types/generated'
+import { TypeEmailContactSkeleton, TypeEmailTemplateContactResearchSupport } from '@/@types/generated'
 import { EmailArgs } from '@/lib/email/emailService'
 import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-support.schema'
 
 export type MessageData = ContactResearchSupportInputs & { referenceNumber: string }
 
-export const getNotificationMessages = (messageData: MessageData, contacts: Entry<TypeEmailContactSkeleton>[]) => {
+export const getNotificationMessages = (
+  messageData: MessageData,
+  contacts: Entry<TypeEmailContactSkeleton>[],
+  contentType: TypeEmailTemplateContactResearchSupport<undefined, ''>['fields']
+) => {
   const messages: EmailArgs[] = []
 
+  const { referenceNumber } = messageData
+  const { senderSubject, senderBody, teamSubject, teamBody, signature, signatureLogo } = contentType
+
+  const templateData = {
+    ...messageData,
+    signatureText: documentToHtmlString(signature),
+    signatureLogo,
+  }
+
   const supportRequestMessage = {
-    subject: `${messageData.referenceNumber} - New enquiry via Find, Recruit and Follow-up`,
-    templateName: 'support-request',
+    subject: teamSubject.replace('{{referenceNumber}}', referenceNumber),
+    bodyHtml: documentToHtmlString(teamBody).replaceAll('&#39;', "'"),
+    bodyText: documentToPlainTextString(teamBody).replaceAll('&#39;', "'"),
   } as const
 
   // FRF-70 AC1/AC4
@@ -23,8 +39,8 @@ export const getNotificationMessages = (messageData: MessageData, contacts: Entr
       const { emailAddress, name, salutation } = contact.fields
       messages.push({
         ...supportRequestMessage,
-        to: emailAddress as string,
-        templateData: { ...messageData, salutation, regionName: name },
+        to: [emailAddress as string],
+        templateData: { ...templateData, salutation, regionName: name },
       })
     }
   }
@@ -37,19 +53,20 @@ export const getNotificationMessages = (messageData: MessageData, contacts: Entr
       const { emailAddress, salutation } = contact.fields
       messages.push({
         ...supportRequestMessage,
-        to: emailAddress as string,
-        templateData: { ...messageData, salutation, regionName: 'Unknown' },
+        to: [emailAddress as string],
+        templateData: { ...templateData, salutation, regionName: 'Unknown' },
       })
     }
   }
 
   // FRF-74
   messages.push({
-    to: messageData.emailAddress,
-    subject: `${messageData.referenceNumber} - Research Support Enquiry Submitted (Find, Recruit and Follow-up)`,
-    templateName: 'request-confirmation',
+    to: [messageData.emailAddress],
+    subject: senderSubject.replace('{{referenceNumber}}', referenceNumber),
+    bodyHtml: documentToHtmlString(senderBody).replaceAll('&#39;', "'"),
+    bodyText: documentToPlainTextString(senderBody).replaceAll('&#39;', "'"),
     templateData: {
-      ...messageData,
+      ...templateData,
       salutation: messageData.fullName,
       regionName:
         messageData.lcrn === 'unknown'

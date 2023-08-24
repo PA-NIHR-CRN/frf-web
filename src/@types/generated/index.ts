@@ -4,7 +4,9 @@ export type { TypeButton, TypeButtonFields, TypeButtonSkeleton } from "./TypeBut
 export type { TypeCookieBanner, TypeCookieBannerFields, TypeCookieBannerSkeleton } from "./TypeCookieBanner";
 export type { TypeDataContentBlock, TypeDataContentBlockFields, TypeDataContentBlockSkeleton } from "./TypeDataContentBlock";
 export type { TypeEmailContact, TypeEmailContactFields, TypeEmailContactSkeleton } from "./TypeEmailContact";
-export type { TypeEmailTemplate, TypeEmailTemplateFields, TypeEmailTemplateSkeleton } from "./TypeEmailTemplate";
+export type { TypeEmailTemplateContactDataServiceProvider, TypeEmailTemplateContactDataServiceProviderFields, TypeEmailTemplateContactDataServiceProviderSkeleton } from "./TypeEmailTemplateContactDataServiceProvider";
+export type { TypeEmailTemplateContactFrfCentralTeam, TypeEmailTemplateContactFrfCentralTeamFields, TypeEmailTemplateContactFrfCentralTeamSkeleton } from "./TypeEmailTemplateContactFrfCentralTeam";
+export type { TypeEmailTemplateContactResearchSupport, TypeEmailTemplateContactResearchSupportFields, TypeEmailTemplateContactResearchSupportSkeleton } from "./TypeEmailTemplateContactResearchSupport";
 export type { TypeEmailTemplateFeedback, TypeEmailTemplateFeedbackFields, TypeEmailTemplateFeedbackSkeleton } from "./TypeEmailTemplateFeedback";
 export type { TypeHomepage, TypeHomepageFields, TypeHomepageSkeleton } from "./TypeHomepage";
 export type { TypeInformationGovernanceBlock, TypeInformationGovernanceBlockFields, TypeInformationGovernanceBlockSkeleton } from "./TypeInformationGovernanceBlock";

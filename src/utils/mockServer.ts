@@ -26,11 +26,12 @@ const setupMockServer = () => {
     data: Record<string, unknown>,
     status = 200,
     path = '/entries',
-    isManagement = false
+    isManagement = false,
+    { once } = { once: false }
   ) =>
     server.use(
       rest.all(`${isManagement ? MANAGEMENT_API_URL : API_URL}${path}`, async (req, res, ctx) => {
-        return res(ctx.status(status), ctx.json(data))
+        return once ? res.once(ctx.status(status), ctx.json(data)) : res(ctx.status(status), ctx.json(data))
       })
     )
 

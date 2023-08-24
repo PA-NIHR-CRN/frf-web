@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { ZodError } from 'zod'
 
 import { contentfulService } from '@/lib/contentful'
-import { emailServiceV2 as emailService } from '@/lib/email'
+import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { getNotificationMessages } from '@/utils/email/feedback/messages.utils'
@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Send email
     if (req.body.emailAddress) {
-      const emailTemplate = await contentfulService.getEmailTemplateFeedback()
+      const emailTemplate = await contentfulService.getEmailTemplateByType('emailTemplateFeedback')
 
       if (emailTemplate) {
         const messages = getNotificationMessages({ ...req.body, referenceNumber }, emailTemplate.fields)

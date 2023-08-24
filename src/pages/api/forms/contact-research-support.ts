@@ -36,10 +36,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       },
     })
 
-    // Send emails
+    // Get email contacts
     const contacts = await contentfulService.getEmailContacts()
-    const messages = getNotificationMessages({ ...req.body, referenceNumber }, contacts)
-    await Promise.all(messages.map(emailService.sendEmail))
+
+    // Send emails
+    const emailTemplate = await contentfulService.getEmailTemplateByType('emailTemplateContactResearchSupport')
+
+    if (emailTemplate) {
+      const messages = getNotificationMessages({ ...req.body, referenceNumber }, contacts, emailTemplate.fields)
+
+      await Promise.all(messages.map(emailService.sendEmail))
+    }
 
     res.redirect(302, `/contact-research-support/confirmation/${referenceNumber}`)
   } catch (error) {

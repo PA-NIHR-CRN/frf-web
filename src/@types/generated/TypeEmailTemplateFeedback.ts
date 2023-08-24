@@ -8,6 +8,12 @@ import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleC
  */
 export interface TypeEmailTemplateFeedbackFields {
     /**
+     * Field type definition for field 'title' (Title)
+     * @name Title
+     * @localized false
+     */
+    title: EntryFieldTypes.Symbol;
+    /**
      * Field type definition for field 'recipients' (Recipients)
      * @name Recipients
      * @localized false
@@ -45,7 +51,7 @@ export interface TypeEmailTemplateFeedbackFields {
  * @type {TypeEmailTemplateFeedbackSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-21T14:56:46.388Z
- * @version 47
+ * @version 49
  */
 export type TypeEmailTemplateFeedbackSkeleton = EntrySkeletonType<TypeEmailTemplateFeedbackFields, "emailTemplateFeedback">;
 /**
@@ -54,6 +60,6 @@ export type TypeEmailTemplateFeedbackSkeleton = EntrySkeletonType<TypeEmailTempl
  * @type {TypeEmailTemplateFeedback}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-21T14:56:46.388Z
- * @version 47
+ * @version 49
  */
 export type TypeEmailTemplateFeedback<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateFeedbackSkeleton, Modifiers, Locales>;

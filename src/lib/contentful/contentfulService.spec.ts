@@ -2,9 +2,16 @@ import type { ContentfulClientApi, Entry } from 'contentful'
 import type { ClientAPI as ManagementClientApi, Environment, Space } from 'contentful-management'
 import { Mock } from 'ts-mockery'
 
-import { TypeEmailTemplate, TypeEmailTemplateFeedback, TypeHomepage, TypeServiceProvider } from '@/@types/generated'
+import {
+  TypeEmailTemplateContactDataServiceProvider,
+  TypeEmailTemplateContactFrfCentralTeam,
+  TypeEmailTemplateContactResearchSupport,
+  TypeEmailTemplateFeedback,
+  TypeHomepage,
+  TypeServiceProvider,
+} from '@/@types/generated'
 
-import { ContentfulService } from './contentfulService'
+import { ContentfulService, EmailTemplateTypes } from './contentfulService'
 
 const mockServiceProvider = Mock.of<TypeServiceProvider<undefined, ''>>({
   fields: {
@@ -16,20 +23,25 @@ const mockServiceProvider = Mock.of<TypeServiceProvider<undefined, ''>>({
 const mockHomepage = Mock.of<TypeHomepage<undefined, ''>>({
   fields: {},
 })
-
-const mockEmailTemplate = Mock.of<TypeEmailTemplate<undefined, ''>>({
-  fields: {},
-})
-
 const mockEmailTemplateFeedback = Mock.of<TypeEmailTemplateFeedback<undefined, ''>>({
   fields: {},
 })
-
+const mockEmailTemplateContactFrfCentralTeam = Mock.of<TypeEmailTemplateContactFrfCentralTeam<undefined, ''>>({
+  fields: {},
+})
+const mockEmailTempContactDataServiceProvider = Mock.of<TypeEmailTemplateContactDataServiceProvider<undefined, ''>>({
+  fields: {},
+})
+const mockEmailTempContactResearchSupport = Mock.of<TypeEmailTemplateContactResearchSupport<undefined, ''>>({
+  fields: {},
+})
 const contentTypeMocks: Record<string, Entry> = {
   homepage: mockHomepage,
   serviceProvider: mockServiceProvider,
-  emailTemplate: mockEmailTemplate,
   emailTemplateFeedback: mockEmailTemplateFeedback,
+  emailTemplateContactFrfCentralTeam: mockEmailTemplateContactFrfCentralTeam,
+  emailTemplateContactDataServiceProvider: mockEmailTempContactDataServiceProvider,
+  emailTemplateContactResearchSupport: mockEmailTempContactResearchSupport,
 }
 
 const mockEnvironment = Mock.of<Environment>({
@@ -189,15 +201,20 @@ describe('ContentfulService', () => {
     })
   })
 
-  describe('getEmailTemplateFeedback', () => {
-    it('returns content for the email template', async () => {
+  describe('getEmailTemplateByType', () => {
+    test.each<EmailTemplateTypes>([
+      'emailTemplateFeedback',
+      'emailTemplateContactFrfCentralTeam',
+      'emailTemplateContactResearchSupport',
+      'emailTemplateContactDataServiceProvider',
+    ])('returns content for the email template %s', async (type) => {
       const [contentfulService, mockContentClient] = setupContentfulService()
 
-      const entry = await contentfulService.getEmailTemplateFeedback()
+      const entry = await contentfulService.getEmailTemplateByType(type)
 
       expect(mockContentClient.getEntries).toHaveBeenCalledWith({
         limit: 1,
-        content_type: 'emailTemplateFeedback',
+        content_type: type,
       })
 
       expect(entry).toBeDefined()
