@@ -4,7 +4,7 @@ import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 
 import { render, within } from '@/config/test-utils'
-import { defaultMock } from '@/mocks/contactResearchSupport'
+import { emailContactsMock } from '@/mocks/contactResearchSupport'
 import ContactResearchSupport, {
   ContactResearchSupportProps,
   getServerSideProps,
@@ -24,7 +24,7 @@ jest.mock('@/lib/logger')
 beforeEach(() => {
   console.error = jest.fn()
   mockRouter.push('/contact-research-support')
-  mockContentfulResponse(defaultMock)
+  mockContentfulResponse(emailContactsMock)
   jest.clearAllMocks()
 })
 
