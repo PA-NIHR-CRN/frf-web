@@ -25,7 +25,7 @@
         "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
         "locale": "en-US"
       },
-      "fields": { "name": "Mock region 1", "emailAddress": "mockregion1@nihr.ac.uk", "type": "LCRN - DA" }
+      "fields": { "name": "Mock region 1", "emailAddress": ["mockregion1@nihr.ac.uk"], "type": "LCRN - DA" }
     },
     {
       "metadata": { "tags": [] },
@@ -46,7 +46,7 @@
         "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
         "locale": "en-US"
       },
-      "fields": { "name": "Mock region 2", "emailAddress": "mockregion2@nihr.ac.uk", "type": "LCRN" }
+      "fields": { "name": "Mock region 2", "emailAddress": ["mockregion2@nihr.ac.uk"], "type": "LCRN" }
     }
   ]
 }

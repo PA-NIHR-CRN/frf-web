@@ -33,13 +33,16 @@ export const getNotificationMessages = (
   // FRF-70 AC1/AC4
   if (messageData.organisationType === 'nonCommercial' || messageData.lcrn !== 'unknown') {
     const contact = contacts.find(
-      (contact) => contact.fields.emailAddress === messageData.lcrn && contact.fields.type === 'LCRN - DA'
+      (contact) =>
+        Array.isArray(contact.fields.emailAddress) &&
+        contact.fields.emailAddress.includes(messageData.lcrn) &&
+        contact.fields.type === 'LCRN - DA'
     )
     if (contact) {
       const { emailAddress, name, salutation } = contact.fields
       messages.push({
         ...supportRequestMessage,
-        to: [emailAddress as string],
+        to: emailAddress as string[],
         templateData: { ...templateData, salutation, regionName: name },
       })
     }
@@ -53,7 +56,7 @@ export const getNotificationMessages = (
       const { emailAddress, salutation } = contact.fields
       messages.push({
         ...supportRequestMessage,
-        to: [emailAddress as string],
+        to: emailAddress as string[],
         templateData: { ...templateData, salutation, regionName: 'Unknown' },
       })
     }
@@ -72,7 +75,10 @@ export const getNotificationMessages = (
         messageData.lcrn === 'unknown'
           ? 'Unknown'
           : contacts.find(
-              (contact) => contact.fields.emailAddress === messageData.lcrn && contact.fields.type === 'LCRN - DA'
+              (contact) =>
+                Array.isArray(contact.fields.emailAddress) &&
+                contact.fields.emailAddress.includes(messageData.lcrn) &&
+                contact.fields.type === 'LCRN - DA'
             )?.fields.name,
     },
   })
