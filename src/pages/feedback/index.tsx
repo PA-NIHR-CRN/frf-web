@@ -130,9 +130,9 @@ export default function Feedback({ query }: FeedbackProps) {
   )
 }
 
-Feedback.getLayout = function getLayout(page: ReactElement, { isPreviewMode, cookieBanner }: FeedbackProps) {
+Feedback.getLayout = function getLayout(page: ReactElement, { isPreviewMode, cookieBanner, heading }: FeedbackProps) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -143,6 +143,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: 'Feedback',
+        heading: 'Find, Recruit & Follow-up feedback',
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(req),

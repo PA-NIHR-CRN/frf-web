@@ -232,10 +232,10 @@ export default function ServiceProvider({ fields, createdAt, updatedAt }: Servic
 
 ServiceProvider.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode, cookieBanner }: ServiceProviderProps
+  { isPreviewMode, cookieBanner, heading }: ServiceProviderProps
 ) {
   return (
-    <ServiceProviderLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <ServiceProviderLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </ServiceProviderLayout>
   )
@@ -265,6 +265,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
     return {
       props: {
         page: `Data service provider (detail) - ${fields.name}`,
+        heading: 'Data Service Provider',
         fields,
         createdAt,
         updatedAt,

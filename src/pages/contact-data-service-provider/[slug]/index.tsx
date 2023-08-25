@@ -134,10 +134,10 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
 
 ContactDataServiceProvider.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode, cookieBanner }: ContactDataServiceProviderProps
+  { isPreviewMode, cookieBanner, heading }: ContactDataServiceProviderProps
 ) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -158,6 +158,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: `Get in touch with ${name}`,
+        heading: 'Contact data service provider',
         name,
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,

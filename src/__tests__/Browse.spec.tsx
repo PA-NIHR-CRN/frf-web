@@ -1,12 +1,13 @@
-import { render, screen } from '@/config/test-utils'
+import { render, screen, within } from '@/config/test-utils'
 import Browse from '@/pages/browse'
 
 test('Displays the fallback navigation menu page', () => {
-  render(<Browse />)
+  render(Browse.getLayout(<Browse />))
 
-  expect(screen.getAllByRole('listitem')).toHaveLength(6)
+  const list = screen.getByTestId('browse-links')
+  expect(within(list).getAllByRole('listitem')).toHaveLength(5)
 
-  expect(screen.getByText('Discover more with the Find, Recruit and Follow-up website')).toBeInTheDocument()
+  expect(screen.getByRole('heading', { name: 'Discover more', level: 1 })).toBeInTheDocument()
 
   expect(screen.getByRole('link', { name: 'View data service providers' })).toHaveAttribute('href', '/providers')
   expect(

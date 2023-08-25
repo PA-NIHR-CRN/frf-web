@@ -15,12 +15,19 @@ const primaryFont = Roboto({ weight: ['400', '700'], subsets: ['latin'], display
 
 export type RootLayoutProps = {
   children: ReactNode
+  heading?: string
   backLink?: ReactNode
   isPreviewMode?: boolean
   cookieBanner?: TypeCookieBanner<undefined, ''> | null
 }
 
-export function RootLayout({ children, backLink, isPreviewMode, cookieBanner }: RootLayoutProps) {
+export function RootLayout({
+  children,
+  backLink,
+  heading = 'Find, Recruit and Follow-up',
+  isPreviewMode,
+  cookieBanner,
+}: RootLayoutProps) {
   useEffect(() => {
     document.body.classList.add('js-enabled')
   }, [])
@@ -37,15 +44,7 @@ export function RootLayout({ children, backLink, isPreviewMode, cookieBanner }: 
         </Link>{' '}
         will help us to improve it.
       </PhaseBanner>
-      <Panel>
-        <Link
-          href="/"
-          className="text-white no-underline focus:text-black"
-          aria-label="Go to the Find, Recruit and Follow-up homepage"
-        >
-          Find, Recruit and Follow-up
-        </Link>
-      </Panel>
+      {heading && <Panel>{heading}</Panel>}
       {backLink}
       <main id="main-content" className="govuk-main-wrapper" role="main">
         {children}

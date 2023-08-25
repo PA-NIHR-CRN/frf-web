@@ -3,6 +3,7 @@ import axios from 'axios'
 import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { render, within } from '@/config/test-utils'
 import { emailContactsMock } from '@/mocks/contactResearchSupport'
 import ContactResearchSupport, {
@@ -35,9 +36,13 @@ test('Initial form state', async () => {
     props: ContactResearchSupportProps
   }
 
-  const { getByLabelText, getByRole, getByText } = render(<ContactResearchSupport {...props} />)
+  const { getByLabelText, getByRole, getByText } = render(
+    <RootLayout {...props}>
+      <ContactResearchSupport {...props} />
+    </RootLayout>
+  )
 
-  expect(getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Get support for your research', level: 1 })).toBeInTheDocument()
 
   expect(
     getByText(
