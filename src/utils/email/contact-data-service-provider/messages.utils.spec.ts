@@ -32,7 +32,7 @@ const signature: Document = {
 describe('getNotificationMessages', () => {
   const defaultMessageData: MessageData = {
     dspName: 'Test DSP',
-    dspEmail: 'testdsp@nihr.ac.uk',
+    dspEmail: ['testdsp@nihr.ac.uk'],
     referenceNumber: 'D00029',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
@@ -59,7 +59,7 @@ describe('getNotificationMessages', () => {
         subject: 'D00029 - New enquiry via Find, Recruit & Follow-up',
         bodyHtml: '<p>Body from contentful</p>',
         bodyText: 'Body from contentful',
-        to: [defaultMessageData.dspEmail],
+        to: defaultMessageData.dspEmail,
         templateData: {
           ...defaultMessageData,
           signatureLogo: 'https://url-to-logo.png',

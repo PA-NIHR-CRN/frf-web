@@ -35,7 +35,7 @@ describe('getNotificationMessages', () => {
   const contacts = [
     Mock.of<Entry<TypeEmailContactSkeleton>>({
       fields: {
-        emailAddress: 'lcrn@example.com',
+        emailAddress: ['lcrn@example.com'],
         name: 'Region 0',
         salutation: 'Mx.',
         type: 'LCRN - DA',
@@ -43,7 +43,7 @@ describe('getNotificationMessages', () => {
     }),
     Mock.of<Entry<TypeEmailContactSkeleton>>({
       fields: {
-        emailAddress: 'bdm@example.com',
+        emailAddress: ['bdm@example.com'],
         name: 'Region 1',
         salutation: 'Mr.',
         type: 'BDM',
@@ -51,7 +51,7 @@ describe('getNotificationMessages', () => {
     }),
     Mock.of<Entry<TypeEmailContactSkeleton>>({
       fields: {
-        emailAddress: 'frf@example.com',
+        emailAddress: ['frf@example.com'],
         name: 'Region 2',
         salutation: 'Ms.',
         type: 'FRF',
@@ -124,7 +124,7 @@ describe('getNotificationMessages', () => {
     const contactsWithDuplicateLcrnEmail = [
       Mock.of<Entry<TypeEmailContactSkeleton>>({
         fields: {
-          emailAddress: 'lcrn@example.com',
+          emailAddress: ['lcrn@example.com'],
           name: 'Region 3',
           salutation: 'Dr',
           type: 'BDM',
@@ -229,7 +229,7 @@ describe('getNotificationMessages', () => {
     const contactsWithDuplicateLcrnEmail = [
       Mock.of<Entry<TypeEmailContactSkeleton>>({
         fields: {
-          emailAddress: 'lcrn@example.com',
+          emailAddress: ['lcrn@example.com'],
           name: 'Region 3',
           salutation: 'Dr',
           type: 'BDM',

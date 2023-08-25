@@ -18,7 +18,7 @@ export interface TypeEmailContactFields {
      * @name Email Address
      * @localized false
      */
-    emailAddress: EntryFieldTypes.Symbol;
+    emailAddress: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     /**
      * Field type definition for field 'salutation' (Salutation)
      * @name Salutation
@@ -39,7 +39,7 @@ export interface TypeEmailContactFields {
  * @type {TypeEmailContactSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-11T16:34:42.182Z
- * @version 7
+ * @version 13
  */
 export type TypeEmailContactSkeleton = EntrySkeletonType<TypeEmailContactFields, "emailContact">;
 /**
@@ -48,6 +48,6 @@ export type TypeEmailContactSkeleton = EntrySkeletonType<TypeEmailContactFields,
  * @type {TypeEmailContact}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-11T16:34:42.182Z
- * @version 7
+ * @version 13
  */
 export type TypeEmailContact<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailContactSkeleton, Modifiers, Locales>;

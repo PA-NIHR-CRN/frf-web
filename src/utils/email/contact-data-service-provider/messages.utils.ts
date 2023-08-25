@@ -7,7 +7,7 @@ import { ContactDataServiceProviderInputs } from '@/utils/schemas/contact-data-s
 
 export type MessageData = ContactDataServiceProviderInputs & {
   dspName: string
-  dspEmail: string
+  dspEmail: string[]
   referenceNumber: string
 }
 
@@ -27,7 +27,7 @@ export const getNotificationMessages = (
   }
 
   messages.push({
-    to: [dspEmail],
+    to: dspEmail,
     subject: teamSubject.replace('{{referenceNumber}}', referenceNumber),
     bodyHtml: documentToHtmlString(teamBody),
     bodyText: documentToPlainTextString(teamBody),
