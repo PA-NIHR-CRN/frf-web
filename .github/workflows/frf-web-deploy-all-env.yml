@@ -28,9 +28,7 @@ jobs:
           echo CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} >> .env.local
           echo CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
           echo NEXT_PUBLIC_APP_ENV=${{ vars.APP_ENV }} >> .env.local
-          echo GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }} >> .env.local
-          echo GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }} >> .env.local
-          echo GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }} >> .env.local
+          echo GTM_ID=${{ vars.GTM_ID }} >> .env.local
           npm run build
       - name: Test
         run: npm run test:ci
@@ -93,9 +91,7 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
           environment-variables: |
-            GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
-            GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
-            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
+            GTM_ID=${{ vars.GTM_ID }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
@@ -172,9 +168,7 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
           environment-variables: |
-            GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
-            GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
-            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
+            GTM_ID=${{ vars.GTM_ID }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
@@ -251,9 +245,7 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
           environment-variables: |
-            GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
-            GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
-            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
+            GTM_ID=${{ vars.GTM_ID }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
@@ -330,9 +322,7 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
           environment-variables: |
-            GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
-            GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
-            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
+            GTM_ID=${{ vars.GTM_ID }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 
@@ -409,9 +399,7 @@ jobs:
           container-name: ${{ env.CONTAINER_NAME }}
           image: ${{ steps.build-image.outputs.image }}
           environment-variables: |
-            GOOGLE_ANALYTICS_ID=${{ vars.GOOGLE_ANALYTICS_ID }}
-            GOOGLE_ANALYTICS_AUTH=${{ vars.GOOGLE_ANALYTICS_AUTH }}
-            GOOGLE_ANALYTICS_PREVIEW=${{ vars.GOOGLE_ANALYTICS_PREVIEW }}
+            GTM_ID=${{ vars.GTM_ID }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}
             CONTENTFUL_WEBHOOK_API_KEY=${{ secrets.CONTENTFUL_WEBHOOK_API_KEY }}
 

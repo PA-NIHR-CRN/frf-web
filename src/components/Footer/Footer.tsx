@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export function Footer() {
@@ -6,26 +7,36 @@ export function Footer() {
     <footer className={clsx('govuk-footer', 'py-0')} role="contentinfo">
       <div className="bg-navy-100 text-white" data-testid="frf-footer-links">
         <div className="govuk-width-container">
-          <div className="flex h-[var(--footer-links-panel-height)] items-center">
-            <h2 className="govuk-visually-hidden">Support links</h2>
-            <ul className="govuk-footer__inline-list mb-0 flex w-full md:justify-end">
-              <li className="govuk-footer__inline-list-item">
-                <Link className="govuk-footer__link link--inverse" href="/privacy">
-                  Privacy policy
-                </Link>
-              </li>
-              <li className="govuk-footer__inline-list-item">
-                <Link className="govuk-footer__link link--inverse" href="/cookie-policy">
-                  Cookie policy
-                </Link>
-              </li>
-              <li className="govuk-footer__inline-list-item">
-                <Link className="govuk-footer__link link--inverse" href="/accessibility">
-                  Accessibility
-                </Link>
-              </li>
-              <li className="govuk-footer__inline-list-item ml-auto md:ml-0">&copy; NIHR 2022</li>
-            </ul>
+          <div className="flex items-center justify-between">
+            <div>
+              <Image src="/assets/logos/shaw-trust.png" height={57} width={189} alt="Shaw Trust Logo" />
+            </div>
+            <div className="flex h-[var(--footer-links-panel-height)] items-center">
+              <h2 className="govuk-visually-hidden">Support links</h2>
+              <ul className="govuk-footer__inline-list mb-0 flex w-full md:justify-end">
+                <li className="govuk-footer__inline-list-item">
+                  <Link className="govuk-footer__link link--inverse" href="/terms-and-conditions">
+                    Terms and conditions
+                  </Link>
+                </li>
+                <li className="govuk-footer__inline-list-item">
+                  <Link className="govuk-footer__link link--inverse" href="/privacy">
+                    Privacy policy
+                  </Link>
+                </li>
+                <li className="govuk-footer__inline-list-item">
+                  <Link className="govuk-footer__link link--inverse" href="/cookie-policy">
+                    Cookie policy
+                  </Link>
+                </li>
+                <li className="govuk-footer__inline-list-item">
+                  <Link className="govuk-footer__link link--inverse" href="/accessibility">
+                    Accessibility
+                  </Link>
+                </li>
+                <li className="govuk-footer__inline-list-item ml-auto md:ml-0">&copy; NIHR 2022</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
