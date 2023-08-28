@@ -9,7 +9,6 @@ declare namespace NodeJS {
     CONTENTFUL_CACHE_TTL: string
     NEXT_REVALIDATE_TIME: string
     NEXT_PUBLIC_APP_ENV: 'dev' | 'test' | 'uat' | 'oat' | 'prod'
-    GOOGLE_ANALYTICS_ID: string
-    GOOGLE_ANALYTICS_AUTH: string
+    GTM_ID: string
   }
 }
