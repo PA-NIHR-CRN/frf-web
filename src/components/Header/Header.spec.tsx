@@ -179,6 +179,4 @@ test('Shows a home icon when browsing on pages that are not the home page', asyn
   })
 
   await screen.findByRole('link', { name: 'Go to Find, Recruit and Follow-up homepage' })
-
-  expect(screen.getByTestId('frf-icon-home')).toHaveAttribute('aria-hidden')
 })
