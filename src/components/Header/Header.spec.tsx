@@ -22,8 +22,8 @@ test('Displays the header', () => {
   // Logo image
   const logo = screen.getByAltText('National Institute for Health and Care Research logo')
   expect(logo).toBeInTheDocument()
-  expect(logo).toHaveAttribute('height', '32')
-  expect(logo).toHaveAttribute('width', '322')
+  expect(logo).toHaveAttribute('height', '94')
+  expect(logo).toHaveAttribute('width', '306')
 
   // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
@@ -165,18 +165,4 @@ test('Hide the navigation menu when changing page', async () => {
   })
 
   expect(menu).not.toBeVisible()
-})
-
-test('Shows a home icon when browsing on pages that are not the home page', async () => {
-  mockRouter.push('/')
-
-  render(<Header />)
-
-  expect(screen.queryByRole('link', { name: 'Go to Find, Recruit and Follow-up homepage' })).not.toBeInTheDocument()
-
-  act(() => {
-    mockRouter.push('/providers')
-  })
-
-  await screen.findByRole('link', { name: 'Go to Find, Recruit and Follow-up homepage' })
 })
