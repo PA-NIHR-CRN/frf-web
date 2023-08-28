@@ -57,6 +57,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     createdAt: new Date('123'),
     updatedAt: new Date('123'),
     referenceNumber: '',
+    dspName: 'Genomic Profile Register',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     phoneNumber: '+447443121812',
@@ -76,6 +77,7 @@ test('Successful submission redirects to the confirmation page', async () => {
   // Form data is saved in the database
   expect(prismaMock.dataServiceProviderRequest.create).toHaveBeenCalledWith({
     data: {
+      dspName: 'Genomic Profile Register',
       fullName: 'Test user',
       emailAddress: 'testemail@nihr.ac.uk',
       phoneNumber: '+447443121812',

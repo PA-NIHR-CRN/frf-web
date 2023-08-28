@@ -28,9 +28,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     await contactDataServiceProviderSchema.parse(req.body)
 
+    const entry = await contentfulService.getProviderBySlug(String(slug))
+
+    if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
+
+    const {
+      fields: { name: dspName, emailAddress: dspEmail },
+    } = entry
+
     delete req.body.workEmailAddress // Clear honeypot before db entry
 
-    const { id } = await prisma.dataServiceProviderRequest.create({ data: { ...req.body } })
+    const { id } = await prisma.dataServiceProviderRequest.create({ data: { ...req.body, dspName } })
 
     const referenceNumber = createReferenceNumber({ id, prefix: 'D' })
     await prisma.dataServiceProviderRequest.update({
@@ -41,14 +49,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         referenceNumber,
       },
     })
-
-    const entry = await contentfulService.getProviderBySlug(String(slug))
-
-    if (!entry) throw new Error('Failed to fetch provider by slug: null entry')
-
-    const {
-      fields: { name: dspName, emailAddress: dspEmail },
-    } = entry
 
     // Send emails
     const emailTemplate = await contentfulService.getEmailTemplateByType('emailTemplateContactDataServiceProvider')
