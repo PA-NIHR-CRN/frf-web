@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, ReactElement } from 'react'
 
 import { Container } from '@/components/Container/Container'
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { menu } from '@/constants/menu'
 
 export default function Browse() {
@@ -9,18 +10,11 @@ export default function Browse() {
     <Container>
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-two-thirds">
-          <ul>
+          <ul data-testid="browse-links">
             {menu.map((column, key) => (
               <Fragment key={key}>
                 {column.map((item, key) => {
-                  if (!item.link) {
-                    return (
-                      <li key={key}>
-                        <span className="govuk-heading-m">{item.text}</span>
-                      </li>
-                    )
-                  }
-
+                  if (!item.link) return
                   return (
                     <li key={key}>
                       <Link className="govuk-heading-s mb-1" href={item.link}>
@@ -37,4 +31,8 @@ export default function Browse() {
       </div>
     </Container>
   )
+}
+
+Browse.getLayout = function getLayout(page: ReactElement) {
+  return <RootLayout heading="Discover more">{page}</RootLayout>
 }

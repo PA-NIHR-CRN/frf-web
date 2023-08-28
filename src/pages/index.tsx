@@ -159,6 +159,7 @@ export const getStaticProps = async () => {
         ...entry.fields,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(),
+        heading: 'Welcome to Find, Recruit and Follow-up',
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

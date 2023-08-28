@@ -132,10 +132,10 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
 
 ContactFrfTeam.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode, cookieBanner }: ContactFrfTeamProps
+  { isPreviewMode, cookieBanner, heading }: ContactFrfTeamProps
 ) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -146,6 +146,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: `Contact Find, Recruit and Follow-up specialist team`,
+        heading: 'Contact us',
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(req),

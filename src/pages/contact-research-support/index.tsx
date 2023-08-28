@@ -239,10 +239,10 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
 
 ContactResearchSupport.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode, cookieBanner }: ContactResearchSupportProps
+  { isPreviewMode, cookieBanner, heading }: ContactResearchSupportProps
 ) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -257,6 +257,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: 'Contact research support',
+        heading: 'Get support for your research',
         contacts: emailContacts.map((entry) => entry.fields),
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,

@@ -78,6 +78,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
         fields: entry.fields,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(),
+        heading: entry.fields.title,
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

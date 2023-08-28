@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next'
 
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { render, screen } from '@/config/test-utils'
 import { defaultMock } from '@/mocks/serviceProvider'
 import ContactFrfTeamConfirmation, {
@@ -30,10 +31,16 @@ test('Contact data service provider confirmation page', async () => {
     props: ContactFrfTeamConfirmationProps
   }
 
-  render(<ContactFrfTeamConfirmation {...props} />)
+  render(
+    <RootLayout {...props}>
+      <ContactFrfTeamConfirmation {...props} />
+    </RootLayout>
+  )
 
-  expect(screen.getByRole('heading', { name: 'Thank you', level: 2 })).toBeInTheDocument()
-  expect(screen.getByText(/We have received your enquiry and will be in touch in due course./)).toBeInTheDocument()
+  expect(screen.getByRole('heading', { name: 'Thank you for contacting us', level: 1 })).toBeInTheDocument()
+  expect(
+    screen.getByText(/The FRF central team has received your enquiry and will be in touch in due course./)
+  ).toBeInTheDocument()
   expect(
     screen.getByText(
       /Your enquiry reference number is mock-123. A copy of your enquiry will be sent to your email address./
