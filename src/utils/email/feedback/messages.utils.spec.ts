@@ -47,6 +47,7 @@ describe('getNotificationMessages', () => {
     body,
     signature,
     signatureLogo: 'https://url-to-logo.png',
+    sourceInbox: 'frfteam@nihr.ac.uk',
   }
 
   test('should generate feedback message', () => {
@@ -62,6 +63,7 @@ describe('getNotificationMessages', () => {
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
       },
+      sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const messages = getNotificationMessages(defaultMessageData, contentType)

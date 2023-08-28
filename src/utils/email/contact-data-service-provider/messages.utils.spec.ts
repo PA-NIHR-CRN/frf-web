@@ -51,6 +51,7 @@ describe('getNotificationMessages', () => {
     teamBody: body,
     signature,
     signatureLogo: 'https://url-to-logo.png',
+    sourceInbox: 'frfteam@nihr.ac.uk',
   }
 
   test('should generate feedback message', () => {
@@ -65,6 +66,7 @@ describe('getNotificationMessages', () => {
           signatureLogo: 'https://url-to-logo.png',
           signatureText: '<p>Signature from contentful</p>',
         },
+        sourceInbox: 'frfteam@nihr.ac.uk',
       },
       {
         subject: 'D00029 - Your enquiry has been sent to Test DSP (Find, Recruit & Follow-up)',
@@ -76,6 +78,7 @@ describe('getNotificationMessages', () => {
           signatureLogo: 'https://url-to-logo.png',
           signatureText: '<p>Signature from contentful</p>',
         },
+        sourceInbox: 'frfteam@nihr.ac.uk',
       },
     ]
 
