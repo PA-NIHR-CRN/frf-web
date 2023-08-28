@@ -1,3 +1,4 @@
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { render, screen } from '@/config/test-utils'
 import { successMock } from '@/mocks/generic'
 import { errorMock } from '@/mocks/homepage'
@@ -29,7 +30,11 @@ test('Displays a generic contentful page', async () => {
 
   const { props } = await getStaticProps({ params: { slug } })
 
-  render(<GenericPage {...props} />)
+  render(
+    <RootLayout {...props}>
+      <GenericPage {...props} />
+    </RootLayout>
+  )
 
   // Page title
   expect(document.title).toBe(mockData.metaTitle)
@@ -44,6 +49,9 @@ test('Displays a generic contentful page', async () => {
   expect(document.querySelector("meta[property='og:title']")?.attributes.getNamedItem('content')?.value).toBe(
     mockData.metaTitle
   )
+
+  // Page Heading
+  expect(screen.getByRole('heading', { name: 'Research Support Staff', level: 1 }))
 
   // Title
   expect(screen.getByRole('heading', { name: 'Research support teams', level: 2 }))

@@ -3,6 +3,7 @@ import axios from 'axios'
 import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { render, screen, within } from '@/config/test-utils'
 import { defaultMock } from '@/mocks/contactResearchSupport'
 import Feedback, { FeedbackProps, getServerSideProps } from '@/pages/feedback'
@@ -32,7 +33,13 @@ test('Initial form state', async () => {
     props: FeedbackProps
   }
 
-  const { getByLabelText, getByText, getByRole } = render(<Feedback {...props} />)
+  const { getByLabelText, getByText, getByRole } = render(
+    <RootLayout {...props}>
+      <Feedback {...props} />
+    </RootLayout>
+  )
+
+  expect(screen.getByRole('heading', { name: 'Find, Recruit & Follow-up feedback', level: 1 })).toBeInTheDocument()
 
   expect(screen.getByRole('heading', { name: 'Let us know what you think', level: 2 })).toBeInTheDocument()
 

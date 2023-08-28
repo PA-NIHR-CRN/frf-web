@@ -54,8 +54,10 @@ test('Displays the Home page', async () => {
     mockData.metaTitle
   )
 
+  // Page heading
+  expect(screen.getByRole('heading', { name: 'Welcome to Find, Recruit and Follow-up', level: 1 })).toBeInTheDocument()
+
   // Title + Description
-  // expect(screen.getByRole('heading', { name: mockData.title, level: 2 }))
   expect(screen.getByText(/This website will enable researchers and life sciences companies/)).toBeInTheDocument()
 
   // Video

@@ -26,6 +26,8 @@ test('Default search criteria (no search or filters set)', async () => {
 
   render(<ServiceProviders {...props} />)
 
+  expect(props.heading).toEqual('List of data service providers')
+
   // Title (duplicated by the filters panel mobile only title)
   expect(screen.getAllByText('5 data service providers found')).toHaveLength(2)
 
