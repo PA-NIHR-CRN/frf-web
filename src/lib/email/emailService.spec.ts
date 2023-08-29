@@ -42,6 +42,7 @@ describe('EmailService', () => {
 
     const emailData: EmailArgs = {
       to: ['recipient@example.com'],
+      sourceInbox: 'frfteam@nihr.ac.uk',
       subject: 'Test Subject',
       bodyHtml: '<p>content</p>',
       bodyText: 'content',

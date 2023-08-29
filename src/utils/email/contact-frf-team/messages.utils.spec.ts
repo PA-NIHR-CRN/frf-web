@@ -50,6 +50,7 @@ describe('getNotificationMessages', () => {
     teamBody: body,
     signature,
     signatureLogo: 'https://url-to-logo.png',
+    sourceInbox: 'frfteam@nihr.ac.uk',
   }
 
   test('should generate email messages', () => {
@@ -64,6 +65,7 @@ describe('getNotificationMessages', () => {
           signatureLogo: 'https://url-to-logo.png',
           signatureText: '<p>Signature from contentful</p>',
         },
+        sourceInbox: 'frfteam@nihr.ac.uk',
       },
       {
         subject: 'C00029 - Contact FRF central team enquiry submitted',
@@ -75,6 +77,7 @@ describe('getNotificationMessages', () => {
           signatureLogo: 'https://url-to-logo.png',
           signatureText: '<p>Signature from contentful</p>',
         },
+        sourceInbox: 'frfteam@nihr.ac.uk',
       },
     ]
 

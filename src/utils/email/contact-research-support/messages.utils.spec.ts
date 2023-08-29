@@ -84,6 +84,7 @@ describe('getNotificationMessages', () => {
     teamBody: body,
     signature,
     signatureLogo: 'https://url-to-logo.png',
+    sourceInbox: 'frfteam@nihr.ac.uk',
   }
 
   test('should generate support request message for non-commercial organisation or known LCRN', () => {
@@ -99,6 +100,7 @@ describe('getNotificationMessages', () => {
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
       },
+      sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const messages = getNotificationMessages(defaultMessageData, contacts, contentType)
@@ -119,6 +121,7 @@ describe('getNotificationMessages', () => {
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
       },
+      sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const contactsWithDuplicateLcrnEmail = [
@@ -157,6 +160,7 @@ describe('getNotificationMessages', () => {
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
       },
+      sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const messages = getNotificationMessages(messageData, contacts, contentType)
@@ -184,6 +188,7 @@ describe('getNotificationMessages', () => {
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
       },
+      sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const messages = getNotificationMessages(messageData, contacts, contentType)
@@ -204,6 +209,7 @@ describe('getNotificationMessages', () => {
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
       },
+      sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const messages = getNotificationMessages(defaultMessageData, contacts, contentType)
@@ -224,6 +230,7 @@ describe('getNotificationMessages', () => {
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
       },
+      sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const contactsWithDuplicateLcrnEmail = [

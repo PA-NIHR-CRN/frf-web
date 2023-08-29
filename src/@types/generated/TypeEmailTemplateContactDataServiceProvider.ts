@@ -14,6 +14,12 @@ export interface TypeEmailTemplateContactDataServiceProviderFields {
      */
     title: EntryFieldTypes.Symbol;
     /**
+     * Field type definition for field 'sourceInbox' (Source inbox)
+     * @name Source inbox
+     * @localized false
+     */
+    sourceInbox: EntryFieldTypes.Symbol;
+    /**
      * Field type definition for field 'senderSubject' (Researcher Subject)
      * @name Researcher Subject
      * @localized false
@@ -57,7 +63,7 @@ export interface TypeEmailTemplateContactDataServiceProviderFields {
  * @type {TypeEmailTemplateContactDataServiceProviderSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T19:05:10.798Z
- * @version 7
+ * @version 17
  */
 export type TypeEmailTemplateContactDataServiceProviderSkeleton = EntrySkeletonType<TypeEmailTemplateContactDataServiceProviderFields, "emailTemplateContactDataServiceProvider">;
 /**
@@ -66,6 +72,6 @@ export type TypeEmailTemplateContactDataServiceProviderSkeleton = EntrySkeletonT
  * @type {TypeEmailTemplateContactDataServiceProvider}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T19:05:10.798Z
- * @version 7
+ * @version 17
  */
 export type TypeEmailTemplateContactDataServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateContactDataServiceProviderSkeleton, Modifiers, Locales>;

@@ -14,7 +14,7 @@ export const getNotificationMessages = (
   const messages: EmailArgs[] = []
 
   const { referenceNumber } = messageData
-  const { recipients, subject, body, signature, signatureLogo } = contentType
+  const { recipients, subject, body, signature, signatureLogo, sourceInbox } = contentType
 
   messages.push({
     to: recipients,
@@ -26,6 +26,7 @@ export const getNotificationMessages = (
       signatureText: documentToHtmlString(signature),
       signatureLogo,
     },
+    sourceInbox,
   })
 
   return messages

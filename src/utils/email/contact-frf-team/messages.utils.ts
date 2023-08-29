@@ -16,7 +16,8 @@ export const getNotificationMessages = (
   const messages: EmailArgs[] = []
 
   const { emailAddress, referenceNumber } = messageData
-  const { recipients, senderSubject, senderBody, teamSubject, teamBody, signature, signatureLogo } = contentType
+  const { recipients, senderSubject, senderBody, teamSubject, teamBody, signature, signatureLogo, sourceInbox } =
+    contentType
 
   const templateData = {
     ...messageData,
@@ -30,6 +31,7 @@ export const getNotificationMessages = (
     bodyHtml: documentToHtmlString(teamBody),
     bodyText: documentToPlainTextString(teamBody),
     templateData,
+    sourceInbox,
   })
 
   messages.push({
@@ -38,6 +40,7 @@ export const getNotificationMessages = (
     bodyHtml: documentToHtmlString(senderBody),
     bodyText: documentToPlainTextString(senderBody),
     templateData,
+    sourceInbox,
   })
 
   return messages

@@ -16,7 +16,7 @@ export const getNotificationMessages = (
   const messages: EmailArgs[] = []
 
   const { referenceNumber } = messageData
-  const { senderSubject, senderBody, teamSubject, teamBody, signature, signatureLogo } = contentType
+  const { senderSubject, senderBody, teamSubject, teamBody, signature, signatureLogo, sourceInbox } = contentType
 
   const templateData = {
     ...messageData,
@@ -44,6 +44,7 @@ export const getNotificationMessages = (
         ...supportRequestMessage,
         to: emailAddress as string[],
         templateData: { ...templateData, salutation, regionName: name },
+        sourceInbox,
       })
     }
   }
@@ -58,6 +59,7 @@ export const getNotificationMessages = (
         ...supportRequestMessage,
         to: emailAddress as string[],
         templateData: { ...templateData, salutation, regionName: 'Unknown' },
+        sourceInbox,
       })
     }
   }
@@ -68,6 +70,7 @@ export const getNotificationMessages = (
     subject: senderSubject.replace('{{referenceNumber}}', referenceNumber),
     bodyHtml: documentToHtmlString(senderBody).replaceAll('&#39;', "'"),
     bodyText: documentToPlainTextString(senderBody).replaceAll('&#39;', "'"),
+    sourceInbox,
     templateData: {
       ...templateData,
       salutation: messageData.fullName,
