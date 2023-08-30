@@ -20,6 +20,8 @@
       "fields": {
         "title": "Research Support Staff",
         "slug": "research-support",
+        "metaTitle": "Generic Page Title",
+        "metaDescription": "Generic Page Description",
         "content": {
           "nodeType": "document",
           "data": {},

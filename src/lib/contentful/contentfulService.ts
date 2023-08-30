@@ -6,6 +6,10 @@ import {
   TypeCookieBannerSkeleton,
   TypeEmailContactFields,
   TypeEmailContactSkeleton,
+  TypeEmailTemplateContactDataServiceProviderSkeleton,
+  TypeEmailTemplateContactFrfCentralTeamSkeleton,
+  TypeEmailTemplateContactResearchSupportSkeleton,
+  TypeEmailTemplateFeedbackSkeleton,
   TypeHomepageSkeleton,
   TypePageSkeleton,
   TypeServiceProviderSkeleton,
@@ -14,6 +18,12 @@ import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds } from '@/constants'
 
 export type FilterOptions = Awaited<ReturnType<ContentfulService['getProviderFilterOptionValues']>>
+
+export type EmailTemplateTypes =
+  | 'emailTemplateFeedback'
+  | 'emailTemplateContactFrfCentralTeam'
+  | 'emailTemplateContactResearchSupport'
+  | 'emailTemplateContactDataServiceProvider'
 
 export class ContentfulService {
   constructor(
@@ -147,6 +157,24 @@ export class ContentfulService {
       order: ['fields.name'],
     })
     return entries.items.length ? entries.items : []
+  }
+
+  async getEmailTemplateByType<T extends EmailTemplateTypes>(type: T) {
+    type EmailTemplate = T extends 'emailTemplateFeedback'
+      ? TypeEmailTemplateFeedbackSkeleton
+      : T extends 'emailTemplateContactFrfCentralTeam'
+      ? TypeEmailTemplateContactFrfCentralTeamSkeleton
+      : T extends 'emailTemplateContactResearchSupport'
+      ? TypeEmailTemplateContactResearchSupportSkeleton
+      : T extends 'emailTemplateContactDataServiceProvider'
+      ? TypeEmailTemplateContactDataServiceProviderSkeleton
+      : void
+
+    const entries = await this.contentClient.withoutUnresolvableLinks.getEntries<EmailTemplate>({
+      content_type: type,
+      limit: 1,
+    })
+    return entries.items.length ? entries.items[0] : null
   }
 
   static getOrderFilter(orderType?: OrderType) {

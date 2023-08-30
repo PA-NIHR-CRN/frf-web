@@ -6,47 +6,43 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useClickAway } from 'react-use'
 
-import { PAGE_TITLE } from '@/constants'
 import { menu } from '@/constants/menu'
-
-import HomeIcon from '../Icons/HomeIcon'
 
 function Logo() {
   return (
-    <a
-      href="https://www.nihr.ac.uk"
-      className={clsx(
-        'govuk-header__link govuk-header__link--homepage',
-        'inline-block h-[var(--logo-height)] min-w-[199px] hover:m-0'
-      )}
-      aria-label="Go to the National Institute for Health and Care Research website"
-    >
-      <span className="govuk-header__logotype">
-        <Image
-          src="/assets/logos/nihr.svg"
-          width={322}
-          height={32}
-          alt="National Institute for Health and Care Research logo"
-        />
-      </span>
-    </a>
+    <div className="flex items-center gap-2">
+      <a
+        href="https://www.nihr.ac.uk"
+        className={clsx('govuk-header__link', 'inline-block')}
+        aria-label="Go to the National Institute for Health and Care Research website"
+      >
+        <span className="govuk-header__logotype">
+          <Image
+            src="/assets/logos/nihr.svg"
+            width={179}
+            height={47}
+            alt="National Institute for Health and Care Research logo"
+          />
+        </span>
+      </a>
+      <Link
+        href="/"
+        className={clsx('govuk-header__link', 'inline-block')}
+        aria-label="Go to the Find, Recruit and Follow-up homepage"
+      >
+        <span className="govuk-header__logotype">
+          <div className="flex items-center gap-2">
+            <Image src="/assets/logos/frf.svg" width={108} height={108} alt="Find, Recruit and Follow-up logo" />
+          </div>
+        </span>
+      </Link>
+    </div>
   )
 }
 
 function MenuButton({ navOpen }: { navOpen: boolean }) {
-  const router = useRouter()
-
   return (
     <div className="flex items-center">
-      {router.asPath !== '/' && (
-        <Link
-          href="/"
-          className="mr-1 flex h-[3rem] items-center border-r border-grey-80 px-3"
-          aria-label={`Go to ${PAGE_TITLE} homepage`}
-        >
-          <HomeIcon className="block fill-navy-100" />
-        </Link>
-      )}
       <Link
         href="/browse"
         className="js-disabled-show govuk-button govuk-body mb-0 ml-1 hidden items-center justify-end gap-2 bg-white stroke-navy-100 text-navy-100 underline shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0"
@@ -61,7 +57,7 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
           className={clsx(
             'js-disabled-hide govuk-button govuk-body mb-0 flex items-center justify-end gap-2 shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0',
             {
-              'mt-[26px] bg-[var(--nav-bg)] stroke-white pb-[33px] text-white': navOpen,
+              'mt-[45px] bg-[var(--nav-bg)] stroke-white pb-[52px] text-white': navOpen,
               'bg-white stroke-navy-100 text-navy-100': !navOpen,
             }
           )}
@@ -141,7 +137,7 @@ export function Header() {
       <Collapsible.Root open={navOpen} onOpenChange={setNavOpen}>
         <header
           ref={headerRef}
-          className={clsx('govuk-header flex flex-col items-center border-b border-grey-60 bg-[var(--header-bg)]')}
+          className={clsx('govuk-header flex flex-col border-b border-grey-60 bg-[var(--header-bg)]')}
           role="banner"
         >
           <div

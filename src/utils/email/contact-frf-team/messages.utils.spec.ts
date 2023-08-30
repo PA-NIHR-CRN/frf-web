@@ -1,7 +1,33 @@
-import { EMAIL_FRF_INBOX } from '@/constants'
+import { BLOCKS, Document } from '@contentful/rich-text-types'
+
+import { TypeEmailTemplateContactFrfCentralTeam } from '@/@types/generated'
 import { EmailArgs } from '@/lib/email/emailService'
 
 import { getNotificationMessages, MessageData } from './messages.utils'
+
+const body: Document = {
+  data: {},
+  content: [
+    {
+      data: {},
+      content: [{ data: {}, marks: [], value: 'Body from contentful', nodeType: 'text' }],
+      nodeType: BLOCKS.PARAGRAPH,
+    },
+  ],
+  nodeType: BLOCKS.DOCUMENT,
+}
+
+const signature: Document = {
+  data: {},
+  content: [
+    {
+      data: {},
+      content: [{ data: {}, marks: [], value: 'Signature from contentful', nodeType: 'text' }],
+      nodeType: BLOCKS.PARAGRAPH,
+    },
+  ],
+  nodeType: BLOCKS.DOCUMENT,
+}
 
 describe('getNotificationMessages', () => {
   const defaultMessageData: MessageData = {
@@ -15,23 +41,47 @@ describe('getNotificationMessages', () => {
     workEmailAddress: '', // honeypot
   }
 
+  const contentType: TypeEmailTemplateContactFrfCentralTeam<undefined, ''>['fields'] = {
+    title: 'Email template title',
+    recipients: ['frfteam@nihr.ac.uk'],
+    senderSubject: '{{referenceNumber}} - Contact FRF central team enquiry submitted',
+    senderBody: body,
+    teamSubject: '{{referenceNumber}} - New enquiry for FRF central team',
+    teamBody: body,
+    signature,
+    signatureLogo: 'https://url-to-logo.png',
+    sourceInbox: 'frfteam@nihr.ac.uk',
+  }
+
   test('should generate email messages', () => {
     const expectedMessages: EmailArgs[] = [
       {
         subject: 'C00029 - New enquiry for FRF central team',
-        templateName: 'contact-frf-team/frf-confirmation',
-        to: EMAIL_FRF_INBOX,
-        templateData: defaultMessageData,
+        bodyHtml: '<p>Body from contentful</p>',
+        bodyText: 'Body from contentful',
+        to: ['frfteam@nihr.ac.uk'],
+        templateData: {
+          ...defaultMessageData,
+          signatureLogo: 'https://url-to-logo.png',
+          signatureText: '<p>Signature from contentful</p>',
+        },
+        sourceInbox: 'frfteam@nihr.ac.uk',
       },
       {
         subject: 'C00029 - Contact FRF central team enquiry submitted',
-        templateName: 'contact-frf-team/request-confirmation',
-        to: 'testemail@nihr.ac.uk',
-        templateData: defaultMessageData,
+        bodyHtml: '<p>Body from contentful</p>',
+        bodyText: 'Body from contentful',
+        to: ['testemail@nihr.ac.uk'],
+        templateData: {
+          ...defaultMessageData,
+          signatureLogo: 'https://url-to-logo.png',
+          signatureText: '<p>Signature from contentful</p>',
+        },
+        sourceInbox: 'frfteam@nihr.ac.uk',
       },
     ]
 
-    const messages = getNotificationMessages(defaultMessageData)
+    const messages = getNotificationMessages(defaultMessageData, contentType)
 
     expect(messages).toEqual(expectedMessages)
   })

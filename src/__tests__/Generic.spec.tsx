@@ -1,3 +1,4 @@
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { render, screen } from '@/config/test-utils'
 import { successMock } from '@/mocks/generic'
 import { errorMock } from '@/mocks/homepage'
@@ -10,15 +11,47 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
+jest.mock('next/head', () => {
+  return {
+    __esModule: true,
+    default: ({ children }: { children: unknown }) => {
+      return children
+    },
+  }
+})
+
 const fields = successMock.items[0].fields
 const slug = [fields.slug]
 
 test('Displays a generic contentful page', async () => {
   mockContentfulResponse(successMock)
 
+  const mockData = successMock.items[0].fields
+
   const { props } = await getStaticProps({ params: { slug } })
 
-  render(<GenericPage {...props} />)
+  render(
+    <RootLayout {...props}>
+      <GenericPage {...props} />
+    </RootLayout>
+  )
+
+  // Page title
+  expect(document.title).toBe(mockData.metaTitle)
+
+  // Meta data
+  expect(document.querySelector('meta[name=description]')?.attributes.getNamedItem('content')?.value).toBe(
+    mockData.metaDescription
+  )
+  expect(document.querySelector("meta[property='og:description']")?.attributes.getNamedItem('content')?.value).toBe(
+    mockData.metaDescription
+  )
+  expect(document.querySelector("meta[property='og:title']")?.attributes.getNamedItem('content')?.value).toBe(
+    mockData.metaTitle
+  )
+
+  // Page Heading
+  expect(screen.getByRole('heading', { name: 'Research Support Staff', level: 1 }))
 
   // Title
   expect(screen.getByRole('heading', { name: 'Research support teams', level: 2 }))

@@ -1,0 +1,83 @@
+{
+  "sys": {
+    "type": "Array"
+  },
+  "total": 2,
+  "skip": 0,
+  "limit": 1,
+  "items": [
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "id": "4N8wGAaDH9qYGLrYAbalMA",
+        "type": "Entry",
+        "createdAt": "2023-08-21T15:00:11.462Z",
+        "updatedAt": "2023-08-23T12:24:23.119Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "revision": 12,
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "emailTemplateFeedback"
+          }
+        },
+        "locale": "en-US"
+      },
+      "fields": {
+        "recipients": ["frfteam@nihr.ac.uk"],
+        "subject": "{{referenceNumber}} FRF - feedback received",
+        "body": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "{{#if fullName}}{{fullName}}{{else}}{{emailAddress}}{{/if}} has provided feedback and is happy to be contacted.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            },
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [],
+                  "value": "Please review the details on the Feedback list reference number {{referenceNumber}}.",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "signature": {
+          "data": {},
+          "content": [
+            {
+              "data": {},
+              "content": [
+                {
+                  "data": {},
+                  "marks": [{ "type": "bold" }],
+                  "value": "Find, Recruit and Follow-up",
+                  "nodeType": "text"
+                }
+              ],
+              "nodeType": "paragraph"
+            }
+          ],
+          "nodeType": "document"
+        },
+        "signatureLogo": "https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png"
+      }
+    }
+  ]
+}

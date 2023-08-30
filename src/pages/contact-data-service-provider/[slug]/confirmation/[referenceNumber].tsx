@@ -19,7 +19,6 @@ export default function ContactDataServiceProviderConfirmation({
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
-            <h2 className="govuk-heading-l">Thank you</h2>
             <p>Your enquiry has been sent to {name}.</p>
             <p>
               {referenceNumber && `Your enquiry reference number is ${referenceNumber}. `}A copy of your enquiry will be
@@ -54,6 +53,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: `Thank you for contacting ${name}`,
+        heading: 'Thank you for your enquiry',
         name,
         referenceNumber,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,

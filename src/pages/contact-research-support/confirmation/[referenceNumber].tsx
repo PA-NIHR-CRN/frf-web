@@ -16,7 +16,6 @@ export default function ContactResearchSupportConfirmation({
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
-            <h2 className="govuk-heading-l">Thank you</h2>
             <p>
               Your enquiry has been sent to the relevant research support team and they will be in touch in due course.
             </p>
@@ -44,6 +43,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: 'Thank you for contacting research support',
+        heading: 'Thank you for your enquiry',
         referenceNumber,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(req),

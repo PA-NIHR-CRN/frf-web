@@ -14,7 +14,7 @@ export type GenericPageProps = InferGetStaticPropsType<typeof getStaticProps>
 export default function GenericPage({ fields }: GenericPageProps) {
   return (
     <>
-      <NextSeo title={`${fields.title} - Find, Recruit and Follow-up`} />
+      <NextSeo title={fields.metaTitle} description={fields.metaDescription} />
       <Container>
         <article aria-labelledby={`article-${fields.slug}-title`}>
           <div className="govuk-grid-row">
@@ -78,6 +78,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
         fields: entry.fields,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(),
+        heading: entry.fields.title,
       },
       revalidate: getStaticPropsRevalidateValue(),
     }

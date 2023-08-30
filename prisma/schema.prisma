@@ -27,39 +27,40 @@ model SupportRequest {
 }
 
 model Feedback {
-  id                 Int      @id @default(autoincrement())
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  referenceNumber    String   @default("")
-  helpfulness        String
-  suggestions        String   @db.Text
-  fullName           String?
-  emailAddress       String?
-  organisationName   String?
+  id               Int      @id @default(autoincrement())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  referenceNumber  String   @default("")
+  helpfulness      String
+  suggestions      String   @db.Text
+  fullName         String?
+  emailAddress     String?
+  organisationName String?
 }
 
 model DataServiceProviderRequest {
-  id                 Int      @id @default(autoincrement())
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  referenceNumber    String   @default("")
-  fullName           String
-  emailAddress       String
-  phoneNumber        String?
-  jobRole            String
-  organisationName   String
-  studyDescription   String   @db.Text
+  id               Int      @id @default(autoincrement())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  referenceNumber  String   @default("")
+  dspName          String   @default("")
+  fullName         String
+  emailAddress     String
+  phoneNumber      String?
+  jobRole          String
+  organisationName String
+  studyDescription String   @db.Text
 }
 
 model FrfTeamRequest {
-  id                 Int      @id @default(autoincrement())
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  referenceNumber    String   @default("")
-  fullName           String
-  emailAddress       String
-  phoneNumber        String?
-  jobRole            String
-  organisationName   String
-  details            String   @db.Text
+  id               Int      @id @default(autoincrement())
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  referenceNumber  String   @default("")
+  fullName         String
+  emailAddress     String
+  phoneNumber      String?
+  jobRole          String
+  organisationName String
+  details          String   @db.Text
 }

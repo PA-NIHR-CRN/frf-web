@@ -5,8 +5,9 @@ import { Mock } from 'ts-mockery'
 import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
-import { defaultMock } from '@/mocks/contactResearchSupport'
+import { defaultMock } from '@/mocks/contactDataServiceProvider'
 import { prismaMock } from '@/mocks/prisma'
+import { defaultMock as dataServiceProviderMock } from '@/mocks/serviceProvider'
 import { setupMockServer } from '@/utils'
 import { ContactDataServiceProviderInputs } from '@/utils/schemas/contact-data-service-provider.schema'
 
@@ -32,7 +33,8 @@ const testHandler = async (handler: NextApiHandler, options: RequestOptions) => 
 
 beforeEach(() => {
   jest.clearAllMocks()
-  mockContentfulResponse(defaultMock)
+  mockContentfulResponse(defaultMock, 200, undefined, false, { once: true })
+  mockContentfulResponse(dataServiceProviderMock, 200, undefined, false, { once: true })
   console.error = jest.fn()
 })
 
@@ -55,6 +57,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     createdAt: new Date('123'),
     updatedAt: new Date('123'),
     referenceNumber: '',
+    dspName: 'Genomic Profile Register',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     phoneNumber: '+447443121812',
@@ -74,6 +77,7 @@ test('Successful submission redirects to the confirmation page', async () => {
   // Form data is saved in the database
   expect(prismaMock.dataServiceProviderRequest.create).toHaveBeenCalledWith({
     data: {
+      dspName: 'Genomic Profile Register',
       fullName: 'Test user',
       emailAddress: 'testemail@nihr.ac.uk',
       phoneNumber: '+447443121812',
@@ -92,10 +96,19 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   const [emailOne, emailTwo] = sendEmailSpy.mock.calls
 
-  expect(emailOne[0].to).toBe('mockregion1@nihr.ac.uk')
+  expect(emailOne[0].to).toEqual(['mockregion1@nihr.ac.uk'])
   expect(emailOne[0].templateData.referenceNumber).toEqual('D00999')
-  expect(emailTwo[0].to).toBe('testemail@nihr.ac.uk')
+  expect(emailOne[0].templateData.signatureText).toEqual('<p><b>Find, Recruit and Follow-up</b></p>')
+  expect(emailOne[0].templateData.signatureLogo).toEqual(
+    'https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png'
+  )
+
+  expect(emailTwo[0].to).toEqual(['testemail@nihr.ac.uk'])
   expect(emailTwo[0].templateData.referenceNumber).toEqual('D00999')
+  expect(emailTwo[0].templateData.signatureText).toEqual('<p><b>Find, Recruit and Follow-up</b></p>')
+  expect(emailTwo[0].templateData.signatureLogo).toEqual(
+    'https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png'
+  )
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {

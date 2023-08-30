@@ -18,6 +18,7 @@ export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P
 }
 
 type AppPropsWithLayout = AppProps<{
+  heading: string
   isPreviewMode?: boolean
   page?: string
   cookieBanner?: TypeCookieBanner<undefined, ''>
@@ -41,7 +42,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout =
     Component.getLayout ??
     ((page) => (
-      <RootLayout isPreviewMode={pageProps.isPreviewMode} cookieBanner={pageProps.cookieBanner}>
+      <RootLayout
+        isPreviewMode={pageProps.isPreviewMode}
+        cookieBanner={pageProps.cookieBanner}
+        heading={pageProps.heading}
+      >
         {page}
       </RootLayout>
     ))

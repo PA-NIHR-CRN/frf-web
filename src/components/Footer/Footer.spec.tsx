@@ -5,6 +5,8 @@ import { Footer } from './Footer'
 test('Displays the links & copyright bar', () => {
   render(<Footer />)
 
+  expect(screen.getByAltText('Shaw Trust Logo')).toBeVisible()
+  expect(screen.getByText('Terms and conditions')).toHaveAttribute('href', '/terms-and-conditions')
   expect(screen.getByText('Privacy policy')).toHaveAttribute('href', '/privacy')
   expect(screen.getByText('Accessibility')).toHaveAttribute('href', '/accessibility')
   expect(screen.getByText('© NIHR 2022'))

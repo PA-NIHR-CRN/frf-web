@@ -77,6 +77,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
               If you would like to access this support please complete the form below and a professional from the
               relevant research support infrastructure will get in touch to respond to your request
             </p>
+            <p>All fields are required unless marked as optional.</p>
             <Form
               method="post"
               action="/api/forms/contact-research-support"
@@ -238,10 +239,10 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
 
 ContactResearchSupport.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode, cookieBanner }: ContactResearchSupportProps
+  { isPreviewMode, cookieBanner, heading }: ContactResearchSupportProps
 ) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -256,6 +257,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: 'Contact research support',
+        heading: 'Get support for your research',
         contacts: emailContacts.map((entry) => entry.fields),
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
