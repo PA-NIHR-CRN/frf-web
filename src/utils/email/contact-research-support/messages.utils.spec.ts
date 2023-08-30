@@ -108,6 +108,60 @@ describe('getNotificationMessages', () => {
     expect(messages).toContainEqual(expectedMessage)
   })
 
+  test('should generate support request message for non-commercial organisation or known LCRN with multiple email addresses', () => {
+    const lcrnContactWithMultipleEmailAddresses = [
+      Mock.of<Entry<TypeEmailContactSkeleton>>({
+        fields: {
+          emailAddress: ['tom.christian@nihr.ac.uk', 'dale.christian@nihr.ac.uk'],
+          name: 'Region 0',
+          salutation: 'Mx.',
+          type: 'LCRN - DA',
+        },
+      }),
+      Mock.of<Entry<TypeEmailContactSkeleton>>({
+        fields: {
+          emailAddress: ['bdm@example.com'],
+          name: 'Region 1',
+          salutation: 'Mr.',
+          type: 'BDM',
+        },
+      }),
+      Mock.of<Entry<TypeEmailContactSkeleton>>({
+        fields: {
+          emailAddress: ['frf@example.com'],
+          name: 'Region 2',
+          salutation: 'Ms.',
+          type: 'FRF',
+        },
+      }),
+    ]
+
+    const expectedMessage: EmailArgs = {
+      subject: 'ABC123 - New enquiry via Find, Recruit and Follow-up',
+      bodyHtml: '<p>Body from contentful</p>',
+      bodyText: 'Body from contentful',
+      to: ['tom.christian@nihr.ac.uk', 'dale.christian@nihr.ac.uk'],
+      templateData: {
+        ...defaultMessageData,
+        salutation: 'Mx.',
+        regionName: 'Region 0',
+        signatureLogo: 'https://url-to-logo.png',
+        signatureText: '<p>Signature from contentful</p>',
+        lcrn: 'tom.christian@nihr.ac.uk,dale.christian@nihr.ac.uk',
+      },
+      sourceInbox: 'frfteam@nihr.ac.uk',
+    }
+
+    const messageData: MessageData = {
+      ...defaultMessageData,
+      lcrn: 'tom.christian@nihr.ac.uk,dale.christian@nihr.ac.uk',
+    }
+
+    const messages = getNotificationMessages(messageData, lcrnContactWithMultipleEmailAddresses, contentType)
+
+    expect(messages).toContainEqual(expectedMessage)
+  })
+
   test('support request message for non-commercial organisation or known LCRN with a duplicate email address', () => {
     const expectedMessage: EmailArgs = {
       subject: 'ABC123 - New enquiry via Find, Recruit and Follow-up',
