@@ -12,7 +12,7 @@ export default class FeedbackConfirmationPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.confirmTextBlock = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.returnToHomePageButton = page.locator('a[class="govuk-button"]')
   }
@@ -24,7 +24,7 @@ export default class FeedbackConfirmationPage {
 
   async assertOnFeedbackConfirmationPage() {
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Thank you')
+    await expect(this.headingPageTitle).toHaveText('Thank you for your enquiry')
     expect(this.page.url()).toContain('feedback/confirmation')
   }
 
