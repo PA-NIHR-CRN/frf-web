@@ -13,29 +13,17 @@ test('Displays the header', () => {
   // Skip link
   expect(screen.getByText('Skip to main content')).toHaveAttribute('href', '#main-content')
 
-  // NIHR Logo link
-  const nihrLogoLink = screen.getByRole('link', {
-    name: 'Go to the National Institute for Health and Care Research website',
-  })
-  expect(nihrLogoLink).toHaveAttribute('href', 'https://www.nihr.ac.uk')
-
-  // NIHR Logo image
-  const nihrLogo = screen.getByAltText('National Institute for Health and Care Research logo')
-  expect(nihrLogo).toBeInTheDocument()
-  expect(nihrLogo).toHaveAttribute('height', '47')
-  expect(nihrLogo).toHaveAttribute('width', '179')
-
-  // FRF Logo link
+  // Logo link
   const frfLogoLink = screen.getByRole('link', {
     name: 'Go to the Find, Recruit and Follow-up homepage',
   })
   expect(frfLogoLink).toHaveAttribute('href', '/')
 
-  // FRF Logo image
+  // Logo image
   const frfLogo = screen.getByAltText('Find, Recruit and Follow-up logo')
   expect(frfLogo).toBeInTheDocument()
   expect(frfLogo).toHaveAttribute('height', '108')
-  expect(frfLogo).toHaveAttribute('width', '108')
+  expect(frfLogo).toHaveAttribute('width', '295')
 
   // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
