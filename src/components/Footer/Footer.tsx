@@ -41,20 +41,20 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Footer logos temporarily commented out - these may return once we have confirmation from client */}
-      {/* <div className={clsx('bg-white')} data-testid="frf-footer-logos">
+      <div className={clsx('bg-white')} data-testid="frf-footer-logos">
         <div className="govuk-width-container">
           <div className="m-auto flex max-w-[320px] flex-wrap items-center justify-center gap-8 py-7 sm:max-w-none md:flex-nowrap lg:justify-between">
-            <a href="#" target="_blank" className="max-w-[240px] lg:w-auto">
+            <a href="https://www.nihr.ac.uk" className="max-w-[240px] lg:w-auto">
               <Image
-                src="/assets/logos/nihr.svg"
+                src="/assets/logos/nihr-full.svg"
                 width={240}
                 height={24}
-                alt="National Institute for Health and Care Research logo (opens in a new window)"
+                alt="National Institute for Health and Care Research logo"
                 className="mx-auto"
               />
             </a>
-            <a href="#" target="_blank" className="max-w-[240px] lg:w-auto">
+            {/* Footer logos temporarily commented out - these may return once we have confirmation from client */}
+            {/* <a href="#" target="_blank" className="max-w-[240px] lg:w-auto">
               <Image
                 src="/assets/logos/hsc-public-health-agency.svg"
                 width={253}
@@ -80,10 +80,10 @@ export function Footer() {
                 alt="Health Care Research Wales logo (opens in a new window)"
                 className="mx-auto"
               />
-            </a>
+            </a> */}
           </div>
         </div>
-      </div> */}
+      </div>
     </footer>
   )
 }

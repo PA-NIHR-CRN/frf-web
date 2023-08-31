@@ -5,6 +5,7 @@ import { Footer } from './Footer'
 test('Displays the links & copyright bar', () => {
   render(<Footer />)
 
+  expect(screen.getByAltText('National Institute for Health and Care Research logo')).toBeVisible()
   expect(screen.getByAltText('Shaw Trust Logo')).toBeVisible()
   expect(screen.getByText('Terms and conditions')).toHaveAttribute('href', '/terms-and-conditions')
   expect(screen.getByText('Privacy policy')).toHaveAttribute('href', '/privacy')
@@ -12,21 +13,20 @@ test('Displays the links & copyright bar', () => {
   expect(screen.getByText('© NIHR 2022'))
 })
 
-// TODO Footer logos may return once confirmed from client
-test.skip.each([
-  ['National Institute for Health and Care Research', '#', { w: 240, h: 24 }],
-  ['HSC Public Health Agency', '#', { w: 253, h: 97 }],
-  ['NHS Scotland', '#', { w: 153, h: 130 }],
-  ['Health Care Research Wales', '#', { w: 168, h: 106 }],
+test.each([
+  ['National Institute for Health and Care Research', 'https://www.nihr.ac.uk', { w: 240, h: 24 }],
+  // ['HSC Public Health Agency', '#', { w: 253, h: 97 }],
+  // ['NHS Scotland', '#', { w: 153, h: 130 }],
+  // ['Health Care Research Wales', '#', { w: 168, h: 106 }],
 ])('Displays the %s logo and link', (name, href, sizes) => {
   render(<Footer />)
 
   // Link
-  const link = screen.getByRole('link', { name: `${name} logo (opens in a new window)` })
+  const link = screen.getByRole('link', { name: `${name} logo` })
   expect(link).toHaveAttribute('href', href)
 
   // Logo
-  const logo = screen.getByAltText(`${name} logo (opens in a new window)`)
+  const logo = screen.getByAltText(`${name} logo`)
   expect(logo).toBeInTheDocument()
   expect(logo).toHaveAttribute('height', String(sizes.h))
   expect(logo).toHaveAttribute('width', String(sizes.w))
