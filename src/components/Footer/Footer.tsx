@@ -46,7 +46,7 @@ export function Footer() {
           <div className="m-auto flex max-w-[320px] flex-wrap items-center justify-center gap-8 py-7 sm:max-w-none md:flex-nowrap lg:justify-between">
             <a href="https://www.nihr.ac.uk" className="max-w-[240px] lg:w-auto">
               <Image
-                src="/assets/logos/nihr.svg"
+                src="/assets/logos/nihr-full.svg"
                 width={240}
                 height={24}
                 alt="National Institute for Health and Care Research logo"
