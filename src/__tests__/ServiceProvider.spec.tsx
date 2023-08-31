@@ -30,7 +30,7 @@ test('Service provider detail', async () => {
   render(await getComponent())
 
   // Page heading
-  expect(screen.getByRole('heading', { name: 'Data Service Provider', level: 1 })).toBeInTheDocument()
+  expect(screen.getByRole('heading', { name: 'Data Service Provider details', level: 1 })).toBeInTheDocument()
 
   // Back link
   expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(

@@ -265,7 +265,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
     return {
       props: {
         page: `Data service provider (detail) - ${fields.name}`,
-        heading: 'Data Service Provider',
+        heading: 'Data Service Provider details',
         fields,
         createdAt,
         updatedAt,
