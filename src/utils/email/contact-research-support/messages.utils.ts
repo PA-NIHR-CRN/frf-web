@@ -30,15 +30,10 @@ export const getNotificationMessages = (
     bodyText: documentToPlainTextString(teamBody).replaceAll('&#39;', "'"),
   } as const
 
-  const lcrnEmailAddresses = messageData.lcrn.split(',')
-
   // FRF-70 AC1/AC4
   if (messageData.organisationType === 'nonCommercial' || messageData.lcrn !== 'unknown') {
     const contact = contacts.find(
-      (contact) =>
-        Array.isArray(contact.fields.emailAddress) &&
-        contact.fields.emailAddress.some((contact) => lcrnEmailAddresses.includes(contact)) &&
-        contact.fields.type === 'LCRN - DA'
+      (contact) => contact.fields.name === messageData.lcrn && contact.fields.type === 'LCRN - DA'
     )
     if (contact) {
       const { emailAddress, name, salutation } = contact.fields
@@ -79,12 +74,8 @@ export const getNotificationMessages = (
       regionName:
         messageData.lcrn === 'unknown'
           ? 'Unknown'
-          : contacts.find(
-              (contact) =>
-                Array.isArray(contact.fields.emailAddress) &&
-                contact.fields.emailAddress.some((contact) => lcrnEmailAddresses.includes(contact)) &&
-                contact.fields.type === 'LCRN - DA'
-            )?.fields.name,
+          : contacts.find((contact) => contact.fields.name === messageData.lcrn && contact.fields.type === 'LCRN - DA')
+              ?.fields.name,
     },
   })
 

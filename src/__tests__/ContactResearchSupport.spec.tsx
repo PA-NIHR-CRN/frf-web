@@ -122,8 +122,8 @@ test('Initial form state', async () => {
 
   expect(within(regionSelect).getByText('-')).toHaveAttribute('selected')
   expect(within(regionSelect).getByText('-')).toHaveValue('')
-  expect(within(regionSelect).getByText('Mock region 1')).toHaveValue('mockregion1@nihr.ac.uk')
-  expect(within(regionSelect).getByText('Mock region 2')).toHaveValue('mockregion2@nihr.ac.uk')
+  expect(within(regionSelect).getByText('Mock region 1')).toHaveValue('Mock region 1')
+  expect(within(regionSelect).getByText('Mock region 2')).toHaveValue('Mock region 2')
   expect(within(regionSelect).queryByText('Unknown')).not.toBeInTheDocument()
 
   // Study title (optional)

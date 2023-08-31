@@ -61,7 +61,7 @@ describe('getNotificationMessages', () => {
 
   const defaultMessageData: MessageData = {
     organisationType: 'nonCommercial',
-    lcrn: 'lcrn@example.com',
+    lcrn: 'Region 0',
     emailAddress: 'researcher@example.com',
     fullName: 'John Doe',
     referenceNumber: 'ABC123',
@@ -147,14 +147,14 @@ describe('getNotificationMessages', () => {
         regionName: 'Region 0',
         signatureLogo: 'https://url-to-logo.png',
         signatureText: '<p>Signature from contentful</p>',
-        lcrn: 'tom.christian@nihr.ac.uk,dale.christian@nihr.ac.uk',
+        lcrn: 'Region 0',
       },
       sourceInbox: 'frfteam@nihr.ac.uk',
     }
 
     const messageData: MessageData = {
       ...defaultMessageData,
-      lcrn: 'tom.christian@nihr.ac.uk,dale.christian@nihr.ac.uk',
+      lcrn: 'Region 0',
     }
 
     const messages = getNotificationMessages(messageData, lcrnContactWithMultipleEmailAddresses, contentType)
