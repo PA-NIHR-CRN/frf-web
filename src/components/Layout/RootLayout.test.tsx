@@ -8,7 +8,7 @@ jest.mock('next/router', () => require('next-router-mock'))
 export const assertRootLayout = (heading: string) => {
   // Header
   const header = screen.getByRole('banner')
-  expect(within(header).getByAltText('National Institute for Health and Care Research logo')).toBeInTheDocument()
+  expect(within(header).getByAltText('Find, Recruit and Follow-up logo')).toBeInTheDocument()
 
   // Phase Banner
   const banner = screen.getByTestId('frf-phase-banner')
