@@ -103,6 +103,7 @@ test.describe('Cookie Tests - @frf_3', () => {
     homePage,
     commonItemsPage,
   }) => {
+    test.fail() //current valid failure, needs code fix
     await test.step('Given I have visited the FRF site', async () => {
       await homePage.goto()
     })

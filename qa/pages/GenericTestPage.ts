@@ -159,7 +159,7 @@ export default class GenericTestPage {
         expect(await this.page.context().pages().at(1)?.title()).toEqual('Identity Gateway')
         break
       case 'secondary':
-        expect(await this.page.title()).toEqual('Welcome to Find, Recruit and Follow-up')
+        expect(await this.page.title()).toEqual('Find, Recruit & Follow-Up Test')
         break
       case 'contact':
         await this.page.waitForURL('/feedback')

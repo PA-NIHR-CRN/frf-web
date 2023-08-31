@@ -35,7 +35,7 @@ export default class ContactFrfTeamConfirmationPage {
   async assertConfirmationPageTextBlock() {
     await expect(this.confirmTextBlocks.first()).toBeVisible()
     await expect(this.confirmTextBlocks.first()).toContainText(
-      'We have received your enquiry and will be in touch in due course.'
+      'The FRF central team has received your enquiry and will be in touch in due course.'
     )
     await expect(this.confirmTextBlocks.nth(1)).toContainText(
       'A copy of your enquiry will be sent to your email address.'

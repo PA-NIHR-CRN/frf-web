@@ -134,7 +134,7 @@ test.describe('Cookie Confirmation Tests - @frf_3', () => {
       await commonItemsPage.assertCookieBannerOptionsAppear()
     })
     await test.step('When I navigate back to the Homepage', async () => {
-      await commonItemsPage.btnHomeIcon.click()
+      await commonItemsPage.frfHeaderLogo.click()
     })
     await test.step('Then the Cookie Banner is not Visible', async () => {
       await commonItemsPage.assertCookieBannerAppears(false)

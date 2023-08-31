@@ -87,26 +87,18 @@ test.describe('Home Page Smoke Tests - @frf_4', () => {
     await test.step('Given I have navigated to the Providers Page', async () => {
       await providersPage.goto()
     })
-    await test.step('When I click the FRF Banner Title', async () => {
-      await commonItemsPage.frfServiceTitle.locator('a').click()
+    await test.step('And I should see the FRF Logo in the Header', async () => {
+      await commonItemsPage.assertFrfLogoHeaderVisible()
+    })
+    await test.step('When I click the FRF Logo in the Header', async () => {
+      await commonItemsPage.frfHeaderLogo.click()
     })
     await test.step('Then I should see the Home Page', async () => {
       await homePage.assertOnHomePage()
     })
-    await test.step('Given I have navigated to the Privacy Page', async () => {
-      await privacyPage.goto()
-    })
-    await test.step('And I should see the "Home" Icon', async () => {
-      await commonItemsPage.assertHomeIconVisible()
-    })
-    await test.step('When I click the Home Icon', async () => {
-      await commonItemsPage.btnHomeIcon.click()
-    })
-    await test.step('Then I should see the Home Page', async () => {
-      await homePage.assertOnHomePage()
-    })
-    await test.step('Then I should not see the Home Icon', async () => {
-      await commonItemsPage.assertHomeIconHidden()
-    })
+    //navigate elsewhere, click footer logo when added and check on home
+    // await test.step('Then I should not see the Home Icon', async () => {
+    //   await commonItemsPage.assertHomeIconHidden()
+    // })
   })
 })

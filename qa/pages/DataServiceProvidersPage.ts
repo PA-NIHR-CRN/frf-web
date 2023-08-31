@@ -23,7 +23,7 @@ export default class DataServiceProvidersPage {
   async assertOnDataServiceProvidersPage() {
     await expect(this.page).toHaveURL('data-service-providers')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Data service providers')
+    await expect(this.headingPageTitle).toHaveText('Information for data service providers')
   }
 
   async assertContactFrfButtonPresent() {

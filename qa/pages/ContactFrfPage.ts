@@ -5,7 +5,8 @@ import { convertPromiseStringToNumber } from '../utils/UtilFunctions'
 //Declare Page Objects
 export default class ContactFrfPage {
   readonly page: Page
-  readonly headingPageTitle: Locator
+  readonly pageTitle: Locator
+  readonly pageHeading: Locator
   readonly contactFrfForm: Locator
   readonly contactFrfFormTxtBlocks: Locator
   readonly formEnquiryDetailsLbl: Locator
@@ -47,7 +48,8 @@ export default class ContactFrfPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageHeading = page.locator('h2[class="govuk-heading-l"]')
     this.contactFrfForm = page.locator('form[action="/api/forms/contact-frf-team"]')
     this.contactFrfFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.formEnquiryDetailsLbl = page.locator('label[id="details-label"]')
@@ -92,8 +94,10 @@ export default class ContactFrfPage {
 
   async assertOnContactFrfPage() {
     await expect(this.page).toHaveURL('contact-frf-team')
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact Find, Recruit and Follow-up central team')
+    await expect(this.pageTitle).toBeVisible()
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Contact us')
+    await expect(this.pageHeading).toHaveText('Contact Find, Recruit and Follow-up central team')
   }
 
   async assertContactFrfFormPresent() {
@@ -296,7 +300,9 @@ export default class ContactFrfPage {
 
   async assertOnContactFrfErrorPage() {
     await expect(this.page).toHaveURL('contact-frf-team?fatal=1')
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact Find, Recruit and Follow-up central team')
+    await expect(this.pageTitle).toBeVisible()
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Contact us')
+    await expect(this.pageHeading).toHaveText('Contact Find, Recruit and Follow-up central team')
   }
 }

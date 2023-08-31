@@ -29,8 +29,12 @@ export default class FeedbackConfirmationPage {
   }
 
   async assertFeedbackPageTextBlock() {
-    await expect(this.confirmTextBlock).toBeVisible()
-    await expect(this.confirmTextBlock).toHaveText(
+    await expect(this.confirmTextBlock.first()).toBeVisible()
+    await expect(this.confirmTextBlock.nth(1)).toBeVisible()
+    await expect(this.confirmTextBlock.first()).toHaveText(
+      'Your feedback has been received and will help us to improve the FRF website.'
+    )
+    await expect(this.confirmTextBlock.nth(1)).toHaveText(
       'If you have provided contact details we may contact you in the near future for further feedback.'
     )
   }

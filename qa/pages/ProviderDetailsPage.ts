@@ -3,6 +3,7 @@ import { expect, Locator, Page } from '@playwright/test'
 //Declare Page Objects
 export default class ProviderDetailsPage {
   readonly page: Page
+  readonly pageTitle: Locator
   readonly linkBackToProviders: Locator
   readonly dspDetailName: Locator
   readonly dspDetailSidebar: Locator
@@ -63,6 +64,7 @@ export default class ProviderDetailsPage {
     this.page = page
 
     //Locators
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.linkBackToProviders = page.locator('a[class="govuk-back-link"]')
     this.dspDetailName = page.locator('h2[class="govuk-heading-l mb-2"]')
     this.dspDetailSidebar = page.locator('div[data-testid="frf-dsp-sidebar"]')
@@ -177,7 +179,9 @@ export default class ProviderDetailsPage {
   }
 
   async assertOnProviderDetailsPage() {
+    await expect(this.pageTitle).toBeVisible()
     await expect(this.linkBackToProviders).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Data Service Provider details')
     await expect(this.linkBackToProviders).toHaveText('Back to list of data service providers')
     await expect(this.dspDetailName).toBeVisible()
     await expect(this.dspDetailSidebar).toBeVisible()

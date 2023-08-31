@@ -7,10 +7,12 @@ export default class CommonItemsPage {
   readonly page: Page
   readonly linkPrivacy: Locator
   readonly linkAccessibility: Locator
+  readonly linkCookiePolicy: Locator
+  readonly linkTermsConditions: Locator
   readonly frfHeader: Locator
   readonly frfFooterLinks: Locator
   readonly frfFooterLogos: Locator
-  readonly frfServiceTitle: Locator
+  readonly frfPageTitle: Locator
   readonly nihrLogo: Locator
   readonly bannerGdsBeta: Locator
   readonly linkFeedback: Locator
@@ -24,7 +26,7 @@ export default class CommonItemsPage {
   readonly txtLinkDescriptions: Locator
   readonly txtSiteMenuIntro: Locator
   readonly siteSeoMetaTag: Locator
-  readonly btnHomeIcon: Locator
+  readonly frfHeaderLogo: Locator
   readonly cookieBanner: Locator
   readonly cookieBannerAccept: Locator
   readonly cookieBannerReject: Locator
@@ -44,10 +46,12 @@ export default class CommonItemsPage {
     //Locators
     this.linkPrivacy = page.locator('a', { hasText: 'Privacy policy' })
     this.linkAccessibility = page.locator('a', { hasText: 'Accessibility' })
+    this.linkCookiePolicy = page.locator('a', { hasText: 'Cookie policy' })
+    this.linkTermsConditions = page.locator('a', { hasText: 'Terms and conditions' })
     this.frfHeader = page.locator('div[data-testid="frf-panel"]')
     this.frfFooterLinks = page.locator('div[data-testid="frf-footer-links"]')
     this.frfFooterLogos = page.locator('div[data-testid="frf-footer-logos"]')
-    this.frfServiceTitle = page.locator('h1[class="govuk-panel__title heading-underscore"]')
+    this.frfPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.nihrLogo = page.locator('img[alt="National Institute for Health and Care Research logo"]')
     this.bannerGdsBeta = page.locator('strong[class="govuk-tag govuk-phase-banner__content__tag"]')
     this.linkFeedback = page.locator('a', { hasText: 'feedback' })
@@ -77,7 +81,7 @@ export default class CommonItemsPage {
     this.txtLinkDescriptions = page.locator('p[class="govuk-body-s text-white"]')
     this.txtSiteMenuIntro = page.locator('p[class="govuk-heading-s max-w-[300px] font-normal text-white"]')
     this.siteSeoMetaTag = page.locator('meta[name="robots"]')
-    this.btnHomeIcon = page.locator('svg[data-testid="frf-icon-home"]')
+    this.frfHeaderLogo = page.locator('img[alt="Find, Recruit and Follow-up logo"]')
     this.cookieBanner = page.locator(
       'div[class="govuk-cookie-banner govuk-!-padding-top-5 govuk-!-padding-bottom-3 w-full"]'
     )
@@ -103,11 +107,12 @@ export default class CommonItemsPage {
     await expect(this.frfFooterLinks).toBeVisible()
     await expect(this.linkPrivacy).toBeVisible()
     await expect(this.linkAccessibility).toBeVisible()
+    await expect(this.linkCookiePolicy).toBeVisible()
+    await expect(this.linkTermsConditions).toBeVisible()
   }
 
   async assertServiceTitleCorrect() {
-    await expect(this.frfServiceTitle).toBeVisible()
-    await expect(this.frfServiceTitle).toHaveText('Find, Recruit and Follow-up')
+    await expect(this.frfPageTitle).toBeVisible()
   }
 
   async assertNihrLogoPresent() {
@@ -165,13 +170,13 @@ export default class CommonItemsPage {
     await expect(this.siteSeoMetaTag).toHaveAttribute('content', 'noindex,nofollow')
   }
 
-  async assertHomeIconVisible() {
-    await expect(this.btnHomeIcon).toBeVisible()
+  async assertFrfLogoHeaderVisible() {
+    await expect(this.frfHeaderLogo).toBeVisible()
   }
 
-  async assertHomeIconHidden() {
-    await expect(this.btnHomeIcon).toBeHidden()
-  }
+  // async assertHomeIconHidden() {
+  //   await expect(this.btnHomeIcon).toBeHidden()
+  // }
 
   async assertCookieBannerAppears(visible: boolean) {
     if (visible) {

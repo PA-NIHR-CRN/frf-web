@@ -5,6 +5,7 @@ import { confirmStringNotNull, numDaysBetween } from '../utils/UtilFunctions'
 //Declare Page Objects
 export default class ProvidersPage {
   readonly page: Page
+  readonly pageTitle: Locator
   readonly focAllText: string
   readonly focNoncCommText: string
   readonly chargeableText: string
@@ -45,6 +46,8 @@ export default class ProvidersPage {
   readonly dspListTypeDataHeader: Locator
   readonly dspListTypeDataList: Locator
   readonly dspListLoading: Locator
+  readonly dspOrderedList: Locator
+  readonly dspNoResultsSection: Locator
   readonly dspNoResultsHeader: Locator
   readonly dspNoResultHelpMsg: Locator
   readonly dspNoResultHelpList: Locator
@@ -100,6 +103,7 @@ export default class ProvidersPage {
     this.chargeableText = 'Chargeable service'
 
     //List Locators
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.btnViewMoreDetails = page.locator('a[class="govuk-button mb-0 whitespace-nowrap"]')
     this.dspListArticle = page.locator('ol[class="mt-5"]')
     this.dspListPageTitle = page.locator('p[class="govuk-heading-m mb-0 whitespace-nowrap"]')
@@ -149,6 +153,8 @@ export default class ProvidersPage {
       'div[class="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0"] ul[class="govuk-list govuk-list--bullet"]'
     )
     this.dspListLoading = page.locator('p[class="govuk-body mt-5 min-h-[40rem]"]')
+    this.dspOrderedList = page.locator('ol[aria-label="Data service providers"]')
+    this.dspNoResultsSection = page.locator('div[class="govuk-!-margin-top-8 govuk-body"]')
     this.dspNoResultsHeader = page.locator('h3[class="govuk-heading-l"]')
     this.dspNoResultHelpMsg = page.locator('p[id="improve-search-results"]')
     this.dspNoResultHelpList = page.locator('ul[aria-labelledby="improve-search-results"]')
@@ -229,7 +235,9 @@ export default class ProvidersPage {
   }
 
   async assertOnProvidersPage() {
+    await expect(this.pageTitle).toBeVisible()
     await expect(this.btnViewMoreDetails.nth(0)).toBeVisible()
+    await expect(this.pageTitle).toHaveText('List of data service providers')
     expect(this.page.url()).toContain('/providers')
   }
 
@@ -332,8 +340,8 @@ export default class ProvidersPage {
     await expect(this.dspResultSuitedHeader.nth(0)).toBeVisible()
     await expect(this.dspResultSuitedList.nth(0)).toBeVisible()
     await expect(this.dspResultSuitedList.nth(0).locator('li')).toHaveCount(4)
-    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(0).textContent()).toEqual('Drug development trials')
-    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(3).textContent()).toEqual('Large patient cohorts')
+    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(0).textContent()).toEqual('Large patient cohorts')
+    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(3).textContent()).toEqual('Drug development trials')
   }
 
   async assertDspFirstPubLastUpdate() {
@@ -1058,9 +1066,10 @@ export default class ProvidersPage {
   }
 
   async waitForListReload() {
-    await this.dspListLoading.waitFor()
-    await expect(this.dspListLoading).toHaveText('Loading...')
+    // await this.dspListLoading.waitFor()
     await this.dspListLoading.waitFor({ state: 'detached' })
+    await this.dspOrderedList.or(this.dspNoResultsSection).waitFor({ state: 'visible' })
+    await expect(this.dspResultArticle.first().or(this.dspNoResultsHeader)).toBeVisible()
   }
 
   async assertResultsReduced(previousNoResults: number, currentNoResults: number) {

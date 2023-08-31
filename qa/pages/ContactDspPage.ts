@@ -5,7 +5,8 @@ import { convertPromiseStringToNumber } from '../utils/UtilFunctions'
 //Declare Page Objects
 export default class ContactDspPage {
   readonly page: Page
-  readonly headingPageTitle: Locator
+  readonly pageTitle: Locator
+  readonly pageHeading: Locator
   readonly contactDspForm: Locator
   readonly contactDspFormTxtBlocks: Locator
   readonly formEnquiryDetailsLbl: Locator
@@ -47,7 +48,8 @@ export default class ContactDspPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageHeading = page.locator('h2[class="govuk-heading-l"]')
     this.contactDspForm = page.locator('form[method="post"]')
     this.contactDspFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.formEnquiryDetailsLbl = page.locator('label[id="studyDescription-label"]')
@@ -91,8 +93,10 @@ export default class ContactDspPage {
   }
 
   async assertOnContactDspPage(dspName: string) {
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText(`Get in touch with ${dspName}`)
+    await expect(this.pageTitle).toBeVisible()
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Contact data service provider')
+    await expect(this.pageHeading).toHaveText(`Get in touch with ${dspName}`)
     expect(this.page.url()).toContain('contact-data-service-provider/')
   }
 
@@ -292,7 +296,9 @@ export default class ContactDspPage {
   async assertOnContactDspErrorPage(dspName: string) {
     expect(this.page.url()).toContain('contact-data-service-provider/')
     expect(this.page.url()).toContain('?fatal=1')
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText(`Get in touch with ${dspName}`)
+    await expect(this.pageTitle).toBeVisible()
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Contact data service provider')
+    await expect(this.pageHeading).toHaveText(`Get in touch with ${dspName}`)
   }
 }
