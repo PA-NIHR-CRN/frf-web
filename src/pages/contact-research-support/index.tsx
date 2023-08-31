@@ -186,8 +186,8 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                   <Option value="" disabled>
                     -
                   </Option>
-                  {contacts.map(({ name, emailAddress }) => (
-                    <Option key={name} value={emailAddress}>
+                  {contacts.map(({ name }) => (
+                    <Option key={name} value={name}>
                       {name}
                     </Option>
                   ))}
