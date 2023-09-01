@@ -50,7 +50,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     organisationType: 'nonCommercial',
-    lcrn: 'mockregion1@nihr.ac.uk',
+    lcrn: 'Mock region 1',
     studyTitle: '',
     protocolReference: '',
     cpmsId: '',
@@ -71,7 +71,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     organisationType: 'nonCommercial',
-    lcrn: 'mockregion1@nihr.ac.uk',
+    lcrn: 'Mock region 1',
     studyTitle: '',
     protocolReference: '',
     cpmsId: '',
@@ -92,7 +92,7 @@ test('Successful submission redirects to the confirmation page', async () => {
       jobRole: 'Researcher',
       organisationName: 'NIHR',
       organisationType: 'nonCommercial',
-      lcrn: 'mockregion1@nihr.ac.uk',
+      lcrn: 'Mock region 1',
       studyTitle: '',
       protocolReference: '',
       cpmsId: '',
@@ -131,14 +131,14 @@ test('Validation error redirects back to the form with the errors and original v
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
-    lcrn: 'lcrnregion@nihr.ac.uk',
+    lcrn: 'Mock region 1',
     workEmailAddress: '', // honeypot
   }
 
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe(
-    '/contact-research-support?supportDescriptionError=Required&emailAddressError=Enter+a+valid+email+address&organisationTypeError=Select+the+type+of+organisation&studyTitleError=Required&protocolReferenceError=Required&cpmsIdError=Required&enquiryType=data&fullName=Test+user&emailAddress=invalid&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&lcrn=lcrnregion%40nihr.ac.uk'
+    '/contact-research-support?supportDescriptionError=Required&emailAddressError=Enter+a+valid+email+address&organisationTypeError=Select+the+type+of+organisation&studyTitleError=Required&protocolReferenceError=Required&cpmsIdError=Required&enquiryType=data&fullName=Test+user&emailAddress=invalid&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&lcrn=Mock+region+1'
   )
 })
 

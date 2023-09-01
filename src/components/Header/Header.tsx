@@ -10,33 +10,17 @@ import { menu } from '@/constants/menu'
 
 function Logo() {
   return (
-    <div className="flex items-center gap-2">
-      <a
-        href="https://www.nihr.ac.uk"
-        className={clsx('govuk-header__link', 'inline-block')}
-        aria-label="Go to the National Institute for Health and Care Research website"
-      >
-        <span className="govuk-header__logotype">
-          <Image
-            src="/assets/logos/nihr.svg"
-            width={179}
-            height={47}
-            alt="National Institute for Health and Care Research logo"
-          />
-        </span>
-      </a>
-      <Link
-        href="/"
-        className={clsx('govuk-header__link', 'inline-block')}
-        aria-label="Go to the Find, Recruit and Follow-up homepage"
-      >
-        <span className="govuk-header__logotype">
-          <div className="flex items-center gap-2">
-            <Image src="/assets/logos/frf.svg" width={108} height={108} alt="Find, Recruit and Follow-up logo" />
-          </div>
-        </span>
-      </Link>
-    </div>
+    <Link
+      href="/"
+      className={clsx('govuk-header__link', 'inline-block')}
+      aria-label="Go to the Find, Recruit and Follow-up homepage"
+    >
+      <span className="govuk-header__logotype">
+        <div className="flex items-center gap-2">
+          <Image src="/assets/logos/nihr-frf.svg" width={295} height={108} alt="Find, Recruit and Follow-up logo" />
+        </div>
+      </span>
+    </Link>
   )
 }
 
