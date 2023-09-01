@@ -109,8 +109,7 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
       await genericTestPage.goto('/chris-testing-page')
     })
     await test.step('When I Click the Hyperlink', async () => {
-      await genericTestPage.linkText.click()
-      await genericTestPage.page.waitForLoadState('domcontentloaded')
+      await genericTestPage.clickExternalSiteLink()
     })
     await test.step('Then I am taken to the Hyperlinked Page', async () => {
       await genericTestPage.assertOnLinkedPage('BBC')

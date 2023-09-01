@@ -406,9 +406,10 @@ export default class ProviderDetailsPage {
     await newPage.waitForURL('https://www.bbc.co.uk/news/health'),
       await newPage.waitForLoadState('domcontentloaded'),
       expect(await newPage.title()).toEqual('Health - BBC News')
+    //doing assertion here as otherwise the page context is destroyed/closed during parrallel execution
   }
 
-  async assertOnNewTab() {
+  async assertNewTabOpened() {
     expect(this.page.context().pages().length).toEqual(2)
     expect(await this.page.context().pages().at(0)?.title()).toEqual(
       'Further details for Testing DSP - Find, Recruit and Follow-up'

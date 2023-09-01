@@ -185,7 +185,7 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
       await providerDetailsPage.clickExternalSiteLink()
     })
     await test.step('Then I will be taken to the External Site in a new tab', async () => {
-      await providerDetailsPage.assertOnNewTab()
+      await providerDetailsPage.assertNewTabOpened()
     })
   })
 
