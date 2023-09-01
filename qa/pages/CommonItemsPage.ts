@@ -13,7 +13,7 @@ export default class CommonItemsPage {
   readonly frfFooterLinks: Locator
   readonly frfFooterLogos: Locator
   readonly frfPageTitle: Locator
-  readonly nihrLogo: Locator
+  readonly nihrFooterLogo: Locator
   readonly bannerGdsBeta: Locator
   readonly linkFeedback: Locator
   readonly btnClosedSiteMenu: Locator
@@ -52,7 +52,7 @@ export default class CommonItemsPage {
     this.frfFooterLinks = page.locator('div[data-testid="frf-footer-links"]')
     this.frfFooterLogos = page.locator('div[data-testid="frf-footer-logos"]')
     this.frfPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
-    this.nihrLogo = page.locator('img[alt="National Institute for Health and Care Research logo"]')
+    this.nihrFooterLogo = page.locator('img[alt="National Institute for Health and Care Research logo"]')
     this.bannerGdsBeta = page.locator('strong[class="govuk-tag govuk-phase-banner__content__tag"]')
     this.linkFeedback = page.locator('a', { hasText: 'feedback' })
     this.btnClosedSiteMenu = page.locator('button[aria-label="Show navigation menu"]')
@@ -109,14 +109,19 @@ export default class CommonItemsPage {
     await expect(this.linkAccessibility).toBeVisible()
     await expect(this.linkCookiePolicy).toBeVisible()
     await expect(this.linkTermsConditions).toBeVisible()
+    //shaws trust
   }
 
   async assertServiceTitleCorrect() {
     await expect(this.frfPageTitle).toBeVisible()
   }
 
+  async assertFrfLogoPresent() {
+    await expect(this.frfHeaderLogo).toBeVisible()
+  }
+
   async assertNihrLogoPresent() {
-    await expect(this.nihrLogo).toBeVisible()
+    await expect(this.nihrFooterLogo).toBeVisible()
   }
 
   async assertBetaGdsBannerAppears() {
@@ -169,14 +174,6 @@ export default class CommonItemsPage {
   async assertSeoIsDisabled() {
     await expect(this.siteSeoMetaTag).toHaveAttribute('content', 'noindex,nofollow')
   }
-
-  async assertFrfLogoHeaderVisible() {
-    await expect(this.frfHeaderLogo).toBeVisible()
-  }
-
-  // async assertHomeIconHidden() {
-  //   await expect(this.btnHomeIcon).toBeHidden()
-  // }
 
   async assertCookieBannerAppears(visible: boolean) {
     if (visible) {
@@ -295,5 +292,10 @@ export default class CommonItemsPage {
     } else {
       await expect(this.cookieConfirmationHideBtn).toBeHidden()
     }
+  }
+
+  async assertOnNihrHomePage() {
+    await expect(this.page).toHaveURL('https://www.nihr.ac.uk/')
+    expect(await this.page.title()).toEqual('National Institute for Health and Care Research | NIHR')
   }
 }
