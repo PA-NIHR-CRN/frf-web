@@ -3,7 +3,6 @@ import { expect, Locator, Page } from '@playwright/test'
 //Declare Page Objects
 export default class ProviderDetailsPage {
   readonly page: Page
-  externalTabTitle: string
   readonly pageTitle: Locator
   readonly linkBackToProviders: Locator
   readonly dspDetailName: Locator
@@ -63,7 +62,6 @@ export default class ProviderDetailsPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page
-    this.externalTabTitle = ''
 
     //Locators
     this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
@@ -405,11 +403,9 @@ export default class ProviderDetailsPage {
 
   async clickExternalSiteLink() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
-    console.log(newPage.url())
-    newPage.waitForURL('https://www.bbc.co.uk/news/health')
-    const pageTitle = await newPage.title()
-    await newPage.waitForLoadState('domcontentloaded')
-    this.externalTabTitle = pageTitle
+    newPage.waitForURL('https://www.bbc.co.uk/news/health'),
+      await newPage.waitForLoadState('domcontentloaded'),
+      expect(await newPage.title()).toEqual('Health - BBC News')
   }
 
   async assertOnNewTab() {
@@ -417,7 +413,6 @@ export default class ProviderDetailsPage {
     expect(await this.page.context().pages().at(0)?.title()).toEqual(
       'Further details for Testing DSP - Find, Recruit and Follow-up'
     )
-    expect(this.externalTabTitle).toEqual('Health - BBC News')
   }
 
   async assertSuitedToValues() {
