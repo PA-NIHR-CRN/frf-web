@@ -404,6 +404,7 @@ export default class ProviderDetailsPage {
   async clickExternalSiteLink() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
     await newPage.waitForLoadState('domcontentloaded')
+    expect(await newPage.title()).toEqual('Health - BBC News')
   }
 
   async assertOnNewTab() {
