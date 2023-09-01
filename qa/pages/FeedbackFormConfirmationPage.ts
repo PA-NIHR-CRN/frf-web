@@ -24,7 +24,7 @@ export default class FeedbackConfirmationPage {
 
   async assertOnFeedbackConfirmationPage() {
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Thank you for your enquiry')
+    await expect(this.headingPageTitle).toHaveText('Thank you for your feedback')
     expect(this.page.url()).toContain('feedback/confirmation')
   }
 
