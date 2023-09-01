@@ -151,8 +151,8 @@ export default class GenericTestPage {
 
   async clickExternalSiteLink() {
     await this.linkText.click()
-    await this.page.waitForLoadState('domcontentloaded')
     await this.page.waitForURL('https://www.bbc.co.uk/news/health')
+    await this.page.waitForLoadState('domcontentloaded')
   }
 
   async assertOnLinkedPage(linkedPage: string) {
