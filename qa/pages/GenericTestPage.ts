@@ -149,6 +149,12 @@ export default class GenericTestPage {
     await expect(this.contactBlockButton).toHaveText(buttonText)
   }
 
+  async clickExternalSiteLink() {
+    await this.linkText.click()
+    await this.page.waitForLoadState('domcontentloaded')
+    await this.page.waitForURL('https://www.bbc.co.uk/news/health')
+  }
+
   async assertOnLinkedPage(linkedPage: string) {
     switch (linkedPage.toLowerCase()) {
       case 'bbc':

@@ -63,7 +63,7 @@ export default class ProviderDetailsPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page
-    this.externalTabTitle = 'page'
+    this.externalTabTitle = ''
 
     //Locators
     this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
