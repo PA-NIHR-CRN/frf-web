@@ -171,7 +171,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                         <a
                           href="https://local.nihr.ac.uk/lcrn"
                           target="_blank"
-                          rel="external"
+                          rel="noreferrer noopener"
                           aria-label="Local Clinical Research Networks (Opens in a new window)"
                         >
                           Local Clinical Research Networks
