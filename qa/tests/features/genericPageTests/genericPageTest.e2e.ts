@@ -138,6 +138,7 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
     })
     await test.step('When I Click the Secondary Button', async () => {
       await genericTestPage.secondaryButton.click()
+      await genericTestPage.page.waitForLoadState()
     })
     await test.step('Then I am taken to the Linked Page', async () => {
       await genericTestPage.assertOnLinkedPage('Secondary')
