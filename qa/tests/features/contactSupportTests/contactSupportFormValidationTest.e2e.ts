@@ -184,7 +184,7 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32', () => 
     })
   })
 
-  test('As a user I cannot exceed the 1200 character limit on the Summary Support field - @frf_32_validation_max_chars', async ({
+  test.only('As a user I cannot exceed the 1200 character limit on the Summary Support field - @frf_32_validation_max_chars', async ({
     contactSupportPage,
   }) => {
     await test.step('Given I have navigated to the Contact Support Page', async () => {

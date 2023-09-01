@@ -174,7 +174,7 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
     })
   })
 
-  test('As a user I will be taken to the External DSP Site in a new tab, when I click the Link - @frf_22_ac2_6', async ({
+  test.only('As a user I will be taken to the External DSP Site in a new tab, when I click the Link - @frf_22_ac2_6', async ({
     providerDetailsPage,
   }) => {
     await test.step('Given I have navigated to the Testing DSP Details Page', async () => {

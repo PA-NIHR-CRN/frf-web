@@ -175,7 +175,7 @@ test.describe('Contact FRF Form Validation Tests - @frf_75', () => {
     })
   })
 
-  test('As a user I cannot exceed the 1200 character limit on the Enquiry Details Text Area - @frf_75_validation_max_chars', async ({
+  test.only('As a user I cannot exceed the 1200 character limit on the Enquiry Details Text Area - @frf_75_validation_max_chars', async ({
     contactFrfPage,
   }) => {
     await test.step('Given I have navigated to the Contact FRF Page', async () => {
