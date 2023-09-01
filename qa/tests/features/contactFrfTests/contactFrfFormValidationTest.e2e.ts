@@ -1,7 +1,7 @@
 import { test } from '../../../hooks/CustomFixtures'
 import testData from '../../../utils/testData.json'
 
-test.describe('Contact FRF Form Validation Tests - @frf_75', () => {
+test.describe('Contact FRF Form Validation Tests - @frf_75 @frf_75_validation', () => {
   test('As a user I am shown a Summary of Validation Errors, if Mandatory fields are incomplete - @frf_75_validation_summary', async ({
     contactFrfPage,
   }) => {

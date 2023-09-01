@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.context().clearCookies()
 })
 
-test.describe('Cookie Tests - @frf_3', () => {
+test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
   test('As a user I am shown a Cookie Banner when I first visit the FRF site- @frf_3_ac1_display', async ({
     homePage,
     commonItemsPage,

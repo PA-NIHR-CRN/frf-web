@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('DSP List Search Tests - @frf_14 @frf_14_', () => {
+test.describe('DSP List Search Tests - @frf_14 @frf_14_excluded', () => {
   test('As a user I cannot search a specific DSP by Population - @frf_14_ac1_population', async ({ providersPage }) => {
     await test.step('Given I have navigated to the DSP List Page', async () => {
       await providersPage.goto()

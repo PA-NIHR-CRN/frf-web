@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.context().clearCookies()
 })
 
-test.describe('Cookie Confirmation Tests - @frf_3', () => {
+test.describe('Cookie Confirmation Tests - @frf_3_cookies @frf_3_cookie_confirm', () => {
   test('I am shown the Cookie Confirmation Banner, when I have made a Selection - @frf_3_ac5_confirmation', async ({
     homePage,
     commonItemsPage,
