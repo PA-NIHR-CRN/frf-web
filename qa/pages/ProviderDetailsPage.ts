@@ -403,7 +403,7 @@ export default class ProviderDetailsPage {
 
   async clickExternalSiteLink() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
-    newPage.waitForURL('https://www.bbc.co.uk/news/health'),
+    await newPage.waitForURL('https://www.bbc.co.uk/news/health'),
       await newPage.waitForLoadState('domcontentloaded'),
       expect(await newPage.title()).toEqual('Health - BBC News')
   }
