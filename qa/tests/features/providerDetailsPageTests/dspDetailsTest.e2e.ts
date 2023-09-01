@@ -181,7 +181,7 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
       await providerDetailsPage.goto('/providers/testing-dsp')
       await providerDetailsPage.assertOnProviderDetailsPage()
     })
-    await test.step('When I click the External the Coverage Section', async () => {
+    await test.step('When I click the External Link in the Coverage Section', async () => {
       await providerDetailsPage.clickExternalSiteLink()
     })
     await test.step('Then I will be taken to the External Site in a new tab', async () => {

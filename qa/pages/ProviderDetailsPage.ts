@@ -403,7 +403,7 @@ export default class ProviderDetailsPage {
 
   async clickExternalSiteLink() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
-    await newPage.waitForLoadState()
+    await newPage.waitForLoadState('domcontentloaded')
   }
 
   async assertOnNewTab() {
