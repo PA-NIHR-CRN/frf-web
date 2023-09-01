@@ -8,3 +8,5 @@ async function globalSetup() {
   }
 }
 export default globalSetup
+//figure out flaky external site nav tests on the workflow
+//add more specific block tags
