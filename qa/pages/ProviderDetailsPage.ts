@@ -3,6 +3,7 @@ import { expect, Locator, Page } from '@playwright/test'
 //Declare Page Objects
 export default class ProviderDetailsPage {
   readonly page: Page
+  externalTab: Page
   readonly pageTitle: Locator
   readonly linkBackToProviders: Locator
   readonly dspDetailName: Locator
@@ -62,6 +63,7 @@ export default class ProviderDetailsPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page
+    this.externalTab = page
 
     //Locators
     this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
@@ -405,6 +407,7 @@ export default class ProviderDetailsPage {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
     await newPage.waitForLoadState('domcontentloaded')
     expect(await newPage.title()).toEqual('Health - BBC News')
+    this.externalTab = newPage
   }
 
   async assertOnNewTab() {
@@ -412,7 +415,7 @@ export default class ProviderDetailsPage {
     expect(await this.page.context().pages().at(0)?.title()).toEqual(
       'Further details for Testing DSP - Find, Recruit and Follow-up'
     )
-    // expect(await this.page.context().pages().at(1)?.title()).toEqual('Health - BBC News')
+    expect(await this.externalTab.title()).toEqual('Health - BBC News')
   }
 
   async assertSuitedToValues() {
