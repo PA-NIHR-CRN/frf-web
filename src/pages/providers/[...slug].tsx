@@ -45,7 +45,10 @@ export default function ServiceProvider({ fields, createdAt, updatedAt }: Servic
 
   return (
     <>
-      <NextSeo title={`Further details for ${fields.name} - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`${fields.name} details - Find, Recruit and Follow-up`}
+        description={`Discover how ${fields.name}’s services can help support your research. Find out more about how the services work, the costs, expected timelines and type of data available.`}
+      />
       <Container>
         <article aria-labelledby={`article-${fields.slug}-title`}>
           <div className="govuk-grid-row">

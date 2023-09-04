@@ -73,7 +73,10 @@ export default function ServiceProviders({
 
   return (
     <>
-      <NextSeo title={`List of data service providers ${titleResultsText} - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`List of data service providers ${titleResultsText} - Find, Recruit and Follow-up`}
+        description="Explore and compare UK data service providers included in Find, Recruit and Follow-up. Refine the list to identify the most suitable data service providers for your research."
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third-from-desktop">
