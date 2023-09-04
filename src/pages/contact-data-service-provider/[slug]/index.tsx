@@ -47,7 +47,10 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
 
   return (
     <>
-      <NextSeo title={`Get in touch with ${name} - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`Contact ${name} - Find, Recruit and Follow-up`}
+        description={`Get in touch with ${name} directly for further information about the Find, Recruit and Follow-up services you are interested in to support your research.`}
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">

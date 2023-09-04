@@ -43,7 +43,10 @@ export default function Feedback({ query }: FeedbackProps) {
 
   return (
     <>
-      <NextSeo title={`Feedback - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`Give your feedback - Find, Recruit and Follow-up`}
+        description="Let us know what you think of our new Find, Recruit and Follow-up website. Your feedback will help us to improve it."
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
