@@ -16,9 +16,12 @@ Playwright Getting Started Documentation - https://playwright.dev/docs/intro
 
 Go to `GlobalSetup.ts` file  
 The `BASE_URL` environment variable is populated by an input from the FRF E2E Tests workflow in GitHub Actions  
-Simply hardcode the value by commenting out all lines within the globalSetup function
-Leaving either line 3 uncommented, if you want to run in Dev
+Simply hardcode the value by commenting out all lines within the globalSetup function  
+Leaving either line 3 uncommented, if you want to run in Dev  
 Or line 5 uncommented, if you want to run in Test
+
+<img width="633" alt="hardcodeBaseUrl" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/a9aff651-fe11-43eb-8df6-6a4a8ef1f44a">
+
 **DO NOT ADD, COMMIT OR PUSH THIS CHANGE TO GITHUB**
 
 Run the command `npx playwright test`  
@@ -36,6 +39,52 @@ To run individual tests or a specific group of tests:
 
 Playwright Testing Documentation - https://playwright.dev/docs/api/class-test
 
+## --------------------RUN ACCESSIBILITY TESTS LOCALLY--------------------
+
+Go to `playwright.config.ts` file  
+The FindRecruitFollow project within the **projects** array has a property called **testIgnore**  
+Which is set to ignore all tests that fall within the **accessibiltyTests** folder.   
+This is so that the accessibility tests are not included in the day to day runs.  
+
+<img width="537" alt="accessConfig" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/7d84ed6a-9167-406e-b0dc-ad6fbaeeef8d">
+
+
+To include the accessibilty tests in the run simply comment out this line.  
+Alternatively, to run only the Accessibilty tests,  
+change the property from testIgnore to **testMatch**  
+
+**DO NOT ADD, COMMIT OR PUSH THIS CHANGE TO GITHUB**
+
+You could also do any of the the following to run all the accessibilty tests, or specific ones  
+
+- run using the test tag command 'npx playwright test --grep <tag name>' e.g. npx playwright test --grep @accessibility
+- add the '.only' method on any individual tests blocks, e.g. test.only("Test Name"{...});
+- add the '.only' method on any describe blocks, e.g. test.describe.only("Test Group Name"{ test("Test Name"{...} )});
+
+## --------------------RUN TESTS LOCALLY in OTHER BROWSERS & DEVICES -----------------
+
+Go to `playwright.config.ts` file  
+There is a **projects** array containing multiple project objects  
+Each project object is set to run using a different browser and/or device combination  
+For example Firefox on Desktop and Safari on Mobile  
+The default project has the name FindRecruitFollow  
+And is set to run the tests in Playwrights default environment, Desktop Chromium  
+
+All of the other projects have a **testIgnore** property  
+With a value that is set to ignore all tests that fall within the **tests** folder, i.e all of them  
+
+<img width="379" alt="otherProjects" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/0dabb0b3-91c9-45ef-b92c-e3511a41e74c">
+
+To enable tests to run using the config from other project objects  
+Simply comment out the line with the **testIgnore** property for the relevant project  
+Or change its value so that it no longer ignores all tests  
+For example its value could be changed to only ignore the accessibiltyTests folder  
+In the same way the FindRecruitFollow project is set up  
+If you wish to run only the selected project, and not include the default FindRecruitFollow project  
+You would also be required to change its **testIgnore** value to ignore all tests before running
+
+**DO NOT ADD, COMMIT OR PUSH THESE CHANGES TO GITHUB**
+
 ## --------------------RUN TESTS via GITHUB ACTIONS--------------------
 
 GitHub Actions are configured in the playwright.yml file  
@@ -44,13 +93,13 @@ Tests are set to run and publish an HTML report to a GitHub page on a scheduled 
 To trigger the test run manually  
 Go the the repo's GitHub actions page - https://github.com/PA-NIHR-CRN/frf-web/actions  
 Select **FRF E2E Tests** from the workflow's options on the left  
-Click the 'Run workflow' option and select remote branch you wish to run the tests from, main by default
+Click the 'Run workflow' option and select remote branch you wish to run the tests from, main by default  
 Set the **Select which environment** input field to either test or dev, default value is test  
 This value dictates which environment the tests will run in  
 Set the **Upload test report** input field to either true or false, default value is false  
-This value dictates whether the HTML test report is published to a GitHub Page and the Managed Services Slack channel
-Set the **Select which Tests** input field to either 'all' or '@<test tag>' e.g. @fhirId, default is all
-This value dictates which tests are included in the run,
+This value dictates whether the HTML test report is published to a GitHub Page and the Managed Services Slack channel  
+Set the **Select which Tests** input field to either 'all' or '@<test tag>' e.g. @frf_13, default is all  
+This value dictates which tests are included in the run,  
 'all' will run everything, @<test tag will run any tests with that tag
 
 GitHub Page is found here - https://pa-nihr-crn.github.io/frf-web/  
