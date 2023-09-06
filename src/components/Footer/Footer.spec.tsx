@@ -3,14 +3,15 @@ import { render, screen } from '@testing-library/react'
 import { Footer } from './Footer'
 
 test('Displays the links & copyright bar', () => {
-  render(<Footer />)
+  const { getByAltText, getByText, getByRole } = render(<Footer />)
 
-  expect(screen.getByAltText('National Institute for Health and Care Research logo')).toBeVisible()
-  expect(screen.getByAltText('Shaw Trust Logo')).toBeVisible()
-  expect(screen.getByText('Terms and conditions')).toHaveAttribute('href', '/terms-and-conditions')
-  expect(screen.getByText('Privacy policy')).toHaveAttribute('href', '/privacy')
-  expect(screen.getByText('Accessibility')).toHaveAttribute('href', '/accessibility')
-  expect(screen.getByText('© NIHR 2022'))
+  expect(getByAltText('National Institute for Health and Care Research logo')).toBeVisible()
+  expect(getByAltText('Shaw Trust Logo')).toBeVisible()
+  expect(getByRole('link', { name: 'Shaw Trust Logo' })).toBeVisible()
+  expect(getByText('Terms and conditions')).toHaveAttribute('href', '/terms-and-conditions')
+  expect(getByText('Privacy policy')).toHaveAttribute('href', '/privacy')
+  expect(getByText('Accessibility')).toHaveAttribute('href', '/accessibility')
+  expect(getByText('© NIHR 2022'))
 })
 
 test.each([

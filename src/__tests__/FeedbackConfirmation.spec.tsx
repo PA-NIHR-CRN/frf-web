@@ -23,7 +23,7 @@ test('Feedback confirmation page', async () => {
     </RootLayout>
   )
 
-  expect(screen.getByRole('heading', { name: 'Thank you for your enquiry', level: 1 })).toBeInTheDocument()
+  expect(screen.getByRole('heading', { name: 'Thank you for your feedback', level: 1 })).toBeInTheDocument()
   expect(
     screen.getByText('If you have provided contact details we may contact you in the near future for further feedback.')
   ).toBeInTheDocument()

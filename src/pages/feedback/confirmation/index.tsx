@@ -31,7 +31,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       page: 'Feedback Confirmation',
-      heading: 'Thank you for your enquiry',
+      heading: 'Thank you for your feedback',
       isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       cookieBanner: await getCookieBanner(),
     },

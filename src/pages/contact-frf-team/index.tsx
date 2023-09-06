@@ -42,7 +42,10 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
 
   return (
     <>
-      <NextSeo title={`Contact Find, Recruit and Follow-up specialist team - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`Contact Find, Recruit and Follow-up central team - Find, Recruit and Follow-up`}
+        description="Research support colleagues and organisations providing data services can contact the Find, Recruit and Follow-up (FRF) central team for further information about the FRF advisory support, how to get involved or for support for complex enquiries."
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">

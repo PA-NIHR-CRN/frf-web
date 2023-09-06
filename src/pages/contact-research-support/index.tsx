@@ -64,7 +64,10 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
 
   return (
     <>
-      <NextSeo title={`Contact research support - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`Contact research support - Find, Recruit and Follow-up`}
+        description="Get in touch with professionals across the UK research support infrastructure who can help you identify appropriate data service providers or support with the planning and delivery of your study in the UK."
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
@@ -171,7 +174,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
                         <a
                           href="https://local.nihr.ac.uk/lcrn"
                           target="_blank"
-                          rel="external"
+                          rel="noreferrer noopener"
                           aria-label="Local Clinical Research Networks (Opens in a new window)"
                         >
                           Local Clinical Research Networks
