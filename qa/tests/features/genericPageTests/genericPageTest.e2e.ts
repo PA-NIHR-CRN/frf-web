@@ -102,7 +102,7 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
     })
   })
 
-  test.only('As a user I can Navigate using a Hyperlink on a Generic Page - @frf_61_hyperlink', async ({
+  test('As a user I can Navigate using a Hyperlink on a Generic Page - @frf_61_hyperlink', async ({
     genericTestPage,
   }) => {
     await test.step('Given I have Published a Generic Page with a Hyperlink', async () => {
@@ -130,7 +130,7 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
     })
   })
 
-  test.only('As a user I can Navigate using a Secondary Button on a Generic Page - @frf_61_secondary', async ({
+  test('As a user I can Navigate using a Secondary Button on a Generic Page - @frf_61_secondary', async ({
     genericTestPage,
   }) => {
     await test.step('Given I have Published a Generic Page with a Secondary Button with Internal Link', async () => {

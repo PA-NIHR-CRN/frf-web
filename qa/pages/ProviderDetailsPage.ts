@@ -412,7 +412,7 @@ export default class ProviderDetailsPage {
   async assertNewTabOpened() {
     expect(this.page.context().pages().length).toEqual(2)
     expect(await this.page.context().pages().at(0)?.title()).toEqual(
-      'Further details for Testing DSP - Find, Recruit and Follow-up'
+      'Testing DSP details - Find, Recruit and Follow-up'
     )
   }
 

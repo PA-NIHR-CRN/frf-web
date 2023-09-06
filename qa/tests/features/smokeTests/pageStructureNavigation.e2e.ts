@@ -252,7 +252,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1_str
     })
   })
 
-  test('As a user I will Always have a Link Available to Navigate back to the NIHR Home Page - @frf_1_6', async ({
+  test('As a user I will Always have a Link Available to Navigate to the NIHR Home Page - @frf_1_6', async ({
     providersPage,
     commonItemsPage,
   }) => {
@@ -271,7 +271,25 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1_str
     })
   })
 
-  test('The Site has SEO Disabled in Lower Environments - @frf_1_7', async ({ homePage, commonItemsPage }) => {
+  test('As a user I will Always have a Link Available to Navigate to the Shaw Trust FRF Certificate Page - @frf_1_7', async ({
+    providerDetailsPage,
+    commonItemsPage,
+  }) => {
+    await test.step('Given I have navigated a Provider Details Page', async () => {
+      await providerDetailsPage.goto('providers/gp-visualise-and-dataview')
+    })
+    await test.step('And I should see the Shaw Trust Logo at the Bottom of the Page', async () => {
+      await commonItemsPage.assertShawTrustLogoPresent()
+    })
+    await test.step('When I click the Shaw Trust Logo ', async () => {
+      await commonItemsPage.assertShawTrustNavigation()
+    })
+    await test.step('Then I should see the Shaw Trust FRF CertificatePage in a new tab', async () => {
+      await commonItemsPage.assertNewTabOpened()
+    })
+  })
+
+  test('The Site has SEO Disabled in Lower Environments - @frf_1_8', async ({ homePage, commonItemsPage }) => {
     await test.step('Given I have navigated to the HomePage', async () => {
       await homePage.goto()
       await homePage.assertOnHomePage()

@@ -38,6 +38,7 @@ export default class CommonItemsPage {
   readonly cookieConfirmationPolicyLink: Locator
   readonly cookieConfirmationChangeLink: Locator
   readonly cookieConfirmationHideBtn: Locator
+  readonly shawTrustLogo: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -99,6 +100,7 @@ export default class CommonItemsPage {
     })
     this.cookieConfirmationChangeLink = page.locator('a[class="govuk-link"][href="#cookie-banner"]')
     this.cookieConfirmationHideBtn = page.locator('button[class="govuk-button"]', { hasText: 'Hide cookie message' })
+    this.shawTrustLogo = page.locator('img[alt="Shaw Trust Logo"]')
   }
 
   //Page Methods
@@ -109,7 +111,7 @@ export default class CommonItemsPage {
     await expect(this.linkAccessibility).toBeVisible()
     await expect(this.linkCookiePolicy).toBeVisible()
     await expect(this.linkTermsConditions).toBeVisible()
-    //shaws trust
+    await expect(this.shawTrustLogo).toBeVisible()
   }
 
   async assertServiceTitleCorrect() {
@@ -122,6 +124,10 @@ export default class CommonItemsPage {
 
   async assertNihrLogoPresent() {
     await expect(this.nihrFooterLogo).toBeVisible()
+  }
+
+  async assertShawTrustLogoPresent() {
+    await expect(this.shawTrustLogo).toBeVisible()
   }
 
   async assertBetaGdsBannerAppears() {
@@ -297,5 +303,24 @@ export default class CommonItemsPage {
   async assertOnNihrHomePage() {
     await expect(this.page).toHaveURL('https://www.nihr.ac.uk/')
     expect(await this.page.title()).toEqual('National Institute for Health and Care Research | NIHR')
+  }
+
+  async assertShawTrustNavigation() {
+    const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.shawTrustLogo.click()])
+    await newPage.waitForURL(
+      'https://www.accessibility-services.co.uk/certificates/national-institute-for-health-and-care-research/'
+    ),
+      await newPage.waitForLoadState('domcontentloaded'),
+      expect(await newPage.title()).toEqual(
+        'National Institute for Health and Care Research | Shaw Trust Accessibility Services'
+      )
+    //doing assertion here as otherwise the page context is destroyed/closed during parrallel execution
+  }
+
+  async assertNewTabOpened() {
+    expect(this.page.context().pages().length).toEqual(2)
+    expect(await this.page.context().pages().at(0)?.title()).toEqual(
+      'GP Visualise and DataView details - Find, Recruit and Follow-up'
+    )
   }
 }
