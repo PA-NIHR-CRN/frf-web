@@ -165,12 +165,10 @@ export default class GenericTestPage {
         expect(await this.page.context().pages().at(1)?.title()).toEqual('Identity Gateway')
         break
       case 'secondary':
-        await this.page.waitForURL('')
         expect(await this.page.title()).toEqual('Find, Recruit & Follow-Up Test')
         break
       case 'contact':
-        await this.page.waitForURL('/feedback')
-        expect(await this.page.title()).toEqual('Feedback - Find, Recruit and Follow-up')
+        expect(await this.page.title()).toEqual('Give your feedback - Find, Recruit and Follow-up')
         break
       default:
         throw new Error(`${linkedPage} is not a valid option`)
