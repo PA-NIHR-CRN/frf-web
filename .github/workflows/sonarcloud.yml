@@ -19,7 +19,7 @@ jobs:
       - name: Install
         run: npm ci --no-audit --no-fund
       - name: Test and coverage
-        run: npx jest --coverage --outputFile=coverage.info
+        run: npx jest --coverage --outputFile=./coverage/coverage.info
 
       # - name: SonarCloud Scan
       #   uses: SonarSource/sonarcloud-github-action@master
@@ -33,4 +33,4 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.projectKey=PA-NIHR-CRN_frf-web \
-          -Dsonar.coverageReportPaths=coverage.info
+          -Dsonar.coverageReportPaths=./coverage/coverage.info
