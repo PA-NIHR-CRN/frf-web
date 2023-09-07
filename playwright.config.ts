@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
   globalSetup: './qa/hooks/GlobalSetup.ts',
   timeout: 30000,
   workers: 6, // to enforce parallel workers in Actions Workflow
-  // retries: 2,
+  retries: 2,
   projects: [
     {
       name: 'FindRecruitFollow',
