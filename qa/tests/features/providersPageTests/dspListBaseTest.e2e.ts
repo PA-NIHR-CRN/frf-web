@@ -213,7 +213,7 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test.only('As a user I should a "New" Indicator on a DSP where Applicable- @frf_11_ac4', async ({
+  test.only('As a user I should see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_0', async ({
     homePage,
     providersPage,
   }) => {
@@ -226,11 +226,36 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     await test.step('And I am on the Providers Page', async () => {
       await providersPage.assertOnProvidersPage()
     })
-    await test.step('And I am Looking a DSP with "First Published" within Last 3 Months', async () => {
-      await providersPage.assertDspIsNew()
+    await test.step('And I select the `Recently published` Sort Option', async () => {
+      await providersPage.selectDspSortDropdownOption('Published')
+      await providersPage.assertSelectedSortOption('Published')
     })
-    await test.step('Then I should see a "New" indicator next to the DSP name', async () => {
-      await providersPage.assertDspNewIconAppears()
+    await test.step('Then I am Looking at a DSP with "First Published" Date within the Last 3 Months', async () => {
+      await providersPage.assertDspIsNew(true)
+    })
+    await test.step('And I should see a "New" indicator next to the DSP name', async () => {
+      await providersPage.assertDspNewIconAppears(true)
+    })
+  })
+
+  test.only('As a user I should not see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_1', async ({
+    homePage,
+    providersPage,
+  }) => {
+    await test.step('Given I have navigated to the HomePage', async () => {
+      await homePage.goto()
+    })
+    await test.step('When I click the View All DSPs button', async () => {
+      await homePage.btnProviders.click()
+    })
+    await test.step('And I am on the Providers Page', async () => {
+      await providersPage.assertOnProvidersPage()
+    })
+    await test.step('And I am Looking at a DSP with "First Published" Date more than 3 Months ago', async () => {
+      await providersPage.assertDspIsNew(false)
+    })
+    await test.step('Then I should not see a "New" indicator next to the DSP name', async () => {
+      await providersPage.assertDspNewIconAppears(false)
     })
   })
 })

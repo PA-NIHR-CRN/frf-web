@@ -351,13 +351,13 @@ export default class ProvidersPage {
     expect(await this.dspResultLastUpdatedValue.nth(0).textContent()).toContain('2023')
   }
 
-  async assertDspIsNew() {
+  async assertDspIsNew(isNew: boolean) {
     const firstPublishedValue = await this.dspResultFirstPublishedValue.nth(0).textContent()
     if (firstPublishedValue !== null) {
-      const strPublishDate = new Date(firstPublishedValue).toLocaleDateString()
+      const strPublishDate = new Date(firstPublishedValue).toLocaleDateString('en-US')
       const currentDate = new Date()
       currentDate.setDate(currentDate.getDate())
-      const strCurrentDate = new Date(currentDate).toLocaleDateString()
+      const strCurrentDate = new Date(currentDate).toLocaleDateString('en-US')
       console.log(strCurrentDate)
       console.log(strPublishDate)
 
@@ -367,13 +367,21 @@ export default class ProvidersPage {
       console.log(alignedCurrentDate)
       console.log(alignedPublishDate)
       console.log(daysDifference)
-      expect(daysDifference).toBeLessThanOrEqual(90)
+      if (isNew) {
+        expect(daysDifference).toBeLessThanOrEqual(90)
+      } else {
+        expect(daysDifference).toBeGreaterThan(90)
+      }
     }
   }
 
-  async assertDspNewIconAppears() {
-    await expect(this.dspResultHeader.nth(0).locator(this.dspResultNewIcon)).toBeVisible()
-    expect(await this.dspResultHeader.nth(0).locator(this.dspResultNewIcon).textContent()).toEqual('New')
+  async assertDspNewIconAppears(visible: boolean) {
+    if (visible) {
+      await expect(this.dspResultHeader.nth(0).locator(this.dspResultNewIcon)).toBeVisible()
+      expect(await this.dspResultHeader.nth(0).locator(this.dspResultNewIcon).textContent()).toEqual('New')
+    } else {
+      await expect(this.dspResultHeader.nth(0).locator(this.dspResultNewIcon)).toBeHidden()
+    }
   }
 
   async assertDspResultsGreaterThanFour() {
@@ -1172,7 +1180,7 @@ export default class ProvidersPage {
       (node: HTMLSelectElement) => node.options[node.options.selectedIndex].textContent
     )
     let expectedOptionText: string
-    switch (expectedOption) {
+    switch (expectedOption.toLowerCase()) {
       case 'ascending':
         expectedOptionText = 'Alphabetical (ascending)'
         break
