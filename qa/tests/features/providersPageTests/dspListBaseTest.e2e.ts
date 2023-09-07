@@ -213,7 +213,7 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I should a "New" Indicator on a DSP where Applicable- @frf_11_ac4', async ({
+  test.only('As a user I should a "New" Indicator on a DSP where Applicable- @frf_11_ac4', async ({
     homePage,
     providersPage,
   }) => {

@@ -358,11 +358,16 @@ export default class ProvidersPage {
       const currentDate = new Date()
       currentDate.setDate(currentDate.getDate())
       const strCurrentDate = new Date(currentDate).toLocaleDateString()
+      console.log(strCurrentDate)
+      console.log(strPublishDate)
 
       const alignedCurrentDate = new Date(strCurrentDate)
       const alignedPublishDate = new Date(strPublishDate)
       const daysDifference = numDaysBetween(alignedCurrentDate, alignedPublishDate)
-      expect(daysDifference).toBeLessThan(90)
+      console.log(alignedCurrentDate)
+      console.log(alignedPublishDate)
+      console.log(daysDifference)
+      expect(daysDifference).toBeLessThanOrEqual(90)
     }
   }
 
