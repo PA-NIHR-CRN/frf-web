@@ -30,6 +30,7 @@ jobs:
       - name: SonarCloud analysis
         run: |
           npx sonar-scanner \
+          -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.projectKey=PA-NIHR-CRN_frf-web \
           -Dsonar.coverageReportPaths=coverage.info
