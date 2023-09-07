@@ -27,12 +27,7 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Setup SonarCloud
-        uses: sonarsource/setup-sonarcloud@v1
-        with:
-          organization: pa-nihr-crn
-          project-key: PA-NIHR-CRN_frf-web
-          token: ${{ secrets.SONAR_TOKEN }}
-
       - name: SonarCloud analysis
-        run: npx sonar-scanner -Dsonar.coverageReportPaths=coverage.info
+        run: |
+        npx sonar-scanner -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.projectKey=PA-NIHR-CRN_frf-web
+        npx sonar-scanner -Dsonar.coverageReportPaths=coverage.info
