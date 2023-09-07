@@ -19,7 +19,7 @@ jobs:
       - name: Install
         run: npm ci --no-audit --no-fund
       - name: Test and coverage
-        run: npm run test:coverage 
+        run: npx jest --coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
