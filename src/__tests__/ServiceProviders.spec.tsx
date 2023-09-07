@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event'
+import MockDate from 'mockdate'
 import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 import { act } from 'react-dom/test-utils'
@@ -14,6 +15,14 @@ const [server, mockContentfulResponse] = setupMockServer()
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
+
+beforeEach(() => {
+  MockDate.set(new Date('2023-06-08'))
+})
+
+afterEach(() => {
+  MockDate.reset()
+})
 
 type GetServerSidePropsReturnType = Required<Awaited<ReturnType<typeof getServerSideProps>>>
 
