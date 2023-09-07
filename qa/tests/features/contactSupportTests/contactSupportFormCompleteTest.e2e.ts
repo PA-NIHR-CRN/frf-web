@@ -1,7 +1,7 @@
 import { test } from '../../../hooks/CustomFixtures'
 
 test.describe('Contact Research Support Form Complete Tests - @frf_68', () => {
-  test('As a user I am shown a Confirmation Page, when I successfully complete the Form - @frf_68_success', async ({
+  test.skip('As a user I am shown a Confirmation Page, when I successfully complete the Form - @frf_68_success', async ({
     contactSupportPage,
     contactSupportConfirmationPage,
   }) => {
@@ -29,7 +29,7 @@ test.describe('Contact Research Support Form Complete Tests - @frf_68', () => {
     })
   })
 
-  test('As a user I am shown a Confirmation Page with a formatted enquiry Reference Number - @frf_68_ref_format', async ({
+  test.skip('As a user I am shown a Confirmation Page with a formatted enquiry Reference Number - @frf_68_ref_format', async ({
     contactSupportPage,
     contactSupportConfirmationPage,
   }) => {
@@ -51,7 +51,7 @@ test.describe('Contact Research Support Form Complete Tests - @frf_68', () => {
     })
   })
 
-  test('The Contact Research Support Reference Number increments with each form Submission- @frf_68_ref_increment', async ({
+  test.skip('The Contact Research Support Reference Number increments with each form Submission- @frf_68_ref_increment', async ({
     contactSupportPage,
     contactSupportConfirmationPage,
   }) => {

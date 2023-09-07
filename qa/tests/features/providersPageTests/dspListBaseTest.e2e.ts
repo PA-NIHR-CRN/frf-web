@@ -213,7 +213,7 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test.only('As a user I should see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_0', async ({
+  test('As a user I should see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_0', async ({
     homePage,
     providersPage,
   }) => {
@@ -238,7 +238,7 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test.only('As a user I should not see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_1', async ({
+  test('As a user I should not see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_1', async ({
     homePage,
     providersPage,
   }) => {
