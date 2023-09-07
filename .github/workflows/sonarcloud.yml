@@ -19,9 +19,20 @@ jobs:
       - name: Install
         run: npm ci --no-audit --no-fund
       - name: Test and coverage
-        run: npx jest --coverage
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: npx jest --coverage --outputFile=coverage.info
+
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Setup SonarCloud
+        uses: sonarsource/setup-sonarcloud@v1
+        with:
+          organization: pa-nihr-crn
+          project-key: PA-NIHR-CRN_frf-web
+          token: ${{ secrets.SONAR_TOKEN }}
+
+      - name: SonarCloud analysis
+        run: npx sonar-scanner -Dsonar.coverageReportPaths=coverage.info
