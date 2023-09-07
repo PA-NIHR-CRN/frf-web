@@ -53,7 +53,7 @@ test.describe('Contact FRF Form Complete Tests - @frf_39', () => {
     })
   })
 
-  test.skip('The Contact FRF Reference Number increments with each form Submission- @frf_39_ref_increment', async ({
+  test('The Contact FRF Reference Number increments with each form Submission- @frf_39_ref_increment', async ({
     contactFrfPage,
     contactFrfConfirmationPage,
   }) => {

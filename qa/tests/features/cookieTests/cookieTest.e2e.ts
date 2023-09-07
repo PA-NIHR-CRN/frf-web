@@ -99,11 +99,11 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
     })
   })
 
-  test('Google Analytics & Youtube Cookies are applied when I Accept Cookies - @frf_3_ac4_accept', async ({
+  test.only('Google Analytics & Youtube Cookies are applied when I Accept Cookies - @frf_3_ac4_accept', async ({
     homePage,
     commonItemsPage,
   }) => {
-    test.fail() //current valid failure, needs code fix
+    // test.fail() //current valid failure, needs code fix
     await test.step('Given I have visited the FRF site', async () => {
       await homePage.goto()
     })

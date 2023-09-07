@@ -53,7 +53,7 @@ test.describe('Contact DSP Form Complete Tests - @frf_29', () => {
     })
   })
 
-  test.skip('The Contact DSP Reference Number increments with each form Submission- @frf_29_ref_increment', async ({
+  test('The Contact DSP Reference Number increments with each form Submission- @frf_29_ref_increment', async ({
     contactDspPage,
     contactDspConfirmationPage,
   }) => {

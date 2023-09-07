@@ -1,7 +1,7 @@
 import { test } from '../../../hooks/CustomFixtures'
 
 test.describe('Feedback Form Complete Tests - @frf_8', () => {
-  test.skip('As a user I am shown a Confirmation Page, when I successfully complete the Form - @frf_8_success', async ({
+  test('As a user I am shown a Confirmation Page, when I successfully complete the Form - @frf_8_success', async ({
     feedbackFormPage,
     feedbackFormConfirmationPage,
   }) => {
