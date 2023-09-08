@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe.only('Generic Page Functionality Tests - @frf_61', () => {
+test.describe('Generic Page Functionality Tests - @frf_61', () => {
   test('As a user I can navigate to a Generic Page that I have Published - @frf_61_navigation', async ({
     homePage,
     providerDetailsPage,
