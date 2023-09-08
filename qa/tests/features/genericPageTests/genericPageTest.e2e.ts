@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Generic Page Functionality Tests - @frf_61', () => {
+test.describe.only('Generic Page Functionality Tests - @frf_61', () => {
   test('As a user I can navigate to a Generic Page that I have Published - @frf_61_navigation', async ({
     homePage,
     providerDetailsPage,
@@ -104,15 +104,17 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
 
   test('As a user I can Navigate using a Hyperlink on a Generic Page - @frf_61_hyperlink', async ({
     genericTestPage,
+    providersPage,
   }) => {
     await test.step('Given I have Published a Generic Page with a Hyperlink', async () => {
       await genericTestPage.goto('/chris-testing-page')
     })
     await test.step('When I Click the Hyperlink', async () => {
-      await genericTestPage.clickExternalSiteLink()
+      await genericTestPage.linkText.click()
     })
     await test.step('Then I am taken to the Hyperlinked Page', async () => {
-      await genericTestPage.assertOnLinkedPage('BBC')
+      await providersPage.assertOnProvidersPage()
+      await genericTestPage.assertOnLinkedPage('Hyperlink')
     })
   })
 
