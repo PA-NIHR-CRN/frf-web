@@ -19,7 +19,7 @@ const customJestConfig: Config = {
   testEnvironment: 'jest-environment-jsdom',
   reporters: ['default', 'jest-junit'],
   testPathIgnorePatterns: ['.vscode'],
-  coverageReporters: ['json-summary', 'text', 'html'],
+  coverageReporters: ['json-summary', 'text', 'html', 'lcov'],
   coveragePathIgnorePatterns: ['node_modules'],
   coverageThreshold: {
     global: {
