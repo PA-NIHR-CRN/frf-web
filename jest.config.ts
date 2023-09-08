@@ -29,6 +29,7 @@ const customJestConfig: Config = {
       statements: 90,
     },
   },
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!qa/**'],
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
