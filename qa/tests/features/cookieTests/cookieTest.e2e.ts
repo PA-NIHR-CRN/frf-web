@@ -103,11 +103,11 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
     homePage,
     commonItemsPage,
   }) => {
-    test.fail() //current valid failure, needs code fix
     await test.step('Given I have visited the FRF site', async () => {
       await homePage.goto()
     })
     await test.step('And there are currently no Cookies applied to the FRF site', async () => {
+      await commonItemsPage.page.context().clearCookies()
       await commonItemsPage.assertNoCookiesApplied()
     })
     await test.step('When I have chosen to Accept Cookies', async () => {
@@ -137,6 +137,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
       await homePage.goto()
     })
     await test.step('And there are currently no Cookies applied to the FRF site', async () => {
+      await commonItemsPage.page.context().clearCookies()
       await commonItemsPage.assertNoCookiesApplied()
     })
     await test.step('When I have chosen to Reject Cookies', async () => {
