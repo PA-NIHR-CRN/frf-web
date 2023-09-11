@@ -175,3 +175,52 @@ The Network tab shows the Response Code, Request Headers, Response Headers and R
 <img width="1658" alt="reportTraceNetwork" src="https://user-images.githubusercontent.com/57842230/199382891-5c8e3f26-928c-46bf-91a5-89657cb5b6f1.png">
   
 The Trace View is a useful tool for testers to debug exactly why a test has failed
+
+
+## --------------------TEST MAINTENANCE--------------------
+
+One of the features of the FRF site is that any Service Providers that have been published withinn the last 90 days  
+Will have a red 'New' icon next to the Service Providers name on the DSP list page.  
+
+There is a test in place for this in the dspListBaseTest.e2e.ts feature file,  
+The test is tagged **@frf_11_ac4_0**.  
+It simply navigates to the DSP list, sorts the list to show the most recently published at the top.  
+Then asserts that the top result has been published wothin the last 90 days,  
+And the 'New' icon appears as expected
+
+In order for this test to work there needs to be a Service Provider published within the last 90 days via Contentful.  
+So roughly every 3 months this test will begin to fail as the most recently published Service Provider,  
+Will no longer fall under the 'New' criteria.
+
+To correct this go to the Test environment in Contentful and select the Service Provider content type.  
+There is a Service Provider called '**Recently Published DSP**'.  
+Tick the checkbox next to it and select the **Duplicate** option.  
+
+<img width="854" alt="mostRecentDSP" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/f9b9f495-ea33-471f-a545-e3714627acec">
+
+This will created an identical Service Provider with a '(1)' after the name.  
+This new Service Provider will have a status of **Draft**.  
+Tick the checkbox of the original 'Recently Published DSP' again,  
+This time select the **Unpublish** option
+
+<img width="835" alt="unpublish" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/7ea251c6-5eb7-4bfd-80bf-92cdc5e9deac">
+
+This will move the 'Recently Published DSP' into Draft.  
+Now tick the checkbox of the original 'Recently Published DSP' again,  
+This time select the **Delete** option  
+And choose to permanently delete the 'Recently Published DSP'  
+
+<img width="707" alt="delete" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/77c3b8ed-aaf7-4d05-a613-c1ba2979c4ff">
+
+Now click on the the new Service Provider named 'Recently Published DSP (1)'  
+And edit the name to remove the '(1)'.  
+Then select the Publish option.  
+
+<img width="1374" alt="publishNew" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/26448897-dc8c-4197-af68-800938d1b091">
+
+This will publish the new Service Proivder on the FRF site  
+And will have te current date as the **Published Date**
+And will display the 'New' icon next to its name on the DSP list  
+Meaning that the test should now pass once again  
+
+<img width="724" alt="newDsp" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/cc3d1488-38db-49c0-8a22-55cf3698bc66">
