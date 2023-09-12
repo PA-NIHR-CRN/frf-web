@@ -1,8 +1,8 @@
 name: FRF E2E Tests
 on:
-  # schedule:
-  # # Run at 08:00 (UTC) Mon-Fri (09:00 during BST)
-  # - cron: '0 08 * * 1-5'
+  schedule:
+  # Run at 08:00 (UTC) Mon-Fri (09:00 during BST)
+  - cron: '0 08 * * 1-5'
   workflow_dispatch:
     inputs:
       env-context:

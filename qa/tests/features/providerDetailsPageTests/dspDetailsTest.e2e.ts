@@ -179,7 +179,6 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
   test('As a user I will be taken to the External DSP Site in a new tab, when I click the Link - @frf_22_ac2_6', async ({
     providerDetailsPage,
   }) => {
-    test.setTimeout(45000) //tends to exceed 30s in GH workflow
     await test.step('Given I have navigated to the Testing DSP Details Page', async () => {
       await providerDetailsPage.goto('/providers/testing-dsp')
       await providerDetailsPage.assertOnProviderDetailsPage()
