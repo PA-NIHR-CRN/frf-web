@@ -239,7 +239,7 @@ export default class FeedbackFormPage {
     await this.formHelpfulRadioButtonVery.click()
     await this.formOtherFeedbackTxt.type('Testing Other Feedback Value')
     await this.formFullNameInput.type('Testing Name')
-    await this.formEmailAddressInput.type('chris.mcneill@nihr.ac.uk')
+    await this.formEmailAddressInput.type('dummy.test@nihr.ac.uk')
     await this.formOrgNameInput.type('Testing Org')
   }
 

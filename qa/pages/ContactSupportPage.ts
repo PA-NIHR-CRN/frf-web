@@ -445,7 +445,7 @@ export default class ContactSupportPage {
     await this.formEnquiryRadioButtonResearch.click()
     await this.formSummarySupportTxt.type('Testing Value')
     await this.formFullNameInput.type('Testing Name')
-    await this.formEmailAddressInput.type('chris.mcneill@nihr.ac.uk')
+    await this.formEmailAddressInput.type('dummy.test@nihr.ac.uk')
     await this.formJobRoleInput.type('Testing Job')
     await this.formOrgNameInput.type('Testing Org')
     await this.formOrgRadioButtonNonComm.click()

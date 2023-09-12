@@ -272,7 +272,7 @@ export default class ContactDspPage {
 
   async enterValuesAllMandatory() {
     await this.formFullNameInput.type('Testing Name')
-    await this.formEmailAddressInput.type('chris.mcneill@nihr.ac.uk')
+    await this.formEmailAddressInput.type('dummy.test@nihr.ac.uk')
     await this.formJobRoleInput.type('Testing Job')
     await this.formOrgNameInput.type('Testing Org')
     await this.formEnquiryDetailsTxt.type('Testing DSP Value')
