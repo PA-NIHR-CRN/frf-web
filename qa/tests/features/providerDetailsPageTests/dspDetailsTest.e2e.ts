@@ -55,7 +55,9 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
       await providerDetailsPage.assertVideoPresent()
     })
     await test.step('And I will have a link to an External DSP website', async () => {
-      await providerDetailsPage.assertExternalLinkPresent('https://www.bbc.co.uk/news/health')
+      await providerDetailsPage.assertExternalLinkPresent(
+        'https://test.findrecruitandfollowup.nihr.ac.uk/research-support'
+      )
     })
     await test.step('And I will see Funded by, First Published & Last updated information', async () => {
       await providerDetailsPage.assertFundPublishUpdated('Department of Health and Social Care', '19 June 2023')
