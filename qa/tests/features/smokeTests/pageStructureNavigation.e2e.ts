@@ -271,7 +271,7 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1_str
     })
   })
 
-  test('As a user I will Always have a Link Available to Navigate to the Shaw Trust FRF Certificate Page - @frf_1_7', async ({
+  test.only('As a user I will Always have a Link Available to Navigate to the Shaw Trust FRF Certificate Page - @frf_1_7', async ({
     providerDetailsPage,
     commonItemsPage,
   }) => {

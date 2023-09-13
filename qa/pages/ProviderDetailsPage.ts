@@ -403,9 +403,11 @@ export default class ProviderDetailsPage {
 
   async clickExternalSiteLink() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
-    await newPage.waitForURL('research-support'),
-      await newPage.waitForLoadState('domcontentloaded'),
-      expect(await newPage.title()).toEqual('Find, Recruit and Follow-up')
+    {
+      await newPage.waitForURL('research-support'),
+        await newPage.waitForLoadState('domcontentloaded'),
+        expect(await newPage.title()).toEqual('Find, Recruit and Follow-up')
+    }
     //doing assertion here as otherwise the page context is destroyed/closed during parrallel execution
   }
 
