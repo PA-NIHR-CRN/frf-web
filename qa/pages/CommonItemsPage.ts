@@ -307,15 +307,13 @@ export default class CommonItemsPage {
 
   async assertShawTrustNavigation() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.shawTrustLogo.click()])
-    {
-      await newPage.waitForURL(
-        'https://www.accessibility-services.co.uk/certificates/national-institute-for-health-and-care-research/'
-      ),
-        await newPage.waitForLoadState('domcontentloaded'),
-        expect(await newPage.title()).toEqual(
-          'National Institute for Health and Care Research | Shaw Trust Accessibility Services'
-        )
-    }
+    await newPage.waitForURL(
+      'https://www.accessibility-services.co.uk/certificates/national-institute-for-health-and-care-research/'
+    )
+    await newPage.waitForLoadState('domcontentloaded')
+    expect(await newPage.title()).toEqual(
+      'National Institute for Health and Care Research | Shaw Trust Accessibility Services'
+    )
     //doing assertion here as otherwise the page context is destroyed/closed during parrallel execution
   }
 
