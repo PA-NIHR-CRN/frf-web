@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', () => {
+test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1_structure', () => {
   test('As a User I Can Navigate to the Home Page', async ({ homePage }) => {
     await test.step('Given I have navigated to the HomePage', async () => {
       await homePage.goto()
@@ -49,11 +49,14 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     await test.step('Then I should see the Header and Footer Items Appear', async () => {
       await commonItemsPage.assertHeaderFooterItemsAppear()
     })
+    await test.step('And I should see the FRF Logo Appear at the top of the Page', async () => {
+      await commonItemsPage.assertFrfLogoPresent()
+    })
+    await test.step('And I should see the NIHR Logo Appear at the bottom of the Page', async () => {
+      await commonItemsPage.assertNihrLogoPresent()
+    })
     await test.step('And I should see the FRF Service Title Appear', async () => {
       await commonItemsPage.assertServiceTitleCorrect()
-    })
-    await test.step('And I should see the NIHR Logo Appear', async () => {
-      await commonItemsPage.assertNihrLogoPresent()
     })
     await test.step('And I should see the GDS Beta Banner Appear', async () => {
       await commonItemsPage.assertBetaGdsBannerAppears()
@@ -67,11 +70,14 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     await test.step('Then I should see the Header and Footer Items Appear', async () => {
       await commonItemsPage.assertHeaderFooterItemsAppear()
     })
+    await test.step('And I should see the FRF Logo Appear at the top of the Page', async () => {
+      await commonItemsPage.assertFrfLogoPresent()
+    })
+    await test.step('And I should see the NIHR Logo Appear at the bottom of the Page', async () => {
+      await commonItemsPage.assertNihrLogoPresent()
+    })
     await test.step('And I should see the FRF Service Title Appear', async () => {
       await commonItemsPage.assertServiceTitleCorrect()
-    })
-    await test.step('And I should see the NIHR Logo Appear', async () => {
-      await commonItemsPage.assertNihrLogoPresent()
     })
     await test.step('And I should see the GDS Beta Banner Appear', async () => {
       await commonItemsPage.assertBetaGdsBannerAppears()
@@ -85,11 +91,14 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     await test.step('Then I should see the Header and Footer Items Appear', async () => {
       await commonItemsPage.assertHeaderFooterItemsAppear()
     })
+    await test.step('And I should see the FRF Logo Appear at the top of the Page', async () => {
+      await commonItemsPage.assertFrfLogoPresent()
+    })
+    await test.step('And I should see the NIHR Logo Appear at the bottom of the Page', async () => {
+      await commonItemsPage.assertNihrLogoPresent()
+    })
     await test.step('And I should see the FRF Service Title Appear', async () => {
       await commonItemsPage.assertServiceTitleCorrect()
-    })
-    await test.step('And I should see the NIHR Logo Appear', async () => {
-      await commonItemsPage.assertNihrLogoPresent()
     })
     await test.step('And I should see the GDS Beta Banner Appear', async () => {
       await commonItemsPage.assertBetaGdsBannerAppears()
@@ -207,7 +216,80 @@ test.describe('Contentful Page Structure and Navigation Smoke Tests - @frf_1', (
     })
   })
 
-  test('The Site has SEO Disabled in Lower Environments - @frf_1_6', async ({ homePage, commonItemsPage }) => {
+  test('As a User I Can Navigate to the Terms and Conditons Page via the Footer Link, Across Multiple Pages - @frf_1_5', async ({
+    homePage,
+    providersPage,
+    providerDetailsPage,
+    commonItemsPage,
+    termsConditionsPage,
+  }) => {
+    await test.step('Given I have navigated to the HomePage', async () => {
+      await homePage.goto()
+    })
+    await test.step('When I click the Terms and Conditons Link in the Footer', async () => {
+      await commonItemsPage.linkTermsConditions.click()
+    })
+    await test.step('Then I should see the Terms and Conditons Page', async () => {
+      await termsConditionsPage.assertOnAccessibilityPage()
+    })
+    await test.step('Given I have navigated to the Providers Page', async () => {
+      await providersPage.goto()
+    })
+    await test.step('When I click the Terms and Conditons Link in the Footer', async () => {
+      await commonItemsPage.linkTermsConditions.click()
+    })
+    await test.step('Then I should see the Terms and Conditons Page', async () => {
+      await termsConditionsPage.assertOnAccessibilityPage()
+    })
+    await test.step('Given I have navigated to the Provider Details Page', async () => {
+      await providerDetailsPage.goto('/providers/testing-dsp')
+    })
+    await test.step('When I click the Terms and Conditons Link in the Footer', async () => {
+      await commonItemsPage.linkTermsConditions.click()
+    })
+    await test.step('Then I should see the Terms and Conditons Page', async () => {
+      await termsConditionsPage.assertOnAccessibilityPage()
+    })
+  })
+
+  test('As a user I will Always have a Link Available to Navigate to the NIHR Home Page - @frf_1_6', async ({
+    providersPage,
+    commonItemsPage,
+  }) => {
+    await test.step('Given I have navigated to the Providers Page', async () => {
+      await providersPage.goto()
+    })
+    await test.step('And I should see the NIHR Logo at the Bottom of the Page', async () => {
+      await commonItemsPage.assertNihrLogoPresent()
+    })
+    await test.step('When I click the NIHR Logo', async () => {
+      await commonItemsPage.nihrFooterLogo.click()
+      await commonItemsPage.page.waitForLoadState()
+    })
+    await test.step('Then I should see the NIHR Home Page', async () => {
+      await commonItemsPage.assertOnNihrHomePage()
+    })
+  })
+
+  test.only('As a user I will Always have a Link Available to Navigate to the Shaw Trust FRF Certificate Page - @frf_1_7', async ({
+    providerDetailsPage,
+    commonItemsPage,
+  }) => {
+    await test.step('Given I have navigated a Provider Details Page', async () => {
+      await providerDetailsPage.goto('providers/gp-visualise-and-dataview')
+    })
+    await test.step('And I should see the Shaw Trust Logo at the Bottom of the Page', async () => {
+      await commonItemsPage.assertShawTrustLogoPresent()
+    })
+    await test.step('When I click the Shaw Trust Logo ', async () => {
+      await commonItemsPage.assertShawTrustNavigation()
+    })
+    await test.step('Then I should see the Shaw Trust FRF CertificatePage in a new tab', async () => {
+      await commonItemsPage.assertNewTabOpened()
+    })
+  })
+
+  test('The Site has SEO Disabled in Lower Environments - @frf_1_8', async ({ homePage, commonItemsPage }) => {
     await test.step('Given I have navigated to the HomePage', async () => {
       await homePage.goto()
       await homePage.assertOnHomePage()

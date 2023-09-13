@@ -11,7 +11,7 @@ export default class ResearchSupportPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.contactFrfBtn = page.locator('a[class="govuk-button govuk-button--secondary mb-0 mt-2 text-left"]')
   }
 

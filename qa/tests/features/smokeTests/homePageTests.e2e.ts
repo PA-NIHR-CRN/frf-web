@@ -78,35 +78,22 @@ test.describe('Home Page Smoke Tests - @frf_4', () => {
     })
   })
 
-  test('As a user I will Always have a Link Available to Navigate back to the Home Page - @frf_4_ac3', async ({
+  test('As a user I will Always have a Link Available to Navigate back to the FRF Home Page - @frf_4_ac3', async ({
     homePage,
     providersPage,
     commonItemsPage,
-    privacyPage,
   }) => {
     await test.step('Given I have navigated to the Providers Page', async () => {
       await providersPage.goto()
     })
-    await test.step('When I click the FRF Banner Title', async () => {
-      await commonItemsPage.frfServiceTitle.locator('a').click()
+    await test.step('And I should see the FRF Logo at the Top of the Page', async () => {
+      await commonItemsPage.assertFrfLogoPresent()
     })
-    await test.step('Then I should see the Home Page', async () => {
+    await test.step('When I click the FRF Logo', async () => {
+      await commonItemsPage.frfHeaderLogo.click()
+    })
+    await test.step('Then I should see the FRF Home Page', async () => {
       await homePage.assertOnHomePage()
-    })
-    await test.step('Given I have navigated to the Privacy Page', async () => {
-      await privacyPage.goto()
-    })
-    await test.step('And I should see the "Home" Icon', async () => {
-      await commonItemsPage.assertHomeIconVisible()
-    })
-    await test.step('When I click the Home Icon', async () => {
-      await commonItemsPage.btnHomeIcon.click()
-    })
-    await test.step('Then I should see the Home Page', async () => {
-      await homePage.assertOnHomePage()
-    })
-    await test.step('Then I should not see the Home Icon', async () => {
-      await commonItemsPage.assertHomeIconHidden()
     })
   })
 })

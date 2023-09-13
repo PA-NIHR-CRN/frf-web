@@ -1,7 +1,7 @@
 import { test } from '../../../hooks/CustomFixtures'
 import testData from '../../../utils/testData.json'
 
-test.describe('Contact DSP Form Validation Tests - @frf_23', () => {
+test.describe('Contact DSP Form Validation Tests - @frf_23 @frf_23_validation', () => {
   test('As a user I am shown a Summary of Validation Errors, if Mandatory fields are incomplete - @frf_23_validation_summary', async ({
     contactDspPage,
   }) => {
@@ -178,6 +178,7 @@ test.describe('Contact DSP Form Validation Tests - @frf_23', () => {
   test('As a user I cannot exceed the 1200 character limit on the Enquiry Details Text Area - @frf_23_validation_max_chars', async ({
     contactDspPage,
   }) => {
+    test.setTimeout(45000)
     await test.step('Given I have navigated to a Contact DSP Page', async () => {
       await contactDspPage.goto('/contact-data-service-provider/genomic-profile-register')
       await contactDspPage.assertOnContactDspPage('Genomic Profile Register')

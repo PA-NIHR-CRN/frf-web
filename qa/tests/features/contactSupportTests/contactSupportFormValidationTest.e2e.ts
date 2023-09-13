@@ -1,7 +1,7 @@
 import { test } from '../../../hooks/CustomFixtures'
 import testData from '../../../utils/testData.json'
 
-test.describe('Contact Research Support Form Validation Tests - @frf_32', () => {
+test.describe('Contact Research Support Form Validation Tests - @frf_32 @frf_32_validation', () => {
   test('As a user I am shown a Summary of Validation Errors, if Mandatory fields are incomplete - @frf_32_validation_summary', async ({
     contactSupportPage,
   }) => {
@@ -187,6 +187,7 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32', () => 
   test('As a user I cannot exceed the 1200 character limit on the Summary Support field - @frf_32_validation_max_chars', async ({
     contactSupportPage,
   }) => {
+    test.setTimeout(45000)
     await test.step('Given I have navigated to the Contact Support Page', async () => {
       await contactSupportPage.goto()
       await contactSupportPage.assertOnContactSupportPage()

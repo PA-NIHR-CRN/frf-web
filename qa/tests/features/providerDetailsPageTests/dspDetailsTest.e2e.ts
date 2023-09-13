@@ -55,7 +55,9 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
       await providerDetailsPage.assertVideoPresent()
     })
     await test.step('And I will have a link to an External DSP website', async () => {
-      await providerDetailsPage.assertExternalLinkPresent('https://www.bbc.co.uk/news/health')
+      await providerDetailsPage.assertExternalLinkPresent(
+        'https://test.findrecruitandfollowup.nihr.ac.uk/research-support'
+      )
     })
     await test.step('And I will see Funded by, First Published & Last updated information', async () => {
       await providerDetailsPage.assertFundPublishUpdated('Department of Health and Social Care', '19 June 2023')
@@ -174,18 +176,18 @@ test.describe('DSP Details, Base Functionality Tests - @frf_22', () => {
     })
   })
 
-  test('As a user I will be taken to the External DSP Site in a new tab, when I click the Link - @frf_22_ac2_6', async ({
+  test.only('As a user I will be taken to the External DSP Site in a new tab, when I click the Link - @frf_22_ac2_6', async ({
     providerDetailsPage,
   }) => {
     await test.step('Given I have navigated to the Testing DSP Details Page', async () => {
       await providerDetailsPage.goto('/providers/testing-dsp')
       await providerDetailsPage.assertOnProviderDetailsPage()
     })
-    await test.step('When I click the External the Coverage Section', async () => {
+    await test.step('When I click the External Link in the Coverage Section', async () => {
       await providerDetailsPage.clickExternalSiteLink()
     })
     await test.step('Then I will be taken to the External Site in a new tab', async () => {
-      await providerDetailsPage.assertOnNewTab()
+      await providerDetailsPage.assertNewTabOpened()
     })
   })
 

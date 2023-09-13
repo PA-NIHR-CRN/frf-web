@@ -104,16 +104,17 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
 
   test('As a user I can Navigate using a Hyperlink on a Generic Page - @frf_61_hyperlink', async ({
     genericTestPage,
+    providersPage,
   }) => {
     await test.step('Given I have Published a Generic Page with a Hyperlink', async () => {
       await genericTestPage.goto('/chris-testing-page')
     })
     await test.step('When I Click the Hyperlink', async () => {
       await genericTestPage.linkText.click()
-      await genericTestPage.page.waitForLoadState()
     })
     await test.step('Then I am taken to the Hyperlinked Page', async () => {
-      await genericTestPage.assertOnLinkedPage('BBC')
+      await providersPage.assertOnProvidersPage()
+      await genericTestPage.assertOnLinkedPage('Hyperlink')
     })
   })
 
@@ -133,6 +134,7 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
 
   test('As a user I can Navigate using a Secondary Button on a Generic Page - @frf_61_secondary', async ({
     genericTestPage,
+    homePage,
   }) => {
     await test.step('Given I have Published a Generic Page with a Secondary Button with Internal Link', async () => {
       await genericTestPage.goto('/chris-testing-page')
@@ -141,21 +143,23 @@ test.describe('Generic Page Functionality Tests - @frf_61', () => {
       await genericTestPage.secondaryButton.click()
     })
     await test.step('Then I am taken to the Linked Page', async () => {
+      await homePage.assertOnHomePage()
       await genericTestPage.assertOnLinkedPage('Secondary')
     })
   })
 
   test('As a user I can Navigate using a Contact Block Button on a Generic Page - @frf_61_contact_button', async ({
     genericTestPage,
+    feedbackFormPage,
   }) => {
     await test.step('Given I have Published a Generic Page with a Contact Block Button', async () => {
       await genericTestPage.goto('/chris-testing-page')
     })
     await test.step('When I Click the Contact Block Button', async () => {
       await genericTestPage.contactBlockButton.click()
-      await genericTestPage.page.waitForLoadState()
     })
     await test.step('Then I am taken to the Linked Page', async () => {
+      await feedbackFormPage.assertOnFeedbackForm()
       await genericTestPage.assertOnLinkedPage('Contact')
     })
   })

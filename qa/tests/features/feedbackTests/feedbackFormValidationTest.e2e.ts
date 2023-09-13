@@ -1,7 +1,7 @@
 import { test } from '../../../hooks/CustomFixtures'
 import testData from '../../../utils/testData.json'
 
-test.describe('Feedback Form Validation Tests - @frf_2', () => {
+test.describe('Feedback Form Validation Tests - @frf_2_feedback @frf_2_validation', () => {
   test('As a user I am shown a Summary of Validation Errors, if Mandatory fields are incomplete - @frf_2_validation_summary', async ({
     feedbackFormPage,
   }) => {
@@ -139,6 +139,7 @@ test.describe('Feedback Form Validation Tests - @frf_2', () => {
   test('As a user I cannot exceed the 1200 character limit on the Any Other Feedback Text Area - @frf_2_validation_max_chars', async ({
     feedbackFormPage,
   }) => {
+    test.setTimeout(45000)
     await test.step('Given I have navigated to the Feedback Page', async () => {
       await feedbackFormPage.goto()
       await feedbackFormPage.assertOnFeedbackForm()

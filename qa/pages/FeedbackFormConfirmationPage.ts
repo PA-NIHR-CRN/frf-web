@@ -12,7 +12,7 @@ export default class FeedbackConfirmationPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.confirmTextBlock = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.returnToHomePageButton = page.locator('a[class="govuk-button"]')
   }
@@ -24,13 +24,17 @@ export default class FeedbackConfirmationPage {
 
   async assertOnFeedbackConfirmationPage() {
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Thank you')
+    await expect(this.headingPageTitle).toHaveText('Thank you for your feedback')
     expect(this.page.url()).toContain('feedback/confirmation')
   }
 
   async assertFeedbackPageTextBlock() {
-    await expect(this.confirmTextBlock).toBeVisible()
-    await expect(this.confirmTextBlock).toHaveText(
+    await expect(this.confirmTextBlock.first()).toBeVisible()
+    await expect(this.confirmTextBlock.nth(1)).toBeVisible()
+    await expect(this.confirmTextBlock.first()).toHaveText(
+      'Your feedback has been received and will help us to improve the FRF website.'
+    )
+    await expect(this.confirmTextBlock.nth(1)).toHaveText(
       'If you have provided contact details we may contact you in the near future for further feedback.'
     )
   }

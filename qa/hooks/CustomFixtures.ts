@@ -19,6 +19,7 @@ import PrivacyPage from '../pages/PrivacyPage'
 import ProviderDetailsPage from '../pages/ProviderDetailsPage'
 import ProvidersPage from '../pages/ProvidersPage'
 import ResearchSupportPage from '../pages/ResearchSupportPage'
+import TermsConditionsPage from '../pages/TermsConditionsPage'
 
 type CustomFixtures = {
   homePage: HomePage
@@ -39,6 +40,7 @@ type CustomFixtures = {
   contactDspPage: ContactDspPage
   contactDspConfirmationPage: ContactDspConfirmationPage
   cookiePolicyPage: CookiePolicyPage
+  termsConditionsPage: TermsConditionsPage
 
   makeAxeBuilder: () => AxeBuilder
 }
@@ -114,6 +116,10 @@ export const test = base.extend<CustomFixtures>({
 
   cookiePolicyPage: async ({ page }, use) => {
     await use(new CookiePolicyPage(page))
+  },
+
+  termsConditionsPage: async ({ page }, use) => {
+    await use(new TermsConditionsPage(page))
   },
 
   makeAxeBuilder: async ({ page }, use) => {

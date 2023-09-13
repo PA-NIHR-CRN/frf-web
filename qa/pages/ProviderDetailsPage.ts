@@ -3,6 +3,7 @@ import { expect, Locator, Page } from '@playwright/test'
 //Declare Page Objects
 export default class ProviderDetailsPage {
   readonly page: Page
+  readonly pageTitle: Locator
   readonly linkBackToProviders: Locator
   readonly dspDetailName: Locator
   readonly dspDetailSidebar: Locator
@@ -63,6 +64,7 @@ export default class ProviderDetailsPage {
     this.page = page
 
     //Locators
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.linkBackToProviders = page.locator('a[class="govuk-back-link"]')
     this.dspDetailName = page.locator('h2[class="govuk-heading-l mb-2"]')
     this.dspDetailSidebar = page.locator('div[data-testid="frf-dsp-sidebar"]')
@@ -177,7 +179,9 @@ export default class ProviderDetailsPage {
   }
 
   async assertOnProviderDetailsPage() {
+    await expect(this.pageTitle).toBeVisible()
     await expect(this.linkBackToProviders).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Data Service Provider details')
     await expect(this.linkBackToProviders).toHaveText('Back to list of data service providers')
     await expect(this.dspDetailName).toBeVisible()
     await expect(this.dspDetailSidebar).toBeVisible()
@@ -399,15 +403,17 @@ export default class ProviderDetailsPage {
 
   async clickExternalSiteLink() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
-    await newPage.waitForLoadState()
+    await newPage.waitForURL('research-support')
+    await newPage.waitForLoadState('domcontentloaded')
+    expect(await newPage.title()).toEqual('Find, Recruit and Follow-up')
+    //doing assertion here as otherwise the page context is destroyed/closed during parrallel execution
   }
 
-  async assertOnNewTab() {
+  async assertNewTabOpened() {
     expect(this.page.context().pages().length).toEqual(2)
     expect(await this.page.context().pages().at(0)?.title()).toEqual(
-      'Further details for Testing DSP - Find, Recruit and Follow-up'
+      'Testing DSP details - Find, Recruit and Follow-up'
     )
-    expect(await this.page.context().pages().at(1)?.title()).toEqual('Health - BBC News')
   }
 
   async assertSuitedToValues() {

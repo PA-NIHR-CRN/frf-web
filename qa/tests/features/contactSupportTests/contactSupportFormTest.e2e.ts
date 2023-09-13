@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Contact Research Support Form Tests - @frf_32', () => {
+test.describe('Contact Research Support Form Tests - @frf_32 @frf_32_form', () => {
   test('As a user I have access to a Contact Research Support Form via the Home Page - @frf_32_nav_home', async ({
     homePage,
     contactSupportPage,
