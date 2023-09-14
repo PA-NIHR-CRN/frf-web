@@ -69,6 +69,10 @@ jobs:
         ENV_CONTEXT: 'DEV'
     - name: Test inputs
       run: echo "${{ github.event.inputs.test-tag }}"
+    - name: Set Test Tag
+      run: echo "TEST_TAG=${{ github.event.inputs.test-tag || 'all' }}" >> "$GITHUB_ENV"
+    - name: Test Test Tag
+      run: echo "${{ env.TEST_TAG }}"
     - name: Run All FRF E2E Tests in TEST
       if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag == '' || github.event.inputs.test-tag == 'all')
       run: npx playwright test
