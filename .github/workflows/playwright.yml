@@ -2,27 +2,27 @@ name: FRF E2E Tests
 on:
   schedule:
   # Run at 08:00 (UTC) Mon-Fri (09:00 during BST)
-  - cron: '45 10 * * 1-5'
+  - cron: '0 08 * * 1-5'
   workflow_dispatch:
     inputs:
       env-context:
         description: 'Select which environment you want to run the tests in
           Accepts dev or test'
         options: ['dev', 'test']
-        required: true
+        # required: true
         default: 'test'
       publish-report:
         description: 'Do you want to upload test report to GitHub Pages?
           Note - Current report will be overwritten!
           Accepts true or false'
         options: ['true', 'false']
-        required: true
+        # required: true
         default: 'true'
       test-tag:
         description: "Select which Tests you want to run using @<tag name>.
           For example: @frf_13, @frf_32_ac1_submit.
           To run all tests leave as default 'all'"
-        required: true
+        # required: true
         default: "all"
 jobs:
   e2e-test:
