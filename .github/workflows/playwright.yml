@@ -57,37 +57,26 @@ jobs:
       run: |
           aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
     - name: Run All FRF E2E Tests in DEV
-      with:
-        test-tag: ${{ github.event.inputs.test-tag || 'all' }}
-      if: github.event.inputs.env-context == 'dev' && (test-tag == 'all')
+      if: github.event.inputs.env-context == 'dev' && (github.event.inputs.test-tag == '' || github.event.inputs.test-tag == 'all')
       run: npx playwright test
       env:
         ENV_CONTEXT: 'DEV'
     - name: Run Tag Specific FRF E2E Tests in DEV
-      with:
-        test-tag: ${{ github.event.inputs.test-tag || 'all' }}
       if: | 
-        github.event.inputs.env-context == 'dev' && (test-tag != 'all')
+        github.event.inputs.env-context == 'dev' && (github.event.inputs.test-tag != 'all')
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'DEV'
     - name: Test inputs
       run: echo "${{ github.event.inputs.test-tag }}"
-      with:
-        test-tag: ${{ github.event.inputs.test-tag || 'all' }}
-        run: echo "${{ test-tag }}"
     - name: Run All FRF E2E Tests in TEST
-      with:
-        test-tag: ${{ github.event.inputs.test-tag || 'all' }}
-      if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (test-tag == 'all')
+      if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag == '' || github.event.inputs.test-tag == 'all')
       run: npx playwright test
       env:
         ENV_CONTEXT: 'TEST'
     - name: Run Tag Specific FRF E2E Tests in TEST
-      with:
-        test-tag: ${{ github.event.inputs.test-tag || 'all' }}
       if: | 
-        github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (test-tag != 'all')
+        github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag != 'all')
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'TEST'
