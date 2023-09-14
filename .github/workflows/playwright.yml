@@ -60,8 +60,7 @@ jobs:
       env:
         ENV_CONTEXT: 'DEV'
     - name: Run Tag Specific FRF E2E Tests in DEV
-      if: | 
-        github.event.inputs.env-context == 'dev' && (github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all')
+      if: github.event.inputs.env-context == 'dev' && (github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all')
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'DEV'
@@ -73,8 +72,7 @@ jobs:
       env:
         ENV_CONTEXT: 'TEST'
     - name: Run Tag Specific FRF E2E Tests in TEST
-      if: | 
-        github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all')
+      if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all')
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'TEST'
