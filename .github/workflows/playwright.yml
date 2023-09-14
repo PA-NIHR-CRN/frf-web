@@ -2,27 +2,27 @@ name: FRF E2E Tests
 on:
   schedule:
   # Run at 08:00 (UTC) Mon-Fri (09:00 during BST)
-  - cron: '0 08 * * 1-5'
+  - cron: '15 12 * * 1-5'
   workflow_dispatch:
     inputs:
       env-context:
         description: 'Select which environment you want to run the tests in
           Accepts dev or test'
         options: ['dev', 'test']
-        # required: true
+        required: true
         default: 'test'
       publish-report:
         description: 'Do you want to upload test report to GitHub Pages?
           Note - Current report will be overwritten!
           Accepts true or false'
         options: ['true', 'false']
-        # required: true
+        required: true
         default: 'true'
       test-tag:
         description: "Select which Tests you want to run using @<tag name>.
           For example: @frf_13, @frf_32_ac1_submit.
           To run all tests leave as default 'all'"
-        # required: true
+        required: true
         default: "all"
 jobs:
   e2e-test:
@@ -30,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+      with:
+        ref: test/playwright-yml-fix
     - uses: actions/setup-node@v3
       with:
         node-version: 16
@@ -60,7 +62,8 @@ jobs:
       env:
         ENV_CONTEXT: 'DEV'
     - name: Run Tag Specific FRF E2E Tests in DEV
-      if: github.event.inputs.env-context == 'dev' && (github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all')
+      if: | 
+        github.event.inputs.env-context == 'dev' && (github.event.inputs.test-tag != 'all')
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'DEV'
@@ -72,7 +75,8 @@ jobs:
       env:
         ENV_CONTEXT: 'TEST'
     - name: Run Tag Specific FRF E2E Tests in TEST
-      if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all')
+      if: | 
+        github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag != 'all')
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'TEST'
