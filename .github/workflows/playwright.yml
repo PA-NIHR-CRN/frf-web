@@ -74,12 +74,12 @@ jobs:
     - name: Test Test Tag
       run: echo "${{ env.TEST_TAG }}"
     - name: Run All FRF E2E Tests in TEST
-      if: (github.event.inputs.env-context == '' || 'test') && (env.TEST_TAG == 'all')
+      if: (github.event.inputs.env-context == '' || 'test') && (github.event.inputs.test-tag == '' || 'all')
       run: npx playwright test
       env:
         ENV_CONTEXT: 'TEST'
     - name: Run Tag Specific FRF E2E Tests in TEST
-      if: (github.event.inputs.env-context == '' || 'test') && (env.TEST_TAG != 'all')
+      if: (github.event.inputs.env-context == '' || 'test') && (github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all')
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'TEST'
