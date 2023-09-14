@@ -2,7 +2,7 @@ name: FRF E2E Tests
 on:
   schedule:
   # Run at 08:00 (UTC) Mon-Fri (09:00 during BST)
-  - cron: '0 08 * * 1-5'
+  - cron: '45 10 * * 1-5'
   workflow_dispatch:
     inputs:
       env-context:
@@ -65,6 +65,8 @@ jobs:
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       env:
         ENV_CONTEXT: 'DEV'
+    - name: Test inputs
+      run: echo "${{ github.event.inputs.test-tag }}"
     - name: Run All FRF E2E Tests in TEST
       if: github.event.inputs.env-context == '' || github.event.inputs.env-context == 'test' && (github.event.inputs.test-tag == '' || github.event.inputs.test-tag == 'all')
       run: npx playwright test
