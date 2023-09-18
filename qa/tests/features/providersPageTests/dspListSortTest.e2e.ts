@@ -1,7 +1,9 @@
 import { test } from '../../../hooks/CustomFixtures'
 
 test.describe('DSP List Sorting Tests - @frf_12', () => {
-  test('As a user I can Sort the List of DSP`s Alphabetically - @frf_12_alphabetical', async ({ providersPage }) => {
+  test.only('As a user I can Sort the List of DSP`s Alphabetically - @frf_12_alphabetical', async ({
+    providersPage,
+  }) => {
     await test.step('Given I am on the DSP List Page', async () => {
       await providersPage.goto()
       await providersPage.assertOnProvidersPage()
