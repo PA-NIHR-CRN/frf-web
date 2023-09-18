@@ -16,8 +16,8 @@ on:
         description: "Select which Tests you want to run using @<tag name>.
           For example: @frf_13, @frf_32_ac1_submit.
           To run all tests leave as default 'all'"
-        required: true
-        default: "all"
+        # required: true
+        # default: "all"
 jobs:
   e2e-test:
     timeout-minutes: 10
