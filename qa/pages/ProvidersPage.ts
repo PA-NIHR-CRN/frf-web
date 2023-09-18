@@ -278,13 +278,16 @@ export default class ProvidersPage {
     for (const title of titleElements) {
       const titleText = await title.textContent()
       if (titleText !== null) {
-        actualTitleOrder.push(titleText.toLowerCase())
+        const cutOffIndex = titleText.indexOf(':') + 1
+        const truncatedTitleText = titleText.substring(cutOffIndex).trim()
+        actualTitleOrder.push(truncatedTitleText.toLowerCase())
       }
     }
     const expectedTitleOrder = JSON.parse(JSON.stringify(actualTitleOrder))
     expectedTitleOrder.sort()
-    if (ordering.toLowerCase() == 'ascending') expect(actualTitleOrder).toEqual(expectedTitleOrder)
-    else {
+    if (ordering.toLowerCase() == 'ascending') {
+      expect(actualTitleOrder).toEqual(expectedTitleOrder)
+    } else {
       expect(actualTitleOrder).toEqual(expectedTitleOrder.reverse())
     }
   }
