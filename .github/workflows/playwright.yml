@@ -46,13 +46,9 @@ jobs:
     - name: Run All FRF E2E Tests in TEST
       if: github.event.inputs.test-tag == '' || github.event.inputs.test-tag == 'all'
       run: npx playwright test
-      env:
-        ENV_CONTEXT: 'TEST'
     - name: Run Tag Specific FRF E2E Tests in TEST
       if: github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all'
       run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
-      env:
-        ENV_CONTEXT: 'TEST'
     - name: Remove Github Actions IP from LB security group (Test)
       run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
