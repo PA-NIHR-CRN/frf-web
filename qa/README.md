@@ -14,18 +14,19 @@ Playwright Getting Started Documentation - https://playwright.dev/docs/intro
 
 ## --------------------RUN TESTS LOCALLY--------------------
 
-Go to `GlobalSetup.ts` file  
-The `BASE_URL` environment variable is populated by an input from the FRF E2E Tests workflow in GitHub Actions  
-Simply hardcode the value by commenting out all lines within the globalSetup function  
-Leaving either line 3 uncommented, if you want to run in Dev  
-Or line 5 uncommented, if you want to run in Test
+Playwright is configured in the `playwright.config.ts` file  
+It contains global properties, as well as project specific properties inside a **projects** array  
+By default the tests run using the **FindRecruitFollow** project
+The `BASE_URL` environment variable is populated in the `GlobalSetup.ts` file  
+It is set to run in the Test environment by default
 
-<img width="633" alt="hardcodeBaseUrl" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/a9aff651-fe11-43eb-8df6-6a4a8ef1f44a">
-
+Should you wish to run the test in another environment  
+Simply change the `BASE_URL` value to the desired environment   
 **DO NOT ADD, COMMIT OR PUSH THIS CHANGE TO GITHUB**
 
+To execute the tests  
 Run the command `npx playwright test`  
-Result will print to the console
+Results will print to the console
 
 To see HTML report generated once the test run has finished,  
 run the command `npx playwright show-report`  
@@ -93,14 +94,11 @@ Tests are set to run and publish an HTML report to a GitHub page on a scheduled 
 To trigger the test run manually  
 Go the the repo's GitHub actions page - https://github.com/PA-NIHR-CRN/frf-web/actions  
 Select **FRF E2E Tests** from the workflow's options on the left  
-Click the 'Run workflow' option and select remote branch you wish to run the tests from, main by default  
-Set the **Select which environment** input field to either test or dev, default value is test  
-This value dictates which environment the tests will run in  
 Set the **Upload test report** input field to either true or false, default value is false  
 This value dictates whether the HTML test report is published to a GitHub Page and the Managed Services Slack channel  
-Set the **Select which Tests** input field to either 'all' or '@<test tag>' e.g. @frf_13, default is all  
+Set the **Select which Tests** input field to either 'all' or '@<test_tag>' e.g. @frf_13, default is all  
 This value dictates which tests are included in the run,  
-'all' will run everything, @<test tag will run any tests with that tag
+'all' will run everything, @<test_tag will run any tests with that tag
 
 GitHub Page is found here - https://pa-nihr-crn.github.io/frf-web/  
 The GitHub page stores and displays the latest published HTML test report  
