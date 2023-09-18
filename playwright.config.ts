@@ -37,6 +37,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -51,6 +52,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -66,6 +68,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -81,6 +84,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -95,6 +99,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -109,6 +114,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
