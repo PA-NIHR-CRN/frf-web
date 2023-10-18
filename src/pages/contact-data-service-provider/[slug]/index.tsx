@@ -6,7 +6,7 @@ import { ReactElement, useCallback } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
-import { ErrorSummary, Fieldset, Form, HoneyPot, Textarea, TextInput } from '@/components/Form'
+import { ErrorSummary, Form, HoneyPot, Textarea, TextInput } from '@/components/Form'
 import { RootLayout } from '@/components/Layout/RootLayout'
 import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
@@ -73,7 +73,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
             >
               <ErrorSummary errors={errors} />
               <HoneyPot {...register('workEmailAddress')} />
-              <Fieldset>
+              <div>
                 <TextInput
                   label="Full name"
                   errors={errors}
@@ -115,7 +115,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
                   defaultValue={defaultValues?.studyDescription}
                   {...register('studyDescription')}
                 />
-              </Fieldset>
+              </div>
 
               <p>We will email you a copy of this form for your records</p>
 

@@ -66,7 +66,7 @@ export default function Feedback({ query }: FeedbackProps) {
             >
               <ErrorSummary errors={errors} />
               <HoneyPot {...register('workEmailAddress')} />
-              <Fieldset>
+              <div>
                 <RadioGroup
                   label="How helpful was the Find, Recruit and Follow-up (FRF) website?"
                   errors={errors}
@@ -86,7 +86,7 @@ export default function Feedback({ query }: FeedbackProps) {
                   defaultValue={defaultValues?.suggestions}
                   {...register('suggestions')}
                 />
-              </Fieldset>
+              </div>
 
               <Fieldset
                 className="govuk-!-margin-top-7"
