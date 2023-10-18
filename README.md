@@ -24,7 +24,7 @@ A handful of GitHub Actions workflows are defined. These are described below:
 
 1. `npm install` to install dependencies
 2. Create a `.env.local` file from the `.env.example` and update its values
-3. `nm run dev` to run the local Next.js server
+3. `npm run dev` to run the local Next.js server
 
 ## Environment variables
 
