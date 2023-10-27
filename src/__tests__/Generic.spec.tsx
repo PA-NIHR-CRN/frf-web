@@ -122,7 +122,7 @@ test('Sets the static cache revalidation period', async () => {
 test('Handles no data returned', async () => {
   mockContentfulResponse({ items: [] })
   await expect(getStaticProps({ params: { slug } })).rejects.toThrow(
-    'Failed to fetch generic page content (Error: Null entry)'
+    'Failed to fetch generic page content (Error: Null entry for slug research-support)'
   )
 })
 
