@@ -24,6 +24,7 @@ import { Sort } from '@/components/Sort/Sort'
 import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
+import { logger } from '@/lib/logger'
 import { formatDate, getFiltersFromQuery, numDaysBetween, pluralise, transformFilters } from '@/utils'
 import { getCookieBanner } from '@/utils/getCookieBanner'
 
@@ -251,6 +252,8 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
       },
     }
   } catch (error) {
+    logger.error('getServerSideProps error getting providers')
+    logger.error(error)
     return {
       redirect: {
         destination: '/500',

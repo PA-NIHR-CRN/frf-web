@@ -1,13 +1,19 @@
 import { forwardRef } from 'react'
 
+/**
+ *  Honey pot filter to catch bots
+ *  prevent autocomplete https://stackoverflow.com/a/30873633
+ */
 export const HoneyPot = forwardRef<HTMLInputElement>(({ ...props }, ref) => {
   return (
     <>
-      <label>
-        <span className="sr-only">Label</span>
+      <div aria-hidden="true">
+        <label htmlFor="potFilter" className="sr-only">
+          Work email address
+        </label>
         <input
+          id="potFilter"
           ref={ref}
-          // https://stackoverflow.com/a/30873633
           type="search"
           autoComplete="off"
           className="sr-only"
@@ -15,7 +21,7 @@ export const HoneyPot = forwardRef<HTMLInputElement>(({ ...props }, ref) => {
           tabIndex={-1}
           {...props}
         />
-      </label>
+      </div>
     </>
   )
 })

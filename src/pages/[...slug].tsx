@@ -71,7 +71,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
   try {
     const entry = await contentfulService.getGenericPageBySlug(slug)
 
-    if (!entry) throw new Error('Null entry')
+    if (!entry) throw new Error(`Null entry for slug ${slug}`)
 
     return {
       props: {
