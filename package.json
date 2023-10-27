@@ -39,7 +39,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "govuk-frontend": "^4.6.0",
     "handlebars": "^4.7.7",
-    "next": "^13.4.9",
+    "next": "^13.5.0",
     "next-seo": "^6.0.0",
     "node-mocks-http": "^1.12.2",
     "pino": "^8.14.1",
