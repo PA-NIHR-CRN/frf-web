@@ -50,7 +50,7 @@
     "react-use": "^17.4.0",
     "react-use-pagination": "^2.0.1",
     "typescript": "5.0.4",
-    "zod": "^3.21.4"
+    "zod": "^3.22.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",
