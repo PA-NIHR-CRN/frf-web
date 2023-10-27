@@ -9,7 +9,9 @@ const devOptions = {
   },
 }
 
-const prodOptions = {}
+const prodOptions = {
+  ...(process.env.NEXT_PUBLIC_APP_ENV === 'dev' && { level: 'trace' }),
+}
 
 const options = process.env.NODE_ENV === 'development' ? devOptions : prodOptions
 

@@ -1,4 +1,4 @@
-import { Locator } from '@playwright/test'
+import { Cookie, Locator } from '@playwright/test'
 
 export function numDaysBetween(d1: Date, d2: Date): number {
   const diff = Math.abs(d1.getTime() - d2.getTime())
@@ -25,6 +25,24 @@ export function convertPromiseStringToNumber(inputString: string | undefined): n
   return inputAsNumber
 }
 
+export function confirmStringNotNull(inputString: string | null): string {
+  if (inputString != null) {
+    return inputString
+  } else {
+    throw new Error(`The input string is null`)
+  }
+}
+
 export function extractRefNoDigits(inputString: string | undefined, charToBeReplaced: string): string | undefined {
   return inputString?.replaceAll(charToBeReplaced, '')
+}
+
+export function getDomainSpecificCookieList(inputCookieArray: Cookie[], domainToFetch: string): Cookie[] {
+  const returnedCookieArray: Cookie[] = []
+  inputCookieArray.forEach((cookie) => {
+    if (cookie.domain == domainToFetch) {
+      returnedCookieArray.push(cookie)
+    }
+  })
+  return returnedCookieArray
 }

@@ -1,4 +1,5 @@
 import userEvent from '@testing-library/user-event'
+import MockDate from 'mockdate'
 import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 import { act } from 'react-dom/test-utils'
@@ -15,6 +16,14 @@ beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
+beforeEach(() => {
+  MockDate.set(new Date('2023-06-08'))
+})
+
+afterEach(() => {
+  MockDate.reset()
+})
+
 type GetServerSidePropsReturnType = Required<Awaited<ReturnType<typeof getServerSideProps>>>
 
 test('Default search criteria (no search or filters set)', async () => {
@@ -25,6 +34,8 @@ test('Default search criteria (no search or filters set)', async () => {
   }
 
   render(<ServiceProviders {...props} />)
+
+  expect(props.heading).toEqual('List of data service providers')
 
   // Title (duplicated by the filters panel mobile only title)
   expect(screen.getAllByText('5 data service providers found')).toHaveLength(2)

@@ -15,7 +15,7 @@ export default class ContactFrfTeamConfirmationPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.confirmTextBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.txtBlockFeedbackLink = this.confirmTextBlocks.locator('a[href="/feedback"]')
     this.returnToHomePageButton = page.locator('a[class="govuk-button"]')
@@ -28,14 +28,14 @@ export default class ContactFrfTeamConfirmationPage {
 
   async assertOnContactFrfConfirmationPage() {
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Thank you')
+    await expect(this.headingPageTitle).toHaveText('Thank you for contacting us')
     expect(this.page.url()).toContain('contact-frf-team/confirmation/C')
   }
 
   async assertConfirmationPageTextBlock() {
     await expect(this.confirmTextBlocks.first()).toBeVisible()
     await expect(this.confirmTextBlocks.first()).toContainText(
-      'We have received your enquiry and will be in touch in due course.'
+      'The FRF central team has received your enquiry and will be in touch in due course.'
     )
     await expect(this.confirmTextBlocks.nth(1)).toContainText(
       'A copy of your enquiry will be sent to your email address.'

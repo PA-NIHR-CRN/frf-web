@@ -6,7 +6,7 @@ import { ReactElement, useCallback } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
-import { ErrorSummary, Fieldset, Form, HoneyPot, Textarea, TextInput } from '@/components/Form'
+import { ErrorSummary, Form, HoneyPot, Textarea, TextInput } from '@/components/Form'
 import { RootLayout } from '@/components/Layout/RootLayout'
 import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
@@ -42,7 +42,10 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
 
   return (
     <>
-      <NextSeo title={`Contact Find, Recruit and Follow-up specialist team - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`Contact Find, Recruit and Follow-up central team - Find, Recruit and Follow-up`}
+        description="Research support colleagues and organisations providing data services can contact the Find, Recruit and Follow-up (FRF) central team for further information about the FRF advisory support, how to get involved or for support for complex enquiries."
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
@@ -69,7 +72,7 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
             >
               <ErrorSummary errors={errors} />
               <HoneyPot {...register('workEmailAddress')} />
-              <Fieldset>
+              <div>
                 <TextInput
                   label="Full name"
                   errors={errors}
@@ -99,7 +102,6 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
                 />
                 <TextInput
                   label="Organisation name"
-                  hint="For research support colleagues, please specify where you are based (CRNCC, Local Clinical Research Network or Devolve Nation)"
                   errors={errors}
                   defaultValue={defaultValues?.organisationName}
                   {...register('organisationName')}
@@ -111,7 +113,7 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
                   defaultValue={defaultValues?.details}
                   {...register('details')}
                 />
-              </Fieldset>
+              </div>
 
               <p>We will email you a copy of this form for your records</p>
 
@@ -133,10 +135,10 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
 
 ContactFrfTeam.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode, cookieBanner }: ContactFrfTeamProps
+  { isPreviewMode, cookieBanner, heading }: ContactFrfTeamProps
 ) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -147,6 +149,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: `Contact Find, Recruit and Follow-up specialist team`,
+        heading: 'Contact us',
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(req),

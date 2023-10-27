@@ -23,11 +23,11 @@ export interface TypeServiceProviderFields {
      */
     slug?: EntryFieldTypes.Symbol;
     /**
-     * Field type definition for field 'emailAddress' (Email address)
-     * @name Email address
+     * Field type definition for field 'emailAddress' (Email Address)
+     * @name Email Address
      * @localized false
      */
-    emailAddress: EntryFieldTypes.Symbol;
+    emailAddress: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
     /**
      * Field type definition for field 'searchKeywords' (Search Keywords)
      * @name Search Keywords
@@ -174,7 +174,7 @@ export interface TypeServiceProviderFields {
  * @type {TypeServiceProviderSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 75
+ * @version 89
  */
 export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderFields, "serviceProvider">;
 /**
@@ -183,6 +183,6 @@ export type TypeServiceProviderSkeleton = EntrySkeletonType<TypeServiceProviderF
  * @type {TypeServiceProvider}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-05T14:41:54.076Z
- * @version 75
+ * @version 89
  */
 export type TypeServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeServiceProviderSkeleton, Modifiers, Locales>;

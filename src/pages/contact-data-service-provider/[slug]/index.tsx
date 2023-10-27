@@ -6,7 +6,7 @@ import { ReactElement, useCallback } from 'react'
 import { FieldError, useForm } from 'react-hook-form'
 
 import { Container } from '@/components/Container/Container'
-import { ErrorSummary, Fieldset, Form, HoneyPot, Textarea, TextInput } from '@/components/Form'
+import { ErrorSummary, Form, HoneyPot, Textarea, TextInput } from '@/components/Form'
 import { RootLayout } from '@/components/Layout/RootLayout'
 import { TEXTAREA_MAX_CHARACTERS } from '@/constants/forms'
 import { useFormErrorHydration } from '@/hooks/useFormErrorHydration'
@@ -47,7 +47,10 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
 
   return (
     <>
-      <NextSeo title={`Get in touch with ${name} - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`Contact ${name} - Find, Recruit and Follow-up`}
+        description={`Get in touch with ${name} directly for further information about the Find, Recruit and Follow-up services you are interested in to support your research.`}
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
@@ -70,7 +73,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
             >
               <ErrorSummary errors={errors} />
               <HoneyPot {...register('workEmailAddress')} />
-              <Fieldset>
+              <div>
                 <TextInput
                   label="Full name"
                   errors={errors}
@@ -112,7 +115,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
                   defaultValue={defaultValues?.studyDescription}
                   {...register('studyDescription')}
                 />
-              </Fieldset>
+              </div>
 
               <p>We will email you a copy of this form for your records</p>
 
@@ -134,10 +137,10 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
 
 ContactDataServiceProvider.getLayout = function getLayout(
   page: ReactElement,
-  { isPreviewMode, cookieBanner }: ContactDataServiceProviderProps
+  { isPreviewMode, cookieBanner, heading }: ContactDataServiceProviderProps
 ) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -158,6 +161,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: `Get in touch with ${name}`,
+        heading: 'Contact data service provider',
         name,
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,

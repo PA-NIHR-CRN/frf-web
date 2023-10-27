@@ -30,6 +30,9 @@ describe('EmailService', () => {
 
     // Mock handlebars compile
     const compileMock = jest.spyOn(handlebars, 'compile')
+    compileMock.mockReturnValueOnce((data) => `COMPILED_BODY_PARTIAL_HTML(${JSON.stringify(data)})`)
+    compileMock.mockReturnValueOnce((data) => `COMPILED_BODY_PARTIAL_TEXT(${JSON.stringify(data)})`)
+    compileMock.mockReturnValueOnce((data) => `COMPILED_SIGNATURE_HTML(${JSON.stringify(data)})`)
     compileMock.mockReturnValueOnce((data) => `COMPILED_HTML(${JSON.stringify(data)})`)
     compileMock.mockReturnValueOnce((data) => `COMPILED_TEXT(${JSON.stringify(data)})`)
 
@@ -38,10 +41,12 @@ describe('EmailService', () => {
     sesClientMock.sendEmail = jest.fn().mockReturnValueOnce({ promise: sendEmailMock })
 
     const emailData: EmailArgs = {
-      to: 'recipient@example.com',
+      to: ['recipient@example.com'],
+      sourceInbox: 'frfteam@nihr.ac.uk',
       subject: 'Test Subject',
-      templateName: 'support-request',
-      templateData: { name: 'John Doe' },
+      bodyHtml: '<p>content</p>',
+      bodyText: 'content',
+      templateData: { name: 'John Doe', signatureText: '<p>signature</p>' },
     }
 
     await emailService.sendEmail(emailData)
@@ -49,18 +54,21 @@ describe('EmailService', () => {
     expect(readFileSyncMock).toHaveBeenCalledTimes(2)
     expect(readFileSyncMock).toHaveBeenNthCalledWith(
       1,
-      path.resolve(process.cwd(), 'src/templates/emails/support-request.html.hbs'),
+      path.resolve(process.cwd(), 'src/templates/emails/email-template.html.hbs'),
       { encoding: 'utf-8' }
     )
     expect(readFileSyncMock).toHaveBeenNthCalledWith(
       2,
-      path.resolve(process.cwd(), 'src/templates/emails/support-request.text.hbs'),
+      path.resolve(process.cwd(), 'src/templates/emails/email-template.text.hbs'),
       { encoding: 'utf-8' }
     )
 
-    expect(compileMock).toHaveBeenCalledTimes(2)
-    expect(compileMock).toHaveBeenNthCalledWith(1, 'HTML_CONTENT')
-    expect(compileMock).toHaveBeenNthCalledWith(2, 'TEXT_CONTENT')
+    expect(compileMock).toHaveBeenCalledTimes(5)
+    expect(compileMock).toHaveBeenNthCalledWith(1, emailData.bodyHtml)
+    expect(compileMock).toHaveBeenNthCalledWith(2, emailData.bodyText)
+    expect(compileMock).toHaveBeenNthCalledWith(3, emailData.templateData.signatureText)
+    expect(compileMock).toHaveBeenNthCalledWith(4, 'HTML_CONTENT')
+    expect(compileMock).toHaveBeenNthCalledWith(5, 'TEXT_CONTENT')
 
     expect(sesClientMock.sendEmail).toHaveBeenCalledTimes(1)
     expect(sesClientMock.sendEmail).toHaveBeenCalledWith({

@@ -7,7 +7,8 @@ export default class ContactSupportPage {
   readonly page: Page
   readonly researchLeadExampleOption: string
   readonly researchLeadChrisOption: string
-  readonly headingPageTitle: Locator
+  readonly pageTitle: Locator
+  readonly pageHeading: Locator
   readonly contactSupportForm: Locator
   readonly contactSupportFormTxtBlocks: Locator
   readonly formAboutEnquirySectionLbl: Locator
@@ -80,7 +81,8 @@ export default class ContactSupportPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageHeading = page.locator('h2[class="govuk-heading-l"]')
     this.contactSupportForm = page.locator('form[action="/api/forms/contact-research-support"]')
     this.contactSupportFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.formAboutEnquirySectionLbl = page.locator('legend[class="govuk-fieldset__legend govuk-fieldset__legend--m"]', {
@@ -173,8 +175,10 @@ export default class ContactSupportPage {
 
   async assertOnContactSupportPage() {
     await expect(this.page).toHaveURL('contact-research-support')
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact research support')
+    await expect(this.pageTitle).toBeVisible()
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Get support for your research')
+    await expect(this.pageHeading).toHaveText('Contact research support')
   }
 
   async assertContactSupportFormPresent() {
@@ -441,7 +445,7 @@ export default class ContactSupportPage {
     await this.formEnquiryRadioButtonResearch.click()
     await this.formSummarySupportTxt.type('Testing Value')
     await this.formFullNameInput.type('Testing Name')
-    await this.formEmailAddressInput.type('chris.mcneill@nihr.ac.uk')
+    await this.formEmailAddressInput.type('dummy.test@nihr.ac.uk')
     await this.formJobRoleInput.type('Testing Job')
     await this.formOrgNameInput.type('Testing Org')
     await this.formOrgRadioButtonNonComm.click()
@@ -465,7 +469,7 @@ export default class ContactSupportPage {
 
   async assertOnContactSupportErrorPage() {
     await expect(this.page).toHaveURL('contact-research-support?fatal=1')
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Contact research support')
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageHeading).toHaveText('Contact research support')
   }
 }

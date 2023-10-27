@@ -43,12 +43,16 @@ export default function Feedback({ query }: FeedbackProps) {
 
   return (
     <>
-      <NextSeo title={`Feedback - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`Give your feedback - Find, Recruit and Follow-up`}
+        description="Let us know what you think of our new Find, Recruit and Follow-up website. Your feedback will help us to improve it."
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
             <h2 className="govuk-heading-l">Let us know what you think</h2>
             <p>The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.</p>
+            <p>All fields are required unless marked as optional.</p>
             <Form
               method="post"
               action="/api/forms/feedback"
@@ -62,7 +66,7 @@ export default function Feedback({ query }: FeedbackProps) {
             >
               <ErrorSummary errors={errors} />
               <HoneyPot {...register('workEmailAddress')} />
-              <Fieldset>
+              <div>
                 <RadioGroup
                   label="How helpful was the Find, Recruit and Follow-up (FRF) website?"
                   errors={errors}
@@ -82,7 +86,7 @@ export default function Feedback({ query }: FeedbackProps) {
                   defaultValue={defaultValues?.suggestions}
                   {...register('suggestions')}
                 />
-              </Fieldset>
+              </div>
 
               <Fieldset
                 className="govuk-!-margin-top-7"
@@ -129,9 +133,9 @@ export default function Feedback({ query }: FeedbackProps) {
   )
 }
 
-Feedback.getLayout = function getLayout(page: ReactElement, { isPreviewMode, cookieBanner }: FeedbackProps) {
+Feedback.getLayout = function getLayout(page: ReactElement, { isPreviewMode, cookieBanner, heading }: FeedbackProps) {
   return (
-    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner}>
+    <RootLayout isPreviewMode={isPreviewMode} cookieBanner={cookieBanner} heading={heading}>
       {page}
     </RootLayout>
   )
@@ -142,6 +146,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: 'Feedback',
+        heading: 'Find, Recruit & Follow-up feedback',
         query,
         isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
         cookieBanner: await getCookieBanner(req),

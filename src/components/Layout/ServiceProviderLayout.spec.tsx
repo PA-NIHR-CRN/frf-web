@@ -11,12 +11,12 @@ jest.mock('next/router', () => require('next-router-mock'))
 
 test('Displays a back link & page content', () => {
   render(
-    <ServiceProviderLayout>
-      <h1>Service Provider Detail Page</h1>
+    <ServiceProviderLayout heading="Service Provider Detail Page">
+      <div>Page Content</div>
     </ServiceProviderLayout>
   )
 
-  assertRootLayout()
+  assertRootLayout('Service Provider Detail Page')
 
   // Back
   expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
@@ -25,7 +25,7 @@ test('Displays a back link & page content', () => {
   )
 
   // Page content
-  expect(screen.getByRole('heading', { name: 'Service Provider Detail Page' })).toBeInTheDocument()
+  expect(screen.getByText('Page Content')).toBeInTheDocument()
 })
 
 test('Back link goes back to the previous url state', async () => {

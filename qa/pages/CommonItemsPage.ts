@@ -1,15 +1,19 @@
-import { expect, Locator, Page } from '@playwright/test'
+import { Cookie, expect, Locator, Page } from '@playwright/test'
+
+import { getDomainSpecificCookieList } from '../utils/UtilFunctions'
 
 //Declare Page Objects
 export default class CommonItemsPage {
   readonly page: Page
   readonly linkPrivacy: Locator
   readonly linkAccessibility: Locator
+  readonly linkCookiePolicy: Locator
+  readonly linkTermsConditions: Locator
   readonly frfHeader: Locator
   readonly frfFooterLinks: Locator
   readonly frfFooterLogos: Locator
-  readonly frfServiceTitle: Locator
-  readonly nihrLogo: Locator
+  readonly frfPageTitle: Locator
+  readonly nihrFooterLogo: Locator
   readonly bannerGdsBeta: Locator
   readonly linkFeedback: Locator
   readonly btnClosedSiteMenu: Locator
@@ -22,7 +26,19 @@ export default class CommonItemsPage {
   readonly txtLinkDescriptions: Locator
   readonly txtSiteMenuIntro: Locator
   readonly siteSeoMetaTag: Locator
-  readonly btnHomeIcon: Locator
+  readonly frfHeaderLogo: Locator
+  readonly cookieBanner: Locator
+  readonly cookieBannerAccept: Locator
+  readonly cookieBannerReject: Locator
+  readonly cookieBannerViewCookies: Locator
+  readonly cookieBannerHeading: Locator
+  readonly cookieBannerTxt: Locator
+  readonly cookiePolicyFooterLink: Locator
+  readonly cookieConfirmationMsg: Locator
+  readonly cookieConfirmationPolicyLink: Locator
+  readonly cookieConfirmationChangeLink: Locator
+  readonly cookieConfirmationHideBtn: Locator
+  readonly shawTrustLogo: Locator
 
   //Initialize Page Objects
   constructor(page: Page) {
@@ -31,11 +47,13 @@ export default class CommonItemsPage {
     //Locators
     this.linkPrivacy = page.locator('a', { hasText: 'Privacy policy' })
     this.linkAccessibility = page.locator('a', { hasText: 'Accessibility' })
+    this.linkCookiePolicy = page.locator('a', { hasText: 'Cookie policy' })
+    this.linkTermsConditions = page.locator('a', { hasText: 'Terms and conditions' })
     this.frfHeader = page.locator('div[data-testid="frf-panel"]')
     this.frfFooterLinks = page.locator('div[data-testid="frf-footer-links"]')
     this.frfFooterLogos = page.locator('div[data-testid="frf-footer-logos"]')
-    this.frfServiceTitle = page.locator('h1[class="govuk-panel__title heading-underscore"]')
-    this.nihrLogo = page.locator('img[alt="National Institute for Health and Care Research logo"]')
+    this.frfPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.nihrFooterLogo = page.locator('img[alt="National Institute for Health and Care Research logo"]')
     this.bannerGdsBeta = page.locator('strong[class="govuk-tag govuk-phase-banner__content__tag"]')
     this.linkFeedback = page.locator('a', { hasText: 'feedback' })
     this.btnClosedSiteMenu = page.locator('button[aria-label="Show navigation menu"]')
@@ -64,7 +82,25 @@ export default class CommonItemsPage {
     this.txtLinkDescriptions = page.locator('p[class="govuk-body-s text-white"]')
     this.txtSiteMenuIntro = page.locator('p[class="govuk-heading-s max-w-[300px] font-normal text-white"]')
     this.siteSeoMetaTag = page.locator('meta[name="robots"]')
-    this.btnHomeIcon = page.locator('svg[data-testid="frf-icon-home"]')
+    this.frfHeaderLogo = page.locator('img[alt="Find, Recruit and Follow-up logo"]')
+    this.cookieBanner = page.locator(
+      'div[class="govuk-cookie-banner govuk-!-padding-top-5 govuk-!-padding-bottom-3 w-full"]'
+    )
+    this.cookieBannerAccept = page.locator('button[value="accept"]')
+    this.cookieBannerReject = page.locator('button[value="reject"]')
+    this.cookieBannerViewCookies = page.locator('a[href="/cookie-policy"][class="govuk-link"]', {
+      hasText: 'View cookies',
+    })
+    this.cookieBannerHeading = page.locator('h2[class="govuk-cookie-banner__heading govuk-heading-m"]')
+    this.cookieBannerTxt = page.locator('div[class="govuk-cookie-banner__content govuk-body focus:outline-0"]')
+    this.cookiePolicyFooterLink = this.frfFooterLinks.locator('a[href="/cookie-policy"]')
+    this.cookieConfirmationMsg = page.locator('p[data-testid="confirmation-message"]')
+    this.cookieConfirmationPolicyLink = page.locator('a[class="govuk-link"][href="/cookie-policy"]', {
+      hasText: 'cookie policy',
+    })
+    this.cookieConfirmationChangeLink = page.locator('a[class="govuk-link"][href="#cookie-banner"]')
+    this.cookieConfirmationHideBtn = page.locator('button[class="govuk-button"]', { hasText: 'Hide cookie message' })
+    this.shawTrustLogo = page.locator('img[alt="Shaw Trust Logo"]')
   }
 
   //Page Methods
@@ -73,15 +109,25 @@ export default class CommonItemsPage {
     await expect(this.frfFooterLinks).toBeVisible()
     await expect(this.linkPrivacy).toBeVisible()
     await expect(this.linkAccessibility).toBeVisible()
+    await expect(this.linkCookiePolicy).toBeVisible()
+    await expect(this.linkTermsConditions).toBeVisible()
+    await expect(this.shawTrustLogo).toBeVisible()
   }
 
   async assertServiceTitleCorrect() {
-    await expect(this.frfServiceTitle).toBeVisible()
-    await expect(this.frfServiceTitle).toHaveText('Find, Recruit and Follow-up')
+    await expect(this.frfPageTitle).toBeVisible()
+  }
+
+  async assertFrfLogoPresent() {
+    await expect(this.frfHeaderLogo).toBeVisible()
   }
 
   async assertNihrLogoPresent() {
-    await expect(this.nihrLogo).toBeVisible()
+    await expect(this.nihrFooterLogo).toBeVisible()
+  }
+
+  async assertShawTrustLogoPresent() {
+    await expect(this.shawTrustLogo).toBeVisible()
   }
 
   async assertBetaGdsBannerAppears() {
@@ -135,11 +181,146 @@ export default class CommonItemsPage {
     await expect(this.siteSeoMetaTag).toHaveAttribute('content', 'noindex,nofollow')
   }
 
-  async assertHomeIconVisible() {
-    await expect(this.btnHomeIcon).toBeVisible()
+  async assertCookieBannerAppears(visible: boolean) {
+    if (visible) {
+      await expect(this.cookieBanner).toBeVisible()
+    } else {
+      await expect(this.cookieBanner).toBeHidden()
+    }
   }
 
-  async assertHomeIconHidden() {
-    await expect(this.btnHomeIcon).toBeHidden()
+  async assertCookieBannerOptionsAppear() {
+    await expect(this.cookieBannerAccept).toBeVisible()
+    await expect(this.cookieBannerReject).toBeVisible()
+    await expect(this.cookieBannerViewCookies).toBeVisible()
+    await expect(this.cookieBannerAccept).toHaveText('Accept additional cookies')
+    await expect(this.cookieBannerReject).toHaveText('Reject additional cookies')
+    await expect(this.cookieBannerViewCookies).toHaveText('View cookies')
+  }
+
+  async assertCookieBannerTxtContent() {
+    await expect(this.cookieBannerHeading).toBeVisible()
+    await expect(this.cookieBannerTxt).toBeVisible()
+    await expect(this.cookieBannerHeading).toHaveText('Cookies on Find, Recruit and Follow-Up')
+    await expect(this.cookieBannerTxt).toContainText('We use some essential cookies to make this service work')
+    await expect(this.cookieBannerTxt).toContainText(
+      'understand how people use the Find, Recruit and Follow-up website'
+    )
+  }
+
+  async assertNoCookiesApplied() {
+    const cookieList = await this.getCookies()
+    expect(cookieList).toHaveLength(0)
+  }
+
+  async assertDecisonCookieApplied(decision: string) {
+    const cookieList = await this.getCookies()
+    const decisionCookieArray = getDomainSpecificCookieList(cookieList, 'test.findrecruitandfollowup.nihr.ac.uk')
+    expect(decisionCookieArray).toHaveLength(1)
+    if (decision.toLowerCase() == 'accept') {
+      expect(decisionCookieArray[0].value).toEqual('Accept')
+    } else {
+      expect(decisionCookieArray[0].value).toEqual('Reject')
+    }
+  }
+
+  async assertDecisonCookieExpiry() {
+    const cookieList = await this.getCookies()
+    const decisionCookieArray = getDomainSpecificCookieList(cookieList, 'test.findrecruitandfollowup.nihr.ac.uk')
+    const epochExpireValue = decisionCookieArray[0].expires
+    const expiryDate = new Date(0)
+    expiryDate.setUTCSeconds(epochExpireValue)
+    const currentDate = new Date()
+    const differenceInDays = Math.floor((expiryDate.valueOf() - currentDate.valueOf()) / (1000 * 60 * 60 * 24))
+    expect(differenceInDays).toEqual(365)
+  }
+
+  async assertGoogleAnalyticsCookiesApplied(applied: boolean) {
+    const cookieList = await this.getCookies()
+    const gaCookiesArray = getDomainSpecificCookieList(cookieList, '.nihr.ac.uk')
+    if (applied) {
+      expect(gaCookiesArray.length).toEqual(2)
+      gaCookiesArray.forEach((cookie) => expect(cookie.name.startsWith('_ga')).toBeTruthy())
+    } else {
+      expect(cookieList.length).toEqual(1)
+      expect(gaCookiesArray.length).toEqual(0)
+    }
+  }
+
+  async assertYoutubeCookiesApplied(applied: boolean) {
+    const cookieList = await this.getCookies()
+    const ytCookiesArray = getDomainSpecificCookieList(cookieList, '.youtube.com')
+    if (applied) {
+      expect(ytCookiesArray.length).toEqual(2)
+      expect(ytCookiesArray.some((cookie) => cookie.name == 'YSC')).toBeTruthy()
+      expect(ytCookiesArray.some((cookie) => cookie.name == 'VISITOR_INFO1_LIVE')).toBeTruthy()
+    } else {
+      expect(cookieList.length).toEqual(1)
+      expect(ytCookiesArray.length).toEqual(0)
+    }
+  }
+
+  async getCookies(): Promise<Cookie[]> {
+    return await this.page.context().cookies()
+  }
+
+  async assertCookieConfirmationMsgAppears(decision: string) {
+    await expect(this.cookieConfirmationMsg).toBeVisible()
+    if (decision.toLowerCase() == 'accept') {
+      await expect(this.cookieConfirmationMsg).toContainText('You’ve accepted additional cookies.')
+    } else {
+      await expect(this.cookieConfirmationMsg).toContainText('You’ve rejected additional cookies.')
+    }
+  }
+
+  async assertCookieConfirmationPolicyLink(visible: boolean) {
+    if (visible) {
+      await expect(this.cookieConfirmationPolicyLink).toBeVisible()
+      await expect(this.cookieConfirmationPolicyLink).toHaveText('cookie policy')
+    } else {
+      await expect(this.cookieConfirmationPolicyLink).toBeHidden()
+    }
+  }
+
+  async assertCookieConfirmationChangeLink(visible: boolean) {
+    if (visible) {
+      await expect(this.cookieConfirmationChangeLink).toBeVisible()
+      await expect(this.cookieConfirmationChangeLink).toHaveText('change your cookie settings')
+    } else {
+      await expect(this.cookieConfirmationChangeLink).toBeHidden()
+    }
+  }
+
+  async assertCookieConfirmationHideButton(visible: boolean) {
+    if (visible) {
+      await expect(this.cookieConfirmationHideBtn).toBeVisible()
+      await expect(this.cookieConfirmationHideBtn).toHaveText('Hide cookie message')
+    } else {
+      await expect(this.cookieConfirmationHideBtn).toBeHidden()
+    }
+  }
+
+  async assertOnNihrHomePage() {
+    await expect(this.page).toHaveURL('https://www.nihr.ac.uk/')
+    expect(await this.page.title()).toEqual('National Institute for Health and Care Research | NIHR')
+  }
+
+  async assertShawTrustNavigation() {
+    const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.shawTrustLogo.click()])
+    await newPage.waitForURL(
+      'https://www.accessibility-services.co.uk/certificates/national-institute-for-health-and-care-research/'
+    )
+    await newPage.waitForLoadState('domcontentloaded')
+    expect(await newPage.title()).toEqual(
+      'National Institute for Health and Care Research | Shaw Trust Accessibility Services'
+    )
+    //doing assertion here as otherwise the page context is destroyed/closed during parrallel execution
+  }
+
+  async assertNewTabOpened() {
+    expect(this.page.context().pages().length).toEqual(2)
+    expect(await this.page.context().pages().at(0)?.title()).toEqual(
+      'GP Visualise and DataView details - Find, Recruit and Follow-up'
+    )
   }
 }

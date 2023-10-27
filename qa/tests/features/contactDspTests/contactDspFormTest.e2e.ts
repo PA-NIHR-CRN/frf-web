@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Contact DSP Form Tests - @frf_23', () => {
+test.describe('Contact DSP Form Tests - @frf_23 @frf_23_form', () => {
   test('As a user I have access to a Contact DSP Form via the DSP Details Page - @frf_23_nav', async ({
     providerDetailsPage,
     contactDspPage,

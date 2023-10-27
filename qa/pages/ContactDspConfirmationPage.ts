@@ -15,7 +15,7 @@ export default class ContactDspConfirmationPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.confirmTextBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.txtBlockFeedbackLink = this.confirmTextBlocks.locator('a[href="/feedback"]')
     this.returnToHomePageButton = page.locator('a[class="govuk-button"]')
@@ -28,7 +28,7 @@ export default class ContactDspConfirmationPage {
 
   async assertOnContactDspConfirmationPage(dspPath: string) {
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Thank you')
+    await expect(this.headingPageTitle).toHaveText('Thank you for your enquiry')
     expect(this.page.url()).toContain(`contact-data-service-provider/${dspPath}/confirmation/D`)
   }
 

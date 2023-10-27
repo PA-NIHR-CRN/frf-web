@@ -6,7 +6,7 @@ import { Mock } from 'ts-mockery'
 import { emailService } from '@/lib/email'
 import { logger } from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
-import { defaultMock } from '@/mocks/contactResearchSupport'
+import { defaultMock, emailContactsMock } from '@/mocks/contactResearchSupport'
 import { prismaMock } from '@/mocks/prisma'
 import { setupMockServer } from '@/utils'
 import { ContactResearchSupportInputs } from '@/utils/schemas/contact-research-support.schema'
@@ -33,7 +33,8 @@ const testHandler = async (handler: NextApiHandler, options: RequestOptions) => 
 
 beforeEach(() => {
   jest.clearAllMocks()
-  mockContentfulResponse(defaultMock)
+  mockContentfulResponse(defaultMock, 200, undefined, false, { once: true })
+  mockContentfulResponse(emailContactsMock, 200, undefined, false, { once: true })
   console.error = jest.fn()
 })
 
@@ -49,7 +50,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     organisationType: 'nonCommercial',
-    lcrn: 'mockregion1@nihr.ac.uk',
+    lcrn: 'Mock region 1',
     studyTitle: '',
     protocolReference: '',
     cpmsId: '',
@@ -70,7 +71,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     organisationType: 'nonCommercial',
-    lcrn: 'mockregion1@nihr.ac.uk',
+    lcrn: 'Mock region 1',
     studyTitle: '',
     protocolReference: '',
     cpmsId: '',
@@ -91,7 +92,7 @@ test('Successful submission redirects to the confirmation page', async () => {
       jobRole: 'Researcher',
       organisationName: 'NIHR',
       organisationType: 'nonCommercial',
-      lcrn: 'mockregion1@nihr.ac.uk',
+      lcrn: 'Mock region 1',
       studyTitle: '',
       protocolReference: '',
       cpmsId: '',
@@ -107,11 +108,19 @@ test('Successful submission redirects to the confirmation page', async () => {
 
   const [emailOne, emailTwo] = sendEmailSpy.mock.calls
 
-  expect(emailOne[0].to).toBe('mockregion1@nihr.ac.uk')
+  expect(emailOne[0].to).toEqual(['mockregion1@nihr.ac.uk'])
   expect(emailOne[0].templateData.referenceNumber).toEqual(expect.any(String))
+  expect(emailOne[0].templateData.signatureText).toEqual('<p><b>Find, Recruit and Follow-up</b></p>')
+  expect(emailOne[0].templateData.signatureLogo).toEqual(
+    'https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png'
+  )
 
-  expect(emailTwo[0].to).toBe('testemail@nihr.ac.uk')
+  expect(emailTwo[0].to).toEqual(['testemail@nihr.ac.uk'])
   expect(emailTwo[0].templateData.referenceNumber).toEqual(expect.any(String))
+  expect(emailTwo[0].templateData.signatureText).toEqual('<p><b>Find, Recruit and Follow-up</b></p>')
+  expect(emailTwo[0].templateData.signatureLogo).toEqual(
+    'https://www.nihr.ac.uk/layout/4.0/assets/external/nihr-logo.png'
+  )
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {
@@ -122,14 +131,14 @@ test('Validation error redirects back to the form with the errors and original v
     phoneNumber: '+447443121812',
     jobRole: 'Researcher',
     organisationName: 'NIHR',
-    lcrn: 'lcrnregion@nihr.ac.uk',
+    lcrn: 'Mock region 1',
     workEmailAddress: '', // honeypot
   }
 
   const res = await testHandler(handler, { method: 'POST', body })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe(
-    '/contact-research-support?supportDescriptionError=Required&emailAddressError=Enter+a+valid+email+address&organisationTypeError=Select+the+type+of+organisation&studyTitleError=Required&protocolReferenceError=Required&cpmsIdError=Required&enquiryType=data&fullName=Test+user&emailAddress=invalid&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&lcrn=lcrnregion%40nihr.ac.uk'
+    '/contact-research-support?supportDescriptionError=Required&emailAddressError=Enter+a+valid+email+address&organisationTypeError=Select+the+type+of+organisation&studyTitleError=Required&protocolReferenceError=Required&cpmsIdError=Required&enquiryType=data&fullName=Test+user&emailAddress=invalid&phoneNumber=%2B447443121812&jobRole=Researcher&organisationName=NIHR&lcrn=Mock+region+1'
   )
 })
 

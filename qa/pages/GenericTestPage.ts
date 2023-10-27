@@ -36,7 +36,7 @@ export default class GenericTestPage {
     this.introParagraph = page.locator('p', { hasText: 'Introduction' })
     this.bulletList = page.locator('ul[class="govuk-list govuk-list--bullet"]')
     this.numberedList = page.locator('ol[class="govuk-list govuk-list--number"]')
-    this.linkText = page.locator('a[href="https://www.bbc.co.uk/news/health"]')
+    this.linkText = page.locator('a', { hasText: 'This is link text' })
     this.lineSeparator = page.locator('hr')
     this.videoElement = page.locator('iframe[title="Test Video"]')
     this.primaryButton = page.locator('a[class="govuk-button govuk-!-margin-top-3"]')
@@ -151,19 +151,18 @@ export default class GenericTestPage {
 
   async assertOnLinkedPage(linkedPage: string) {
     switch (linkedPage.toLowerCase()) {
-      case 'bbc':
-        expect(await this.page.title()).toEqual('Health - BBC News')
+      case 'hyperlink':
+        expect(await this.page.title()).toContain('List of data service providers (')
         break
       case 'primary':
         expect(this.page.context().pages().length).toEqual(2)
         expect(await this.page.context().pages().at(1)?.title()).toEqual('Identity Gateway')
         break
       case 'secondary':
-        expect(await this.page.title()).toEqual('Welcome to Find, Recruit and Follow-up')
+        expect(await this.page.title()).toEqual('Find, Recruit & Follow-Up Test')
         break
       case 'contact':
-        await this.page.waitForURL('/feedback')
-        expect(await this.page.title()).toEqual('Feedback - Find, Recruit and Follow-up')
+        expect(await this.page.title()).toEqual('Give your feedback - Find, Recruit and Follow-up')
         break
       default:
         throw new Error(`${linkedPage} is not a valid option`)

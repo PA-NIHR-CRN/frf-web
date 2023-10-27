@@ -5,10 +5,10 @@ import { RootLayout } from './RootLayout'
 
 jest.mock('next/router', () => require('next-router-mock'))
 
-export const assertRootLayout = () => {
+export const assertRootLayout = (heading: string) => {
   // Header
   const header = screen.getByRole('banner')
-  expect(within(header).getByAltText('National Institute for Health and Care Research logo')).toBeInTheDocument()
+  expect(within(header).getByAltText('Find, Recruit and Follow-up logo')).toBeInTheDocument()
 
   // Phase Banner
   const banner = screen.getByTestId('frf-phase-banner')
@@ -16,23 +16,20 @@ export const assertRootLayout = () => {
 
   // Hero Panel
   const panel = screen.getByTestId('frf-panel')
-  expect(within(panel).getByRole('link', { name: 'Go to the Find, Recruit and Follow-up homepage' })).toHaveAttribute(
-    'href',
-    '/'
-  )
+  expect(within(panel).getByRole('heading', { name: heading, level: 1 }))
 }
 
 test('Displays NIHR layout & page content', () => {
   render(
-    <RootLayout>
-      <h1>Welcome</h1>
+    <RootLayout heading="Welcome">
+      <div>Page content</div>
     </RootLayout>
   )
 
-  assertRootLayout()
+  assertRootLayout('Welcome')
 
   // Page content
-  expect(screen.getByRole('heading', { name: 'Welcome' }))
+  expect(screen.getByText('Page content')).toBeInTheDocument()
 })
 
 test('Adds a class to the body to detect js is enabled', () => {
@@ -44,7 +41,7 @@ test('Adds a class to the body to detect js is enabled', () => {
   expect(document.body.classList.contains('js-enabled')).toBeTruthy()
 })
 
-test('Displays a preview banner when preview mode is enabled', () => {
+test('Displays a preview warning banner when preview mode is enabled', () => {
   render(
     <RootLayout isPreviewMode>
       <h1>Service Provider Detail Page</h1>
@@ -53,6 +50,18 @@ test('Displays a preview banner when preview mode is enabled', () => {
   expect(
     screen.getByText('You are viewing the preview site, which includes draft content (not for onwards sharing).')
   ).toBeInTheDocument()
+})
+
+test('Displays a test site warning banner in the UAT environment', () => {
+  const oldAppEnv = process.env.NEXT_PUBLIC_APP_ENV
+  process.env.NEXT_PUBLIC_APP_ENV = 'uat'
+  render(
+    <RootLayout>
+      <h1>Service Provider Detail Page</h1>
+    </RootLayout>
+  )
+  expect(screen.getByText('You are viewing the test site.')).toBeInTheDocument()
+  process.env.NEXT_PUBLIC_APP_ENV = oldAppEnv
 })
 
 test('Displays the cookie banner', () => {

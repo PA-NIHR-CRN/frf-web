@@ -5,7 +5,8 @@ import { convertPromiseStringToNumber } from '../utils/UtilFunctions'
 //Declare Page Objects
 export default class FeedbackFormPage {
   readonly page: Page
-  readonly headingPageTitle: Locator
+  readonly pageTitle: Locator
+  readonly pageHeading: Locator
   readonly feedbackForm: Locator
   readonly feedbackFormIntroTxt: Locator
   readonly formHelpfulHeader: Locator
@@ -43,7 +44,8 @@ export default class FeedbackFormPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageHeading = page.locator('h2[class="govuk-heading-l"]')
     this.feedbackForm = page.locator('form[action="/api/forms/feedback"]')
     this.feedbackFormIntroTxt = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.formHelpfulHeader = page.locator('legend[class="govuk-fieldset__legend govuk-fieldset__legend--s"]', {
@@ -86,8 +88,10 @@ export default class FeedbackFormPage {
 
   async assertOnFeedbackForm() {
     await expect(this.page).toHaveURL('feedback')
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Let us know what you think')
+    await expect(this.pageTitle).toBeVisible()
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Find, Recruit & Follow-up feedback')
+    await expect(this.pageHeading).toHaveText('Let us know what you think')
   }
 
   async assertFeedbackFormPresent() {
@@ -95,10 +99,12 @@ export default class FeedbackFormPage {
   }
 
   async assertIntroText() {
-    await expect(this.feedbackFormIntroTxt).toBeVisible()
-    await expect(this.feedbackFormIntroTxt).toContainText(
+    await expect(this.feedbackFormIntroTxt.first()).toBeVisible()
+    await expect(this.feedbackFormIntroTxt.nth(1)).toBeVisible()
+    await expect(this.feedbackFormIntroTxt.first()).toHaveText(
       'The Find, Recruit and Follow-Up (FRF) website is new and we would appreciate your feedback.'
     )
+    await expect(this.feedbackFormIntroTxt.nth(1)).toHaveText('All fields are required unless marked as optional.')
   }
 
   async assertHelpfulHeaderPresent() {
@@ -233,7 +239,7 @@ export default class FeedbackFormPage {
     await this.formHelpfulRadioButtonVery.click()
     await this.formOtherFeedbackTxt.type('Testing Other Feedback Value')
     await this.formFullNameInput.type('Testing Name')
-    await this.formEmailAddressInput.type('chris.mcneill@nihr.ac.uk')
+    await this.formEmailAddressInput.type('dummy.test@nihr.ac.uk')
     await this.formOrgNameInput.type('Testing Org')
   }
 
@@ -250,7 +256,9 @@ export default class FeedbackFormPage {
 
   async assertOnFeedbackErrorPage() {
     await expect(this.page).toHaveURL('feedback?fatal=1')
-    await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Let us know what you think')
+    await expect(this.pageTitle).toBeVisible()
+    await expect(this.pageHeading).toBeVisible()
+    await expect(this.pageTitle).toHaveText('Find, Recruit & Follow-up feedback')
+    await expect(this.pageHeading).toHaveText('Let us know what you think')
   }
 }

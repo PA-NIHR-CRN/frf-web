@@ -3,8 +3,9 @@ import axios from 'axios'
 import { GetServerSidePropsContext } from 'next'
 import mockRouter from 'next-router-mock'
 
+import { RootLayout } from '@/components/Layout/RootLayout'
 import { render, within } from '@/config/test-utils'
-import { defaultMock } from '@/mocks/contactResearchSupport'
+import { emailContactsMock } from '@/mocks/contactResearchSupport'
 import ContactResearchSupport, {
   ContactResearchSupportProps,
   getServerSideProps,
@@ -24,7 +25,7 @@ jest.mock('@/lib/logger')
 beforeEach(() => {
   console.error = jest.fn()
   mockRouter.push('/contact-research-support')
-  mockContentfulResponse(defaultMock)
+  mockContentfulResponse(emailContactsMock)
   jest.clearAllMocks()
 })
 
@@ -35,9 +36,13 @@ test('Initial form state', async () => {
     props: ContactResearchSupportProps
   }
 
-  const { getByLabelText, getByRole, getByText } = render(<ContactResearchSupport {...props} />)
+  const { getByLabelText, getByRole, getByText } = render(
+    <RootLayout {...props}>
+      <ContactResearchSupport {...props} />
+    </RootLayout>
+  )
 
-  expect(getByRole('heading', { name: 'Contact research support', level: 2 })).toBeInTheDocument()
+  expect(getByRole('heading', { name: 'Get support for your research', level: 1 })).toBeInTheDocument()
 
   expect(
     getByText(
@@ -50,6 +55,8 @@ test('Initial form state', async () => {
       'If you would like to access this support please complete the form below and a professional from the relevant research support infrastructure will get in touch to respond to your request'
     )
   ).toBeInTheDocument()
+
+  expect(getByText('All fields are required unless marked as optional.')).toBeInTheDocument()
 
   expect(getByRole('group', { name: 'About your enquiry' })).toBeInTheDocument()
 
@@ -115,8 +122,8 @@ test('Initial form state', async () => {
 
   expect(within(regionSelect).getByText('-')).toHaveAttribute('selected')
   expect(within(regionSelect).getByText('-')).toHaveValue('')
-  expect(within(regionSelect).getByText('Mock region 1')).toHaveValue('mockregion1@nihr.ac.uk')
-  expect(within(regionSelect).getByText('Mock region 2')).toHaveValue('mockregion2@nihr.ac.uk')
+  expect(within(regionSelect).getByText('Mock region 1')).toHaveValue('Mock region 1')
+  expect(within(regionSelect).getByText('Mock region 2')).toHaveValue('Mock region 2')
   expect(within(regionSelect).queryByText('Unknown')).not.toBeInTheDocument()
 
   // Study title (optional)

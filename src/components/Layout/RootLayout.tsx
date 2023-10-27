@@ -9,18 +9,25 @@ import { Footer } from '../Footer/Footer'
 import { Header } from '../Header/Header'
 import { Panel } from '../Panel/Panel'
 import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
-import { PreviewBanner } from '../PreviewBanner/PreviewBanner'
+import { WarningBanner } from '../WarningBanner/WarningBanner'
 
 const primaryFont = Roboto({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-primary' })
 
 export type RootLayoutProps = {
   children: ReactNode
+  heading?: string
   backLink?: ReactNode
   isPreviewMode?: boolean
   cookieBanner?: TypeCookieBanner<undefined, ''> | null
 }
 
-export function RootLayout({ children, backLink, isPreviewMode, cookieBanner }: RootLayoutProps) {
+export function RootLayout({
+  children,
+  backLink,
+  heading = 'Find, Recruit and Follow-up',
+  isPreviewMode,
+  cookieBanner,
+}: RootLayoutProps) {
   useEffect(() => {
     document.body.classList.add('js-enabled')
   }, [])
@@ -28,7 +35,7 @@ export function RootLayout({ children, backLink, isPreviewMode, cookieBanner }: 
   return (
     <div className={`${primaryFont.variable} font-sans`}>
       {cookieBanner && <CookieBanner content={cookieBanner} />}
-      <PreviewBanner isPreviewMode={!!isPreviewMode} />
+      <WarningBanner isPreviewMode={!!isPreviewMode} isTestEnvironment={process.env.NEXT_PUBLIC_APP_ENV === 'uat'} />
       <Header />
       <PhaseBanner phase="Beta">
         This is a new service – your{' '}
@@ -37,15 +44,7 @@ export function RootLayout({ children, backLink, isPreviewMode, cookieBanner }: 
         </Link>{' '}
         will help us to improve it.
       </PhaseBanner>
-      <Panel>
-        <Link
-          href="/"
-          className="text-white no-underline focus:text-black"
-          aria-label="Go to the Find, Recruit and Follow-up homepage"
-        >
-          Find, Recruit and Follow-up
-        </Link>
-      </Panel>
+      {heading && <Panel>{heading}</Panel>}
       {backLink}
       <main id="main-content" className="govuk-main-wrapper" role="main">
         {children}

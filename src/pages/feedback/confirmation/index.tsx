@@ -15,7 +15,7 @@ export default function FeedbackConfirmation(props: FeedbackConfirmationProps) {
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
-            <h2 className="govuk-heading-l">Thank you</h2>
+            <p>Your feedback has been received and will help us to improve the FRF website.</p>
             <p>If you have provided contact details we may contact you in the near future for further feedback.</p>
             <Link href="/" className="govuk-button" data-module="govuk-button">
               Return to homepage
@@ -31,6 +31,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       page: 'Feedback Confirmation',
+      heading: 'Thank you for your feedback',
       isPreviewMode: parseInt(process.env.CONTENTFUL_PREVIEW_MODE) === 1,
       cookieBanner: await getCookieBanner(),
     },

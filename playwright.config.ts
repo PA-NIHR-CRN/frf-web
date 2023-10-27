@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   ],
   globalSetup: './qa/hooks/GlobalSetup.ts',
   timeout: 30000,
-  // workers: 6, // to enforce parallel workers in Actions Workflow
+  workers: 6, // to enforce parallel workers in Actions Workflow
   retries: 2,
   projects: [
     {
@@ -37,6 +37,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -51,6 +52,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -66,6 +68,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -81,6 +84,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -95,6 +99,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },
@@ -109,6 +114,7 @@ const config: PlaywrightTestConfig = {
         baseURL: `${process.env.BASE_URL}`,
         headless: true,
         screenshot: 'on',
+        storageState: 'qa/utils/cookieAccept.json',
         launchOptions: {
           slowMo: 0,
         },

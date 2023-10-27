@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Feedback Form Tests - @frf_2', () => {
+test.describe('Feedback Form Tests - @frf_2_feedback @frf_2_form', () => {
   test('As a user I have access to the Feedback Form via the Home Page - @frf_2_nav_banner', async ({
     homePage,
     commonItemsPage,

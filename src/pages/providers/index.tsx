@@ -24,6 +24,7 @@ import { Sort } from '@/components/Sort/Sort'
 import { NEW_LIMIT, PER_PAGE } from '@/constants'
 import { useProviders } from '@/hooks/useProviders'
 import { contentfulService } from '@/lib/contentful'
+import { logger } from '@/lib/logger'
 import { formatDate, getFiltersFromQuery, numDaysBetween, pluralise, transformFilters } from '@/utils'
 import { getCookieBanner } from '@/utils/getCookieBanner'
 
@@ -73,7 +74,10 @@ export default function ServiceProviders({
 
   return (
     <>
-      <NextSeo title={`List of data service providers ${titleResultsText} - Find, Recruit and Follow-up`} />
+      <NextSeo
+        title={`List of data service providers ${titleResultsText} - Find, Recruit and Follow-up`}
+        description="Explore and compare UK data service providers included in Find, Recruit and Follow-up. Refine the list to identify the most suitable data service providers for your research."
+      />
       <Container>
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third-from-desktop">
@@ -234,6 +238,7 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
     return {
       props: {
         page: 'Data service providers (list)',
+        heading: 'List of data service providers',
         items: entry.items,
         filterOptions,
         filters,
@@ -247,6 +252,8 @@ export const getServerSideProps = async ({ query, req }: GetServerSidePropsConte
       },
     }
   } catch (error) {
+    logger.error('getServerSideProps error getting providers')
+    logger.error(error)
     return {
       redirect: {
         destination: '/500',

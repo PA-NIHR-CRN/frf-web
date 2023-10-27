@@ -1,10 +1,11 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-import { numDaysBetween } from '../utils/UtilFunctions'
+import { confirmStringNotNull, numDaysBetween } from '../utils/UtilFunctions'
 
 //Declare Page Objects
 export default class ProvidersPage {
   readonly page: Page
+  readonly pageTitle: Locator
   readonly focAllText: string
   readonly focNoncCommText: string
   readonly chargeableText: string
@@ -45,10 +46,15 @@ export default class ProvidersPage {
   readonly dspListTypeDataHeader: Locator
   readonly dspListTypeDataList: Locator
   readonly dspListLoading: Locator
+  readonly dspOrderedList: Locator
+  readonly dspNoResultsSection: Locator
   readonly dspNoResultsHeader: Locator
   readonly dspNoResultHelpMsg: Locator
   readonly dspNoResultHelpList: Locator
   readonly dspContactSupportBtn: Locator
+  readonly dspListSortDropdown: Locator
+  readonly dspListSortDropdownLbl: Locator
+  readonly dspListAllPageListItems: Locator
 
   //Filter Objects
   readonly dspFilterMobileBtnOpen: Locator
@@ -97,6 +103,7 @@ export default class ProvidersPage {
     this.chargeableText = 'Chargeable service'
 
     //List Locators
+    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.btnViewMoreDetails = page.locator('a[class="govuk-button mb-0 whitespace-nowrap"]')
     this.dspListArticle = page.locator('ol[class="mt-5"]')
     this.dspListPageTitle = page.locator('p[class="govuk-heading-m mb-0 whitespace-nowrap"]')
@@ -146,10 +153,15 @@ export default class ProvidersPage {
       'div[class="[&>ul>li_p]:mb-1 [&>ul_li_p]:text-sm [&>ul_ul]:pt-1 [&>ul_ul_li:not(:last-child)]:mb-0"] ul[class="govuk-list govuk-list--bullet"]'
     )
     this.dspListLoading = page.locator('p[class="govuk-body mt-5 min-h-[40rem]"]')
+    this.dspOrderedList = page.locator('ol[aria-label="Data service providers"]')
+    this.dspNoResultsSection = page.locator('div[class="govuk-!-margin-top-8 govuk-body"]')
     this.dspNoResultsHeader = page.locator('h3[class="govuk-heading-l"]')
     this.dspNoResultHelpMsg = page.locator('p[id="improve-search-results"]')
     this.dspNoResultHelpList = page.locator('ul[aria-labelledby="improve-search-results"]')
     this.dspContactSupportBtn = page.locator('a[class="govuk-button govuk-button--secondary"]')
+    this.dspListSortDropdown = page.locator('select[id="order"]')
+    this.dspListSortDropdownLbl = page.locator('label[for="order"]')
+    this.dspListAllPageListItems = page.locator('ul[class="govuk-pagination__list"] li')
 
     //Filter Locators
     this.dspFilterMobileBtnOpen = page.locator('a[id="show-filters"]')
@@ -223,7 +235,9 @@ export default class ProvidersPage {
   }
 
   async assertOnProvidersPage() {
+    await expect(this.pageTitle).toBeVisible()
     await expect(this.btnViewMoreDetails.nth(0)).toBeVisible()
+    await expect(this.pageTitle).toHaveText('List of data service providers')
     expect(this.page.url()).toContain('/providers')
   }
 
@@ -255,7 +269,7 @@ export default class ProvidersPage {
     }
   }
 
-  async assertDspListAlphabetical() {
+  async assertDspListAlphabetical(ordering: string) {
     await expect(this.dspListArticle).toBeVisible()
     await expect(this.dspResultHeader.nth(0)).toBeVisible()
     const titleElements = await this.dspResultTitle.all()
@@ -264,11 +278,18 @@ export default class ProvidersPage {
     for (const title of titleElements) {
       const titleText = await title.textContent()
       if (titleText !== null) {
-        actualTitleOrder.push(titleText.toLowerCase())
+        const cutOffIndex = titleText.indexOf(':') + 1
+        const truncatedTitleText = titleText.substring(cutOffIndex).trim()
+        actualTitleOrder.push(truncatedTitleText.toLowerCase())
       }
     }
     const expectedTitleOrder = JSON.parse(JSON.stringify(actualTitleOrder))
-    expect(actualTitleOrder).toEqual(expectedTitleOrder.sort())
+    expectedTitleOrder.sort()
+    if (ordering.toLowerCase() == 'ascending') {
+      expect(actualTitleOrder).toEqual(expectedTitleOrder)
+    } else {
+      expect(actualTitleOrder).toEqual(expectedTitleOrder.reverse())
+    }
   }
 
   async assertDspNameOrg() {
@@ -322,8 +343,8 @@ export default class ProvidersPage {
     await expect(this.dspResultSuitedHeader.nth(0)).toBeVisible()
     await expect(this.dspResultSuitedList.nth(0)).toBeVisible()
     await expect(this.dspResultSuitedList.nth(0).locator('li')).toHaveCount(4)
-    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(0).textContent()).toEqual('Drug development trials')
-    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(3).textContent()).toEqual('Large patient cohorts')
+    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(0).textContent()).toEqual('Large patient cohorts')
+    expect(await this.dspResultSuitedList.nth(0).locator('li').nth(3).textContent()).toEqual('Drug development trials')
   }
 
   async assertDspFirstPubLastUpdate() {
@@ -333,24 +354,32 @@ export default class ProvidersPage {
     expect(await this.dspResultLastUpdatedValue.nth(0).textContent()).toContain('2023')
   }
 
-  async assertDspIsNew() {
+  async assertDspIsNew(isNew: boolean) {
     const firstPublishedValue = await this.dspResultFirstPublishedValue.nth(0).textContent()
     if (firstPublishedValue !== null) {
-      const strPublishDate = new Date(firstPublishedValue).toLocaleDateString()
+      const strPublishDate = new Date(firstPublishedValue).toLocaleDateString('en-US')
       const currentDate = new Date()
       currentDate.setDate(currentDate.getDate())
-      const strCurrentDate = new Date(currentDate).toLocaleDateString()
+      const strCurrentDate = new Date(currentDate).toLocaleDateString('en-US')
 
       const alignedCurrentDate = new Date(strCurrentDate)
       const alignedPublishDate = new Date(strPublishDate)
       const daysDifference = numDaysBetween(alignedCurrentDate, alignedPublishDate)
-      expect(daysDifference).toBeLessThan(90)
+      if (isNew) {
+        expect(daysDifference).toBeLessThanOrEqual(90)
+      } else {
+        expect(daysDifference).toBeGreaterThan(90)
+      }
     }
   }
 
-  async assertDspNewIconAppears() {
-    await expect(this.dspResultHeader.nth(0).locator(this.dspResultNewIcon)).toBeVisible()
-    expect(await this.dspResultHeader.nth(0).locator(this.dspResultNewIcon).textContent()).toEqual('New')
+  async assertDspNewIconAppears(visible: boolean) {
+    if (visible) {
+      await expect(this.dspResultHeader.nth(0).locator(this.dspResultNewIcon)).toBeVisible()
+      expect(await this.dspResultHeader.nth(0).locator(this.dspResultNewIcon).textContent()).toEqual('New')
+    } else {
+      await expect(this.dspResultHeader.nth(0).locator(this.dspResultNewIcon)).toBeHidden()
+    }
   }
 
   async assertDspResultsGreaterThanFour() {
@@ -1048,9 +1077,10 @@ export default class ProvidersPage {
   }
 
   async waitForListReload() {
-    await this.dspListLoading.waitFor()
-    await expect(this.dspListLoading).toHaveText('Loading...')
+    // await this.dspListLoading.waitFor()
     await this.dspListLoading.waitFor({ state: 'detached' })
+    await this.dspOrderedList.or(this.dspNoResultsSection).waitFor({ state: 'visible' })
+    await expect(this.dspResultArticle.first().or(this.dspNoResultsHeader)).toBeVisible()
   }
 
   async assertResultsReduced(previousNoResults: number, currentNoResults: number) {
@@ -1116,5 +1146,110 @@ export default class ProvidersPage {
     await expect(this.dspListTypeDataList.nth(0).locator('li').nth(0)).toContainText(expectedTypeData, {
       ignoreCase: true,
     })
+  }
+
+  async assertDspSortDropdownPresent() {
+    await expect(this.dspListSortDropdown).toBeVisible()
+    await expect(this.dspListSortDropdownLbl).toBeVisible()
+    await expect(this.dspListSortDropdownLbl).toHaveText('Sort by')
+  }
+
+  async selectDspSortDropdownOption(option: string) {
+    switch (option.toLowerCase()) {
+      case 'ascending':
+        await this.dspListSortDropdown.selectOption({ value: 'a-z' })
+        break
+      case 'descending':
+        await this.dspListSortDropdown.selectOption({ value: 'z-a' })
+        break
+      case 'updated':
+        await this.dspListSortDropdown.selectOption({ value: 'updated' })
+        break
+      case 'published':
+        await this.dspListSortDropdown.selectOption({ value: 'published' })
+        break
+      default:
+        throw new Error(`${option} is not a valid Sort option`)
+    }
+  }
+
+  async assertSelectedSortOption(expectedOption: string) {
+    const selectedOptionText = await this.dspListSortDropdown.evaluate(
+      (node: HTMLSelectElement) => node.options[node.options.selectedIndex].textContent
+    )
+    let expectedOptionText: string
+    switch (expectedOption.toLowerCase()) {
+      case 'ascending':
+        expectedOptionText = 'Alphabetical (ascending)'
+        break
+      case 'descending':
+        expectedOptionText = 'Alphabetical (descending)'
+        break
+      case 'updated':
+        expectedOptionText = 'Recently updated'
+        break
+      case 'published':
+        expectedOptionText = 'Recently published'
+        break
+      default:
+        throw new Error(`${expectedOption} is not a valid Sort option`)
+    }
+    expect(selectedOptionText).toEqual(expectedOptionText)
+  }
+
+  async assertDspListRecentlyUpdated() {
+    const arrayOfResultDates = await this.gatherDspDateEpochNos('updated')
+    const arrayOfExpectedResults: number[] = []
+    arrayOfResultDates.forEach((result) => arrayOfExpectedResults.push(result))
+    //Expect Largest to Smallest as the more recent the date the Larger the Number
+    expect(arrayOfResultDates).toEqual(
+      arrayOfExpectedResults.sort(function (a, b) {
+        return b - a
+      })
+    )
+  }
+
+  async assertDspListRecentlyPublished() {
+    const arrayOfResultDates = await this.gatherDspDateEpochNos('published')
+    const arrayOfExpectedResults: number[] = []
+    arrayOfResultDates.forEach((result) => arrayOfExpectedResults.push(result))
+    //Expect Largest to Smallest as the more recent the date the Larger the Number
+    expect(arrayOfResultDates).toEqual(
+      arrayOfExpectedResults.sort(function (a, b) {
+        return b - a
+      })
+    )
+  }
+
+  async gatherDspDateEpochNos(dateType: string): Promise<number[]> {
+    await this.assertCurrentPage('1')
+    const arrayOfDates: number[] = []
+    if (dateType.toLowerCase() == 'updated') {
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultLastUpdatedValue.first().textContent())).getTime()
+      )
+      await this.dspListPageTwoOption.click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultLastUpdatedValue.nth(2).textContent())).getTime()
+      )
+      await this.dspListAllPageListItems.last().click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultLastUpdatedValue.last().textContent())).getTime()
+      )
+      return arrayOfDates
+    } else {
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultFirstPublishedValue.first().textContent())).getTime()
+      )
+      await this.dspListPageTwoOption.click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultFirstPublishedValue.nth(2).textContent())).getTime()
+      )
+      await this.dspListAllPageListItems.last().click()
+      arrayOfDates.push(
+        new Date(confirmStringNotNull(await this.dspResultFirstPublishedValue.last().textContent())).getTime()
+      )
+      return arrayOfDates
+    }
   }
 }

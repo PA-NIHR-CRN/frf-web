@@ -14,6 +14,7 @@ if (!globalForAxios.axios) {
     if (!res.cached) {
       logger.trace(
         {
+          ttl: process.env.CONTENTFUL_CACHE_TTL,
           method: res.config.method,
           url: res.config.url,
           status: res.status,
@@ -26,4 +27,4 @@ if (!globalForAxios.axios) {
   })
 }
 
-if (process.env.NODE_ENV !== 'production') globalForAxios.axios = axios
+globalForAxios.axios = axios

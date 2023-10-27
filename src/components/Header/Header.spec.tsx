@@ -14,16 +14,16 @@ test('Displays the header', () => {
   expect(screen.getByText('Skip to main content')).toHaveAttribute('href', '#main-content')
 
   // Logo link
-  const logoLink = screen.getByRole('link', {
-    name: 'Go to the National Institute for Health and Care Research website',
+  const frfLogoLink = screen.getByRole('link', {
+    name: 'Go to the Find, Recruit and Follow-up homepage',
   })
-  expect(logoLink).toHaveAttribute('href', 'https://www.nihr.ac.uk')
+  expect(frfLogoLink).toHaveAttribute('href', '/')
 
   // Logo image
-  const logo = screen.getByAltText('National Institute for Health and Care Research logo')
-  expect(logo).toBeInTheDocument()
-  expect(logo).toHaveAttribute('height', '32')
-  expect(logo).toHaveAttribute('width', '322')
+  const frfLogo = screen.getByAltText('Find, Recruit and Follow-up logo')
+  expect(frfLogo).toBeInTheDocument()
+  expect(frfLogo).toHaveAttribute('height', '108')
+  expect(frfLogo).toHaveAttribute('width', '295')
 
   // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
@@ -165,20 +165,4 @@ test('Hide the navigation menu when changing page', async () => {
   })
 
   expect(menu).not.toBeVisible()
-})
-
-test('Shows a home icon when browsing on pages that are not the home page', async () => {
-  mockRouter.push('/')
-
-  render(<Header />)
-
-  expect(screen.queryByRole('link', { name: 'Go to Find, Recruit and Follow-up homepage' })).not.toBeInTheDocument()
-
-  act(() => {
-    mockRouter.push('/providers')
-  })
-
-  await screen.findByRole('link', { name: 'Go to Find, Recruit and Follow-up homepage' })
-
-  expect(screen.getByTestId('frf-icon-home')).toHaveAttribute('aria-hidden')
 })

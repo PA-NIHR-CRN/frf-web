@@ -55,6 +55,18 @@ export interface TypeHomepageFields {
      * @localized false
      */
     signPostDescription2: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'metaTitle' (Meta: Title)
+     * @name Meta: Title
+     * @localized false
+     */
+    metaTitle?: EntryFieldTypes.Symbol;
+    /**
+     * Field type definition for field 'metaDescription' (Meta: Description)
+     * @name Meta: Description
+     * @localized false
+     */
+    metaDescription?: EntryFieldTypes.Text;
 }
 
 /**
@@ -63,7 +75,7 @@ export interface TypeHomepageFields {
  * @type {TypeHomepageSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 33
+ * @version 61
  */
 export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepage">;
 /**
@@ -72,6 +84,6 @@ export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepa
  * @type {TypeHomepage}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 33
+ * @version 61
  */
 export type TypeHomepage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeHomepageSkeleton, Modifiers, Locales>;
