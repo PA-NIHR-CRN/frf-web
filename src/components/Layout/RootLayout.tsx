@@ -39,11 +39,11 @@ export function RootLayout({
       <Header />
       <main id="main-content" className="govuk-main-wrapper" role="main">
         <PhaseBanner phase="Beta">
-          This is a new service – your{' '}
+          This is a new service –{' '}
           <Link className="govuk-link govuk-link--no-visited-state" href="/feedback">
-            feedback
-          </Link>{' '}
-          will help us to improve it.
+            your feedback will help us to improve it
+          </Link>
+          .
         </PhaseBanner>
         {heading && <Panel>{heading}</Panel>}
         {backLink}

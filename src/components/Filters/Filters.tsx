@@ -74,7 +74,7 @@ export function Filters({
         <a
           href="#show-filters"
           className="text-white focus:text-black md:hidden"
-          aria-label="Close filters"
+          aria-label="Close search criteria filters"
           onClick={onRequestClose}
         >
           <Cross className="text-[2em]" />
@@ -229,15 +229,25 @@ export function Filters({
 
         {/* Clear all */}
         <div className="border-t border-grey-120 text-center">
-          <Button secondary type="submit" className="w-full [.js-enabled_&]:hidden">
+          <Button
+            secondary
+            type="submit"
+            className="w-full [.js-enabled_&]:hidden"
+            aria-label="Apply search criteria filters"
+          >
             Apply filters
           </Button>
-          <Link href="/providers" className="govuk-button govuk-button--secondary w-full text-center">
+          <Link
+            href="/providers"
+            className="govuk-button govuk-button--secondary w-full text-center"
+            aria-label="Clear all search criteria filters"
+          >
             Clear all filters
           </Link>
           <a
             href="#show-filters"
             className=" govuk-button govuk-button--secondary w-full text-center md:hidden"
+            aria-label="Close search criteria filters"
             onClick={onRequestClose}
           >
             Close filters
