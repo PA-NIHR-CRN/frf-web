@@ -49,9 +49,9 @@ test('Service provider detail', async () => {
 
   // Services available and costs
   expect(screen.getByRole('table', { name: 'Services available and costs:' })).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'See more about Find' })).toHaveAttribute('href', '#find')
-  expect(screen.getByRole('link', { name: 'See more about Recruit' })).toHaveAttribute('href', '#recruit')
-  expect(screen.getByRole('link', { name: 'See more about Follow-Up' })).toHaveAttribute('href', '#follow-up')
+  expect(screen.getByRole('link', { name: 'See more about find' })).toHaveAttribute('href', '#find')
+  expect(screen.getByRole('link', { name: 'See more about recruit' })).toHaveAttribute('href', '#recruit')
+  expect(screen.getByRole('link', { name: 'See more about follow-up' })).toHaveAttribute('href', '#follow-up')
 
   // Types of data available
   expect(screen.getByRole('heading', { name: 'Type of data available:', level: 3 })).toBeInTheDocument()
