@@ -87,7 +87,7 @@ export function SelectedFilters({ filters, isLoading }: SelectedFiltersProps) {
           .map((filter, i) => renderSelectedFilters(filter, filters[filter], i))}
       </ul>
       <div className="order-2 ml-auto whitespace-nowrap pl-1 md:order-3">
-        <Link href="/providers" scroll={false}>
+        <Link href="/providers" scroll={false} aria-label="Clear all search criteria filters">
           Clear all filters
         </Link>
       </div>

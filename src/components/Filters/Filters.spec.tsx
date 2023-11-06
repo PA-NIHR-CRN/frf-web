@@ -216,7 +216,7 @@ test('Default input states are correct in relation to the currently enabled filt
 
 test('Allows clearing all filters', () => {
   render(<Filters {...defaultProps} />)
-  expect(screen.getByRole('link', { name: 'Clear all filters' })).toHaveAttribute('href', '/providers')
+  expect(screen.getByRole('link', { name: 'Clear all search criteria filters' })).toHaveAttribute('href', '/providers')
 })
 
 test('Clears the search query after the search input is emptied', async () => {
