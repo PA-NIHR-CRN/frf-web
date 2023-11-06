@@ -21,7 +21,7 @@ test('No page set - defaults to first page', () => {
   expect(pagination).toBeInTheDocument()
 
   // Prev Link (hidden when on first page)
-  expect(within(pagination).queryByRole('link', { name: 'Previous' })).not.toBeInTheDocument()
+  expect(within(pagination).queryByRole('link', { name: 'Previous page' })).not.toBeInTheDocument()
 
   // Page 1 Link
   expect(within(pagination).getByRole('link', { name: 'Page 1' })).toHaveAttribute('href', '?page=1')
@@ -32,7 +32,7 @@ test('No page set - defaults to first page', () => {
   expect(within(pagination).getByRole('link', { name: 'Page 2' })).not.toHaveAttribute('aria-current')
 
   // Next Link
-  expect(within(pagination).getByRole('link', { name: 'Next' })).toHaveAttribute('href', '?page=2')
+  expect(within(pagination).getByRole('link', { name: 'Next page' })).toHaveAttribute('href', '?page=2')
 })
 
 test('First page set', () => {
@@ -45,7 +45,7 @@ test('First page set', () => {
   expect(pagination).toBeInTheDocument()
 
   // Prev Link (hidden when on first page)
-  expect(within(pagination).queryByRole('link', { name: 'Previous' })).not.toBeInTheDocument()
+  expect(within(pagination).queryByRole('link', { name: 'Previous page' })).not.toBeInTheDocument()
 
   // Page 1 Link
   expect(within(pagination).getByRole('link', { name: 'Page 1' })).toHaveAttribute('href', '?page=1')
@@ -56,7 +56,7 @@ test('First page set', () => {
   expect(within(pagination).getByRole('link', { name: 'Page 2' })).not.toHaveAttribute('aria-current')
 
   // Next Link
-  expect(within(pagination).getByRole('link', { name: 'Next' })).toHaveAttribute('href', '?page=2')
+  expect(within(pagination).getByRole('link', { name: 'Next page' })).toHaveAttribute('href', '?page=2')
 })
 
 test('Last page set', async () => {
@@ -69,7 +69,7 @@ test('Last page set', async () => {
   expect(pagination).toBeInTheDocument()
 
   // Prev Link
-  expect(within(pagination).getByRole('link', { name: 'Previous' })).toHaveAttribute('href', '?page=1')
+  expect(within(pagination).getByRole('link', { name: 'Previous page' })).toHaveAttribute('href', '?page=1')
 
   // Page 1 Link
   expect(within(pagination).getByRole('link', { name: 'Page 1' })).toHaveAttribute('href', '?page=1')
@@ -80,7 +80,7 @@ test('Last page set', async () => {
   expect(within(pagination).getByRole('link', { name: 'Page 2' })).toHaveAttribute('aria-current', 'page')
 
   // Next Link (hidden when on last page)
-  expect(within(pagination).queryByRole('link', { name: 'Next' })).not.toBeInTheDocument()
+  expect(within(pagination).queryByRole('link', { name: 'Next page' })).not.toBeInTheDocument()
 })
 
 test('Forward/back updates the set page', async () => {
