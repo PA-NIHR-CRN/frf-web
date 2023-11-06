@@ -49,7 +49,7 @@ test('Allows searching by keyword', async () => {
 
 test('Allows non-JavaScript users to apply filters', () => {
   render(<Filters {...defaultProps} />)
-  expect(screen.getByRole('button', { name: 'Apply filters' })).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: 'Apply search criteria filters' })).toBeInTheDocument()
 })
 
 test('Allows users with JavaScript to apply filters', async () => {
@@ -252,7 +252,7 @@ test('Allows toggling filters on mobile', async () => {
   expect(screen.getByTestId('filters-card')).not.toHaveClass('hidden')
 
   // Close filters
-  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
+  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close search criteria filters' })
   closeFiltersButtons.forEach((element) => expect(element).toHaveAttribute('href', '#show-filters'))
   await userEvent.click(closeFiltersButtons[0])
   await userEvent.click(closeFiltersButtons[1])
