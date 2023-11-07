@@ -60,7 +60,7 @@ test('Displays selected filters with correct links', () => {
   expect(screen.queryByRole('link', { name: 'Clear filter: Exclude regional' })).not.toBeInTheDocument()
 
   // Clear filters link
-  expect(screen.getByRole('link', { name: 'Clear all filters' })).toHaveAttribute('href', '/providers')
+  expect(screen.getByRole('link', { name: 'Clear all search criteria filters' })).toHaveAttribute('href', '/providers')
 })
 
 test('Displays exclude regional filter when `true`', () => {
