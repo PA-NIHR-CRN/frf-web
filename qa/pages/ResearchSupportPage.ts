@@ -31,3 +31,8 @@ export default class ResearchSupportPage {
     await expect(this.contactFrfBtn).toHaveText('Contact FRF central team')
   }
 }
+
+/* Illogical heading structure: headings are ordered 1, 3, 2. Heading 3, contact FRF central team, should be chnaged to heading 2,
+it takes you out the page, just like the existing heading 2, support links. Heading 3 can be styled to get the wanted design, 
+after changing it to a heading 2.
+*/
