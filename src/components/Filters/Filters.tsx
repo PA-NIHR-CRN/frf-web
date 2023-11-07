@@ -74,8 +74,9 @@ export function Filters({
         <a
           href="#show-filters"
           className="text-white focus:text-black md:hidden"
-          aria-label="Collapse search criteria filters"
+          aria-label="Close search criteria filters"
           onClick={onRequestClose}
+          data-testid="closeFiltersIcon"
         >
           <Cross className="text-[2em]" />
         </a>
