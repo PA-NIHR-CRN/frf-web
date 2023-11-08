@@ -16,7 +16,7 @@ export default function GenericPage({ fields }: GenericPageProps) {
     <>
       <NextSeo title={fields.metaTitle} description={fields.metaDescription} />
       <Container>
-        <article aria-labelledby={`article-${fields.slug}-title`}>
+        <article>
           <div className="govuk-grid-row">
             <div
               className={clsx({ ['govuk-grid-column-two-thirds-from-desktop']: fields.sidebar })}
