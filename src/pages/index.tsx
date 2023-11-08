@@ -136,9 +136,8 @@ export default function Home({
                   <Link
                     className="govuk-button govuk-button--secondary mb-0 mt-2 text-left"
                     href="/data-service-providers"
-                    aria-label="Find out more about data service providers"
                   >
-                    Find out more
+                    Information for organisations
                   </Link>
                 </div>
               </div>
