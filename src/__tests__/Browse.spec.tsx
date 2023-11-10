@@ -24,7 +24,7 @@ test('Displays the fallback navigation menu page', () => {
     )
   ).toBeInTheDocument()
 
-  expect(screen.getByRole('link', { name: 'Data service providers' })).toHaveAttribute(
+  expect(screen.getByRole('link', { name: 'Organisations providing data services' })).toHaveAttribute(
     'href',
     '/data-service-providers'
   )
