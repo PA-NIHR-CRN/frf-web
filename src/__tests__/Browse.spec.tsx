@@ -39,6 +39,6 @@ test('Displays the fallback navigation menu page', () => {
     screen.getByText('Information for colleagues within the various research support organisations across the UK')
   ).toBeInTheDocument()
 
-  expect(screen.getByRole('link', { name: 'Provide feedback' })).toHaveAttribute('href', '/feedback')
+  expect(screen.getByRole('link', { name: 'Provide feedback on this service' })).toHaveAttribute('href', '/feedback')
   expect(screen.getByText('Your feedback on our service would be invaluable')).toBeInTheDocument()
 })

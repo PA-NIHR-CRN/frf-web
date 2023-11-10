@@ -29,7 +29,7 @@ export const menu = [
   [
     {
       link: '/feedback',
-      text: 'Provide feedback on our service',
+      text: 'Provide feedback on this service',
       description: 'Your feedback on our service would be invaluable',
     },
   ],
