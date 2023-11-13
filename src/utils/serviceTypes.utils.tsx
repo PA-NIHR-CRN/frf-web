@@ -77,7 +77,7 @@ const formatSingleServiceTypeCostRow = ({
           <a
             href={`#${costSplit[0].toLowerCase()}`}
             className="text-navy-100"
-            aria-label={`See more about ${costSplit[0].toLowerCase()}`}
+            aria-label={`See more about the ${costSplit[0].toLowerCase()} service`}
           >
             {costSplit[0]}
           </a>
