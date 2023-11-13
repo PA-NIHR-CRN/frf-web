@@ -16,7 +16,7 @@ export const menu = [
   [
     {
       link: '/data-service-providers',
-      text: 'Data service providers',
+      text: 'Organisations providing data services',
       description:
         'Information for organisations offering Find, Recruit and Follow-up data services to researchers and life sciences companies',
     },
@@ -29,7 +29,7 @@ export const menu = [
   [
     {
       link: '/feedback',
-      text: 'Provide feedback',
+      text: 'Provide feedback on this service',
       description: 'Your feedback on our service would be invaluable',
     },
   ],
