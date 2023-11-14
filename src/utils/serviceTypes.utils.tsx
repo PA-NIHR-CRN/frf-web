@@ -74,7 +74,11 @@ const formatSingleServiceTypeCostRow = ({
         className={`govuk-table__cell govuk-body-s bg-[var(--colour-${costSplit[0].toLowerCase()}-background)] p-2 text-center align-middle font-bold uppercase tracking-wider text-navy-100 md:w-[136px]`}
       >
         {hasAnchor ? (
-          <a href={`#${costSplit[0].toLowerCase()}`} className="text-navy-100">
+          <a
+            href={`#${costSplit[0].toLowerCase()}`}
+            className="text-navy-100"
+            aria-label={`See more about the ${costSplit[0].toLowerCase()} service`}
+          >
             {costSplit[0]}
           </a>
         ) : (
