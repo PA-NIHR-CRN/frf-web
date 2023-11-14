@@ -77,7 +77,7 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   ).toBeInTheDocument()
 
   // 3rd column
-  expect(within(openMenu).getByRole('link', { name: 'Data service providers' })).toHaveAttribute(
+  expect(within(openMenu).getByRole('link', { name: 'Organisations providing data services' })).toHaveAttribute(
     'href',
     '/data-service-providers'
   )
@@ -98,7 +98,10 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   ).toBeInTheDocument()
 
   // 4th column
-  expect(within(openMenu).getByRole('link', { name: 'Provide feedback' })).toHaveAttribute('href', '/feedback')
+  expect(within(openMenu).getByRole('link', { name: 'Provide feedback on this service' })).toHaveAttribute(
+    'href',
+    '/feedback'
+  )
   expect(within(openMenu).getByText('Your feedback on our service would be invaluable')).toBeInTheDocument()
 })
 
