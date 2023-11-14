@@ -99,7 +99,7 @@ test('Displays the Home page', async () => {
 
   expect(screen.getByRole('heading', { name: 'Organisations providing data services', level: 2 })).toBeInTheDocument()
   expect(screen.getByText(mockData.signPostDescription2)).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Find out more about data service providers' })).toHaveAttribute(
+  expect(screen.getByRole('link', { name: 'Information for organisations' })).toHaveAttribute(
     'href',
     '/data-service-providers'
   )
