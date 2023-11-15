@@ -1,6 +1,5 @@
 import { Details } from '@/components/Details/Details'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
-import { TextRenderer } from '@/components/Renderers/TextRenderer/TextRenderer'
 import { ServiceType } from '@/constants'
 import { ServiceProviderProps } from '@/pages/providers/[...slug]'
 
@@ -105,19 +104,19 @@ export const formatServiceTypeBlock = (serviceType: ServiceType, costs: Costs, c
 
   return (
     <>
-      {fields.description && <TextRenderer>{fields.description}</TextRenderer>}
+      {fields.description && <RichTextRenderer>{fields.description}</RichTextRenderer>}
 
       {fields.howTheServiceWorks && (
         <>
           <p className="govuk-heading-s govuk-!-margin-bottom-2 govuk-!-margin-top-6">How the service works:</p>
-          <TextRenderer>{fields.howTheServiceWorks}</TextRenderer>
+          <RichTextRenderer>{fields.howTheServiceWorks}</RichTextRenderer>
         </>
       )}
 
       {fields.expectedTimelines && (
         <>
           <p className="govuk-heading-s govuk-!-margin-bottom-2 govuk-!-margin-top-6">Expected timelines:</p>
-          <TextRenderer>{fields.expectedTimelines}</TextRenderer>
+          <RichTextRenderer>{fields.expectedTimelines}</RichTextRenderer>
         </>
       )}
 
@@ -145,7 +144,7 @@ export const formatServiceTypeBlock = (serviceType: ServiceType, costs: Costs, c
             item?.fields.heading &&
             item.fields.text && (
               <Details key={i} heading={item.fields.heading}>
-                <TextRenderer>{item.fields.text}</TextRenderer>
+                <RichTextRenderer>{item.fields.text}</RichTextRenderer>
               </Details>
             )
         )}
