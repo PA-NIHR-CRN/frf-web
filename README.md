@@ -49,3 +49,18 @@ To generate database migrations + rebuild the local Prisma client run: `npm run 
 ## Emails
 
 Sending email notifications requires adding AWS credentials to `.env.local`. These are temporary credentials with a 1 hour expiry. From the AWS account page, click **Command line or programmatic access** and copy over the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN` values.
+
+## Content Migration
+
+If this is the first time you are migrating content, you will need to install the CLI tool. If you have already installed the CLI tool, you can skip to step 3.
+
+1. Install the CLI tool globally using npm `npm install -g contentful-cli`
+2. Login to the CLI tool using `contentful login`
+3. Set the default space using `contentful space use --space-id <SPACE_ID>`
+4. Export the content from the source space using `contentful space export --space-id <SPACE_ID> --environment-id <ENVIRONMENT_ID>`
+5. Import the content into the destination space using `contentful space import --space-id <SPACE_ID> --environment-id <ENVIRONMENT_ID> --content-file <FILE_NAME>`
+
+### Optional
+
+1. If you want to delete the content from the source space, you can use `npm install -g contentful-clean-space` to install the CLI tool
+2. Then run `contentful-clean-space --space-id <SPACE_ID> --environment-id <ENVIRONMENT_ID>  --accesstoken <CONTENTFUL_MANAGEMENT_ACCESS_TOKEN>` to delete all content from the source space
