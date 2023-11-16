@@ -67,7 +67,7 @@ export default class HomePage {
       hasText: 'Contact research support',
     })
     this.btnBecomeDsp = page.locator('a[class="govuk-button govuk-button--secondary mb-0 mt-2 text-left"]', {
-      hasText: 'Find out more',
+      hasText: 'Information for organisations',
     })
   }
 

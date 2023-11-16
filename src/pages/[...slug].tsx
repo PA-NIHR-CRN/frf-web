@@ -16,7 +16,7 @@ export default function GenericPage({ fields }: GenericPageProps) {
     <>
       <NextSeo title={fields.metaTitle} description={fields.metaDescription} />
       <Container>
-        <article aria-labelledby={`article-${fields.slug}-title`}>
+        <article>
           <div className="govuk-grid-row">
             <div
               className={clsx({ ['govuk-grid-column-two-thirds-from-desktop']: fields.sidebar })}
@@ -71,7 +71,7 @@ export const getStaticProps = async ({ params }: GetStaticProps) => {
   try {
     const entry = await contentfulService.getGenericPageBySlug(slug)
 
-    if (!entry) throw new Error('Null entry')
+    if (!entry) throw new Error(`Null entry for slug ${slug}`)
 
     return {
       props: {

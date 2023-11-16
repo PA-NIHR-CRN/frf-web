@@ -9,7 +9,7 @@ type PanelProps = {
 export function Panel({ children }: PanelProps) {
   return (
     <div
-      className="border-x-0 border-b-[9px] border-t-0 border-[var(--panel-border-color)] bg-[var(--panel-bg-color)]"
+      className="mb-8 border-x-0 border-b-[9px] border-t-0 border-[var(--panel-border-color)] bg-[var(--panel-bg-color)]"
       data-testid="frf-panel"
     >
       <Container>

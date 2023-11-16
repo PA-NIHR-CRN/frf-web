@@ -53,10 +53,10 @@ test('Default search criteria (no search or filters set)', async () => {
   // Pagination
   const pagination = screen.getByRole('navigation', { name: 'results' })
   expect(pagination).toBeInTheDocument()
-  expect(within(pagination).queryByRole('link', { name: 'Previous' })).not.toBeInTheDocument()
+  expect(within(pagination).queryByRole('link', { name: 'Previous page' })).not.toBeInTheDocument()
   expect(within(pagination).getByRole('link', { name: 'Page 1' })).toHaveAttribute('href', '?page=1')
   expect(within(pagination).getByRole('link', { name: 'Page 2' })).toHaveAttribute('href', '?page=2')
-  expect(within(pagination).getByRole('link', { name: 'Next' })).toHaveAttribute('href', '?page=2')
+  expect(within(pagination).getByRole('link', { name: 'Next page' })).toHaveAttribute('href', '?page=2')
 })
 
 test('Data service provider details newly published', async () => {
@@ -187,10 +187,10 @@ test('Page two results', async () => {
   // Pagination
   const pagination = screen.getByRole('navigation', { name: 'results' })
   expect(pagination).toBeInTheDocument()
-  expect(within(pagination).getByRole('link', { name: 'Previous' })).toHaveAttribute('href', '?page=1')
+  expect(within(pagination).getByRole('link', { name: 'Previous page' })).toHaveAttribute('href', '?page=1')
   expect(within(pagination).getByRole('link', { name: 'Page 1' })).toHaveAttribute('href', '?page=1')
   expect(within(pagination).getByRole('link', { name: 'Page 2' })).toHaveAttribute('href', '?page=2')
-  expect(within(pagination).queryByRole('link', { name: 'Next' })).not.toBeInTheDocument()
+  expect(within(pagination).queryByRole('link', { name: 'Next page' })).not.toBeInTheDocument()
 })
 
 test('Toggling filters on mobile', async () => {
@@ -217,7 +217,7 @@ test('Toggling filters on mobile', async () => {
   expect(showFiltersButton).toHaveClass('hidden')
 
   // Close filters
-  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close filters' })
+  const closeFiltersButtons = screen.getAllByRole('link', { name: 'Close search criteria filters' })
   closeFiltersButtons.forEach((element) => expect(element).toHaveAttribute('href', '#show-filters'))
 
   await userEvent.click(closeFiltersButtons[0])

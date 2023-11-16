@@ -55,7 +55,9 @@ export default function Pagination({ initialPage, initialPageSize, totalItems }:
             >
               <path d="m6.5938-0.0078125-6.7266 6.7266 6.7441 6.4062 1.377-1.449-4.1856-3.9768h12.896v-2h-12.984l4.2931-4.293-1.414-1.414z"></path>
             </svg>
-            <span className="govuk-pagination__link-title">Previous</span>
+            <span className="govuk-pagination__link-title" aria-label="Previous page">
+              Previous
+            </span>
           </Link>
         </div>
       )}
@@ -101,7 +103,9 @@ export default function Pagination({ initialPage, initialPageSize, totalItems }:
             rel="next"
             onClick={setNextPage}
           >
-            <span className="govuk-pagination__link-title">Next</span>{' '}
+            <span className="govuk-pagination__link-title" aria-label="Next page">
+              Next
+            </span>{' '}
             <svg
               className="govuk-pagination__icon govuk-pagination__icon--next"
               xmlns="http://www.w3.org/2000/svg"

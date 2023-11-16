@@ -99,7 +99,10 @@ test('Displays the Home page', async () => {
 
   expect(screen.getByRole('heading', { name: 'Organisations providing data services', level: 2 })).toBeInTheDocument()
   expect(screen.getByText(mockData.signPostDescription2)).toBeInTheDocument()
-  expect(screen.getByRole('link', { name: 'Find out more' })).toHaveAttribute('href', '/data-service-providers')
+  expect(screen.getByRole('link', { name: 'Information for organisations' })).toHaveAttribute(
+    'href',
+    '/data-service-providers'
+  )
 
   // Cookie banner
   expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()

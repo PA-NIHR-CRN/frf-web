@@ -37,16 +37,16 @@ export function RootLayout({
       {cookieBanner && <CookieBanner content={cookieBanner} />}
       <WarningBanner isPreviewMode={!!isPreviewMode} isTestEnvironment={process.env.NEXT_PUBLIC_APP_ENV === 'uat'} />
       <Header />
-      <PhaseBanner phase="Beta">
-        This is a new service – your{' '}
-        <Link className="govuk-link govuk-link--no-visited-state" href="/feedback">
-          feedback
-        </Link>{' '}
-        will help us to improve it.
-      </PhaseBanner>
-      {heading && <Panel>{heading}</Panel>}
-      {backLink}
       <main id="main-content" className="govuk-main-wrapper" role="main">
+        <PhaseBanner phase="Beta">
+          This is a new service –{' '}
+          <Link className="govuk-link govuk-link--no-visited-state" href="/feedback">
+            your feedback will help us to improve it
+          </Link>
+          .
+        </PhaseBanner>
+        {heading && <Panel>{heading}</Panel>}
+        {backLink}
         {children}
       </main>
       <Footer />
