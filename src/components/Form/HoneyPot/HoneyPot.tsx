@@ -11,7 +11,7 @@ export const HoneyPot = forwardRef<HTMLInputElement>(({ ...props }, ref) => {
         <label
           htmlFor="potFilter"
           className="sr-only"
-          aria-label="Please leave this field empty. Providing information in this field will cause your form submission to fail. The intended purpose of this field is to prevent bots from submitted data."
+          aria-label="Please leave this field empty. Providing information in this field will cause your form submission to fail. The intended purpose of this field is to prevent bots from submitting this form."
         >
           Work email address
         </label>
