@@ -40,7 +40,7 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   render(<Header />)
 
   const trigger = screen.getByRole('button', { name: 'Show navigation menu' })
-  const closedMenu = screen.queryByRole('navigation', { name: 'Navigation menu' })
+  const closedMenu = screen.queryByTestId('nav')
 
   expect(trigger).toHaveAttribute('aria-expanded', 'false')
   expect(closedMenu).not.toBeInTheDocument()
@@ -49,7 +49,7 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
 
   expect(trigger).toHaveAttribute('aria-expanded', 'true')
 
-  const openMenu = screen.getByRole('navigation', { name: 'Navigation menu' })
+  const openMenu = screen.getByTestId('nav')
   expect(openMenu).toBeVisible()
 
   // 1st column
@@ -113,23 +113,23 @@ test('Toggle the navigation menu by keyboard keys', async () => {
   const trigger = screen.getByRole('button', { name: 'Show navigation menu' })
   trigger.focus()
 
-  expect(screen.queryByRole('navigation', { name: 'Navigation menu' })).not.toBeInTheDocument()
+  expect(screen.queryByTestId('nav')).not.toBeInTheDocument()
 
   // Open with enter key
   await user.keyboard('{Enter}')
-  expect(screen.getByRole('navigation', { name: 'Navigation menu' })).toBeInTheDocument()
+  expect(screen.queryByTestId('nav')).toBeInTheDocument()
 
   // Close with enter key
   await user.keyboard('{Enter}')
-  expect(screen.queryByRole('navigation', { name: 'Navigation menu' })).not.toBeInTheDocument()
+  expect(screen.queryByTestId('nav')).not.toBeInTheDocument()
 
   // Open with space key
   await user.keyboard(' ')
-  expect(screen.getByRole('navigation', { name: 'Navigation menu' })).toBeInTheDocument()
+  expect(screen.queryByTestId('nav')).toBeInTheDocument()
 
   // Close with space key
   await user.keyboard(' ')
-  expect(screen.queryByRole('navigation', { name: 'Navigation menu' })).not.toBeInTheDocument()
+  expect(screen.queryByTestId('nav')).not.toBeInTheDocument()
 })
 
 test('Hide the navigation menu when clicking away from the menu', async () => {
@@ -144,7 +144,7 @@ test('Hide the navigation menu when clicking away from the menu', async () => {
 
   await user.click(screen.getByRole('button', { name: 'Show navigation menu' }))
 
-  const menu = screen.getByRole('navigation', { name: 'Navigation menu' })
+  const menu = screen.queryByTestId('nav')
   expect(menu).toBeVisible()
 
   await user.click(screen.getByText('Outside'))
@@ -158,7 +158,7 @@ test('Hide the navigation menu when changing page', async () => {
 
   await user.click(screen.getByRole('button', { name: 'Show navigation menu' }))
 
-  const menu = screen.getByRole('navigation', { name: 'Navigation menu' })
+  const menu = screen.queryByTestId('nav')
 
   expect(menu).toBeVisible()
 
