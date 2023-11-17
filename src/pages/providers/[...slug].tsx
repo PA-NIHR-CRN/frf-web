@@ -25,7 +25,6 @@ import {
   TypesOfData,
 } from '@/components/Provider'
 import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
-import { TextRenderer } from '@/components/Renderers/TextRenderer/TextRenderer'
 import { Video } from '@/components/Video/Video'
 import { contentfulService } from '@/lib/contentful'
 import { getStaticPropsRevalidateValue } from '@/utils'
@@ -137,14 +136,14 @@ export default function ServiceProvider({ fields, createdAt, updatedAt }: Servic
                 {/* Geographical and population coverage  */}
                 {fields.geographicAndPopulationCoverage && (
                   <Section heading="Geographical and population coverage" icon={<GlobeIcon />}>
-                    <TextRenderer>{fields.geographicAndPopulationCoverage}</TextRenderer>
+                    <RichTextRenderer>{fields.geographicAndPopulationCoverage}</RichTextRenderer>
                   </Section>
                 )}
 
                 {/* Information governance */}
                 {fields.informationGovernance && (
                   <Section heading="Information governance" icon={<GovernanceIcon />}>
-                    <TextRenderer>{fields.informationGovernance}</TextRenderer>
+                    <RichTextRenderer>{fields.informationGovernance}</RichTextRenderer>
                   </Section>
                 )}
 
