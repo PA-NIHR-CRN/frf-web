@@ -105,7 +105,9 @@ test('Costs table with a custom description', () => {
     })
   )
 
-  expect(screen.getByRole('table', { name: 'Services available and costs:' })).toBeInTheDocument()
+  expect(
+    screen.getByRole('table', { name: 'Find, Recruit, Follow-up services available, and costs:' })
+  ).toBeInTheDocument()
 
   // Table column headers
   const headers = screen.getAllByRole('rowheader')
