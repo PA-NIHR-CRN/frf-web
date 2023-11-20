@@ -50,7 +50,9 @@ test('Displays the Home page', async () => {
   expect(document.querySelector("meta[property='og:description']")?.attributes.getNamedItem('content')?.value).toBe(
     mockData.metaDescription
   )
-
+  expect(document.querySelector("meta[property='og:title']")?.attributes.getNamedItem('content')?.value).toBe(
+    mockData.metaTitle
+  )
   // Page heading
   expect(screen.getByRole('heading', { name: 'Welcome to Find, Recruit and Follow-up', level: 1 })).toBeInTheDocument()
 
