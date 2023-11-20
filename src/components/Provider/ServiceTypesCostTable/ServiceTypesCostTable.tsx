@@ -24,7 +24,9 @@ export const ServiceTypesCostTable = ({ costs, find, recruit, followUp, classNam
 
   return (
     <table className={clsx('govuk-table govuk-!-font-size-16 table-fixed', className)}>
-      <caption className="govuk-table__caption govuk-body-m mb-2">Services available and costs:</caption>
+      <caption className="govuk-table__caption govuk-body-m mb-2">
+        Find, Recruit, Follow-up services available, and costs:
+      </caption>
       {formatServiceTypesCostsTable(costs, find, recruit, followUp)}
     </table>
   )
