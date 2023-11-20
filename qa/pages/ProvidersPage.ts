@@ -168,7 +168,7 @@ export default class ProvidersPage {
     this.dspFilterMobileBtnClose = page.locator(
       'a[href="#show-filters"][class=" govuk-button govuk-button--secondary w-full text-center md:hidden"]'
     )
-    this.dspFilterMobileIconClose = page.locator('a[href="#show-filters"][aria-label="Close filters"]')
+    this.dspFilterMobileIconClose = page.locator('a[data-testid="closeFiltersIcon"]')
     this.dspFilterPanel = page.locator('div[id="filters"]')
     this.dspFilterServiceTitle = page.locator('details span[class="govuk-body m-0"]', { hasText: 'Type of service' })
     this.dspFilterServiceSection = page.locator('legend[class="govuk-visually-hidden"]', {
