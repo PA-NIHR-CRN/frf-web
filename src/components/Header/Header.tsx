@@ -35,7 +35,6 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
       </Link>
       <Collapsible.Trigger asChild>
         <button
-          aria-controls="navigation-menu"
           aria-expanded={navOpen}
           aria-label={`${navOpen ? 'Hide' : 'Show'} navigation menu`}
           className={clsx(
