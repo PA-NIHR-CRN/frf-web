@@ -28,6 +28,14 @@
   }
 }
 
+// Video Container
+.youtube-wrapper {
+  outline: none;
+}
+.youtube-wrapper:focus {
+  outline: 5px var(--focus) solid;
+}
+
 // GDS Front-end Overrides
 $govuk-global-styles: true;
 $govuk-new-link-styles: true;
