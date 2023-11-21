@@ -35,7 +35,6 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
       </Link>
       <Collapsible.Trigger asChild>
         <button
-          aria-controls="navigation-menu"
           aria-expanded={navOpen}
           aria-label={`${navOpen ? 'Hide' : 'Show'} navigation menu`}
           className={clsx(
@@ -64,10 +63,7 @@ function MenuPanel() {
       id="navigation-menu"
       className={clsx('js-disabled-show min-h-[var(--nav-height)] w-full bg-[var(--nav-bg)] text-white')}
     >
-      <nav>
-        <h2 id="navigation-menu-heading" className="govuk-visually-hidden">
-          Navigation menu
-        </h2>
+      <nav data-testid="nav">
         <div className="govuk-header__container--full-width">
           <div className="govuk-grid-row py-5 lg:py-8">
             {menu.map((column, key) => (
