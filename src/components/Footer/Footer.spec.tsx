@@ -6,8 +6,8 @@ test('Displays the links & copyright bar', () => {
   const { getByAltText, getByText, getByRole } = render(<Footer />)
 
   expect(getByAltText('National Institute for Health and Care Research logo')).toBeVisible()
-  expect(getByAltText('Shaw Trust Logo')).toBeVisible()
-  expect(getByRole('link', { name: 'Shaw Trust Logo' })).toBeVisible()
+  expect(getByAltText('Shaw Trust Logo (Opens in a new window)')).toBeVisible()
+  expect(getByRole('link', { name: 'Shaw Trust Logo (Opens in a new window)' })).toBeVisible()
   expect(getByText('Terms and conditions')).toHaveAttribute('href', '/terms-and-conditions')
   expect(getByText('Privacy policy')).toHaveAttribute('href', '/privacy')
   expect(getByText('Accessibility')).toHaveAttribute('href', '/accessibility')
