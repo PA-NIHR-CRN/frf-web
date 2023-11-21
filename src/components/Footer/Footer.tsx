@@ -14,7 +14,12 @@ export function Footer() {
                 target="_blank"
                 href="https://www.accessibility-services.co.uk/certificates/national-institute-for-health-and-care-research/"
               >
-                <Image src="/assets/logos/shaw-trust.png" height={57} width={189} alt="Shaw Trust Logo" />
+                <Image
+                  src="/assets/logos/shaw-trust.png"
+                  height={57}
+                  width={189}
+                  alt="Shaw Trust Logo (Opens in a new window)"
+                />
               </a>
             </div>
             <div className="flex h-[var(--footer-links-panel-height)] items-center">
