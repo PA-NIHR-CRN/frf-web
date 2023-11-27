@@ -41,8 +41,8 @@ export function Footer() {
                   </Link>
                 </li>
                 <li className="govuk-footer__inline-list-item">
-                  <Link className="govuk-footer__link link--inverse" href="/site-map">
-                    Site map
+                  <Link className="govuk-footer__link link--inverse" href="/sitemap">
+                    Sitemap
                   </Link>
                 </li>
                 <li className="govuk-footer__inline-list-item ml-auto md:ml-0">&copy; NIHR 2022</li>
