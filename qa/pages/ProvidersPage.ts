@@ -476,6 +476,24 @@ export default class ProvidersPage {
     }
   }
 
+  async assertComponentHasAriaLabel(page: Page, componentSelector: string, expectedText: string): Promise<void> {
+    const component = await page.$(componentSelector)
+
+    if (!component) {
+      throw new Error(`Component with selector '${componentSelector}' not found.`)
+    }
+
+    const ariaLabel = await component.getAttribute('aria-label')
+
+    if (!ariaLabel) {
+      throw new Error(`Component with selector '${componentSelector}' does not have an aria-label attribute.`)
+    }
+
+    if (ariaLabel !== expectedText) {
+      throw new Error(`Expected aria-label '${expectedText}', but found '${ariaLabel}'.`)
+    }
+  }
+
   async assertFilterCategoryPresent(category: string) {
     switch (category.toLowerCase()) {
       case 'type of service':
