@@ -14,14 +14,14 @@ export default function SiteMap({ query }: SiteMapProps) {
   return (
     <>
       <NextSeo
-        title={`Sitemap - Explore Find, Recruit and Follow-up Services`}
-        description="Explore the site map for Find, Recruit and Follow-up. Navigate through different sections and services offered on our website."
+        title={`Sitemap - Find, Recruit and Follow-up Services`}
+        description="Site map for Find, Recruit and Follow-up."
       />
       <Container>
         <div className="govuk-grid-row">
           <ol>
             <li>
-              <Link href="/">Return to homepage</Link>
+              <Link href="/">Home</Link>
             </li>
             <li>
               <Link href="/feedback">Provide feedback on this service</Link>
@@ -59,7 +59,6 @@ export default function SiteMap({ query }: SiteMapProps) {
             <li>
               <Link href="/accessibility">Accessibility</Link>
             </li>
-            {/* Remove external links */}
           </ol>
         </div>
       </Container>
