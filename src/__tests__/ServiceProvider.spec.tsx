@@ -49,8 +49,11 @@ test('Service provider detail', async () => {
 
   // Services available and costs
   expect(
-    screen.getByRole('table', { name: 'Find, Recruit, Follow-up services available, and costs:' })
+    screen.getByRole('table', {
+      name: expect.stringContaining('Find, Recruit, Follow-up services available, and costs:'),
+    })
   ).toHaveTextContent('Services available and costs')
+
   expect(screen.getByRole('link', { name: 'See more about the find service' })).toHaveAttribute('href', '#find')
   expect(screen.getByRole('link', { name: 'See more about the recruit service' })).toHaveAttribute('href', '#recruit')
   expect(screen.getByRole('link', { name: 'See more about the follow-up service' })).toHaveAttribute(
