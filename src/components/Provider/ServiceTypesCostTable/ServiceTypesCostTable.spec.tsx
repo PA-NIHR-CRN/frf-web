@@ -9,7 +9,7 @@ const getComponent = (props: ComponentProps<typeof ServiceTypesCostTable>) => <S
 test('No costs', () => {
   const { rerender } = render(
     getComponent({
-      providerName: '',
+      providerName: 'Join Dementia Research',
       costs: undefined,
       find: {
         description: '',
@@ -30,7 +30,7 @@ test('No costs', () => {
 
   rerender(
     getComponent({
-      providerName: '',
+      providerName: 'Join Dementia Research',
       costs: [],
       find: {
         description: '',
@@ -53,7 +53,7 @@ test('No costs', () => {
 test('Costs table without a custom description', () => {
   render(
     getComponent({
-      providerName: '',
+      providerName: 'Join Dementia Research',
       costs: ['Find: Free of charge (All studies)', 'Recruit: Chargeable service', 'Follow-Up: Chargeable service'],
       find: {
         description: '',
@@ -71,7 +71,7 @@ test('Costs table without a custom description', () => {
   )
 
   expect(
-    screen.getByRole('table', { name: 'Find, Recruit, Follow-up services available, and costs:' })
+    screen.getByRole('table', { name: 'Join Dementia Research, services available and costs' })
   ).toBeInTheDocument()
 
   // Table column headers
@@ -92,7 +92,7 @@ test('Costs table without a custom description', () => {
 test('Costs table with a custom description', () => {
   render(
     getComponent({
-      providerName: '',
+      providerName: 'Join Dementia Research',
       costs: ['Find: Free of charge (All studies)', 'Recruit: Chargeable service', 'Follow-Up: Chargeable service'],
       find: {
         description: 'Mock find description',
@@ -110,7 +110,7 @@ test('Costs table with a custom description', () => {
   )
 
   expect(
-    screen.getByRole('table', { name: 'Find, Recruit, Follow-up services available, and costs:' })
+    screen.getByRole('table', { name: 'Join Dementia Research, services available and costs' })
   ).toBeInTheDocument()
 
   // Table column headers

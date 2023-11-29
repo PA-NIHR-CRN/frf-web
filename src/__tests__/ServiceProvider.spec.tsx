@@ -48,12 +48,7 @@ test('Service provider detail', async () => {
   expect(screen.getByTestId('frf-dsp-description')).toBeInTheDocument()
 
   // Services available and costs
-  expect(
-    screen.getByRole('table', {
-      name: expect.stringContaining('Find, Recruit, Follow-up services available, and costs:'),
-    })
-  ).toHaveTextContent('Services available and costs')
-
+  expect(screen.getByText('Services available and costs')).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'See more about the find service' })).toHaveAttribute('href', '#find')
   expect(screen.getByRole('link', { name: 'See more about the recruit service' })).toHaveAttribute('href', '#recruit')
   expect(screen.getByRole('link', { name: 'See more about the follow-up service' })).toHaveAttribute(
