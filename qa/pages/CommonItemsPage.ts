@@ -69,7 +69,7 @@ export default class CommonItemsPage {
     )
     this.linkSiteMenuDsp = page
       .locator('a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]')
-      .getByText('Data service providers', { exact: true })
+      .getByText('Organisations providing data services', { exact: true })
     this.linkSiteMenuResearchStaff = page.locator(
       'a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]',
       {
