@@ -48,10 +48,10 @@ test('Service provider detail', async () => {
   expect(screen.getByTestId('frf-dsp-description')).toBeInTheDocument()
 
   // Services available and costs
-  const providerName = ''
   expect(
-    screen.getByRole('table', { name: `Find, Recruit, Follow-up ${providerName}, services available, and costs:` })
+    screen.getByRole('table', { name: `Find, Recruit, Follow-up services available, and costs:` })
   ).toBeInTheDocument()
+  expect(screen.getByRole('aria-label', { name: 'services available and costs' })).toHaveAttribute('providerName')
   expect(screen.getByRole('link', { name: 'See more about the find service' })).toHaveAttribute('href', '#find')
   expect(screen.getByRole('link', { name: 'See more about the recruit service' })).toHaveAttribute('href', '#recruit')
   expect(screen.getByRole('link', { name: 'See more about the follow-up service' })).toHaveAttribute(
