@@ -59,7 +59,6 @@ function MenuPanel() {
   return (
     <Collapsible.Content
       asChild
-      aria-labelledby="navigation-menu-heading"
       id="navigation-menu"
       className={clsx('js-disabled-show min-h-[var(--nav-height)] w-full bg-[var(--nav-bg)] text-white')}
     >
