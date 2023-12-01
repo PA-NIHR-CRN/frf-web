@@ -84,7 +84,9 @@ test('Data service provider details newly published', async () => {
   expect(within(result).getByTestId('frf-dsp-description')).toBeInTheDocument()
 
   // Services available and costs
-  expect(within(result).getByRole('table', { name: 'Services available and costs:' })).toBeInTheDocument()
+  expect(
+    within(result).getByRole('table', { name: 'Genomic Profile Register, services available and costs' })
+  ).toBeInTheDocument()
 
   // Coverage
   expect(within(result).getByRole('list', { name: 'Coverage' })).toBeInTheDocument()
@@ -141,7 +143,9 @@ test('Data service provider details older than 3 months', async () => {
   expect(within(result).getByTestId('frf-dsp-description')).toBeInTheDocument()
 
   // Services available and costs
-  expect(within(result).getByRole('table', { name: 'Services available and costs:' })).toBeInTheDocument()
+  expect(
+    within(result).getByRole('table', { name: 'Join Dementia Research, services available and costs' })
+  ).toBeInTheDocument()
 
   // Coverage
   expect(within(result).getByRole('list', { name: 'Coverage' })).toBeInTheDocument()
