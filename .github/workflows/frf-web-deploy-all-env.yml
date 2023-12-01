@@ -35,11 +35,11 @@ jobs:
       - name: Build
         run: |
           touch .env.local
-          echo DATABASE_URL=${{ env.DATABASE_URL }} >> .env.local
-          echo CONTENTFUL_SPACE_ID=${{ env.CONTENTFUL_SPACE_ID }} >> .env.local
-          echo CONTENTFUL_ACCESS_TOKEN=${{ secrets.CONTENTFUL_ACCESS_TOKEN }} >> .env.local
-          echo CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ secrets.CONTENTFUL_PREVIEW_ACCESS_TOKEN }} >> .env.local
-          echo CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ secrets.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} >> .env.local
+          echo DATABASE_URL=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_DATABASE_URL }} >> .env.local
+          echo CONTENTFUL_SPACE_ID=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} >> .env.local
+          echo CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} >> .env.local
+          echo CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} >> .env.local
+          echo CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} >> .env.local
           echo CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
           echo NEXT_PUBLIC_APP_ENV=${{ vars.APP_ENV }} >> .env.local
           echo GTM_ID=${{ vars.GTM_ID }} >> .env.local
