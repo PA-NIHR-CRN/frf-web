@@ -141,6 +141,7 @@ export default function ServiceProviders({
 
                                 {/* Service costs */}
                                 <ServiceTypesCostTable
+                                  providerName={fields.name}
                                   costs={fields.costs}
                                   find={{
                                     description: fields.findCostChargeableDescription,
