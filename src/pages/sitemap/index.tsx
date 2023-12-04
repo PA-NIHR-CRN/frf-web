@@ -5,10 +5,26 @@ import { ReactElement } from 'react'
 
 import { Container } from '@/components/Container/Container'
 import { RootLayout } from '@/components/Layout/RootLayout'
+import { List, ListItem } from '@/components/List/List'
 import { logger } from '@/lib/logger'
 import { getCookieBanner } from '@/utils/getCookieBanner'
 
 export type SiteMapProps = InferGetServerSidePropsType<typeof getServerSideProps>
+
+const navigationItems = [
+  { label: 'View data service providers', href: '/providers' },
+  { label: 'View all Find services', href: '/providers?serviceType=Find' },
+  { label: 'View all Recruit services', href: '/providers?serviceType=Recruit' },
+  { label: 'View all Follow-Up services', href: '/providers?serviceType=Follow-Up' },
+  { label: 'Contact research support', href: '/contact-research-support' },
+  { label: 'Organisations providing data services', href: '/data-service-providers' },
+  { label: 'Research support colleagues', href: '/research-support' },
+  { label: 'Provide feedback on this service', href: '/feedback' },
+  { label: 'Terms and conditions', href: '/terms-and-conditions' },
+  { label: 'Privacy policy', href: '/privacy' },
+  { label: 'Cookie policy', href: '/cookie-policy' },
+  { label: 'Accessibility', href: '/accessibility' },
+]
 
 export default function SiteMap({ query }: SiteMapProps) {
   return (
@@ -18,49 +34,16 @@ export default function SiteMap({ query }: SiteMapProps) {
         description="Site map for Find, Recruit and Follow-up."
       />
       <Container>
-        <div className="govuk-grid-row">
-          <ol>
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/feedback">Provide feedback on this service</Link>
-            </li>
-            <li>
-              <Link href="/data-service-providers">Organisations providing data services</Link>
-            </li>
-            <li>
-              <Link href="/providers">View data service providers</Link>
-            </li>
-            <li>
-              <Link href="/providers?serviceType=Find">View all Find services</Link>
-            </li>
-            <li>
-              <Link href="/providers?serviceType=Recruit">View all Recruit services</Link>
-            </li>
-            <li>
-              <Link href="/providers?serviceType=Follow-Up">View all Follow-Up services</Link>
-            </li>
-            <li>
-              <Link href="/contact-research-support">Contact research support</Link>
-            </li>
-            <li>
-              <Link href="/research-support">Research support colleagues</Link>
-            </li>
-            <li>
-              <Link href="/terms-and-conditions">Terms and conditions</Link>
-            </li>
-            <li>
-              <Link href="/privacy">Privacy policy</Link>
-            </li>
-            <li>
-              <Link href="/cookie-policy">Cookie policy</Link>
-            </li>
-            <li>
-              <Link href="/accessibility">Accessibility</Link>
-            </li>
-          </ol>
-        </div>
+        <h2 className="govuk-heading-m">
+          <Link href="/">Home</Link>
+        </h2>
+        <List>
+          {navigationItems.map((item, index) => (
+            <ListItem key={index}>
+              <Link href={item.href}>{item.label}</Link>
+            </ListItem>
+          ))}
+        </List>
       </Container>
     </>
   )
