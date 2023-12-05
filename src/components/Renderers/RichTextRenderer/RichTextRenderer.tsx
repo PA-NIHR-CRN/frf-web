@@ -34,8 +34,9 @@ const ButtonEntry = ({
       'govuk-button--secondary': type === 'Secondary',
     })}
     shallow={url.includes('?change-settings=1')}
+    aria-label={external ? `${text} (Opens in a new window)` : undefined}
   >
-    {external ? `${text} (Opens in a new window)` : text}
+    {text}
   </Link>
 )
 
