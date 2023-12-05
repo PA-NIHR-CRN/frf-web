@@ -36,7 +36,7 @@ export const ServiceTypesCostTable = ({
         className="govuk-table__caption govuk-body-m mb-2"
         aria-label={`${providerName}, services available and costs`}
       >
-        Services available and costs
+        Services available and costs:
       </caption>
       {formatServiceTypesCostsTable(costs, find, recruit, followUp)}
     </table>
