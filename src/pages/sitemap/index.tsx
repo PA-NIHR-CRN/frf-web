@@ -12,7 +12,7 @@ import { getCookieBanner } from '@/utils/getCookieBanner'
 export type SiteMapProps = InferGetServerSidePropsType<typeof getServerSideProps>
 
 const navigationItems = [
-  { label: 'View data service providers', href: '/providers' },
+  { label: 'View all data service providers', href: '/providers' },
   { label: 'View all Find services', href: '/providers?serviceType=Find' },
   { label: 'View all Recruit services', href: '/providers?serviceType=Recruit' },
   { label: 'View all Follow-Up services', href: '/providers?serviceType=Follow-Up' },
