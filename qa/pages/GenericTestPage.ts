@@ -126,7 +126,7 @@ export default class GenericTestPage {
   }
 
   async assertButtonIsExternal() {
-    await expect(this.primaryButton).toContainText('(Opens in a new window)')
+    await expect(this.primaryButton.getAttribute('aria-label')).toContain('Opens in a new window')
   }
 
   async assertContactBlockAppears(visible: boolean) {
