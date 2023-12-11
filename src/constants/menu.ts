@@ -3,7 +3,7 @@ export const menu = [
   [
     {
       link: '/providers',
-      text: 'View data service providers',
+      text: 'View all data service providers',
       description: 'Discover more about the different data service providers within Find, Recruit and Follow-up',
     },
     {
