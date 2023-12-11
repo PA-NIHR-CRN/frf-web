@@ -59,7 +59,7 @@ export default class CommonItemsPage {
     this.btnClosedSiteMenu = page.locator('button[aria-label="Show navigation menu"]')
     this.btnOpenedSiteMenu = page.locator('button[aria-label="Hide navigation menu"]')
     this.linkSiteMenuFindDsp = page.locator('a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]', {
-      hasText: 'View data service providers',
+      hasText: 'View all data service providers',
     })
     this.linkSiteMenuContactSupport = page.locator(
       'a[class="link--inverse govuk-heading-s mb-1 inline-block font-normal"]',
