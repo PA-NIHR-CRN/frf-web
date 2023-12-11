@@ -64,7 +64,7 @@ test('Displays a generic contentful page', async () => {
   ).toBeInTheDocument()
 
   // Button is rendered
-  expect(screen.getByRole('link', { name: 'Visit NIHR Learn' })).toHaveAttribute('href', '#')
+  expect(screen.getByRole('link', { name: 'Visit NIHR Learn (Opens in a new window)' })).toHaveAttribute('href', '#')
 
   // Image is rendered
   expect(screen.getByRole('img', { name: 'NIHR logo alt text' })).toHaveAttribute(
