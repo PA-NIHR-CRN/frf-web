@@ -204,7 +204,7 @@
           "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "button" } },
           "locale": "en-US"
         },
-        "fields": { "text": "Visit NIHR Learn", "url": "#", "type": "Primary", "external": false }
+        "fields": { "text": "Visit NIHR Learn", "url": "#", "type": "Primary", "external": true }
       },
       {
         "metadata": { "tags": [] },
