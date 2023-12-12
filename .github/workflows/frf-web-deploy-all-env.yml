@@ -253,7 +253,7 @@ jobs:
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids: |
-            crnccs-secret-test-frf-app-config
+            crnccs-secret-uat-frf-app-config
           parse-json-secrets: true
 
       - name: Login to Amazon ECR
