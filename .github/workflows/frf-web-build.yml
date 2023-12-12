@@ -49,6 +49,15 @@ jobs:
             crnccd-secret-dev-frf-app-config
           parse-json-secrets: true
 
+      - name: mask secrets
+        run: |
+           echo "::add-mask::${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_DATABASE_URL }}"
+           echo "::add-mask::${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }}"
+           echo "::add-mask::${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }}"
+           echo "::add-mask::${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }}"
+           echo "::add-mask::${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }}"
+           echo "::add-mask::${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}"
+
       - name: Build
         run: |
           touch .env.local
