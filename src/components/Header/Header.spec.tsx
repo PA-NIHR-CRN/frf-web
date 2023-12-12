@@ -56,7 +56,7 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
   expect(within(openMenu).getByText('Discover more with the Find, Recruit and Follow-up website')).toBeInTheDocument()
 
   // 2nd column
-  expect(within(openMenu).getByRole('link', { name: 'View data service providers' })).toHaveAttribute(
+  expect(within(openMenu).getByRole('link', { name: 'View all data service providers' })).toHaveAttribute(
     'href',
     '/providers'
   )
