@@ -101,6 +101,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(301)
     }
   } catch (error) {
+    logger.error(error)
     res.status(500).send(`${error}`)
     return
   }
