@@ -126,7 +126,9 @@ export default class GenericTestPage {
   }
 
   async assertButtonIsExternal() {
-    await expect(this.primaryButton.getAttribute('aria-label')).toContain('Opens in a new window')
+    const buttonText = 'Visit NIHR Learn (Opens in a new window)'
+    const button = this.page.getByRole('link', { name: buttonText })
+    await expect(button).toBeVisible()
   }
 
   async assertContactBlockAppears(visible: boolean) {
