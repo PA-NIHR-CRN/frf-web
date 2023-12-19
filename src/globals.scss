@@ -164,3 +164,25 @@ body {
 .govuk-main-wrapper {
   padding-top: 0px;
 }
+
+.youtube-cover-img {
+  position: relative;
+}
+
+.youtube-cover-img img{
+  object-fit: cover;
+}
+
+.youtube-cover-img span{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font:48px/1.5 sans-serif;
+  color:white;
+  text-shadow:0 0 0.5em black;
+}
+
+.youtube-cover-img:focus{
+  outline: 5px solid #ffdd00;
+}
