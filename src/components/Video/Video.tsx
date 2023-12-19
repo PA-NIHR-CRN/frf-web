@@ -47,6 +47,7 @@ export const Video = ({ url, title }: VideoProps) => {
           <img
             className="aspect-video w-full max-w-[700px] lg:w-[450px] "
             src={`https://img.youtube.com/vi/${videoID}/hqdefault.jpg`}
+            title={title}
             alt={`${title}`}
           />
           <span>▶</span>
