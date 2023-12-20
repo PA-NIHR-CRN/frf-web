@@ -38,7 +38,6 @@ test('Includes necessary attributes in the iframe element', async () => {
   )
   const videoElement = screen.getByTestId('youtube-video')
   expect(videoElement).toBeVisible()
-  videoElement.click()
 })
 
 test('Updates domain if cookies have been previously accepted', () => {
