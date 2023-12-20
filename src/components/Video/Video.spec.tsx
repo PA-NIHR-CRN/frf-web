@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { getCookie } from 'cookies-next'
 
 import { COOKIE_SETTINGS_CHANGE_EVENT, FRF_GDPR_COOKIE_ACCEPT_VALUE } from '@/constants/cookies'
@@ -25,13 +25,20 @@ test('Renders an iframe with the correct src and title', () => {
   expect(videoElement).toHaveAttribute('src', 'https://img.youtube.com/vi/ABCDEFG/hqdefault.jpg')
 })
 
-test('Includes necessary attributes in the iframe element', () => {
+test('Includes necessary attributes in the iframe element', async () => {
   render(<Video {...testProps} />)
-  const videoCoverImage = screen.getByRole('img', { name: testProps.title })
+  const videoCoverImage = screen.getByTestId('youtube-cover-img')
   expect(videoCoverImage).toBeVisible()
   videoCoverImage.click()
-  const videoElement = screen.getByTitle(testProps.title)
+  await waitFor(
+    () => {
+      expect(videoCoverImage).not.toBeVisible()
+    },
+    { timeout: 1000 }
+  )
+  const videoElement = screen.getByTestId('youtube-video')
   expect(videoElement).toBeVisible()
+  videoElement.click()
 })
 
 test('Updates domain if cookies have been previously accepted', () => {
