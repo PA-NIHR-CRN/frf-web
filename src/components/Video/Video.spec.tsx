@@ -38,6 +38,8 @@ test('Includes necessary attributes in the iframe element', async () => {
   )
   const videoElement = screen.getByTestId('youtube-video')
   expect(videoElement).toBeVisible()
+  expect(videoElement).toHaveAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope;')
+  expect(videoElement).toHaveAttribute('allowfullscreen')
 })
 
 test('Updates domain if cookies have been previously accepted', () => {
