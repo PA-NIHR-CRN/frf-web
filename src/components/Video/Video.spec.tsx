@@ -40,6 +40,7 @@ test('Includes necessary attributes in the iframe element', async () => {
   expect(videoElement).toBeVisible()
   expect(videoElement).toHaveAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope;')
   expect(videoElement).toHaveAttribute('allowfullscreen')
+  expect(videoElement).toHaveAttribute('src', 'https://www.youtube-nocookie.com/embed/ABCDEFG')
 })
 
 test('Updates domain if cookies have been previously accepted', () => {
