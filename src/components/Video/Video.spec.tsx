@@ -27,8 +27,11 @@ test('Renders an iframe with the correct src and title', () => {
 
 test('Includes necessary attributes in the iframe element', () => {
   render(<Video {...testProps} />)
-
+  const videoCoverImage = screen.getByRole('img', { name: testProps.title })
+  expect(videoCoverImage).toBeVisible()
+  videoCoverImage.click()
   const videoElement = screen.getByTitle(testProps.title)
+  expect(videoElement).toBeVisible()
 })
 
 test('Updates domain if cookies have been previously accepted', () => {

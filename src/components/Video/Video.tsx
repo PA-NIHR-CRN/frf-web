@@ -14,7 +14,7 @@ const YOUTUBE_NOCOOKIE_DOMAIN = 'www.youtube-nocookie.com'
 
 export const Video = ({ url, title }: VideoProps) => {
   const [youTubeDomain, setYouTubeDomain] = useState(YOUTUBE_NOCOOKIE_DOMAIN)
-  const [showYoutubeCoverImage, setYoutubeCoverImage] = useState(true)
+  const [showYoutubeCoverImage, setShowYoutubeCoverImage] = useState(true)
 
   // Set correct domain on first render
   useEffect(() => {
@@ -37,12 +37,12 @@ export const Video = ({ url, title }: VideoProps) => {
   const videoURL = `https://${youTubeDomain}/embed/${videoID}`
 
   const handleClick = () => {
-    setYoutubeCoverImage(false)
+    setShowYoutubeCoverImage(false)
   }
 
   return (
     <div>
-      {showYoutubeCoverImage && (
+      {showYoutubeCoverImage ? (
         <button className="youtube-cover-img" onClick={handleClick}>
           <img
             className="aspect-video w-full max-w-[700px] lg:w-[450px] "
@@ -52,9 +52,7 @@ export const Video = ({ url, title }: VideoProps) => {
           />
           <span>▶</span>
         </button>
-      )}
-
-      {!showYoutubeCoverImage && (
+      ) : (
         <iframe
           className="aspect-video w-full max-w-[700px] lg:w-[450px]"
           src={videoURL}
