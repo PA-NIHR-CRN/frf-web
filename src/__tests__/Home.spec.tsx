@@ -61,7 +61,7 @@ test('Displays the Home page', async () => {
 
   // Video
   const videoIframe = screen.getByTitle('Video: Find, Recruit and Follow-up Intro')
-  expect(videoIframe).toHaveAttribute('src', 'https://www.youtube-nocookie.com/embed/msizPweg3kE')
+  expect(videoIframe).toHaveAttribute('src', 'https://img.youtube.com/vi/msizPweg3kE/hqdefault.jpg')
 
   // Service Info
   expect(screen.getByRole('heading', { name: 'Find', level: 2 })).toBeInTheDocument()
