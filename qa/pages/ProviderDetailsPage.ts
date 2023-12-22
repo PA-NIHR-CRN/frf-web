@@ -31,6 +31,7 @@ export default class ProviderDetailsPage {
   readonly dspDetailNotSuitedSection: Locator
   readonly dspDetailNotSuitedValuePhase: Locator
   readonly dspDetailNotSuitedValueRecruitment: Locator
+  readonly iframeIntroContainer: Locator
   readonly dspDetailVideo: Locator
   readonly linkDspDetailExternal: Locator
   readonly dspDetailSummaryInfoSection: Locator
@@ -108,6 +109,7 @@ export default class ProviderDetailsPage {
     this.dspDetailNotSuitedValueRecruitment = page.locator('ul[aria-label="Not suited to:"] li', {
       hasText: 'Recruitment Targeting 1000+ or more patients',
     })
+    this.iframeIntroContainer = page.getByTestId('youtube-cover-img')
     this.dspDetailVideo = page.locator('iframe[class="aspect-video w-full max-w-[700px] lg:w-[450px]"]')
     this.linkDspDetailExternal = page.locator('a[class="govuk-!-margin-top-4 govuk-body inline-block"]')
     this.dspDetailSummaryInfoSection = page.locator('div[class="govuk-!-margin-top-9"]')
@@ -268,6 +270,7 @@ export default class ProviderDetailsPage {
   }
 
   async assertVideoPresent() {
+    await this.iframeIntroContainer.click()
     await expect(this.dspDetailVideo).toBeVisible()
   }
 

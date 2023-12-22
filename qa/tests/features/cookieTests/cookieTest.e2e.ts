@@ -119,7 +119,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
       await commonItemsPage.assertGoogleAnalyticsCookiesApplied(true)
     })
     await test.step('When I click an embedded Youtube video', async () => {
-      await homePage.iframeIntroVideo.click()
+      await homePage.iframeIntroContainer.click()
       await homePage.assertVideoPlayable()
     })
     await test.step('Then the Third Party Cookies from Youtube have been applied', async () => {
@@ -148,7 +148,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
       await commonItemsPage.assertGoogleAnalyticsCookiesApplied(false)
     })
     await test.step('When I click an embedded Youtube video', async () => {
-      await homePage.iframeIntroVideo.click()
+      await homePage.iframeIntroContainer.click()
       await homePage.assertVideoPlayable()
     })
     await test.step('Then the Third Party Cookies from Youtube have not been applied', async () => {

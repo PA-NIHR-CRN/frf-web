@@ -6,7 +6,7 @@ export default class HomePage {
   readonly pageTitle: Locator
   readonly btnProviders: Locator
   readonly paragraphIntroText: Locator
-  readonly iframeIntroVideo: Locator
+  readonly iframeIntroContainer: Locator
   readonly iframePlayerIntroVideo: Locator
   readonly paragraphDspIntroText: Locator
   readonly dspIntroServiceBoxes: Locator
@@ -32,7 +32,7 @@ export default class HomePage {
     this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.btnProviders = page.locator('a', { hasText: 'View all data service providers' })
     this.paragraphIntroText = page.locator('div[class="whitespace-pre-wrap lg:pr-6 [&_p:last-of-type]:lg:mb-0"] p')
-    this.iframeIntroVideo = page.locator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')
+    this.iframeIntroContainer = page.getByTestId('youtube-cover-img')
     this.iframePlayerIntroVideo = page
       .frameLocator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')
       .locator('div[id="player"]')
@@ -90,7 +90,7 @@ export default class HomePage {
   }
 
   async assertVideoPresent() {
-    await expect(this.iframeIntroVideo).toBeVisible()
+    await expect(this.iframeIntroContainer).toBeVisible()
     await expect(this.iframePlayerIntroVideo).toBeHidden()
   }
 
