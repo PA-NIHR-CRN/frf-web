@@ -15,7 +15,7 @@ test.describe('Home Page Smoke Tests - @frf_4', () => {
       await homePage.assertVideoPresent()
     })
     await test.step('When I click the on the Intro Video', async () => {
-      await homePage.iframeIntroVideo.click()
+      await homePage.iframeIntroContainer.click()
     })
     await test.step('Then I can Watch the Video on the Site', async () => {
       await homePage.assertVideoPlayable()
