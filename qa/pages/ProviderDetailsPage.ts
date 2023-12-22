@@ -270,6 +270,7 @@ export default class ProviderDetailsPage {
   }
 
   async assertVideoPresent() {
+    await expect(this.iframeIntroContainer).toBeVisible()
     await this.iframeIntroContainer.click()
     await expect(this.dspDetailVideo).toBeVisible()
   }
