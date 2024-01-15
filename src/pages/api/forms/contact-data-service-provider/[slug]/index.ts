@@ -22,8 +22,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Check for automated bot requests
-    if (req.body.workEmailAddress) {
-      throw new Error(`Bot request caught in honeypot: ${req.body.workEmailAddress}`)
+    if (req.body.caseReferenceNumber) {
+      throw new Error(`Bot request caught in honeypot: ${req.body.caseReferenceNumber}`)
     }
 
     await contactDataServiceProviderSchema.parse(req.body)
@@ -36,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       fields: { name: dspName, emailAddress: dspEmail },
     } = entry
 
-    delete req.body.workEmailAddress // Clear honeypot before db entry
+    delete req.body.caseReferenceNumber // Clear honeypot before db entry
 
     const { id } = await prisma.dataServiceProviderRequest.create({ data: { ...req.body, dspName } })
 

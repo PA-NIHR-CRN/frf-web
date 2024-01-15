@@ -35,6 +35,6 @@ export const contactResearchSupportSchema = z
     studyTitle: z.string().optional(),
     protocolReference: z.string().optional(),
     cpmsId: z.string().optional(),
-    workEmailAddress: z.string().optional(), // Honeypot
+    caseReferenceNumber: z.string().optional(), // Honeypot
   })
   .required()

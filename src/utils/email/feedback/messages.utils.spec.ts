@@ -37,7 +37,7 @@ describe('getNotificationMessages', () => {
     emailAddress: 'frfteam@nihr.ac.uk',
     organisationName: 'NIHR',
     referenceNumber: 'ABC123',
-    workEmailAddress: '', // honeypot
+    caseReferenceNumber: '', // honeypot
   }
 
   const contentType: TypeEmailTemplateFeedback<undefined, ''>['fields'] = {

@@ -38,7 +38,7 @@ describe('getNotificationMessages', () => {
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     details: 'details here',
-    workEmailAddress: '', // honeypot
+    caseReferenceNumber: '', // honeypot
   }
 
   const contentType: TypeEmailTemplateContactFrfCentralTeam<undefined, ''>['fields'] = {

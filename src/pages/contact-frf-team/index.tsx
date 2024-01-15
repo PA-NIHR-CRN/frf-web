@@ -71,7 +71,7 @@ export default function ContactFrfTeam({ query }: ContactFrfTeamProps) {
               }
             >
               <ErrorSummary errors={errors} />
-              <HoneyPot {...register('workEmailAddress')} />
+              <HoneyPot {...register('caseReferenceNumber')} />
               <div>
                 <TextInput
                   label="Full name"

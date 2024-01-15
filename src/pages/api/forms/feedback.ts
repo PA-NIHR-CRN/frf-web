@@ -16,13 +16,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Check for automated bot requests
-    if (req.body.workEmailAddress) {
-      throw new Error(`Bot request caught in honeypot: ${req.body.workEmailAddress}`)
+    if (req.body.caseReferenceNumber) {
+      throw new Error(`Bot request caught in honeypot: ${req.body.caseReferenceNumber}`)
     }
 
     await feedbackSchema.parse(req.body)
 
-    delete req.body.workEmailAddress // Clear honeypot before db entry
+    delete req.body.caseReferenceNumber // Clear honeypot before db entry
 
     const { id } = await prisma.feedback.create({ data: { ...req.body } })
 

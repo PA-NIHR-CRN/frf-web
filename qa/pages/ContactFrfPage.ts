@@ -67,7 +67,7 @@ export default class ContactFrfPage {
     this.formOrgNameInput = page.locator('input[id="organisationName"]')
     this.formEmailCopyTxt = this.contactFrfForm.locator('p')
     this.formSubmitButton = page.locator('button[data-module="govuk-button"]')
-    this.formHiddenHoneyPotInput = page.locator('input[name="workEmailAddress"]')
+    this.formHiddenHoneyPotInput = page.locator('input[name="caseReferenceNumber"]')
     this.validationSummaryBox = page.locator('div[class="govuk-error-summary"]')
     this.validationSummaryHeading = page.locator('h2[id="form-summary-errors"]')
     this.validationSummaryList = page.locator('ul[class="govuk-list govuk-error-summary__list"]')
