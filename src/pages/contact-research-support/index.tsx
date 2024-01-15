@@ -93,7 +93,7 @@ export default function ContactResearchSupport({ contacts, query }: ContactResea
               }
             >
               <ErrorSummary errors={errors} />
-              <HoneyPot {...register('workEmailAddress')} />
+              <HoneyPot {...register('caseReferenceNumber')} />
               <Fieldset legend="About your enquiry">
                 <RadioGroup
                   label="Is your enquiry about"

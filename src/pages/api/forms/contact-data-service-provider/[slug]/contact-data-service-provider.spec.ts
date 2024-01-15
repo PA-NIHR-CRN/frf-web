@@ -48,7 +48,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     studyDescription: 'Study description here',
-    workEmailAddress: '', // honeypot
+    caseReferenceNumber: '', // honeypot
   }
 
   const createMock = jest.mocked(prisma.dataServiceProviderRequest.create)
@@ -119,7 +119,7 @@ test('Validation error redirects back to the form with the errors and original v
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     studyDescription: 'Study description here',
-    workEmailAddress: '', // honeypot
+    caseReferenceNumber: '', // honeypot
   }
 
   const res = await testHandler(handler, {
@@ -137,7 +137,7 @@ test('Honeypot value caught redirects with an error', async () => {
   const res = await testHandler(handler, {
     method: 'POST',
     body: {
-      workEmailAddress: 'I am a bot',
+      caseReferenceNumber: 'I am a bot',
     },
     query: { slug: 'genonmic-profile-register' },
   })

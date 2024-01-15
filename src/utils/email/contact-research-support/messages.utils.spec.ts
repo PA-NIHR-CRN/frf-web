@@ -73,7 +73,7 @@ describe('getNotificationMessages', () => {
     studyTitle: 'test',
     protocolReference: 'test',
     cpmsId: 'test',
-    workEmailAddress: '', // honeypot
+    caseReferenceNumber: '', // honeypot
   }
 
   const contentType: TypeEmailTemplateContactResearchSupport<undefined, ''>['fields'] = {

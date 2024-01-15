@@ -77,7 +77,7 @@ export default class FeedbackFormPage {
     this.validationSummaryEmailError = page.locator('a[href="#emailAddress"]')
     this.validationFieldHelpfulSelectError = page.locator('p[id="helpfulness-error"]')
     this.validationFieldEmailError = page.locator('p[id="emailAddress-error"]')
-    this.formHiddenHoneyPotInput = page.locator('input[name="workEmailAddress"]')
+    this.formHiddenHoneyPotInput = page.locator('input[name="caseReferenceNumber"]')
     this.genericErrorMsg = this.validationSummaryList.locator('li')
   }
 

@@ -40,13 +40,13 @@ beforeEach(() => {
 test('Successful submission redirects to the confirmation page', async () => {
   const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
-  const body: FeedbackInputs & { workEmailAddress: string } = {
+  const body: FeedbackInputs & { caseReferenceNumber: string } = {
     helpfulness: 'very-helpful',
     suggestions: 'great site!',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
     organisationName: 'NIHR',
-    workEmailAddress: '', // Honeypot
+    caseReferenceNumber: '', // Honeypot
   }
 
   const createMock = jest.mocked(prisma.feedback.create)
@@ -96,8 +96,8 @@ test('Successful submission redirects to the confirmation page', async () => {
 })
 
 test('Validation error redirects back to the form with the errors and original values persisted', async () => {
-  const body: Partial<FeedbackInputs> & { workEmailAddress: string } = {
-    workEmailAddress: '', // Honeypot
+  const body: Partial<FeedbackInputs> & { caseReferenceNumber: string } = {
+    caseReferenceNumber: '', // Honeypot
     suggestions: 'great site!',
     fullName: 'Test user',
     emailAddress: 'testemail@nihr.ac.uk',
@@ -112,7 +112,7 @@ test('Validation error redirects back to the form with the errors and original v
 })
 
 test('Honeypot value caught redirects with an error', async () => {
-  const res = await testHandler(handler, { method: 'POST', body: { workEmailAddress: 'I am a bot' } })
+  const res = await testHandler(handler, { method: 'POST', body: { caseReferenceNumber: 'I am a bot' } })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/feedback?fatal=1')
   expect(logger.error).toHaveBeenCalledWith(new Error('Bot request caught in honeypot: I am a bot'))
@@ -128,8 +128,8 @@ test('Wrong http method redirects with an error', async () => {
 test('Successful submission without contact details does not email the FRF inbox', async () => {
   const sendEmailSpy = jest.spyOn(emailService, 'sendEmail').mockImplementation(Mock.noop)
 
-  const body: FeedbackInputs & { workEmailAddress: string } = {
-    workEmailAddress: '', // Honeypot
+  const body: FeedbackInputs & { caseReferenceNumber: string } = {
+    caseReferenceNumber: '', // Honeypot
     helpfulness: 'very-helpful',
     suggestions: 'great site!',
     fullName: 'Test user',

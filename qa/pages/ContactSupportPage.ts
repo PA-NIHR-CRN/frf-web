@@ -139,7 +139,7 @@ export default class ContactSupportPage {
     this.formResearchCpmsGuideTxt = this.page.locator('div[id="cpmsId-hint"]')
     this.formEmailCopyTxt = this.contactSupportForm.locator('p').nth(2)
     this.formSubmitButton = page.locator('button[data-module="govuk-button"]')
-    this.formHiddenHoneyPotInput = page.locator('input[name="workEmailAddress"]')
+    this.formHiddenHoneyPotInput = page.locator('input[name="caseReferenceNumber"]')
     this.validationSummaryBox = page.locator('div[class="govuk-error-summary"]')
     this.validationSummaryHeading = page.locator('h2[id="form-summary-errors"]')
     this.validationSummaryList = page.locator('ul[class="govuk-list govuk-error-summary__list"]')

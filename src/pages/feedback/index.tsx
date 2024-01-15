@@ -65,7 +65,7 @@ export default function Feedback({ query }: FeedbackProps) {
               }
             >
               <ErrorSummary errors={errors} />
-              <HoneyPot {...register('workEmailAddress')} />
+              <HoneyPot {...register('caseReferenceNumber')} />
               <div>
                 <RadioGroup
                   label="How helpful was the Find, Recruit and Follow-up (FRF) website?"

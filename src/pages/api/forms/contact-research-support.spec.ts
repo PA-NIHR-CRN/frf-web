@@ -54,7 +54,7 @@ test('Successful submission redirects to the confirmation page', async () => {
     studyTitle: '',
     protocolReference: '',
     cpmsId: '',
-    workEmailAddress: '', // honeypot
+    caseReferenceNumber: '', // honeypot
   }
 
   const createMock = jest.mocked(prisma.supportRequest.create)
@@ -132,7 +132,7 @@ test('Validation error redirects back to the form with the errors and original v
     jobRole: 'Researcher',
     organisationName: 'NIHR',
     lcrn: 'Mock region 1',
-    workEmailAddress: '', // honeypot
+    caseReferenceNumber: '', // honeypot
   }
 
   const res = await testHandler(handler, { method: 'POST', body })
@@ -143,7 +143,7 @@ test('Validation error redirects back to the form with the errors and original v
 })
 
 test('Honeypot value caught redirects with an error', async () => {
-  const res = await testHandler(handler, { method: 'POST', body: { workEmailAddress: 'I am a bot' } })
+  const res = await testHandler(handler, { method: 'POST', body: { caseReferenceNumber: 'I am a bot' } })
   expect(res.statusCode).toBe(302)
   expect(res._getRedirectUrl()).toBe('/contact-research-support?fatal=1')
   expect(logger.error).toHaveBeenCalledWith(new Error('Bot request caught in honeypot: I am a bot'))

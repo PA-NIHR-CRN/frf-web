@@ -72,7 +72,7 @@ export default function ContactDataServiceProvider({ name, query }: ContactDataS
               }
             >
               <ErrorSummary errors={errors} />
-              <HoneyPot {...register('workEmailAddress')} />
+              <HoneyPot {...register('caseReferenceNumber')} />
               <div>
                 <TextInput
                   label="Full name"
