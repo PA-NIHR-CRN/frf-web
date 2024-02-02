@@ -21,7 +21,10 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Test and coverage
         run: npx jest --coverage --outputFile="${GITHUB_WORKSPACE}/coverage/lcov.info"
-
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
       - name: SonarCloud analysis
         run: |
           npx sonar-scanner \

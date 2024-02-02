@@ -1,8 +1,5 @@
 name: FRF E2E Tests
 on:
-  schedule:
-    # Run at 09:30 (UTC) Mon-Fri (09:00 during BST)
-    - cron: '30 09 * * 1-5'
   workflow_dispatch:
     inputs:
       publish-report:
@@ -37,12 +34,14 @@ jobs:
           aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
           aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
           aws-region: eu-west-2
-      - name: Get Github Actions Runner Public IP
-        id: ip
-        uses: haythem/public-ip@v1.3
+      - name: Get GitHub Actions Runner Public IP
+        id: publicip
+        run: |
+          response=$(curl -s icanhazip.com)
+          echo "ip=$response" >> "$GITHUB_OUTPUT"
       - name: Add Github Actions IP to LB security group (Test)
         run: |
-          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
       - name: Run All FRF E2E Tests in TEST
         if: github.event.inputs.test-tag == '' || github.event.inputs.test-tag == 'all'
         run: npx playwright test
@@ -51,7 +50,7 @@ jobs:
         run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
       - name: Remove Github Actions IP from LB security group (Test)
         run: |
-          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.ip.outputs.ipv4 }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
       - name: Upload HTML Report as artifact
         uses: actions/upload-artifact@v3
         if: always()
@@ -63,7 +62,6 @@ jobs:
         uses: actions/download-artifact@v3
         id: download
         if: github.event.inputs.publish-report != 'false' && always()
-
       - name: Publish to GH Pages
         if: github.event.inputs.publish-report != 'false' && always()
         uses: JamesIves/github-pages-deploy-action@v4
