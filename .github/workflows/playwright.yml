@@ -1,8 +1,5 @@
 name: FRF E2E Tests
 on:
-  schedule:
-    # Run at 09:30 (UTC) Mon-Fri (09:00 during BST)
-    - cron: '30 09 * * 1-5'
   workflow_dispatch:
     inputs:
       publish-report:
