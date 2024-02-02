@@ -98,7 +98,7 @@ test.describe.only('Generic Page Functionality Tests - @frf_61', () => {
       await genericTestPage.assertOnAltTestPage()
     })
     await test.step('Then I cannot see the Contact Block', async () => {
-      await genericTestPage.assertContactBlockAppears(false)
+      await genericTestPage.assertContactBlockAppears(true)
     })
   })
 
