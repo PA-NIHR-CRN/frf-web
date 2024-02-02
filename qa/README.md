@@ -88,8 +88,11 @@ You would also be required to change its **testIgnore** value to ignore all test
 
 ## --------------------RUN TESTS via GITHUB ACTIONS--------------------
 
-GitHub Actions are configured in the playwright.yml file  
-Tests are set to run and publish an HTML report to a GitHub page on a scheduled daily morning run
+The GitHub Action to manually trigger the FRF E2E test run is configured in the playwright.yml file
+The GitHub Action which runs the FRF E2E tests as part of the CI/CD pipeline is configured in the frf-web-deploy-all-env.yml file
+This ensures that the tests will be run after the latest work has been deployed to Test, but before it can be deployed to UAT.
+The FRF E2E tests must all pass, before the deployment to UAT can be triggered.
+This is part of the **FRF Web Deploy to all Envs** workflow
 
 To trigger the test run manually  
 Go the the repo's GitHub actions page - https://github.com/PA-NIHR-CRN/frf-web/actions  
@@ -109,6 +112,7 @@ This can be accessed in the Artifacts section of the completed **FRF E2E Tests**
 To view it, click it and it will be downloaded as a Zip file  
 However the Traces section of the report will not work  
 As The Playwright Trace Viewer must be loaded over the http:// or https:// protocols
+
 
 ## --------------------GITHUB PAGES--------------------
 
