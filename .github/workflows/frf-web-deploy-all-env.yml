@@ -289,7 +289,7 @@ jobs:
           folder: ${{steps.download.outputs.download-path}}/qa/test-report/
           branch: gh-pages
       - name: Send slack message failure
-        if: failure() && github.ref == 'refs/heads/main'
+        if: failure() && github.ref == 'refs/heads/tests/update-workflows'
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
@@ -297,7 +297,7 @@ jobs:
           SLACK_MESSAGE: "SE E2E Regression Tests Failed in TEST! :face_with_thermometer:"
           SLACK_TITLE: "Sponsor Engagement E2E UI Tests - ENV: TEST : FAILURE :x:"
       - name: Send slack message success
-        if: success() && github.ref == 'refs/heads/main'
+        if: success() && github.ref == 'refs/heads/tests/update-workflows'
         uses: rtCamp/action-slack-notify@v2.2.0
         env:
           SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
