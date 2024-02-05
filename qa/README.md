@@ -88,10 +88,10 @@ You would also be required to change its **testIgnore** value to ignore all test
 
 ## --------------------RUN TESTS via GITHUB ACTIONS--------------------
 
-The GitHub Action to manually trigger the FRF E2E test run is configured in the playwright.yml file
-The GitHub Action which runs the FRF E2E tests as part of the CI/CD pipeline is configured in the frf-web-deploy-all-env.yml file
-This ensures that the tests will be run after the latest work has been deployed to Test, but before it can be deployed to UAT.
-The FRF E2E tests must all pass, before the deployment to UAT can be triggered.
+The GitHub Action to manually trigger the FRF E2E test run is configured in the playwright.yml file  
+The GitHub Action which runs the FRF E2E tests as part of the CI/CD pipeline is configured in the frf-web-deploy-all-env.yml file  
+This ensures that the tests will be run after the latest work has been deployed to Test, but before it can be deployed to UAT.  
+The FRF E2E tests must all pass, before the deployment to UAT can be triggered.  
 This is part of the **FRF Web Deploy to all Envs** workflow
 
 To trigger the test run manually  
