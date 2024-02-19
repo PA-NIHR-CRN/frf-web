@@ -96,9 +96,9 @@ export default function ServiceProviders({
           <div className="govuk-grid-column-two-thirds-from-desktop">
             {/* Sort bar */}
             <div className="flex-wrap items-center justify-between gap-3 md:flex">
-              <p className="govuk-heading-m mb-0 whitespace-nowrap">
+              <h2 className="govuk-heading-m mb-0 whitespace-nowrap">
                 {`${totalItems} ${pluralise('data service provider', totalItems)} found`}
-              </p>
+              </h2>
               <div className="govuk-form-group mt-5 items-center justify-end md:my-0 md:flex">
                 {/* Show filters */}
                 <div>{showFiltersButton()}</div>
