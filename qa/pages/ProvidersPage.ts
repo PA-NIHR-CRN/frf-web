@@ -106,7 +106,7 @@ export default class ProvidersPage {
     this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
     this.btnViewMoreDetails = page.locator('a[class="govuk-button mb-0 whitespace-nowrap"]')
     this.dspListArticle = page.locator('ol[class="mt-5"]')
-    this.dspListPageTitle = page.locator('p[class="govuk-heading-m mb-0 whitespace-nowrap"]')
+    this.dspListPageTitle = page.locator('h2[class="govuk-heading-m mb-0 whitespace-nowrap"]')
     this.dspResultArticle = page.locator('article[class="shadow-card flex h-full flex-col bg-white govuk-body mb-8"]')
     this.dspResultHeader = page.locator('div[class="flex flex-col justify-between border-b border-grey-80 p-4"]')
     this.dspResultBody = page.locator('div[class="govuk-grid-column-three-quarters-from-desktop pr-5"]')
