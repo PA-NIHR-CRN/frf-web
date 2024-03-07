@@ -55,44 +55,61 @@ export function Footer() {
 
       <div className={clsx('bg-white')} data-testid="frf-footer-logos">
         <div className="govuk-width-container">
-          <div className="m-auto flex max-w-[320px] flex-wrap items-center justify-center gap-8 py-7 sm:max-w-none md:flex-nowrap lg:justify-between">
-            <a href="https://www.nihr.ac.uk" className="max-w-[240px] lg:w-auto">
+          <div
+            className="m-auto flex max-w-[320px] flex-wrap items-center justify-center gap-8 py-7 sm:max-w-none md:flex-nowrap lg:justify-between"
+            aria-label="National Institute for Health and Care Research"
+          >
+            <a href="https://www.nihr.ac.uk" className="lg:w-auto">
               <Image
                 src="/assets/logos/nihr-full.svg"
-                width={240}
-                height={24}
+                width={360}
+                height={60}
                 alt="National Institute for Health and Care Research logo"
                 className="mx-auto"
               />
             </a>
-            {/* Footer logos temporarily commented out - these may return once we have confirmation from client */}
-            {/* <a href="#" target="_blank" className="max-w-[240px] lg:w-auto">
+            <a
+              href="https://www.research.hscni.net"
+              target="_blank"
+              className="max-w-[240px] lg:w-auto"
+              aria-label="HSC Public Health Agency (opens in a new window)"
+            >
               <Image
                 src="/assets/logos/hsc-public-health-agency.svg"
                 width={253}
                 height={97}
-                alt="HSC Public Health Agency logo (opens in a new window)"
+                alt="HSC Public Health Agency logo"
                 className="mx-auto"
               />
             </a>
-            <a href="#" target="_blank" className="max-w-[240px] lg:w-auto">
+            <a
+              href="https://www.nhsresearchscotland.org.uk"
+              target="_blank"
+              className="max-w-[240px] lg:w-auto"
+              aria-label="NHS Scotland (opens in a new window)"
+            >
               <Image
                 src="/assets/logos/nhs-scotland.svg"
                 width={153}
                 height={130}
-                alt="NHS Scotland logo (opens in a new window)"
+                alt="NHS Scotland logo"
                 className="mx-auto"
               />
             </a>
-            <a href="#" target="_blank" className="max-w-[240px] lg:w-auto">
+            <a
+              href="https://healthandcareresearchwales.org"
+              target="_blank"
+              className="max-w-[240px] lg:w-auto"
+              aria-label="Health Care Research Wales (opens in a new window)"
+            >
               <Image
                 src="/assets/logos/health-and-care-research-wales.svg"
                 width={168}
                 height={106}
-                alt="Health Care Research Wales logo (opens in a new window)"
+                alt="Health Care Research Wales logo"
                 className="mx-auto"
               />
-            </a> */}
+            </a>
           </div>
         </div>
       </div>

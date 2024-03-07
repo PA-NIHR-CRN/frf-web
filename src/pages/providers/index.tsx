@@ -80,7 +80,7 @@ export default function ServiceProviders({
       />
       <Container>
         <div className="govuk-grid-row">
-          <div className="govuk-grid-column-one-third-from-desktop">
+          <div className="govuk-grid-column-one-quarter-from-desktop">
             {/* Filter panel */}
             <Filters
               options={filterOptions}
@@ -93,7 +93,7 @@ export default function ServiceProviders({
             <ContactResearchSupport />
           </div>
 
-          <div className="govuk-grid-column-two-thirds-from-desktop">
+          <div className="govuk-grid-column-three-quarters-from-desktop">
             {/* Sort bar */}
             <div className="flex-wrap items-center justify-between gap-3 md:flex">
               <h2 className="govuk-heading-m mb-0 whitespace-nowrap">
