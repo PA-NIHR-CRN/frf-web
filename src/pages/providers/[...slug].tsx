@@ -51,7 +51,7 @@ export default function ServiceProvider({ fields, createdAt, updatedAt }: Servic
       <Container>
         <article aria-labelledby={`article-${fields.slug}-title`}>
           <div className="govuk-grid-row">
-            <div className="govuk-grid-column-two-thirds-from-desktop">
+            <div className="govuk-grid-column-three-quarters-from-desktop">
               {/* Provider name */}
               <ProviderHeadingText id={`article-${fields.slug}-title`}>{fields.name}</ProviderHeadingText>
 
@@ -61,7 +61,7 @@ export default function ServiceProvider({ fields, createdAt, updatedAt }: Servic
           </div>
 
           <div className="govuk-grid-row">
-            <div className="govuk-grid-column-two-thirds-from-desktop" data-testid="frf-dsp-content">
+            <div className="govuk-grid-column-three-quarters-from-desktop" data-testid="frf-dsp-content">
               <div className="max-w-[var(--dsp-detail-container-max-width)]">
                 {/* Description */}
                 <ShortDescription className="govuk-!-margin-top-6">{fields.shortDescription}</ShortDescription>
@@ -210,7 +210,7 @@ export default function ServiceProvider({ fields, createdAt, updatedAt }: Servic
               </div>
             </div>
             <div
-              className="govuk-grid-column-one-third-from-desktop govuk-!-padding-4 md:sticky md:top-4 md:mt-6 md:border-t-4 md:border-t-purple-100"
+              className="govuk-grid-column-one-quarter-from-desktop govuk-!-padding-4 md:sticky md:top-4 md:mt-6 md:border-t-4 md:border-t-purple-100"
               data-testid="frf-dsp-sidebar"
             >
               {/* Provider Contact */}

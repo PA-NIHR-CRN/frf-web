@@ -24,6 +24,8 @@ test('Displays the header', () => {
   expect(frfLogo).toBeInTheDocument()
   expect(frfLogo).toHaveAttribute('height', '108')
   expect(frfLogo).toHaveAttribute('width', '295')
+  expect(frfLogo.parentElement).toHaveAttribute('href', '/')
+  expect(frfLogo.parentElement).toHaveAttribute('aria-hidden', 'true')
 
   // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()

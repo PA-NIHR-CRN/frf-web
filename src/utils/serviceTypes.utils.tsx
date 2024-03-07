@@ -65,7 +65,6 @@ const formatSingleServiceTypeCostRow = ({
   hasAnchor: boolean
 }) => {
   const costSplit = cost.split(':')
-  const costDescriptionText = description ? ` - ${description}` : ''
   return (
     <tr key={key} className="govuk-table__row border-t border-grey-120">
       <th
@@ -84,7 +83,10 @@ const formatSingleServiceTypeCostRow = ({
           costSplit[0]
         )}
       </th>
-      <td className="govuk-table__cell govuk-body-s pl-4">{`${costSplit[1].trim()}${costDescriptionText}`}</td>
+      <td className="govuk-table__cell pl-4">
+        <p className="govuk-body-s mb-2">{costSplit[1].trim()}</p>
+        <p className="govuk-body-s mb-0">{description}</p>
+      </td>
     </tr>
   )
 }
