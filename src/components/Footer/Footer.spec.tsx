@@ -13,16 +13,19 @@ test('Displays the links & copyright bar', () => {
 })
 
 test.each([
-  ['National Institute for Health and Care Research', 'https://www.nihr.ac.uk', { w: 240, h: 24 }],
-  // ['HSC Public Health Agency', '#', { w: 253, h: 97 }],
-  // ['NHS Scotland', '#', { w: 153, h: 130 }],
-  // ['Health Care Research Wales', '#', { w: 168, h: 106 }],
-])('Displays the %s logo and link', (name, href, sizes) => {
+  ['National Institute for Health and Care Research', 'https://www.nihr.ac.uk', { w: 360, h: 60 }, false],
+  ['HSC Public Health Agency', 'https://www.research.hscni.net', { w: 253, h: 97 }, true],
+  ['NHS Scotland', 'https://www.nhsresearchscotland.org.uk', { w: 153, h: 130 }, true],
+  ['Health Care Research Wales', 'https://healthandcareresearchwales.org', { w: 168, h: 106 }, true],
+])('Displays the %s logo and link', (name, href, sizes, newTab) => {
   render(<Footer />)
 
   // Link
-  const link = screen.getByRole('link', { name: `${name} logo` })
+  const link = screen.getByRole('link', { name: new RegExp(name) })
   expect(link).toHaveAttribute('href', href)
+  if (newTab) {
+    expect(link).toHaveAccessibleName(`${name} (opens in a new window)`)
+  }
 
   // Logo
   const logo = screen.getByAltText(`${name} logo`)

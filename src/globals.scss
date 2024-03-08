@@ -32,7 +32,7 @@
 $govuk-global-styles: true;
 $govuk-new-link-styles: true;
 $govuk-font-family: var(--font-primary), arial, sans-serif;
-$govuk-page-width: 1062px;
+$govuk-page-width: 1280px;
 
 @import '~node_modules/govuk-frontend/govuk/all.scss';
 
@@ -60,7 +60,6 @@ body {
 
   // Header
   --header-bg: white;
-  --header-height: 132px;
   --logo-height: 32px;
 
   // Footer
@@ -92,10 +91,10 @@ body {
   --colour-follow-up-foreground: var(--colour-purple-100);
 
   // Provider detail page
-  --dsp-detail-container-max-width: 625px;
+  --dsp-detail-container-max-width: 90%;
 
   // Generic page
-  --generic-page-container-max-width: 625px;
+  --generic-page-container-max-width: 90%;
 
   // Brand Colours
   --colour-aqua-100: #2ea9b0;
@@ -169,20 +168,20 @@ body {
   position: relative;
 }
 
-.youtube-cover-img img{
+.youtube-cover-img img {
   object-fit: cover;
 }
 
-.youtube-cover-img span{
+.youtube-cover-img span {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font:48px/1.5 sans-serif;
-  color:white;
-  text-shadow:0 0 0.5em black;
+  font: 48px/1.5 sans-serif;
+  color: white;
+  text-shadow: 0 0 0.5em black;
 }
 
-.youtube-cover-img:focus{
+.youtube-cover-img:focus {
   outline: 5px solid #ffdd00;
 }

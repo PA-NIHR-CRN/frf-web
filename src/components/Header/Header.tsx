@@ -10,17 +10,14 @@ import { menu } from '@/constants/menu'
 
 function Logo() {
   return (
-    <Link
-      href="/"
-      className={clsx('govuk-header__link', 'inline-block')}
-      aria-label="Go to the Find, Recruit and Follow-up homepage"
-    >
-      <span className="govuk-header__logotype">
-        <div className="flex items-center gap-2">
-          <Image src="/assets/logos/nihr-frf.svg" width={295} height={108} alt="Find, Recruit and Follow-up logo" />
-        </div>
-      </span>
-    </Link>
+    <div className="flex flex-col flex-wrap items-center gap-6 py-6 pl-4 md:flex-row">
+      <Link href="/" className={'govuk-header__link'} aria-label="Go to the Find, Recruit and Follow-up homepage">
+        <Image src="/assets/logos/nihr-full.svg" width={295} height={108} alt="NIHR logo" className="pr-4" />
+      </Link>
+      <Link href="/" className={'govuk-header__link'} aria-hidden>
+        <Image src="/assets/logos/nihr-frf.svg" width={295} height={108} alt="Find, Recruit and Follow-up logo" />
+      </Link>
+    </div>
   )
 }
 
@@ -40,12 +37,12 @@ function MenuButton({ navOpen }: { navOpen: boolean }) {
           className={clsx(
             'js-disabled-hide govuk-button govuk-body mb-0 flex items-center justify-end gap-2 shadow-none focus:bg-[var(--focus)] focus:stroke-black focus:text-black active:top-0',
             {
-              'mt-[45px] bg-[var(--nav-bg)] stroke-white pb-[52px] text-white': navOpen,
+              'mt-[45px] bg-[var(--nav-bg)] stroke-white pb-[52px] text-white md:mt-[24px] md:pb-[31px]': navOpen,
               'bg-white stroke-navy-100 text-navy-100': !navOpen,
             }
           )}
         >
-          <span>Menu</span>
+          <span className="hidden md:block">Menu</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12h18M3 6h18M3 18h18" />
           </svg>
@@ -60,7 +57,7 @@ function MenuPanel() {
     <Collapsible.Content
       asChild
       id="navigation-menu"
-      className={clsx('js-disabled-show min-h-[var(--nav-height)] w-full bg-[var(--nav-bg)] text-white')}
+      className={clsx('js-disabled-show mt-[-1px] min-h-[var(--nav-height)] w-full bg-[var(--nav-bg)] text-white')}
     >
       <nav data-testid="nav">
         <div className="govuk-header__container--full-width">
@@ -125,7 +122,7 @@ export function Header() {
               'mb-0 w-full border-b-0 pt-0'
             )}
           >
-            <div className="flex h-[var(--header-height)] items-center justify-between">
+            <div className="flex items-center justify-between">
               <Logo />
               <MenuButton navOpen={navOpen} />
             </div>
