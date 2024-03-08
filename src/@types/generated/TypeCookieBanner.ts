@@ -17,6 +17,7 @@ export interface TypeCookieBannerFields {
      * Field type definition for field 'description' (Description)
      * @name Description
      * @localized false
+     * @summary Copy for accept/reject screen
      */
     description?: EntryFieldTypes.RichText;
 }
@@ -27,7 +28,7 @@ export interface TypeCookieBannerFields {
  * @type {TypeCookieBannerSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-27T22:49:25.236Z
- * @version 7
+ * @version 11
  */
 export type TypeCookieBannerSkeleton = EntrySkeletonType<TypeCookieBannerFields, "cookieBanner">;
 /**
@@ -36,6 +37,6 @@ export type TypeCookieBannerSkeleton = EntrySkeletonType<TypeCookieBannerFields,
  * @type {TypeCookieBanner}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-27T22:49:25.236Z
- * @version 7
+ * @version 11
  */
 export type TypeCookieBanner<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeCookieBannerSkeleton, Modifiers, Locales>;

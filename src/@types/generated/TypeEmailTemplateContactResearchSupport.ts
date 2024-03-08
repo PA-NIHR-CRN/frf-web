@@ -23,24 +23,28 @@ export interface TypeEmailTemplateContactResearchSupportFields {
      * Field type definition for field 'senderSubject' (Sender Subject)
      * @name Sender Subject
      * @localized false
+     * @summary Available variables: referenceNumber
      */
     senderSubject: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'senderBody' (Sender Body)
      * @name Sender Body
      * @localized false
+     * @summary Available variables: salutation, enquiryType, fullName, regionName, supportDescription, fullName, emailAddress, phoneNumber, jobRole, organisationName, organisationType, studyTitle, protocolReference, cpsmId & referenceNumber
      */
     senderBody: EntryFieldTypes.RichText;
     /**
      * Field type definition for field 'teamSubject' (Team Subject)
      * @name Team Subject
      * @localized false
+     * @summary Available variables: referenceNumber
      */
     teamSubject: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'teamBody' (Team Body)
      * @name Team Body
      * @localized false
+     * @summary Available variables: salutation, enquiryType, fullName, regionName, supportDescription, fullName, emailAddress, phoneNumber, jobRole, organisationName, organisationType, studyTitle, protocolReference, cpsmId & referenceNumber
      */
     teamBody: EntryFieldTypes.RichText;
     /**
@@ -63,7 +67,7 @@ export interface TypeEmailTemplateContactResearchSupportFields {
  * @type {TypeEmailTemplateContactResearchSupportSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T17:05:39.734Z
- * @version 17
+ * @version 21
  */
 export type TypeEmailTemplateContactResearchSupportSkeleton = EntrySkeletonType<TypeEmailTemplateContactResearchSupportFields, "emailTemplateContactResearchSupport">;
 /**
@@ -72,6 +76,6 @@ export type TypeEmailTemplateContactResearchSupportSkeleton = EntrySkeletonType<
  * @type {TypeEmailTemplateContactResearchSupport}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T17:05:39.734Z
- * @version 17
+ * @version 21
  */
 export type TypeEmailTemplateContactResearchSupport<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateContactResearchSupportSkeleton, Modifiers, Locales>;

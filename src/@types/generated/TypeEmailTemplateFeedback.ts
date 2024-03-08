@@ -29,12 +29,14 @@ export interface TypeEmailTemplateFeedbackFields {
      * Field type definition for field 'subject' (Subject)
      * @name Subject
      * @localized false
+     * @summary Available variables: referenceNumber
      */
     subject: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'body' (Body)
      * @name Body
      * @localized false
+     * @summary Available variables: helpfulness, suggestions, fullName, emailAddress, organisationName & referenceNumber
      */
     body: EntryFieldTypes.RichText;
     /**
@@ -57,7 +59,7 @@ export interface TypeEmailTemplateFeedbackFields {
  * @type {TypeEmailTemplateFeedbackSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-21T14:56:46.388Z
- * @version 53
+ * @version 59
  */
 export type TypeEmailTemplateFeedbackSkeleton = EntrySkeletonType<TypeEmailTemplateFeedbackFields, "emailTemplateFeedback">;
 /**
@@ -66,6 +68,6 @@ export type TypeEmailTemplateFeedbackSkeleton = EntrySkeletonType<TypeEmailTempl
  * @type {TypeEmailTemplateFeedback}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-21T14:56:46.388Z
- * @version 53
+ * @version 59
  */
 export type TypeEmailTemplateFeedback<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateFeedbackSkeleton, Modifiers, Locales>;

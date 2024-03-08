@@ -11,6 +11,7 @@ export type { TypeEmailTemplateFeedback, TypeEmailTemplateFeedbackFields, TypeEm
 export type { TypeHomepage, TypeHomepageFields, TypeHomepageSkeleton } from "./TypeHomepage";
 export type { TypeInformationGovernanceBlock, TypeInformationGovernanceBlockFields, TypeInformationGovernanceBlockSkeleton } from "./TypeInformationGovernanceBlock";
 export type { TypeInformationGovernanceDataSource, TypeInformationGovernanceDataSourceFields, TypeInformationGovernanceDataSourceSkeleton } from "./TypeInformationGovernanceDataSource";
+export type { TypeLink, TypeLinkFields, TypeLinkSkeleton } from "./TypeLink";
 export type { TypePage, TypePageFields, TypePageSkeleton } from "./TypePage";
 export type { TypePromoBlock, TypePromoBlockFields, TypePromoBlockSkeleton } from "./TypePromoBlock";
 export type { TypeServiceProvider, TypeServiceProviderFields, TypeServiceProviderSkeleton } from "./TypeServiceProvider";

@@ -47,12 +47,14 @@ export interface TypeHomepageFields {
      * Field type definition for field 'signPostDescription1' (Sign-Post Description #1)
      * @name Sign-Post Description #1
      * @localized false
+     * @summary Description for the "Get support for your research" section
      */
     signPostDescription1: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'signPostDescription2' (Sign-Post Description #2)
      * @name Sign-Post Description #2
      * @localized false
+     * @summary Description for the "Organisations providing data services" section
      */
     signPostDescription2: EntryFieldTypes.Symbol;
     /**
@@ -75,7 +77,7 @@ export interface TypeHomepageFields {
  * @type {TypeHomepageSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 61
+ * @version 65
  */
 export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepage">;
 /**
@@ -84,6 +86,6 @@ export type TypeHomepageSkeleton = EntrySkeletonType<TypeHomepageFields, "homepa
  * @type {TypeHomepage}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-06-06T15:34:53.249Z
- * @version 61
+ * @version 65
  */
 export type TypeHomepage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeHomepageSkeleton, Modifiers, Locales>;
