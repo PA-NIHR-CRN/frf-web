@@ -1,5 +1,6 @@
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { Document } from '@contentful/rich-text-types'
+
+import { RichTextRenderer } from '@/components/Renderers/RichTextRenderer/RichTextRenderer'
 
 type ShortDescriptionProps = {
   children: Document
@@ -8,10 +9,8 @@ type ShortDescriptionProps = {
 
 export const ShortDescription = ({ children, className }: ShortDescriptionProps) => {
   return (
-    <div
-      data-testid="frf-dsp-description"
-      dangerouslySetInnerHTML={{ __html: documentToHtmlString(children) }}
-      className={className}
-    />
+    <div data-testid="frf-dsp-description" className={className}>
+      <RichTextRenderer>{children}</RichTextRenderer>
+    </div>
   )
 }

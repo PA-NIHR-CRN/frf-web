@@ -90,7 +90,7 @@ test('Service provider detail', async () => {
   // More information
   expect(
     screen.getByRole('link', {
-      name: `For more information visit ${fields.websiteName} (Opens in a new window)`,
+      name: `For more information visit ${fields.websiteName} (Opens in a new tab)`,
     })
   )
 
@@ -308,7 +308,7 @@ test('Service provider with only required content types', async () => {
   expect(screen.queryByTitle(`Video: ${fields.name}`)).not.toBeInTheDocument()
   expect(
     screen.queryByRole('link', {
-      name: `For more information visit ${fields.websiteName} (Opens in a new window)`,
+      name: `For more information visit ${fields.websiteName} (Opens in a new tab)`,
     })
   ).not.toBeInTheDocument()
   expect(screen.queryByText('Funded by:')).not.toBeInTheDocument()

@@ -8,7 +8,7 @@ type ExternalLinkProps = HTMLProps<HTMLAnchorElement> & {
 export const ExternalLink = ({ href, children, ...props }: ExternalLinkProps) => {
   return (
     <a href={href} target="_blank" {...props}>
-      {children} <span className="govuk-visually-hidden">(Opens in a new window)</span>
+      {children} (Opens in a new tab)
     </a>
   )
 }

@@ -74,9 +74,24 @@ test('Rich text renderer', () => {
   expect(videoSource).toHaveAttribute('src', '//video.mp4')
   expect(videoSource).toHaveAttribute('type', 'video/mp4')
 
-  // Asser than an embedded image is rendered
+  // Assert than an embedded image is rendered
   const imageElement = screen.getByAltText('Test image description')
   expect(imageElement).toHaveAttribute('src', '/_next/image?url=https%3A%2F%2Fimage.jpg&w=3840&q=75')
   expect(imageElement).toHaveAttribute('width', '1280')
   expect(imageElement).toHaveAttribute('height', '874')
+
+  // Assert that an embedded link is rendered
+  const embeddedLink = screen.getByRole('link', { name: 'Test link' })
+  expect(embeddedLink).toHaveAttribute('href', '#')
+  expect(embeddedLink).not.toHaveAttribute('target')
+
+  // Assert that an external embedded link is rendered
+  const embeddedLinkExternal = screen.getByRole('link', { name: 'Test link - external (Opens in a new tab)' })
+  expect(embeddedLinkExternal).toHaveAttribute('href', '#')
+  expect(embeddedLinkExternal).toHaveAttribute('target', '_blank')
+
+  // Assert that an inline embedded link is rendered
+  const embeddedLinkInline = screen.getByRole('link', { name: 'Test link - inline (Opens in a new tab)' })
+  expect(embeddedLinkInline).toHaveAttribute('href', '#')
+  expect(embeddedLinkInline).toHaveAttribute('target', '_blank')
 })
