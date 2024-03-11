@@ -1,4 +1,4 @@
-import { BLOCKS, Document } from '@contentful/rich-text-types'
+import { BLOCKS, Document, INLINES } from '@contentful/rich-text-types'
 
 export const mockContent: Document = {
   nodeType: BLOCKS.DOCUMENT,
@@ -133,9 +133,45 @@ export const mockContent: Document = {
           data: {
             target: {
               sys: {
+                contentType: { sys: { id: 'link' } },
+              },
+              fields: { text: 'Test link', url: '#', external: false },
+            },
+          },
+          content: [],
+        },
+        {
+          nodeType: BLOCKS.EMBEDDED_ENTRY,
+          data: {
+            target: {
+              sys: {
+                contentType: { sys: { id: 'link' } },
+              },
+              fields: { text: 'Test link - external', url: '#', external: true },
+            },
+          },
+          content: [],
+        },
+        {
+          nodeType: BLOCKS.EMBEDDED_ENTRY,
+          data: {
+            target: {
+              sys: {
                 contentType: { sys: { id: 'video' } },
               },
               fields: { title: 'Video title', url: 'https://www.youtube.com/watch?v=3WUh1huCUrM' },
+            },
+          },
+          content: [],
+        },
+        {
+          nodeType: INLINES.EMBEDDED_ENTRY,
+          data: {
+            target: {
+              sys: {
+                contentType: { sys: { id: 'link' } },
+              },
+              fields: { text: 'Test link - inline', url: '#', external: true },
             },
           },
           content: [],

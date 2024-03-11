@@ -29,24 +29,28 @@ export interface TypeEmailTemplateContactFrfCentralTeamFields {
      * Field type definition for field 'senderSubject' (Sender Subject)
      * @name Sender Subject
      * @localized false
+     * @summary Available variables: referenceNumber
      */
     senderSubject: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'senderBody' (Sender Body)
      * @name Sender Body
      * @localized false
+     * @summary Available variables: fullName, emailAddress, phoneNumber, jobRole, organisationName, details & referenceNumber
      */
     senderBody: EntryFieldTypes.RichText;
     /**
      * Field type definition for field 'teamSubject' (Team Subject)
      * @name Team Subject
      * @localized false
+     * @summary Available variables: referenceNumber
      */
     teamSubject: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'teamBody' (Team Body)
      * @name Team Body
      * @localized false
+     * @summary Available variables: fullName, emailAddress, phoneNumber, jobRole, organisationName, details & referenceNumber
      */
     teamBody: EntryFieldTypes.RichText;
     /**
@@ -69,7 +73,7 @@ export interface TypeEmailTemplateContactFrfCentralTeamFields {
  * @type {TypeEmailTemplateContactFrfCentralTeamSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T15:56:17.369Z
- * @version 13
+ * @version 21
  */
 export type TypeEmailTemplateContactFrfCentralTeamSkeleton = EntrySkeletonType<TypeEmailTemplateContactFrfCentralTeamFields, "emailTemplateContactFrfCentralTeam">;
 /**
@@ -78,6 +82,6 @@ export type TypeEmailTemplateContactFrfCentralTeamSkeleton = EntrySkeletonType<T
  * @type {TypeEmailTemplateContactFrfCentralTeam}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T15:56:17.369Z
- * @version 13
+ * @version 21
  */
 export type TypeEmailTemplateContactFrfCentralTeam<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateContactFrfCentralTeamSkeleton, Modifiers, Locales>;

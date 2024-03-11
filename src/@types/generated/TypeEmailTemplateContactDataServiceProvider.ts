@@ -23,24 +23,28 @@ export interface TypeEmailTemplateContactDataServiceProviderFields {
      * Field type definition for field 'senderSubject' (Researcher Subject)
      * @name Researcher Subject
      * @localized false
+     * @summary Available variables: referenceNumber, dspName
      */
     senderSubject: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'senderBody' (Researcher Body)
      * @name Researcher Body
      * @localized false
+     * @summary Available variables: fullName, dspName, studyDescription, emailAddress, phoneNumber, jobRole, organisationName & referenceNumber
      */
     senderBody: EntryFieldTypes.RichText;
     /**
      * Field type definition for field 'teamSubject' (Data Service Provider Subject)
      * @name Data Service Provider Subject
      * @localized false
+     * @summary Available variables: referenceNumber
      */
     teamSubject: EntryFieldTypes.Symbol;
     /**
      * Field type definition for field 'teamBody' (Data Service Provider Body)
      * @name Data Service Provider Body
      * @localized false
+     * @summary Available variables: fullName, dspName, studyDescription, emailAddress, phoneNumber, jobRole, organisationName & referenceNumber
      */
     teamBody: EntryFieldTypes.RichText;
     /**
@@ -63,7 +67,7 @@ export interface TypeEmailTemplateContactDataServiceProviderFields {
  * @type {TypeEmailTemplateContactDataServiceProviderSkeleton}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T19:05:10.798Z
- * @version 17
+ * @version 23
  */
 export type TypeEmailTemplateContactDataServiceProviderSkeleton = EntrySkeletonType<TypeEmailTemplateContactDataServiceProviderFields, "emailTemplateContactDataServiceProvider">;
 /**
@@ -72,6 +76,6 @@ export type TypeEmailTemplateContactDataServiceProviderSkeleton = EntrySkeletonT
  * @type {TypeEmailTemplateContactDataServiceProvider}
  * @author 2MXTjjyvpmOzLPW2qSiIPI
  * @since 2023-08-23T19:05:10.798Z
- * @version 17
+ * @version 23
  */
 export type TypeEmailTemplateContactDataServiceProvider<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeEmailTemplateContactDataServiceProviderSkeleton, Modifiers, Locales>;

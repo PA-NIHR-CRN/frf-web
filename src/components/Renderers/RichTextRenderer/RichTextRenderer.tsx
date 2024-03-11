@@ -1,12 +1,12 @@
 import { documentToReactComponents, Options } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, Document, MARKS } from '@contentful/rich-text-types'
+import { BLOCKS, Document, INLINES, MARKS } from '@contentful/rich-text-types'
 import clsx from 'clsx'
 import { Entry } from 'contentful'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { FC, ReactNode } from 'react'
 
-import { TypeButtonSkeleton, TypeVideoSkeleton } from '@/@types/generated'
+import { TypeButtonSkeleton, TypeLinkSkeleton, TypeVideoSkeleton } from '@/@types/generated'
 import { List, ListItem } from '@/components/List/List'
 import { Video } from '@/components/Video/Video'
 
@@ -40,6 +40,17 @@ const ButtonEntry = ({
   </Link>
 )
 
+const LinkEntry = ({
+  text,
+  url,
+  external,
+}: Entry<TypeLinkSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', string>['fields']) => (
+  <Link href={url} target={external ? '_blank' : undefined}>
+    {text}
+    {external ? ' (Opens in a new tab)' : undefined}
+  </Link>
+)
+
 const VideoEntry = ({ title, url }: Entry<TypeVideoSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS', string>['fields']) => {
   return (
     <div className="govuk-!-margin-top-4">
@@ -60,11 +71,17 @@ const options: Options = {
     [BLOCKS.HEADING_2]: (node, children) => <Heading level={2}>{children}</Heading>,
     [BLOCKS.HEADING_3]: (node, children) => <Heading level={3}>{children}</Heading>,
     [BLOCKS.HEADING_4]: (node, children) => <Heading level={4}>{children}</Heading>,
+    [INLINES.EMBEDDED_ENTRY]: (node) => {
+      const entryType = node.data.target.sys.contentType.sys.id
+      return entryType === 'link' ? <LinkEntry {...node.data.target.fields} /> : <p>Not yet implemented</p>
+    },
     [BLOCKS.EMBEDDED_ENTRY]: (node) => {
       const entryType = node.data.target.sys.contentType.sys.id
       switch (entryType) {
         case 'button':
           return <ButtonEntry {...node.data.target.fields} />
+        case 'link':
+          return <LinkEntry {...node.data.target.fields} />
         case 'video':
           return <VideoEntry {...node.data.target.fields} />
         default:

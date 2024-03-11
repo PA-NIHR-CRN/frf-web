@@ -23,12 +23,14 @@ export interface TypeButtonFields {
      * Field type definition for field 'type' (Type)
      * @name Type
      * @localized false
+     * @summary Style of the button
      */
     type: EntryFieldTypes.Symbol<"Primary" | "Secondary">;
     /**
      * Field type definition for field 'external' (External)
      * @name External
      * @localized false
+     * @summary Is the button linking to an external site, if checked the link will be opened in a new browser window/tab
      */
     external: EntryFieldTypes.Boolean;
 }
@@ -39,7 +41,7 @@ export interface TypeButtonFields {
  * @type {TypeButtonSkeleton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:25:50.328Z
- * @version 15
+ * @version 21
  */
 export type TypeButtonSkeleton = EntrySkeletonType<TypeButtonFields, "button">;
 /**
@@ -48,6 +50,6 @@ export type TypeButtonSkeleton = EntrySkeletonType<TypeButtonFields, "button">;
  * @type {TypeButton}
  * @author 0e5NmQEjI50YvjZsuXVNKL
  * @since 2023-07-19T19:25:50.328Z
- * @version 15
+ * @version 21
  */
 export type TypeButton<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<TypeButtonSkeleton, Modifiers, Locales>;

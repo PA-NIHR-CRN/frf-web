@@ -5,7 +5,7 @@ import { ExternalLink } from './ExternalLink'
 test('External link', () => {
   render(<ExternalLink href="http://mock-site-url">Mock site name</ExternalLink>)
 
-  const link = screen.getByRole('link', { name: 'Mock site name (Opens in a new window)' })
+  const link = screen.getByRole('link', { name: 'Mock site name (Opens in a new tab)' })
 
   expect(link).toHaveAttribute('target', '_blank')
   expect(link).toHaveAttribute('href', 'http://mock-site-url')
