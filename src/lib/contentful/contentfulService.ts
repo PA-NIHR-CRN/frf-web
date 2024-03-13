@@ -13,6 +13,7 @@ import {
   TypeHomepageSkeleton,
   TypePageSkeleton,
   TypeServiceProviderSkeleton,
+  TypeServiceUnavailableSkeleton,
 } from '@/@types/generated'
 import { ServiceTypes } from '@/@types/services'
 import { PER_PAGE, TagIds } from '@/constants'
@@ -128,6 +129,14 @@ export class ContentfulService {
     const entries = await this.contentClient.getEntries<TypeHomepageSkeleton>({
       limit: 1,
       content_type: 'homepage',
+    })
+    return entries.items.length ? entries.items[0] : null
+  }
+
+  async getServiceUnavailablePage() {
+    const entries = await this.contentClient.getEntries<TypeServiceUnavailableSkeleton>({
+      limit: 1,
+      content_type: 'serviceUnavailable',
     })
     return entries.items.length ? entries.items[0] : null
   }
