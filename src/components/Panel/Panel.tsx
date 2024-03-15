@@ -19,7 +19,9 @@ export function Panel({ children }: PanelProps) {
             'mb-0 flex items-center border-0 bg-[var(--panel-bg-color)] px-0 py-4 text-left'
           )}
         >
-          <h1 className={clsx('govuk-heading-l heading-underscore mb-0 pt-1 text-white')}>{children}</h1>
+          <h1 className={clsx('govuk-heading-l heading-underscore mb-0 pt-1 text-white')} data-testid="page-title">
+            {children}
+          </h1>
         </div>
       </Container>
     </div>

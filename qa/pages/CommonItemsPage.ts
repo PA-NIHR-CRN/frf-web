@@ -1,5 +1,6 @@
 import { Cookie, expect, Locator, Page } from '@playwright/test'
 
+import { BASE_URL } from '../constants/environment'
 import { getDomainSpecificCookieList } from '../utils/UtilFunctions'
 
 //Declare Page Objects
@@ -52,7 +53,7 @@ export default class CommonItemsPage {
     this.frfHeader = page.locator('div[data-testid="frf-panel"]')
     this.frfFooterLinks = page.locator('div[data-testid="frf-footer-links"]')
     this.frfFooterLogos = page.locator('div[data-testid="frf-footer-logos"]')
-    this.frfPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.frfPageTitle = page.locator('h1[data-testid="page-title"]')
     this.nihrFooterLogo = page.locator('img[alt="National Institute for Health and Care Research logo"]')
     this.bannerGdsBeta = page.locator('strong[class="govuk-tag govuk-phase-banner__content__tag"]')
     this.linkFeedback = page.locator('a', { hasText: 'feedback' })
@@ -215,7 +216,8 @@ export default class CommonItemsPage {
 
   async assertDecisonCookieApplied(decision: string) {
     const cookieList = await this.getCookies()
-    const decisionCookieArray = getDomainSpecificCookieList(cookieList, 'test.findrecruitandfollowup.nihr.ac.uk')
+    const domain = new URL(BASE_URL).hostname
+    const decisionCookieArray = getDomainSpecificCookieList(cookieList, domain)
     expect(decisionCookieArray).toHaveLength(1)
     if (decision.toLowerCase() == 'accept') {
       expect(decisionCookieArray[0].value).toEqual('Accept')
@@ -226,7 +228,8 @@ export default class CommonItemsPage {
 
   async assertDecisonCookieExpiry() {
     const cookieList = await this.getCookies()
-    const decisionCookieArray = getDomainSpecificCookieList(cookieList, 'test.findrecruitandfollowup.nihr.ac.uk')
+    const domain = new URL(BASE_URL).hostname
+    const decisionCookieArray = getDomainSpecificCookieList(cookieList, domain)
     const epochExpireValue = decisionCookieArray[0].expires
     const expiryDate = new Date(0)
     expiryDate.setUTCSeconds(epochExpireValue)

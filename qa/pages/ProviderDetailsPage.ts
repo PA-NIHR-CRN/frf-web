@@ -65,7 +65,7 @@ export default class ProviderDetailsPage {
     this.page = page
 
     //Locators
-    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageTitle = page.locator('h1[data-testid="page-title"]')
     this.linkBackToProviders = page.locator('a[class="govuk-back-link"]')
     this.dspDetailName = page.locator('h2[class="govuk-heading-l mb-2"]')
     this.dspDetailSidebar = page.locator('div[data-testid="frf-dsp-sidebar"]')
@@ -149,9 +149,7 @@ export default class ProviderDetailsPage {
     })
     this.dspDetailRecruitLvlTwoSection = page.locator('section[id="recruit"]')
     this.dspDetailRecruitLvlTwoHeader = page.locator('section[id="recruit"] h3')
-    this.dspDetailRecruitLvlTwoCostsHeader = page.locator(
-      'section[id="recruit"] div[class="govuk-!-margin-top-6 govuk-!-margin-bottom-6"] p'
-    )
+    this.dspDetailRecruitLvlTwoCostsHeader = page.locator('section[id="recruit"] p[data-testid="costs-title"]')
     this.dspDetailRecruitLvlTwoCostsTblHeader = page.locator(
       'section[id="recruit"] div[class="govuk-!-margin-top-6 govuk-!-margin-bottom-6"] th'
     )
@@ -170,9 +168,7 @@ export default class ProviderDetailsPage {
     this.dspDetailFollowLvlTwoHeader = page.locator('section[id="follow-up"] h3')
     this.dspDetailCoverageGeography = page.locator('p[class="govuk-!-margin-bottom-1"]')
     this.dspDetailBulletList = page.locator('ul[class="govuk-list govuk-list--bullet"]')
-    this.dspDetailChrisTestPageLink = page.locator(
-      'a[href="https://test.findrecruitandfollowup.nihr.ac.uk/chris-testing-page"]'
-    )
+    this.dspDetailChrisTestPageLink = page.locator('a[href="/chris-testing-page"]')
   }
 
   //Page Methods
@@ -278,7 +274,7 @@ export default class ProviderDetailsPage {
   async assertExternalLinkPresent(expectedSite: string) {
     await expect(this.linkDspDetailExternal).toBeVisible()
     await expect(this.linkDspDetailExternal).toHaveText(
-      'For more information visit ' + expectedSite + ' (Opens in a new window)'
+      'For more information visit ' + expectedSite + ' (Opens in a new tab)'
     )
   }
 
@@ -407,7 +403,7 @@ export default class ProviderDetailsPage {
 
   async clickExternalSiteLink() {
     const [newPage] = await Promise.all([this.page.context().waitForEvent('page'), this.linkDspDetailExternal.click()])
-    await newPage.waitForURL('research-support')
+    await newPage.waitForURL('https://test.findrecruitandfollowup.nihr.ac.uk/research-support')
     await newPage.waitForLoadState('domcontentloaded')
     expect(await newPage.title()).toEqual('Find, Recruit and Follow-up')
     //doing assertion here as otherwise the page context is destroyed/closed during parrallel execution
