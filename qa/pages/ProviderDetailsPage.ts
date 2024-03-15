@@ -274,7 +274,7 @@ export default class ProviderDetailsPage {
   async assertExternalLinkPresent(expectedSite: string) {
     await expect(this.linkDspDetailExternal).toBeVisible()
     await expect(this.linkDspDetailExternal).toHaveText(
-      'For more information visit ' + expectedSite + ' (Opens in a new tab)'
+      `For more information visit ${expectedSite} (Opens in a new tab)`
     )
   }
 

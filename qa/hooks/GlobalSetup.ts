@@ -1,7 +1,7 @@
-import { BASE_URL } from '../constants/environment'
+import { config as dotEnvConfig } from 'dotenv'
 
 async function globalSetup() {
-  process.env.BASE_URL = BASE_URL
+  dotEnvConfig()
 }
 
 export default globalSetup

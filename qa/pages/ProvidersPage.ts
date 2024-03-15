@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-import { BASE_URL } from '../constants/environment'
 import { confirmStringNotNull, numDaysBetween } from '../utils/UtilFunctions'
 
 //Declare Page Objects
@@ -434,7 +433,7 @@ export default class ProvidersPage {
   }
 
   async assertCurrentPageTitle(pageNo: string) {
-    await this.page.waitForURL(`${BASE_URL}providers?page=${pageNo}`)
+    await this.page.waitForURL(new RegExp(`.*\/providers?page=${pageNo}`))
     const pageCount = await this.dspResultPaginationList.locator('li').count()
     const txtResTitleNo = await this.getPageTitleNumber()
     expect(await this.dspListPageTabTitle.textContent()).toBe(

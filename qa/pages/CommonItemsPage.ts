@@ -1,6 +1,5 @@
 import { Cookie, expect, Locator, Page } from '@playwright/test'
 
-import { BASE_URL } from '../constants/environment'
 import { getDomainSpecificCookieList } from '../utils/UtilFunctions'
 
 //Declare Page Objects
@@ -214,9 +213,9 @@ export default class CommonItemsPage {
     expect(cookieList).toHaveLength(0)
   }
 
-  async assertDecisonCookieApplied(decision: string) {
+  async assertDecisonCookieApplied(decision: string, baseURL?: string) {
     const cookieList = await this.getCookies()
-    const domain = new URL(BASE_URL).hostname
+    const domain = new URL(baseURL as string).hostname
     const decisionCookieArray = getDomainSpecificCookieList(cookieList, domain)
     expect(decisionCookieArray).toHaveLength(1)
     if (decision.toLowerCase() == 'accept') {
@@ -226,9 +225,9 @@ export default class CommonItemsPage {
     }
   }
 
-  async assertDecisonCookieExpiry() {
+  async assertDecisonCookieExpiry(baseURL?: string) {
     const cookieList = await this.getCookies()
-    const domain = new URL(BASE_URL).hostname
+    const domain = new URL(baseURL as string).hostname
     const decisionCookieArray = getDomainSpecificCookieList(cookieList, domain)
     const epochExpireValue = decisionCookieArray[0].expires
     const expiryDate = new Date(0)

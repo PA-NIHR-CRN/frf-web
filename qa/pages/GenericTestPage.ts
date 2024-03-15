@@ -1,6 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test'
 
-import { BASE_URL } from '../constants/environment'
 import { getTextFromElementArray } from '../utils/UtilFunctions'
 
 //Declare Page Objects
@@ -58,12 +57,12 @@ export default class GenericTestPage {
   }
 
   async assertOnTestPage() {
-    await expect(this.page).toHaveURL(`${BASE_URL}chris-testing-page`)
+    await expect(this.page).toHaveURL(/.*\/chris-testing-page/)
     expect(await this.page.title()).toEqual('Chris Testing Page - Find, Recruit and Follow-up')
   }
 
   async assertOnAltTestPage() {
-    await expect(this.page).toHaveURL(`${BASE_URL}numbered-list-example`)
+    await expect(this.page).toHaveURL(/.*\/numbered-list-example/)
     expect(await this.page.title()).toEqual('Numbered List Example - Find, Recruit and Follow-up')
   }
 

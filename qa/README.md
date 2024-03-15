@@ -17,12 +17,11 @@ Playwright Getting Started Documentation - https://playwright.dev/docs/intro
 Playwright is configured in the `playwright.config.ts` file  
 It contains global properties, as well as project specific properties inside a **projects** array  
 By default the tests run using the **FindRecruitFollow** project
-The `BASE_URL` environment variable is populated in the `GlobalSetup.ts` file  
-It is set to run in the Test environment by default
+The `BASE_URL` environment variable should be defined in your .env file
 
 Should you wish to run the test in another environment  
-Simply change the `BASE_URL` value to the desired environment   
-**DO NOT ADD, COMMIT OR PUSH THIS CHANGE TO GITHUB**
+Simply change the `BASE_URL` value to the desired environment
+Note: some tests require specific content that is currently only available in the Contentful `test` environment
 
 To execute the tests  
 Run the command `npx playwright test`  
@@ -44,19 +43,18 @@ Playwright Testing Documentation - https://playwright.dev/docs/api/class-test
 
 Go to `playwright.config.ts` file  
 The FindRecruitFollow project within the **projects** array has a property called **testIgnore**  
-Which is set to ignore all tests that fall within the **accessibiltyTests** folder.   
-This is so that the accessibility tests are not included in the day to day runs.  
+Which is set to ignore all tests that fall within the **accessibiltyTests** folder.  
+This is so that the accessibility tests are not included in the day to day runs.
 
 <img width="537" alt="accessConfig" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/7d84ed6a-9167-406e-b0dc-ad6fbaeeef8d">
 
-
 To include the accessibilty tests in the run simply comment out this line.  
 Alternatively, to run only the Accessibilty tests,  
-change the property from testIgnore to **testMatch**  
+change the property from testIgnore to **testMatch**
 
 **DO NOT ADD, COMMIT OR PUSH THIS CHANGE TO GITHUB**
 
-You could also do any of the the following to run all the accessibilty tests, or specific ones  
+You could also do any of the the following to run all the accessibilty tests, or specific ones
 
 - run using the test tag command 'npx playwright test --grep <tag name>' e.g. npx playwright test --grep @accessibility
 - add the '.only' method on any individual tests blocks, e.g. test.only("Test Name"{...});
@@ -69,10 +67,10 @@ There is a **projects** array containing multiple project objects
 Each project object is set to run using a different browser and/or device combination  
 For example Firefox on Desktop and Safari on Mobile  
 The default project has the name FindRecruitFollow  
-And is set to run the tests in Playwrights default environment, Desktop Chromium  
+And is set to run the tests in Playwrights default environment, Desktop Chromium
 
 All of the other projects have a **testIgnore** property  
-With a value that is set to ignore all tests that fall within the **tests** folder, i.e all of them  
+With a value that is set to ignore all tests that fall within the **tests** folder, i.e all of them
 
 <img width="379" alt="otherProjects" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/0dabb0b3-91c9-45ef-b92c-e3511a41e74c">
 
@@ -112,7 +110,6 @@ This can be accessed in the Artifacts section of the completed **FRF E2E Tests**
 To view it, click it and it will be downloaded as a Zip file  
 However the Traces section of the report will not work  
 As The Playwright Trace Viewer must be loaded over the http:// or https:// protocols
-
 
 ## --------------------GITHUB PAGES--------------------
 
@@ -178,11 +175,10 @@ The Network tab shows the Response Code, Request Headers, Response Headers and R
   
 The Trace View is a useful tool for testers to debug exactly why a test has failed
 
-
 ## --------------------TEST MAINTENANCE--------------------
 
 One of the features of the FRF site is that any Service Providers that have been published withinn the last 90 days  
-Will have a red 'New' icon next to the Service Providers name on the DSP list page.  
+Will have a red 'New' icon next to the Service Providers name on the DSP list page.
 
 There is a test in place for this in the dspListBaseTest.e2e.ts feature file,  
 The test is tagged **@frf_11_ac4_0**.  
@@ -196,7 +192,7 @@ Will no longer fall under the 'New' criteria.
 
 To correct this go to the Test environment in Contentful and select the Service Provider content type.  
 There is a Service Provider called '**Recently Published DSP**'.  
-Tick the checkbox next to it and select the **Duplicate** option.  
+Tick the checkbox next to it and select the **Duplicate** option.
 
 <img width="854" alt="mostRecentDSP" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/f9b9f495-ea33-471f-a545-e3714627acec">
 
@@ -210,19 +206,19 @@ This time select the **Unpublish** option
 This will move the 'Recently Published DSP' into Draft.  
 Now tick the checkbox of the original 'Recently Published DSP' again,  
 This time select the **Delete** option  
-And choose to permanently delete the 'Recently Published DSP'  
+And choose to permanently delete the 'Recently Published DSP'
 
 <img width="707" alt="delete" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/77c3b8ed-aaf7-4d05-a613-c1ba2979c4ff">
 
 Now click on the the new Service Provider named 'Recently Published DSP (1)'  
 And edit the name to remove the '(1)'.  
-Then select the Publish option.  
+Then select the Publish option.
 
 <img width="1374" alt="publishNew" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/26448897-dc8c-4197-af68-800938d1b091">
 
 This will publish the new Service Proivder on the FRF site  
 And will have te current date as the **Published Date**
 And will display the 'New' icon next to its name on the DSP list  
-Meaning that the test should now pass once again  
+Meaning that the test should now pass once again
 
 <img width="724" alt="newDsp" src="https://github.com/PA-NIHR-CRN/frf-web/assets/57842230/cc3d1488-38db-49c0-8a22-55cf3698bc66">
