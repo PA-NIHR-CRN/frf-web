@@ -17,10 +17,10 @@ Playwright Getting Started Documentation - https://playwright.dev/docs/intro
 Playwright is configured in the `playwright.config.ts` file  
 It contains global properties, as well as project specific properties inside a **projects** array  
 By default the tests run using the **FindRecruitFollow** project
-The `BASE_URL` environment variable should be defined in your .env file
+The `E2E_BASE_URL` environment variable should be defined in your .env file
 
 Should you wish to run the test in another environment  
-Simply change the `BASE_URL` value to the desired environment
+Simply change the `E2E_BASE_URL` value to the desired environment
 Note: some tests require specific content that is currently only available in the Contentful `test` environment
 
 To execute the tests  

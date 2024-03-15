@@ -19,7 +19,7 @@ const config: PlaywrightTestConfig = {
       testIgnore: '**/accessibilityTests/**',
       use: {
         trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
+        baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
         screenshot: 'on',
         storageState: 'qa/utils/cookieAccept.json',
@@ -34,7 +34,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Firefox'],
         trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
+        baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
         screenshot: 'on',
         storageState: 'qa/utils/cookieAccept.json',
@@ -49,7 +49,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Safari'],
         trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
+        baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
         screenshot: 'on',
         storageState: 'qa/utils/cookieAccept.json',
@@ -65,7 +65,7 @@ const config: PlaywrightTestConfig = {
         ...devices['Desktop Edge'],
         channel: 'msedge',
         trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
+        baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
         screenshot: 'on',
         storageState: 'qa/utils/cookieAccept.json',
@@ -81,7 +81,7 @@ const config: PlaywrightTestConfig = {
         ...devices['Desktop Chrome'],
         channel: 'chrome',
         trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
+        baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
         screenshot: 'on',
         storageState: 'qa/utils/cookieAccept.json',
@@ -96,7 +96,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Pixel 5'],
         trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
+        baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
         screenshot: 'on',
         storageState: 'qa/utils/cookieAccept.json',
@@ -111,7 +111,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['iPhone 13'],
         trace: 'on',
-        baseURL: `${process.env.BASE_URL}`,
+        baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
         screenshot: 'on',
         storageState: 'qa/utils/cookieAccept.json',
