@@ -29,6 +29,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
   test('As a user I will not be asked to re-select my Cookie Preference for 12 months - @frf_3_ac2_expire', async ({
     homePage,
     commonItemsPage,
+    baseURL,
   }) => {
     await test.step('Given I have visited the FRF site', async () => {
       await homePage.goto()
@@ -37,10 +38,10 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
       await commonItemsPage.cookieBannerAccept.click()
     })
     await test.step('Then the Site Decision Cookie has been applied with a value of Accept', async () => {
-      await commonItemsPage.assertDecisonCookieApplied('Accept')
+      await commonItemsPage.assertDecisonCookieApplied('Accept', baseURL)
     })
     await test.step('And the Site Decision Cookie has an Expiry value exactly 1 year later', async () => {
-      await commonItemsPage.assertDecisonCookieExpiry()
+      await commonItemsPage.assertDecisonCookieExpiry(baseURL)
     })
   })
 
@@ -102,6 +103,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
   test('Google Analytics & Youtube Cookies are applied when I Accept Cookies - @frf_3_ac4_accept', async ({
     homePage,
     commonItemsPage,
+    baseURL,
   }) => {
     await test.step('Given I have visited the FRF site', async () => {
       await homePage.goto()
@@ -113,7 +115,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
       await commonItemsPage.cookieBannerAccept.click()
     })
     await test.step('Then the Site Decision Cookie has been applied with a value of Accept', async () => {
-      await commonItemsPage.assertDecisonCookieApplied('Accept')
+      await commonItemsPage.assertDecisonCookieApplied('Accept', baseURL)
     })
     await test.step('And the Site Cookies for Google Analytics have been applied', async () => {
       await commonItemsPage.assertGoogleAnalyticsCookiesApplied(true)
@@ -131,6 +133,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
     homePage,
     commonItemsPage,
     providersPage,
+    baseURL,
   }) => {
     await test.step('Given I have visited the FRF site', async () => {
       await homePage.goto()
@@ -142,7 +145,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
       await commonItemsPage.cookieBannerReject.click()
     })
     await test.step('Then the Site Decision Cookie has been applied with a value of Reject', async () => {
-      await commonItemsPage.assertDecisonCookieApplied('Reject')
+      await commonItemsPage.assertDecisonCookieApplied('Reject', baseURL)
     })
     await test.step('And the Site Cookies for Google Analytics have not been applied', async () => {
       await commonItemsPage.assertGoogleAnalyticsCookiesApplied(false)

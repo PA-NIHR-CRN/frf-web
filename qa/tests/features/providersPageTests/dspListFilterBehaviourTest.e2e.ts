@@ -91,7 +91,7 @@ test.describe('DSP List Filter Page Behaviour Tests - @frf_13 @frf_13_page_behav
     })
     await test.step('When I click the Recruit FOC Non-Commercial Filter Panel', async () => {
       await providersPage.dspFilterSelectedPanel
-        .locator('li', { hasText: 'Recruit: Free of charge (non-commercial studies only)' })
+        .locator('li', { hasText: 'Recruit: Free of charge for non-commercial studies' })
         .click()
       await providersPage.waitForListReload()
     })

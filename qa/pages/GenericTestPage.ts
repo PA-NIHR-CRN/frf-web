@@ -57,12 +57,12 @@ export default class GenericTestPage {
   }
 
   async assertOnTestPage() {
-    await expect(this.page).toHaveURL('/chris-testing-page')
+    await expect(this.page).toHaveURL(/.*\/chris-testing-page/)
     expect(await this.page.title()).toEqual('Chris Testing Page - Find, Recruit and Follow-up')
   }
 
   async assertOnAltTestPage() {
-    await expect(this.page).toHaveURL('/numbered-list-example')
+    await expect(this.page).toHaveURL(/.*\/numbered-list-example/)
     expect(await this.page.title()).toEqual('Numbered List Example - Find, Recruit and Follow-up')
   }
 

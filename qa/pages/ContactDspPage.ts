@@ -48,7 +48,7 @@ export default class ContactDspPage {
     this.page = page
 
     //Locators
-    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageTitle = page.locator('h1[data-testid="page-title"]')
     this.pageHeading = page.locator('h2[class="govuk-heading-l"]')
     this.contactDspForm = page.locator('form[method="post"]')
     this.contactDspFormTxtBlocks = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')

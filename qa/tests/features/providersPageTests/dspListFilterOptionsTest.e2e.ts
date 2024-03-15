@@ -131,10 +131,10 @@ test.describe('DSP List Filter Options Tests - @frf_13 @frf_13_options', () => {
     await test.step('Then there will be a `Find` Filter Header', async () => {
       await providersPage.assertFilterCategoryHeaderPresent('Find')
     })
-    await test.step('And there will be a `Free of charge (All studies)` Filter Option', async () => {
+    await test.step('And there will be a `Free of charge for all studies` Filter Option', async () => {
       await providersPage.assertFilterOptionPresent('Find FOC All')
     })
-    await test.step('And there will be a `Free of charge (non-commercial studies only)` Filter Option', async () => {
+    await test.step('And there will be a `Free of charge for non-commercial studies` Filter Option', async () => {
       await providersPage.assertFilterOptionPresent('Find FOC Non-Comm')
     })
     await test.step('And there will be a `Chargeable service` Filter Option', async () => {
@@ -143,10 +143,10 @@ test.describe('DSP List Filter Options Tests - @frf_13 @frf_13_options', () => {
     await test.step('Then there will be a `Recruit` Filter Header', async () => {
       await providersPage.assertFilterCategoryHeaderPresent('Recruit')
     })
-    await test.step('And there will be a `Free of charge (All studies)` Filter Option', async () => {
+    await test.step('And there will be a `Free of charge for all studies` Filter Option', async () => {
       await providersPage.assertFilterOptionPresent('Recruit FOC All')
     })
-    await test.step('And there will be a `Free of charge (non-commercial studies only)` Filter Option', async () => {
+    await test.step('And there will be a `Free of charge for non-commercial studies` Filter Option', async () => {
       await providersPage.assertFilterOptionPresent('Recruit FOC Non-Comm')
     })
     await test.step('And there will be a `Chargeable service` Filter Option', async () => {
@@ -155,10 +155,10 @@ test.describe('DSP List Filter Options Tests - @frf_13 @frf_13_options', () => {
     await test.step('Then there will be a `Follow-Up` Filter Header', async () => {
       await providersPage.assertFilterCategoryHeaderPresent('Recruit')
     })
-    await test.step('And there will be a `Free of charge (All studies)` Filter Option', async () => {
+    await test.step('And there will be a `Free of charge for all studies` Filter Option', async () => {
       await providersPage.assertFilterOptionPresent('Follow-Up FOC All')
     })
-    await test.step('And there will be a `Free of charge (non-commercial studies only)` Filter Option', async () => {
+    await test.step('And there will be a `Free of charge for non-commercial studies` Filter Option', async () => {
       await providersPage.assertFilterOptionPresent('Follow-Up FOC Non-Comm')
     })
     await test.step('And there will be a `Chargeable service` Filter Option', async () => {
