@@ -10,7 +10,7 @@ import { menu } from '@/constants/menu'
 
 function Logo() {
   return (
-    <div className="flex flex-col flex-wrap items-center gap-6 py-6 pl-4 md:flex-row">
+    <div className="flex flex-col flex-wrap items-center gap-6 py-6 pl-4">
       <Link href="/" className={'govuk-header__link'} aria-label="Go to the Find, Recruit and Follow-up homepage">
         <Image src="/assets/logos/nihr-full.svg" width={295} height={108} alt="NIHR logo" className="pr-4" />
       </Link>
