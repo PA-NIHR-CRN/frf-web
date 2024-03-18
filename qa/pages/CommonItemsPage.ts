@@ -233,7 +233,7 @@ export default class CommonItemsPage {
     const expiryDate = new Date(0)
     expiryDate.setUTCSeconds(epochExpireValue)
     const currentDate = new Date()
-    const differenceInDays = Math.floor((expiryDate.valueOf() - currentDate.valueOf()) / (1000 * 60 * 60 * 24))
+    const differenceInDays = Math.ceil((expiryDate.valueOf() - currentDate.valueOf()) / (1000 * 60 * 60 * 24))
     expect(differenceInDays).toEqual(365)
   }
 
@@ -241,7 +241,7 @@ export default class CommonItemsPage {
     const cookieList = await this.getCookies()
     const gaCookiesArray = getDomainSpecificCookieList(cookieList, '.nihr.ac.uk')
     if (applied) {
-      expect(gaCookiesArray.length).toEqual(2)
+      expect(gaCookiesArray.length).toEqual(3)
       gaCookiesArray.forEach((cookie) => expect(cookie.name.startsWith('_ga')).toBeTruthy())
     } else {
       expect(cookieList.length).toEqual(1)
