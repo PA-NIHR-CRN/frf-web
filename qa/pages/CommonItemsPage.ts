@@ -241,7 +241,7 @@ export default class CommonItemsPage {
     const cookieList = await this.getCookies()
     const gaCookiesArray = getDomainSpecificCookieList(cookieList, '.nihr.ac.uk')
     if (applied) {
-      expect(gaCookiesArray.length).toEqual(3)
+      expect(gaCookiesArray.length).toEqual(2)
       gaCookiesArray.forEach((cookie) => expect(cookie.name.startsWith('_ga')).toBeTruthy())
     } else {
       expect(cookieList.length).toEqual(1)
@@ -253,7 +253,7 @@ export default class CommonItemsPage {
     const cookieList = await this.getCookies()
     const ytCookiesArray = getDomainSpecificCookieList(cookieList, '.youtube.com')
     if (applied) {
-      expect(ytCookiesArray.length).toEqual(2)
+      expect(ytCookiesArray.length).toEqual(3)
       expect(ytCookiesArray.some((cookie) => cookie.name == 'YSC')).toBeTruthy()
       expect(ytCookiesArray.some((cookie) => cookie.name == 'VISITOR_INFO1_LIVE')).toBeTruthy()
     } else {
