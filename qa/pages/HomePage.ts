@@ -29,7 +29,7 @@ export default class HomePage {
     this.page = page
 
     //Locators
-    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageTitle = page.locator('h1[data-testid="page-title"]')
     this.btnProviders = page.locator('a', { hasText: 'View all data service providers' })
     this.paragraphIntroText = page.locator('div[class="whitespace-pre-wrap lg:pr-6 [&_p:last-of-type]:lg:mb-0"] p')
     this.iframeIntroContainer = page.getByTestId('youtube-cover-img')

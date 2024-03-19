@@ -22,7 +22,8 @@ export default class ProvidersPage {
   readonly dspResultServicesCostsHeader: Locator
   readonly dspResultServiceCostsTbl: Locator
   readonly dspResultServiceCostsTblHeader: Locator
-  readonly dspResultsServiceCostsTblCell: Locator
+  readonly dspResultsServiceCostsType: Locator
+  readonly dspResultsServiceCostsDescription: Locator
   readonly dspResultCoverageHeader: Locator
   readonly dspResultCoverageSection: Locator
   readonly dspResultSectionContent: Locator
@@ -98,12 +99,12 @@ export default class ProvidersPage {
   //Initialize Page Objects
   constructor(page: Page) {
     this.page = page
-    this.focAllText = 'Free of charge (All studies)'
-    this.focNoncCommText = 'Free of charge (non-commercial studies only)'
+    this.focAllText = 'Free of charge for all studies'
+    this.focNoncCommText = 'Free of charge for non-commercial studies'
     this.chargeableText = 'Chargeable service'
 
     //List Locators
-    this.pageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.pageTitle = page.locator('h1[data-testid="page-title"]')
     this.btnViewMoreDetails = page.locator('a[class="govuk-button mb-0 whitespace-nowrap"]')
     this.dspListArticle = page.locator('ol[class="mt-5"]')
     this.dspListPageTitle = page.locator('h2[class="govuk-heading-m mb-0 whitespace-nowrap"]')
@@ -121,7 +122,8 @@ export default class ProvidersPage {
       'table[class="govuk-table govuk-!-font-size-16 table-fixed mb-5 mt-6"]'
     )
     this.dspResultServiceCostsTblHeader = page.locator('th[scope="row"]')
-    this.dspResultsServiceCostsTblCell = page.locator('td[class="govuk-table__cell govuk-body-s pl-4"]')
+    this.dspResultsServiceCostsType = page.locator('p[data-testid="cost-type"]')
+    this.dspResultsServiceCostsDescription = page.locator('p[data-testid="cost-description"]')
     this.dspResultCoverageHeader = page.locator('h3[class="govuk-heading-s mb-3"]', { hasText: 'Coverage:' })
     this.dspResultCoverageSection = page.locator('ul[aria-label="Coverage"]')
     this.dspResultSectionContent = page.locator(
@@ -192,23 +194,23 @@ export default class ProvidersPage {
     this.dspFilterOptionScotland = page.locator('input[name="geography"][value="Scotland"]')
     this.dspFilterOptionWales = page.locator('input[name="geography"][value="Wales"]')
     this.dspFilterOptionRegional = page.locator('input[name="excludeRegional"][value="true"]')
-    this.dspFilterOptionFindFocAll = page.locator('input[name="costs"][value="Find: Free of charge (All studies)"]')
+    this.dspFilterOptionFindFocAll = page.locator('input[name="costs"][value="Find: Free of charge for all studies"]')
     this.dspFilterOptionFindFocNonComm = page.locator(
-      'input[name="costs"][value="Find: Free of charge (non-commercial studies only)"]'
+      'input[name="costs"][value="Find: Free of charge for non-commercial studies"]'
     )
     this.dspFilterOptionFindChargeable = page.locator('input[name="costs"][value="Find: Chargeable service"]')
     this.dspFilterOptionRecruitFocAll = page.locator(
-      'input[name="costs"][value="Recruit: Free of charge (All studies)"]'
+      'input[name="costs"][value="Recruit: Free of charge for all studies"]'
     )
     this.dspFilterOptionRecruitFocNonComm = page.locator(
-      'input[name="costs"][value="Recruit: Free of charge (non-commercial studies only)"]'
+      'input[name="costs"][value="Recruit: Free of charge for non-commercial studies"]'
     )
     this.dspFilterOptionRecruitChargeable = page.locator('input[name="costs"][value="Recruit: Chargeable service"]')
     this.dspFilterOptionFollowFocAll = page.locator(
-      'input[name="costs"][value="Follow-Up: Free of charge (All studies)"]'
+      'input[name="costs"][value="Follow-Up: Free of charge for all studies"]'
     )
     this.dspFilterOptionFollowFocNonComm = page.locator(
-      'input[name="costs"][value="Follow-Up: Free of charge (non-commercial studies only)"]'
+      'input[name="costs"][value="Follow-Up: Free of charge for non-commercial studies"]'
     )
     this.dspFilterOptionFollowChargeable = page.locator('input[name="costs"][value="Follow-Up: Chargeable service"]')
     this.dspFilterOptionCostsFindHeader = page.locator(
@@ -351,7 +353,7 @@ export default class ProvidersPage {
     await expect(this.dspResultFirstPublishedHeader.nth(0)).toBeVisible()
     await expect(this.dspResultLastUpdatedHeader.nth(0)).toBeVisible()
     expect(await this.dspResultFirstPublishedValue.nth(0).textContent()).toEqual('8 June 2023')
-    expect(await this.dspResultLastUpdatedValue.nth(0).textContent()).toContain('2023')
+    expect(await this.dspResultLastUpdatedValue.nth(0).textContent()).toContain('2024')
   }
 
   async assertDspIsNew(isNew: boolean) {
@@ -431,7 +433,7 @@ export default class ProvidersPage {
   }
 
   async assertCurrentPageTitle(pageNo: string) {
-    await this.page.waitForURL(`https://test.findrecruitandfollowup.nihr.ac.uk/providers?page=${pageNo}`)
+    await this.page.waitForURL(new RegExp(`.*\/providers\\?page=${pageNo}`))
     const pageCount = await this.dspResultPaginationList.locator('li').count()
     const txtResTitleNo = await this.getPageTitleNumber()
     expect(await this.dspListPageTabTitle.textContent()).toBe(
@@ -553,19 +555,17 @@ export default class ProvidersPage {
       case 'find foc all':
         await expect(this.dspFilterOptionFindFocAll).toBeVisible()
         await expect(this.dspFilterOptionFindFocAll.locator('..').locator(this.filterOptionLbl)).toBeVisible()
-        await expect(this.dspFilterOptionFindFocAll).toHaveValue('Find: Free of charge (All studies)')
+        await expect(this.dspFilterOptionFindFocAll).toHaveValue('Find: Free of charge for all studies')
         await expect(this.dspFilterOptionFindFocAll.locator('..').locator(this.filterOptionLbl)).toHaveText(
-          'Free of charge (All studies)'
+          'Free of charge for all studies'
         )
         break
       case 'find foc non-comm':
         await expect(this.dspFilterOptionFindFocNonComm).toBeVisible()
         await expect(this.dspFilterOptionFindFocNonComm.locator('..').locator(this.filterOptionLbl)).toBeVisible()
-        await expect(this.dspFilterOptionFindFocNonComm).toHaveValue(
-          'Find: Free of charge (non-commercial studies only)'
-        )
+        await expect(this.dspFilterOptionFindFocNonComm).toHaveValue('Find: Free of charge for non-commercial studies')
         await expect(this.dspFilterOptionFindFocNonComm.locator('..').locator(this.filterOptionLbl)).toHaveText(
-          'Free of charge (non-commercial studies only)'
+          'Free of charge for non-commercial studies'
         )
         break
       case 'find chargeable':
@@ -579,19 +579,19 @@ export default class ProvidersPage {
       case 'recruit foc all':
         await expect(this.dspFilterOptionRecruitFocAll).toBeVisible()
         await expect(this.dspFilterOptionRecruitFocAll.locator('..').locator(this.filterOptionLbl)).toBeVisible()
-        await expect(this.dspFilterOptionRecruitFocAll).toHaveValue('Recruit: Free of charge (All studies)')
+        await expect(this.dspFilterOptionRecruitFocAll).toHaveValue('Recruit: Free of charge for all studies')
         await expect(this.dspFilterOptionRecruitFocAll.locator('..').locator(this.filterOptionLbl)).toHaveText(
-          'Free of charge (All studies)'
+          'Free of charge for all studies'
         )
         break
       case 'recruit foc non-comm':
         await expect(this.dspFilterOptionRecruitFocNonComm).toBeVisible()
         await expect(this.dspFilterOptionRecruitFocNonComm.locator('..').locator(this.filterOptionLbl)).toBeVisible()
         await expect(this.dspFilterOptionRecruitFocNonComm).toHaveValue(
-          'Recruit: Free of charge (non-commercial studies only)'
+          'Recruit: Free of charge for non-commercial studies'
         )
         await expect(this.dspFilterOptionRecruitFocNonComm.locator('..').locator(this.filterOptionLbl)).toHaveText(
-          'Free of charge (non-commercial studies only)'
+          'Free of charge for non-commercial studies'
         )
         break
       case 'recruit chargeable':
@@ -605,19 +605,19 @@ export default class ProvidersPage {
       case 'follow-up foc all':
         await expect(this.dspFilterOptionFollowFocAll).toBeVisible()
         await expect(this.dspFilterOptionFollowFocAll.locator('..').locator(this.filterOptionLbl)).toBeVisible()
-        await expect(this.dspFilterOptionFollowFocAll).toHaveValue('Follow-Up: Free of charge (All studies)')
+        await expect(this.dspFilterOptionFollowFocAll).toHaveValue('Follow-Up: Free of charge for all studies')
         await expect(this.dspFilterOptionFollowFocAll.locator('..').locator(this.filterOptionLbl)).toHaveText(
-          'Free of charge (All studies)'
+          'Free of charge for all studies'
         )
         break
       case 'follow-up foc non-comm':
         await expect(this.dspFilterOptionFollowFocNonComm).toBeVisible()
         await expect(this.dspFilterOptionFollowFocNonComm.locator('..').locator(this.filterOptionLbl)).toBeVisible()
         await expect(this.dspFilterOptionFollowFocNonComm).toHaveValue(
-          'Follow-Up: Free of charge (non-commercial studies only)'
+          'Follow-Up: Free of charge for non-commercial studies'
         )
         await expect(this.dspFilterOptionFollowFocNonComm.locator('..').locator(this.filterOptionLbl)).toHaveText(
-          'Free of charge (non-commercial studies only)'
+          'Free of charge for non-commercial studies'
         )
         break
       case 'follow-up chargeable':
@@ -789,11 +789,13 @@ export default class ProvidersPage {
         filterPanelocator = this.dspFilterSelectedPanel.locator('li', { hasText: 'exclude regional' })
         break
       case 'find foc all':
-        filterPanelocator = this.dspFilterSelectedPanel.locator('li', { hasText: 'Find: Free of charge (All studies)' })
+        filterPanelocator = this.dspFilterSelectedPanel.locator('li', {
+          hasText: 'Find: Free of charge for all studies',
+        })
         break
       case 'find foc non-comm':
         filterPanelocator = this.dspFilterSelectedPanel.locator('li', {
-          hasText: 'Find: Free of charge (non-commercial studies only)',
+          hasText: 'Find: Free of charge for non-commercial studies',
         })
         break
       case 'find chargeable':
@@ -801,12 +803,12 @@ export default class ProvidersPage {
         break
       case 'recruit foc all':
         filterPanelocator = this.dspFilterSelectedPanel.locator('li', {
-          hasText: 'Recruit: Free of charge (All studies)',
+          hasText: 'Recruit: Free of charge for all studies',
         })
         break
       case 'recruit foc non-comm':
         filterPanelocator = this.dspFilterSelectedPanel.locator('li', {
-          hasText: 'Recruit: Free of charge (non-commercial studies only)',
+          hasText: 'Recruit: Free of charge for non-commercial studies',
         })
         break
       case 'recruit chargeable':
@@ -814,12 +816,12 @@ export default class ProvidersPage {
         break
       case 'follow-up foc all':
         filterPanelocator = this.dspFilterSelectedPanel.locator('li', {
-          hasText: 'Follow-Up: Free of charge (All studies)',
+          hasText: 'Follow-Up: Free of charge for all studies',
         })
         break
       case 'follow-up foc non-comm':
         filterPanelocator = this.dspFilterSelectedPanel.locator('li', {
-          hasText: 'Follow-Up: Free of charge (non-commercial studies only)',
+          hasText: 'Follow-Up: Free of charge for non-commercial studies',
         })
         break
       case 'follow-up chargeable':
@@ -932,14 +934,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focAllText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focAllText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focAllText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focAllText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -948,14 +950,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focNoncCommText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focNoncCommText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focNoncCommText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focNoncCommText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -964,14 +966,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.chargeableText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.chargeableText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -980,14 +982,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Recruit' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focAllText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focAllText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Recruit' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focAllText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focAllText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -996,14 +998,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Recruit' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focNoncCommText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focNoncCommText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Recruit' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focNoncCommText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focNoncCommText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -1012,14 +1014,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Recruit' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.chargeableText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Recruit' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.chargeableText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -1028,14 +1030,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Follow-Up' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focAllText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focAllText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Follow-Up' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focAllText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focAllText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -1044,14 +1046,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Follow-Up' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focNoncCommText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focNoncCommText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Follow-Up' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.focNoncCommText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.focNoncCommText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -1060,14 +1062,14 @@ export default class ProvidersPage {
           this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Follow-Up' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.chargeableText })
             .first()
         ).toBeVisible()
         expect(
           await this.dspResultServiceCostsTbl
             .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Follow-Up' })
             .locator('..')
-            .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+            .locator(this.dspResultsServiceCostsType, { hasText: this.chargeableText })
             .count()
         ).toEqual(resultListCount)
         break
@@ -1138,7 +1140,7 @@ export default class ProvidersPage {
       this.dspResultServiceCostsTbl
         .locator(this.dspResultServiceCostsTblHeader, { hasText: 'Find' })
         .locator('..')
-        .locator(this.dspResultsServiceCostsTblCell, { hasText: this.chargeableText })
+        .locator(this.dspResultsServiceCostsDescription)
     ).toContainText(expectedCostDesc, { ignoreCase: true })
   }
 

@@ -84,8 +84,12 @@ const formatSingleServiceTypeCostRow = ({
         )}
       </th>
       <td className="govuk-table__cell pl-4">
-        <p className="govuk-body-s mb-2">{costSplit[1].trim()}</p>
-        <p className="govuk-body-s mb-0">{description}</p>
+        <p className="govuk-body-s mb-2" data-testid="cost-type">
+          {costSplit[1].trim()}
+        </p>
+        <p className="govuk-body-s mb-0" data-testid="cost-description">
+          {description}
+        </p>
       </td>
     </tr>
   )
@@ -127,7 +131,9 @@ export const formatServiceTypeBlock = (serviceType: ServiceType, costs: Costs, c
           .filter((item) => item.includes(fields.serviceType + ':'))
           .map((cost, key) => (
             <div key={key} className="govuk-!-margin-top-6 govuk-!-margin-bottom-6">
-              <p className="govuk-heading-s govuk-!-margin-bottom-2">Costs:</p>
+              <p className="govuk-heading-s govuk-!-margin-bottom-2" data-testid="costs-title">
+                Costs:
+              </p>
               <table className="govuk-table">
                 <tbody className="govuk-table__body">
                   {formatSingleServiceTypeCostRow({ key, cost, description: costDescription, hasAnchor: false })}

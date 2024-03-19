@@ -12,7 +12,7 @@ export default class FeedbackConfirmationPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.headingPageTitle = page.locator('h1[data-testid="page-title"]')
     this.confirmTextBlock = page.locator('div[class="govuk-grid-column-two-thirds-from-desktop"] p')
     this.returnToHomePageButton = page.locator('a[class="govuk-button"]')
   }

@@ -10,7 +10,7 @@ export default class TermsConditionsPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h1[class="govuk-panel__title heading-underscore pt-1"]')
+    this.headingPageTitle = page.locator('h1[data-testid="page-title"]')
   }
 
   //Page Methods
