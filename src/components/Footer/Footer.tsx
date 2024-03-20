@@ -68,7 +68,7 @@ export function Footer() {
                 className="mx-auto"
               />
             </a>
-            <a
+            {/* <a
               href="https://www.research.hscni.net"
               target="_blank"
               className="max-w-[240px] lg:w-auto"
@@ -81,7 +81,7 @@ export function Footer() {
                 alt="HSC Public Health Agency logo"
                 className="mx-auto"
               />
-            </a>
+            </a> */}
             <a
               href="https://www.nhsresearchscotland.org.uk"
               target="_blank"
