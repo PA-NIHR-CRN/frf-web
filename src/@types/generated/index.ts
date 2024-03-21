@@ -16,5 +16,6 @@ export type { TypePage, TypePageFields, TypePageSkeleton } from "./TypePage";
 export type { TypePromoBlock, TypePromoBlockFields, TypePromoBlockSkeleton } from "./TypePromoBlock";
 export type { TypeServiceProvider, TypeServiceProviderFields, TypeServiceProviderSkeleton } from "./TypeServiceProvider";
 export type { TypeServiceTypeBlock, TypeServiceTypeBlockFields, TypeServiceTypeBlockSkeleton } from "./TypeServiceTypeBlock";
+export type { TypeServiceUnavailable, TypeServiceUnavailableFields, TypeServiceUnavailableSkeleton } from "./TypeServiceUnavailable";
 export type { TypeTextBlock, TypeTextBlockFields, TypeTextBlockSkeleton } from "./TypeTextBlock";
 export type { TypeVideo, TypeVideoFields, TypeVideoSkeleton } from "./TypeVideo";

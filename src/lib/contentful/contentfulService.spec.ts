@@ -9,6 +9,7 @@ import {
   TypeEmailTemplateFeedback,
   TypeHomepage,
   TypeServiceProvider,
+  TypeServiceUnavailable,
 } from '@/@types/generated'
 
 import { ContentfulService, EmailTemplateTypes } from './contentfulService'
@@ -21,6 +22,9 @@ const mockServiceProvider = Mock.of<TypeServiceProvider<undefined, ''>>({
 })
 
 const mockHomepage = Mock.of<TypeHomepage<undefined, ''>>({
+  fields: {},
+})
+const mockServiceUnavailable = Mock.of<TypeServiceUnavailable<undefined, ''>>({
   fields: {},
 })
 const mockEmailTemplateFeedback = Mock.of<TypeEmailTemplateFeedback<undefined, ''>>({
@@ -37,6 +41,7 @@ const mockEmailTempContactResearchSupport = Mock.of<TypeEmailTemplateContactRese
 })
 const contentTypeMocks: Record<string, Entry> = {
   homepage: mockHomepage,
+  serviceUnavailable: mockServiceUnavailable,
   serviceProvider: mockServiceProvider,
   emailTemplateFeedback: mockEmailTemplateFeedback,
   emailTemplateContactFrfCentralTeam: mockEmailTemplateContactFrfCentralTeam,
@@ -195,6 +200,21 @@ describe('ContentfulService', () => {
       expect(mockContentClient.getEntries).toHaveBeenCalledWith({
         limit: 1,
         content_type: 'homepage',
+      })
+
+      expect(entry).toBeDefined()
+    })
+  })
+
+  describe('getServiceUnavailablePage', () => {
+    it('returns content for the service unavailable page', async () => {
+      const [contentfulService, mockContentClient] = setupContentfulService()
+
+      const entry = await contentfulService.getServiceUnavailablePage()
+
+      expect(mockContentClient.getEntries).toHaveBeenCalledWith({
+        limit: 1,
+        content_type: 'serviceUnavailable',
       })
 
       expect(entry).toBeDefined()

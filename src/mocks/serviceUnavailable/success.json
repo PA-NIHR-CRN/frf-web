@@ -1,0 +1,48 @@
+{
+  "sys": { "type": "Array" },
+  "total": 1,
+  "skip": 0,
+  "limit": 1,
+  "items": [
+    {
+      "metadata": { "tags": [] },
+      "sys": {
+        "space": { "sys": { "type": "Link", "linkType": "Space", "id": "qg9njdfd7ka1" } },
+        "type": "Entry",
+        "id": "1Hoeo2AJ7WJwna3F1kwjTz",
+        "contentType": { "sys": { "type": "Link", "linkType": "ContentType", "id": "serviceUnavailable" } },
+        "revision": 10,
+        "createdAt": "2023-06-06T15:35:33.319Z",
+        "updatedAt": "2023-06-07T16:08:08.616Z",
+        "environment": { "sys": { "id": "dev", "type": "Link", "linkType": "Environment" } },
+        "locale": "en-US"
+      },
+      "fields": {
+        "title": "Test service unavailable title",
+        "content": {
+          "nodeType": "document",
+          "data": {},
+          "content": [
+            {
+              "nodeType": "paragraph",
+              "data": {},
+              "content": [
+                {
+                  "nodeType": "text",
+                  "value": "Test service unavailable content",
+                  "marks": [{ "type": "bold" }],
+                  "data": {}
+                },
+                {
+                  "nodeType": "hyperlink",
+                  "data": { "uri": "#" },
+                  "content": [{ "nodeType": "text", "value": "Test service unavailable link", "marks": [], "data": {} }]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
