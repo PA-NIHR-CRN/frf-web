@@ -24,8 +24,11 @@ test('Displays the header', () => {
   expect(frfLogo).toBeInTheDocument()
   expect(frfLogo).toHaveAttribute('height', '108')
   expect(frfLogo).toHaveAttribute('width', '295')
-  expect(frfLogo.parentElement).toHaveAttribute('href', '/')
-  expect(frfLogo.parentElement).toHaveAttribute('aria-hidden', 'true')
+
+  const nihrLogo = screen.getByAltText('NIHR logo')
+  expect(nihrLogo).toBeInTheDocument()
+  expect(nihrLogo).toHaveAttribute('height', '108')
+  expect(nihrLogo).toHaveAttribute('width', '295')
 
   // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
