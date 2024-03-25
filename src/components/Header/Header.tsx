@@ -10,12 +10,12 @@ import { menu } from '@/constants/menu'
 
 function Logo() {
   return (
-    <div className="flex flex-col flex-wrap items-center gap-6 py-6 pl-4 md:flex-row">
-      <Link href="/" className={'govuk-header__link'} aria-label="Go to the Find, Recruit and Follow-up homepage">
-        <Image src="/assets/logos/nihr-full.svg" width={295} height={108} alt="NIHR logo" className="pr-4" />
-      </Link>
-      <Link href="/" className={'govuk-header__link'} aria-hidden>
-        <Image src="/assets/logos/nihr-frf.svg" width={295} height={108} alt="Find, Recruit and Follow-up logo" />
+    <div className="flex flex-col items-center gap-6 py-6 pl-4">
+      <Link href="/" className="govuk-header__link" aria-label="Go to the Find, Recruit and Follow-up homepage">
+        <div className="flex flex-col items-center gap-6">
+          <Image src="/assets/logos/nihr-full.svg" width={295} height={108} alt="NIHR logo" className="pr-4" />
+          <Image src="/assets/logos/nihr-frf.svg" width={295} height={108} alt="Find, Recruit and Follow-up logo" />
+        </div>
       </Link>
     </div>
   )
