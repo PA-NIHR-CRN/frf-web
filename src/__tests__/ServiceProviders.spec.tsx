@@ -85,7 +85,7 @@ test('Data service provider details newly published', async () => {
 
   // Services available and costs
   expect(
-    screen.getByRole('table', { name: /Services available and costs for Genomic Profile Register/ })
+    within(result).getByRole('table', { name: /Services available and costs for Genomic Profile Register/ })
   ).toBeInTheDocument()
 
   // Coverage
@@ -144,7 +144,7 @@ test('Data service provider details older than 3 months', async () => {
 
   // Services available and costs
   expect(
-    screen.getByRole('table', { name: /Services available and costs for Join Dementia Research/ })
+    within(result).getByRole('table', { name: /Services available and costs for Join Dementia Research/ })
   ).toBeInTheDocument()
 
   // Coverage
