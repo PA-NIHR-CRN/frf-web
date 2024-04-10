@@ -71,7 +71,7 @@ test('Costs table without a custom description', () => {
   )
 
   expect(
-    screen.getByRole('table', { name: 'Join Dementia Research, services available and costs' })
+    screen.getByRole('table', { name: 'Services available and costs for Join Dementia Research:' })
   ).toBeInTheDocument()
 
   // Table column headers
@@ -110,7 +110,7 @@ test('Costs table with a custom description', () => {
   )
 
   expect(
-    screen.getByRole('table', { name: 'Join Dementia Research, services available and costs' })
+    screen.getByRole('table', { name: 'Services available and costs for Join Dementia Research:' })
   ).toBeInTheDocument()
 
   // Table column headers
