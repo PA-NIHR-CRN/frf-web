@@ -76,7 +76,7 @@ export function Filters({
         <a
           href="#show-filters"
           className="text-white focus:text-black md:hidden"
-          aria-label="Close search criteria filters"
+          aria-label="Close filters - search criteria"
           onClick={onRequestClose}
           data-testid="closeFiltersIcon"
         >
@@ -236,21 +236,21 @@ export function Filters({
             secondary
             type="submit"
             className="w-full [.js-enabled_&]:hidden"
-            aria-label="Apply search criteria filters"
+            aria-label="Apply filters - search criteria"
           >
             Apply filters
           </Button>
           <Link
             href="/providers"
             className="govuk-button govuk-button--secondary w-full text-center"
-            aria-label="Clear all search criteria filters"
+            aria-label="Clear all filters - search criteria"
           >
             Clear all filters
           </Link>
           <a
             href="#show-filters"
             className=" govuk-button govuk-button--secondary w-full text-center md:hidden"
-            aria-label="Close search criteria filters"
+            aria-label="Close filters - search criteria"
             onClick={onRequestClose}
           >
             Close filters
