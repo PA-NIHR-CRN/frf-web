@@ -32,11 +32,8 @@ export const ServiceTypesCostTable = ({
 
   return (
     <table className={clsx('govuk-table govuk-!-font-size-16 table-fixed', className)}>
-      <caption
-        className="govuk-table__caption govuk-body-m mb-2"
-        aria-label={`${providerName}, services available and costs`}
-      >
-        Services available and costs:
+      <caption className="govuk-table__caption govuk-body-m mb-2">
+        Services available and costs<span className="govuk-visually-hidden"> for {providerName}</span>:
       </caption>
       {formatServiceTypesCostsTable(costs, find, recruit, followUp)}
     </table>
