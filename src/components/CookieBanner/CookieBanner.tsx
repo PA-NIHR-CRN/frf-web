@@ -179,7 +179,6 @@ export const CookieBanner = ({ content }: CookieBannerProps) => {
       className="govuk-cookie-banner govuk-!-padding-top-5 govuk-!-padding-bottom-3 w-full"
       data-nosnippet=""
       role="region"
-      aria-label="Cookies on Find, Recruit and Follow-Up"
     >
       {view === CookieBannerView.Selection ? renderSelection() : renderConfirmation()}
     </div>
