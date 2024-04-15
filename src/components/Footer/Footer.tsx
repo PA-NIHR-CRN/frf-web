@@ -89,7 +89,7 @@ export function Footer() {
               aria-label="NHS Scotland (opens in a new window)"
             >
               <Image
-                src="/assets/logos/nhs-scotland.svg"
+                src="/assets/logos/nhs-scotland.png"
                 width={153}
                 height={130}
                 alt="NHS Scotland logo"
