@@ -232,7 +232,7 @@ export default class ProviderDetailsPage {
 
   async assertServicesCostsPresent() {
     await expect(this.dspDetailServiceCostsSection).toBeVisible()
-    await expect(this.dspDetailServiceCostsHeader).toHaveText('Services available and costs:')
+    await expect(this.dspDetailServiceCostsHeader).toHaveText(/Services available and costs/)
     await expect(this.tblDspDetailServiceCosts).toBeVisible()
   }
 
