@@ -181,11 +181,11 @@ test('Displays cookie banner via magic link', async () => {
 
   render(<CookieBanner content={mockCookieBannerContent} />)
 
-  expect(screen.queryByLabelText('Cookies on Find, Recruit and Follow-Up')).not.toBeInTheDocument()
+  expect(screen.queryByRole('heading', { name: 'Cookies on Find, Recruit and Follow-Up' })).not.toBeInTheDocument()
 
   await act(() => mockRouter.push('/cookie-policy?change-settings=1', undefined, { shallow: true }))
 
-  expect(screen.getByLabelText('Cookies on Find, Recruit and Follow-Up')).toBeInTheDocument()
+  expect(screen.getByRole('heading', { name: 'Cookies on Find, Recruit and Follow-Up' })).toBeInTheDocument()
 
   // Refocuses cookie banner after route change
   expect(mockFocus).toHaveBeenCalled()
@@ -198,7 +198,7 @@ test('Displays cookie banner via magic link', async () => {
 test('Hides cookie banner on page change if cookie was already set', async () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
-  expect(screen.getByLabelText('Cookies on Find, Recruit and Follow-Up')).toBeInTheDocument()
+  expect(screen.getByRole('heading', { name: 'Cookies on Find, Recruit and Follow-Up' })).toBeInTheDocument()
 
   // Mock the getCookie function to return a truthy value to simulate the cookie being set
   mockedGetCookie.mockReturnValue(FRF_GDPR_COOKIE_ACCEPT_VALUE)
