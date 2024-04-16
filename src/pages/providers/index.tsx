@@ -50,6 +50,7 @@ export default function ServiceProviders({
       onClick={() => {
         setShowFiltersMobile(true)
       }}
+      aria-label="Open filters - search criteria"
     >
       Open filters
     </a>
