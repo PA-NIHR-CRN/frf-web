@@ -209,7 +209,7 @@ test('Toggling filters on mobile', async () => {
 
   render(<ServiceProviders {...props} />)
 
-  const showFiltersButton = screen.getByRole('link', { name: 'Open filters' })
+  const showFiltersButton = screen.getByRole('link', { name: 'Open filters - search criteria' })
   expect(showFiltersButton).toHaveAttribute('href', '#filters')
 
   const filtersCard = screen.getByTestId('filters-card')
