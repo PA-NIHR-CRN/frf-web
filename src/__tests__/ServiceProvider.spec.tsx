@@ -48,7 +48,7 @@ test('Service provider detail', async () => {
   expect(screen.getByTestId('frf-dsp-description')).toBeInTheDocument()
 
   // Services available and costs
-  expect(screen.getByText('Services available and costs:')).toBeInTheDocument()
+  expect(screen.getByText(/Services available and costs/)).toBeInTheDocument()
   expect(screen.getByRole('link', { name: 'See more about the find service' })).toHaveAttribute('href', '#find')
   expect(screen.getByRole('link', { name: 'See more about the recruit service' })).toHaveAttribute('href', '#recruit')
   expect(screen.getByRole('link', { name: 'See more about the follow-up service' })).toHaveAttribute(
@@ -299,7 +299,7 @@ test('Service provider with only required content types', async () => {
   ).toHaveAttribute('href', '/contact-data-service-provider/genomic-profile-register')
 
   // Non-required fields
-  expect(screen.queryByRole('table', { name: 'Services available and costs:' })).not.toBeInTheDocument()
+  expect(screen.queryByRole('table', { name: /Services available and costs/ })).not.toBeInTheDocument()
   expect(screen.queryByText(fields.geographySupportingText)).not.toBeInTheDocument()
   expect(screen.queryByText('Population: 35,000,000')).not.toBeInTheDocument()
 

@@ -19,9 +19,7 @@ const FilterCategory = ({ title, children }: { title: string; children: ReactNod
     <details open className="group/details border-t border-grey-120 first-of-type:mt-5 open:pb-3">
       <summary className="group/summary flex cursor-pointer py-2 outline-none">
         <div className="group-focus/summary:focusable-text flex w-full items-start justify-between py-1">
-          <span className="govuk-body m-0" aria-label={`${title} filter menu`}>
-            {title}
-          </span>
+          <span className="govuk-body m-0">{title}</span>
           <span className={clsx('text-lg', 'group-open/details:rotate-180')}>
             <CollapseIcon />
           </span>

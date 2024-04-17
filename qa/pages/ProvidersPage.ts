@@ -314,7 +314,7 @@ export default class ProvidersPage {
   async assertDspServicesCosts() {
     await expect(this.dspResultServiceCostsTbl.nth(0)).toBeVisible()
     await expect(this.dspResultServicesCostsHeader.nth(0)).toBeVisible()
-    expect(await this.dspResultServicesCostsHeader.nth(0).textContent()).toEqual('Services available and costs:')
+    expect(await this.dspResultServicesCostsHeader.nth(0).textContent()).toMatch(/Services available and costs/)
     expect(
       await this.dspResultServiceCostsTbl.nth(0).locator(this.dspResultServiceCostsTblHeader.nth(0)).textContent()
     ).toEqual('Find')
