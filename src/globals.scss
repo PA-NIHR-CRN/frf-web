@@ -164,6 +164,20 @@ body {
   padding-top: 0px;
 }
 
+.play-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 90px;
+  height: 60px;
+  background-color: red;
+  color: white;
+  font-size: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-shadow: none;
+}
+
 .youtube-cover-img {
   position: relative;
 }
@@ -177,9 +191,6 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font: 48px/1.5 sans-serif;
-  color: white;
-  text-shadow: 0 0 0.5em black;
 }
 
 .youtube-cover-img:focus {

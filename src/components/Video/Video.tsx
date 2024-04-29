@@ -50,7 +50,7 @@ export const Video = ({ url, title }: VideoProps) => {
             title={title}
             alt={title}
           />
-          <span>▶</span>
+          <span className="play-button">▶</span>
         </button>
       ) : (
         <iframe
