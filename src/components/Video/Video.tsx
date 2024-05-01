@@ -43,11 +43,15 @@ export const Video = ({ url, title }: VideoProps) => {
   return (
     <div>
       {showYoutubeCoverImage ? (
-        <button data-testid="youtube-cover-img" className="youtube-cover-img" onClick={handleClick}>
+        <button
+          data-testid="youtube-cover-img"
+          className="youtube-cover-img"
+          onClick={handleClick}
+          aria-label={`Play ${title}`}
+        >
           <img
             className="aspect-video w-full max-w-[700px] lg:w-[450px] "
             src={`https://img.youtube.com/vi/${videoID}/hqdefault.jpg`}
-            title={title}
             alt={title}
           />
           <span className="play-button">▶</span>
