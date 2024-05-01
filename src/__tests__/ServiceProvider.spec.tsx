@@ -84,7 +84,7 @@ test('Service provider detail', async () => {
   expect(within(notSuitedToList).getAllByRole('listitem')).toHaveLength(1)
 
   // Video
-  const videoIframe = screen.getByTitle(`Video: ${fields.name}`)
+  const videoIframe = screen.getByAltText(`Video: ${fields.name}`)
   expect(videoIframe).toHaveAttribute('src', 'https://img.youtube.com/vi/3WUh1huCUrM/hqdefault.jpg')
 
   // More information

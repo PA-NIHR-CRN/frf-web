@@ -59,8 +59,8 @@ test('Displays the Home page', async () => {
   // Title + Description
   expect(screen.getByText(/This website will enable researchers and life sciences companies/)).toBeInTheDocument()
 
-  // Video
-  const videoIframe = screen.getByTitle('Video: Find, Recruit and Follow-up Intro')
+  // Videoa
+  const videoIframe = screen.getByAltText('Video: Find, Recruit and Follow-up Intro')
   expect(videoIframe).toHaveAttribute('src', 'https://img.youtube.com/vi/msizPweg3kE/hqdefault.jpg')
 
   // Service Info
