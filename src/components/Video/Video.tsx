@@ -47,7 +47,7 @@ export const Video = ({ url, title }: VideoProps) => {
           data-testid="youtube-cover-img"
           className="youtube-cover-img"
           onClick={handleClick}
-          aria-label={`Play ${title}`}
+          aria-label={`${title} - Allow YouTube cookies`}
         >
           <img
             className="aspect-video w-full max-w-[700px] lg:w-[450px] "
