@@ -62,8 +62,8 @@ export function Footer() {
             <a href="https://www.nihr.ac.uk" className="lg:w-auto">
               <Image
                 src="/assets/logos/nihr-full.svg"
-                width={360}
-                height={60}
+                width={244}
+                height={24}
                 alt="National Institute for Health and Care Research logo"
                 className="mx-auto"
               />

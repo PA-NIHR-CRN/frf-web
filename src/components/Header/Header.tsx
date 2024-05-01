@@ -13,8 +13,8 @@ function Logo() {
     <div className="flex flex-col items-center gap-6 py-6 pl-4">
       <Link href="/" className="govuk-header__link" aria-label="Go to the Find, Recruit and Follow-up homepage">
         <div className="flex flex-col items-center gap-6">
-          <Image src="/assets/logos/nihr-full.svg" width={295} height={108} alt="NIHR logo" className="pr-4" />
-          <Image src="/assets/logos/nihr-frf.svg" width={295} height={108} alt="Find, Recruit and Follow-up logo" />
+          <Image src="/assets/logos/nihr-full.svg" width={244} height={24} alt="NIHR logo" />
+          <Image src="/assets/logos/nihr-frf.svg" width={244} height={24} alt="Find, Recruit and Follow-up logo" />
         </div>
       </Link>
     </div>
