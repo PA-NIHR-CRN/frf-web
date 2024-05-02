@@ -73,7 +73,10 @@ test('Displays a generic contentful page', async () => {
   )
 
   // Video is rendered
-  const videoIframe = screen.getByTitle('Research Support Staff Video')
+  const videoIframe = screen.getByAltText('Research Support Staff Video')
+  const playButton = screen.getByRole('button', { name: 'Research Support Staff Video - Allow YouTube cookies' })
+
+  expect(playButton).toBeVisible()
   expect(videoIframe).toHaveAttribute('src', 'https://img.youtube.com/vi/3WUh1huCUrM/hqdefault.jpg')
 
   // Sidebar title is rendered

@@ -64,8 +64,8 @@ test('Rich text renderer', () => {
   expect(secondaryButtonLink).toHaveClass('govuk-button')
   expect(secondaryButtonLink).toHaveClass('govuk-button--secondary')
 
-  // Assert that a custom video is rendered
-  const videoIframe = screen.getByTitle('Video title')
+  // Assert that a custom video is renderead
+  const videoIframe = screen.getByAltText('Video title')
   expect(videoIframe).toHaveAttribute('src', 'https://img.youtube.com/vi/3WUh1huCUrM/hqdefault.jpg')
 
   // Assert that an embedded video is rendered
