@@ -39,7 +39,7 @@ export default class GenericTestPage {
     this.numberedList = page.locator('ol[class="govuk-list govuk-list--number"]')
     this.linkText = page.locator('a', { hasText: 'This is link text' })
     this.lineSeparator = page.locator('hr')
-    this.videoCoverImageElement = page.locator('img[title="Test Video"]')
+    this.videoCoverImageElement = page.locator('img[alt="Test Video"]')
     this.videoElement = page.locator('iframe[title="Test Video"]')
     this.primaryButton = page.locator('a[class="govuk-button govuk-!-margin-top-3"]')
     this.secondaryButton = page.locator('a[class="govuk-button govuk-!-margin-top-3 govuk-button--secondary"]')
