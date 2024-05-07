@@ -13,7 +13,7 @@ test('Displays the links & copyright bar', () => {
 })
 
 test.each([
-  ['National Institute for Health and Care Research', 'https://www.nihr.ac.uk', { w: 360, h: 60 }, false],
+  ['National Institute for Health and Care Research', 'https://www.nihr.ac.uk', { w: 244, h: 24 }, false],
   //['HSC Public Health Agency', 'https://www.research.hscni.net', { w: 253, h: 97 }, true],
   ['NHS Scotland', 'https://www.nhsresearchscotland.org.uk', { w: 153, h: 130 }, true],
   ['Health Care Research Wales', 'https://healthandcareresearchwales.org', { w: 168, h: 106 }, true],

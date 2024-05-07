@@ -22,13 +22,13 @@ test('Displays the header', () => {
   // Logo image
   const frfLogo = screen.getByAltText('Find, Recruit and Follow-up logo')
   expect(frfLogo).toBeInTheDocument()
-  expect(frfLogo).toHaveAttribute('height', '108')
-  expect(frfLogo).toHaveAttribute('width', '295')
+  expect(frfLogo).toHaveAttribute('height', '24')
+  expect(frfLogo).toHaveAttribute('width', '244')
 
   const nihrLogo = screen.getByAltText('NIHR logo')
   expect(nihrLogo).toBeInTheDocument()
-  expect(nihrLogo).toHaveAttribute('height', '108')
-  expect(nihrLogo).toHaveAttribute('width', '295')
+  expect(nihrLogo).toHaveAttribute('height', '24')
+  expect(nihrLogo).toHaveAttribute('width', '244')
 
   // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
