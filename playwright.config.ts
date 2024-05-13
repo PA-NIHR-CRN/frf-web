@@ -18,6 +18,7 @@ const config: PlaywrightTestConfig = {
       name: 'FindRecruitFollow',
       testIgnore: '**/accessibilityTests/**',
       use: {
+        userAgent: 'findrecruitandfollowup-auto-agent',
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
