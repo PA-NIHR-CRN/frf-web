@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
   ],
   globalSetup: './qa/hooks/GlobalSetup.ts',
   timeout: 30000,
-  workers: 1, // to enforce parallel workers in Actions Workflow
+  workers: 6, // to enforce parallel workers in Actions Workflow
   retries: 2,
   projects: [
     {
@@ -33,6 +33,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Firefox',
       testIgnore: '**/tests/**',
       use: {
+        userAgent: 'findrecruitandfollowup-auto-agent',
         ...devices['Desktop Firefox'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
@@ -48,6 +49,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Safari',
       testIgnore: '**/tests/**',
       use: {
+        userAgent: 'findrecruitandfollowup-auto-agent',
         ...devices['Desktop Safari'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
@@ -63,6 +65,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Microsoft Edge',
       testIgnore: '**/tests/**',
       use: {
+        userAgent: 'findrecruitandfollowup-auto-agent',
         ...devices['Desktop Edge'],
         channel: 'msedge',
         trace: 'on',
@@ -79,6 +82,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Google Chrome',
       testIgnore: '**/tests/**',
       use: {
+        userAgent: 'findrecruitandfollowup-auto-agent',
         ...devices['Desktop Chrome'],
         channel: 'chrome',
         trace: 'on',
@@ -95,6 +99,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Mobile Chrome',
       testIgnore: '**/tests/**',
       use: {
+        userAgent: 'findrecruitandfollowup-auto-agent',
         ...devices['Pixel 5'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
@@ -110,6 +115,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Mobile Safari',
       testIgnore: '**/tests/**',
       use: {
+        userAgent: 'findrecruitandfollowup-auto-agent',
         ...devices['iPhone 13'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
