@@ -18,7 +18,7 @@ const config: PlaywrightTestConfig = {
       name: 'FindRecruitFollow',
       testIgnore: '**/accessibilityTests/**',
       use: {
-        userAgent: 'findrecruitandfollowup-auto-agent',
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
@@ -33,7 +33,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Firefox',
       testIgnore: '**/tests/**',
       use: {
-        userAgent: 'findrecruitandfollowup-auto-agent',
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         ...devices['Desktop Firefox'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
@@ -49,7 +49,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Safari',
       testIgnore: '**/tests/**',
       use: {
-        userAgent: 'findrecruitandfollowup-auto-agent',
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         ...devices['Desktop Safari'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
@@ -65,7 +65,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Microsoft Edge',
       testIgnore: '**/tests/**',
       use: {
-        userAgent: 'findrecruitandfollowup-auto-agent',
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         ...devices['Desktop Edge'],
         channel: 'msedge',
         trace: 'on',
@@ -82,7 +82,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Google Chrome',
       testIgnore: '**/tests/**',
       use: {
-        userAgent: 'findrecruitandfollowup-auto-agent',
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         ...devices['Desktop Chrome'],
         channel: 'chrome',
         trace: 'on',
@@ -99,7 +99,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Mobile Chrome',
       testIgnore: '**/tests/**',
       use: {
-        userAgent: 'findrecruitandfollowup-auto-agent',
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         ...devices['Pixel 5'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
@@ -115,7 +115,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Mobile Safari',
       testIgnore: '**/tests/**',
       use: {
-        userAgent: 'findrecruitandfollowup-auto-agent',
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         ...devices['iPhone 13'],
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
