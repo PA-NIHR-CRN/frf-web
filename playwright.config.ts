@@ -13,11 +13,8 @@ const config: PlaywrightTestConfig = {
   timeout: 30000,
   workers: 6, // to enforce parallel workers in Actions Workflow
   retries: 2,
-  projects: [
-    {
-      name: 'FindRecruitFollow',
-      testIgnore: '**/accessibilityTests/**',
-      use: {
+  use: {
+        userAgent: `${process.env.FRF_USER_AGENT}`,
         trace: 'on',
         baseURL: `${process.env.E2E_BASE_URL}`,
         headless: true,
@@ -27,20 +24,16 @@ const config: PlaywrightTestConfig = {
           slowMo: 0,
         },
       },
+  projects: [
+    {
+      name: 'FindRecruitFollow',
+      testIgnore: '**/accessibilityTests/**',
     },
     {
       name: 'FRF Firefox',
       testIgnore: '**/tests/**',
       use: {
         ...devices['Desktop Firefox'],
-        trace: 'on',
-        baseURL: `${process.env.E2E_BASE_URL}`,
-        headless: true,
-        screenshot: 'on',
-        storageState: 'qa/utils/cookieAccept.json',
-        launchOptions: {
-          slowMo: 0,
-        },
       },
     },
     {
@@ -48,14 +41,6 @@ const config: PlaywrightTestConfig = {
       testIgnore: '**/tests/**',
       use: {
         ...devices['Desktop Safari'],
-        trace: 'on',
-        baseURL: `${process.env.E2E_BASE_URL}`,
-        headless: true,
-        screenshot: 'on',
-        storageState: 'qa/utils/cookieAccept.json',
-        launchOptions: {
-          slowMo: 0,
-        },
       },
     },
     {
@@ -64,14 +49,6 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Edge'],
         channel: 'msedge',
-        trace: 'on',
-        baseURL: `${process.env.E2E_BASE_URL}`,
-        headless: true,
-        screenshot: 'on',
-        storageState: 'qa/utils/cookieAccept.json',
-        launchOptions: {
-          slowMo: 0,
-        },
       },
     },
     {
@@ -80,14 +57,6 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Chrome'],
         channel: 'chrome',
-        trace: 'on',
-        baseURL: `${process.env.E2E_BASE_URL}`,
-        headless: true,
-        screenshot: 'on',
-        storageState: 'qa/utils/cookieAccept.json',
-        launchOptions: {
-          slowMo: 0,
-        },
       },
     },
     {
@@ -95,14 +64,6 @@ const config: PlaywrightTestConfig = {
       testIgnore: '**/tests/**',
       use: {
         ...devices['Pixel 5'],
-        trace: 'on',
-        baseURL: `${process.env.E2E_BASE_URL}`,
-        headless: true,
-        screenshot: 'on',
-        storageState: 'qa/utils/cookieAccept.json',
-        launchOptions: {
-          slowMo: 0,
-        },
       },
     },
     {
@@ -110,14 +71,6 @@ const config: PlaywrightTestConfig = {
       testIgnore: '**/tests/**',
       use: {
         ...devices['iPhone 13'],
-        trace: 'on',
-        baseURL: `${process.env.E2E_BASE_URL}`,
-        headless: true,
-        screenshot: 'on',
-        storageState: 'qa/utils/cookieAccept.json',
-        launchOptions: {
-          slowMo: 0,
-        },
       },
     },
   ],
