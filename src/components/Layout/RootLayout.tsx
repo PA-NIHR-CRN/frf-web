@@ -1,5 +1,4 @@
 import { Roboto } from 'next/font/google'
-import Link from 'next/link'
 import { ReactNode, useEffect } from 'react'
 
 import { TypeCookieBanner } from '@/@types/generated'
@@ -7,8 +6,6 @@ import { CookieBanner } from '@/components/CookieBanner/CookieBanner'
 
 import { Footer } from '../Footer/Footer'
 import { Header } from '../Header/Header'
-import { Panel } from '../Panel/Panel'
-import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
 import { WarningBanner } from '../WarningBanner/WarningBanner'
 
 const primaryFont = Roboto({ weight: ['400', '700'], subsets: ['latin'], display: 'swap', variable: '--font-primary' })
@@ -36,17 +33,8 @@ export function RootLayout({
     <div className={`${primaryFont.variable} font-sans`}>
       {cookieBanner && <CookieBanner content={cookieBanner} />}
       <WarningBanner isPreviewMode={!!isPreviewMode} isTestEnvironment={process.env.NEXT_PUBLIC_APP_ENV === 'uat'} />
-      <Header />
+      <Header heading={heading} backLink={backLink} />
       <main id="main-content" className="govuk-main-wrapper" role="main">
-        <PhaseBanner phase="Beta">
-          This is a new service –{' '}
-          <Link className="govuk-link govuk-link--no-visited-state" href="/feedback">
-            your feedback will help us to improve it
-          </Link>
-          .
-        </PhaseBanner>
-        {heading && <Panel>{heading}</Panel>}
-        {backLink}
         {children}
       </main>
       <Footer />

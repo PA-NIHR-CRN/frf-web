@@ -8,7 +8,7 @@ import { Header } from './Header'
 jest.mock('next/router', () => require('next-router-mock'))
 
 test('Displays the header', () => {
-  render(<Header />)
+  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
 
   // Skip link
   expect(screen.getByText('Skip to main content')).toHaveAttribute('href', '#main-content')
@@ -42,7 +42,7 @@ test('Displays the header', () => {
 test('Shows the navigation menu when clicking the menu icon', async () => {
   const user = userEvent.setup()
 
-  render(<Header />)
+  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
 
   const trigger = screen.getByRole('button', { name: 'Show navigation menu' })
   const closedMenu = screen.queryByTestId('nav')
@@ -113,7 +113,7 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
 test('Toggle the navigation menu by keyboard keys', async () => {
   const user = userEvent.setup()
 
-  render(<Header />)
+  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
 
   const trigger = screen.getByRole('button', { name: 'Show navigation menu' })
   trigger.focus()
@@ -142,7 +142,7 @@ test('Hide the navigation menu when clicking away from the menu', async () => {
 
   render(
     <>
-      <Header />
+      <Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />
       <p>Outside</p>
     </>
   )
@@ -159,7 +159,7 @@ test('Hide the navigation menu when clicking away from the menu', async () => {
 test('Hide the navigation menu when changing page', async () => {
   const user = userEvent.setup()
 
-  render(<Header />)
+  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
 
   await user.click(screen.getByRole('button', { name: 'Show navigation menu' }))
 
