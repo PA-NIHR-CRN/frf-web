@@ -196,3 +196,8 @@ body {
 .youtube-cover-img:focus {
   outline: 5px solid #ffdd00;
 }
+
+.govuk-select {
+  min-height: 40px;
+  height: auto;
+}
