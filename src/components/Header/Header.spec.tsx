@@ -32,37 +32,31 @@ test('Displays the header', () => {
   expect(nihrLogo).toHaveAttribute('height', '24')
   expect(nihrLogo).toHaveAttribute('width', '244')
 
-  // Menu trigger button
   expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
 
-  // Menu fallback link
   const link = screen.getByRole('link', { name: 'Menu' })
   expect(link).toHaveAttribute('href', '/browse')
   expect(link).toHaveClass('js-disabled-show')
 
-  // Back link
-  expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
-    'href',
-    '/providers'
-  )
+  const { getByRole } = render(<Header heading="Empty Heading" isPreviewMode={false} />)
+
+  expect(getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute('href', '/providers')
 })
 
 test('Does not display back link when on the /providers path', () => {
   mockRouter.setCurrentUrl('/providers')
 
-  render(<Header heading="Empty Heading" isPreviewMode={false} />)
+  const { queryByRole } = render(<Header heading="Empty Heading" isPreviewMode={false} />)
 
-  // Back link should not be rendered
-  expect(screen.queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()
+  expect(queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()
 })
 
 test('Does not display back link when in preview mode', () => {
   mockRouter.setCurrentUrl('/providers/dataanalytics')
 
-  render(<Header heading="Empty Heading" isPreviewMode={true} />)
+  const { queryByRole } = render(<Header heading="Empty Heading" isPreviewMode={true} />)
 
-  // Back link should not be rendered
-  expect(screen.queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()
+  expect(queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()
 })
 
 test('Shows the navigation menu when clicking the menu icon', async () => {
