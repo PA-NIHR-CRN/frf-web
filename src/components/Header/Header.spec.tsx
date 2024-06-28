@@ -10,36 +10,35 @@ jest.mock('next/router', () => require('next-router-mock'))
 test('Displays the header', () => {
   mockRouter.setCurrentUrl('/providers/dataanalytics')
 
-  render(<Header heading="Empty Heading" isPreviewMode={false} />)
+  const { getByRole, getByText, getByAltText } = render(<Header heading="Empty Heading" isPreviewMode={false} />)
 
   // Skip link
-  expect(screen.getByText('Skip to main content')).toHaveAttribute('href', '#main-content')
+  expect(getByText('Skip to main content')).toHaveAttribute('href', '#main-content')
 
   // Logo link
-  const frfLogoLink = screen.getByRole('link', {
+  const frfLogoLink = getByRole('link', {
     name: 'Go to the Find, Recruit and Follow-up homepage',
   })
   expect(frfLogoLink).toHaveAttribute('href', '/')
 
   // Logo image
-  const frfLogo = screen.getByAltText('Find, Recruit and Follow-up logo')
+  const frfLogo = getByAltText('Find, Recruit and Follow-up logo')
   expect(frfLogo).toBeInTheDocument()
   expect(frfLogo).toHaveAttribute('height', '24')
   expect(frfLogo).toHaveAttribute('width', '244')
 
-  const nihrLogo = screen.getByAltText('NIHR logo')
+  const nihrLogo = getByAltText('NIHR logo')
   expect(nihrLogo).toBeInTheDocument()
   expect(nihrLogo).toHaveAttribute('height', '24')
   expect(nihrLogo).toHaveAttribute('width', '244')
 
-  expect(screen.getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
+  expect(getByRole('button', { name: 'Show navigation menu' })).toBeInTheDocument()
 
-  const link = screen.getByRole('link', { name: 'Menu' })
+  const link = getByRole('link', { name: 'Menu' })
   expect(link).toHaveAttribute('href', '/browse')
   expect(link).toHaveClass('js-disabled-show')
 
-  const { getByRole } = render(<Header heading="Empty Heading" isPreviewMode={false} />)
-
+  // Back link
   expect(getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute('href', '/providers')
 })
 
