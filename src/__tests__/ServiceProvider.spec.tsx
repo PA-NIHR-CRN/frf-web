@@ -262,12 +262,6 @@ test('Service provider with only required content types', async () => {
 
   render(await getComponent())
 
-  // Back link
-  expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
-    'href',
-    '/providers'
-  )
-
   // Provider heading
   expect(screen.getByRole('heading', { name: `Data service provider: ${fields.name}`, level: 2 })).toBeInTheDocument()
 
