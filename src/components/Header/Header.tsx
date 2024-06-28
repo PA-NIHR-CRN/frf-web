@@ -1,3 +1,4 @@
+// components/Header/Header.tsx
 import * as Collapsible from '@radix-ui/react-collapsible'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -7,6 +8,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useClickAway } from 'react-use'
 
 import { menu } from '@/constants/menu'
+
+import { BackLink } from '../BackLink/BackLink'
+import { Panel } from '../Panel/Panel'
+import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
 
 function Logo() {
   return (
@@ -94,7 +99,7 @@ function MenuPanel() {
   )
 }
 
-export function Header() {
+export function Header({ heading, isPreviewMode }: { heading: string; isPreviewMode: boolean }) {
   const router = useRouter()
   const headerRef = useRef(null)
   const [navOpen, setNavOpen] = useState(false)
@@ -113,7 +118,7 @@ export function Header() {
       <Collapsible.Root open={navOpen} onOpenChange={setNavOpen}>
         <header
           ref={headerRef}
-          className={clsx('govuk-header flex flex-col border-b border-grey-60 bg-[var(--header-bg)]')}
+          className={clsx('govuk-header flex flex-col border-b bg-[var(--header-bg)]')}
           role="banner"
         >
           <div
@@ -122,12 +127,21 @@ export function Header() {
               'mb-0 w-full border-b-0 pt-0'
             )}
           >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between border-b border-grey-60">
               <Logo />
               <MenuButton navOpen={navOpen} />
             </div>
           </div>
           <MenuPanel />
+          <PhaseBanner phase="Beta">
+            This is a new service –{' '}
+            <Link className="govuk-link govuk-link--no-visited-state" href="/feedback">
+              your feedback will help us to improve it
+            </Link>
+            .
+          </PhaseBanner>
+          {heading && <Panel>{heading}</Panel>}
+          <BackLink isPreviewMode={isPreviewMode} />
         </header>
       </Collapsible.Root>
     </>

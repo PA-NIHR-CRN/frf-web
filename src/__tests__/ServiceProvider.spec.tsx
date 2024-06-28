@@ -32,12 +32,6 @@ test('Service provider detail', async () => {
   // Page heading
   expect(screen.getByRole('heading', { name: 'Data Service Provider details', level: 1 })).toBeInTheDocument()
 
-  // Back link
-  expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
-    'href',
-    '/providers'
-  )
-
   // Provider heading
   expect(screen.getByRole('heading', { name: `Data service provider: ${fields.name}`, level: 2 })).toBeInTheDocument()
 
@@ -261,12 +255,6 @@ test('Service provider with only required content types', async () => {
   mockContentfulResponse(requiredFieldsOnlyMock)
 
   render(await getComponent())
-
-  // Back link
-  expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
-    'href',
-    '/providers'
-  )
 
   // Provider heading
   expect(screen.getByRole('heading', { name: `Data service provider: ${fields.name}`, level: 2 })).toBeInTheDocument()
