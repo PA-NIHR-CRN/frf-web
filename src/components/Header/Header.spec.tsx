@@ -8,7 +8,9 @@ import { Header } from './Header'
 jest.mock('next/router', () => require('next-router-mock'))
 
 test('Displays the header', () => {
-  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
+  mockRouter.setCurrentUrl('/providers/dataanalytics')
+
+  render(<Header heading="Empty Heading" isPreviewMode={false} />)
 
   // Skip link
   expect(screen.getByText('Skip to main content')).toHaveAttribute('href', '#main-content')
@@ -37,12 +39,36 @@ test('Displays the header', () => {
   const link = screen.getByRole('link', { name: 'Menu' })
   expect(link).toHaveAttribute('href', '/browse')
   expect(link).toHaveClass('js-disabled-show')
+
+  // Back link
+  expect(screen.getByRole('link', { name: 'Back to list of data service providers' })).toHaveAttribute(
+    'href',
+    '/providers'
+  )
+})
+
+test('Does not display back link when on the /providers path', () => {
+  mockRouter.setCurrentUrl('/providers')
+
+  render(<Header heading="Empty Heading" isPreviewMode={false} />)
+
+  // Back link should not be rendered
+  expect(screen.queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()
+})
+
+test('Does not display back link when in preview mode', () => {
+  mockRouter.setCurrentUrl('/providers/dataanalytics')
+
+  render(<Header heading="Empty Heading" isPreviewMode={true} />)
+
+  // Back link should not be rendered
+  expect(screen.queryByRole('link', { name: 'Back to list of data service providers' })).not.toBeInTheDocument()
 })
 
 test('Shows the navigation menu when clicking the menu icon', async () => {
   const user = userEvent.setup()
 
-  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
+  render(<Header heading="Empty Heading" isPreviewMode={false} />)
 
   const trigger = screen.getByRole('button', { name: 'Show navigation menu' })
   const closedMenu = screen.queryByTestId('nav')
@@ -113,7 +139,7 @@ test('Shows the navigation menu when clicking the menu icon', async () => {
 test('Toggle the navigation menu by keyboard keys', async () => {
   const user = userEvent.setup()
 
-  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
+  render(<Header heading="Empty Heading" isPreviewMode={false} />)
 
   const trigger = screen.getByRole('button', { name: 'Show navigation menu' })
   trigger.focus()
@@ -142,7 +168,7 @@ test('Hide the navigation menu when clicking away from the menu', async () => {
 
   render(
     <>
-      <Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />
+      <Header heading="Empty Heading" isPreviewMode={false} />
       <p>Outside</p>
     </>
   )
@@ -159,7 +185,7 @@ test('Hide the navigation menu when clicking away from the menu', async () => {
 test('Hide the navigation menu when changing page', async () => {
   const user = userEvent.setup()
 
-  render(<Header heading="Empty Heading" backLink={<a href="#back">Go Back</a>} />)
+  render(<Header heading="Empty Heading" isPreviewMode={false} />)
 
   await user.click(screen.getByRole('button', { name: 'Show navigation menu' }))
 

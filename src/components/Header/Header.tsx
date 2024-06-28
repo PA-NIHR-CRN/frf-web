@@ -1,13 +1,15 @@
+// components/Header/Header.tsx
 import * as Collapsible from '@radix-ui/react-collapsible'
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useClickAway } from 'react-use'
 
 import { menu } from '@/constants/menu'
 
+import { BackLink } from '../BackLink/BackLink'
 import { Panel } from '../Panel/Panel'
 import { PhaseBanner } from '../PhaseBanner/PhaseBanner'
 
@@ -97,7 +99,7 @@ function MenuPanel() {
   )
 }
 
-export function Header({ heading, backLink }: { heading: string; backLink: ReactNode }) {
+export function Header({ heading, isPreviewMode }: { heading: string; isPreviewMode: boolean }) {
   const router = useRouter()
   const headerRef = useRef(null)
   const [navOpen, setNavOpen] = useState(false)
@@ -139,7 +141,7 @@ export function Header({ heading, backLink }: { heading: string; backLink: React
             .
           </PhaseBanner>
           {heading && <Panel>{heading}</Panel>}
-          <div>{backLink}</div>
+          <BackLink isPreviewMode={isPreviewMode} />
         </header>
       </Collapsible.Root>
     </>

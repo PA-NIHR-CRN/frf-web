@@ -13,14 +13,12 @@ const primaryFont = Roboto({ weight: ['400', '700'], subsets: ['latin'], display
 export type RootLayoutProps = {
   children: ReactNode
   heading?: string
-  backLink?: ReactNode
   isPreviewMode?: boolean
   cookieBanner?: TypeCookieBanner<undefined, ''> | null
 }
 
 export function RootLayout({
   children,
-  backLink,
   heading = 'Find, Recruit and Follow-up',
   isPreviewMode,
   cookieBanner,
@@ -33,7 +31,7 @@ export function RootLayout({
     <div className={`${primaryFont.variable} font-sans`}>
       {cookieBanner && <CookieBanner content={cookieBanner} />}
       <WarningBanner isPreviewMode={!!isPreviewMode} isTestEnvironment={process.env.NEXT_PUBLIC_APP_ENV === 'uat'} />
-      <Header heading={heading} backLink={backLink} />
+      <Header heading={heading} isPreviewMode={!!isPreviewMode} />
       <main id="main-content" className="govuk-main-wrapper" role="main">
         {children}
       </main>
