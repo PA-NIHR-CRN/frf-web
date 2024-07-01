@@ -1,7 +1,7 @@
 import { devices, PlaywrightTestConfig } from '@playwright/test'
 
 const baseConfig = {
-  baseURL: `${process.env.E2E_BASE_URL}`,
+  baseURL: 'https://test.findrecruitandfollowup.nihr.ac.uk/',
   headless: true,
   screenshot: 'on' as const,
   trace: 'on' as const,
