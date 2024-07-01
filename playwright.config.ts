@@ -1,5 +1,16 @@
 import { devices, PlaywrightTestConfig } from '@playwright/test'
 
+const baseConfig = {
+  baseURL: `${process.env.E2E_BASE_URL}`,
+  headless: true,
+  screenshot: 'on' as const,
+  trace: 'on' as const,
+  storageState: 'qa/utils/cookieAccept.json',
+  launchOptions: {
+    slowMo: 0,
+  },
+}
+
 const config: PlaywrightTestConfig = {
   testDir: './qa/tests/features',
   outputDir: './qa/test-results',
@@ -14,25 +25,22 @@ const config: PlaywrightTestConfig = {
   workers: 6, // to enforce parallel workers in Actions Workflow
   retries: 2,
   use: {
-        userAgent: `${process.env.FRF_USER_AGENT}`,
-        trace: 'on',
-        baseURL: `${process.env.E2E_BASE_URL}`,
-        headless: true,
-        screenshot: 'on',
-        storageState: 'qa/utils/cookieAccept.json',
-        launchOptions: {
-          slowMo: 0,
-        },
-      },
+    ...baseConfig,
+    userAgent: `${process.env.FRF_USER_AGENT}`,
+  },
   projects: [
     {
       name: 'FindRecruitFollow',
       testIgnore: '**/accessibilityTests/**',
+      use: {
+        ...baseConfig,
+      },
     },
     {
       name: 'FRF Firefox',
       testIgnore: '**/tests/**',
       use: {
+        ...baseConfig,
         ...devices['Desktop Firefox'],
       },
     },
@@ -40,6 +48,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Safari',
       testIgnore: '**/tests/**',
       use: {
+        ...baseConfig,
         ...devices['Desktop Safari'],
       },
     },
@@ -47,6 +56,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Microsoft Edge',
       testIgnore: '**/tests/**',
       use: {
+        ...baseConfig,
         ...devices['Desktop Edge'],
         channel: 'msedge',
       },
@@ -55,6 +65,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Google Chrome',
       testIgnore: '**/tests/**',
       use: {
+        ...baseConfig,
         ...devices['Desktop Chrome'],
         channel: 'chrome',
       },
@@ -63,6 +74,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Mobile Chrome',
       testIgnore: '**/tests/**',
       use: {
+        ...baseConfig,
         ...devices['Pixel 5'],
       },
     },
@@ -70,6 +82,7 @@ const config: PlaywrightTestConfig = {
       name: 'FRF Mobile Safari',
       testIgnore: '**/tests/**',
       use: {
+        ...baseConfig,
         ...devices['iPhone 13'],
       },
     },

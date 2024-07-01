@@ -66,7 +66,7 @@ test.describe('Site Menu Smoke Tests - @frf_5', () => {
       await commonItemsPage.assertMenuIconAppearsOpen()
     })
     await test.step('When I click Anywhere Outside of the Site Menu', async () => {
-      await commonItemsPage.frfHeader.click()
+      await commonItemsPage.frfMainContent.click()
     })
     await test.step('Then the Site Menu will be Closed', async () => {
       await commonItemsPage.assertMenuIconAppearsClosed()
