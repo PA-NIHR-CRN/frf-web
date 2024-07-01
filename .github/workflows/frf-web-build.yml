@@ -59,6 +59,9 @@ jobs:
           echo CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} >> .env.local
           echo CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
           echo NEXT_PUBLIC_APP_ENV=${{ vars.APP_ENV }} >> .env.local
+          echo E2E_BASE_URL=${{ vars.E2E_BASE_URL }} >> .env.local
+          echo FRF_USER_AGENT=${{ vars.FRF_USER_AGENT }} >> .env.local
+
           npm run build
           npx prisma generate
 
