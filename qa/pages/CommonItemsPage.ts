@@ -9,6 +9,7 @@ export default class CommonItemsPage {
   readonly linkAccessibility: Locator
   readonly linkCookiePolicy: Locator
   readonly linkTermsConditions: Locator
+  readonly frfMainContent: Locator
   readonly frfHeader: Locator
   readonly frfFooterLinks: Locator
   readonly frfFooterLogos: Locator
@@ -49,6 +50,7 @@ export default class CommonItemsPage {
     this.linkAccessibility = page.locator('a', { hasText: 'Accessibility' })
     this.linkCookiePolicy = page.locator('a', { hasText: 'Cookie policy' })
     this.linkTermsConditions = page.locator('a', { hasText: 'Terms and conditions' })
+    this.frfMainContent = page.locator('main[id="main-content"]')
     this.frfHeader = page.locator('div[data-testid="frf-panel"]')
     this.frfFooterLinks = page.locator('div[data-testid="frf-footer-links"]')
     this.frfFooterLogos = page.locator('div[data-testid="frf-footer-logos"]')
