@@ -47,13 +47,13 @@ jobs:
         if: github.event.inputs.test-tag == '' || github.event.inputs.test-tag == 'all'
         run: npx playwright test
         env:
-          E2E_BASE_URL: ${{ secrets.E2E_BASE_URL }}
+          E2E_BASE_URL: ${{ vars.E2E_BASE_URL }}
           FRF_USER_AGENT: ${{ secrets.FRF_USER_AGENT }}
       - name: Run Tag Specific FRF E2E Tests in TEST
         if: github.event.inputs.test-tag != '' && github.event.inputs.test-tag != 'all'
         run: npx playwright test --grep ${{ github.event.inputs.test-tag }}
         env:
-          E2E_BASE_URL: ${{ secrets.E2E_BASE_URL }}
+          E2E_BASE_URL: ${{ vars.E2E_BASE_URL }}
           FRF_USER_AGENT: ${{ secrets.FRF_USER_AGENT }}
       - name: Remove Github Actions IP from LB security group (Test)
         run: |

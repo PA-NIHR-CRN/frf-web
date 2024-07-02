@@ -9,7 +9,7 @@ on:
 env:
   AWS_REGION: eu-west-2
   FRF_USER_AGENT: ${{ secrets.FRF_USER_AGENT }}
-  E2E_BASE_URL: ${{ secrets.E2E_BASE_URL }}
+  E2E_BASE_URL: ${{ vars.E2E_BASE_URL }}
 
 permissions:
   id-token: write
