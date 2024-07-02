@@ -1,16 +1,17 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('DSP List Base Functionality Tests - @frf_11', () => {
+test.describe.parallel('DSP List Base Functionality Tests - @frf_11', () => {
+  test.beforeEach(async ({ homePage, providersPage }) => {
+    await homePage.goto()
+    await homePage.btnProviders.click()
+    await test.step('And I am on the Providers Page', async () => {
+      await providersPage.assertOnProvidersPage()
+    })
+  })
+
   test('As a user I want to view a list of DSPs registered on the FRF website - @frf_11_ac1_0', async ({
-    homePage,
     providersPage,
   }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
     await test.step('And I am on the Providers Page', async () => {
       await providersPage.assertOnProvidersPage()
     })
@@ -22,37 +23,15 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I should see the list of DSPs limited to 4 per page - @frf_11_ac1_1', async ({
-    homePage,
-    providersPage,
-  }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
+  test('As a user I should see the list of DSPs limited to 4 per page - @frf_11_ac1_1', async ({ providersPage }) => {
     await test.step('Then there are 4 DSPs Shown on the Current Page', async () => {
       await providersPage.assertDspListPageLimit()
     })
   })
 
   test('As a user I should see the list of DSPs is sorted Alphabetically by default - @frf_11_ac1_2', async ({
-    homePage,
     providersPage,
   }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
     await test.step('Then Sort Option `Alphabetical (ascending)` is Selected by Default', async () => {
       await providersPage.assertSelectedSortOption('ascending')
     })
@@ -62,15 +41,8 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
   })
 
   test('As a user I should see Key Top Level Information on a listed DSP - @frf_11_ac2_0', async ({
-    homePage,
     providersPage,
   }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
     await test.step('Then I should see the DSP Name and Organisation', async () => {
       await providersPage.assertDspNameOrg()
     })
@@ -101,37 +73,17 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
   })
 
   test('As a user I expect to see "UK wide" Displayed First when Present on a DSP - @frf_11_ac2_1', async ({
-    homePage,
     providersPage,
   }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
-    await test.step('Then I should see "UK wide" first the Geographical Coverage List', async () => {
+    await test.step('Then I should see "UK wide" first in the Geographical Coverage List', async () => {
       await providersPage.assertDspCoverage()
       await providersPage.assertDspCoverageUkFirst()
     })
   })
 
   test('As a user I should see Page Control Options when DSP list exceeds 4 - @frf_11_ac3_0', async ({
-    homePage,
     providersPage,
   }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
     await test.step('And the DSP List exceeds 4 results', async () => {
       await providersPage.assertDspResultsGreaterThanFour()
     })
@@ -146,19 +98,7 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I can Navigate between Next and Previous Pages - @frf_11_ac3_1', async ({
-    homePage,
-    providersPage,
-  }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('And I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
+  test('As a user I can Navigate between Next and Previous Pages - @frf_11_ac3_1', async ({ providersPage }) => {
     await test.step('And the DSP List exceeds 4 results', async () => {
       await providersPage.assertDspResultsGreaterThanFour()
     })
@@ -184,16 +124,7 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I can Navigate to a Specific Page - @frf_11_ac3_2', async ({ homePage, providersPage }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('And I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
+  test('As a user I can Navigate to a Specific Page - @frf_11_ac3_2', async ({ providersPage }) => {
     await test.step('And the DSP List exceeds 4 results', async () => {
       await providersPage.assertDspResultsGreaterThanFour()
     })
@@ -214,18 +145,8 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
   })
 
   test('As a user I should see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_0', async ({
-    homePage,
     providersPage,
   }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
     await test.step('And I select the `Recently published` Sort Option', async () => {
       await providersPage.selectDspSortDropdownOption('Published')
       await providersPage.assertSelectedSortOption('Published')
@@ -239,18 +160,8 @@ test.describe('DSP List Base Functionality Tests - @frf_11', () => {
   })
 
   test('As a user I should not see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_1', async ({
-    homePage,
     providersPage,
   }) => {
-    await test.step('Given I have navigated to the HomePage', async () => {
-      await homePage.goto()
-    })
-    await test.step('When I click the View All DSPs button', async () => {
-      await homePage.btnProviders.click()
-    })
-    await test.step('And I am on the Providers Page', async () => {
-      await providersPage.assertOnProvidersPage()
-    })
     await test.step('And I am Looking at a DSP with "First Published" Date more than 3 Months ago', async () => {
       await providersPage.assertDspIsNew(false)
     })
