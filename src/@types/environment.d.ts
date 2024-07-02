@@ -10,5 +10,7 @@ declare namespace NodeJS {
     NEXT_REVALIDATE_TIME: string
     NEXT_PUBLIC_APP_ENV: 'dev' | 'test' | 'uat' | 'oat' | 'prod'
     GTM_ID: string
+    E2E_BASE_URL: string
+    FRF_USER_AGENT: string
   }
 }
