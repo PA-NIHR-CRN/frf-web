@@ -8,6 +8,7 @@ on:
 
 env:
   AWS_REGION: eu-west-2
+  FRF_USER_AGENT: ${{ vars.FRF_USER_AGENT }}
 
 jobs:
   build:
@@ -43,7 +44,7 @@ jobs:
           echo CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
           echo NEXT_PUBLIC_APP_ENV=${{ vars.APP_ENV }} >> .env.local
           echo GTM_ID=${{ vars.GTM_ID }} >> .env.local
-          echo FRF_USER_AGENT=${{ vars.FRF_USER_AGENT }} >> .env.local
+          echo FRF_USER_AGENT=${{ env.FRF_USER_AGENT }} >> .env.local
           npm run build
       - name: Test
         run: npm run test:ci
