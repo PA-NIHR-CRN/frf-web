@@ -308,7 +308,7 @@ jobs:
           SLACK_TITLE: 'FRF E2E UI Tests - ENV: TEST : SUCCESS :tick:'
 
   deploy-uat:
-    # needs: e2e-test
+    needs: e2e-test
     environment: UAT
     name: 'Deploy Uat'
     runs-on: ubuntu-latest
