@@ -1,7 +1,8 @@
 import { devices, PlaywrightTestConfig } from '@playwright/test'
 
 const baseConfig = {
-  baseURL: 'https://test.findrecruitandfollowup.nihr.ac.uk/',
+  userAgent: process.env.FRF_USER_AGENT,
+  baseURL: process.env.E2E_BASE_URL,
   headless: true,
   screenshot: 'on' as const,
   trace: 'on' as const,
@@ -26,7 +27,6 @@ const config: PlaywrightTestConfig = {
   retries: 2,
   use: {
     ...baseConfig,
-    userAgent: `${process.env.FRF_USER_AGENT}`,
   },
   projects: [
     {
