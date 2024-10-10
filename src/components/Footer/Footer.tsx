@@ -12,7 +12,7 @@ export function Footer() {
               <a
                 rel="noreferrer noopener"
                 target="_blank"
-                href="https://www.accessibility-services.co.uk/certificates/national-institute-for-health-and-care-research/"
+                href="https://www.accessibility-services.co.uk/certificates/nihr-frf/"
                 aria-label="Shaw Trust accessibility website (Opens in a new window)"
               >
                 <Image src="/assets/logos/shaw-trust.png" height={57} width={189} alt="Shaw Trust Logo" />

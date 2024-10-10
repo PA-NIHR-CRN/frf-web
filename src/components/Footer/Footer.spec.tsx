@@ -40,10 +40,7 @@ test('Displays the Shaw Trust logo and link', () => {
   // Link
   const link = getByRole('link', { name: 'Shaw Trust accessibility website (Opens in a new window)' })
   expect(link).toBeInTheDocument()
-  expect(link).toHaveAttribute(
-    'href',
-    'https://www.accessibility-services.co.uk/certificates/national-institute-for-health-and-care-research/'
-  )
+  expect(link).toHaveAttribute('href', 'https://www.accessibility-services.co.uk/certificates/nihr-frf/')
   expect(link).toHaveAttribute('target', '_blank')
   expect(link).toHaveAttribute('rel', 'noreferrer noopener')
   expect(link).toHaveAttribute('aria-label', 'Shaw Trust accessibility website (Opens in a new window)')
