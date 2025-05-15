@@ -72,13 +72,13 @@ export function Footer() {
               href="https://research.hscni.net/"
               target="_blank"
               className="max-w-[240px] lg:w-auto"
-              aria-label="HSC Public Health Agency (opens in a new window)"
+              aria-label="Northern Ireland Health and Social Care (opens in a new window)"
             >
               <Image
                 src="/assets/logos/hsc-public-health-agency.svg"
                 width={253}
                 height={97}
-                alt="HSC Public Health Agency logo"
+                alt="Northern Ireland Health and Social Care logo"
                 className="mx-auto"
               />
             </a>
