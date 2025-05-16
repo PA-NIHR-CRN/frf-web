@@ -31,5 +31,5 @@ jobs:
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.projectKey=PA-NIHR-CRN_frf-web \
-          -D-X \
+          --X \
           -Dsonar.javascript.lcov.reportPaths="${GITHUB_WORKSPACE}/coverage/lcov.info"
