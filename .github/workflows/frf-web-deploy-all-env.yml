@@ -14,7 +14,7 @@ env:
 jobs:
   build:
     name: 'Build'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-node
@@ -56,7 +56,7 @@ jobs:
     needs: [build]
     environment: DEV
     name: 'Deploy Dev'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -151,7 +151,7 @@ jobs:
     needs: deploy-dev
     environment: TEST
     name: 'Deploy Test'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -317,7 +317,7 @@ jobs:
     needs: e2e-test
     environment: UAT
     name: 'Deploy Uat'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -412,7 +412,7 @@ jobs:
     needs: deploy-uat
     environment: OAT
     name: 'Deploy Oat'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -507,7 +507,7 @@ jobs:
     needs: deploy-oat
     environment: PROD
     name: 'Deploy Prod'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
