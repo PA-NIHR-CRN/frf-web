@@ -287,7 +287,7 @@ jobs:
           path: qa/test-report/
           retention-days: 3
       - name: 'Download HTML Report Artifact'
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@4.3.0
         id: download
         if: github.event.inputs.publish-report != 'false' && always()
       - name: Publish to GH Pages
