@@ -280,7 +280,7 @@ jobs:
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
       - name: Upload HTML Report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@4.6.2
         if: always()
         with:
           name: test-report
