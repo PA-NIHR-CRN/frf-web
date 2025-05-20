@@ -247,7 +247,7 @@ jobs:
     environment: TEST
     name: 'Run E2E Tests'
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
