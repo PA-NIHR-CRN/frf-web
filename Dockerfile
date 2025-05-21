@@ -15,6 +15,9 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
+  
+# prisma openSSL compatibility fix
+RUN apk add --update --no-cache openssl1.1-compat
 
 # Rebuild the source code only when needed
 FROM base AS builder
