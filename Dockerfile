@@ -16,8 +16,6 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
   
-#prisma simulink for compatibility
-RUN ln -s /usr/lib/libssl.so.3 /lib/libssl.so.3
 
 # Rebuild the source code only when needed
 FROM base AS builder
