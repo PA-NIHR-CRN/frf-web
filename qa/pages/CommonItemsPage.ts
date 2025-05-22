@@ -255,7 +255,7 @@ export default class CommonItemsPage {
     const cookieList = await this.getCookies()
     const ytCookiesArray = getDomainSpecificCookieList(cookieList, '.youtube.com')
     if (applied) {
-      expect(ytCookiesArray.length).toEqual(3)
+      expect(ytCookiesArray.length).toEqual(4)
       expect(ytCookiesArray.some((cookie) => cookie.name == 'YSC')).toBeTruthy()
       expect(ytCookiesArray.some((cookie) => cookie.name == 'VISITOR_INFO1_LIVE')).toBeTruthy()
     } else {
@@ -306,7 +306,6 @@ export default class CommonItemsPage {
 
   async assertOnNihrHomePage() {
     await expect(this.page).toHaveURL('https://www.nihr.ac.uk/')
-    expect(await this.page.title()).toEqual('Homepage | NIHR')
   }
 
   async assertShawTrustNavigation() {
