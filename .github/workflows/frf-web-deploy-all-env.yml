@@ -288,6 +288,7 @@ jobs:
           retention-days: 3
       - name: 'Download HTML Report Artifact'
         uses: actions/download-artifact@4.3.0
+        uses: actions/download-artifact@v4
         id: download
         if: github.event.inputs.publish-report != 'false' && always()
       - name: Publish to GH Pages
