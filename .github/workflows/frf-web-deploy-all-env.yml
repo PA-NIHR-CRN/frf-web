@@ -14,7 +14,7 @@ env:
 jobs:
   build:
     name: 'Build'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-node
@@ -56,7 +56,7 @@ jobs:
     needs: [build]
     environment: DEV
     name: 'Deploy Dev'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -151,7 +151,7 @@ jobs:
     needs: deploy-dev
     environment: TEST
     name: 'Deploy Test'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -247,7 +247,7 @@ jobs:
     environment: TEST
     name: 'Run E2E Tests'
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -280,14 +280,14 @@ jobs:
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
       - name: Upload HTML Report as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@4.6.2
         if: always()
         with:
           name: test-report
           path: qa/test-report/
           retention-days: 3
       - name: 'Download HTML Report Artifact'
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@4.3.0
         id: download
         if: github.event.inputs.publish-report != 'false' && always()
       - name: Publish to GH Pages
@@ -317,7 +317,7 @@ jobs:
     needs: e2e-test
     environment: UAT
     name: 'Deploy Uat'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -412,7 +412,7 @@ jobs:
     needs: deploy-uat
     environment: OAT
     name: 'Deploy Oat'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
@@ -507,7 +507,7 @@ jobs:
     needs: deploy-oat
     environment: PROD
     name: 'Deploy Prod'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - uses: actions/checkout@v3
