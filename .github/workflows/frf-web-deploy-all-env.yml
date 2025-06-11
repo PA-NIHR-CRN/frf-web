@@ -305,8 +305,8 @@ jobs:
       if: github.event.inputs.publish-report != 'false' && always()
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-      folder: ${{ steps.download.outputs.download_path }}/playwright-report/
-      branch: gh-pages
+        folder: ${{ steps.download.outputs.download-path }}/playwright-report/
+        branch: gh-pages
     - name: Send slack message failure
       if: failure() && github.ref == 'refs/heads/main'
       uses: rtCamp/action-slack-notify@v2.2.0
