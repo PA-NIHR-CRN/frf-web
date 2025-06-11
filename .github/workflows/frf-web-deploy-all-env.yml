@@ -1,0 +1,599 @@
+name: FRF Web Deploy to all Envs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  AWS_REGION: eu-west-2
+  FRF_USER_AGENT: ${{ secrets.FRF_USER_AGENT }}
+  E2E_BASE_URL: ${{ vars.E2E_BASE_URL }}
+
+jobs:
+  build:
+    name: 'Build'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-node
+      - name: Install
+        run: npm ci --no-audit --no-fund
+      - name: Configure AWS credentials (dev)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
+          aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get secrets from Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            crnccd-secret-dev-frf-app-config
+          parse-json-secrets: true
+
+      - name: Build
+        run: |
+          touch .env.local
+          echo DATABASE_URL=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_DATABASE_URL }} >> .env.local
+          echo CONTENTFUL_SPACE_ID=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} >> .env.local
+          echo CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} >> .env.local
+          echo CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} >> .env.local
+          echo CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} >> .env.local
+          echo CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} >> .env.local
+          echo NEXT_PUBLIC_APP_ENV=${{ vars.APP_ENV }} >> .env.local
+          echo GTM_ID=${{ vars.GTM_ID }} >> .env.local
+          echo FRF_USER_AGENT=${{ env.FRF_USER_AGENT }} >> .env.local
+          echo E2E_BASE_URL=${{ env.E2E_BASE_URL }} >> .env.local
+
+          npm run build
+      - name: Test
+        run: npm run test:ci
+
+  deploy-dev:
+    needs: [build]
+    environment: DEV
+    name: 'Deploy Dev'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials (dev)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
+          aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get secrets from Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            crnccd-secret-dev-frf-app-config
+          parse-json-secrets: true
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Get GitHub Actions Runner Public IP
+        id: publicip
+        run: |
+          response=$(curl -s icanhazip.com)
+          echo "ip=$response" >> "$GITHUB_OUTPUT"
+      - name: Add Github Actions IP to RDS security group (Dev)
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccd-ecr-dev-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_DATABASE_URL }}
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccd-ecs-dev-frf-task-definition --query taskDefinition > ./task-definition.json
+          echo $(cat ./task-definition.json | jq 'del(
+                  .taskDefinitionArn,
+                  .requiresAttributes,
+                  .compatibilities,
+                  .revision,
+                  .status,
+                  .registeredAt,
+                  .registeredBy
+              )') > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccd-ecs-dev-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+          environment-variables: |
+            GTM_ID=${{ vars.GTM_ID }}
+            DATABASE_URL=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
+
+      - name: Remove Github Actions IP from RDS security group (Dev)
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccd-ecs-dev-frf-service
+          ECS_CLUSTER: crnccd-ecs-dev-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+  deploy-test:
+    needs: deploy-dev
+    environment: TEST
+    name: 'Deploy Test'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials (test)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
+          aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get secrets from Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            crnccd-secret-test-frf-app-config
+          parse-json-secrets: true
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Get GitHub Actions Runner Public IP
+        id: publicip
+        run: |
+          response=$(curl -s icanhazip.com)
+          echo "ip=$response" >> "$GITHUB_OUTPUT"
+      - name: Add Github Actions IP to RDS security group (Test)
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccd-ecr-test-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_DATABASE_URL }}
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccd-ecs-test-frf-task-definition --query taskDefinition > ./task-definition.json
+          echo $(cat ./task-definition.json | jq 'del(
+                  .taskDefinitionArn,
+                  .requiresAttributes,
+                  .compatibilities,
+                  .revision,
+                  .status,
+                  .registeredAt,
+                  .registeredBy
+              )') > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccd-ecs-test-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+          environment-variables: |
+            GTM_ID=${{ vars.GTM_ID }}
+            DATABASE_URL=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
+
+      - name: Remove Github Actions IP from RDS security group (Test)
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccd-ecs-test-frf-service
+          ECS_CLUSTER: crnccd-ecs-test-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+  e2e-test:
+    needs: deploy-test
+    environment: TEST
+    name: 'Run E2E Tests'
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_ID }}
+          aws-secret-access-key: ${{ secrets.NIHR_GITHUB_ACTIONS_IAM_SECRET }}
+          aws-region: eu-west-2
+      - name: Get GitHub Actions Runner Public IP
+        id: publicip
+        run: |
+          response=$(curl -s icanhazip.com)
+          echo "ip=$response" >> "$GITHUB_OUTPUT"
+      - name: Add Github Actions IP to LB security group (Test)
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
+      - name: Run All FRF E2E Tests in TEST
+        run: npx playwright test
+        env:
+          E2E_BASE_URL: ${{ env.E2E_BASE_URL }}
+          FRF_USER_AGENT: ${{ env.FRF_USER_AGENT }}
+      - name: Remove Github Actions IP from LB security group (Test)
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
+      - name: Upload HTML Report as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report
+          path: qa/test-report/
+          retention-days: 3
+      - name: 'Download HTML Report Artifact'
+        uses: actions/download-artifact@v4
+        id: download
+        if: github.event.inputs.publish-report != 'false' && always()
+      - name: Publish to GH Pages
+        if: github.event.inputs.publish-report != 'false' && always()
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{steps.download.outputs.download-path}}/qa/test-report/
+          branch: gh-pages
+      - name: Send slack message failure
+        if: failure() && github.ref == 'refs/heads/main'
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
+          SLACK_COLOR: 'failure'
+          SLACK_MESSAGE: 'FRF E2E Regression Tests Failed in TEST! :face_with_thermometer:'
+          SLACK_TITLE: 'FRF E2E UI Tests - ENV: TEST : FAILURE :x:'
+      - name: Send slack message success
+        if: success() && github.ref == 'refs/heads/main'
+        uses: rtCamp/action-slack-notify@v2.2.0
+        env:
+          SLACK_WEBHOOK: ${{ secrets.FRF_SLACK_WEBHOOK }}
+          SLACK_COLOR: 'success'
+          SLACK_MESSAGE: 'FRF E2E Regression Tests Passed in TEST! :partying_face:'
+          SLACK_TITLE: 'FRF E2E UI Tests - ENV: TEST : SUCCESS :tick:'
+
+  deploy-uat:
+    needs: e2e-test
+    environment: UAT
+    name: 'Deploy Uat'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials (uat)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.CRNCC_STAGING_IAM_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CRNCC_STAGING_IAM_ACCESS_KEY_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get secrets from Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            crnccs-secret-uat-frf-app-config
+          parse-json-secrets: true
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Get GitHub Actions Runner Public IP
+        id: publicip
+        run: |
+          response=$(curl -s icanhazip.com)
+          echo "ip=$response" >> "$GITHUB_OUTPUT"
+      - name: Add Github Actions IP to RDS security group (Uat)
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccs-ecr-uat-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_DATABASE_URL }}
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccs-ecs-uat-frf-task-definition --query taskDefinition > ./task-definition.json
+          echo $(cat ./task-definition.json | jq 'del(
+                  .taskDefinitionArn,
+                  .requiresAttributes,
+                  .compatibilities,
+                  .revision,
+                  .status,
+                  .registeredAt,
+                  .registeredBy
+              )') > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccs-ecs-uat-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+          environment-variables: |
+            GTM_ID=${{ vars.GTM_ID }}
+            DATABASE_URL=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
+
+      - name: Remove Github Actions IP from RDS security group (Uat)
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccs-ecs-uat-frf-service
+          ECS_CLUSTER: crnccs-ecs-uat-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+  deploy-oat:
+    needs: deploy-uat
+    environment: OAT
+    name: 'Deploy Oat'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials (oat)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get secrets from Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            crnccp-secret-oat-frf-app-config
+          parse-json-secrets: true
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Get GitHub Actions Runner Public IP
+        id: publicip
+        run: |
+          response=$(curl -s icanhazip.com)
+          echo "ip=$response" >> "$GITHUB_OUTPUT"
+      - name: Add Github Actions IP to RDS security group (Oat)
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccp-ecr-oat-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_DATABASE_URL }}
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccp-ecs-oat-frf-task-definition --query taskDefinition > ./task-definition.json
+          echo $(cat ./task-definition.json | jq 'del(
+                  .taskDefinitionArn,
+                  .requiresAttributes,
+                  .compatibilities,
+                  .revision,
+                  .status,
+                  .registeredAt,
+                  .registeredBy
+              )') > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccp-ecs-oat-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+          environment-variables: |
+            GTM_ID=${{ vars.GTM_ID }}
+            DATABASE_URL=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
+
+      - name: Remove Github Actions IP from RDS security group (Oat)
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccp-ecs-oat-frf-service
+          ECS_CLUSTER: crnccp-ecs-oat-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+
+  deploy-prod:
+    needs: deploy-oat
+    environment: PROD
+    name: 'Deploy Prod'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials (prod)
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.CRNCC_PROD_IAM_ACCESS_KEY_SECRET }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Get secrets from Secrets Manager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids: |
+            crnccp-secret-prod-frf-app-config
+          parse-json-secrets: true
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Get GitHub Actions Runner Public IP
+        id: publicip
+        run: |
+          response=$(curl -s icanhazip.com)
+          echo "ip=$response" >> "$GITHUB_OUTPUT"
+      - name: Add Github Actions IP to RDS security group (Prod)
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REPOSITORY: crnccp-ecr-prod-frf-repository
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_NAME_TAG: frf-web
+          IMAGE_SHA_TAG: frf-web-${{ github.sha }}
+        run: |
+          echo "Using registry ${{ env.ECR_REGISTRY }}"
+          echo "Tagging image with ${{ env.IMAGE_NAME_TAG}} and ${{ env.IMAGE_SHA_TAG }}"
+          docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ vars.CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
+          docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Run database migrations
+        run: npm run migrate:deploy
+        env:
+          DATABASE_URL: ${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_DATABASE_URL }}
+      - name: Generate task definition file from container
+        run: |
+          aws ecs describe-task-definition --task-definition crnccp-ecs-prod-frf-task-definition --query taskDefinition > ./task-definition.json
+          echo $(cat ./task-definition.json | jq 'del(
+                  .taskDefinitionArn,
+                  .requiresAttributes,
+                  .compatibilities,
+                  .revision,
+                  .status,
+                  .registeredAt,
+                  .registeredBy
+              )') > ./task-definition.json
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        env:
+          ECS_TASK_DEFINITION: ./task-definition.json
+          CONTAINER_NAME: crnccp-ecs-prod-frf-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+          environment-variables: |
+            GTM_ID=${{ vars.GTM_ID }}
+            DATABASE_URL=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_DATABASE_URL }}
+            CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
+
+      - name: Remove Github Actions IP from RDS security group (Prod)
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
+
+      - name: Deploy Amazon ECS task definition
+        env:
+          ECS_SERVICE: crnccp-ecs-prod-frf-service
+          ECS_CLUSTER: crnccp-ecs-prod-frf-cluster
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
