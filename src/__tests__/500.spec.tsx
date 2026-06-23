@@ -66,7 +66,7 @@ test('Displays the 500 page with default/fallback content', async () => {
 test('Sets the static cache revalidation period', async () => {
   mockContentfulResponse(successMock)
   const { revalidate } = await getStaticProps()
-  expect(revalidate).toBe(60)
+  expect(revalidate).toBe(3600)
 })
 
 test('Handles no data returned', async () => {

@@ -1,8 +1,8 @@
 {
-  "name": "dev",
+  "name": "uat",
   "sys": {
     "type": "Environment",
-    "id": "dev",
+    "id": "uat",
     "version": 3,
     "space": {
       "sys": {

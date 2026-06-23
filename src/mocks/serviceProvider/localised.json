@@ -24,7 +24,7 @@
     "updatedAt": "2023-06-30T10:14:01.870Z",
     "environment": {
       "sys": {
-        "id": "dev",
+        "id": "uat",
         "type": "Link",
         "linkType": "Environment"
       }

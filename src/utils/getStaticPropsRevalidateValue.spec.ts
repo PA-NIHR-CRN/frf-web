@@ -2,7 +2,7 @@ import { getStaticPropsRevalidateValue } from './getStaticPropsRevalidateValue'
 
 describe('getStaticPropsRevalidateValue', () => {
   it('returns the correct next revalidation time', () => {
-    expect(getStaticPropsRevalidateValue()).toBe(60)
+    expect(getStaticPropsRevalidateValue()).toBe(3600)
     const currentValue = process.env.NEXT_REVALIDATE_TIME
     process.env.NEXT_REVALIDATE_TIME = 'false'
     expect(getStaticPropsRevalidateValue()).toBe(false)
