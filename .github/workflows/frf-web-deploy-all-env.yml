@@ -101,6 +101,8 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
       - name: Run database migrations
         run: npm run migrate:deploy
         env:
@@ -133,6 +135,7 @@ jobs:
             CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCD_SECRET_DEV_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Dev)
+        if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
@@ -196,6 +199,8 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
       - name: Run database migrations
         run: npm run migrate:deploy
         env:
@@ -228,6 +233,7 @@ jobs:
             CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCD_SECRET_TEST_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Test)
+        if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
@@ -277,6 +283,7 @@ jobs:
           E2E_BASE_URL: ${{ env.E2E_BASE_URL }}
           FRF_USER_AGENT: ${{ env.FRF_USER_AGENT }}
       - name: Remove Github Actions IP from LB security group (Test)
+        if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
       - name: Upload HTML Report as artifact
@@ -362,6 +369,8 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
       - name: Run database migrations
         run: npm run migrate:deploy
         env:
@@ -394,6 +403,7 @@ jobs:
             CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCS_SECRET_UAT_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Uat)
+        if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
@@ -457,6 +467,8 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
       - name: Run database migrations
         run: npm run migrate:deploy
         env:
@@ -489,6 +501,7 @@ jobs:
             CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCP_SECRET_OAT_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Oat)
+        if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 
@@ -552,7 +565,7 @@ jobs:
           docker build --build-arg CONTENTFUL_SPACE_ID=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_SPACE_ID }} --build-arg CONTENTFUL_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_PREVIEW_ACCESS_TOKEN }} --build-arg CONTENTFUL_MANAGEMENT_ACCESS_TOKEN=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN }} --build-arg CONTENTFUL_PREVIEW_MODE=${{ vars.CONTENTFUL_PREVIEW_MODE }} --build-arg CONTENTFUL_ENVIRONMENT=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_ENVIRONMENT }} --build-arg CONTENTFUL_CACHE_TTL=${{ vars.CONTENTFUL_CACHE_TTL }} --build-arg NEXT_REVALIDATE_TIME=${{ vars.NEXT_REVALIDATE_TIME }} --build-arg APP_ENV=${{ vars.APP_ENV }} -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_NAME_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG .
           docker push --all-tags $ECR_REGISTRY/$ECR_REPOSITORY
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_SHA_TAG" >> "$GITHUB_OUTPUT"
-      - name: Install dependencies for migrations
+      - name: Install dependencies
         run: npm ci --no-audit --no-fund
       - name: Run database migrations
         run: npm run migrate:deploy
@@ -586,6 +599,7 @@ jobs:
             CONTENTFUL_WEBHOOK_API_KEY=${{ env.CRNCCP_SECRET_PROD_FRF_APP_CONFIG_CONTENTFUL_WEBHOOK_API_KEY }}
 
       - name: Remove Github Actions IP from RDS security group (Prod)
+        if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.RDS_SG }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 3306, "ToPort": 3306, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation DB migration"}]}]'
 

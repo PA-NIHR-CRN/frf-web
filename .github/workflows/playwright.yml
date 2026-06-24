@@ -56,6 +56,7 @@ jobs:
           E2E_BASE_URL: ${{ vars.E2E_BASE_URL }}
           FRF_USER_AGENT: ${{ secrets.FRF_USER_AGENT }}
       - name: Remove Github Actions IP from LB security group (Test)
+        if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id ${{ secrets.LB_SG_TEST }} --ip-permissions '[{"IpProtocol": "tcp", "FromPort": 443, "ToPort": 443, "IpRanges": [{"CidrIp": "${{ steps.publicip.outputs.ip }}/32", "Description": "GitHub runner IP for FRF automation test run"}]}]'
       - name: Upload HTML Report as artifact
