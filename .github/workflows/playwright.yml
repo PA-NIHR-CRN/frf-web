@@ -19,7 +19,7 @@ jobs:
   e2e-test:
     environment: TEST
     timeout-minutes: 15
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -80,7 +80,7 @@ jobs:
   send-slack-message-failure:
     name: Send slack message failure
     needs: [e2e-test]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: failure()
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
@@ -99,7 +99,7 @@ jobs:
   send-slack-message-success:
     name: Send slack message success
     needs: [e2e-test]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: success()
     steps:
       - uses: technote-space/workflow-conclusion-action@v3
