@@ -64,8 +64,8 @@ jobs:
           echo E2E_BASE_URL=${{ env.E2E_BASE_URL }} >> .env.local
           echo FRF_USER_AGENT=${{ env.FRF_USER_AGENT }} >> .env.local
 
+          ./node_modules/.bin/prisma generate
           npm run build
-          npx prisma generate
 
   # Code quality checks
   quality-checks:
