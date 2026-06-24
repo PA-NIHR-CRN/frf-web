@@ -10,7 +10,7 @@
     "test": "jest --watch",
     "test:ci": "jest --ci --coverage",
     "migrate:dev": "dotenv -e .env.local -- prisma migrate dev",
-    "migrate:deploy": "prisma migrate deploy",
+    "migrate:deploy": "npx --no-install prisma migrate deploy",
     "studio": "prisma studio"
   },
   "dependencies": {
