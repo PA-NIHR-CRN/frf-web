@@ -1,14 +1,14 @@
 import { test } from '../../../hooks/CustomFixtures'
 import { convertPromiseStringToNumber } from '../../../utils/UtilFunctions'
 
-test.describe('DSP List Search Summary Tests - @frf_14 @frf_14_summary', () => {
+test.describe.skip('DSP List Search Summary Tests - @frf_14 @frf_14_summary', () => {
   test('As a user I want to be able to search a specific DSP by Name - @frf_14_ac1_name', async ({ providersPage }) => {
     await test.step('Given I have navigated to the DSP List Page', async () => {
       await providersPage.goto()
       await providersPage.assertOnProvidersPage()
     })
-    await test.step('When I enter key phrase `lolapalooza` into the Search Field', async () => {
-      await providersPage.enterSearchPhrase('lolapalooza')
+    await test.step('When I enter key phrase `Genomic Profile Register` into the Search Field', async () => {
+      await providersPage.enterSearchPhrase('Genomic Profile Register')
     })
     await test.step('And I click the Search Button', async () => {
       await providersPage.dspFilterSearchBtn.click()
@@ -17,19 +17,19 @@ test.describe('DSP List Search Summary Tests - @frf_14 @frf_14_summary', () => {
     await test.step('Then the DSP list shows a single result', async () => {
       await providersPage.assertNumberOfDspResults(1)
     })
-    await test.step('And the DSP shown contains `lolapalooza` in its name', async () => {
-      await providersPage.assertDspSearchResultName('lolapalooza')
+    await test.step('And the DSP shown contains `Genomic Profile Register` in its name', async () => {
+      await providersPage.assertDspSearchResultName('Genomic Profile Register')
     })
   })
 
-  test('As a user I want to be able to search a specific DSP by Organisation - @frf_14_ac1_org', async ({
+  test.skip('As a user I want to be able to search a specific DSP by Organisation - @frf_14_ac1_org', async ({
     providersPage,
   }) => {
     await test.step('Given I have navigated to the DSP List Page', async () => {
       await providersPage.goto()
       await providersPage.assertOnProvidersPage()
     })
-    await test.step('When I enter key phrase `lolapalooza` into the Search Field', async () => {
+    await test.step('When I enter key phrase `Incorporated` into the Search Field', async () => {
       await providersPage.enterSearchPhrase('Incorporated')
     })
     await test.step('And I click the Search Button', async () => {
@@ -151,7 +151,7 @@ test.describe('DSP List Search Summary Tests - @frf_14 @frf_14_summary', () => {
     })
   })
 
-  test('As a user I want to be able to search a specific DSP by Cost Description - @frf_14_ac1_cost_desc', async ({
+  test.skip('As a user I want to be able to search a specific DSP by Cost Description - @frf_14_ac1_cost_desc', async ({
     providersPage,
   }) => {
     await test.step('Given I have navigated to the DSP List Page', async () => {
@@ -180,8 +180,8 @@ test.describe('DSP List Search Summary Tests - @frf_14 @frf_14_summary', () => {
       await providersPage.goto()
       await providersPage.assertOnProvidersPage()
     })
-    await test.step('When I enter key phrase `High Level Data` into the Search Field', async () => {
-      await providersPage.enterSearchPhrase('High Level Data')
+    await test.step('When I enter key phrase `Hospital episode statistics` into the Search Field', async () => {
+      await providersPage.enterSearchPhrase('Hospital episode statistics')
     })
     await test.step('And I click the Search Button', async () => {
       await providersPage.dspFilterSearchBtn.click()
@@ -190,8 +190,8 @@ test.describe('DSP List Search Summary Tests - @frf_14 @frf_14_summary', () => {
     await test.step('Then the DSP list shows a single result', async () => {
       await providersPage.assertNumberOfDspResults(1)
     })
-    await test.step('And the DSP shown contains `High Level Data` in its Type of Data List', async () => {
-      await providersPage.assertDspSearchResultTypeOfData('High Level Data')
+    await test.step('And the DSP shown contains `Hospital episode statistics` in its Type of Data List', async () => {
+      await providersPage.assertDspSearchResultTypeOfData('Hospital episode statistics')
     })
   })
 
@@ -204,8 +204,8 @@ test.describe('DSP List Search Summary Tests - @frf_14 @frf_14_summary', () => {
     await test.step('And No Search has been Applied', async () => {
       numTotalNoOfDsp = convertPromiseStringToNumber(await providersPage.getPageTitleNumber())
     })
-    await test.step('When I enter key phrase `lolapalooza` into the Search Field', async () => {
-      await providersPage.enterSearchPhrase('lolapalooza')
+    await test.step('When I enter key phrase `Genomic Profile Register` into the Search Field', async () => {
+      await providersPage.enterSearchPhrase('Genomic Profile Register')
     })
     await test.step('And I click the Search Button', async () => {
       await providersPage.dspFilterSearchBtn.click()

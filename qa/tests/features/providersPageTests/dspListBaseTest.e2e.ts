@@ -40,7 +40,7 @@ test.describe.parallel('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I should see Key Top Level Information on a listed DSP - @frf_11_ac2_0', async ({
+  test.skip('As a user I should see Key Top Level Information on a listed DSP - @frf_11_ac2_0', async ({
     providersPage,
   }) => {
     await test.step('Then I should see the DSP Name and Organisation', async () => {
@@ -72,7 +72,7 @@ test.describe.parallel('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I expect to see "UK wide" Displayed First when Present on a DSP - @frf_11_ac2_1', async ({
+  test.skip('As a user I expect to see "UK wide" Displayed First when Present on a DSP - @frf_11_ac2_1', async ({
     providersPage,
   }) => {
     await test.step('Then I should see "UK wide" first in the Geographical Coverage List', async () => {

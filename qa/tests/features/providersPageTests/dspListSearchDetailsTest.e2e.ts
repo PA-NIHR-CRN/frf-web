@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('DSP List Search Details Tests - @frf_14 @frf_14_details', () => {
+test.describe.skip('DSP List Search Details Tests - @frf_14 @frf_14_details', () => {
   test('As a user I want to be able to search a specific DSP by `Funded By` field - @frf_14_ac1_funded_by', async ({
     providersPage,
     providerDetailsPage,

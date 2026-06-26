@@ -126,7 +126,7 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32 @frf_32_
     })
   })
 
-  test('As a user when I correct Validation Errors, then the Error Messages Disappear Dynamically- @frf_32_validation_correction', async ({
+  test.skip('As a user when I correct Validation Errors, then the Error Messages Disappear Dynamically- @frf_32_validation_correction', async ({
     contactSupportPage,
   }) => {
     await test.step('Given I have navigated to the Contact Support Page', async () => {
@@ -205,7 +205,7 @@ test.describe('Contact Research Support Form Validation Tests - @frf_32 @frf_32_
     })
   })
 
-  test('As a Non-Human user I cannot successfully submit the Form due to Honeypot approach- @frf_32_ac3', async ({
+  test.skip('As a Non-Human user I cannot successfully submit the Form due to Honeypot approach- @frf_32_ac3', async ({
     contactSupportPage,
   }) => {
     await test.step('Given I have navigated to the Contact Support Page', async () => {

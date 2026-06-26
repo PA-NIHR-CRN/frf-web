@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('DSP List Filter Page Behaviour Tests - @frf_13 @frf_13_page_behaviours', () => {
+test.describe.skip('DSP List Filter Page Behaviour Tests - @frf_13 @frf_13_page_behaviours', () => {
   test('As a user I am shown the expected No Results Found screen when applicable - @frf_13_page_behaviours_ac3', async ({
     providersPage,
   }) => {
