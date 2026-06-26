@@ -70,5 +70,5 @@ test('Displays the cookie banner', () => {
       <h1>Service Provider Detail Page</h1>
     </RootLayout>
   )
-  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
+  expect(screen.getByText('We may use some essential cookies to make this service work.')).toBeInTheDocument()
 })

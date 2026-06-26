@@ -11,7 +11,7 @@ export default class DataServiceProvidersPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h1[class="govuk-heading-l"]')
     this.contactFrfBtn = page.locator('a[class="govuk-button govuk-button--secondary mb-0 mt-2 text-left"]')
   }
 
@@ -23,7 +23,7 @@ export default class DataServiceProvidersPage {
   async assertOnDataServiceProvidersPage() {
     await expect(this.page).toHaveURL('data-service-providers')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Information for data service providers')
+    await expect(this.headingPageTitle).toHaveText('Organisations providing data services')
   }
 
   async assertContactFrfButtonPresent() {
