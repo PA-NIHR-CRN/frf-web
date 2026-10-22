@@ -11,7 +11,7 @@ export default class CookiePolicyPage {
     this.page = page
 
     //Locators
-    this.headingPageTitle = page.locator('h2[class="govuk-heading-l"]')
+    this.headingPageTitle = page.locator('h1[data-testid="page-title"]')
     this.changeCookieBtn = page.locator('a[href="/cookie-policy?change-settings=1"]')
   }
 
@@ -22,7 +22,7 @@ export default class CookiePolicyPage {
 
   async assertOnCookiePolicyPage() {
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Cookie Policy')
+    await expect(this.headingPageTitle).toHaveText('Cookies policy')
     await expect(this.page).toHaveURL('cookie-policy')
   }
 

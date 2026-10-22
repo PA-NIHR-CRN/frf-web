@@ -104,13 +104,13 @@ test('Displays the Home page', async () => {
   )
 
   // Cookie banner
-  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
+  expect(screen.getByText('We may use some essential cookies to make this service work.')).toBeInTheDocument()
 })
 
 test('Sets the static cache revalidation period', async () => {
   mockContentfulResponse(successMock)
   const { revalidate } = await getStaticProps()
-  expect(revalidate).toBe(60)
+  expect(revalidate).toBe(3600)
 })
 
 test('Handles no data returned', async () => {

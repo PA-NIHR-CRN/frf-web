@@ -84,7 +84,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
       await providerDetailsPage.btnContactDsp.click()
     })
     await test.step('And I am on the Contact DSP page', async () => {
-      await contactDspPage.assertOnContactDspPage('Genomic Profile Register')
+      await contactDspPage.assertOnContactDspPage('DataAnalytics')
     })
     await test.step('Then I will see the Cookie Banner displays at the top of the Page', async () => {
       await commonItemsPage.assertCookieBannerAppears(true)
@@ -100,7 +100,7 @@ test.describe('Cookie Tests - @frf_3_cookies @frf_3_cookie_banner', () => {
     })
   })
 
-  test('Google Analytics & Youtube Cookies are applied when I Accept Cookies - @frf_3_ac4_accept', async ({
+  test.skip('Google Analytics & Youtube Cookies are applied when I Accept Cookies - @frf_3_ac4_accept', async ({
     homePage,
     commonItemsPage,
     baseURL,

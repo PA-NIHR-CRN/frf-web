@@ -25,7 +25,7 @@ test('Renders the cookie banner selection view', () => {
   render(<CookieBanner content={mockCookieBannerContent} />)
 
   expect(screen.getByRole('heading', { name: /cookies on find, recruit and follow-up/i })).toBeInTheDocument()
-  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
+  expect(screen.getByText('We may use some essential cookies to make this service work.')).toBeInTheDocument()
   expect(screen.getByRole('button', { name: /accept additional cookies/i })).toBeInTheDocument()
   expect(screen.getByRole('button', { name: /reject additional cookies/i })).toBeInTheDocument()
   expect(screen.getByRole('link', { name: /view cookies/i })).toBeInTheDocument()
@@ -109,7 +109,7 @@ test('Changes back to the selection view when "change your cookie settings" is c
 
   // Ensure that the selection view is rendered again
   expect(screen.getByRole('heading', { name: /cookies on find, recruit and follow-up/i })).toBeInTheDocument()
-  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
+  expect(screen.getByText('We may use some essential cookies to make this service work.')).toBeInTheDocument()
   expect(screen.getByRole('button', { name: /accept additional cookies/i })).toBeInTheDocument()
   expect(screen.getByRole('button', { name: /reject additional cookies/i })).toBeInTheDocument()
   expect(screen.getByRole('link', { name: /view cookies/i })).toBeInTheDocument()
@@ -141,7 +141,7 @@ test('Accepting or rejecting cookies via keyboard', async () => {
 
   await user.keyboard('{Enter}')
 
-  expect(screen.getByText('We use some essential cookies to make this service work.')).toBeInTheDocument()
+  expect(screen.getByText('We may use some essential cookies to make this service work.')).toBeInTheDocument()
 
   await user.tab()
   await user.tab()

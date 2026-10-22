@@ -130,7 +130,7 @@ export default class ProvidersPage {
       'li[class="govuk-body govuk-!-margin-bottom-2 flex list-none items-start gap-x-2 gap-y-1"]'
     )
     this.dspResultCoverageTxt = page.locator('p[class="govuk-!-margin-bottom-1"]')
-    this.dspResultCoverageSupportTxt = page.locator('p[class="mb-0"]')
+    this.dspResultCoverageSupportTxt = page.locator('p[data-testid="frf-dsp-description"]')
     this.dspResultSuitedHeader = page.locator('h3[class="govuk-heading-s mb-3"]', { hasText: 'Suited to:' })
     this.dspResultSuitedList = page.locator('ul[aria-label="Suited to:"]')
     this.dspResultFirstPublishedHeader = page.locator('strong', { hasText: 'First published:' })
@@ -298,10 +298,10 @@ export default class ProvidersPage {
     const titleText = await this.dspResultTitle.nth(0).textContent()
     if (titleText !== null) {
       expect(titleText.substring(titleText.indexOf(':') + 1, titleText.length).trim()).toEqual(
-        'Genomic Profile Register'
+        'DataAnalytics'
       )
     }
-    expect(await this.dspResultOrgName.nth(0).textContent()).toEqual('Genomic Profile Register')
+    expect(await this.dspResultOrgName.nth(0).textContent()).toEqual('DataAnalytics')
   }
 
   async assertDspOverviewPresent() {

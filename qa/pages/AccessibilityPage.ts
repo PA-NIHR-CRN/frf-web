@@ -21,6 +21,6 @@ export default class AccessibilityPage {
   async assertOnAccessibilityPage() {
     await expect(this.page).toHaveURL('accessibility')
     await expect(this.headingPageTitle).toBeVisible()
-    await expect(this.headingPageTitle).toHaveText('Accessibility statement for findrecruitandfollowup.nihr.ac.uk')
+    await expect(this.headingPageTitle).toHaveText('Accessibility statement for Find, Recruit and Follow-up')
   }
 }

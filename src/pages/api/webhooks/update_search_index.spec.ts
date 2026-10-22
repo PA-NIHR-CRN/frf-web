@@ -33,8 +33,8 @@ const searchKeywords = `Genomic Profile Register, Delivered by Genomic Profile R
 
 test('Updates search index when a DSP is published', async () => {
   mockContentfulResponse(defaultMock)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test', true)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test/published', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test/published', true)
 
   const res = await testHandler(handler, {
     method: 'POST',
@@ -48,8 +48,8 @@ test('Updates search index when a DSP is published', async () => {
 
 test('Updates search index when an embedded content type is published', async () => {
   mockContentfulResponse(defaultMock)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test', true)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test/published', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test/published', true)
 
   const res = await testHandler(handler, {
     method: 'POST',
@@ -91,8 +91,8 @@ test('Returns 500 if entry not found', async () => {
 
 test('Returns 500 when using wrong http method', async () => {
   mockContentfulResponse(defaultMock)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test', true)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test/published', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test/published', true)
 
   const res = await testHandler(handler, {
     method: 'GET',
@@ -106,8 +106,8 @@ test('Returns 500 when using wrong http method', async () => {
 
 test('Returns 401 when auth Basic token is not recognised', async () => {
   mockContentfulResponse(defaultMock)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test', true)
-  mockContentfulResponse(localisedMock, 200, '/environments/dev/entries/test/published', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test', true)
+  mockContentfulResponse(localisedMock, 200, '/environments/uat/entries/test/published', true)
 
   const res = await testHandler(handler, {
     method: 'POST',

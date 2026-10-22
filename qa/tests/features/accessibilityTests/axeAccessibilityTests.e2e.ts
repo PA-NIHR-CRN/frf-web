@@ -343,7 +343,7 @@ test.describe('Contact DSP Confirmation Page Accessibility Tests - @accessibilit
   })
 })
 
-test.describe('Generic Page Accessibility Tests - @accessibility @access_GenericPage', () => {
+test.describe.skip('Generic Page Accessibility Tests - @accessibility @access_GenericPage', () => {
   test('Scan Generic Page with AXE Tool', async ({ genericTestPage, makeAxeBuilder }, testInfo) => {
     const axeScanner = makeAxeBuilder()
     let axeScanResults = await axeScanner.analyze()

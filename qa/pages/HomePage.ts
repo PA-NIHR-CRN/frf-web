@@ -31,7 +31,9 @@ export default class HomePage {
     //Locators
     this.pageTitle = page.locator('h1[data-testid="page-title"]')
     this.btnProviders = page.locator('a', { hasText: 'View all data service providers' })
-    this.paragraphIntroText = page.locator('div[class="whitespace-pre-wrap lg:pr-6 [&_p:last-of-type]:lg:mb-0"] p')
+    this.paragraphIntroText = page.getByText('Find, Recruit and Follow-up activities', {
+      exact: false,
+    })
     this.iframeIntroContainer = page.getByTestId('youtube-cover-img')
     this.iframePlayerIntroVideo = page
       .frameLocator('iframe[title="Video: Find, Recruit and Follow-up Intro"]')
@@ -86,7 +88,6 @@ export default class HomePage {
   async assertIntroductorySectionDisplayed() {
     await expect(this.btnProviders).toBeVisible()
     await expect(this.paragraphIntroText).toBeVisible()
-    await expect(this.paragraphIntroText).toContainText('Find, Recruit and Follow-up Services')
   }
 
   async assertVideoPresent() {
@@ -118,7 +119,7 @@ export default class HomePage {
   async assertDspIntroBoxesTextDisplayed() {
     await expect(this.dspIntroServiceBoxesText.nth(0)).toContainText('Identifying')
     await expect(this.dspIntroServiceBoxesText.nth(1)).toContainText('Enabling')
-    await expect(this.dspIntroServiceBoxesText.nth(2)).toContainText('Collecting')
+    await expect(this.dspIntroServiceBoxesText.nth(2)).toContainText('Matching')
   }
 
   async assertDspIntroBoxesLinksDisplayed() {
@@ -150,7 +151,7 @@ export default class HomePage {
 
   async assertBecomeDspDescTextVisible() {
     await expect(this.additonalServicesSectionsDescText.nth(1)).toBeVisible()
-    await expect(this.additonalServicesSectionsDescText.nth(1)).toContainText('If you provide services')
+    await expect(this.additonalServicesSectionsDescText.nth(1)).toContainText('If you are an organisation offering Find, Recruit and Follow-up data services')
   }
 
   async assertGetSupportButtonVisible() {

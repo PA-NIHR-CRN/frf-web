@@ -15,7 +15,7 @@ export const mockCookieBannerContent = Mock.of<TypeCookieBanner<undefined, ''>>(
           content: [
             {
               nodeType: 'text',
-              value: 'We use some essential cookies to make this service work.',
+              value: 'We may use some essential cookies to make this service work.',
               marks: [],
               data: {},
             },

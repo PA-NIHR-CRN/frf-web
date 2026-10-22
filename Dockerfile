@@ -48,9 +48,9 @@ ENV CONTENTFUL_CACHE_TTL $CONTENTFUL_CACHE_TTL
 ENV NEXT_REVALIDATE_TIME $NEXT_REVALIDATE_TIME
 ENV NEXT_PUBLIC_APP_ENV $APP_ENV
 
-RUN npm run build
+RUN ./node_modules/.bin/prisma generate
 
-RUN npx prisma generate
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -96,9 +96,9 @@ ENV NEXT_REVALIDATE_TIME $NEXT_REVALIDATE_TIME
 ENV NEXT_PUBLIC_APP_ENV $APP_ENV
 
 # Any variables not required at build time can be inserted via the task definition generation step in the workflow
-ENV GTM_ID = ''
-ENV DATABASE_URL = ''
-ENV CONTENTFUL_WEBHOOK_API_KEY = ''
+ENV GTM_ID=''
+ENV DATABASE_URL=''
+ENV CONTENTFUL_WEBHOOK_API_KEY=''
 
 EXPOSE 3000
 

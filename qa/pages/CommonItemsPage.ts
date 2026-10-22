@@ -204,7 +204,7 @@ export default class CommonItemsPage {
     await expect(this.cookieBannerHeading).toBeVisible()
     await expect(this.cookieBannerTxt).toBeVisible()
     await expect(this.cookieBannerHeading).toHaveText('Cookies on Find, Recruit and Follow-Up')
-    await expect(this.cookieBannerTxt).toContainText('We use some essential cookies to make this service work')
+    await expect(this.cookieBannerTxt).toContainText('We may use some essential cookies to make this service work')
     await expect(this.cookieBannerTxt).toContainText(
       'understand how people use the Find, Recruit and Follow-up website'
     )

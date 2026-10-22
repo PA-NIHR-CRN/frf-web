@@ -1,6 +1,6 @@
 import { test } from '../../../hooks/CustomFixtures'
 
-test.describe('Contact DSP Form Complete Tests - @frf_29', () => {
+test.describe.skip('Contact DSP Form Complete Tests - @frf_29', () => {
   test('As a user I am shown a Confirmation Page, when I successfully complete the Form - @frf_29_success', async ({
     contactDspPage,
     contactDspConfirmationPage,

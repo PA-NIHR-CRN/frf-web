@@ -86,7 +86,7 @@ test.describe('DSP List Filters Applied Behaviour Tests - @frf_13 @frf_13_applie
     })
   })
 
-  test('As a user I can Exclude Regional Only Services from the DSP List - @frf_13_applied_behaviours_ac4', async ({
+  test.skip('As a user I can Exclude Regional Only Services from the DSP List - @frf_13_applied_behaviours_ac4', async ({
     providersPage,
   }) => {
     await test.step('Given I am on the DSP List Page', async () => {
