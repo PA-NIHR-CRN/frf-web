@@ -144,20 +144,23 @@ test.describe.parallel('DSP List Base Functionality Tests - @frf_11', () => {
     })
   })
 
-  test('As a user I should see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_0', async ({
-    providersPage,
-  }) => {
-    await test.step('And I select the `Recently published` Sort Option', async () => {
-      await providersPage.selectDspSortDropdownOption('Published')
-      await providersPage.assertSelectedSortOption('Published')
-    })
-    await test.step('Then I am Looking at a DSP with "First Published" Date within the Last 3 Months', async () => {
-      await providersPage.assertDspIsNew(true)
-    })
-    await test.step('And I should see a "New" indicator next to the DSP name', async () => {
-      await providersPage.assertDspNewIconAppears(true)
-    })
-  })
+  // Test removed as it depends on external data and the test pre-conditions are not always met
+  // i.e. there is no guarantee a new DSP will be added within the last 90 days.
+  //
+  // test('As a user I should see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_0', async ({
+  //   providersPage,
+  // }) => {
+  //   await test.step('And I select the `Recently published` Sort Option', async () => {
+  //     await providersPage.selectDspSortDropdownOption('Published')
+  //     await providersPage.assertSelectedSortOption('Published')
+  //   })
+  //   await test.step('Then I am Looking at a DSP with "First Published" Date within the Last 3 Months', async () => {
+  //     await providersPage.assertDspIsNew(true)
+  //   })
+  //   await test.step('And I should see a "New" indicator next to the DSP name', async () => {
+  //     await providersPage.assertDspNewIconAppears(true)
+  //   })
+  // })
 
   test('As a user I should not see a "New" Indicator on a DSP where Applicable- @frf_11_ac4_1', async ({
     providersPage,
